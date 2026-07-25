@@ -1,3 +1,4 @@
+#include "mesh.h"
 #include <graphics/opengl.h>
 #include <unordered_map>
 #include <SDL3/SDL.h>
@@ -6,8 +7,6 @@
 
 #include "resources.h"
 #include "random.h"
-#include "mesh.h"
-
 
 struct ModelDataVertex
 {
@@ -16,22 +15,21 @@ struct ModelDataVertex
     float uv[2];
 };
 
-
 namespace
 {
-    inline int32_t readInt(const P<ResourceStream>& stream)
-    {
-        int32_t ret = 0;
-        stream->read(&ret, sizeof(int32_t));
-        return SDL_Swap32BE(ret);
-    }
+inline int32_t readInt(const P<ResourceStream>& stream)
+{
+    int32_t ret = 0;
+    stream->read(&ret, sizeof(int32_t));
+    return SDL_Swap32BE(ret);
+}
 
-    constexpr uint32_t NO_BUFFER = 0;
-    std::unordered_map<string, Mesh*> meshMap;
+constexpr uint32_t NO_BUFFER = 0;
+std::unordered_map<string, Mesh*> meshMap;
 }
 
 Mesh::Mesh(std::vector<MeshVertex>&& unindexed_vertices)
-    :face_count{ static_cast<uint32_t>(unindexed_vertices.size()) / 3}
+    :face_count{static_cast<uint32_t>(unindexed_vertices.size()) / 3}
 {
     if (!unindexed_vertices.empty())
     {
@@ -47,13 +45,13 @@ Mesh::Mesh(std::vector<MeshVertex>&& unindexed_vertices)
             meshopt_remapIndexBuffer(reinterpret_cast<uint32_t*>(remap_indices.data()), nullptr, index_count, remap.data());
             meshopt_remapVertexBuffer(vertices.data(), unindexed_vertices.data(), index_count, sizeof(MeshVertex), remap.data());
 
+            // ES 2 supports only u16 for indices. u32 is available only through
+            // an extension. (Many systems should have it, but SP doesn't
+            // support it yet). Forgo the indices and inform the user.
             if (vertices.size() > size_t{ std::numeric_limits<uint16_t>::max() })
             {
-                // ES 2 only supports u16 for indices - u32 is only available through an extension
-                // (a lot of systems should have it, but SP doesn't have support for it yet).
-                // Forego the indices, and inform the user.
                 vertices = std::move(unindexed_vertices);
-                LOG(WARNING) << "Loading mesh with a large number of vertices (" << vertices.size() << ").";
+                LOG(Warning, "[mesh] Loading mesh with a large number of vertices (", vertices.size(), ").");
             }
             else
             {
@@ -102,19 +100,15 @@ void Mesh::render(int32_t position_attrib, int32_t texcoords_attrib, int32_t nor
         glDrawElements(GL_TRIANGLES, face_count * 3, GL_UNSIGNED_SHORT, nullptr);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_NONE);
     }
-
     else
-    {
         glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(vertices.size()));
-    }
 
     glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
 }
 
 glm::vec3 Mesh::randomPoint()
 {
-    if (vertices.empty())
-        return glm::vec3{};
+    if (vertices.empty()) return glm::vec3{};
 
     // Pick a face
     size_t v0_index{}, v1_index{}, v2_index{};
@@ -127,7 +121,6 @@ glm::vec3 Mesh::randomPoint()
     }
     else
     {
-
         v0_index = static_cast<size_t>(irandom(0, static_cast<int>(vertices.size()) / 3 - 1)) * 3;
         v1_index = v0_index + 1;
         v2_index = v0_index + 2;
@@ -144,29 +137,30 @@ glm::vec3 Mesh::randomPoint()
         f1 = 1.0f - f1;
         f2 = 1.0f - f2;
     }
+
     glm::vec3 v01 = (v0 * f1) + (v1 * (1.0f - f1));
     glm::vec3 ret = (v01 * f2) + (v2 * (1.0f - f2));
+
     return ret;
 }
 
 float Mesh::greatestDistanceFromCenter(std::vector<MeshVertex>& vertices)
 {
-    if (vertices.empty()) {
-        return 0;
-    }
+    if (vertices.empty()) return 0;
 
     glm::vec3 sum{};
-    for(auto vertex : vertices) sum += glm::vec3{vertex.position[0], vertex.position[1], vertex.position[2]};
-    auto average = sum / float(vertices.size());
 
-    auto greatest_distance = 0.f;
-    for(auto vertex : vertices)
+    for (auto vertex : vertices)
+        sum += glm::vec3{vertex.position[0], vertex.position[1], vertex.position[2]};
+    auto average = sum / static_cast<float>(vertices.size());
+
+    auto greatest_distance = 0.0f;
+    for (auto vertex : vertices)
     {
         float distance = glm::distance(average, glm::vec3{vertex.position[0], vertex.position[1], vertex.position[2]});
-        if(distance > greatest_distance) {
-            greatest_distance = distance;
-        }
+        if (distance > greatest_distance) greatest_distance = distance;
     }
+
     return greatest_distance;
 }
 
@@ -180,12 +174,10 @@ struct IndexInfo
 Mesh* Mesh::getMesh(const string& filename)
 {
     Mesh* ret = meshMap[filename];
-    if (ret)
-        return ret;
+    if (ret) return ret;
 
     P<ResourceStream> stream = getResourceStream(filename);
-    if (!stream)
-        return NULL;
+    if (!stream) return NULL;
 
     std::vector<MeshVertex> mesh_vertices;
     if (filename.endswith(".obj"))
@@ -202,45 +194,41 @@ Mesh* Mesh::getMesh(const string& filename)
             if (line.length() > 0 && line[0] != '#')
             {
                 std::vector<string> parts = line.strip().split();
-                if (parts.size() < 1)
-                    continue;
+                if (parts.size() < 1) continue;
                 if (parts[0] == "v")
                 {
                     if (parts.size() >= 4)
-                    {
                         vertices.emplace_back(parts[1].toFloat(), parts[2].toFloat(), parts[3].toFloat());
-                    }
                     else
                     {
-                        LOG(ERROR, "Bad vertex line: ", line);
+                        LOG(Error, "[mesh] Bad vertex line: ", line);
                         parsing_ok = false;
                     }
 
-                }else if (parts[0] == "vn")
+                }
+                else if (parts[0] == "vn")
                 {
                     if (parts.size() >= 4)
-                    {
                         normals.push_back(glm::normalize(glm::vec3(parts[1].toFloat(), parts[2].toFloat(), parts[3].toFloat())));
-                    }
                     else
                     {
-                        LOG(ERROR, "Bad normal line: ", line);
+                        LOG(Error, "[mesh] Bad normal line: ", line);
                         parsing_ok = false;
                     }
 
-                }else if (parts[0] == "vt")
+                }
+                else if (parts[0] == "vt")
                 {
                     if (parts.size() >= 3)
-                    {
                         texCoords.push_back(glm::vec2(parts[1].toFloat(), parts[2].toFloat()));
-                    }
                     else
                     {
-                        LOG(ERROR, "Bad vertex texcoord line: ", line);
+                        LOG(Error, "[mesh] Bad vertex texcoord line: ", line);
                         parsing_ok = false;
                     }
 
-                }else if (parts[0] == "f")
+                }
+                else if (parts[0] == "f")
                 {
                     if (parts.size() >= 4)
                     {
@@ -268,21 +256,20 @@ Mesh* Mesh::getMesh(const string& filename)
                             }
                             else
                             {
-                                LOG(ERROR, "Bad face triangle: ", line);
+                                LOG(Error, "[mesh] Bad face triangle: ", line);
                                 parsing_ok = false;
                             }
                         }
                     }
                     else
                     {
-                        LOG(ERROR, "Bad face line: ", line);
+                        LOG(Error, "[mesh] Bad face line: ", line);
                         parsing_ok = false;
                     }
-                }else{
-                    LOG(DEBUG, "mesh: ignored: ", line);
                 }
+                else LOG(Error, "[mesh] Ignored: ", line);
             }
-        }while(parsing_ok && stream->tell() < stream->getSize());
+        } while(parsing_ok && stream->tell() < stream->getSize());
 
         if (parsing_ok)
         {
@@ -296,22 +283,20 @@ Mesh* Mesh::getMesh(const string& filename)
                 mesh_vertices[n].normal[1] = normals[indices[n].n].z;
                 mesh_vertices[n].normal[2] = normals[indices[n].n].y;
                 mesh_vertices[n].uv[0] = texCoords[indices[n].t].x;
-                mesh_vertices[n].uv[1] = 1.f - texCoords[indices[n].t].y;
+                mesh_vertices[n].uv[1] = 1.0f - texCoords[indices[n].t].y;
             }
         }
-        else
-        {
-            LOG(ERROR, "Failed to parse ", filename);
-        }
-
-
-    }else if (filename.endswith(".model"))
+        else LOG(Error, "[mesh] Failed to parse ", filename);
+    }
+    else if (filename.endswith(".model"))
     {
         std::vector<ModelDataVertex> model_data_vertices;
         model_data_vertices.resize(readInt(stream));
         stream->read(model_data_vertices.data(), sizeof(ModelDataVertex) * model_data_vertices.size());
         mesh_vertices.resize(model_data_vertices.size());
-        for(auto idx=0U; idx<model_data_vertices.size(); idx++) {
+
+        for (auto idx = 0U; idx < model_data_vertices.size(); idx++)
+        {
             mesh_vertices[idx].position[0] = model_data_vertices[idx].position[0];
             mesh_vertices[idx].position[1] = model_data_vertices[idx].position[1];
             mesh_vertices[idx].position[2] = model_data_vertices[idx].position[2];
@@ -321,14 +306,14 @@ Mesh* Mesh::getMesh(const string& filename)
             mesh_vertices[idx].uv[0] = model_data_vertices[idx].uv[0];
             mesh_vertices[idx].uv[1] = model_data_vertices[idx].uv[1];
         }
-    }else{
-        LOG(ERROR) << "Unknown mesh format: " << filename;
     }
+    else LOG(Error, "[mesh] Unknown mesh format: " << filename);
 
     if (!mesh_vertices.empty())
     {
         // Calculate tangent
-        for(auto idx=0U; idx<mesh_vertices.size(); idx+=3) {
+        for (auto idx = 0U; idx < mesh_vertices.size(); idx += 3)
+        {
             auto p0 = glm::vec3(mesh_vertices[idx+0].position[0], mesh_vertices[idx+0].position[1], mesh_vertices[idx+0].position[2]);
             auto p1 = glm::vec3(mesh_vertices[idx+1].position[0], mesh_vertices[idx+1].position[1], mesh_vertices[idx+1].position[2]);
             auto p2 = glm::vec3(mesh_vertices[idx+2].position[0], mesh_vertices[idx+2].position[1], mesh_vertices[idx+2].position[2]);
@@ -344,22 +329,22 @@ Mesh* Mesh::getMesh(const string& filename)
             float f = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV2.x * deltaUV1.y);
 
             auto tangent = glm::vec3(
-                    f * (deltaUV2.y * edge1.x - deltaUV1.y * edge2.x),
-                    f * (deltaUV2.y * edge1.y - deltaUV1.y * edge2.y),
-                    f * (deltaUV2.y * edge1.z - deltaUV1.y * edge2.z));
+                f * (deltaUV2.y * edge1.x - deltaUV1.y * edge2.x),
+                f * (deltaUV2.y * edge1.y - deltaUV1.y * edge2.y),
+                f * (deltaUV2.y * edge1.z - deltaUV1.y * edge2.z)
+            );
 
-            for(int n=0; n<3; n++) {
+            for (int n = 0; n < 3; n++)
+            {
                 mesh_vertices[idx+n].tangent[0] = tangent.x;
                 mesh_vertices[idx+n].tangent[1] = tangent.y;
                 mesh_vertices[idx+n].tangent[2] = tangent.z;
             }
         }
 
-
         ret = new Mesh(std::move(mesh_vertices));
         meshMap[filename] = ret;
     }
-
 
     return ret;
 }
