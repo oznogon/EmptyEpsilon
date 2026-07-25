@@ -3,30 +3,31 @@
 #include "logging.h"
 #include "gameGlobalInfo.h"
 #include "playerInfo.h"
+#include "preferencesManager.h"
 #include "ecs/query.h"
 
-#include "components/hull.h"
-#include "components/shields.h"
-#include "components/reactor.h"
-#include "components/impulse.h"
-#include "components/warpdrive.h"
-#include "components/jumpdrive.h"
-#include "components/docking.h"
 #include "components/collision.h"
-#include "components/player.h"
-#include "components/selfdestruct.h"
+#include "components/docking.h"
+#include "components/hull.h"
+#include "components/impulse.h"
+#include "components/jumpdrive.h"
 #include "components/missiletubes.h"
+#include "components/player.h"
+#include "components/reactor.h"
+#include "components/selfdestruct.h"
+#include "components/shields.h"
 #include "components/utilityBeam.h"
+#include "components/warpdrive.h"
 
-#include "systems/warpsystem.h"
 #include "systems/radarblock.h"
+#include "systems/warpsystem.h"
 
 #include "devices/dmx512SerialDevice.h"
 #include "devices/enttecDMXProDevice.h"
-#include "devices/virtualOutputDevice.h"
+#include "devices/philipsHueV1Device.h"
 #include "devices/sACNDMXDevice.h"
 #include "devices/uDMXDevice.h"
-#include "devices/philipsHueV1Device.h"
+#include "devices/virtualOutputDevice.h"
 #ifdef HAVE_OPENSSL
 #include "devices/philipsHueV2Device.h"
 #endif
@@ -35,12 +36,9 @@
 
 HardwareController::~HardwareController()
 {
-    for(HardwareOutputDevice* device : devices)
-        delete device;
-    for(HardwareMappingState& state : states)
-        delete state.effect;
-    for(HardwareMappingEvent& event : events)
-        delete event.effect;
+    for (HardwareOutputDevice* device : devices) delete device;
+    for (HardwareMappingState& state : states) delete state.effect;
+    for (HardwareMappingEvent& event : events) delete event.effect;
 }
 
 void HardwareController::loadConfiguration(string filename)
@@ -507,9 +505,12 @@ bool HardwareController::getVariableValue(string variable_name, float& value)
     /// SelfDestruct: Returns 1.0 if the ship's self-destruct system has been
     /// activated and is prompting officers for authorization codes.
     SHIP_VARIABLE("SelfDestruct", SelfDestruct, c->active ? 1.0f : 0.0f);
+    /// SelfDestructCountdownValue: Returns the literal value of the
+    /// self-destruct countdown.
+    SHIP_VARIABLE("SelfDestructCountdownValue", SelfDestruct, c->countdown);
     /// SelfDestructCountdown: Returns the percentage of the remaining countdown
     /// if the ship's self-destruct system has been authorized.
-    SHIP_VARIABLE("SelfDestructCountdown", SelfDestruct, c->countdown / 10.0f);
+    SHIP_VARIABLE("SelfDestructCountdown", SelfDestruct, c->countdown / PreferencesManager::get("self_destruct_countdown", "10").toFloat());
     /// UtilityBeamActive: Returns 1.0 if the Utility Beam is active.
     SHIP_VARIABLE("UtilityBeamActive", UtilityBeam, c->active ? 1.0f : 0.0f);
     /// UtilityBeamFiring: Returns 1.0 if the Utility Beam is active and also
