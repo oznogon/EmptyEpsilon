@@ -48,6 +48,7 @@ endif()
 
 # User-settings
 set(SERIOUS_PROTON_DIR "../SeriousProton" CACHE PATH "Path to SeriousProton")
+option(WITH_SSL "Enable SSL/TLS support via OpenSSL (required for Hue V2 hardware)" OFF)
 if(NOT ANDROID)
     option(WITH_DISCORD "Build with Discord support" ${WITH_DISCORD_DEFAULT})
 else()
@@ -760,7 +761,7 @@ else()
     add_executable(${PROJECT_NAME} MACOSX_BUNDLE ${MAIN_SOURCES})
 endif()
 
-if(WIN32)
+if(WIN32 AND WITH_SSL)
     # Add OpenSSL, required for Hue V2 control
     add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different "$<TARGET_FILE:OpenSSL::SSL>" "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
