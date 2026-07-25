@@ -109,12 +109,12 @@ CrewScreen::CrewScreen(RenderLayer* render_layer, bool with_main_screen)
         threat_estimate->setCallbacks(
             []()
             {
-                LOG(Info, "Switching to ambient music.");
+                LOG(Info, "[threat] Switching to ambient music.");
                 soundManager->playMusicSet(findResources("music/ambient/*.ogg"));
             },
             []()
             {
-                LOG(Info, "Switching to combat music.");
+                LOG(Info, "[threat] Switching to combat music.");
                 soundManager->playMusicSet(findResources("music/combat/*.ogg"));
             }
         );

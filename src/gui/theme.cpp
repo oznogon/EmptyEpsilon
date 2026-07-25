@@ -18,25 +18,27 @@ glm::u8vec4 GuiTheme::toColor(const string& s)
         if (s.length() == 9)
             return {s.substr(1, 3).toInt(16), s.substr(3, 5).toInt(16), s.substr(5, 7).toInt(16), s.substr(7, 9).toInt(16)};
     }
-    LOG(Error, "Failed to parse color string ", s);
+
+    LOG(Error, "Failed to parse color string: ", s);
     return {255, 255, 255, 255};
 }
 
 static sp::Font* cacheFont(const string& s)
 {
     auto it = fonts.find(s);
-    if (it != fonts.end())
-        return it->second;
+    if (it != fonts.end()) return it->second;
     P<ResourceStream> font_stream = getResourceStream(s);
+
     if (!font_stream)
     {
         LOG(Debug, "Failed to load font resource ", s);
         fonts[s] = nullptr;
         return nullptr;
     }
+
     auto result = new sp::FreetypeFont(s, font_stream);
     fonts[s] = result;
-    LOG(Debug, "Loaded font ", s);
+    LOG(Debug, "Cached font: ", s);
     return result;
 }
 
@@ -44,8 +46,7 @@ static sp::Font* cacheFont(const string& s)
 static std::map<string, std::map<string, string>>* getFlattenedTheme(const string& name, std::unordered_map<string, std::map<string, std::map<string, string>>>& session_cache)
 {
     auto it = session_cache.find(name);
-    if (it != session_cache.end())
-        return &it->second;
+    if (it != session_cache.end()) return &it->second;
 
     string resource_name = "gui/" + name + ".theme.txt";
     auto tree = sp::io::KeyValueTreeLoader::load(resource_name);
@@ -65,16 +66,16 @@ static std::map<string, std::map<string, string>>* getFlattenedTheme(const strin
 static void mergeFlattenedData(std::map<string, std::map<string, string>>& dest, const std::map<string, std::map<string, string>>& source)
 {
     for (const auto& [element_name, properties] : source)
-        for (const auto& [key, value] : properties) dest[element_name][key] = value;
+    {
+        for (const auto& [key, value] : properties)
+            dest[element_name][key] = value;
+    }
 }
 
 const GuiThemeStyle* GuiTheme::getStyle(const string& element)
 {
     auto it = styles.find(element);
-    if (it != styles.end())
-    {
-        return &it->second;
-    }
+    if (it != styles.end()) return &it->second;
 
     int n = element.rfind(".");
     if (n == -1)
@@ -103,6 +104,7 @@ GuiTheme* GuiTheme::getTheme(const string& name)
         LOG(Error, "Default theme not found. Most likely crashing now.");
         return nullptr;
     }
+
     LOG(Warning, "Theme ", name, " not found. Falling back to Default theme.");
     return getTheme("default");
 }
@@ -288,7 +290,7 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
             global_style.sound = input["sound"];
 
         // Apply global_style to all states.
-        for(unsigned int n = 0; n < int(GuiElement::State::COUNT); n++)
+        for (unsigned int n = 0; n < int(GuiElement::State::COUNT); n++)
         {
             string postfix = "?";
             switch(GuiElement::State(n))
@@ -383,7 +385,7 @@ GuiTheme::GuiTheme(const string& name)
     fallback_state.size = 12;
     fallback_state.font = nullptr;
     std::vector<string> fonts = findResources("gui/fonts/*.ttf");
-    if(fonts.size() > 0)
+    if (fonts.size() > 0)
         fallback_state.font = cacheFont(fonts[0]);
     fallback_state.font_offset = 0.0f;
     fallback_state.line_height = 1.0f;

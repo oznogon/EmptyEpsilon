@@ -42,7 +42,7 @@ PackResourceProvider::PackResourceProvider(string filename)
     auto f = SDL_IOFromFile(filename.c_str(), "rb");
     if (!f)
     {
-        LOG(WARNING) << "Failed to open " << filename << ": " << SDL_GetError();
+        LOG(Warning, "[pack] Failed to open ", filename, ": ", SDL_GetError());
         return;
     }
 
@@ -50,19 +50,17 @@ PackResourceProvider::PackResourceProvider(string filename)
     if (version == 0)
     {
         int file_count = readInt(f);
-        LOG(INFO) << "Loaded: " << filename << " with " << file_count << " files";
-        for(int n=0; n<file_count; n++)
+        LOG(Info, "[pack] Loaded: ", filename, " with ", file_count, " files");
+        for(int n = 0; n < file_count; n++)
         {
-            string fileName = readString(f);
+            string file_name = readString(f);
             int position = readInt(f);
             int size = readInt(f);
-            files[fileName] = PackResourceInfo(position, size);
+            files[file_name] = PackResourceInfo(position, size);
         }
     }
-    else
-    {
-        LOG(WARNING) << filename << " has unknown version " << version;
-    }
+    else LOG(Warning, "[pack] ", filename, " has unknown version ", version);
+
     SDL_CloseIO(f);
 }
 
@@ -95,7 +93,7 @@ void PackResourceProvider::addPackResourcesForDirectory(const string directory)
                 new PackResourceProvider(entry.path().u8string());
         }
         else
-            LOG(WARNING, entry.path().u8string(), " encountered an error: ", error_code.message());
+            LOG(Warning, "[pack] ", entry.path().u8string(), " encountered an error: ", error_code.message());
     }
 #else
     //Limitation :
@@ -118,7 +116,7 @@ void PackResourceProvider::addPackResourcesForDirectory(const string directory)
 
     if (asset_manager)
     {
-        LOG(INFO) << "Looking for packs in " << directory;
+        LOG(Info, "[pack] Looking for packs in " << directory);
         auto stripped = directory.rstrip("/");
         AAssetDir* dir = AAssetManager_openDir(asset_manager, stripped.c_str());
         if (dir)
@@ -128,16 +126,11 @@ void PackResourceProvider::addPackResourcesForDirectory(const string directory)
             {
                 string name = stripped + "/" + string(filename);
                 if (name.lower().endswith(".pack"))
-                {
                     new PackResourceProvider(name);
-                }
             }
             AAssetDir_close(dir);
         }
-        else
-        {
-            LOG(WARNING) << "Could not open directory " << directory;
-        }
+        else LOG(Warning, "[pack] Could not open directory ", directory);
     }
 #endif
 }
@@ -146,21 +139,17 @@ PackResourceStream::PackResourceStream(string filename, PackResourceInfo info)
 : position(info.position), size(info. size)
 {
     f = SDL_IOFromFile(filename.c_str(), "rb");
-    if (!f)
-        destroy();
-    else
-        seek(0);
+    if (!f) destroy();
+    else seek(0);
 }
 PackResourceStream::~PackResourceStream()
 {
-    if (f)
-        SDL_CloseIO(f);
+    if (f) SDL_CloseIO(f);
 }
 
 size_t PackResourceStream::read(void* data, size_t size)
 {
-    if (read_position + size > this->size)
-        size = this->size - read_position;
+    if (read_position + size > this->size) size = this->size - read_position;
     auto ret = SDL_ReadIO(f, data, size);
     read_position += ret;
     return ret;

@@ -132,7 +132,7 @@ ServerSetupScreen::ServerSetupScreen()
         ->setSize(250.0f, GuiElement::GuiSizeMax)
         ->setAttribute("margin", "0, 10, 0, 0");
 
-    server_port = new GuiTextEntry(row, "SERVER_PORT", string(defaultServerPort));
+    server_port = new GuiTextEntry(row, "SERVER_PORT", string(DEFAULT_SERVER_PORT));
     server_port
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     (new GuiTextTooltip(server_port, "SERVER_PORT_TIP", tr("tooltips", "Set the network port for the server. Default is 35666."), 20.0f))->setWidth(280.0f);
@@ -218,7 +218,7 @@ ServerSetupScreen::ServerSetupScreen()
         [this]()
         {
             int port = server_port->getText().toInt();
-            if (port < 80) port = defaultServerPort;
+            if (port < 80) port = DEFAULT_SERVER_PORT;
             new EpsilonServer(port);
             if (!game_server.isAlive())
             {

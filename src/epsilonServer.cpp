@@ -27,7 +27,7 @@ EpsilonServer::EpsilonServer(int server_port)
         setCollectNetworkStats(true);
     }
     else
-        LOG(Warning, "Invalid metrics server port ", string(metrics_port), ". Network stats collection not enabled.");
+        LOG(Warning, "Invalid metrics_port ", string(metrics_port), ". Network stats collection not enabled.");
 
     new GameGlobalInfo();
     new GameMasterActions();

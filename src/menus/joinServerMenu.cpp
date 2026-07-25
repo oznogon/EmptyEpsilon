@@ -104,7 +104,7 @@ void JoinServerScreen::update(float delta)
         if (!target.address.getHumanReadable().empty())
         {
             string last_server = target.address.getHumanReadable()[0];
-            if (target.port != defaultServerPort)
+            if (target.port != DEFAULT_SERVER_PORT)
                 last_server += ":" + string(static_cast<int>(target.port));
             PreferencesManager::set("last_server", last_server);
         }

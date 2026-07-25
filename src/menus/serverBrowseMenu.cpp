@@ -228,7 +228,7 @@ ServerBrowserMenu::~ServerBrowserMenu()
 void ServerBrowserMenu::connect(string host)
 {
     host = host.strip();
-    uint64_t port = defaultServerPort;
+    uint64_t port = DEFAULT_SERVER_PORT;
 
     if (host.find(":") != -1)
     {

@@ -74,9 +74,9 @@ void AutoConnectScreen::update(float delta)
         if (!autoconnect_address.empty())
         {
             // Set autoconnect_port. If autoconnect_address specifies a port,
-            // use that. Otherwise, use defaultServerPort.
+            // use that. Otherwise, use DEFAULT_SERVER_PORT.
             autoconnect_address = autoconnect_address.strip();
-            int autoconnect_port = defaultServerPort;
+            int autoconnect_port = DEFAULT_SERVER_PORT;
 
             if (autoconnect_address.find(":") != -1)
             {
@@ -86,7 +86,7 @@ void AutoConnectScreen::update(float delta)
                 if (autoconnect_port < 1024 || autoconnect_port > 65535)
                 {
                     LOG(Warning, "Invalid autoconnect port " + string(autoconnect_port));
-                    autoconnect_port = defaultServerPort;
+                    autoconnect_port = DEFAULT_SERVER_PORT;
                 }
             }
 
@@ -106,7 +106,7 @@ void AutoConnectScreen::update(float delta)
 
                 status_label->setText(tr("Found server ") + server.name);
                 connect_to_address = server.address;
-                connect_to_port = defaultServerPort;
+                connect_to_port = DEFAULT_SERVER_PORT;
                 tried_password = false;
                 new GameClient(VERSION_NUMBER, connect_to_address, connect_to_port);
                 scanner->destroy();

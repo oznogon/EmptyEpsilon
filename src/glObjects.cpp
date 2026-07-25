@@ -56,8 +56,7 @@ namespace gl
 
     ScopedVertexAttribArray::~ScopedVertexAttribArray()
     {
-        if (attrib != -1)
-            GL_CHECK(glDisableVertexAttribArray(attrib));
+        if (attrib != -1) GL_CHECK(glDisableVertexAttribArray(attrib));
     }
 
     ScopedVertexAttribArray::ScopedVertexAttribArray(ScopedVertexAttribArray&& other) noexcept
@@ -116,7 +115,7 @@ namespace gl
             auto stream = getResourceStream(std::get<0>(face));
             if (!stream || !image.loadFromStream(stream))
             {
-                LOG(Warning, "Failed to load texture: ", std::get<0>(face));
+                LOG(Warning, "[cubemap] Failed to load texture: ", std::get<0>(face));
                 image = sp::Image({8, 8}, {255, 0, 255, 128});
             }
 
@@ -140,7 +139,7 @@ namespace gl
 
         glBindTexture(GL_TEXTURE_CUBE_MAP, GL_NONE);
 
-        LOG(Info, "Loaded cubemap: ", file_path);
+        LOG(Info, "[cubemap] Loaded cubemap: ", file_path);
     }
 
     void CubemapTexture::bind()

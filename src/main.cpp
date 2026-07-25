@@ -74,22 +74,22 @@ GUI_REGISTER_LAYOUT("horizontalcenter", GuiLayoutHorizontalCenter);
 
 int runProxyServer()
 {
-    int port = defaultServerPort;
+    int port = DEFAULT_SERVER_PORT;
     string password = "";
-    int listenPort = defaultServerPort;
-    string proxyName = "";
+    int listenPort = DEFAULT_SERVER_PORT;
+    string proxy_name = "";
     auto parts = PreferencesManager::get("proxy").split(":");
     string host = parts[0];
 
     if (parts.size() > 1) port = parts[1].toInt();
     if (parts.size() > 2) password = parts[2].upper();
     if (parts.size() > 3) listenPort = parts[3].toInt();
-    if (parts.size() > 4) proxyName = parts[4];
+    if (parts.size() > 4) proxy_name = parts[4];
 
     if (host == "listen")
-        new GameServerProxy(password, listenPort, proxyName);
+        new GameServerProxy(password, listenPort, proxy_name);
     else
-        new GameServerProxy(host, port, password, listenPort, proxyName);
+        new GameServerProxy(host, port, password, listenPort, proxy_name);
 
     engine->runMainLoop();
     return 0;
@@ -172,11 +172,18 @@ int main(int argc, char** argv)
     if (PreferencesManager::get("metrics_server").toInt() != 0)
     {
         int metrics_port = PreferencesManager::get("metrics_server").toInt();
-        if (metrics_port < 1024 || metrics_port > 65535)
-            LOG(Warning, "metrics_server set to invalid port ", string(metrics_port), ". Prometheus metrics endpoint not enabled.");
+
+        if (metrics_port == 0)
+        {
+            LOG(Warning, "metrics_port ", string(metrics_port), " either not set or not an integer. Prometheus metrics endpoint not enabled.");
+        }
+        else if (metrics_port < 1024 || metrics_port > 65535)
+        {
+            LOG(Warning, "metrics_port ", string(metrics_port), " is out of valid range (1024 to 65535). Prometheus metrics endpoint not enabled.");
+        }
         else
         {
-            LOG(Info, "Prometheus metrics endpoint enabled on port ", metrics_port);
+            LOG(Info, "Prometheus metrics endpoint enabled at /metrics on port ", metrics_port);
             new PrometheusMetricsServer(metrics_port);
         }
     }
@@ -282,10 +289,14 @@ int main(int argc, char** argv)
         // value (toInt returns 0 if empty or not an int).
         int server_port = PreferencesManager::get("server_port").toInt();
 
-        if (server_port < 1024 || server_port > 65535)
+        if (server_port == 0)
         {
-            LOG(Warning, "Invalid server_port " + string(server_port));
-            server_port = defaultServerPort;
+            LOG(Warning, "server_port ", string(server_port), " either not set or not an integer. Using default port ", string(DEFAULT_SERVER_PORT));
+        }
+        else if (server_port < 1024 || server_port > 65535)
+        {
+            LOG(Warning, "server_port ", string(server_port), " is out of valid range (1024 to 65535). Using default port ", string(DEFAULT_SERVER_PORT));
+            server_port = DEFAULT_SERVER_PORT;
         }
 
         LOG(Info, "Launching server_scenario " + server_scenario + " on port " + string(server_port));
@@ -311,7 +322,7 @@ int main(int argc, char** argv)
     if (windows.size() > 0)
     {
         PreferencesManager::set("fsaa", windows[0]->getFSAA());
-        PreferencesManager::set("fullscreen", (int)windows[0]->getMode());
+        PreferencesManager::set("fullscreen", static_cast<int>(windows[0]->getMode()));
 
         if (PreferencesManager::get("line_drawing_mode", "quad") == "quad")
             sp::RenderTarget::setLineDrawingMode(sp::RenderTarget::LineDrawingMode::Quad);
@@ -363,7 +374,8 @@ int main(int argc, char** argv)
 
 void returnToMainMenu(RenderLayer* render_layer)
 {
-    if (render_layer != defaultRenderLayer) // Handle secondary monitors
+    // Handle secondary monitors
+    if (render_layer != defaultRenderLayer)
     {
         returnToShipSelection(render_layer);
         return;
@@ -376,14 +388,19 @@ void returnToMainMenu(RenderLayer* render_layer)
         // Use the default port if server_port isn't set or has an invalid
         // value (toInt returns 0).
         int headless_port = PreferencesManager::get("server_port").toInt();
+
         // This is the same process as server_port and could be made DRY.
-        if (headless_port < 1024 || headless_port > 65535)
+        if (headless_port == 0)
         {
-            LOG(Warning, "Invalid server_port: " + string(headless_port));
-            headless_port = defaultServerPort;
+            LOG(Warning, "server_port ", string(headless_port), " either not set or not an integer. Using default port ", string(DEFAULT_SERVER_PORT));
+        }
+        else if (headless_port < 1024 || headless_port > 65535)
+        {
+            LOG(Warning, "server_port ", string(headless_port), " is out of valid range (1024 to 65535). Using default port ", string(DEFAULT_SERVER_PORT));
+            headless_port = DEFAULT_SERVER_PORT;
         }
 
-        LOG(Info, "Launching headless scenario " + headless + " on port " + string(headless_port));
+        LOG(Info, "Launching scenario " + headless + " as a headless server on port " + string(headless_port));
         new EpsilonServer(headless_port);
 
         if (PreferencesManager::get("headless_name") != "") game_server->setServerName(PreferencesManager::get("headless_name"));

@@ -260,10 +260,10 @@ void DebugRenderer::onDraw(sp::RenderTarget& renderer)
     fps_display->setValue(string(fps));
 
     string threat_text = tr("debug", "R {raw}, S {smoothed}").format({
-        {"raw", string(ThreatLevelEstimate::debug_max_threat, 1)},
-        {"smoothed", string(ThreatLevelEstimate::debug_smoothed_threat, 1)}
+        {"raw", string(ThreatLevelEstimate::DEBUG_MAX_THREAT, 1)},
+        {"smoothed", string(ThreatLevelEstimate::DEBUG_SMOOTHED_THREAD, 1)}
     });
-    if (ThreatLevelEstimate::debug_threat_high)
+    if (ThreatLevelEstimate::DEBUG_THREAT_HIGH)
         threat_text += " " + tr("debug", "[COMBAT]");
     threat_display->setValue(threat_text);
 

@@ -9,15 +9,15 @@ class ThreatLevelEstimate : public Updatable
 private:
     typedef std::function<void()> func_t;
 
-    static constexpr float threat_drop_off_time = 20.0f;
-    static constexpr float threat_high_level = 700.0f;
-    static constexpr float threat_low_level = 300.0f;
+    static constexpr float THREAT_DROP_OFF_TIME = 20.0f;
+    static constexpr float THREAT_HIGH_LEVEL = 700.0f;
+    static constexpr float THREAT_LOW_LEVEL = 300.0f;
 
-    float smoothed_threat_level;
-    bool threat_high;
+    float smoothed_threat_level = 0.0f;
+    bool threat_high = false;
 
-    func_t threat_low_func;
-    func_t threat_high_func;
+    func_t threat_low_func = nullptr;
+    func_t threat_high_func = nullptr;
 public:
     ThreatLevelEstimate();
     virtual ~ThreatLevelEstimate() = default;
@@ -27,9 +27,9 @@ public:
 
     virtual void update(float delta) override;
 
-    static float debug_max_threat;
-    static float debug_smoothed_threat;
-    static bool debug_threat_high;
+    static float DEBUG_MAX_THREAT;
+    static float DEBUG_SMOOTHED_THREAD;
+    static bool DEBUG_THREAT_HIGH;
 private:
     float getThreatFor(sp::ecs::Entity ship);
 };

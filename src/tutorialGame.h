@@ -52,7 +52,7 @@ private:
 class LocalOnlyGame : public EpsilonServer
 {
 public:
-    LocalOnlyGame() : EpsilonServer(defaultServerPort) {}
+    LocalOnlyGame() : EpsilonServer(DEFAULT_SERVER_PORT) {}
     //Overide the update function from the game server, so no actuall socket communication is done.
     virtual void update(float delta) override;
 };

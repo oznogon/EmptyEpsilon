@@ -82,7 +82,7 @@ MainMenu::MainMenu()
     auto* gm_button = new GuiButton(menu_selections, "", tr("mainMenu", "GM screen"),
         [this]()
         {
-            new EpsilonServer(defaultServerPort);
+            new EpsilonServer(DEFAULT_SERVER_PORT);
             if (game_server.isAlive())
             {
                 gameGlobalInfo->startScenario("scenario_90_empty_space.lua");
