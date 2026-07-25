@@ -310,9 +310,9 @@ void GuiRadarView::drawSectorGrid(sp::RenderTarget& renderer)
     float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
 
     float sector_size = 20000.0f;
-    const float super_sector_size = sector_size * 8.0f;
+    const float super_sector_size = sector_size * 10.0f;
     if (distance > super_sector_size) sector_size = super_sector_size;
-    const float sub_sector_size = sector_size / 8.0f;
+    const float sub_sector_size = sector_size / 10.0f;
 
     int sector_x_min = static_cast<int>(floor((view_position.x - (radar_screen_center.x - rect.position.x) / scale) / sector_size)) + 1;
     int sector_x_max = static_cast<int>(floor((view_position.x + (rect.position.x + rect.size.x - radar_screen_center.x) / scale) / sector_size));

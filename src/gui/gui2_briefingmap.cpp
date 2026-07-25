@@ -224,9 +224,9 @@ void GuiBriefingMap::onDraw(sp::RenderTarget& renderer)
     }
 
     float sector_size = 20000.0f;
-    const float super_sector_size = sector_size * 8.0f;
+    const float super_sector_size = sector_size * 10.0f;
     if (zoom > super_sector_size) sector_size = super_sector_size;
-    const float sub_sector_size = sector_size / 8.0f;
+    const float sub_sector_size = sector_size / 10.0f;
 
     glm::vec2 map_center = rect.center();
     const float scale = std::min(rect.size.x, rect.size.y) / 2.0f / zoom;
