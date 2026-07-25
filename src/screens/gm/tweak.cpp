@@ -3222,7 +3222,8 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
                     showPageDescription(pi);
                 }
             }
-            else if (in_group_view) showGroupComponents(index);
+            else if (in_group_view && index >= 0 && index < static_cast<int>(filtered_group_indices.size()))
+                showGroupComponents(filtered_group_indices[index]);
             else if (index == 0) showGroups();
             else
             {
@@ -5196,7 +5197,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ))
         ->setTextSize(20.0f)
         ->setPosition(10.0f, -20.0f, sp::Alignment::TopRight)
-        ->setSize(20.0f, 30.0f);
+        ->setSize(30.0f, 30.0f);
 }
 
 void GuiEntityTweak::open(sp::ecs::Entity e, string select_component)
@@ -5245,8 +5246,10 @@ void GuiEntityTweak::showGroups()
     current_group_index = -1;
     for (auto page : pages) page->hide();
     component_list->clear();
-    for (auto& group : component_groups)
+    filtered_group_indices.clear();
+    for (int gi = 0; gi < static_cast<int>(component_groups.size()); gi++)
     {
+        auto& group = component_groups[gi];
         if (show_only_existing)
         {
             bool has_match = false;
@@ -5260,6 +5263,7 @@ void GuiEntityTweak::showGroups()
             }
             if (!has_match) continue;
         }
+        filtered_group_indices.push_back(gi);
         component_list->addEntry(group.name, "");
     }
     component_list->setSelectionIndex(0);
