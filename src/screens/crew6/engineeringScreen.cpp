@@ -1,5 +1,6 @@
 #include "engineeringScreen.h"
 #include <i18n.h>
+#include "format.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "engine.h"
@@ -922,7 +923,4 @@ void EngineeringScreen::addSystemEffect(string key, string value)
     system_effects_index++;
 }
 
-string EngineeringScreen::toNearbyIntString(float value)
-{
-    return string(int(nearbyint(value)));
-}
+// toNearbyIntString centralized in src/format.h

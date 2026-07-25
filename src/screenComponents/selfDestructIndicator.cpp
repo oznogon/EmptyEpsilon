@@ -1,5 +1,6 @@
 #include "selfDestructIndicator.h"
 #include "i18n.h"
+#include "format.h"
 #include "playerInfo.h"
 #include "components/selfdestruct.h"
 
@@ -21,29 +22,30 @@ GuiSelfDestructIndicator::GuiSelfDestructIndicator(GuiContainer* owner)
 void GuiSelfDestructIndicator::onDraw(sp::RenderTarget& target)
 {
     box->hide();
-    if (!my_spaceship)
-        return;
+    if (!my_spaceship) return;
+
     auto self_destruct = my_spaceship.getComponent<SelfDestruct>();
-    if (!self_destruct || !self_destruct->active)
-        return;
+    if (!self_destruct || !self_destruct->active) return;
 
     box->show();
 
     if (self_destruct->countdown <= 0.0f)
     {
         int todo = 0;
-        for(int n=0; n<SelfDestruct::max_codes; n++)
-            if (!self_destruct->confirmed[n])
-                todo++;
-        label->setText(tr("Waiting for authorization input: {codes} left").format({{"codes", string(todo)}}));
-    }else{
+        for (int n = 0; n < SelfDestruct::max_codes; n++)
+            if (!self_destruct->confirmed[n]) todo++;
+
+        label->setText(tr("Waiting for authorization input: {codes} left").format({
+            {"codes", string(todo)}
+        }));
+    }
+    else
+    {
         if (self_destruct->countdown <= 3.0f)
-        {
             label->setText(tr("Have a nice day."));
-        }
         else
-        {
-            label->setText(tr("This ship will self-destruct in {seconds} seconds.").format({{"seconds", string(int(std::nearbyint(self_destruct->countdown)))}}));
-        }
+            label->setText(tr("This ship will self-destruct in {seconds} seconds.").format({
+                {"seconds", toNearbyIntString(self_destruct->countdown)}
+            }));
     }
 }

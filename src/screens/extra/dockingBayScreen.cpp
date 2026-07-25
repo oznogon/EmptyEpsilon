@@ -1,6 +1,7 @@
 #include "dockingBayScreen.h"
-#include "random.h"
 #include "i18n.h"
+#include "format.h"
+#include "random.h"
 #include "gameGlobalInfo.h"
 #include "crewPositionRequirements.h"
 
@@ -33,17 +34,13 @@
 
 #include "systems/docking.h"
 
-static string toNearbyIntString(float value)
-{
-    return static_cast<string>(static_cast<int>(nearbyint(value)));
-}
-
 DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 : GuiOverlay(owner, "DOCKING_BAY_SCREEN", GuiTheme::getColor("background")),
   selected_entity(sp::ecs::Entity())
 {
     // Render the background decorations.
-    (new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
+    (new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255, 255, 255, 255}))
+        ->setTextureTiled("gui/background/crosses.png");
 
     // Render the alert level color overlay.
     (new AlertLevelOverlay(this));
@@ -62,7 +59,8 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     layout
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "horizontal");
-    layout->setAttribute("padding", "20");
+    layout
+        ->setAttribute("padding", "20");
 
     left_column = new GuiElement(layout, "DOCKING_BAY_LEFT_COLUMN");
     left_column
@@ -218,9 +216,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
             // If viewing origin berth (entity is here and moving out)
             if (selected_berth.move_target_berth >= 0 && selected_berth.docked_entity)
-            {
                 entity_to_cancel = selected_berth.docked_entity;
-            }
             // If viewing destination berth (entity is moving here)
             else
             {

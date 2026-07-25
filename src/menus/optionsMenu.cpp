@@ -1,6 +1,7 @@
 #include "optionsMenu.h"
 #include <i18n.h>
 #include "engine.h"
+#include "format.h"
 #include "hotkeyMenu.h"
 #include "main.h"
 #include "preferenceManager.h"
@@ -531,7 +532,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
                 PreferencesManager::set("camera_mouse_sensitivity", sensitivity);
                 camera_sensitivity_overlay_label->setText(
                     tr("options", "Mouselook sensitivity: {s}").format({
-                        {"s", static_cast<string>(static_cast<int>(nearbyint(sensitivity * 100.0f)))}
+                        {"s", toNearbyIntString(sensitivity * 100.0f)}
                     })
                 );
             }
@@ -542,7 +543,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
         // Override overlay label.
         camera_sensitivity_overlay_label = new GuiLabel(camera_sensitivity_slider, "CAMERA_SENSITIVITY_SLIDER_LABEL",
             tr("options", "Mouselook sensitivity: {s}").format({
-                {"s", static_cast<string>(static_cast<int>(nearbyint(initial_camera_sensitivity * 100.0f)))}
+                {"s", toNearbyIntString(initial_camera_sensitivity * 100.0f)}
             }), GuiElement::GuiSizeLabel);
         camera_sensitivity_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 

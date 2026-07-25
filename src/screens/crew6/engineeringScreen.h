@@ -65,7 +65,6 @@ private:
     void addSystemEffect(string key, string value);
     void selectSystem(ShipSystem::Type system);
 
-    string toNearbyIntString(float value);
 public:
     EngineeringScreen(GuiContainer* owner, CrewPosition crew_position=CrewPosition::engineering);
 
