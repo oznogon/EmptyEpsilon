@@ -109,48 +109,48 @@ void GameGlobalInfo::setVictory(string faction_name)
 {
     victory_faction = Faction::find(faction_name);
     if (!victory_faction)
-        LOG(Error, "Attempted to set victory faction to ", faction_name, ", but no faction name matched.");
+        LOG(Error, "[ggi] Attempted to set victory faction to ", faction_name, ", but no faction name matched.");
 }
 
 void GameGlobalInfo::update(float delta)
 {
-    if (global_message_timeout > 0.0f)
-    {
-        global_message_timeout -= delta;
-    }
+    if (global_message_timeout > 0.0f) global_message_timeout -= delta;
+
     if (my_player_info)
     {
-        //Set the my_spaceship variable based on the my_player_info->ship_id
+        // Set the my_spaceship variable based on the my_player_info->ship_id.
         if (my_spaceship != my_player_info->ship)
             my_spaceship = my_player_info->ship;
     }
+
     elapsed_time += delta;
 
-    if (main_scenario_script && main_script_error_count < max_repeated_script_errors) {
+    if (main_scenario_script && main_script_error_count < max_repeated_script_errors)
+    {
         auto res = main_scenario_script->call<void>("update", delta);
-        if (res.isErr() && res.error() != "Not a function") {
+        if (res.isErr() && res.error() != "Not a function")
+        {
             LuaConsole::checkResult(res);
             main_script_error_count += 1;
-            if (main_script_error_count == max_repeated_script_errors) {
+            if (main_script_error_count == max_repeated_script_errors)
                 LuaConsole::addLog("5 repeated script update errors, stopping updates.");
-            }
-        } else {
-            main_script_error_count = 0;
         }
+        else main_script_error_count = 0;
     }
+
     script_threads.insert(script_threads.end(), new_script_threads.begin(), new_script_threads.end());
     new_script_threads.clear();
-    for(auto it = script_threads.begin(); it != script_threads.end(); )
+
+    for (auto it = script_threads.begin(); it != script_threads.end(); )
     {
         auto res = (*it)->resume(delta);
         LuaConsole::checkResult(res);
-        if (res.isErr() || !res.value()) {
-            it = script_threads.erase(it);
-        } else {
-            ++it;
-        }
+        if (res.isErr() || !res.value()) it = script_threads.erase(it);
+        else ++it;
     }
-    for(auto& as : additional_scripts) {
+
+    for (auto& as : additional_scripts)
+    {
         auto res = as->call<void>("update", delta);
         if (res.isErr() && res.error() != "Not a function")
             LuaConsole::checkResult(res);
@@ -169,7 +169,7 @@ string GameGlobalInfo::getNextShipCallsign()
     case 4: return "VS" + string(callsign_counter);
     case 5: return "BR" + string(callsign_counter);
     case 6: return "CSS" + string(callsign_counter);
-    case 7: return "UTI" + string(callsign_counter);
+    case 7: return "UT" + string(callsign_counter);
     case 8: return "VK" + string(callsign_counter);
     case 9: return "CCN" + string(callsign_counter);
     }
@@ -182,7 +182,8 @@ void GameGlobalInfo::execScriptCode(const string& code)
     {
         auto res = main_scenario_script->run<sp::script::CaptureAllResults>("return " + code);
 
-        // Errors without a traceback are parse errors, so we can try without the return.
+        // Errors without a traceback are parse errors, so we can try without
+        // the return.
         if (res.isErr() && res.error().find('\n') < 0)
             res = main_scenario_script->run<sp::script::CaptureAllResults>(code);
 
@@ -192,8 +193,7 @@ void GameGlobalInfo::execScriptCode(const string& code)
         {
             if (PreferencesManager::get("headless").empty())
                 LuaConsole::addLog(s);
-            else
-                printf("%s\n", s.c_str());
+            else printf("%s\n", s.c_str());
         }
     }
 }
@@ -205,77 +205,134 @@ bool GameGlobalInfo::allowNewPlayerShips()
     return res.value();
 }
 
-namespace sp::script {
-    template<> struct Convert<std::vector<GameGlobalInfo::ShipSpawnInfo>> {
-        static std::vector<GameGlobalInfo::ShipSpawnInfo> fromLua(lua_State* L, int idx) {
-            std::vector<GameGlobalInfo::ShipSpawnInfo> result{};
-            if (lua_istable(L, idx)) {
-                for(int index=1; lua_geti(L, idx, index) == LUA_TTABLE; index++) {
-                    lua_geti(L, -1, 1); auto callback = Convert<sp::script::Callback>::fromLua(L, -1); lua_pop(L, 1);
-                    lua_geti(L, -1, 2); auto label = lua_tostring(L, -1); lua_pop(L, 1);
-                    lua_geti(L, -1, 3); auto description = lua_tostring(L, -1); lua_pop(L, 1);
-                    lua_geti(L, -1, 4); auto icon = lua_tostring(L, -1); lua_pop(L, 1);
-                    lua_pop(L, 1);
-                    result.push_back({callback, label ? label : "", description ? description : "", icon ? icon : ""});
-                }
+namespace sp::script
+{
+template<> struct Convert<std::vector<GameGlobalInfo::ShipSpawnInfo>>
+{
+    static std::vector<GameGlobalInfo::ShipSpawnInfo> fromLua(lua_State* L, int idx)
+    {
+        std::vector<GameGlobalInfo::ShipSpawnInfo> result{};
+        if (lua_istable(L, idx))
+        {
+            for (int index = 1; lua_geti(L, idx, index) == LUA_TTABLE; index++)
+            {
+                lua_geti(L, -1, 1);
+                auto callback = Convert<sp::script::Callback>::fromLua(L, -1);
                 lua_pop(L, 1);
+
+                lua_geti(L, -1, 2);
+                auto label = lua_tostring(L, -1);
+                lua_pop(L, 1);
+
+                lua_geti(L, -1, 3);
+                auto description = lua_tostring(L, -1);
+                lua_pop(L, 1);
+
+                lua_geti(L, -1, 4);
+                auto icon = lua_tostring(L, -1);
+                lua_pop(L, 1);
+
+                lua_pop(L, 1);
+                result.push_back({
+                    callback,
+                    label ? label : "",
+                    description ? description : "",
+                    icon ? icon : ""
+                });
             }
-            return result;
+
+            lua_pop(L, 1);
         }
-    };
+
+        return result;
+    }
+};
 }
+
 std::vector<GameGlobalInfo::ShipSpawnInfo> GameGlobalInfo::getSpawnablePlayerShips()
 {
     std::vector<GameGlobalInfo::ShipSpawnInfo> info;
-    if (main_scenario_script) {
+    if (main_scenario_script)
+    {
         auto res = main_scenario_script->call<std::vector<GameGlobalInfo::ShipSpawnInfo>>("getSpawnablePlayerShips");
         LuaConsole::checkResult(res);
-        if (res.isOk())
-            info = res.value();
+        if (res.isOk()) info = res.value();
     }
+
     return info;
 }
-namespace sp::script {
-    template<> struct Convert<std::vector<GameGlobalInfo::ObjectSpawnInfo>> {
-        static std::vector<GameGlobalInfo::ObjectSpawnInfo> fromLua(lua_State* L, int idx) {
-            std::vector<GameGlobalInfo::ObjectSpawnInfo> result{};
-            if (lua_istable(L, idx)) {
-                for(int index=1; lua_geti(L, idx, index) == LUA_TTABLE; index++) {
-                    lua_geti(L, -1, 1); auto callback = Convert<sp::script::Callback>::fromLua(L, -1); lua_pop(L, 1);
-                    lua_geti(L, -1, 2); auto label = lua_tostring(L, -1); lua_pop(L, 1);
-                    lua_geti(L, -1, 3); auto category = lua_tostring(L, -1); lua_pop(L, 1);
-                    lua_geti(L, -1, 4); auto description = lua_tostring(L, -1); lua_pop(L, 1);
-                    lua_geti(L, -1, 5); auto icon = lua_tostring(L, -1); lua_pop(L, 1);
-                    lua_pop(L, 1);
-                    result.push_back({callback, label ? label : "", category ? category : "", description ? description : "", icon ? icon : ""});
-                }
+
+namespace sp::script
+{
+template<> struct Convert<std::vector<GameGlobalInfo::ObjectSpawnInfo>>
+{
+    static std::vector<GameGlobalInfo::ObjectSpawnInfo> fromLua(lua_State* L, int idx)
+    {
+        std::vector<GameGlobalInfo::ObjectSpawnInfo> result{};
+        if (lua_istable(L, idx))
+        {
+            for (int index = 1; lua_geti(L, idx, index) == LUA_TTABLE; index++)
+            {
+                lua_geti(L, -1, 1);
+                auto callback = Convert<sp::script::Callback>::fromLua(L, -1);
                 lua_pop(L, 1);
+
+                lua_geti(L, -1, 2);
+                auto label = lua_tostring(L, -1);
+                lua_pop(L, 1);
+
+                lua_geti(L, -1, 3);
+                auto category = lua_tostring(L, -1);
+                lua_pop(L, 1);
+
+                lua_geti(L, -1, 4);
+                auto description = lua_tostring(L, -1);
+                lua_pop(L, 1);
+
+                lua_geti(L, -1, 5);
+                auto icon = lua_tostring(L, -1);
+                lua_pop(L, 1);
+
+                lua_pop(L, 1);
+                result.push_back({
+                    callback,
+                    label ? label : "",
+                    category ? category : "",
+                    description ? description : "",
+                    icon ? icon : ""
+                });
             }
-            return result;
+
+            lua_pop(L, 1);
         }
-    };
+
+        return result;
+    }
+};
 }
 
 std::vector<GameGlobalInfo::ObjectSpawnInfo> GameGlobalInfo::getGMSpawnableObjects()
 {
     std::vector<GameGlobalInfo::ObjectSpawnInfo> info;
-    if (main_scenario_script) {
+    if (main_scenario_script)
+    {
         auto res = main_scenario_script->call<std::vector<GameGlobalInfo::ObjectSpawnInfo>>("getSpawnableGMObjects");
         LuaConsole::checkResult(res);
-        if (res.isOk())
-            info = res.value();
+        if (res.isOk()) info = res.value();
     }
+
     return info;
 }
 
 string GameGlobalInfo::getEntityExportString(sp::ecs::Entity entity)
 {
-    if (main_scenario_script) {
+    if (main_scenario_script)
+    {
         auto res = main_scenario_script->call<string>("getEntityExportString", entity);
         LuaConsole::checkResult(res);
-        if (res.isOk())
-            return res.value();
+        if (res.isOk()) return res.value();
     }
+
     return "";
 }
 
@@ -299,13 +356,10 @@ void GameGlobalInfo::reset()
     banner_string = "";
     default_skybox = "default";
 
-    //Pause the game
-    engine->setGameSpeed(0.0);
+    // Pause the game.
+    engine->setGameSpeed(0.0f);
 
-    foreach(PlayerInfo, p, player_info_list)
-    {
-        p->reset();
-    }
+    foreach (PlayerInfo, p, player_info_list) p->reset();
 }
 
 void GameGlobalInfo::setScenarioSettings(const string filename, std::unordered_map<string, string> new_settings)
@@ -315,7 +369,7 @@ void GameGlobalInfo::setScenarioSettings(const string filename, std::unordered_m
 
     // Set the scenario name.
     gameGlobalInfo->scenario = info.name;
-    LOG(Info, "Configuring settings for scenario ", gameGlobalInfo->scenario);
+    LOG(Info, "[ggi] Configuring settings for scenario: ", gameGlobalInfo->scenario);
 
     // Set each scenario setting to either a matching passed new value, or the
     // default if there's no match (or no new value).
@@ -328,16 +382,16 @@ void GameGlobalInfo::setScenarioSettings(const string filename, std::unordered_m
         if (!new_settings.empty())
         {
             // ... confirm that this setting key exists in the new settings.
+            // If so, override the default with the new value.
             if (new_settings.find(setting.key) != new_settings.end())
             {
-                // If so, override the default with the new value.
                 if (new_settings[setting.key] != "")
                     gameGlobalInfo->scenario_settings[setting.key] = new_settings[setting.key];
             }
         }
 
         // Log scenario setting confirmation.
-        LOG(INFO) << setting.key << " scenario setting set to " << gameGlobalInfo->scenario_settings[setting.key];
+        LOG(Info, "[ggi] ", setting.key, " scenario setting set to ", gameGlobalInfo->scenario_settings[setting.key]);
     }
 }
 
@@ -351,6 +405,7 @@ void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, s
     if (!same_scenario)
         foreach (PlayerInfo, p, player_info_list) p->crew_positions.clear();
 
+    // Reload locale files.
     i18n::reset();
     i18n::load("locale/main." + PreferencesManager::get("language", "en_US") + ".po");
     i18n::load("locale/comms_ship." + PreferencesManager::get("language", "en_US") + ".po");
@@ -367,6 +422,7 @@ void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, s
     {
         auto res = script_environment_base->runFile<void>("model_data.lua");
         LuaConsole::checkResult(res);
+
         if (!res.isErr())
         {
             res = script_environment_base->runFile<void>("factionInfo.lua");
@@ -402,14 +458,13 @@ void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, s
         bool is_headless = !PreferencesManager::get("headless").empty();
         res = main_scenario_script->call<void>("init");
         LuaConsole::checkResult(res);
+
         if (res.isErr())
         {
             main_script_error_count = max_repeated_script_errors;
             const string error_message = "init() function failed, not going to call update()";
-            if (is_headless)
-                printf("%s", error_message.c_str());
-            else
-                LuaConsole::addLog(error_message);
+            if (is_headless) printf("%s", error_message.c_str());
+            else LuaConsole::addLog(error_message);
         }
 
         // Announce StdinLuaConsole() on headless mode.
@@ -430,10 +485,12 @@ void GameGlobalInfo::destroy()
     MultiplayerObject::destroy();
 }
 
-string GameGlobalInfo::getMissionTime() {
+string GameGlobalInfo::getMissionTime()
+{
     unsigned int seconds = static_cast<unsigned int>(gameGlobalInfo->elapsed_time);
-    unsigned int minutes = (seconds / 60) % 60;
-    unsigned int hours = (seconds / 60 / 60) % 24;
+    unsigned int total_minutes = seconds / 60;
+    unsigned int minutes = total_minutes % 60;
+    unsigned int hours = (total_minutes / 60) % 24;
     seconds = seconds % 60;
     char buf[9];
     std::snprintf(buf, 9, "%02d:%02d:%02d", hours, minutes, seconds);
@@ -443,56 +500,71 @@ string GameGlobalInfo::getMissionTime() {
 static string blockToLettersAM(int block_count)
 {
     string result;
-    while (block_count > 0) {
+    while (block_count > 0)
+    {
         block_count--;
-        int idx = block_count % 13;
+        const int idx = block_count % 13;
         result = char('A' + idx) + result;
         block_count /= 13;
     }
+
     return result;
 }
 
 static string blockToLettersNZ(int block_count)
 {
     string result;
-    while (block_count > 0) {
+
+    while (block_count > 0)
+    {
         block_count--;
-        int idx = block_count % 13;
+        const int idx = block_count % 13;
         result = char('N' + idx) + result;
         block_count /= 13;
     }
+
     return result;
 }
 
 static int lettersToBlockAM(const string& s, int& pos)
 {
     int block = 0;
-    while (pos < (int)s.length() && s[pos] >= 'A' && s[pos] <= 'M') {
+
+    while (pos < static_cast<int>(s.length()) && s[pos] >= 'A' && s[pos] <= 'M')
+    {
         block = block * 13 + (s[pos] - 'A' + 1);
         pos++;
     }
+
     return block;
 }
 
 static int lettersToBlockNZ(const string& s, int& pos)
 {
     int block = 0;
-    while (pos < (int)s.length() && s[pos] >= 'N' && s[pos] <= 'Z') {
+
+    while (pos < static_cast<int>(s.length()) && s[pos] >= 'N' && s[pos] <= 'Z')
+    {
         block = block * 13 + (s[pos] - 'N' + 1);
         pos++;
     }
+
     return block;
 }
 
 string getSectorName(glm::vec2 position)
 {
-    constexpr float sector_size = 20000;
+    constexpr float sector_size = 20000.0f;
     int sector_x = static_cast<int>(floorf(position.x / sector_size)) + 50;
     int sector_y = static_cast<int>(floorf(position.y / sector_size)) + 50;
 
-    int block_x = sector_x >= 0 ? sector_x / 100 : (sector_x - 99) / 100;
+    int block_x = sector_x >= 0
+        ? sector_x / 100
+        : (sector_x - 99) / 100;
     int local_col = ((sector_x % 100) + 100) % 100;
-    int block_y = sector_y >= 0 ? sector_y / 100 : (sector_y - 99) / 100;
+    int block_y = sector_y >= 0
+        ? sector_y / 100
+        : (sector_y - 99) / 100;
     int local_row = ((sector_y % 100) + 100) % 100;
 
     char row_buf[3];
@@ -501,61 +573,73 @@ string getSectorName(glm::vec2 position)
     snprintf(col_buf, sizeof(col_buf), "%02d", local_col);
 
     string row_prefix;
-    if (block_y < 0)
-        row_prefix = blockToLettersAM(-block_y);
-    else if (block_y > 0)
-        row_prefix = blockToLettersNZ(block_y);
+    if (block_y < 0) row_prefix = blockToLettersAM(-block_y);
+    else if (block_y > 0) row_prefix = blockToLettersNZ(block_y);
 
     string col_sep;
-    if (block_x == 0)
-        col_sep = "-";
-    else if (block_x < 0)
-        col_sep = blockToLettersAM(-block_x);
-    else
-        col_sep = blockToLettersNZ(block_x);
+    if (block_x == 0) col_sep = "-";
+    else if (block_x < 0) col_sep = blockToLettersAM(-block_x);
+    else col_sep = blockToLettersNZ(block_x);
 
     return row_prefix + string(row_buf) + col_sep + string(col_buf);
 }
 
-glm::vec2 sectorToXY(string sector_name)
+glm::vec2 sectorToXY(const std::string& sector_name)
 {
-    constexpr float sector_size = 20000;
-    if (sector_name.length() < 5) return {};
+    constexpr float SECTOR_SIZE = 20000.0f;
+    constexpr int BLOCK_SIZE = 100;
+    constexpr float SECTOR_OFFSET = 50.0f;
+    constexpr int MIN_LENGTH = 5;
+
+    if (static_cast<int>(sector_name.length()) < MIN_LENGTH) return {};
 
     int pos = 0;
+
+    // Parse Y (row) — block prefix (A-M = negative, N-Z = positive, absent = zero)
     int block_y = 0;
-    if (pos < (int)sector_name.length() && sector_name[pos] >= 'A' && sector_name[pos] <= 'M')
-        block_y = -lettersToBlockAM(sector_name, pos);
-    else if (pos < (int)sector_name.length() && sector_name[pos] >= 'N' && sector_name[pos] <= 'Z')
-        block_y = lettersToBlockNZ(sector_name, pos);
-
-    if (pos + 2 > (int)sector_name.length()) return {};
-    string row_str = sector_name.substr(pos, pos + 2);
-    int local_row = row_str.toInt();
-    pos += 2;
-
-    if (pos >= (int)sector_name.length()) return {};
-
-    int block_x = 0;
-    if (sector_name[pos] == '-') {
-        pos++;
-    } else if (sector_name[pos] >= 'A' && sector_name[pos] <= 'M') {
-        block_x = -lettersToBlockAM(sector_name, pos);
-    } else if (sector_name[pos] >= 'N' && sector_name[pos] <= 'Z') {
-        block_x = lettersToBlockNZ(sector_name, pos);
-    } else {
-        return {};
+    if (sector_name[pos] < '0' || sector_name[pos] > '9')
+    {
+        if (sector_name[pos] >= 'A' && sector_name[pos] <= 'M')
+            block_y = -lettersToBlockAM(sector_name, pos);
+        else if (sector_name[pos] >= 'N' && sector_name[pos] <= 'Z')
+            block_y = lettersToBlockNZ(sector_name, pos);
+        else
+            return {};
     }
 
-    if (pos + 2 > (int)sector_name.length()) return {};
-    string col_str = sector_name.substr(pos, pos + 2);
-    int local_col = col_str.toInt();
+    // Parse 2-digit local row
+    if (pos + 2 > static_cast<int>(sector_name.length())) return {};
+    const int local_row = (sector_name[pos] - '0') * 10 + (sector_name[pos + 1] - '0');
+    if (local_row < 0 || local_row >= 100) return {};
+    pos += 2;
 
-    int sector_x = block_x * 100 + local_col;
-    int sector_y = block_y * 100 + local_row;
+    // Parse X (column) — '-' = block zero, A-M = negative, N-Z = positive
+    int block_x = 0;
+    if (pos < static_cast<int>(sector_name.length()))
+    {
+        if (sector_name[pos] == '-') pos++;
+        else if (sector_name[pos] >= 'A' && sector_name[pos] <= 'M')
+            block_x = -lettersToBlockAM(sector_name, pos);
+        else if (sector_name[pos] >= 'N' && sector_name[pos] <= 'Z')
+            block_x = lettersToBlockNZ(sector_name, pos);
+        else return {};
+    }
+    else return {};
 
-    float x = (sector_x - 50) * sector_size;
-    float y = (sector_y - 50) * sector_size;
+    // Parse 2-digit local column
+    if (pos + 2 > static_cast<int>(sector_name.length())) return {};
+    const int local_col = (sector_name[pos] - '0') * 10 + (sector_name[pos + 1] - '0');
+    if (local_col < 0 || local_col >= 100) return {};
+    pos += 2;
 
-    return {x, y};
+    // Reject trailing characters
+    if (pos != static_cast<int>(sector_name.length())) return {};
+
+    int sector_x = block_x * BLOCK_SIZE + local_col;
+    int sector_y = block_y * BLOCK_SIZE + local_row;
+
+    return {
+        (sector_x - SECTOR_OFFSET) * SECTOR_SIZE,
+        (sector_y - SECTOR_OFFSET) * SECTOR_SIZE
+    };
 }
