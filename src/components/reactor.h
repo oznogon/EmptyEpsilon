@@ -2,8 +2,10 @@
 
 #include "shipsystem.h"
 
-// The reactor component stores and generates energy, any shipsystem can use energy and drain this. While the reactor generates energy.
-class Reactor : public ShipSystem {
+// The Reactor component stores and generates energy. Any other ShipSystem can
+// consume energy, but the Reactor only generates energy.
+class Reactor : public ShipSystem
+{
 public:
     Reactor() { can_be_hacked = false; }
 
@@ -14,5 +16,18 @@ public:
     // Runtime
     float energy = 1000.0f;
 
-    bool useEnergy(float amount) { if (amount > energy) return false; energy -= amount; return true; }
+    // Return the current energy value as an integer percentile.
+    int energyPercentage()
+    {
+        if (max_energy <= 0.0f) return 0;
+        return static_cast<int>(100.0f * energy / max_energy);
+    }
+    // Consume the given amount of energy. Returns false if the request is
+    // larger than the available energy.
+    bool useEnergy(float amount)
+    {
+        if (amount > energy) return false;
+        energy -= amount;
+        return true;
+    }
 };
