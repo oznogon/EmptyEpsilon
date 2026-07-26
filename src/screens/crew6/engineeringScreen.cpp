@@ -529,9 +529,9 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                 // Limit max power to 100% if lacking both Coolant and Reactor.
                 // Rotated bar takes the max value first.
                 const float effective_power_max = (coolant || reactor) ? 3.0f : 1.0f;
-                power_slider
-                    ->setRange(effective_power_max, 0.0f)
-                    ->setValue(system->power_request);
+                power_slider->setRange(effective_power_max, 0.0f);
+                if (!power_slider->isDragging())
+                    power_slider->setValue(system->power_request);
 
                 power_bar
                     ->setRange(0.0f, effective_power_max)
@@ -547,9 +547,9 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                         {"current_level", toNearbyIntString(system->coolant_level / coolant->max_coolant_per_system * 100.0f)},
                         {"requested", toNearbyIntString(std::min(system->coolant_request, coolant->max) / coolant->max_coolant_per_system * 100.0f)}
                     }));
-                    coolant_slider
-                        ->setValue(std::min(system->coolant_request, coolant->max))
-                        ->setEnable(!coolant->auto_levels);
+                    if (!coolant_slider->isDragging())
+                        coolant_slider->setValue(std::min(system->coolant_request, coolant->max));
+                    coolant_slider->setEnable(!coolant->auto_levels);
                     coolant_bar->setValue(std::min(system->coolant_level, coolant->max));
                 }
 
@@ -897,8 +897,10 @@ void EngineeringScreen::selectSystem(ShipSystem::Type system)
     {
         auto sys = ShipSystem::get(my_spaceship, system);
         if (sys) {
-            power_slider->setValue(sys->power_request);
-            coolant_slider->setValue(sys->coolant_request);
+            if (!power_slider->isDragging())
+                power_slider->setValue(sys->power_request);
+            if (!coolant_slider->isDragging())
+                coolant_slider->setValue(sys->coolant_request);
         }
     }
 }

@@ -185,7 +185,8 @@ void GuiJumpControls::onUpdate()
         set_active = axis_value != 0.0f;
     }
 
-    slider->setValue(value);
+    if (!slider->isDragging())
+        slider->setValue(value);
 
     if (keys.helms_execute_jump.isDiscreteStepDown())
         my_player_info->commandJump(slider->getValue());

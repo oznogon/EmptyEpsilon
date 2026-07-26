@@ -1097,9 +1097,12 @@ void DockingBayScreen::updateSelectedEntityDisplay()
         ->setCustomLabel(0, tr("dockingbay", "Berth {i}").format({{"i", selected_berth_index + 1}}))
         ->setCustomIcon(1, type_icon)
         ->setCustomLabel(2, type_name);
-    energy_transfer_direction->setValue(static_cast<float>(selected_berth.transfer_direction));
-    thermal_venting_direction->setValue(static_cast<float>(selected_berth.transfer_direction));
-    repair_prioritization_direction->setValue(static_cast<float>(selected_berth.transfer_direction));
+    if (!energy_transfer_direction->isDragging())
+        energy_transfer_direction->setValue(static_cast<float>(selected_berth.transfer_direction));
+    if (!thermal_venting_direction->isDragging())
+        thermal_venting_direction->setValue(static_cast<float>(selected_berth.transfer_direction));
+    if (!repair_prioritization_direction->isDragging())
+        repair_prioritization_direction->setValue(static_cast<float>(selected_berth.transfer_direction));
 
     // Update reactor/energy displays.
     auto carrier_reactor = my_spaceship.getComponent<Reactor>();

@@ -1226,13 +1226,15 @@ void DroneOperationsScreen::onUpdate()
         // Impulse sync and label update.
         if (auto engine = drone.getComponent<ImpulseEngine>())
         {
-            impulse_slider->setValue(engine->request);
+            if (!impulse_slider->isDragging())
+                impulse_slider->setValue(engine->request);
             impulse_label->setValue(string(static_cast<int>(std::round(engine->actual * 100.0f))) + "%");
         }
 
         if (auto warp = drone.getComponent<WarpDrive>())
         {
-            warp_slider->setValue(static_cast<float>(warp->request));
+            if (!warp_slider->isDragging())
+                warp_slider->setValue(static_cast<float>(warp->request));
             warp_label->setValue(string(warp->current, 1));
 
             if (warp_slider->getRangeMin() != static_cast<float>(warp->max_level))

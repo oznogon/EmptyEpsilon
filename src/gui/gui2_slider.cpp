@@ -256,6 +256,7 @@ void GuiSlider2D::onDraw(sp::RenderTarget& renderer)
 
 bool GuiSlider2D::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
+    dragging = true;
     onMouseDrag(position, id);
     return true;
 }
@@ -306,6 +307,7 @@ void GuiSlider2D::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
 
 void GuiSlider2D::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
+    dragging = false;
 }
 
 GuiSlider2D* GuiSlider2D::clearSnapValues()

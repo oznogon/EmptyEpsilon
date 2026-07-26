@@ -52,7 +52,8 @@ void GuiWarpControls::onDraw(sp::RenderTarget& target)
     if (auto warp = my_spaceship.getComponent<WarpDrive>())
     {
         label->setValue(string(warp->current, 1));
-        slider->setValue(static_cast<float>(warp->request));
+        if (!slider->isDragging())
+            slider->setValue(static_cast<float>(warp->request));
 
         if (slider->getRangeMin() != static_cast<float>(warp->max_level))
         {
@@ -130,7 +131,6 @@ void GuiWarpControls::onUpdate()
     if (command_value != current_request_value)
         my_player_info->commandWarp(command_value);
 
-    // Always update the slider to the request value, since the warp request
-    // could be changed by means other than the controls.
-    slider->setValue(static_cast<float>(command_value));
+    if (!slider->isDragging())
+        slider->setValue(static_cast<float>(command_value));
 }

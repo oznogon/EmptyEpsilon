@@ -96,4 +96,9 @@ public:
     GuiSlider2D* addSnapValue(glm::vec2 value, glm::vec2 range);
     GuiSlider2D* setValue(glm::vec2 value);
     glm::vec2 getValue();
+
+    bool isDragging() const { return dragging; }
+
+protected:
+    bool dragging = false;
 };
