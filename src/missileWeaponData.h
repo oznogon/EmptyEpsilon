@@ -1,16 +1,70 @@
 #pragma once
 
-#include "multiplayer.h"
+#include "ecs/entity.h"
+#include <glm/gtc/type_precision.hpp>
+#include <array>
+#include <unordered_map>
 
-enum EMissileWeapons
+static constexpr int16_t MW_None = -1;
+static constexpr int MW_MaxTypes = 16;
+
+class MissileWeaponDataRegistry
 {
-    MW_None = -1,
-    MW_Homing = 0,
-    MW_Nuke,
-    MW_Mine,
-    MW_EMP,
-    MW_HVLI,
-    MW_Count
+public:
+    static MissileWeaponDataRegistry& instance();
+
+    int registerEntity(sp::ecs::Entity entity, const string& name);
+    void unregisterEntity(sp::ecs::Entity entity);
+    void rebuild();
+
+    int getTypeCount() const { return type_count; }
+
+    int getIndexForName(const string& name) const;
+    sp::ecs::Entity getEntityForName(const string& name) const;
+    sp::ecs::Entity getEntityForIndex(int index) const;
+    const string& getNameForIndex(int index) const;
+
+    int getMissileWeaponName(int index) const;
+    int getLocaleMissileWeaponName(int index) const;
+
+    float getSpeed(int index) const;
+    float getTurnrate(int index) const;
+    float getLifetime(int index) const;
+    glm::u8vec4 getColor(int index) const;
+    float getHomingRange(int index) const;
+    const string& getFireSound(int index) const;
+    const string& getRadarTrace(int index) const;
+
+    float getDamageAtCenter(int index) const;
+    float getDamageAtEdge(int index) const;
+    float getBlastRange(int index) const;
+    const string& getExplosionSfx(int index) const;
+    float getRadarR(int index) const;
+    float getRadarG(int index) const;
+    float getRadarB(int index) const;
+    bool getExplodesOnTimeout(int index) const;
+    bool getIsDelayedExplode(int index) const;
+    int getFireCount(int index) const;
+    const string& getDamageTypeStr(int index) const;
+    int getAvoidObjectDelay(int index) const;
+    bool getCircleCollision(int index) const;
+    bool getNoLifetimeOnMissile(int index) const;
+
+    std::vector<string> getTypeNames() const;
+    std::vector<int> getTypeIndices() const;
+
+private:
+    MissileWeaponDataRegistry() = default;
+
+    struct Entry
+    {
+        sp::ecs::Entity entity;
+        string name;
+    };
+
+    std::array<Entry, MW_MaxTypes> entries;
+    int type_count = 0;
+    std::unordered_map<string, int> name_to_index;
 };
 
 enum EMissileSizes
@@ -19,32 +73,41 @@ enum EMissileSizes
     MS_Medium = 1,
     MS_Large = 2,
 };
-string getMissileSizeString(EMissileSizes size);
-string getMissileWeaponName(EMissileWeapons missile);
-string getLocaleMissileWeaponName(EMissileWeapons missile);
 
-/* data container for missile weapon data, contains information about different missile weapon types. */
+string getMissileSizeString(EMissileSizes size);
+
 class MissileWeaponData
 {
 public:
     MissileWeaponData() = default;
-    MissileWeaponData(float speed, float turnrate, float lifetime, glm::u8vec4 color, float homing_range, string fire_sound, string radar_trace);
 
-    float speed; //meter/sec
-    float turnrate; //deg/sec
-
-    float lifetime; //sec
-    glm::u8vec4 color;
-    float homing_range;
-
+    int index = -1;
+    string name;
+    string locale_name;
+    int order = 0;
+    float speed = 200.0f;
+    float turnrate = 10.f;
+    float lifetime = 27.0f;
+    glm::u8vec4 color = {255, 255, 255, 255};
+    float homing_range = 0.0f;
     string fire_sound;
     string radar_trace;
 
-    static const MissileWeaponData& getDataFor(EMissileWeapons type);
+    float damage_at_center = 35.0f;
+    float damage_at_edge = 5.0f;
+    float blast_range = 30.0f;
+    string explosion_sfx = "sfx/explosion.wav";
+    float radar_r = 0.0f;
+    float radar_g = 0.1f;
+    float radar_b = 0.2f;
+    bool explodes_on_timeout = false;
+    bool is_delayed_explode = false;
+    int fire_count = 1;
+    string damage_type = "Kinetic";
+    int avoid_object_delay = 0;
+    bool circle_collision = false;
+    bool no_lifetime_on_missile = false;
 
     static float convertSizeToCategoryModifier(EMissileSizes size);
     static EMissileSizes convertCategoryModifierToSize(float size);
-
-private:
-    static MissileWeaponData* getMissileDataArray();
 };

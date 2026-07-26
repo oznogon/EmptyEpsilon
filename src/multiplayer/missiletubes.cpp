@@ -19,16 +19,8 @@ BASIC_REPLICATION_IMPL(MissileTubesReplication, MissileTubes)
     BASIC_REPLICATION_FIELD(auto_repair_per_second);
     BASIC_REPLICATION_FIELD(damage_per_second_on_overheat);
 
-    BASIC_REPLICATION_FIELD(storage[MW_Homing]);
-    BASIC_REPLICATION_FIELD(storage[MW_Nuke]);
-    BASIC_REPLICATION_FIELD(storage[MW_Mine]);
-    BASIC_REPLICATION_FIELD(storage[MW_EMP]);
-    BASIC_REPLICATION_FIELD(storage[MW_HVLI]);
-    BASIC_REPLICATION_FIELD(storage_max[MW_Homing]);
-    BASIC_REPLICATION_FIELD(storage_max[MW_Nuke]);
-    BASIC_REPLICATION_FIELD(storage_max[MW_Mine]);
-    BASIC_REPLICATION_FIELD(storage_max[MW_EMP]);
-    BASIC_REPLICATION_FIELD(storage_max[MW_HVLI]);
+    BASIC_REPLICATION_FIELD(storage);
+    BASIC_REPLICATION_FIELD(storage_max);
 
     BASIC_REPLICATION_VECTOR(mounts)
         VECTOR_REPLICATION_FIELD(position);
@@ -41,5 +33,6 @@ BASIC_REPLICATION_IMPL(MissileTubesReplication, MissileTubes)
         VECTOR_REPLICATION_FIELD(state);
         VECTOR_REPLICATION_FIELD_QUANTIZED(delay, uint8_t, 0.0f, 300.0f);
         VECTOR_REPLICATION_FIELD(fire_count);
+        VECTOR_REPLICATION_FIELD(target_angle);
     VECTOR_REPLICATION_END();
 }

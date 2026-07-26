@@ -31,7 +31,7 @@ protected:
         Rear
     };
     EWeaponDirection weapon_direction = EWeaponDirection::Front;
-    EMissileWeapons best_missile_type = EMissileWeapons::MW_Homing;
+    int best_missile_type = 0;
 
     float update_target_delay = 0.0f;
     float pathfind_cooldown = 0.0f;
@@ -97,14 +97,11 @@ protected:
     sp::ecs::Entity findBestMissileRestockTarget(glm::vec2 position, float radius);
 
     // Return scoring estimates for missile types.
-    static float getMissileWeaponStrength(EMissileWeapons type)
+    static float getMissileWeaponStrength(int type_index)
     {
-        switch (type)
-        {
-        case MW_Nuke: return 250.0f;
-        case MW_EMP:  return 150.0f;
-        case MW_HVLI: return 20.0f;
-        default:      return 35.0f;
-        }
+        auto& registry = MissileWeaponDataRegistry::instance();
+        float dmg = registry.getDamageAtCenter(type_index);
+        float blast = registry.getBlastRange(type_index);
+        return dmg + blast * 0.1f;
     }
 };

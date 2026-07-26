@@ -146,6 +146,13 @@ static string getCommsTransmitterStateString(CommsTransmitter::State state)
     return tr("Unknown");
 }
 
+static string getMissileWeaponNameForTweak(int index)
+{
+    if (index < 0)
+        return tr("None");
+    return MissileWeaponDataRegistry::instance().getNameForIndex(index);
+}
+
 // Convert main screen mode to string.
 static string mainScreenSettingToLocaleString(MainScreenSetting setting)
 {
@@ -3789,11 +3796,26 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_PAGE(tr("tweak-tab", "Missile system"), MissileTubes);
     new_page->description =  tr("tweak-missile-system", "Ship system and storage for missiles and mines. Defines current stock and maximum capacity for each type.\n\nEach missile launch tube has a mount that defines its fire direction, load time, size class, and allowed ammunition types. Performance is affected by, and firing generates heat into, the Missile weapon system.");
     ADD_LABEL(tr("tweak-text", "Weapon stocks"));
-    ADD_VALUE_MAX_TWEAK(tr("tweak-text", "Homing:"), MissileTubes, storage[MW_Homing], storage_max[MW_Homing]);
-    ADD_VALUE_MAX_TWEAK(tr("tweak-text", "Nuke:"), MissileTubes, storage[MW_Nuke], storage_max[MW_Nuke]);
-    ADD_VALUE_MAX_TWEAK(tr("tweak-text", "EMP:"), MissileTubes, storage[MW_EMP], storage_max[MW_EMP]);
-    ADD_VALUE_MAX_TWEAK(tr("tweak-text", "HVLI:"), MissileTubes, storage[MW_HVLI], storage_max[MW_HVLI]);
-    ADD_VALUE_MAX_TWEAK(tr("tweak-text", "Mines:"), MissileTubes, storage[MW_Mine], storage_max[MW_Mine]);
+    for (int mwi = 0; mwi < MissileWeaponDataRegistry::instance().getTypeCount(); mwi++)
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal");
+        string label = MissileWeaponDataRegistry::instance().getNameForIndex(mwi) + ":";
+        (new GuiLabel(row, "", label, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        auto ui = new GuiValueMaxTweak(row);
+        ui->val_update_func = [this, ui, mwi]() -> float { if (auto v = entity.getComponent<MissileTubes>()) return static_cast<float>(v->storage[mwi]); return ui->val_input->getText().toFloat(); };
+        ui->max_update_func = [this, ui, mwi]() -> float { if (auto v = entity.getComponent<MissileTubes>()) return static_cast<float>(v->storage_max[mwi]); return ui->max_input->getText().toFloat(); };
+        ui->val_callback = [this, mwi](float val) { if (auto v = entity.getComponent<MissileTubes>()) { val = std::min(val, static_cast<float>(v->storage_max[mwi])); v->storage[mwi] = static_cast<int>(val); } };
+        ui->max_callback = [this, mwi](float val) { if (auto v = entity.getComponent<MissileTubes>()) v->storage_max[mwi] = static_cast<int>(val); };
+        new_page->apply_functions.push_back([this, ui, mwi]() {
+            string val_text = ui->val_input->getText();
+            string max_text = ui->max_input->getText();
+            if (auto v = entity.getComponent<MissileTubes>()) {
+                if (!max_text.empty()) v->storage_max[mwi] = static_cast<int>(max_text.toFloat());
+                if (!val_text.empty()) { float capped = std::min(val_text.toFloat(), static_cast<float>(v->storage_max[mwi])); v->storage[mwi] = static_cast<int>(capped); }
+            }
+        });
+    }
     ADD_LABEL(tr("tweak-text", "Missile weapons system"));
     ADD_SHIP_SYSTEM_TWEAK(MissileTubes);
 
@@ -3802,13 +3824,24 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_VECTOR_ROTATION_TWEAK(tr("tweak-text", "Direction:"), MissileTubes, mounts, direction);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Load time:"), MissileTubes, mounts, load_time);
     ADD_VECTOR_ENUM_TWEAK(tr("tweak-text", "Size:"), MissileTubes, mounts, size, MS_Small, MS_Large, getMissileSizeString);
-    ADD_VECTOR_TOGGLE_MASK_TWEAK(tr("tweak-text", "Allow homing in this tube"), MissileTubes, mounts, type_allowed_mask, 1 << MW_Homing);
-    ADD_VECTOR_TOGGLE_MASK_TWEAK(tr("tweak-text", "Allow nuke in this tube"), MissileTubes, mounts, type_allowed_mask, 1 << MW_Nuke);
-    ADD_VECTOR_TOGGLE_MASK_TWEAK(tr("tweak-text", "Allow mine in this tube"), MissileTubes, mounts, type_allowed_mask, 1 << MW_Mine);
-    ADD_VECTOR_TOGGLE_MASK_TWEAK(tr("tweak-text", "Allow EMP in this tube"), MissileTubes, mounts, type_allowed_mask, 1 << MW_EMP);
-    ADD_VECTOR_TOGGLE_MASK_TWEAK(tr("tweak-text", "Allow HVLI in this tube"), MissileTubes, mounts, type_allowed_mask, 1 << MW_HVLI);
+    for (int mwi = 0; mwi < MissileWeaponDataRegistry::instance().getTypeCount(); mwi++)
+    {
+        string label = tr("tweak-text", "Allow {type} in this tube").replace("{type}", MissileWeaponDataRegistry::instance().getNameForIndex(mwi));
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal");
+        auto ui = new GuiToggleTweak(row, label, [this, vector_selector, mwi](bool value) { auto v = entity.getComponent<MissileTubes>();
+            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->mounts.size())) {
+                uint32_t mask = 1 << mwi;
+                if (value) v->mounts[vector_selector->getSelectionIndex()].type_allowed_mask |= mask;
+                else v->mounts[vector_selector->getSelectionIndex()].type_allowed_mask &= ~mask; }
+            });
+        ui->update_func = [this, vector_selector, ui, mwi]() -> bool { auto v = entity.getComponent<MissileTubes>();
+            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->mounts.size()))
+                return v->mounts[vector_selector->getSelectionIndex()].type_allowed_mask & (1U << mwi);
+            return ui->getValue(); };
+    }
     ADD_VECTOR_VEC3_TWEAK(tr("tweak-text", "Position:"), MissileTubes, mounts, position);
-    ADD_VECTOR_ENUM_TWEAK(tr("tweak-text", "Type loaded:"), MissileTubes, mounts, type_loaded, MW_None, MW_Count - 1, getMissileWeaponName);
+    ADD_VECTOR_ENUM_TWEAK(tr("tweak-text", "Type loaded:"), MissileTubes, mounts, type_loaded, MW_None, MW_MaxTypes - 1, getMissileWeaponNameForTweak);
     ADD_VECTOR_ENUM_TWEAK(tr("tweak-text", "State:"), MissileTubes, mounts, state, static_cast<int>(MissileTubes::MountPoint::State::Empty), static_cast<int>(MissileTubes::MountPoint::State::Firing), getMountPointStateString);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Delay:"), MissileTubes, mounts, delay);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Fire count:"), MissileTubes, mounts, fire_count);
@@ -4241,11 +4274,16 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_BOOL_TWEAK(tr("tweak-text", "Only players can pick up this entity"), PickupCallback, player);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Give energy:"), PickupCallback, give_energy);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Give probe:"), PickupCallback, give_probe);
-    ADD_MISSILE_ARRAY_TWEAK(tr("tweak-text", "Give homing:"), PickupCallback, give_missile, MW_Homing);
-    ADD_MISSILE_ARRAY_TWEAK(tr("tweak-text", "Give nuke:"), PickupCallback, give_missile, MW_Nuke);
-    ADD_MISSILE_ARRAY_TWEAK(tr("tweak-text", "Give mine:"), PickupCallback, give_missile, MW_Mine);
-    ADD_MISSILE_ARRAY_TWEAK(tr("tweak-text", "Give EMP:"), PickupCallback, give_missile, MW_EMP);
-    ADD_MISSILE_ARRAY_TWEAK(tr("tweak-text", "Give HVLI:"), PickupCallback, give_missile, MW_HVLI);
+    for (int mwi = 0; mwi < MissileWeaponDataRegistry::instance().getTypeCount(); mwi++)
+    {
+        string label = tr("tweak-text", "Give {type}:").replace("{type}", MissileWeaponDataRegistry::instance().getNameForIndex(mwi));
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal");
+        (new GuiLabel(row, "", label, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        auto ui = new GuiTextTweak(row);
+        ui->update_func = [this, mwi]() -> string { if (auto v = entity.getComponent<PickupCallback>()) return string(static_cast<float>(v->give_missile[mwi])); return ""; };
+        ui->callback([this, mwi](string text) { if (auto v = entity.getComponent<PickupCallback>()) v->give_missile[mwi] = text.toInt(); });
+    }
     addPageToGroup(scripting_group);
 
     ADD_PAGE(tr("tweak-tab", "Collision callback"), CollisionCallback);

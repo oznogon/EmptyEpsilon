@@ -351,7 +351,7 @@ void DockingSystem::update(float delta)
                         if (auto tubes = entity.getComponent<MissileTubes>())
                         {
                             bool needs_missile = false;
-                            for (int n = 0; n < MW_Count; n++)
+                            for (int n = 0; n < MissileWeaponDataRegistry::instance().getTypeCount(); n++)
                             {
                                 if  (tubes->storage[n] < tubes->storage_max[n])
                                 {

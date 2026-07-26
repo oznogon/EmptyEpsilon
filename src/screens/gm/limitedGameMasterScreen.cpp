@@ -648,46 +648,19 @@ private:
         auto& page = addPage(tr("tweak-tab", "Missile tubes"),
             [](sp::ecs::Entity e) { return e.hasComponent<MissileTubes>(); });
         page.description = tr("tweak-missile-system", "Ship system and storage for missiles and mines. Defines current stock and maximum capacity for each type.");
-        addIntTweak(page.page, tr("tweak-text", "Homing:"), ".components.missile_tubes.storage_homing",
-            [this]()
-            {
-                if (auto v = entity.getComponent<MissileTubes>()) return v->storage[int(MW_Homing)];
-                return 0;
-            },
-            page.update_funcs
-        );
-        addIntTweak(page.page, tr("tweak-text", "Nuke:"), ".components.missile_tubes.storage_nuke",
-            [this]()
-            {
-                if (auto v = entity.getComponent<MissileTubes>()) return v->storage[int(MW_Nuke)];
-                return 0;
-            },
-            page.update_funcs
-        );
-        addIntTweak(page.page, tr("tweak-text", "Mine:"), ".components.missile_tubes.storage_mine",
-            [this]()
-            {
-                if (auto v = entity.getComponent<MissileTubes>()) return v->storage[int(MW_Mine)];
-                return 0;
-            },
-            page.update_funcs
-        );
-        addIntTweak(page.page, tr("tweak-text", "EMP:"), ".components.missile_tubes.storage_emp",
-            [this]()
-            {
-                if (auto v = entity.getComponent<MissileTubes>()) return v->storage[int(MW_EMP)];
-                return 0;
-            },
-            page.update_funcs
-        );
-        addIntTweak(page.page, tr("tweak-text", "HVLI:"), ".components.missile_tubes.storage_hvli",
-            [this]()
-            {
-                if (auto v = entity.getComponent<MissileTubes>()) return v->storage[int(MW_HVLI)];
-                return 0;
-            },
-            page.update_funcs
-        );
+        for (int mwi = 0; mwi < MissileWeaponDataRegistry::instance().getTypeCount(); mwi++)
+        {
+            string label = MissileWeaponDataRegistry::instance().getNameForIndex(mwi) + ":";
+            string lua_path = ".components.missile_tubes.storage";
+            addIntTweak(page.page, label, lua_path + string(mwi),
+                [this, mwi]()
+                {
+                    if (auto v = entity.getComponent<MissileTubes>()) return v->storage[mwi];
+                    return 0;
+                },
+                page.update_funcs
+            );
+        }
     }
 
     void createReactorPage()

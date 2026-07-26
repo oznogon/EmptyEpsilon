@@ -1,23 +1,24 @@
 #include "systems/missilesystem.h"
-
-#include "gameGlobalInfo.h"
-#include "components/collision.h"
-#include "components/missiletubes.h"
-#include "components/missile.h"
-#include "components/lifetime.h"
-#include "components/hull.h"
-#include "components/radar.h"
-#include "components/docking.h"
-#include "components/warpdrive.h"
-#include "components/sfx.h"
-#include "components/rendering.h"
-#include "components/faction.h"
-#include "components/avoidobject.h"
-#include "ecs/query.h"
 #include "multiplayer_server.h"
 #include "particleEffect.h"
 #include "random.h"
+#include "gameGlobalInfo.h"
+#include "ecs/query.h"
 
+#include "components/avoidobject.h"
+#include "components/collision.h"
+#include "components/docking.h"
+#include "components/faction.h"
+#include "components/hull.h"
+#include "components/lifetime.h"
+#include "components/missile.h"
+#include "components/missiletubes.h"
+#include "components/missileWeaponTarget.h"
+#include "components/radar.h"
+#include "components/rendering.h"
+#include "components/sfx.h"
+#include "components/target.h"
+#include "components/warpdrive.h"
 
 MissileSystem::MissileSystem()
 {
@@ -26,16 +27,17 @@ MissileSystem::MissileSystem()
 
 void MissileSystem::update(float delta)
 {
-    for(auto [entity, tubes] : sp::ecs::Query<MissileTubes>())
+    for (auto [entity, tubes] : sp::ecs::Query<MissileTubes>())
     {
-        for(auto& tube : tubes.mounts)
+        for (auto& tube : tubes.mounts)
         {
             if (tube.delay > 0.0f)
                 tube.delay -= delta * tubes.getSystemEffectiveness();
             else
             {
                 tube.delay = 0.0f;
-                switch(tube.state)
+
+                switch (tube.state)
                 {
                 case MissileTubes::MountPoint::State::Loading:
                     tube.state = MissileTubes::MountPoint::State::Loaded;
@@ -49,13 +51,18 @@ void MissileSystem::update(float delta)
                 case MissileTubes::MountPoint::State::Firing:
                     if (game_server.isAlive())
                     {
-                        spawnProjectile(entity, tube, 0, {});
+                        sp::ecs::Entity target_entity;
+                        if (entity.hasComponent<sp::Transform>())
+                        {
+                            if (auto mt = entity.getComponent<MissileWeaponTarget>())
+                                target_entity = mt->entity;
+                            else if (auto tgt = entity.getComponent<Target>())
+                                target_entity = tgt->entity;
+                        }
+                        spawnProjectile(entity, tube, tube.target_angle, target_entity);
 
                         tube.fire_count -= 1;
-                        if (tube.fire_count > 0)
-                        {
-                            tube.delay = 1.5f;
-                        }
+                        if (tube.fire_count > 0) tube.delay = 1.5f;
                         else
                         {
                             tube.state = MissileTubes::MountPoint::State::Empty;
@@ -70,47 +77,72 @@ void MissileSystem::update(float delta)
         }
     }
 
-    for(auto [entity, flight, transform, physics] : sp::ecs::Query<MissileFlight, sp::Transform, sp::Physics>()) {
+    for (auto [entity, flight, transform, physics] : sp::ecs::Query<MissileFlight, sp::Transform, sp::Physics>())
+    {
         physics.setVelocity(vec2FromAngle(transform.getRotation()) * flight.speed);
-        if (flight.timeout > 0.0f) {
+
+        if (flight.timeout > 0.0f)
+        {
             flight.timeout -= delta;
-            if (flight.timeout <= 0.0f && game_server) {
+
+            if (flight.timeout <= 0.0f && game_server)
+            {
                 entity.removeComponent<MissileFlight>();
                 physics.setVelocity({0.0f, 0.0f});
             }
         }
     }
 
-    for(auto [entity, homing, transform, physics] : sp::ecs::Query<MissileHoming, sp::Transform, sp::Physics>()) {
-        if (auto tt = homing.target.getComponent<sp::Transform>()) {
-            float r = homing.range + 10.0f;
-            if (glm::length2(tt->getPosition() - transform.getPosition()) < r*r)
+    for (auto [entity, homing, transform, physics] : sp::ecs::Query<MissileHoming, sp::Transform, sp::Physics>())
+    {
+        if (auto tt = homing.target.getComponent<sp::Transform>())
+        {
+            const float r = homing.range + 10.0f;
+            if (glm::length2(tt->getPosition() - transform.getPosition()) < r * r)
                 homing.target_angle = vec2ToAngle(tt->getPosition() - transform.getPosition());
         }
+
         float angle_diff = angleDifference(transform.getRotation(), homing.target_angle);
 
-        if (angle_diff > 1.0f)
-            physics.setAngularVelocity(homing.turn_rate);
+        if (angle_diff > 1.0f) physics.setAngularVelocity(homing.turn_rate);
         else if (angle_diff < -1.0f)
             physics.setAngularVelocity(homing.turn_rate * -1.0f);
-        else
-            physics.setAngularVelocity(angle_diff * homing.turn_rate);
+        else physics.setAngularVelocity(angle_diff * homing.turn_rate);
     }
 
     // TODO: Not really part of missile
-    for(auto [entity, emitter, transform] : sp::ecs::Query<ConstantParticleEmitter, sp::Transform>()) {
+    for (auto [entity, emitter, transform] : sp::ecs::Query<ConstantParticleEmitter, sp::Transform>())
+    {
         emitter.delay -= delta;
-        if (emitter.delay <= 0.0f) {
+        if (emitter.delay <= 0.0f)
+        {
             emitter.delay = emitter.interval;
             auto pos = glm::vec3(transform.getPosition().x, transform.getPosition().y, 0);
-            ParticleEngine::spawn(pos, pos + glm::vec3(random(-emitter.travel_random_range, emitter.travel_random_range), random(-emitter.travel_random_range, emitter.travel_random_range), random(-emitter.travel_random_range, emitter.travel_random_range)), emitter.start_color, emitter.end_color, emitter.start_size, emitter.end_size, emitter.life_time);
+            ParticleEngine::spawn(
+                pos,
+                pos + glm::vec3(
+                    random(-emitter.travel_random_range, emitter.travel_random_range),
+                    random(-emitter.travel_random_range, emitter.travel_random_range),
+                    random(-emitter.travel_random_range, emitter.travel_random_range)
+                ),
+                emitter.start_color,
+                emitter.end_color,
+                emitter.start_size,
+                emitter.end_size,
+                emitter.life_time
+            );
         }
     }
 
-    if (game_server.isAlive()) {
-        for(auto [entity, deot, transform] : sp::ecs::Query<DelayedExplodeOnTouch, sp::Transform>()) {
-            if (deot.trigger_holdoff_delay > 0.0f) deot.trigger_holdoff_delay -= delta;
+    if (game_server.isAlive())
+    {
+        for (auto [entity, deot, transform] : sp::ecs::Query<DelayedExplodeOnTouch, sp::Transform>())
+        {
+            if (deot.trigger_holdoff_delay > 0.0f)
+                deot.trigger_holdoff_delay -= delta;
+
             if (!deot.triggered) continue;
+
             deot.delay -= delta;
             if (deot.delay >= 0.0f) continue;
 
@@ -118,16 +150,21 @@ void MissileSystem::update(float delta)
         }
     }
 
-    if (game_server.isAlive()) {
+    if (game_server.isAlive())
+    {
         // TODO: Not really part of missile
-        for(auto [entity, lifetime] : sp::ecs::Query<LifeTime>()) {
+        for (auto [entity, lifetime] : sp::ecs::Query<LifeTime>())
+        {
             lifetime.lifetime -= delta;
-            if (lifetime.lifetime <= 0.0f) {
-                if (entity.hasComponent<ExplodeOnTimeout>()) {
-                    if (auto eot = entity.getComponent<ExplodeOnTouch>()) {
+
+            if (lifetime.lifetime <= 0.0f)
+            {
+                if (entity.hasComponent<ExplodeOnTimeout>())
+                {
+                    if (auto eot = entity.getComponent<ExplodeOnTouch>())
                         explode(entity, {}, *eot);
-                    }
                 }
+
                 entity.destroy();
             }
         }
@@ -137,17 +174,25 @@ void MissileSystem::update(float delta)
 void MissileSystem::collision(sp::ecs::Entity a, sp::ecs::Entity b, float force)
 {
     if (!game_server.isAlive()) return;
+
+    auto hull = b.getComponent<Hull>();
+    if (!hull) return;
+
+    auto deot_a = a.getComponent<DelayedExplodeOnTouch>();
+    auto deot_b = b.getComponent<DelayedExplodeOnTouch>();
+    if ((deot_a && deot_a->trigger_holdoff_delay > 0.0f)
+        || (deot_b && deot_b->trigger_holdoff_delay > 0.0f)) return;
+
     auto deot = a.getComponent<DelayedExplodeOnTouch>();
-    if (deot && deot->trigger_holdoff_delay <= 0.0f) {
-        auto hull = b.getComponent<Hull>();
-        if (!hull) return;
+    if (deot && deot->trigger_holdoff_delay <= 0.0f)
+    {
         deot->triggered = true;
+        return;
     }
+
     auto eot = a.getComponent<ExplodeOnTouch>();
     if (!eot) return;
     if (eot->owner == b) return;
-    auto hull = b.getComponent<Hull>();
-    if (!hull) return;
 
     explode(a, b, *eot);
 }
@@ -156,50 +201,59 @@ void MissileSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e,
 {
     auto physics = e.getComponent<sp::Physics>();
     if (!physics) return;
+
     auto r = physics->getSize().x;
-    renderer.drawCircleOutline(screen_position, r * scale, 3.0, component.triggered ? glm::u8vec4(255, 0, 0, 128) : glm::u8vec4(255, 255, 255, 128));
+    if (r <= 0.0f) return;
+
+    renderer.drawCircleOutline(
+        screen_position,
+        r * scale,
+        3.0f,
+        component.triggered
+            ? glm::u8vec4(255, 0, 0, 128)
+            : glm::u8vec4(255, 255, 255, 128)
+    );
 }
 
 void MissileSystem::explode(sp::ecs::Entity source, sp::ecs::Entity target, ExplodeOnTouch& eot)
 {
     auto transform = source.getComponent<sp::Transform>();
     if (!transform) return;
+
     DamageInfo info(eot.owner, eot.damage_type, transform->getPosition());
-    if (eot.blast_range > 100.0f || !target) {
+
+    if (eot.blast_range > 100.0f || !target)
         DamageSystem::damageArea(transform->getPosition(), eot.blast_range, eot.damage_at_edge, eot.damage_at_center, info, eot.blast_range / 2);
-    } else {
-        DamageSystem::applyDamage(target, eot.damage_at_center, info);
-    }
+    else DamageSystem::applyDamage(target, eot.damage_at_center, info);
 
     auto e = sp::ecs::Entity::create();
     e.addComponent<sp::Transform>(*transform);
     auto& ee = e.addComponent<ExplosionEffect>();
     ee.size = eot.blast_range;
     ee.radar = true;
-    if (!eot.explosion_sfx.empty()) {
+
+    if (!eot.explosion_sfx.empty())
         e.addComponent<Sfx>().sound = eot.explosion_sfx;
-    }
-    if (eot.damage_type == DamageType::EMP) {
-        ee.electrical = true;
-    }
+
+    if (eot.damage_type == DamageType::EMP) ee.electrical = true;
+
     source.destroy();
 }
 
-void MissileSystem::startLoad(sp::ecs::Entity source, MissileTubes::MountPoint& tube, EMissileWeapons type)
+void MissileSystem::startLoad(sp::ecs::Entity source, MissileTubes::MountPoint& tube, int type_index)
 {
-    if (!tube.canLoad(type))
-        return;
-    if (tube.state != MissileTubes::MountPoint::State::Empty)
-        return;
+    if (!tube.canLoad(type_index)) return;
+    if (tube.state != MissileTubes::MountPoint::State::Empty) return;
+
     auto tubes = source.getComponent<MissileTubes>();
     if (!tubes) return;
-    if (tubes->storage[type] <= 0)
-        return;
+
+    if (tubes->storage[type_index] <= 0) return;
 
     tube.state = MissileTubes::MountPoint::State::Loading;
     tube.delay = tube.load_time;
-    tube.type_loaded = type;
-    tubes->storage[type]--;
+    tube.type_loaded = type_index;
+    tubes->storage[type_index]--;
 }
 
 void MissileSystem::startUnload(sp::ecs::Entity source, MissileTubes::MountPoint& tube)
@@ -222,12 +276,18 @@ void MissileSystem::fire(sp::ecs::Entity source, MissileTubes::MountPoint& tube,
     if (warp && warp->current > 0.0f) return;
     if (tube.state != MissileTubes::MountPoint::State::Loaded) return;
 
-    if (tube.type_loaded == MW_HVLI)
+    auto& registry = MissileWeaponDataRegistry::instance();
+    int fire_count = registry.getFireCount(tube.type_loaded);
+
+    if (fire_count > 1)
     {
-        tube.fire_count = 5;
+        tube.fire_count = fire_count;
+        tube.target_angle = target_angle;
         tube.state = MissileTubes::MountPoint::State::Firing;
-        tube.delay = 0.0;
-    }else{
+        tube.delay = 0.0f;
+    }
+    else
+    {
         spawnProjectile(source, tube, target_angle, target);
         tube.state = MissileTubes::MountPoint::State::Empty;
         tube.type_loaded = MW_None;
@@ -240,209 +300,206 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
     if (!source_transform) return;
     auto fire_location = source_transform->getPosition() + rotateVec2(glm::vec2(tube.position), source_transform->getRotation());
     auto category_modifier = MissileWeaponData::convertSizeToCategoryModifier(tube.size);
-    auto& mwd = MissileWeaponData::getDataFor(tube.type_loaded);
+    auto& registry = MissileWeaponDataRegistry::instance();
+    int type_index = tube.type_loaded;
 
-    sp::ecs::Entity missile;
-    switch(tube.type_loaded)
+    float speed = registry.getSpeed(type_index);
+    float turnrate = registry.getTurnrate(type_index);
+    float lifetime = registry.getLifetime(type_index);
+    float homing_range = registry.getHomingRange(type_index);
+    glm::u8vec4 color = registry.getColor(type_index);
+    string fire_sound = registry.getFireSound(type_index);
+    string radar_trace = registry.getRadarTrace(type_index);
+
+    float damage_at_center = registry.getDamageAtCenter(type_index) * category_modifier;
+    float damage_at_edge = registry.getDamageAtEdge(type_index) * category_modifier;
+    float blast_range = registry.getBlastRange(type_index) * category_modifier;
+    string explosion_sfx = registry.getExplosionSfx(type_index);
+    float radar_r = registry.getRadarR(type_index);
+    float radar_g = registry.getRadarG(type_index);
+    float radar_b = registry.getRadarB(type_index);
+    bool explodes_on_timeout = registry.getExplodesOnTimeout(type_index);
+    bool is_delayed_explode = registry.getIsDelayedExplode(type_index);
+    string damage_type_str = registry.getDamageTypeStr(type_index);
+    int avoid_object_delay = registry.getAvoidObjectDelay(type_index);
+    bool circle_collision = registry.getCircleCollision(type_index);
+    bool no_lifetime_on_missile = registry.getNoLifetimeOnMissile(type_index);
+
+    DamageType dmg_type = DamageType::Kinetic;
+    if (damage_type_str == "EMP") dmg_type = DamageType::EMP;
+
+    sp::ecs::Entity missile = sp::ecs::Entity::create();
+
+    if (is_delayed_explode)
     {
-    case MW_Homing:
-        {
-            missile = sp::ecs::Entity::create();
-            auto& mc = missile.addComponent<ExplodeOnTouch>();
-            mc.owner = source;
-            mc.damage_at_center = 35 * category_modifier;
-            mc.damage_at_edge = 5 * category_modifier;
-            mc.blast_range = 30 * category_modifier;
-            mc.explosion_sfx = "sfx/explosion.wav";
-            missile.addComponent<RawRadarSignatureInfo>(0.0f, 0.1f, 0.2f);
-        }
-        break;
-    case MW_Nuke:
-        {
-            missile = sp::ecs::Entity::create();
-            auto& mc = missile.addComponent<ExplodeOnTouch>();
-            mc.owner = source;
-            mc.damage_at_center = 160.0f * category_modifier;
-            mc.damage_at_edge = 30.0f * category_modifier;
-            mc.blast_range = 1000.0f * category_modifier;
-            mc.explosion_sfx = "sfx/nuke_explosion.wav";
-            missile.addComponent<RawRadarSignatureInfo>(0.0f, 0.7f, 0.1f);
-            missile.addComponent<DelayedAvoidObject>(10.0f, 1000.0f);
-            missile.addComponent<ExplodeOnTimeout>();
-        }
-        break;
-    case MW_Mine:
-        {
-            missile = sp::ecs::Entity::create();
-            auto& mc = missile.addComponent<DelayedExplodeOnTouch>();
-            mc.trigger_holdoff_delay = mwd.lifetime;
-            mc.delay = 1.0f;
-            mc.owner = source;
-            mc.damage_at_center = 160.0f * category_modifier;
-            mc.damage_at_edge = 30.0f * category_modifier;
-            mc.blast_range = 1000.0f * category_modifier;
-            mc.explosion_sfx = "sfx/explosion.wav";
-            missile.addComponent<RawRadarSignatureInfo>(0.0f, 0.05f, 0.0f);
-            missile.addComponent<DelayedAvoidObject>(mwd.lifetime, 1000.0f * category_modifier);
-        }
-        break;
-    case MW_HVLI:
-        {
-            missile = sp::ecs::Entity::create();
-            auto& mc = missile.addComponent<ExplodeOnTouch>();
-            mc.owner = source;
-            mc.damage_at_center = 10.0f * category_modifier;
-            mc.damage_at_edge = 10.0f * category_modifier;
-            mc.blast_range = 20.0f * category_modifier;
-            mc.explosion_sfx = "sfx/explosion.wav";
-            missile.addComponent<RawRadarSignatureInfo>(0.1f, 0.0f, 0.0f);
-        }
-        break;
-    case MW_EMP:
-        {
-            missile = sp::ecs::Entity::create();
-            auto& mc = missile.addComponent<ExplodeOnTouch>();
-            mc.owner = source;
-            mc.damage_at_center = 160.0f * category_modifier;
-            mc.damage_at_edge = 30.0f * category_modifier;
-            mc.blast_range = 1000.0f * category_modifier;
-            mc.damage_type = DamageType::EMP;
-            mc.explosion_sfx = "sfx/emp_explosion.wav";
-            missile.addComponent<RawRadarSignatureInfo>(0.0f, 1.0f, 0.0f);
-            missile.addComponent<ExplodeOnTimeout>();
-        }
-        break;
-    default:
-        break;
+        auto& mc = missile.addComponent<DelayedExplodeOnTouch>();
+        mc.trigger_holdoff_delay = lifetime;
+        mc.delay = 1.0f;
+        mc.owner = source;
+        mc.damage_at_center = damage_at_center;
+        mc.damage_at_edge = damage_at_edge;
+        mc.blast_range = blast_range;
+        mc.explosion_sfx = explosion_sfx;
+        missile.addComponent<RawRadarSignatureInfo>(radar_r, radar_g, radar_b);
+
+        if (avoid_object_delay > 0)
+            missile.addComponent<DelayedAvoidObject>(static_cast<float>(avoid_object_delay), blast_range);
+    }
+    else
+    {
+        auto& mc = missile.addComponent<ExplodeOnTouch>();
+        mc.owner = source;
+        mc.damage_at_center = damage_at_center;
+        mc.damage_at_edge = damage_at_edge;
+        mc.blast_range = blast_range;
+        mc.damage_type = dmg_type;
+        mc.explosion_sfx = explosion_sfx;
+        missile.addComponent<RawRadarSignatureInfo>(radar_r, radar_g, radar_b);
+
+        if (explodes_on_timeout) missile.addComponent<ExplodeOnTimeout>();
+        if (avoid_object_delay > 0)
+            missile.addComponent<DelayedAvoidObject>(static_cast<float>(avoid_object_delay), blast_range);
     }
 
-    if (missile) {
-        auto& physics = missile.addComponent<sp::Physics>();
-        if (tube.type_loaded == MW_Mine)
-            physics.setCircle(sp::Physics::Type::Sensor, 1000.0f * 0.6f);
-        else
-            physics.setRectangle(sp::Physics::Type::Sensor, {10, 30});
+    auto& physics = missile.addComponent<sp::Physics>();
+    if (circle_collision)
+        physics.setCircle(sp::Physics::Type::Sensor, blast_range * 0.6f);
+    else
+        physics.setRectangle(sp::Physics::Type::Sensor, {10, 30});
 
-        auto& mf = missile.addComponent<MissileFlight>();
-        mf.speed = mwd.speed / category_modifier;
-        if (tube.type_loaded == MW_Mine)
-            mf.timeout = mwd.lifetime;
-        if (mwd.homing_range > 0.0f) {
-            auto& mh = missile.addComponent<MissileHoming>();
-            mh.range = mwd.homing_range;
-            mh.target = target;
-            mh.target_angle = target_angle;
-            mh.turn_rate = mwd.turnrate / category_modifier;
-        }
+    auto& mf = missile.addComponent<MissileFlight>();
+    mf.speed = speed / category_modifier;
 
-        if (auto f = source.getComponent<Faction>())
-            missile.addComponent<Faction>().entity = f->entity;
+    if (no_lifetime_on_missile) mf.timeout = lifetime;
 
-        auto& t = missile.addComponent<sp::Transform>();
-        t.setPosition(fire_location);
-        t.setRotation(source_transform->getRotation() + tube.direction);
-        auto& cpe = missile.addComponent<ConstantParticleEmitter>();
-        if (tube.type_loaded == MW_Mine) {
-            cpe.travel_random_range = 100.0f;
-            cpe.start_color = {1, 1, 1};
-            cpe.end_color = {0, 0, 1};
-            cpe.interval = 0.4f;
-            cpe.start_size = 30.0f;
-            cpe.end_size = 0.0f;
-            cpe.life_time = 10.0f;
-        }
-
-        if (tube.type_loaded != MW_Mine)
-            missile.addComponent<LifeTime>().lifetime = mwd.lifetime * category_modifier;
-
-        if (tube.type_loaded != MW_Mine) {
-            auto& dbad = missile.addComponent<DestroyedByAreaDamage>();
-            dbad.damaged_by_flags = (1 << int(DamageType::EMP)) | (1 << int(DamageType::Energy));
-        }
-
-        auto& trace = missile.addComponent<RadarTrace>();
-        trace.icon = mwd.radar_trace;
-        trace.radius = 32.0f;
-        trace.max_size = trace.min_size = 32 * (0.25f + 0.25f * category_modifier);
-        trace.flags = RadarTrace::Rotate;
-        // Show missiles on long-range radar if the server setting is enabled.
-        // Mines are always visible on long-range radar.
-        if (gameGlobalInfo && gameGlobalInfo->missiles_on_long_range_radar)
-            trace.flags |= RadarTrace::LongRange;
-        if (tube.type_loaded == MW_Mine) trace.flags |= RadarTrace::LongRange;
-        trace.color = mwd.color;
-
-        auto& sfx = missile.addComponent<Sfx>();
-        sfx.sound = mwd.fire_sound;
-        sfx.volume = 55.0f + 15.0f * category_modifier;
-        sfx.pitch += random(-0.1f, 0.1f);
-
-        auto& hull = missile.addComponent<Hull>();
-        hull.current = 1.0f;
-        hull.max = 1.0f;
+    if (homing_range > 0.0f)
+    {
+        auto& mh = missile.addComponent<MissileHoming>();
+        mh.range = homing_range;
+        mh.target = target;
+        mh.target_angle = target_angle;
+        mh.turn_rate = turnrate / category_modifier;
     }
+
+    if (auto f = source.getComponent<Faction>())
+        missile.addComponent<Faction>().entity = f->entity;
+
+    auto& t = missile.addComponent<sp::Transform>();
+    t.setPosition(fire_location);
+    t.setRotation(source_transform->getRotation() + tube.direction);
+    auto& cpe = missile.addComponent<ConstantParticleEmitter>();
+
+    if (circle_collision)
+    {
+        cpe.travel_random_range = 100.0f;
+        cpe.start_color = {1, 1, 1};
+        cpe.end_color = {0, 0, 1};
+        cpe.interval = 0.4f;
+        cpe.start_size = 30.0f;
+        cpe.end_size = 0.0f;
+        cpe.life_time = 10.0f;
+    }
+
+    if (!no_lifetime_on_missile)
+        missile.addComponent<LifeTime>().lifetime = lifetime * category_modifier;
+
+    if (!no_lifetime_on_missile)
+    {
+        auto& dbad = missile.addComponent<DestroyedByAreaDamage>();
+        dbad.damaged_by_flags = (1 << static_cast<int>(DamageType::EMP)) | (1 << static_cast<int>(DamageType::Energy));
+    }
+
+    auto& trace = missile.addComponent<RadarTrace>();
+    trace.icon = radar_trace;
+    trace.radius = 32.0f;
+    trace.max_size = trace.min_size = 32 * (0.25f + 0.25f * category_modifier);
+    trace.flags = RadarTrace::Rotate;
+
+    if (gameGlobalInfo && gameGlobalInfo->missiles_on_long_range_radar)
+        trace.flags |= RadarTrace::LongRange;
+
+    if (is_delayed_explode) trace.flags |= RadarTrace::LongRange;
+
+    trace.color = color;
+
+    auto& sfx = missile.addComponent<Sfx>();
+    sfx.sound = fire_sound;
+    sfx.volume = 55.0f + 15.0f * category_modifier;
+    sfx.pitch += random(-0.1f, 0.1f);
+
+    auto& hull = missile.addComponent<Hull>();
+    hull.current = 1.0f;
+    hull.max = 1.0f;
 }
 
 static float calculateTurnAngle(glm::vec2 aim_position, float turn_direction, float turn_radius)
 {
     float turn_angle;
-    const float d = glm::length(aim_position - turn_direction*glm::vec2(0.0f, turn_radius)); // Distance from turn center
+    // Distance from turn center.
+    const float d = glm::length(aim_position - turn_direction*glm::vec2(0.0f, turn_radius));
+
     if (d >= turn_radius)
     {
         const float a = glm::atan(aim_position.x, turn_direction*aim_position.y - turn_radius);
         const float b = glm::acos(turn_radius / d);
-        turn_angle = float(M_PI) - a - b;
-        if (turn_angle < 0.0f)
-            turn_angle = turn_angle + 2.0f*float(M_PI);
+        turn_angle = static_cast<float>(M_PI) - a - b;
+        if (turn_angle < 0.0f) turn_angle = turn_angle + 2.0f * static_cast<float>(M_PI);
     }
-    else
-    {
-        turn_angle = 0.0f;
-    }
+    else turn_angle = 0.0f;
+
     return turn_angle;
 }
 
 float MissileSystem::calculateFiringSolution(sp::ecs::Entity source, const MissileTubes::MountPoint& tube, sp::ecs::Entity target)
 {
-    if (!target)
-        return std::numeric_limits<float>::infinity();
-    const MissileWeaponData& missile = MissileWeaponData::getDataFor(tube.type_loaded);
-    if (missile.turnrate == 0.0f)  //If the missile cannot turn, we cannot find a firing solution.
-        return std::numeric_limits<float>::infinity();
+    if (!target) return std::numeric_limits<float>::infinity();
+
+    auto& registry = MissileWeaponDataRegistry::instance();
+    float missile_speed = registry.getSpeed(tube.type_loaded);
+
+    float missile_turnrate = registry.getTurnrate(tube.type_loaded);
+    if (missile_turnrate == 0.0f) return std::numeric_limits<float>::infinity();
+
     auto source_transform = source.getComponent<sp::Transform>();
-    if (!source_transform)
-        return std::numeric_limits<float>::infinity();
+    if (!source_transform) return std::numeric_limits<float>::infinity();
+
     auto target_transform = target.getComponent<sp::Transform>();
-    if (!target_transform)
-        return std::numeric_limits<float>::infinity();
+    if (!target_transform) return std::numeric_limits<float>::infinity();
+
     auto target_physics = target.getComponent<sp::Physics>();
 
     const float tube_angle = source_transform->getRotation() + tube.direction; // Degrees
-    const float turn_rate = glm::radians(missile.turnrate);
-    const float turn_radius = missile.speed / turn_rate;
+    const float turn_rate = glm::radians(missile_turnrate);
+    const float turn_radius = missile_speed / turn_rate;
 
     // Get target parameters in the tube centered reference frame:
     // X axis pointing in direction of fire
     // Y axis pointing to the right of the tube
     const glm::vec2 target_position = rotateVec2(target_transform->getPosition() - source_transform->getPosition(), -tube_angle);
     glm::vec2 target_velocity = {0, 0};
+
     if (target_physics)
         target_velocity = rotateVec2(target_physics->getVelocity(), -tube_angle);
 
     const int MAX_ITER = 10;
     const float tolerance = 0.1f * (target_physics ? target_physics->getSize().x : 300.0f);
     bool converged = false;
-    glm::vec2 aim_position = target_position; // Set initial aim point
+    // Set initial aim point.
+    glm::vec2 aim_position = target_position;
     float turn_direction; // Left: -1, Right: +1, No turn: 0
     float turn_angle; // In radians. Value of 0 means no turn.
-    for (int iterations=0; iterations<MAX_ITER && converged == false; iterations++)
+
+    for (int iterations = 0; iterations < MAX_ITER && converged == false; iterations++)
     {
         // Select turn direction and calculate turn angle
         // Turn in the direction of the target on condition that the target
         // is not inside the turning circle of that side. If it is inside
         // the turning circle, turn in the opposite direction.
-        const float d_left = glm::length(aim_position + glm::vec2(0.0f, turn_radius)); // Distance from left turn center
-        const float d_right = glm::length(aim_position - glm::vec2(0.0f, turn_radius)); // Distance from right turn center
+
+        // Distance from left turn center.
+        const float d_left = glm::length(aim_position + glm::vec2(0.0f, turn_radius));
+        // Distance from right turn center.
+        const float d_right = glm::length(aim_position - glm::vec2(0.0f, turn_radius));
         if (d_left >= turn_radius && (aim_position.y < 0.0f || d_right < turn_radius))
         {
             turn_direction = -1.0f;
@@ -459,30 +516,34 @@ float MissileSystem::calculateFiringSolution(sp::ecs::Entity source, const Missi
             turn_angle = 0.0f;
         }
 
-        // Calculate missile and target parameters at turn exit
+        // Calculate missile and target parameters at turn exit.
         const float exit_time = turn_angle / turn_rate;
         const glm::vec2 missile_position_exit = turn_radius * glm::vec2(glm::sin(turn_angle), turn_direction * (1.0f - glm::cos(turn_angle)));
-        const glm::vec2 missile_velocity = missile.speed * glm::vec2(glm::cos(turn_angle), turn_direction * glm::sin(turn_angle));
+        const glm::vec2 missile_velocity = missile_speed * glm::vec2(glm::cos(turn_angle), turn_direction * glm::sin(turn_angle));
         const glm::vec2 target_position_exit = glm::vec2(target_position + target_velocity*exit_time);
 
-        // Calculate nearest approach
+        // Calculate nearest approach.
         const glm::vec2 relative_position_exit = target_position_exit - missile_position_exit;
         const glm::vec2 relative_velocity = target_velocity - missile_velocity;
         const float relative_speed = glm::length(relative_velocity);
-        float nearest_time; // Time after turn exit when nearest approach occurs
-        if (relative_speed == 0.0f)
-            nearest_time = 0.0f;
+        // Time after turn exit when nearest approach occurs.
+        float nearest_time;
+
+        if (relative_speed == 0.0f) nearest_time = 0.0f;
         else
             nearest_time = -glm::dot(relative_position_exit, relative_velocity) / relative_speed / relative_speed;
+
         const float nearest_distance = glm::length(relative_position_exit + relative_velocity*nearest_time);
 
         // Check if solution has converged or if we must adjust aim
         if (nearest_distance < tolerance && nearest_time >= 0.0f)
             converged = true;
         else
-            aim_position = target_position + target_velocity*(exit_time + nearest_time);
+            aim_position = target_position + target_velocity * (exit_time + nearest_time);
     }
-    if (!converged || turn_angle >= float(M_PI))
+
+    if (!converged || turn_angle >= static_cast<float>(M_PI))
         return std::numeric_limits<float>::infinity();
+
     return tube_angle + glm::degrees(turn_direction*turn_angle);
 }

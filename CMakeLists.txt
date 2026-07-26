@@ -546,6 +546,8 @@ set(MAIN_SOURCES
     src/multiplayer/missile.cpp
     src/multiplayer/missiletubes.h
     src/multiplayer/missiletubes.cpp
+    src/multiplayer/missileWeaponDataRep.h
+    src/multiplayer/missileWeaponDataRep.cpp
     src/multiplayer/sfx.h
     src/multiplayer/sfx.cpp
     src/multiplayer/spin.h

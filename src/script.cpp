@@ -44,6 +44,7 @@
 #include "systems/docking.h"
 #include "systems/jumpsystem.h"
 #include "systems/missilesystem.h"
+#include "components/pickup.h"
 #include "systems/probe.h"
 #include "systems/radarblock.h"
 #include "systems/selfdestruct.h"
@@ -1624,12 +1625,15 @@ void luaCommandSetScienceTarget(sp::ecs::Entity ship, sp::ecs::Entity target)
     luaCommandSetTarget(ship, target);
 }
 
-void luaCommandLoadTube(sp::ecs::Entity ship, int tube_nr, EMissileWeapons type)
+void luaCommandLoadTube(sp::ecs::Entity ship, int tube_nr, string type_name)
 {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandLoadTube(tube_nr, type); return; }
+    int type_index = MissileWeaponDataRegistry::instance().getIndexForName(type_name);
+    if (type_index < 0)
+        return;
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandLoadTube(tube_nr, type_index); return; }
     auto missiletubes = ship.getComponent<MissileTubes>();
     if (missiletubes && tube_nr >= 0 && tube_nr < static_cast<int>(missiletubes->mounts.size()))
-        MissileSystem::startLoad(ship, missiletubes->mounts[tube_nr], type);
+        MissileSystem::startLoad(ship, missiletubes->mounts[tube_nr], type_index);
 }
 
 void luaCommandUnloadTube(sp::ecs::Entity ship, int tube_nr)
@@ -2275,6 +2279,73 @@ static sp::ecs::Entity luaFindFaction(string name)
     return Faction::find(name);
 }
 
+static sp::ecs::Entity luaFindMissileWeaponData(string name)
+{
+    return MissileWeaponDataRegistry::instance().getEntityForName(name);
+}
+
+static void luaRebuildMissileWeaponData()
+{
+    MissileWeaponDataRegistry::instance().rebuild();
+}
+
+static int luaGetWeaponStorageImpl(sp::ecs::Entity entity, string type_name)
+{
+    if (auto tubes = entity.getComponent<MissileTubes>())
+        return tubes->getStorage(type_name);
+    if (auto pickup = entity.getComponent<PickupCallback>())
+        return pickup->getGiveMissile(type_name);
+    return 0;
+}
+
+static void luaSetWeaponStorageImpl(sp::ecs::Entity entity, string type_name, int amount)
+{
+    if (auto tubes = entity.getComponent<MissileTubes>())
+        tubes->setStorage(type_name, amount);
+    else if (auto pickup = entity.getComponent<PickupCallback>())
+        pickup->setGiveMissile(type_name, amount);
+}
+
+static int luaGetWeaponStorageMaxImpl(sp::ecs::Entity entity, string type_name)
+{
+    if (auto tubes = entity.getComponent<MissileTubes>())
+        return tubes->getStorageMax(type_name);
+    return 0;
+}
+
+static void luaSetWeaponStorageMaxImpl(sp::ecs::Entity entity, string type_name, int amount)
+{
+    if (auto tubes = entity.getComponent<MissileTubes>())
+        tubes->setStorageMax(type_name, amount);
+}
+
+static bool luaWeaponTubeAllowMissileImpl(sp::ecs::Entity entity, int mount_index, string type_name)
+{
+    if (auto tubes = entity.getComponent<MissileTubes>())
+        return tubes->isMountAllowed(mount_index, type_name);
+    return false;
+}
+
+static void luaSetWeaponTubeAllowMissileImpl(sp::ecs::Entity entity, int mount_index, string type_name, bool allowed)
+{
+    if (auto tubes = entity.getComponent<MissileTubes>())
+        tubes->setMountAllowed(mount_index, type_name, allowed);
+}
+
+static void luaSetWeaponTubeExclusiveImpl(sp::ecs::Entity entity, int mount_index, string type_name)
+{
+    auto& registry = MissileWeaponDataRegistry::instance();
+    if (auto tubes = entity.getComponent<MissileTubes>())
+    {
+        if (mount_index < 0 || mount_index >= static_cast<int>(tubes->mounts.size()))
+            return;
+        tubes->mounts[mount_index].type_allowed_mask = 0;
+        int mwi = registry.getIndexForName(type_name);
+        if (mwi >= 0)
+            tubes->mounts[mount_index].type_allowed_mask = 1U << mwi;
+    }
+}
+
 void setupSubEnvironment(sp::script::Environment& env)
 {
     env.setGlobalFuncWithEnvUpvalue("require", &luaRequire);
@@ -2629,7 +2700,8 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("commandSetScienceTarget", &luaCommandSetScienceTarget);
     /// void commandLoadTube(entity ship, integer tube_index, string missile_type)
     /// Loads a missile of the given type into the given tube.
-    /// tube_index is 0-based. See EMissileWeapons for valid missle type values.
+    /// tube_index is 0-based. The missile_type is the missile's name (e.g. "homing", "nuke").
+    /// See the scripts/missileWeaponData.lua file for available missile types.
     /// This is equivalent to clicking a missile type on the Weapons screen's missile tubes control, and then click an empty tube.
     /// Example:
     /// commandLoadTube(getPlayerShip(-1), 0, "homing") -- load a homing missile into tube 0
@@ -3089,6 +3161,46 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Returns the FactionInfo entity for the given faction name (e.g. "Human Navy", "Exuari").
     /// Useful when changing an entity's faction via CMD_RUN_SCRIPT.
     env.setGlobal("findFaction", &luaFindFaction);
+
+    /// entity findMissileWeaponData(string name)
+    /// Returns the MissileWeaponData entity for the given missile type name (e.g. "Homing", "Nuke").
+    /// Useful when querying or modifying missile weapon data via CMD_RUN_SCRIPT.
+    env.setGlobal("findMissileWeaponData", &luaFindMissileWeaponData);
+
+    /// void rebuildMissileWeaponData()
+    /// Rebuilds the internal missile weapon data registry index.
+    /// Call this after adding or removing MissileWeaponData entities mid-game to update the type list.
+    env.setGlobal("rebuildMissileWeaponData", &luaRebuildMissileWeaponData);
+
+    /// int getWeaponStorage(entity entity, string type_name)
+    /// Returns the current stock of the given missile type on the given entity.
+    /// Works with entities that have MissileTubes or PickupCallback components.
+    env.setGlobal("getWeaponStorage", &luaGetWeaponStorageImpl);
+
+    /// void setWeaponStorage(entity entity, string type_name, int amount)
+    /// Sets the stock of the given missile type on the given entity.
+    /// Clamps to the entity's storage_max for that type. Works with MissileTubes and PickupCallback.
+    env.setGlobal("setWeaponStorage", &luaSetWeaponStorageImpl);
+
+    /// int getWeaponStorageMax(entity entity, string type_name)
+    /// Returns the maximum stock capacity for the given missile type on the given entity.
+    env.setGlobal("getWeaponStorageMax", &luaGetWeaponStorageMaxImpl);
+
+    /// void setWeaponStorageMax(entity entity, string type_name, int amount)
+    /// Sets the maximum stock capacity for the given missile type. Caps current stock if it exceeds the new max.
+    env.setGlobal("setWeaponStorageMax", &luaSetWeaponStorageMaxImpl);
+
+    /// bool weaponTubeAllowMissile(entity entity, int mount_index, string type_name)
+    /// Returns whether the given missile type is allowed in the specified tube mount.
+    env.setGlobal("weaponTubeAllowMissile", &luaWeaponTubeAllowMissileImpl);
+
+    /// void setWeaponTubeAllowMissile(entity entity, int mount_index, string type_name, bool allowed)
+    /// Sets whether the given missile type is allowed in the specified tube mount.
+    env.setGlobal("setWeaponTubeAllowMissile", &luaSetWeaponTubeAllowMissileImpl);
+
+    /// void setWeaponTubeExclusive(entity entity, int mount_index, string type_name)
+    /// Clears all allowed types for the mount, then allows only the specified type.
+    env.setGlobal("setWeaponTubeExclusive", &luaSetWeaponTubeExclusiveImpl);
 
     // Load hardcoded script files.
     // Lua standard library extensions.

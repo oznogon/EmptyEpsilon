@@ -45,7 +45,7 @@ private:
     GuiElement* docking_bay_info;
 
     GuiEntityInfoPanel* selected_entity_info;
-    GuiKeyValueDisplay* entity_missiles[MW_Count];
+    GuiKeyValueDisplay* entity_missiles[MW_MaxTypes];
     GuiKeyValueDisplay* entity_energy;
     GuiKeyValueDisplay* entity_hull;
     GuiKeyValueDisplay* entity_probes;
@@ -66,8 +66,8 @@ private:
     GuiSlider* thermal_venting_direction;
     GuiElement* heat_gauges_row;
     GuiElement* supply_controls;
-    GuiKeyValueDisplay* berth_missiles[MW_Count];
-    GuiKeyValueDisplay* carrier_missiles[MW_Count];
+    GuiKeyValueDisplay* berth_missiles[MW_MaxTypes];
+    GuiKeyValueDisplay* carrier_missiles[MW_MaxTypes];
     GuiKeyValueDisplay* berth_scan_probes;
     GuiKeyValueDisplay* carrier_scan_probes;
     GuiButton* generate_supply_drop;
@@ -86,8 +86,8 @@ private:
     void updateSelectedEntityDisplay();
     void updateBerthsList();
     void updateBerthsLabels();
-    void updateMissileDisplay(GuiKeyValueDisplay* display, MissileTubes* tubes, EMissileWeapons type);
-    void updateMissileDisplay(GuiKeyValueDisplay* display, PickupCallback* pickup, EMissileWeapons type);
+    void updateMissileDisplay(GuiKeyValueDisplay* display, MissileTubes* tubes, int type);
+    void updateMissileDisplay(GuiKeyValueDisplay* display, PickupCallback* pickup, int type);
 
 public:
     DockingBayScreen(GuiContainer* owner);

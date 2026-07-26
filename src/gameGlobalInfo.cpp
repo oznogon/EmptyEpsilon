@@ -11,6 +11,7 @@
 #include "systems/collision.h"
 #include "ecs/query.h"
 #include "menus/luaConsole.h"
+#include "missileWeaponData.h"
 #include "playerInfo.h"
 #include <SDL3/SDL.h>
 
@@ -393,6 +394,7 @@ void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, s
     i18n::load("locale/comms_ship." + PreferencesManager::get("language", "en_US") + ".po");
     i18n::load("locale/comms_station." + PreferencesManager::get("language", "en_US") + ".po");
     i18n::load("locale/factionInfo." + PreferencesManager::get("language", "en_US") + ".po");
+    i18n::load("locale/missileWeaponData." + PreferencesManager::get("language", "en_US") + ".po");
     i18n::load("locale/science_db." + PreferencesManager::get("language", "en_US") + ".po");
     i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en_US") + ".po"));
 
@@ -409,6 +411,15 @@ void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, s
         {
             res = script_environment_base->runFile<void>("factionInfo.lua");
             LuaConsole::checkResult(res);
+        }
+
+        // Rebuild the missile weapon data registry with global default types.
+        if (!res.isErr())
+        {
+            res = script_environment_base->runFile<void>("missileWeaponData.lua");
+            LuaConsole::checkResult(res);
+            if (!res.isErr())
+                MissileWeaponDataRegistry::instance().rebuild();
         }
 
         if (!res.isErr())
@@ -435,11 +446,16 @@ void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, s
 
     auto res = main_scenario_script->runFile<void>(filename);
     LuaConsole::checkResult(res);
+    if (!res.isErr())
+        MissileWeaponDataRegistry::instance().rebuild();
     if (res.isOk() && main_scenario_script->isFunction("init"))
     {
         bool is_headless = !PreferencesManager::get("headless").empty();
         res = main_scenario_script->call<void>("init");
         LuaConsole::checkResult(res);
+
+        if (!res.isErr())
+            MissileWeaponDataRegistry::instance().rebuild();
 
         if (res.isErr())
         {

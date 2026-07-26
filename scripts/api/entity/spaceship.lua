@@ -154,145 +154,38 @@ function Entity:getDockingState()
 end
 
 --- Returns the number of the given weapon type stocked by this ship.
+--- Works with any missile type registered in missileWeaponData.lua, including custom types.
 --- Example: homing = ship:getWeaponStorage("Homing")
 function Entity:getWeaponStorage(weapon_type)
-    if self.components.missile_tubes then
-        weapon_type = string.lower(weapon_type)
-        if weapon_type == "homing" then
-            return self.components.missile_tubes.storage_homing
-        end
-        if weapon_type == "nuke" then
-            return self.components.missile_tubes.storage_nuke
-        end
-        if weapon_type == "mine" then
-            return self.components.missile_tubes.storage_mine
-        end
-        if weapon_type == "emp" then
-            return self.components.missile_tubes.storage_emp
-        end
-        if weapon_type == "hvli" then
-            return self.components.missile_tubes.storage_hvli
-        end
-    end
-    return 0
+    return getWeaponStorage(self, weapon_type)
 end
 --- Returns this ship's capacity for the given weapon type.
+--- Works with any missile type registered in missileWeaponData.lua, including custom types.
 --- Example: homing_max = ship:getWeaponStorageMax("Homing")
 function Entity:getWeaponStorageMax(weapon_type)
-    if self.components.missile_tubes then
-        weapon_type = string.lower(weapon_type)
-        if weapon_type == "homing" then
-            return self.components.missile_tubes.max_homing
-        end
-        if weapon_type == "nuke" then
-            return self.components.missile_tubes.max_nuke
-        end
-        if weapon_type == "mine" then
-            return self.components.missile_tubes.max_mine
-        end
-        if weapon_type == "emp" then
-            return self.components.missile_tubes.max_emp
-        end
-        if weapon_type == "hvli" then
-            return self.components.missile_tubes.max_hvli
-        end
-    end
-    return 0
+    return getWeaponStorageMax(self, weapon_type)
 end
 --- Sets the number of the given weapon type stocked by this entity.
+--- Works with any missile type registered in missileWeaponData.lua, including custom types.
 --- If the entity has MissileTubes, this sets the weapon type and amount carried by this entity.
 --- If the entity is a SupplyDrop, this sets the weapon type and amount that entity restocks upon pickup.
 --- Examples:
 --- ship:setWeaponStorage("Homing", 2) -- this ship has 2 Homing missiles
 --- supply_drop:setWeaponStorage("Homing", 6) -- this SupplyDrop adds 6 Homing missiles to the entity that picks it up
+--- ship:setWeaponStorage("TestMissile", 4) -- works for custom types
 function Entity:setWeaponStorage(weapon_type, amount)
-    if self.components.missile_tubes then
-        weapon_type = string.lower(weapon_type)
-        if weapon_type == "homing" then
-            self.components.missile_tubes.storage_homing =
-                math.min(self.components.missile_tubes.max_homing, amount)
-        end
-        if weapon_type == "nuke" then
-            self.components.missile_tubes.storage_nuke =
-                math.min(self.components.missile_tubes.max_nuke, amount)
-        end
-        if weapon_type == "mine" then
-            self.components.missile_tubes.storage_mine =
-                math.min(self.components.missile_tubes.max_mine, amount)
-        end
-        if weapon_type == "emp" then
-            self.components.missile_tubes.storage_emp =
-                math.min(self.components.missile_tubes.max_emp, amount)
-        end
-        if weapon_type == "hvli" then
-            self.components.missile_tubes.storage_hvli =
-                math.min(self.components.missile_tubes.max_hvli, amount)
-        end
-    end
-    if self.components.pickup then
-        weapon_type = string.lower(weapon_type)
-        if weapon_type == "homing" then
-            self.components.pickup.give_homing = amount
-        end
-        if weapon_type == "nuke" then
-            self.components.pickup.give_nuke = amount
-        end
-        if weapon_type == "mine" then
-            self.components.pickup.give_mine = amount
-        end
-        if weapon_type == "emp" then
-            self.components.pickup.give_emp = amount
-        end
-        if weapon_type == "hvli" then
-            self.components.pickup.give_hvli = amount
-        end
-    end
+    setWeaponStorage(self, weapon_type, amount)
     return self
 end
 --- Sets this entity's capacity for the given weapon type.
+--- Works with any missile type registered in missileWeaponData.lua, including custom types.
 --- If this ship has more stock of that weapon type than the new capacity, its stock is reduced.
 --- However, if this ship's capacity for a weapon type is increased, its stocks are not.
 --- Use Entity:setWeaponStorage() to update the stocks.
 --- Example: entity:setWeaponStorageMax("Homing", 4) -- this ship can carry 4 Homing missiles
+--- Example: entity:setWeaponStorageMax("TestMissile", 10) -- works for custom types
 function Entity:setWeaponStorageMax(weapon_type, amount)
-    if self.components.missile_tubes then
-        weapon_type = string.lower(weapon_type)
-        if weapon_type == "homing" then
-            self.components.missile_tubes.max_homing = amount
-            self:setWeaponStorage(
-                "homing",
-                self.components.missile_tubes.storage_homing
-            )
-        end
-        if weapon_type == "nuke" then
-            self.components.missile_tubes.max_nuke = amount
-            self:setWeaponStorage(
-                "nuke",
-                self.components.missile_tubes.storage_nuke
-            )
-        end
-        if weapon_type == "mine" then
-            self.components.missile_tubes.max_mine = amount
-            self:setWeaponStorage(
-                "mine",
-                self.components.missile_tubes.storage_mine
-            )
-        end
-        if weapon_type == "emp" then
-            self.components.missile_tubes.max_emp = amount
-            self:setWeaponStorage(
-                "emp",
-                self.components.missile_tubes.storage_emp
-            )
-        end
-        if weapon_type == "hvli" then
-            self.components.missile_tubes.max_hvli = amount
-            self:setWeaponStorage(
-                "hvli",
-                self.components.missile_tubes.storage_hvli
-            )
-        end
-    end
+    setWeaponStorageMax(self, weapon_type, amount)
     return self
 end
 --- Returns this ship's shield frequency index.
@@ -1040,34 +933,22 @@ end
 --- Note the spelling of "missle".
 --- Example: ship:weaponTubeAllowMissle(0,"Homing") -- allows Homing missiles to be loaded in WeaponTube 0
 function Entity:weaponTubeAllowMissle(index, weapon_type)
-    local tubes = self.components.missile_tubes
-    if tubes and index >= 0 and index < #tubes then
-        tubes[index + 1]["allow_" .. string.lower(weapon_type)] = true
-    end
+    setWeaponTubeAllowMissile(self, index, weapon_type, true)
     return self
 end
 --- Sets which weapon types the WeaponTube with the given index can't load on this ship.
+--- Works with any missile type registered in missileWeaponData.lua, including custom types.
 --- Note the spelling of "missle".
 --- Example: ship:weaponTubeDisallowMissle(0,"Homing") -- prevents Homing missiles from being loaded in tube 0
 function Entity:weaponTubeDisallowMissle(index, weapon_type)
-    local tubes = self.components.missile_tubes
-    if tubes and index >= 0 and index < #tubes then
-        tubes[index + 1]["allow_" .. string.lower(weapon_type)] = false
-    end
+    setWeaponTubeAllowMissile(self, index, weapon_type, false)
     return self
 end
 --- Sets a weapon tube with the given index on this ship to allow loading only the given weapon type.
+--- Works with any missile type registered in missileWeaponData.lua, including custom types.
 --- Example: ship:setWeaponTubeExclusiveFor(0,"Homing") -- allows only Homing missiles to be loaded in tube 0
 function Entity:setWeaponTubeExclusiveFor(index, weapon_type)
-    local tubes = self.components.missile_tubes
-    if tubes and index >= 0 and index < #tubes then
-        tubes[index + 1]["allow_homing"] = false
-        tubes[index + 1]["allow_nuke"] = false
-        tubes[index + 1]["allow_mine"] = false
-        tubes[index + 1]["allow_emp"] = false
-        tubes[index + 1]["allow_hvli"] = false
-        tubes[index + 1]["allow_" .. string.lower(weapon_type)] = true
-    end
+    setWeaponTubeExclusive(self, index, weapon_type)
     return self
 end
 --- Sets the angle, relative to this ship's forward bearing, toward which the WeaponTube with the given index on this ship points.

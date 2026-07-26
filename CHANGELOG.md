@@ -4,6 +4,18 @@
 
 ### New features
 
+- Missile weapon data moved from hardcoded C++ enums to Lua-driven ECS components
+  - `EMissileWeapons` enum replaced with dynamic `MissileWeaponData` ECS component loaded from `scripts/missileWeaponData.lua`
+  - `MissileWeaponDataRegistry` singleton maps missile type names to integer indices for efficient storage arrays
+  - Missile type data (speed, turnrate, damage, blast, behavior flags) now defined in Lua and replicated over the network
+  - New `MissileWeaponData()` and `getMissileWeaponData()` Lua API following the FactionInfo pattern
+  - `MissileTubes` storage arrays expanded to support up to 16 dynamic missile types (was 5 hardcoded)
+  - Scenario scripts can create, modify, and remove missile weapon types mid-game
+  - Existing Lua APIs (`getWeaponStorage`, `setWeaponStorage`, `commandLoadTube`, etc.) maintain backward compatibility
+  - Missile spawn behavior data-driven: explosion type, damage, SFX, homing, and special flags all configurable per type
+  - GM Tweak screen missile weapon editor supports dynamic types
+  - New `findMissileWeaponData()` C++ binding exposed to Lua
+
 - Touchscreen pinch-to-zoom gestures on RadarViews
   - Pinch with two fingers to zoom, centered on the pinch point like mousewheel zoom
   - Single-finger touch continues to support tap-to-select and drag-to-pan

@@ -653,11 +653,14 @@ void GuiRadarView::drawTargetProjections(sp::RenderTarget& renderer)
                 if (mount.state != MissileTubes::MountPoint::State::Loaded) continue;
                 auto fire_position = transform->getPosition() + rotateVec2(glm::vec2(mount.position), transform->getRotation());
 
-                const MissileWeaponData& data = MissileWeaponData::getDataFor(mount.type_loaded);
+                auto& registry = MissileWeaponDataRegistry::instance();
+                float data_speed = registry.getSpeed(mount.type_loaded);
+                float data_turnrate = registry.getTurnrate(mount.type_loaded);
+                float data_lifetime = registry.getLifetime(mount.type_loaded);
                 float fire_angle = mount.direction + (transform->getRotation());
                 float missile_target_angle = fire_angle;
 
-                if (data.turnrate > 0.0f)
+                if (data_turnrate > 0.0f)
                 {
                     bool manual_aim = false;
                     float target_angle = 0.0f;
@@ -695,9 +698,9 @@ void GuiRadarView::drawTargetProjections(sp::RenderTarget& renderer)
                 }
 
                 float angle_diff = angleDifference(missile_target_angle, fire_angle);
-                float turn_radius = ((360.0f / data.turnrate) * data.speed) / (2.0f * float(M_PI));
+                float turn_radius = ((360.0f / data_turnrate) * data_speed) / (2.0f * float(M_PI));
 
-                if (data.turnrate == 0.0f) turn_radius = 0.0f;
+                if (data_turnrate == 0.0f) turn_radius = 0.0f;
 
                 float left_or_right = 90.0f;
                 if (angle_diff > 0) left_or_right = -90.0f;
@@ -706,8 +709,8 @@ void GuiRadarView::drawTargetProjections(sp::RenderTarget& renderer)
                 auto turn_exit = turn_center + vec2FromAngle(missile_target_angle - left_or_right) * turn_radius;
 
                 float turn_distance = fabs(angle_diff) / 360.0f * (turn_radius * 2.0f * float(M_PI));
-                float lifetime_after_turn = data.lifetime - turn_distance / data.speed;
-                float length_after_turn = data.speed * lifetime_after_turn;
+                float lifetime_after_turn = data_lifetime - turn_distance / data_speed;
+                float length_after_turn = data_speed * lifetime_after_turn;
 
                 std::vector<glm::vec2> missile_path;
                 missile_path.push_back(worldToScreen(fire_position));
@@ -722,9 +725,9 @@ void GuiRadarView::drawTargetProjections(sp::RenderTarget& renderer)
                     1.0f,
                     glm::u8vec4(color.r, color.g, color.b, color.a / 2)
                 );
+                float offset = seconds_per_distance_tick * data_speed;
 
-                float offset = seconds_per_distance_tick * data.speed;
-                for (int cnt = 0; cnt < floor(data.lifetime / seconds_per_distance_tick); cnt++)
+                for (int cnt = 0; cnt < floor(data_lifetime / seconds_per_distance_tick); cnt++)
                 {
                     glm::vec2 p;
                     glm::vec2 n{};
@@ -750,7 +753,7 @@ void GuiRadarView::drawTargetProjections(sp::RenderTarget& renderer)
                         color
                     );
 
-                    offset += seconds_per_distance_tick * data.speed;
+                    offset += seconds_per_distance_tick * data_speed;
                 }
             }
         }

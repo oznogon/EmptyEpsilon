@@ -15,6 +15,26 @@ function Entity:setName(name)
     if self.components.science_database then
         self.components.science_database.name = name
     end
+    if self.components.missile_weapon_data then
+        self.components.missile_weapon_data.name = name
+        __missile_weapon_data[name] = self
+    end
+    return self
+end
+
+--- Sets the locale (translated) name for factions and missile weapon data.
+--- For factions: the name as presented in the user interface.
+--- For missile weapon data: the translatable display name for the missile type.
+--- Wrap the string in the _() function to make it available for translation.
+--- Example: faction:setLocaleName(_("USN"))
+--- Example: mwd:setLocaleName(_("Homing"))
+function Entity:setLocaleName(name)
+    if self.components.faction_info then
+        self.components.faction_info.locale_name = name
+    end
+    if self.components.missile_weapon_data then
+        self.components.missile_weapon_data.locale_name = name
+    end
     return self
 end
 

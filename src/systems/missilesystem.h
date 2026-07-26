@@ -19,7 +19,7 @@ public:
     void collision(sp::ecs::Entity a, sp::ecs::Entity b, float force) override;
     void renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e, glm::vec2 screen_position, float scale, float rotation, DelayedExplodeOnTouch& component) override;
 
-    static void startLoad(sp::ecs::Entity source, MissileTubes::MountPoint& tube, EMissileWeapons type);
+    static void startLoad(sp::ecs::Entity source, MissileTubes::MountPoint& tube, int type_index);
     static void startUnload(sp::ecs::Entity source, MissileTubes::MountPoint& tube);
     static void fire(sp::ecs::Entity source, MissileTubes::MountPoint& tube, float target_angle, sp::ecs::Entity target);
     static float calculateFiringSolution(sp::ecs::Entity source, const MissileTubes::MountPoint& tube, sp::ecs::Entity target);

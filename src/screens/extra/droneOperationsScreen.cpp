@@ -1,16 +1,18 @@
 #include "droneOperationsScreen.h"
 #include "main.h"
 #include <i18n.h>
-#include <limits>
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "featureDefs.h"
 #include "crewPositionRequirements.h"
+#include <limits>
 
-#include "components/drone.h"
+#include "components/ai.h"
 #include "components/beamweapon.h"
-#include "components/coolant.h"
 #include "components/collision.h"
+#include "components/coolant.h"
+#include "components/docking.h"
+#include "components/drone.h"
 #include "components/impulse.h"
 #include "components/jumpdrive.h"
 #include "components/maneuveringthrusters.h"
@@ -22,8 +24,6 @@
 #include "components/scanning.h"
 #include "components/shields.h"
 #include "components/target.h"
-#include "components/ai.h"
-#include "components/docking.h"
 #include "components/warpdrive.h"
 
 #include "systems/jumpsystem.h"
@@ -119,6 +119,7 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
             {
                 auto drone = connectedDrone();
                 bool connected = drone && isDroneConnected();
+
                 if (!connected)
                 {
                     // Disconnected: target selection only.
@@ -131,6 +132,7 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
                 {
                     auto last_target = targets.get();
                     targets.setToClosestTo(position, 250.0f, TargetsContainer::Targetable);
+
                     if (targets.get() && targets.get() != last_target)
                     {
                         my_player_info->commandDroneSetTarget(targets.get());
@@ -156,6 +158,7 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
             {
                 auto drone = connectedDrone();
                 bool connected = drone && isDroneConnected();
+
                 if (connected && drag_rotate)
                 {
                     if (auto transform = drone.getComponent<sp::Transform>())
@@ -190,6 +193,7 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
 
                 auto dc = my_spaceship.getComponent<DroneController>();
                 float max_range = dc ? dc->control_range : min_range;
+
                 if (auto sensors = my_spaceship.getComponent<SensorsSystem>())
                     max_range *= sensors->getSystemEffectiveness();
                 if (max_range <= min_range) return;
@@ -589,26 +593,33 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
     tube_rows_layout->setAttribute("layout", "vertical");
 
     // Missile type selector (above tube rows).
-    for (int n = MW_Count - 1; n >= 0; n--)
+    for (int n = MW_MaxTypes - 1; n >= 0; n--)
     {
         missile_type_rows[n].layout = new GuiElement(tube_controls_layout, "MISSILE_TYPE_ROW_" + string(n));
-        missile_type_rows[n].layout->setSize(GuiElement::GuiSizeMax, 40.0f)->setAttribute("layout", "horizontal");
-        missile_type_rows[n].button = new GuiToggleButton(missile_type_rows[n].layout, "MISSILE_TYPE_" + string(n), getLocaleMissileWeaponName(EMissileWeapons(n)),
+        missile_type_rows[n].layout
+            ->setSize(GuiElement::GuiSizeMax, 40.0f)
+            ->setAttribute("layout", "horizontal");
+
+        missile_type_rows[n].button = new GuiToggleButton(missile_type_rows[n].layout, "MISSILE_TYPE_" + string(n), MissileWeaponDataRegistry::instance().getNameForIndex(n),
             [this, n](bool value)
             {
                 if (value) selected_missile_type = n;
                 else selected_missile_type = -1;
-                for (int idx = 0; idx < MW_Count; idx++)
+
+                for (int idx = 0; idx < MW_MaxTypes; idx++)
                     missile_type_rows[idx].button->setValue(idx == selected_missile_type);
             }
         );
-        missile_type_rows[n].button->setTextSize(28)->setSize(200.0f, 40.0f);
+        missile_type_rows[n].button
+            ->setTextSize(28.0f)
+            ->setSize(200.0f, 40.0f);
     }
-    missile_type_rows[MW_Homing].button->setIcon("gui/icons/weapon-homing.png");
-    missile_type_rows[MW_Mine].button->setIcon("gui/icons/weapon-mine.png");
-    missile_type_rows[MW_EMP].button->setIcon("gui/icons/weapon-emp.png");
-    missile_type_rows[MW_Nuke].button->setIcon("gui/icons/weapon-nuke.png");
-    missile_type_rows[MW_HVLI].button->setIcon("gui/icons/weapon-hvli.png");
+
+    missile_type_rows[0].button->setIcon("gui/icons/weapon-homing.png");
+    missile_type_rows[1].button->setIcon("gui/icons/weapon-nuke.png");
+    missile_type_rows[2].button->setIcon("gui/icons/weapon-mine.png");
+    missile_type_rows[3].button->setIcon("gui/icons/weapon-emp.png");
+    missile_type_rows[4].button->setIcon("gui/icons/weapon-hvli.png");
 
     // Manual aim toggle button near tube controls.
     manual_aim_button = new GuiToggleButton(radar_pane, "MANUAL_AIM", tr("missile", "Lock"),
@@ -663,13 +674,11 @@ sp::ecs::Entity DroneOperationsScreen::getOrderTarget()
 {
     // 1. If connected to a drone, send order to the connected drone.
     if (auto drone = connectedDrone())
-        if (isDroneConnected())
-            return drone;
+        if (isDroneConnected()) return drone;
 
     // 2. If a drone is targeted, send order to the target.
     if (auto target = targets.get())
-        if (target.hasComponent<AllowDroneLink>())
-            return target;
+        if (target.hasComponent<AllowDroneLink>()) return target;
 
     // 3. If a drone is selected in the selector, send order to that drone.
     int idx = drone_selector->getSelectionIndex();
@@ -749,21 +758,20 @@ void DroneOperationsScreen::updateTubeRows(sp::ecs::Entity drone_entity)
             [this, row_idx]()
             {
                 if (!isDroneConnected()) return;
+
                 auto drone = connectedDrone();
                 if (!drone) return;
 
                 auto tubes = drone.getComponent<MissileTubes>();
                 if (!tubes || row_idx >= tubes->mounts.size()) return;
+
                 auto& tube = tubes->mounts[row_idx];
                 if (tube.state == MissileTubes::MountPoint::State::Empty)
                 {
                     if (selected_missile_type >= 0)
-                        my_player_info->commandDroneLoadTube(row_idx, static_cast<EMissileWeapons>(selected_missile_type));
+                        my_player_info->commandDroneLoadTube(row_idx, selected_missile_type);
                 }
-                else
-                {
-                    my_player_info->commandDroneUnloadTube(row_idx);
-                }
+                else my_player_info->commandDroneUnloadTube(row_idx);
             }
         );
         row.load_button->setSize(130.0f, GuiElement::GuiSizeRow);
@@ -827,7 +835,7 @@ void DroneOperationsScreen::updateTubeRows(sp::ecs::Entity drone_entity)
         tube_rows[n].layout->show();
         auto& tube = missiletubes->mounts[n];
 
-        if (tube.canOnlyLoad(MW_Mine))
+        if (tube.canOnlyLoad(2))
             tube_rows[n].fire_button->setIcon("gui/icons/weapon-mine", sp::Alignment::CenterLeft);
         else
             tube_rows[n].fire_button->setIcon("gui/icons/missile", sp::Alignment::CenterLeft, tube.direction);
@@ -837,7 +845,7 @@ void DroneOperationsScreen::updateTubeRows(sp::ecs::Entity drone_entity)
         case MissileTubes::MountPoint::State::Empty:
             tube_rows[n].load_button
                 ->setText(tr("missile", "Load"))
-                ->setEnable(selected_missile_type >= 0 && tube.canLoad(static_cast<EMissileWeapons>(selected_missile_type)));
+                ->setEnable(selected_missile_type >= 0 && tube.canLoad(selected_missile_type));
             if (health <= 0.0f)
                 tube_rows[n].load_button->disable();
             tube_rows[n].fire_button
@@ -866,7 +874,7 @@ void DroneOperationsScreen::updateTubeRows(sp::ecs::Entity drone_entity)
                     ->enable()
                     ->show();
             }
-            tube_rows[n].fire_button->setText(getTubeName(tube.direction) + ": " + getLocaleMissileWeaponName(tube.type_loaded));
+            tube_rows[n].fire_button->setText(getTubeName(tube.direction) + ": " + MissileWeaponDataRegistry::instance().getNameForIndex(tube.type_loaded));
             tube_rows[n].loading_bar->hide();
             break;
         case MissileTubes::MountPoint::State::Loading:
@@ -874,7 +882,7 @@ void DroneOperationsScreen::updateTubeRows(sp::ecs::Entity drone_entity)
                 ->setText(tr("missile", "Load"))
                 ->disable();
             tube_rows[n].fire_button
-                ->setText(getTubeName(tube.direction) + ": " + getLocaleMissileWeaponName(tube.type_loaded))
+                ->setText(getTubeName(tube.direction) + ": " + MissileWeaponDataRegistry::instance().getNameForIndex(tube.type_loaded))
                 ->hide();
             tube_rows[n].loading_bar
                 ->setValue(1.0f - tube.delay / tube.load_time)
@@ -886,7 +894,7 @@ void DroneOperationsScreen::updateTubeRows(sp::ecs::Entity drone_entity)
                 ->setText(tr("missile", "Unload"))
                 ->disable();
             tube_rows[n].fire_button
-                ->setText(getLocaleMissileWeaponName(tube.type_loaded))
+                ->setText(MissileWeaponDataRegistry::instance().getNameForIndex(tube.type_loaded))
                 ->hide();
             tube_rows[n].loading_bar
                 ->setValue(tube.delay / tube.load_time)
@@ -1139,11 +1147,11 @@ void DroneOperationsScreen::onUpdate()
 
         // Update missile type selector visibility and storage counts.
         auto tubes = drone.getComponent<MissileTubes>();
-        for (int n = 0; n < MW_Count; n++)
+        for (int n = 0; n < MW_MaxTypes; n++)
         {
             if (tubes)
             {
-                missile_type_rows[n].button->setText(getLocaleMissileWeaponName(EMissileWeapons(n)) + " [" + string(tubes->storage[n]) + "/" + string(tubes->storage_max[n]) + "]");
+                missile_type_rows[n].button->setText(MissileWeaponDataRegistry::instance().getNameForIndex(n) + " [" + string(tubes->storage[n]) + "/" + string(tubes->storage_max[n]) + "]");
                 missile_type_rows[n].layout->setVisible(tubes->storage_max[n] > 0);
             }
             else missile_type_rows[n].layout->hide();
@@ -1152,32 +1160,32 @@ void DroneOperationsScreen::onUpdate()
         // Weapon hotkeys.
         if (keys.weapons_select_homing.getDown())
         {
-            selected_missile_type = MW_Homing;
-            for (int idx = 0; idx < MW_Count; idx++)
+            selected_missile_type = 0;
+            for (int idx = 0; idx < MW_MaxTypes; idx++)
                 missile_type_rows[idx].button->setValue(idx == selected_missile_type);
         }
         if (keys.weapons_select_nuke.getDown())
         {
-            selected_missile_type = MW_Nuke;
-            for (int idx = 0; idx < MW_Count; idx++)
+            selected_missile_type = 1;
+            for (int idx = 0; idx < MW_MaxTypes; idx++)
                 missile_type_rows[idx].button->setValue(idx == selected_missile_type);
         }
         if (keys.weapons_select_mine.getDown())
         {
-            selected_missile_type = MW_Mine;
-            for (int idx = 0; idx < MW_Count; idx++)
+            selected_missile_type = 2;
+            for (int idx = 0; idx < MW_MaxTypes; idx++)
                 missile_type_rows[idx].button->setValue(idx == selected_missile_type);
         }
         if (keys.weapons_select_emp.getDown())
         {
-            selected_missile_type = MW_EMP;
-            for (int idx = 0; idx < MW_Count; idx++)
+            selected_missile_type = 3;
+            for (int idx = 0; idx < MW_MaxTypes; idx++)
                 missile_type_rows[idx].button->setValue(idx == selected_missile_type);
         }
         if (keys.weapons_select_hvli.getDown())
         {
-            selected_missile_type = MW_HVLI;
-            for (int idx = 0; idx < MW_Count; idx++)
+            selected_missile_type = 4;
+            for (int idx = 0; idx < MW_MaxTypes; idx++)
                 missile_type_rows[idx].button->setValue(idx == selected_missile_type);
         }
 
@@ -1188,7 +1196,7 @@ void DroneOperationsScreen::onUpdate()
                 if (keys.weapons_load_tube[n].getDown())
                 {
                     if (tubes->mounts[n].state == MissileTubes::MountPoint::State::Empty && selected_missile_type >= 0)
-                        my_player_info->commandDroneLoadTube(n, static_cast<EMissileWeapons>(selected_missile_type));
+                        my_player_info->commandDroneLoadTube(n, selected_missile_type);
                 }
 
                 if (keys.weapons_unload_tube[n].getDown())

@@ -147,35 +147,25 @@ template<> struct Convert<AIOrder> {
         return AIOrder::Idle;
     }
 };
-template<> struct Convert<EMissileWeapons> {
-    static int toLua(lua_State* L, EMissileWeapons value) {
+template<> struct Convert<EMissileSizes> {
+    static int toLua(lua_State* L, EMissileSizes value) {
         switch(value) {
-        case EMissileWeapons::MW_None: lua_pushstring(L, "none"); break;
-        case EMissileWeapons::MW_Homing: lua_pushstring(L, "homing"); break;
-        case EMissileWeapons::MW_Nuke: lua_pushstring(L, "nuke"); break;
-        case EMissileWeapons::MW_Mine: lua_pushstring(L, "mine"); break;
-        case EMissileWeapons::MW_EMP: lua_pushstring(L, "emp"); break;
-        case EMissileWeapons::MW_HVLI: lua_pushstring(L, "hvli"); break;
-        case EMissileWeapons::MW_Count: lua_pushstring(L, "none"); break;
+        case MS_Small: lua_pushstring(L, "small"); break;
+        case MS_Medium: lua_pushstring(L, "medium"); break;
+        case MS_Large: lua_pushstring(L, "large"); break;
+        default: lua_pushstring(L, "medium"); break;
         }
         return 1;
     }
-    static EMissileWeapons fromLua(lua_State* L, int idx) {
+    static EMissileSizes fromLua(lua_State* L, int idx) {
         string str = string(luaL_checkstring(L, idx)).lower();
-        if (str == "none")
-            return EMissileWeapons::MW_None;
-        else if (str == "homing")
-            return EMissileWeapons::MW_Homing;
-        else if (str == "nuke")
-            return EMissileWeapons::MW_Nuke;
-        else if (str == "mine")
-            return EMissileWeapons::MW_Mine;
-        else if (str == "emp")
-            return EMissileWeapons::MW_EMP;
-        else if (str == "hvli")
-            return EMissileWeapons::MW_HVLI;
-        luaL_error(L, "Unknown EMissileWeapons type: %s", str.c_str());
-        return EMissileWeapons::MW_None;
+        if (str == "small")
+            return MS_Small;
+        else if (str == "medium")
+            return MS_Medium;
+        else if (str == "large")
+            return MS_Large;
+        return MS_Medium;
     }
 };
 template<> struct Convert<ShipSystem::Type> {
@@ -227,28 +217,6 @@ template<> struct Convert<ShipSystem::Type> {
             return ShipSystem::Type::Sensors;
         luaL_error(L, "Unknown ShipSystem::Type: %s", str.c_str());
         return ShipSystem::Type::None;
-    }
-};
-template<> struct Convert<EMissileSizes> {
-    static int toLua(lua_State* L, EMissileSizes value) {
-        switch(value) {
-        case EMissileSizes::MS_Small: lua_pushstring(L, "small"); break;
-        case EMissileSizes::MS_Medium: lua_pushstring(L, "medium"); break;
-        case EMissileSizes::MS_Large: lua_pushstring(L, "large"); break;
-        default: lua_pushstring(L, "none"); break;
-        }
-        return 1;
-    }
-    static EMissileSizes fromLua(lua_State* L, int idx) {
-        string str = string(luaL_checkstring(L, idx)).lower();
-        if (str == "small")
-            return EMissileSizes::MS_Small;
-        else if (str == "medium")
-            return EMissileSizes::MS_Medium;
-        else if (str == "large")
-            return EMissileSizes::MS_Large;
-        luaL_error(L, "Unknown EMissileSizes: %s", str.c_str());
-        return EMissileSizes::MS_Medium;
     }
 };
 template<> struct Convert<MissileTubes::MountPoint::State> {

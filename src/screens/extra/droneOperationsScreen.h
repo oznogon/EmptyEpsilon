@@ -90,7 +90,7 @@ private:
         GuiElement* layout;
         GuiToggleButton* button;
     };
-    MissileTypeRow missile_type_rows[MW_Count];
+    MissileTypeRow missile_type_rows[MW_MaxTypes];
 
     // Stats display
     GuiElement* player_stats;

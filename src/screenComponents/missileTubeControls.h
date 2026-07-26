@@ -38,13 +38,13 @@ private:
         GuiElement* layout;
         GuiToggleButton* button;
     };
-    TypeRow load_type_rows[MW_Count];
-    EMissileWeapons load_type;
+    TypeRow load_type_rows[MW_MaxTypes];
+    int load_type = MW_None;
 
     bool manual_aim;
     float missile_target_angle;
 
     void createTubeRow();
     void removeTubeRow();
-    void selectMissileWeapon(EMissileWeapons type);
+    void selectMissileWeapon(int type);
 };

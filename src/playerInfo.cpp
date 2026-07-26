@@ -389,7 +389,7 @@ void PlayerInfo::commandSetUtilityBeamTarget(sp::ecs::Entity target)
     sendClientCommand(packet);
 }
 
-void PlayerInfo::commandLoadTube(uint32_t tubeNumber, EMissileWeapons missileType)
+void PlayerInfo::commandLoadTube(uint32_t tubeNumber, int missileType)
 {
     sp::io::DataBuffer packet;
     packet << CMD_LOAD_TUBE << tubeNumber << missileType;
@@ -428,7 +428,7 @@ void PlayerInfo::commandFireTubeAtTarget(uint32_t tubeNumber, sp::ecs::Entity ta
     commandFireTube(tubeNumber, target_angle);
 }
 
-void PlayerInfo::commandTransferMissile(sp::ecs::Entity target, EMissileWeapons missile_type, int quantity)
+void PlayerInfo::commandTransferMissile(sp::ecs::Entity target, int missile_type, int quantity)
 {
     sp::io::DataBuffer packet;
     packet << CMD_TRANSFER_MISSILE << target << missile_type << quantity;
@@ -921,7 +921,7 @@ void PlayerInfo::commandDroneSetShields(bool enabled)
     sendClientCommand(packet);
 }
 
-void PlayerInfo::commandDroneLoadTube(uint32_t tube_nr, EMissileWeapons type)
+void PlayerInfo::commandDroneLoadTube(uint32_t tube_nr, int type)
 {
     sp::io::DataBuffer packet;
     packet << CMD_DRONE_LOAD_TUBE << tube_nr << type;
@@ -1125,7 +1125,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
     case CMD_LOAD_TUBE:
         {
             uint32_t tube_nr;
-            EMissileWeapons type;
+            int type;
             packet >> tube_nr >> type;
 
             auto missiletubes = ship.getComponent<MissileTubes>();
@@ -1166,7 +1166,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
     case CMD_TRANSFER_MISSILE:
         {
             sp::ecs::Entity target;
-            EMissileWeapons type;
+            int type;
             int quantity;
             packet >> target >> type >> quantity;
 
@@ -1922,7 +1922,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
     case CMD_DRONE_LOAD_TUBE:
         {
             uint32_t tube_nr;
-            EMissileWeapons type;
+            int type;
             packet >> tube_nr >> type;
             if (auto dl = ship.getComponent<DroneLink>())
             {

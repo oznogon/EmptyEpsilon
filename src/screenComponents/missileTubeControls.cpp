@@ -23,26 +23,26 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
     tube_rows_layout = new GuiElement(this, "TUBE_ROWS_LAYOUT");
     tube_rows_layout->setAttribute("layout", "vertical");
 
-    for (int n = MW_Count-1; n >= 0; n--)
+    for (int n = MW_MaxTypes-1; n >= 0; n--)
     {
         load_type_rows[n].layout = new GuiElement(this, id + "_ROW_" + string(n));
         load_type_rows[n].layout->setSize(GuiElement::GuiSizeMax, 40)->setAttribute("layout", "horizontal");
 
-        load_type_rows[n].button = new GuiToggleButton(load_type_rows[n].layout, id + "_MW_" + string(n), getLocaleMissileWeaponName(EMissileWeapons(n)), [this, n](bool value) {
+        load_type_rows[n].button = new GuiToggleButton(load_type_rows[n].layout, id + "_MW_" + string(n), MissileWeaponDataRegistry::instance().getNameForIndex(n), [this, n](bool value) {
             if (value)
-                load_type = EMissileWeapons(n);
+                load_type = n;
             else
                 load_type = MW_None;
-            for(int idx = 0; idx < MW_Count; idx++)
+            for(int idx = 0; idx < MW_MaxTypes; idx++)
                 load_type_rows[idx].button->setValue(idx == load_type);
         });
         load_type_rows[n].button->setTextSize(28)->setSize(200, 40);
     }
-    load_type_rows[MW_Homing].button->setIcon("gui/icons/weapon-homing.png");
-    load_type_rows[MW_Mine].button->setIcon("gui/icons/weapon-mine.png");
-    load_type_rows[MW_EMP].button->setIcon("gui/icons/weapon-emp.png");
-    load_type_rows[MW_Nuke].button->setIcon("gui/icons/weapon-nuke.png");
-    load_type_rows[MW_HVLI].button->setIcon("gui/icons/weapon-hvli.png");
+    load_type_rows[0].button->setIcon("gui/icons/weapon-homing.png");
+    load_type_rows[2].button->setIcon("gui/icons/weapon-mine.png");
+    load_type_rows[3].button->setIcon("gui/icons/weapon-emp.png");
+    load_type_rows[1].button->setIcon("gui/icons/weapon-nuke.png");
+    load_type_rows[4].button->setIcon("gui/icons/weapon-hvli.png");
 }
 
 static string getTubeName(float direction)
@@ -60,22 +60,23 @@ static string getTubeName(float direction)
 
 void GuiMissileTubeControls::onUpdate()
 {
-    if (!my_spaceship || !isEffectivelyVisible())
-        return;
+    if (!my_spaceship || !isEffectivelyVisible()) return;
+
     auto tubes = my_spaceship.getComponent<MissileTubes>();
-    if (!tubes) {
-        for (int n = 0; n < MW_Count; n++)
-            load_type_rows[n].layout->hide();
-        for(auto& row : rows)
-            row.layout->hide();
+    if (!tubes)
+    {
+        for (int n = 0; n < MW_MaxTypes; n++) load_type_rows[n].layout->hide();
+        for (auto& row : rows) row.layout->hide();
         return;
     }
+
     auto sys = ShipSystem::get(my_spaceship, ShipSystem::Type::MissileSystem);
     float health = sys->health;
     float power_level = sys->power_level;
-    for (int n = 0; n < MW_Count; n++)
+
+    for (int n = 0; n < MW_MaxTypes; n++)
     {
-        load_type_rows[n].button->setText(getLocaleMissileWeaponName(EMissileWeapons(n)) + " [" + string(tubes->storage[n]) + "/" + string(tubes->storage_max[n]) + "]");
+        load_type_rows[n].button->setText(MissileWeaponDataRegistry::instance().getNameForIndex(n) + " [" + string(tubes->storage[n]) + "/" + string(tubes->storage_max[n]) + "]");
         load_type_rows[n].layout->setVisible(tubes->storage_max[n] > 0);
     }
 
@@ -84,38 +85,51 @@ void GuiMissileTubeControls::onUpdate()
         if (rows.size() <= n) createTubeRow();
         auto& tube = tubes->mounts[n];
         rows[n].layout->show();
-        if (tube.canOnlyLoad(MW_Mine))
+        if (tube.canOnlyLoad(2))
             rows[n].fire_button->setIcon("gui/icons/weapon-mine", sp::Alignment::CenterLeft);
         else
             rows[n].fire_button->setIcon("gui/icons/missile", sp::Alignment::CenterLeft, tube.direction);
-        switch(tube.state)
+
+        switch (tube.state)
         {
         case MissileTubes::MountPoint::State::Empty:
             rows[n].load_button->setEnable(tube.canLoad(load_type));
             rows[n].load_button->setText(tr("missile","Load"));
-            if (health <= 0)
-                rows[n].load_button->disable();
+
+            if (health <= 0) rows[n].load_button->disable();
+
             rows[n].fire_button->disable()->show();
             rows[n].fire_button->setText(getTubeName(tube.direction) + ": " + tr("missile","Empty"));
             rows[n].loading_bar->hide();
             break;
         case MissileTubes::MountPoint::State::Loaded:
             rows[n].load_button->setText(tr("missile","Unload"));
-            if ((health <= 0) || (power_level <=0)) {
-                rows[n].fire_button->disable()->show();
-                rows[n].load_button->disable()->show();
-            } else {
-                rows[n].fire_button->enable()->show();
-                rows[n].load_button->enable()->show();
+            if ((health <= 0) || (power_level <=0))
+            {
+                rows[n].fire_button
+                    ->disable()
+                    ->show();
+                rows[n].load_button
+                    ->disable()
+                    ->show();
             }
-            rows[n].fire_button->setText(getTubeName(tube.direction) + ": " + getLocaleMissileWeaponName(tube.type_loaded));
+            else
+            {
+                rows[n].fire_button
+                    ->enable()
+                    ->show();
+                rows[n].load_button
+                    ->enable()
+                    ->show();
+            }
+            rows[n].fire_button->setText(getTubeName(tube.direction) + ": " + MissileWeaponDataRegistry::instance().getNameForIndex(tube.type_loaded));
             rows[n].loading_bar->hide();
             break;
         case MissileTubes::MountPoint::State::Loading:
             rows[n].load_button->disable();
             rows[n].load_button->setText(tr("missile","Load"));
             rows[n].fire_button->hide();
-            rows[n].fire_button->setText(getTubeName(tube.direction) + ": " + getLocaleMissileWeaponName(tube.type_loaded));
+            rows[n].fire_button->setText(getTubeName(tube.direction) + ": " + MissileWeaponDataRegistry::instance().getNameForIndex(tube.type_loaded));
             rows[n].loading_bar->show();
             rows[n].loading_bar->setValue(1.0f - tube.delay / tube.load_time);
             rows[n].loading_label->setText(tr("missile","Loading"));
@@ -124,7 +138,7 @@ void GuiMissileTubeControls::onUpdate()
             rows[n].load_button->disable();
             rows[n].load_button->setText(tr("missile","Unload"));
             rows[n].fire_button->hide();
-            rows[n].fire_button->setText(getLocaleMissileWeaponName(tube.type_loaded));
+            rows[n].fire_button->setText(MissileWeaponDataRegistry::instance().getNameForIndex(tube.type_loaded));
             rows[n].loading_bar->show();
             rows[n].loading_bar->setValue(tube.delay / tube.load_time);
             rows[n].loading_label->setText(tr("missile","Unloading"));
@@ -138,26 +152,19 @@ void GuiMissileTubeControls::onUpdate()
         }
 
         auto warp = my_spaceship.getComponent<WarpDrive>();
-        if (warp && warp->current > 0.0f)
-        {
-            rows[n].fire_button->disable();
-        }
+        if (warp && warp->current > 0.0f) rows[n].fire_button->disable();
     }
-    while(rows.size() > tubes->mounts.size())
-        removeTubeRow();
 
-    if (keys.weapons_select_homing.getDown())
-        selectMissileWeapon(MW_Homing);
-    if (keys.weapons_select_nuke.getDown())
-        selectMissileWeapon(MW_Nuke);
-    if (keys.weapons_select_mine.getDown())
-        selectMissileWeapon(MW_Mine);
-    if (keys.weapons_select_emp.getDown())
-        selectMissileWeapon(MW_EMP);
-    if (keys.weapons_select_hvli.getDown())
-        selectMissileWeapon(MW_HVLI);
+    while (rows.size() > tubes->mounts.size()) removeTubeRow();
 
-    for (unsigned int n = 0; n < std::min(tubes->mounts.size(), size_t(16)); n++)
+    // Handle hotkeys for default missile types.
+    if (keys.weapons_select_homing.getDown()) selectMissileWeapon(0);
+    if (keys.weapons_select_nuke.getDown()) selectMissileWeapon(1);
+    if (keys.weapons_select_mine.getDown()) selectMissileWeapon(2);
+    if (keys.weapons_select_emp.getDown()) selectMissileWeapon(3);
+    if (keys.weapons_select_hvli.getDown()) selectMissileWeapon(4);
+
+    for (unsigned int n = 0; n < std::min(tubes->mounts.size(), static_cast<size_t>(16)); n++)
     {
         if (keys.weapons_load_tube[n].getDown())
             my_player_info->commandLoadTube(n, load_type);
@@ -266,9 +273,9 @@ void GuiMissileTubeControls::removeTubeRow()
     rows.pop_back();
 }
 
-void GuiMissileTubeControls::selectMissileWeapon(EMissileWeapons type)
+void GuiMissileTubeControls::selectMissileWeapon(int type)
 {
     load_type = type;
-    for(int idx = 0; idx < MW_Count; idx++)
+    for(int idx = 0; idx < MW_MaxTypes; idx++)
         load_type_rows[idx].button->setValue(idx == type);
 }

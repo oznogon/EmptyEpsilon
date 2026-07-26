@@ -28,7 +28,7 @@ public:
 
     template<typename T> static void checkResult(const sp::Result<T>& r) {
         if (r.isErr()) {
-            LOG(Error, "LUA-Error:", r.error());
+            LOG(Error, "[lua] ", r.error());
             addLog(r.error());
         }
     }

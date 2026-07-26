@@ -122,17 +122,17 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     selected_entity_kvs_1
         ->setAttribute("margin", "0, 10, 0, 0");
 
-    for (int i = MW_Homing; i < MW_Count; i++)
+    for (int i = 0; i < MW_MaxTypes; i++)
     {
-        entity_missiles[i] = new GuiKeyValueDisplay(selected_entity_kvs_1, "", kv_split, getLocaleMissileWeaponName(static_cast<EMissileWeapons>(i)), "");
+        entity_missiles[i] = new GuiKeyValueDisplay(selected_entity_kvs_1, "", kv_split, MissileWeaponDataRegistry::instance().getNameForIndex(i), "");
         entity_missiles[i]->setSize(GuiElement::GuiSizeMax, kv_size);
     }
 
-    entity_missiles[MW_Homing]->setIcon("gui/icons/weapon-homing");
-    entity_missiles[MW_Nuke]->setIcon("gui/icons/weapon-nuke");
-    entity_missiles[MW_EMP]->setIcon("gui/icons/weapon-emp");
-    entity_missiles[MW_HVLI]->setIcon("gui/icons/weapon-hvli");
-    entity_missiles[MW_Mine]->setIcon("gui/icons/weapon-mine");
+    entity_missiles[0]->setIcon("gui/icons/weapon-homing");
+    entity_missiles[1]->setIcon("gui/icons/weapon-nuke");
+    entity_missiles[2]->setIcon("gui/icons/weapon-mine");
+    entity_missiles[3]->setIcon("gui/icons/weapon-emp");
+    entity_missiles[4]->setIcon("gui/icons/weapon-hvli");
 
     GuiElement* selected_entity_kvs_2 = new GuiElement(docking_bay_info, "");
     selected_entity_kvs_2
@@ -654,18 +654,18 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     (new GuiLabel(supply_controls_right, "", tr("dockingbay", "Carrier"), 20.0f))
         ->setSize(GuiElement::GuiSizeMax, kv_size);
 
-    auto populateMissiles = [](GuiKeyValueDisplay* supply_missiles[MW_Count], GuiElement* column) {
-        for (int i = MW_Homing; i < MW_Count; i++)
+    auto populateMissiles = [](GuiKeyValueDisplay* supply_missiles[MW_MaxTypes], GuiElement* column) {
+        for (int i = 0; i < MW_MaxTypes; i++)
         {
-            supply_missiles[i] = new GuiKeyValueDisplay(column, "", kv_split, getLocaleMissileWeaponName(static_cast<EMissileWeapons>(i)), "");
+            supply_missiles[i] = new GuiKeyValueDisplay(column, "", kv_split, MissileWeaponDataRegistry::instance().getNameForIndex(i), "");
             supply_missiles[i]->setSize(200.0f, kv_size);
         }
 
-        supply_missiles[MW_Homing]->setIcon("gui/icons/weapon-homing");
-        supply_missiles[MW_Nuke]->setIcon("gui/icons/weapon-nuke");
-        supply_missiles[MW_EMP]->setIcon("gui/icons/weapon-emp");
-        supply_missiles[MW_HVLI]->setIcon("gui/icons/weapon-hvli");
-        supply_missiles[MW_Mine]->setIcon("gui/icons/weapon-mine");
+        supply_missiles[0]->setIcon("gui/icons/weapon-homing");
+        supply_missiles[1]->setIcon("gui/icons/weapon-nuke");
+        supply_missiles[3]->setIcon("gui/icons/weapon-emp");
+        supply_missiles[4]->setIcon("gui/icons/weapon-hvli");
+        supply_missiles[2]->setIcon("gui/icons/weapon-mine");
 
         return supply_missiles;
     };
@@ -675,15 +675,15 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     populateMissiles(carrier_missiles, supply_controls_right);
 
     // Populate missile transfer buttons
-    GuiButton* to_berth[MW_Count];
-    GuiButton* to_carrier[MW_Count];
+    GuiButton* to_berth[MW_MaxTypes];
+    GuiButton* to_carrier[MW_MaxTypes];
     GuiElement* supply_controls_center_row = new GuiElement(supply_controls_center, "");
     // Blank spacer for first row.
     supply_controls_center_row
         ->setSize(GuiElement::GuiSizeMax, kv_size)
         ->setAttribute("layout", "horizontal");
 
-    for (int i = MW_Homing; i < MW_Count; i++)
+    for (int i = 0; i < MW_MaxTypes; i++)
     {
         supply_controls_center_row = new GuiElement(supply_controls_center, "");
         supply_controls_center_row
@@ -702,7 +702,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
                 auto selected_entity = bay->berths[selected_berth_index].docked_entity;
                 if (selected_entity && selected_entity != sp::ecs::Entity())
-                    my_player_info->commandTransferMissile(selected_entity, static_cast<EMissileWeapons>(i), 1);
+                    my_player_info->commandTransferMissile(selected_entity, i, 1);
             }
         );
         to_berth[i]->setSize(kv_size, kv_size);
@@ -720,7 +720,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
                 auto selected_entity = bay->berths[selected_berth_index].docked_entity;
                 if (selected_entity && selected_entity != sp::ecs::Entity())
-                    my_player_info->commandTransferMissile(selected_entity, static_cast<EMissileWeapons>(i), -1);
+                    my_player_info->commandTransferMissile(selected_entity, i, -1);
             }
         );
         to_carrier[i]->setSize(kv_size, kv_size);
@@ -1150,18 +1150,18 @@ void DockingBayScreen::updateSelectedEntityDisplay()
     // Update berth's missile displays.
     if (auto tubes = selected_entity.getComponent<MissileTubes>())
     {
-        for (int i = MW_Homing; i < MW_Count; i++)
+        for (int i = 0; i < MW_MaxTypes; i++)
         {
-            updateMissileDisplay(entity_missiles[i], tubes, static_cast<EMissileWeapons>(i));
-            updateMissileDisplay(berth_missiles[i], tubes, static_cast<EMissileWeapons>(i));
+            updateMissileDisplay(entity_missiles[i], tubes, i);
+            updateMissileDisplay(berth_missiles[i], tubes, i);
         }
     }
     else if (auto pickup = selected_entity.getComponent<PickupCallback>())
     {
-        for (int i = MW_Homing; i < MW_Count; i++)
+        for (int i = 0; i < MW_MaxTypes; i++)
         {
-            updateMissileDisplay(entity_missiles[i], pickup, static_cast<EMissileWeapons>(i));
-            updateMissileDisplay(berth_missiles[i], pickup, static_cast<EMissileWeapons>(i));
+            updateMissileDisplay(entity_missiles[i], pickup, i);
+            updateMissileDisplay(berth_missiles[i], pickup, i);
         }
     }
     else
@@ -1173,8 +1173,8 @@ void DockingBayScreen::updateSelectedEntityDisplay()
     // Update carrier's missile displays.
     if (auto tubes = my_spaceship.getComponent<MissileTubes>())
     {
-        for (int i = MW_Homing; i < MW_Count; i++)
-            updateMissileDisplay(carrier_missiles[i], tubes, static_cast<EMissileWeapons>(i));
+        for (int i = 0; i < MW_MaxTypes; i++)
+            updateMissileDisplay(carrier_missiles[i], tubes, i);
     }
 
     // Update berth's scan probe displays.
@@ -1351,7 +1351,7 @@ void DockingBayScreen::updateSelectedEntityDisplay()
     }
 }
 
-void DockingBayScreen::updateMissileDisplay(GuiKeyValueDisplay* display, MissileTubes* tubes, EMissileWeapons type)
+void DockingBayScreen::updateMissileDisplay(GuiKeyValueDisplay* display, MissileTubes* tubes, int type)
 {
     if (tubes->storage_max[type] > 0)
     {
@@ -1362,7 +1362,7 @@ void DockingBayScreen::updateMissileDisplay(GuiKeyValueDisplay* display, Missile
     else display->setValue("-");
 }
 
-void DockingBayScreen::updateMissileDisplay(GuiKeyValueDisplay* display, PickupCallback* pickup, EMissileWeapons type)
+void DockingBayScreen::updateMissileDisplay(GuiKeyValueDisplay* display, PickupCallback* pickup, int type)
 {
     display->setValue(static_cast<string>(pickup->give_missile[type]));
 }

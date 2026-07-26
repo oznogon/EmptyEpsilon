@@ -35,6 +35,7 @@
 #include "components/missile.h"
 #include "components/missiletubes.h"
 #include "components/missileWeaponTarget.h"
+#include "missileWeaponData.h"
 #include "components/moveto.h"
 #include "components/name.h"
 #include "components/orbit.h"
@@ -741,26 +742,53 @@ void initComponentScriptBindings()
     BIND_MEMBER(JumpDrive, delay);
     BIND_MEMBER(JumpDrive, just_jumped);
 
+    sp::script::ComponentHandler<MissileWeaponData>::name("missile_weapon_data");
+    BIND_MEMBER(MissileWeaponData, index);
+    BIND_MEMBER(MissileWeaponData, name);
+    BIND_MEMBER(MissileWeaponData, locale_name);
+    BIND_MEMBER(MissileWeaponData, order);
+    BIND_MEMBER(MissileWeaponData, speed);
+    BIND_MEMBER(MissileWeaponData, turnrate);
+    BIND_MEMBER(MissileWeaponData, lifetime);
+    BIND_MEMBER(MissileWeaponData, color);
+    BIND_MEMBER(MissileWeaponData, homing_range);
+    BIND_MEMBER(MissileWeaponData, fire_sound);
+    BIND_MEMBER(MissileWeaponData, radar_trace);
+    BIND_MEMBER(MissileWeaponData, damage_at_center);
+    BIND_MEMBER(MissileWeaponData, damage_at_edge);
+    BIND_MEMBER(MissileWeaponData, blast_range);
+    BIND_MEMBER(MissileWeaponData, explosion_sfx);
+    BIND_MEMBER(MissileWeaponData, radar_r);
+    BIND_MEMBER(MissileWeaponData, radar_g);
+    BIND_MEMBER(MissileWeaponData, radar_b);
+    BIND_MEMBER(MissileWeaponData, explodes_on_timeout);
+    BIND_MEMBER(MissileWeaponData, is_delayed_explode);
+    BIND_MEMBER(MissileWeaponData, fire_count);
+    BIND_MEMBER(MissileWeaponData, damage_type);
+    BIND_MEMBER(MissileWeaponData, avoid_object_delay);
+    BIND_MEMBER(MissileWeaponData, circle_collision);
+    BIND_MEMBER(MissileWeaponData, no_lifetime_on_missile);
+
     sp::script::ComponentHandler<MissileTubes>::name("missile_tubes");
     BIND_SHIP_SYSTEM(MissileTubes);
-    BIND_MEMBER_NAMED(MissileTubes, storage[int(MW_Homing)], "storage_homing");
-    BIND_MEMBER_NAMED(MissileTubes, storage_max[int(MW_Homing)], "max_homing");
-    BIND_MEMBER_NAMED(MissileTubes, storage[int(MW_Nuke)], "storage_nuke");
-    BIND_MEMBER_NAMED(MissileTubes, storage_max[int(MW_Nuke)], "max_nuke");
-    BIND_MEMBER_NAMED(MissileTubes, storage[int(MW_Mine)], "storage_mine");
-    BIND_MEMBER_NAMED(MissileTubes, storage_max[int(MW_Mine)], "max_mine");
-    BIND_MEMBER_NAMED(MissileTubes, storage[int(MW_EMP)], "storage_emp");
-    BIND_MEMBER_NAMED(MissileTubes, storage_max[int(MW_EMP)], "max_emp");
-    BIND_MEMBER_NAMED(MissileTubes, storage[int(MW_HVLI)], "storage_hvli");
-    BIND_MEMBER_NAMED(MissileTubes, storage_max[int(MW_HVLI)], "max_hvli");
+    BIND_MEMBER_NAMED(MissileTubes, storage[0], "storage_homing");
+    BIND_MEMBER_NAMED(MissileTubes, storage_max[0], "max_homing");
+    BIND_MEMBER_NAMED(MissileTubes, storage[1], "storage_nuke");
+    BIND_MEMBER_NAMED(MissileTubes, storage_max[1], "max_nuke");
+    BIND_MEMBER_NAMED(MissileTubes, storage[2], "storage_mine");
+    BIND_MEMBER_NAMED(MissileTubes, storage_max[2], "max_mine");
+    BIND_MEMBER_NAMED(MissileTubes, storage[3], "storage_emp");
+    BIND_MEMBER_NAMED(MissileTubes, storage_max[3], "max_emp");
+    BIND_MEMBER_NAMED(MissileTubes, storage[4], "storage_hvli");
+    BIND_MEMBER_NAMED(MissileTubes, storage_max[4], "max_hvli");
     BIND_ARRAY(MissileTubes, mounts);
     BIND_ARRAY_MEMBER(MissileTubes, mounts, position);
     BIND_ARRAY_MEMBER(MissileTubes, mounts, load_time);
-    BIND_ARRAY_MEMBER_FLAG(MissileTubes, mounts, type_allowed_mask, "allow_homing", 1 << MW_Homing);
-    BIND_ARRAY_MEMBER_FLAG(MissileTubes, mounts, type_allowed_mask, "allow_nuke", 1 << MW_Nuke);
-    BIND_ARRAY_MEMBER_FLAG(MissileTubes, mounts, type_allowed_mask, "allow_mine", 1 << MW_Mine);
-    BIND_ARRAY_MEMBER_FLAG(MissileTubes, mounts, type_allowed_mask, "allow_emp", 1 << MW_EMP);
-    BIND_ARRAY_MEMBER_FLAG(MissileTubes, mounts, type_allowed_mask, "allow_hvli", 1 << MW_HVLI);
+    BIND_ARRAY_MEMBER_FLAG(MissileTubes, mounts, type_allowed_mask, "allow_homing", 1 << 0);
+    BIND_ARRAY_MEMBER_FLAG(MissileTubes, mounts, type_allowed_mask, "allow_nuke", 1 << 1);
+    BIND_ARRAY_MEMBER_FLAG(MissileTubes, mounts, type_allowed_mask, "allow_mine", 1 << 2);
+    BIND_ARRAY_MEMBER_FLAG(MissileTubes, mounts, type_allowed_mask, "allow_emp", 1 << 3);
+    BIND_ARRAY_MEMBER_FLAG(MissileTubes, mounts, type_allowed_mask, "allow_hvli", 1 << 4);
     BIND_ARRAY_MEMBER(MissileTubes, mounts, direction);
     BIND_ARRAY_MEMBER(MissileTubes, mounts, size);
     BIND_ARRAY_MEMBER(MissileTubes, mounts, type_loaded);
@@ -941,11 +969,11 @@ void initComponentScriptBindings()
     BIND_MEMBER(PickupCallback, player);
     BIND_MEMBER(PickupCallback, give_energy);
     BIND_MEMBER(PickupCallback, give_probe);
-    BIND_MEMBER_NAMED(PickupCallback, give_missile[int(MW_Homing)], "give_homing");
-    BIND_MEMBER_NAMED(PickupCallback, give_missile[int(MW_Nuke)], "give_nuke");
-    BIND_MEMBER_NAMED(PickupCallback, give_missile[int(MW_Mine)], "give_mine");
-    BIND_MEMBER_NAMED(PickupCallback, give_missile[int(MW_EMP)], "give_emp");
-    BIND_MEMBER_NAMED(PickupCallback, give_missile[int(MW_HVLI)], "give_hvli");
+    BIND_MEMBER_NAMED(PickupCallback, give_missile[0], "give_homing");
+    BIND_MEMBER_NAMED(PickupCallback, give_missile[1], "give_nuke");
+    BIND_MEMBER_NAMED(PickupCallback, give_missile[2], "give_mine");
+    BIND_MEMBER_NAMED(PickupCallback, give_missile[3], "give_emp");
+    BIND_MEMBER_NAMED(PickupCallback, give_missile[4], "give_hvli");
 
     sp::script::ComponentHandler<CollisionCallback>::name("collision_callback");
     BIND_MEMBER(CollisionCallback, callback);

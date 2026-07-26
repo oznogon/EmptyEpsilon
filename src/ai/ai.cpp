@@ -283,21 +283,31 @@ void ShipAI::updateWeaponState(float delta)
 
     //If we have weapon tubes, load them with torpedoes
     auto tubes = owner.getComponent<MissileTubes>();
+    auto& registry = MissileWeaponDataRegistry::instance();
     if (tubes)
     {
         for(auto& tube : tubes->mounts)
         {
-            if (tube.state == MissileTubes::MountPoint::State::Empty && tubes->storage[MW_EMP] > 0 && tube.canLoad(MW_EMP))
-                MissileSystem::startLoad(owner, tube, MW_EMP);
-            else if (tube.state == MissileTubes::MountPoint::State::Empty && tubes->storage[MW_Nuke] > 0 && tube.canLoad(MW_Nuke))
-                MissileSystem::startLoad(owner, tube, MW_Nuke);
-            else if (tube.state == MissileTubes::MountPoint::State::Empty && tubes->storage[MW_Homing] > 0 && tube.canLoad(MW_Homing))
-                MissileSystem::startLoad(owner, tube, MW_Homing);
-            else if (tube.state == MissileTubes::MountPoint::State::Empty && tubes->storage[MW_HVLI] > 0 && tube.canLoad(MW_HVLI))
-                MissileSystem::startLoad(owner, tube, MW_HVLI);
+            if (tube.state == MissileTubes::MountPoint::State::Empty)
+            {
+                int best_idx = MW_None;
+                float best_strength = 0.0f;
+                for (int i = 0; i < registry.getTypeCount(); i++)
+                {
+                    if (tubes->storage[i] > 0 && tube.canLoad(i))
+                    {
+                        float strength = getMissileWeaponStrength(i);
+                        if (strength > best_strength)
+                        {
+                            best_strength = strength;
+                            best_idx = i;
+                        }
+                    }
+                }
+                if (best_idx >= 0)
+                    MissileSystem::startLoad(owner, tube, best_idx);
+            }
 
-            // When the tube is loading, loaded, or firing, add the relative
-            // strength of this tube to the direction of this tube.
             if (tube.state == MissileTubes::MountPoint::State::Loading || tube.state == MissileTubes::MountPoint::State::Loaded || tube.state == MissileTubes::MountPoint::State::Firing)
             {
                 int index = getDirectionIndex(tube.direction, 90);
@@ -352,32 +362,24 @@ void ShipAI::updateWeaponState(float delta)
     }
 
     // Prioritize available missiles to ensure stronger missiles are fired
-    // first, and manually aimed HVLIs are used only when other options are
-    // depleted.
+    // first.
     if (has_missiles && tubes)
     {
-        bool has_homing = false;
-        bool has_hvli = false;
-        bool has_nuke = false;
-        bool has_emp = false;
-
+        float best_strength = 0.0f;
         for (auto& tube : tubes->mounts)
         {
             if (tube.state == MissileTubes::MountPoint::State::Loading
                 || tube.state == MissileTubes::MountPoint::State::Loaded
                 || tube.state == MissileTubes::MountPoint::State::Firing)
             {
-                if (tube.type_loaded == MW_Homing) has_homing = true;
-                if (tube.type_loaded == MW_HVLI) has_hvli = true;
-                if (tube.type_loaded == MW_Nuke) has_nuke = true;
-                if (tube.type_loaded == MW_EMP) has_emp = true;
+                float strength = getMissileWeaponStrength(tube.type_loaded);
+                if (strength > best_strength)
+                {
+                    best_strength = strength;
+                    best_missile_type = tube.type_loaded;
+                }
             }
         }
-
-        if (has_nuke) best_missile_type = MW_Nuke;
-        else if (has_emp) best_missile_type = MW_EMP;
-        else if (has_homing) best_missile_type = MW_Homing;
-        else if (has_hvli) best_missile_type = MW_HVLI;
     }
 
     int direction_index = best_tube_index;
@@ -671,7 +673,7 @@ void ShipAI::runOrders()
                 {
                     if (auto tubes = owner.getComponent<MissileTubes>())
                     {
-                        for (int n = 0; n < MW_Count; n++)
+                        for (int n = 0; n < MissileWeaponDataRegistry::instance().getTypeCount(); n++)
                         {
                             if (tubes->storage[n] < tubes->storage_max[n])
                             {
@@ -753,7 +755,7 @@ void ShipAI::runAttack(sp::ecs::Entity target)
 
     // Define the attack approach distance.
     float attack_distance = 4000.0f;
-    if (has_missiles && best_missile_type == MW_HVLI)
+    if (has_missiles && MissileWeaponDataRegistry::instance().getTurnrate(best_missile_type) == 0.0f)
         attack_distance = 2500.0f;
     if (has_beams)
         attack_distance = beam_weapon_range * 0.7f;
@@ -788,8 +790,8 @@ void ShipAI::runAttack(sp::ecs::Entity target)
     }
     else
     {
-        // Unguided HVLIs require the firing ship to maintain aim by rotating.
-        if (best_missile_type == MW_HVLI &&
+        // Unguided missiles require the firing ship to maintain aim by rotating.
+        if (MissileWeaponDataRegistry::instance().getTurnrate(best_missile_type) == 0.0f &&
             (weapon_direction == EWeaponDirection::Side || weapon_direction == EWeaponDirection::Left || weapon_direction == EWeaponDirection::Right))
         {
             // Calculate the angle to the target
@@ -811,11 +813,11 @@ void ShipAI::runAttack(sp::ecs::Entity target)
                 const float right_rotation = angle_to_target - 90.0f;
                 if (fabs(angleDifference(ot->getRotation(), left_rotation)) < fabs(angleDifference(ot->getRotation(), right_rotation)))
                     desired_rotation = left_rotation;
-                else
-                    desired_rotation = right_rotation;
+                else desired_rotation = right_rotation;
             }
 
-            // Override movement orders to maintain HVLI firing position.
+            // Override movement orders to maintain unguided missile firing
+            // position.
             if (auto thrusters = owner.getComponent<ManeuveringThrusters>())
                 thrusters->target = desired_rotation;
 
@@ -1186,7 +1188,7 @@ float ShipAI::calculateFiringSolution(sp::ecs::Entity target, const MissileTubes
     if (target.hasComponent<MoveTo>() && target.hasComponent<ShareShortRangeRadar>())
         return std::numeric_limits<float>::infinity();
 
-    EMissileWeapons type = tube.type_loaded;
+    int type = tube.type_loaded;
 
     // Determine whether a non-hostile ship might be damaged by a missile attack
     // on a line of fire within our short-range radar range.
@@ -1217,23 +1219,22 @@ float ShipAI::calculateFiringSolution(sp::ecs::Entity target, const MissileTubes
         }
     }
 
-    // Custom HVLI targeting for AI, as the calculate firing solution.
-    // TODO: Instead tie to whether the missile type uses MissileHoming.
-    // This might need to move to Lua to support scriptable missile types.
-    if (type == MW_HVLI)
+    // Custom unguided missile targeting for AI, as the calculate firing
+    // solution.
+    if (MissileWeaponDataRegistry::instance().getTurnrate(type) == 0.0f)
     {
-        const MissileWeaponData& data = MissileWeaponData::getDataFor(type);
+        const MissileWeaponDataRegistry& mwd_reg = MissileWeaponDataRegistry::instance();
+        float data_speed = mwd_reg.getSpeed(type);
 
         auto target_position = tt->getPosition();
         float target_angle = vec2ToAngle(target_position - ot->getPosition());
 
-        // HVLI missiles don't home or turn, so use a different targeting
-        // mechanism.
+        // Missiles that don't home or turn use a different targeting mechanism.
         float angle_diff = angleDifference(target_angle, fire_angle);
 
         // Target is moving. Estimate where it'll be when the missile hits.
         // TODO: Fix this, because it doesn't actually work.
-        float fly_time = target_distance / data.speed;
+        float fly_time = target_distance / data_speed;
         if (auto physics = target.getComponent<sp::Physics>())
             target_position += physics->getVelocity() * fly_time;
 
@@ -1249,7 +1250,7 @@ float ShipAI::calculateFiringSolution(sp::ecs::Entity target, const MissileTubes
         return std::numeric_limits<float>::infinity();
     }
 
-    if (type == MW_Nuke || type == MW_EMP)
+    if (MissileWeaponDataRegistry::instance().getExplodesOnTimeout(type))
     {
         auto target_position = tt->getPosition();
 

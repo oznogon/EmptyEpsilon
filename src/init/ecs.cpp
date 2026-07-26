@@ -36,6 +36,7 @@
 #include "multiplayer/scanning.h"
 #include "multiplayer/missile.h"
 #include "multiplayer/missiletubes.h"
+#include "multiplayer/missileWeaponDataRep.h"
 #include "multiplayer/internalrooms.h"
 #include "multiplayer/orbit.h"
 #include "multiplayer/sfx.h"
@@ -115,6 +116,7 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<MissileHomingReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ConstantParticleEmitterReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<MissileTubesReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<MissileWeaponDataReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<MoveToReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<CallSignReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<TypeNameReplication>();
