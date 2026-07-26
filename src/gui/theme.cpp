@@ -19,7 +19,7 @@ glm::u8vec4 GuiTheme::toColor(const string& s)
             return {s.substr(1, 3).toInt(16), s.substr(3, 5).toInt(16), s.substr(5, 7).toInt(16), s.substr(7, 9).toInt(16)};
     }
 
-    LOG(Error, "Failed to parse color string: ", s);
+    LOG(Error, "[guitheme] Failed to parse color string: ", s);
     return {255, 255, 255, 255};
 }
 
@@ -31,14 +31,14 @@ static sp::Font* cacheFont(const string& s)
 
     if (!font_stream)
     {
-        LOG(Debug, "Failed to load font resource ", s);
+        LOG(Debug, "[sp-font] Failed to load font resource: ", s);
         fonts[s] = nullptr;
         return nullptr;
     }
 
     auto result = new sp::FreetypeFont(s, font_stream);
     fonts[s] = result;
-    LOG(Debug, "Cached font: ", s);
+    LOG(Debug, "[sp-font] Cached font: ", s);
     return result;
 }
 
@@ -52,12 +52,12 @@ static std::map<string, std::map<string, string>>* getFlattenedTheme(const strin
     auto tree = sp::io::KeyValueTreeLoader::load(resource_name);
     if (!tree)
     {
-        LOG(Debug, "Failed to load theme file for flattening: ", resource_name);
+        LOG(Debug, "[guitheme] Failed to load theme file for flattening: ", resource_name);
         return nullptr;
     }
 
     session_cache[name] = tree->getFlattenNodesByIds();
-    LOG(Debug, "Flattened theme ", name, " with ", session_cache[name].size(), " elements");
+    LOG(Debug, "[guitheme] Flattened theme: ", name, " with ", session_cache[name].size(), " elements.");
     return &session_cache[name];
 }
 
@@ -84,10 +84,10 @@ const GuiThemeStyle* GuiTheme::getStyle(const string& element)
         // want to know if it somehow does.
         if (element == "fallback")
         {
-            LOG(Error, "Theme ", name, " is missing the 'fallback' style.");
+            LOG(Error, "[guitheme] Theme ", name, " is missing the 'fallback' style.");
             return nullptr;
         }
-        LOG(Warning, "Can't find ", element, " in theme ", name, ". Falling back to 'fallback' style.");
+        LOG(Warning, "[guitheme] Can't find ", element, " in theme ", name, ". Falling back to 'fallback' style.");
         return getStyle("fallback");
     }
     string parent_element = element.substr(0, n);
@@ -101,11 +101,11 @@ GuiTheme* GuiTheme::getTheme(const string& name)
 
     if (name == "default")
     {
-        LOG(Error, "Default theme not found. Most likely crashing now.");
+        LOG(Error, "[guitheme] Default theme not found. Most likely crashing now.");
         return nullptr;
     }
 
-    LOG(Warning, "Theme ", name, " not found. Falling back to Default theme.");
+    LOG(Warning, "[guitheme] Theme ", name, " not found. Falling back to Default theme.");
     return getTheme("default");
 }
 
@@ -113,7 +113,7 @@ void GuiTheme::setCurrentTheme(const string &theme_name)
 {
     if (themes.find(theme_name) != themes.end())
     {
-        LOG(Info, "Theme set to ", theme_name);
+        LOG(Info, "[guitheme] Theme set to ", theme_name);
         GuiTheme::current_theme = theme_name;
     }
 }
@@ -125,13 +125,13 @@ GuiTheme* GuiTheme::getCurrentTheme()
 
 bool GuiTheme::loadTheme(const string& name, const string& resource_name)
 {
-    LOG(Debug, "Loading theme ", name, " from ", resource_name);
+    LOG(Debug, "[guitheme] Loading theme ", name, " from ", resource_name);
     GuiTheme* theme = new GuiTheme(name);
 
     auto tree = sp::io::KeyValueTreeLoader::load(resource_name);
     if (!tree)
     {
-        LOG(Debug, "Failed to load theme file: ", resource_name);
+        LOG(Debug, "[guitheme] Failed to load theme file: ", resource_name);
         delete theme;
         return false;
     }
@@ -169,7 +169,7 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
         if (std::find(parent_names.begin(), parent_names.end(), "default") == parent_names.end())
             parent_names.insert(parent_names.begin(), "default");
         else
-            LOG(Debug, "Theme ", name, " already explicitly inherits from 'default', skipping implicit addition");
+            LOG(Debug, "[guitheme] Theme ", name, " already explicitly inherits from 'default', skipping implicit addition.");
     }
 
     // Check for circular dependencies.
@@ -178,7 +178,7 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
     {
         if (loading_chain.find(parent_name) != loading_chain.end())
         {
-            LOG(Error, "Circular theme inheritance detected: ", parent_name);
+            LOG(Error, "[guitheme] Circular theme inheritance detected: ", parent_name);
             delete theme;
             return false;
         }
@@ -199,7 +199,7 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
             theme->parent_themes.push_back(parent_name);
         }
         else
-            LOG(Warning, "Parent theme ", parent_name, " not found for theme ", name);
+            LOG(Warning, "[guitheme] Parent theme ", parent_name, " not found for theme ", name);
     }
 
     // Active theme's definitions override parents' on merge.
@@ -268,7 +268,7 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
             // Fallback if font failed to load.
             if (!global_style.font)
             {
-                LOG(Debug, "Font ", font_path, " failed to load for element ", element_name, " in theme ", name, ". Using fallback font.");
+                LOG(Debug, "[guitheme] Font ", font_path, " failed to load for element ", element_name, " in theme ", name, ". Using fallback font.");
                 global_style.font = theme->styles["fallback"].states[0].font;
             }
         }
@@ -337,7 +337,7 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
                 string state_font_path = input["font." + postfix];
                 style.states[n].font = cacheFont(state_font_path);
                 if (!style.states[n].font)
-                    LOG(Debug, "State-specific font '", state_font_path, "' failed to load for element ", element_name, " state ", postfix, " in theme ", name);
+                    LOG(Debug, "[guitheme] State-specific font '", state_font_path, "' failed to load for element ", element_name, " state ", postfix, " in theme ", name);
             }
             if (input.find("font_offset." + postfix) != input.end())
             {
@@ -371,7 +371,7 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
         theme->styles[element_name] = style;
     }
 
-    LOG(Debug, "Successfully loaded theme: ", name, " with ", theme->styles.size(), " total styles");
+    LOG(Debug, "[guitheme] Successfully loaded theme: ", name, " with ", theme->styles.size(), " total styles");
     return true;
 }
 
@@ -385,13 +385,12 @@ GuiTheme::GuiTheme(const string& name)
     fallback_state.size = 12;
     fallback_state.font = nullptr;
     std::vector<string> fonts = findResources("gui/fonts/*.ttf");
-    if (fonts.size() > 0)
-        fallback_state.font = cacheFont(fonts[0]);
+    if (fonts.size() > 0) fallback_state.font = cacheFont(fonts[0]);
     fallback_state.font_offset = 0.0f;
     fallback_state.line_height = 1.0f;
     fallback_state.texture = "";
     GuiThemeStyle fallback;
-    for(unsigned int n=0; n<int(GuiElement::State::COUNT); n++)
+    for (unsigned int n = 0; n < static_cast<int>(GuiElement::State::COUNT); n++)
         fallback.states[n] = fallback_state;
     styles["fallback"] = fallback;
 }

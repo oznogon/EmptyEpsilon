@@ -1,12 +1,13 @@
 #pragma once
 
 #include "multiplayer.h"
-#include "components/player.h"
-#include "systems/shipsystemssystem.h"
-#include "systems/utilityBeam.h"
 #include "missileWeaponData.h"
 #include "crewPosition.h"
 
+#include "components/player.h"
+
+#include "systems/shipsystemssystem.h"
+#include "systems/utilityBeam.h"
 
 enum class AIOrder;
 
@@ -19,14 +20,14 @@ extern PVector<PlayerInfo> player_info_list;
 class PlayerInfo : public MultiplayerObject
 {
 public:
-    int32_t client_id;
+    int32_t client_id = -1;
 
     std::vector<CrewPositions> crew_positions;
     uint32_t main_screen = 0;
     uint32_t main_screen_control = 0;
     sp::ecs::Entity ship;
     string name;
-    string last_ship_password;
+    string last_ship_password = "";
 
     PlayerInfo();
 

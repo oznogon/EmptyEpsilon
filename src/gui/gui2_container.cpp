@@ -253,7 +253,7 @@ bool GuiContainer::setAttribute(const string& key, const string& value)
         else if (v == "bottomleft" || v == "leftbottom") layout.alignment = sp::Alignment::BottomLeft;
         else if (v == "bottom" || v == "bottomcenter" || v == "centerbottom") layout.alignment = sp::Alignment::BottomCenter;
         else if (v == "bottomright" || v == "rightbottom") layout.alignment = sp::Alignment::BottomRight;
-        else LOG(Warning, "Unknown alignment:", value);
+        else LOG(Warning, "[guicontainer] Unknown alignment: ", value);
         return true;
     }
     else if (key == "layout")
@@ -269,7 +269,7 @@ bool GuiContainer::setAttribute(const string& key, const string& value)
             return true;
         }
         else
-            LOG(Error, "Failed to find layout type:", value);
+            LOG(Error, "[guicontainer] Failed to find layout type: ", value);
     }
     else if (key == "stretch")
     {
@@ -297,7 +297,7 @@ bool GuiContainer::setAttribute(const string& key, const string& value)
         return true;
     }
     else
-        LOG(Warning, "Tried to set unknown widget attribute:", key, "to", value);
+        LOG(Warning, "[guicontainer] Tried to set unknown widget attribute: ", key, " to ", value);
     return false;
 }
 

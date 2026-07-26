@@ -60,16 +60,19 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
     // Validate and apply camera control sensitivity pref.
     const float pref_sens = PreferencesManager::get("camera_mouse_sensitivity", "0.15").toFloat();
     if (pref_sens > 0.0f) camera_sensitivity = pref_sens;
-    else LOG(Warning, "camera_mouse_sensitivity value invalid:", PreferencesManager::get("camera_mouse_sensitivity"));
+    else LOG(Warning, "[cinematicview] camera_mouse_sensitivity value invalid: ", PreferencesManager::get("camera_mouse_sensitivity"));
 
     // Control GUI.
     camera_controls = new GuiElement(this, "CAMERA_CONTROLS");
     camera_controls->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Let the screen operator select a player ship to lock the camera onto.
-    camera_lock_selector = new GuiSelector(camera_controls, "CAMERA_LOCK_SELECTOR", [this](int index, string value) {
-        if (auto ship = sp::ecs::Entity::fromString(value)) target = ship;
-    });
+    camera_lock_selector = new GuiSelector(camera_controls, "CAMERA_LOCK_SELECTOR",
+        [this](int index, string value)
+        {
+            if (auto ship = sp::ecs::Entity::fromString(value)) target = ship;
+        }
+    );
     camera_lock_selector
         ->setSelectionIndex(camera_mode_flyby_int)
         ->setPosition(20.0f, -120.0f, sp::Alignment::BottomLeft)
@@ -150,7 +153,7 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
                     camera_reset->setValue(false);
                     break;
                 default:
-                    LOG(Warning, "Invalid case for camera mode in CinematicViewScreen camera_reset: ", static_cast<int>(active_camera_mode));
+                    LOG(Warning, "[cinematicview] Invalid case for camera mode in CinematicViewScreen camera_reset: ", static_cast<int>(active_camera_mode));
                     break;
             }
         }
@@ -455,7 +458,7 @@ void CinematicViewScreen::update(float delta)
                 ->setText(tr("button", "Go to target"));
             break;
         default:
-            LOG(Warning, "Invalid case for camera mode in CinematicViewScreen update() mode_selector label assignment: ", static_cast<int>(active_camera_mode));
+            LOG(Warning, "[cinematicview] Invalid case for camera mode in CinematicViewScreen update() mode_selector label assignment: ", static_cast<int>(active_camera_mode));
             break;
     }
 
@@ -737,7 +740,7 @@ void CinematicViewScreen::update(float delta)
             break;
 
         default:
-            LOG(Warning, "Invalid case for camera mode in CinematicViewScreen update() when UI is not visible: ", static_cast<int>(active_camera_mode));
+            LOG(Warning, "[cinematicview] Invalid case for camera mode in CinematicViewScreen update() when UI is not visible: ", static_cast<int>(active_camera_mode));
             break;
         }
     }
@@ -1080,7 +1083,7 @@ void CinematicViewScreen::updateCamera(sp::Transform* main_transform, sp::Transf
         // Do nothing.
         break;
     default:
-        LOG(Warning, "Invalid case for camera mode in CinematicViewScreen updateCamera(): ", static_cast<int>(active_camera_mode));
+        LOG(Warning, "[cinematicview] Invalid case for camera mode in CinematicViewScreen updateCamera(): ", static_cast<int>(active_camera_mode));
         break;
     }
 }
@@ -1605,8 +1608,8 @@ float CinematicViewScreen::calculatePerspectiveAutoZoomFoV(float camera_to_targe
     float aspect_ratio = viewport->getAspectRatio();
     if (aspect_ratio <= 0.0f)
     {
-        LOG(Error, "Viewport has non-positive aspect ratio in auto-zoom, falling back to 4:3");
-        aspect_ratio = 4.0f / 3.0f;
+        LOG(Error, "[cinematicview] Viewport has non-positive aspect ratio in auto-zoom. Falling back to 4:3 ratio.");
+        aspect_ratio = 1.3333f;
     }
 
     // Calculate horizontal FoV needed to fit the span at the given distance.
@@ -1630,8 +1633,8 @@ float CinematicViewScreen::calculateOrthographicAutoZoomDistance(float horizonta
     float aspect_ratio = viewport->getAspectRatio();
     if (aspect_ratio <= 0.0f)
     {
-        LOG(Error, "Viewport has non-positive aspect ratio in orthographic auto-zoom, falling back to 4:3");
-        aspect_ratio = 4.0f / 3.0f;
+        LOG(Error, "[cinematicview] Viewport has non-positive aspect ratio in orthographic auto-zoom. Falling back to 4:3 ratio.");
+        aspect_ratio = 1.3333f;
     }
 
     // Convert horizontal span to required vertical half-height using aspect ratio.

@@ -32,20 +32,22 @@ static void initScriptStorage()
         }
         else
         {
-            LOG(WARNING, "Unable to parse ", scriptstorage_path, ": ", err);
+            LOG(Warning, "[datastorage] Unable to parse ", scriptstorage_path, ": ", err);
         }
     }
 }
 
 static void luaPushJson(lua_State* L, const nlohmann::json& json)
 {
-    switch(json.type()) {
+    switch (json.type())
+    {
     case nlohmann::json::value_t::null:
         lua_pushnil(L);
         break;
     case nlohmann::json::value_t::object:
         lua_newtable(L);
-        for(const auto& [key, value] : json.items()) {
+        for (const auto& [key, value] : json.items())
+        {
             luaPushJson(L, key);
             luaPushJson(L, value);
             lua_settable(L, -3);
@@ -55,7 +57,8 @@ static void luaPushJson(lua_State* L, const nlohmann::json& json)
         lua_newtable(L);
         {
             int index = 1;
-            for(const auto& value : json) {
+            for (const auto& value : json)
+            {
                 luaPushJson(L, value);
                 lua_seti(L, -2, index++);
             }
@@ -86,7 +89,7 @@ static void luaPushJson(lua_State* L, const nlohmann::json& json)
 static nlohmann::json luaGetJson(lua_State* L, int index)
 {
     nlohmann::json res{nullptr};
-    switch(lua_type(L, index))
+    switch (lua_type(L, index))
     {
     case LUA_TBOOLEAN:
         res = bool(lua_toboolean(L, index));
@@ -99,17 +102,22 @@ static nlohmann::json luaGetJson(lua_State* L, int index)
         break;
     case LUA_TTABLE:
         index = lua_absindex(L, index);
-        if (lua_rawlen(L, index) > 0) {
+        if (lua_rawlen(L, index) > 0)
+        {
             res = nlohmann::json::array();
-            for(size_t n=1; n<=lua_rawlen(L, index); n++) {
+            for (size_t n=1; n<=lua_rawlen(L, index); n++)
+            {
                 lua_geti(L, index, n);
                 res.push_back(luaGetJson(L, -1));
                 lua_pop(L, 1);
             }
-        } else {
+        }
+        else
+        {
             res = nlohmann::json::object();
             lua_pushnil(L);
-            while(lua_next(L, index)) {
+            while (lua_next(L, index))
+            {
                 auto key = luaGetJson(L, -2);
                 auto value = luaGetJson(L, -1);
                 if (key.is_string())
@@ -125,11 +133,11 @@ static nlohmann::json luaGetJson(lua_State* L, int index)
 static int luaScriptDataStorageSet(lua_State* L)
 {
     string key = luaL_checkstring(L, 2);
-    if (lua_isnil(L, 3)) {
+    if (lua_isnil(L, 3))
         data.erase(key);
-    } else {
+    else
         data[key] = luaGetJson(L, 3);
-    }
+
     FILE* f = fopen(scriptstorage_path.c_str(), "wt");
     if (f)
     {
@@ -137,6 +145,7 @@ static int luaScriptDataStorageSet(lua_State* L)
         fwrite(s.data(), s.size(), 1, f);
         fclose(f);
     }
+
     return 0;
 }
 
@@ -144,8 +153,7 @@ static int luaScriptDataStorageGet(lua_State* L)
 {
     string key = luaL_checkstring(L, 2);
     auto it = data.find(key);
-    if (it == data.end())
-        return 0;
+    if (it == data.end()) return 0;
 
     luaPushJson(L, *it);
     return 1;

@@ -86,7 +86,7 @@ GuiHotkeyHelpOverlay::GuiHotkeyHelpOverlay(GuiContainer* owner, std::vector<stri
 : GuiHelpOverlay(owner, tr("hotkey_F1", "Controls"), help_text, tr("hotkey_F1", "Configure controls in Options > Interface Options")), categories(categories)
 {
     if (categories.empty() && help_text.empty())
-        LOG(Warning, "GuiHotkeyHelpOverlay called without categories or explicit help text");
+        LOG(Warning, "[hho] GuiHotkeyHelpOverlay called without categories or explicit help text.");
     updateText();
 }
 
@@ -112,7 +112,7 @@ GuiHotkeyHelpOverlay* GuiHotkeyHelpOverlay::removeCategory(string category)
     auto new_end = std::remove(categories.begin(), categories.end(), category);
     if (new_end == categories.end())
     {
-        LOG(Warning, "Attempted to remove a hotkey category not tracked by GuiHotkeyHelpOverlay");
+        LOG(Warning, "[hho] Attempted to remove a hotkey category not tracked by GuiHotkeyHelpOverlay.");
         return this;
     }
 
@@ -133,8 +133,7 @@ void GuiHotkeyHelpOverlay::updateText()
             const std::string bind_label = binding->getLabel();
 
             bool include = false;
-            if (special_position == CrewPosition::MAX)
-                include = true;
+            if (special_position == CrewPosition::MAX) include = true;
             else if (special_position == CrewPosition::tacticalOfficer)
                 include = shield_labels.find(bind_label) == shield_labels.end();
             else if (special_position == CrewPosition::engineeringPlus)

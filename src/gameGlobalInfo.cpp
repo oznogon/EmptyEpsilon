@@ -1,6 +1,6 @@
+#include "gameGlobalInfo.h"
 #include <i18n.h>
 #include "menus/luaConsole.h"
-#include "gameGlobalInfo.h"
 #include "preferenceManager.h"
 #include "scenarioInfo.h"
 #include "multiplayer_client.h"
@@ -17,33 +17,13 @@
 P<GameGlobalInfo> gameGlobalInfo;
 
 REGISTER_MULTIPLAYER_CLASS(GameGlobalInfo, "GameGlobalInfo")
+
 GameGlobalInfo::GameGlobalInfo()
 : MultiplayerObject("GameGlobalInfo")
 {
     SDL_assert(!gameGlobalInfo);
 
-    callsign_counter = 0;
     gameGlobalInfo = this;
-
-    global_message_timeout = 0.0;
-    scanning_complexity = SC_Normal;
-    hacking_difficulty = 2;
-    hacking_games = HG_All;
-    use_beam_shield_frequencies = true;
-    use_system_damage = true;
-    enable_multiple_waypoint_sets = false;
-    enable_waypoint_routes = false;
-    use_drone_energy_drain = false;
-    missiles_on_long_range_radar = false;
-    collision_damage_factor = 0.0f;
-    allow_main_screen_tactical_radar = true;
-    allow_main_screen_long_range_radar = true;
-    allow_main_screen_strategic_map = true;
-    gm_control_code = "";
-    elapsed_time = 0.0f;
-    elapsed_delta = 0.0f;
-
-    intercept_all_comms_to_gm = false;
 
     registerMemberReplication(&scanning_complexity);
     registerMemberReplication(&hacking_difficulty);
@@ -67,7 +47,8 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&default_skybox);
 }
 
-//due to a suspected compiler bug this deconstructor needs to be explicitly defined
+// Due to a suspected compiler bug, this deconstructor needs to be explicitly
+// defined.
 GameGlobalInfo::~GameGlobalInfo()
 {
 }
@@ -78,19 +59,20 @@ void GameGlobalInfo::onReceiveServerCommand(sp::io::DataBuffer& packet)
     packet >> command;
     switch(command)
     {
-    case CMD_PLAY_CLIENT_SOUND:{
-        CrewPosition position;
-        string sound_name;
-        sp::ecs::Entity entity;
-        packet >> entity >> position >> sound_name;
-        if (my_spaceship == entity && my_player_info)
+    case CMD_PLAY_CLIENT_SOUND:
         {
-            if ((position == CrewPosition::MAX && my_player_info->main_screen) || my_player_info->hasPosition(position))
+            CrewPosition position;
+            string sound_name;
+            sp::ecs::Entity entity;
+            packet >> entity >> position >> sound_name;
+
+            if (my_spaceship == entity && my_player_info)
             {
-                soundManager->playSound(sound_name);
+                if ((position == CrewPosition::MAX && my_player_info->main_screen) || my_player_info->hasPosition(position))
+                    soundManager->playSound(sound_name);
             }
         }
-        }break;
+        break;
     }
 }
 

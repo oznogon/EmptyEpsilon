@@ -218,13 +218,15 @@ ServerSetupScreen::ServerSetupScreen()
         [this]()
         {
             int port = server_port->getText().toInt();
-            if (port < 80) port = DEFAULT_SERVER_PORT;
+            if (port < 1024 || port > 65535) port = DEFAULT_SERVER_PORT;
             new EpsilonServer(port);
+
             if (!game_server.isAlive())
             {
-                LOG(Error, "Failed to start server on port " + string(port) + " (port may be in use)");
+                LOG(Error, "[servercreation] Failed to start server on port " + string(port) + " (port may be in use).");
                 return;
             }
+
             game_server->setServerName(server_name->getText());
             game_server->setPassword(server_password->getText().upper());
             gameGlobalInfo->gm_control_code = gm_password->getText().upper();
@@ -269,6 +271,7 @@ ServerSetupMasterServerRegistrationScreen::ServerSetupMasterServerRegistrationSc
         }
     );
     close_registration->setSize(250.0f, GuiElement::GuiSizeMax);
+
     (new GuiTextTooltip(close_registration, "CLOSE_REGISTRATION_TIP", tr("tooltips", "Cancel master server registration and return to server setup."), 20.0f))->setWidth(280.0f);
 
     (new GuiElement(row, "SPACER"))

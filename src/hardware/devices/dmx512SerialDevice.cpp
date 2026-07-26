@@ -1,15 +1,10 @@
 #include "dmx512SerialDevice.h"
-#include "hardware/serialDriver.h"
 #include "logging.h"
+#include "hardware/serialDriver.h"
 
 DMX512SerialDevice::DMX512SerialDevice()
 {
-    port = nullptr;
-    for(int n=0; n<1+512; n++)
-        data_stream[n] = 0;
-    channel_count = 512;
-    resend_delay = 25;
-    run_thread = false;
+    for (int n = 0; n <= 512; n++) data_stream[n] = 0;
 }
 
 DMX512SerialDevice::~DMX512SerialDevice()
@@ -19,8 +14,8 @@ DMX512SerialDevice::~DMX512SerialDevice()
         run_thread = false;
         update_thread.join();
     }
-    if (port)
-        delete port;
+
+    if (port) delete port;
 }
 
 bool DMX512SerialDevice::configure(std::unordered_map<string, string> settings)
@@ -28,27 +23,28 @@ bool DMX512SerialDevice::configure(std::unordered_map<string, string> settings)
     if (settings.find("port") != settings.end())
     {
         port = new SerialPort(settings["port"]);
+
         if (!port->isOpen())
         {
-            LOG(ERROR) << "Failed to open port: " << settings["port"] << " for DMX512SerialDevice";
+            LOG(Error, "[dmx] Failed to open port ", settings["port"], " for DMX512SerialDevice.");
             port = nullptr;
             delete port;
         }
     }
+
     if (settings.find("channels") != settings.end())
-    {
         channel_count = std::max(1, std::min(512, settings["channels"].toInt()));
-    }
+
     if (settings.find("resend_delay") != settings.end())
-    {
         resend_delay = settings["resend_delay"].toInt();
-    }
+
     if (port)
     {
         run_thread = true;
         update_thread = std::thread(&DMX512SerialDevice::updateLoop, this);
         return true;
     }
+
     return false;
 }
 
@@ -56,7 +52,7 @@ bool DMX512SerialDevice::configure(std::unordered_map<string, string> settings)
 void DMX512SerialDevice::setChannelData(int channel, float value)
 {
     if (channel >= 0 && channel < channel_count)
-        data_stream[1+channel] = int((value * 255.0f) + 0.5f);
+        data_stream[1+channel] = static_cast<int>((value * 255.0f) + 0.5f);
 }
 
 //Return the number of output channels supported by this device.
@@ -67,21 +63,23 @@ int DMX512SerialDevice::getChannelCount()
 
 void DMX512SerialDevice::updateLoop()
 {
-    //On the Open DMX USB controller, the RTS line is used to enable the RS485 transmitter.
+    // On the Open DMX USB controller, the RTS line is used to enable the RS485
+    // transmitter.
     port->clearRTS();
 
-    //Configure the port for straight DMX-512 protocol.
+    // Configure the port for straight DMX-512 protocol.
     port->configure(250000, 8, SerialPort::NoParity, SerialPort::TwoStopbits);
 
-    while(run_thread)
+    while (run_thread)
     {
-        //Send a break to initiate transfer, break needs to be at least 88uSec (note, not all USB serial convertors implement BREAK sending)
+        // Send a BREAK to initiate transfer. BREAK must be at least 88uSec.
+        // (Not all USB serial convertors implement BREAK sending.)
         port->sendBreak();
 
-        //Send the channel data.
+        // Send the channel data.
         port->send(data_stream, 1 + channel_count);
 
-        //Delay a bit before sending again.
+        // Delay a bit before sending again.
         std::this_thread::sleep_for(std::chrono::milliseconds(resend_delay));
     }
 }

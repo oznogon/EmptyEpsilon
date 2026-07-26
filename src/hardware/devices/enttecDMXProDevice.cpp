@@ -4,11 +4,7 @@
 
 EnttecDMXProDevice::EnttecDMXProDevice()
 {
-    port = nullptr;
-    for(int n=0; n<512; n++)
-        channel_data[n] = 0;
-    channel_count = 512;
-    resend_delay = 25;
+    for (int n = 0; n < 512; n++) channel_data[n] = 0;
 }
 
 EnttecDMXProDevice::~EnttecDMXProDevice()
@@ -18,8 +14,8 @@ EnttecDMXProDevice::~EnttecDMXProDevice()
         run_thread = false;
         update_thread.join();
     }
-    if (port)
-        delete port;
+
+    if (port) delete port;
 }
 
 bool EnttecDMXProDevice::configure(std::unordered_map<string, string> settings)
@@ -27,38 +23,38 @@ bool EnttecDMXProDevice::configure(std::unordered_map<string, string> settings)
     if (settings.find("port") != settings.end())
     {
         port = new SerialPort(settings["port"]);
+
         if (!port->isOpen())
         {
-            LOG(ERROR) << "Failed to open port: " << settings["port"] << " for EnttecDMXProDevice";
+            LOG(Error, "[enttecdmx] Failed to open port ", settings["port"], " for EnttecDMXProDevice.");
             port = nullptr;
             delete port;
         }
     }
     if (settings.find("channels") != settings.end())
-    {
         channel_count = std::max(1, std::min(512, settings["channels"].toInt()));
-    }
+
     if (settings.find("resend_delay") != settings.end())
-    {
         resend_delay = settings["resend_delay"].toInt();
-    }
+
     if (port)
     {
         run_thread = true;
         update_thread = std::thread(&EnttecDMXProDevice::updateLoop, this);
         return true;
     }
+
     return false;
 }
 
-//Set a hardware channel output. Value is 0.0 to 1.0 for no to max output.
+// Set a hardware channel output. Value is 0.0 to 1.0 for no to max output.
 void EnttecDMXProDevice::setChannelData(int channel, float value)
 {
     if (channel >= 0 && channel < channel_count)
-        channel_data[channel] = int((value * 255.0f) + 0.5f);
+        channel_data[channel] = static_cast<int>((value * 255.0f) + 0.5f);
 }
 
-//Return the number of output channels supported by this device.
+// Return the number of output channels supported by this device.
 int EnttecDMXProDevice::getChannelCount()
 {
     return channel_count;
@@ -66,19 +62,20 @@ int EnttecDMXProDevice::getChannelCount()
 
 void EnttecDMXProDevice::updateLoop()
 {
-    //Configuration does not real matter as it's just a virtual device.
+    // Configuration doesn't really matter since it's a virtual device.
     port->configure(115200, 8, SerialPort::NoParity, SerialPort::OneStopBit);
 
     int size = channel_count + 1;
     uint8_t start_code[5] = {0x7E, 0x06, uint8_t(size & 0xFF), uint8_t(size >> 8), 0x00};
     uint8_t end_code[1] = {0xE7};
-    while(run_thread)
+
+    while (run_thread)
     {
         port->send(start_code, sizeof(start_code));
         port->send(channel_data, channel_count);
         port->send(end_code, sizeof(end_code));
 
-        //Delay a bit before sending again.
+        // Delay a bit before sending again.
         std::this_thread::sleep_for(std::chrono::milliseconds(resend_delay));
     }
 }

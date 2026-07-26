@@ -307,7 +307,7 @@ Mesh* Mesh::getMesh(const string& filename)
             mesh_vertices[idx].uv[1] = model_data_vertices[idx].uv[1];
         }
     }
-    else LOG(Error, "[mesh] Unknown mesh format: " << filename);
+    else LOG(Error, "[mesh] Unknown mesh format: ", filename);
 
     if (!mesh_vertices.empty())
     {

@@ -147,9 +147,9 @@ void GuiUtilityBeamControls::onUpdate()
             if (range_input != 0.0f) my_player_info->commandSetUtilityBeamRange(utility_beam->range + range_input);
 
             if (keys.utilitybeam_mode_next.getDown())
-                LOG(WARNING) << "You forgot to implement prev/next on custom_beam_mode";
+                LOG(Warning, "[ubc] You forgot to implement prev/next on custom_beam_mode");
             if (keys.utilitybeam_mode_prev.getDown())
-                LOG(WARNING) << "You forgot to implement prev/next on custom_beam_mode";
+                LOG(Warning, "[ubc] You forgot to implement prev/next on custom_beam_mode");
         }
     }
     else

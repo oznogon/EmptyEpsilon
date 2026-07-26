@@ -34,7 +34,7 @@ void exitOptionsMenu(OptionsMenu::ReturnTo return_to, RenderLayer* render_layer)
         returnToMainMenu(render_layer);
     else if (return_to == OptionsMenu::ReturnTo::ShipSelection)
         returnToShipSelection(render_layer);
-    else LOG(Error, "exitOptionsMenu called without a return_to target");
+    else LOG(Error, "[options] exitOptionsMenu called without a return_to target.");
 }
 
 OptionsMenu::OptionsMenu(OptionsMenu::ReturnTo return_to)
@@ -300,13 +300,13 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
             *iter = iter->substr(iter->find("/") + 1, iter->find("."));
             if (!GuiTheme::loadTheme(*iter, "gui/" + *iter + ".theme.txt"))
             {
-                LOG(Error, "Failed to load theme ", *iter);
+                LOG(Error, "[options] Failed to load theme ", *iter);
                 iter = themes.erase(iter);
             }
             else if (!GuiTheme::getTheme(*iter)->getStyle("base")->states[0].font
                      || !GuiTheme::getTheme(*iter)->getStyle("bold")->states[0].font)
             {
-                LOG(Error, "Missing base font or bold font for theme ", *iter);
+                LOG(Error, "[options] Missing base font or bold font for theme ", *iter);
                 iter = themes.erase(iter);
             }
             else ++iter;
@@ -315,7 +315,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
         std::sort(themes.begin(), themes.end());
         if (themes.size() == 0)
         {
-            LOG(Error, "Failed to load any theme, exiting");
+            LOG(Error, "[options] Failed to load any theme, exiting");
             SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load any theme. Are resources missing or invalid? Themes should be in gui/*.theme.txt and not contain errors.", nullptr);
             exit(1);
         }
@@ -522,7 +522,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
         auto initial_camera_sensitivity = PreferencesManager::get("camera_mouse_sensitivity", "0.15").toFloat();
         if (initial_camera_sensitivity <= 0.0f)
         {
-            LOG(Warning, "camera_mouse_sensitivity value invalid: ", PreferencesManager::get("camera_mouse_sensitivity", "0.15"));
+            LOG(Warning, "[options] camera_mouse_sensitivity value invalid: ", PreferencesManager::get("camera_mouse_sensitivity", "0.15"));
             initial_camera_sensitivity = 0.15f;
         }
 
@@ -746,7 +746,7 @@ void OptionsMenu::setupGraphicsOptions()
         auto initial_fov = PreferencesManager::get("main_screen_camera_fov", "60").toFloat();
         if (initial_fov <= 30.0f || initial_fov >= 140.0f)
         {
-            LOG(Warning, "main_screen_camera_fov value invalid: ", PreferencesManager::get("main_screen_camera_fov"));
+            LOG(Warning, "[options] main_screen_camera_fov value invalid: ", PreferencesManager::get("main_screen_camera_fov"));
             initial_fov = std::clamp(initial_fov, 30.0f, 140.0f);
         }
 
@@ -775,7 +775,7 @@ void OptionsMenu::setupGraphicsOptions()
         auto initial_draw_distance = PreferencesManager::get("default_draw_distance", "25000").toFloat();
         if (initial_draw_distance <= 1000.0f)
         {
-            LOG(Warning, "default_draw_distance value invalid: ", initial_draw_distance);
+            LOG(Warning, "[options] default_draw_distance value invalid: ", initial_draw_distance);
             initial_draw_distance = 25000.0f;
         }
         graphics_draw_distance_slider = new GuiBasicSlider(graphics_page, "GRAPHICS_DRAW_DISTANCE_SLIDER", 1000.0f, 100000.0f, initial_draw_distance,

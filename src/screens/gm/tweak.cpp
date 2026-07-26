@@ -3992,7 +3992,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     new_page->has_component = [](sp::ecs::Entity e) { return e.hasComponent<AIController>(); };
     new_page->add_component = [](sp::ecs::Entity e) { e.addComponent<AIController>(); };
     new_page->remove_component = [](sp::ecs::Entity e) {
-        LOG(Warning, "AIController component removal not supported via Tweaks dialog");
+        LOG(Warning, "[gmtweak] AIController component removal not supported via Tweaks dialog.");
     };
     pages.push_back(new_page);
     page_labels.push_back(tr("tweak-tab", "AI controller"));

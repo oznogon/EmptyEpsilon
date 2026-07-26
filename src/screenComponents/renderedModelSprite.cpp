@@ -58,7 +58,7 @@ bool GuiRenderedModelSprite::renderToTexture(glm::ivec2 size)
             glEnable(GL_SCISSOR_TEST);
             glScissor(scissor_box[0], scissor_box[1], scissor_box[2], scissor_box[3]);
         }
-        LOG(Error, "Failed to activate render texture");
+        LOG(Error, "[rms] Failed to activate render texture.");
         return false;
     }
 

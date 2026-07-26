@@ -60,7 +60,8 @@ static int luaRequire(lua_State* L)
     string filename = luaL_checkstring(L, 1);
 
     {
-        //Start a new scope to ensure things are properly destroyed before we call lua_error(), as lua_error does not properly call destructors.
+        // Start a new scope to ensure things are properly destroyed before we
+        // call lua_error(), as lua_error doesn't properly call destructors.
         P<ResourceStream> stream = getResourceStream(filename);
         if (!stream)
         {
@@ -68,7 +69,8 @@ static int luaRequire(lua_State* L)
             error = true;
         }
 
-        if (!error) {
+        if (!error)
+        {
             // Load the locale file for this script.
             i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en_US") + ".po"));
 
@@ -85,11 +87,12 @@ static int luaRequire(lua_State* L)
         }
     }
 
-    if (!error) {
+    if (!error)
+    {
         lua_pushvalue(L, lua_upvalueindex(1));
         lua_setupvalue(L, -2, 1);
 
-        //Call the actual code.
+        // Call the actual code.
         if (lua_pcall(L, 0, LUA_MULTRET, 0))
         {
             string error_string = luaL_checkstring(L, -1);
@@ -98,30 +101,36 @@ static int luaRequire(lua_State* L)
         }
     }
 
-    if (error)
-        return lua_error(L);
+    if (error) return lua_error(L);
+
     return lua_gettop(L) - old_top;
 }
 
 static int luaTranslate(lua_State* L)
 {
-    if (lua_type(L, 1) == LUA_TNUMBER) {
+    if (lua_type(L, 1) == LUA_TNUMBER)
+    {
         auto n = static_cast<int>(luaL_checkinteger(L, 1));
         auto str_1 = luaL_checkstring(L, 2);
         auto str_2 = luaL_checkstring(L, 3);
         auto str_3 = luaL_optstring(L, 4, nullptr);
+
         if (str_3)
             lua_pushstring(L, trn(n, str_1, str_2, str_3).c_str());
         else
             lua_pushstring(L, trn(n, str_1, str_2).c_str());
+
         return 1;
     }
+
     auto str_1 = luaL_checkstring(L, 1);
     auto str_2 = luaL_optstring(L, 2, nullptr);
+
     if (str_2)
         lua_pushstring(L, tr(str_1, str_2).c_str());
     else
         lua_pushstring(L, tr(str_1).c_str());
+
     return 1;
 }
 
@@ -142,8 +151,10 @@ static int luaQueryEntities(lua_State* L)
 {
     auto key = luaL_checkstring(L, 1);
     auto it = sp::script::ComponentRegistry::components.find(key);
+
     if (it == sp::script::ComponentRegistry::components.end())
         return luaL_error(L, "Tried to query non-existing component %s", key);
+
     return it->second.query(L);
 }
 
@@ -154,68 +165,85 @@ static int luaCreateObjectFunc(lua_State* L)
     lua_setmetatable(L, -2);
 
     lua_getfield(L, -1, "__init__");
-    if (lua_isfunction(L, -1)) {
+    if (lua_isfunction(L, -1))
+    {
         lua_pushvalue(L, -2);
         lua_call(L, 1, 0);
-    } else {
-        lua_pop(L, 1);
     }
+    else lua_pop(L, 1);
+
     return 1;
 }
 
 static int luaCreateClass(lua_State* L)
 {
-    // Create a class, returns 1 variable, which is a table containing the functions for this class.
+    // Create a class. Returns 1 variable, which is a table containing the
+    // functions for this class.
+
     lua_newtable(L); // Table to return
-    lua_newtable(L); // Table to use as metatable for the class table.
-    lua_newtable(L); // Table to use as metatable for the object table.
+    lua_newtable(L); // Table to use as class table's metatable.
+    lua_newtable(L); // Table to use as object table's metatable.
     lua_pushvalue(L, -3);
     lua_setfield(L, -2, "__index");
     lua_pushcclosure(L, luaCreateObjectFunc, 1);
     lua_setfield(L, -2, "__call");
     lua_setmetatable(L, -2);
+
     return 1;
 }
 
 static int luaPrintLog(lua_State* L, bool print)
 {
     string message;
-    int n = lua_gettop(L);  /* number of arguments */
-    for (int i=1; i<=n; i++) {
-        if (lua_istable(L, i)) {
-            if (i > 1)
-                message += " ";
+    // Number of arguments.
+    int n = lua_gettop(L);
+
+    for (int i = 1; i <= n; i++)
+    {
+        if (lua_istable(L, i))
+        {
+            if (i > 1) message += " ";
+
             message += "{";
             lua_pushnil(L);
             bool first = true;
-            while(lua_next(L, i)) {
-                if (first) first = false; else message += ",";
+
+            while (lua_next(L, i))
+            {
+                if (first) first = false;
+                else message += ",";
+
                 auto s = luaL_tolstring(L, -2, nullptr);
-                if (s != nullptr) {
-                    message += s;
-                    message += "=";
-                }
+                if (s != nullptr) message += string(s) + "=";
+
                 lua_pop(L, 1);
                 s = luaL_tolstring(L, -1, nullptr);
-                if (s != nullptr) {
-                    message += s;
-                }
+
+                if (s != nullptr) message += s;
+
                 lua_pop(L, 2);
             }
+
             message += "}";
-        } else {
+        }
+        else
+        {
             auto s = luaL_tolstring(L, i, nullptr);
-            if (s != nullptr) {
-                if (i > 1)
-                    message += " ";
+
+            if (s != nullptr)
+            {
+                if (i > 1) message += " ";
                 message += s;
             }
+
             lua_pop(L, 1);
         }
     }
-    LOG(Info, "LUA:", message);
-    if (print)
-        LuaConsole::addLog(message);
+
+    LOG(Info, "[lua] ", message);
+
+    if (print) LuaConsole::addLog(message);
+
     return 0;
 }
 
@@ -238,9 +266,12 @@ static int luaGetEntityFunctionTable(lua_State* L)
 static void luaVictory(string faction)
 {
     gameGlobalInfo->setVictory(faction);
+
     if (engine->getObject("scenario"))
         engine->getObject("scenario")->destroy();
-    engine->setGameSpeed(0.0);
+
+    // Pause game on victory.
+    engine->setGameSpeed(0.0f);
 }
 
 static string luaGetSectorName(float x, float y)
@@ -252,6 +283,7 @@ static string luaGetScenarioSetting(string key)
 {
     if (gameGlobalInfo->scenario_settings.find(key) != gameGlobalInfo->scenario_settings.end())
         return gameGlobalInfo->scenario_settings[key];
+
     return "";
 }
 
@@ -259,13 +291,16 @@ static string luaGetScenarioVariation()
 {
     if (gameGlobalInfo->scenario_settings.find("variation") != gameGlobalInfo->scenario_settings.end())
         return gameGlobalInfo->scenario_settings["variation"];
+
     return "None";
 }
 
 static void luaGlobalMessage(string message, std::optional<float> timeout)
 {
     gameGlobalInfo->global_message = message;
-    gameGlobalInfo->global_message_timeout = timeout.has_value() ? timeout.value() : 5.0f;
+    gameGlobalInfo->global_message_timeout = timeout.has_value()
+        ? timeout.value()
+        : 5.0f;
 }
 
 static void luaAddGMFunction(string label, sp::script::Callback callback)
@@ -285,73 +320,97 @@ static int luaCreateAdditionalScript(lua_State* L)
     setupSubEnvironment(*env.get());
     auto ptr = reinterpret_cast<sp::script::Environment**>(lua_newuserdata(L, sizeof(sp::script::Environment*)));
     *ptr = env.get();
+
     luaL_getmetatable(L, "ScriptObject");
-    if (lua_isnil(L, -1)) {
+
+    if (lua_isnil(L, -1))
+    {
         lua_pop(L, 1);
         luaL_newmetatable(L, "ScriptObject");
         lua_newtable(L);
-        lua_pushcfunction(L, [](lua_State* LL) {
-            auto ptr = reinterpret_cast<sp::script::Environment**>(luaL_checkudata(LL, 1, "ScriptObject"));
-            if (!ptr) return 0;
-            string filename = luaL_checkstring(LL, 2);
-            i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en_US") + ".po"));
-            auto res = (*ptr)->runFile<void>(filename);
-            LuaConsole::checkResult(res);
-            if (res.isOk()) {
-                res = (*ptr)->call<void>("init");
-                LuaConsole::checkResult(res);
-            }
-            return 0;
-        });
-        lua_setfield(L, -2, "run");
-        lua_pushcfunction(L, [](lua_State* LL)
-        {
-            auto ptr = reinterpret_cast<sp::script::Environment**>(luaL_checkudata(LL, 1, "ScriptObject"));
-            if (!ptr) return 0;
-            string name = luaL_checkstring(LL, 2);
-            auto ltype = lua_type(LL, 3);
-            // Strings
-            if (ltype == LUA_TSTRING)
-            {
-                string value = lua_tostring(LL, 3);
-                (*ptr)->setGlobal(name, value);
-            }
-            // Entities, as light userdata
-            else if (ltype == LUA_TLIGHTUSERDATA)
-            {
-                sp::ecs::Entity entity = sp::script::Convert<sp::ecs::Entity>::fromLua(LL, 3);
-                if (entity) (*ptr)->setGlobal(name, entity);
-                else return luaL_error(LL, "Userdata was passed to setVariable, but it wasn't an entity");
-            }
-            // Numbers
-            else if (ltype == LUA_TNUMBER)
-            {
-                float value = static_cast<float>(lua_tonumber(LL, 3));
-                (*ptr)->setGlobal(name, value);
-            }
-            else
-                return luaL_error(LL, "setVariable expects a string, float, or entity as the second argument");
 
-            lua_settop(LL, 1);
-            return 1;
-        });
+        lua_pushcfunction(L,
+            [](lua_State* LL)
+            {
+                auto ptr = reinterpret_cast<sp::script::Environment**>(luaL_checkudata(LL, 1, "ScriptObject"));
+                if (!ptr) return 0;
+
+                // Load script file.
+                string filename = luaL_checkstring(LL, 2);
+                // Load script's translation, if any.
+                i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en_US") + ".po"));
+
+                auto res = (*ptr)->runFile<void>(filename);
+                LuaConsole::checkResult(res);
+                if (res.isOk())
+                {
+                    res = (*ptr)->call<void>("init");
+                    LuaConsole::checkResult(res);
+                }
+
+                return 0;
+            }
+        );
+
+        lua_setfield(L, -2, "run");
+        lua_pushcfunction(L,
+            [](lua_State* LL)
+            {
+                auto ptr = reinterpret_cast<sp::script::Environment**>(luaL_checkudata(LL, 1, "ScriptObject"));
+                if (!ptr) return 0;
+
+                string name = luaL_checkstring(LL, 2);
+                auto ltype = lua_type(LL, 3);
+
+                // Strings
+                if (ltype == LUA_TSTRING)
+                {
+                    string value = lua_tostring(LL, 3);
+                    (*ptr)->setGlobal(name, value);
+                }
+
+                // Entities, as light userdata
+                else if (ltype == LUA_TLIGHTUSERDATA)
+                {
+                    sp::ecs::Entity entity = sp::script::Convert<sp::ecs::Entity>::fromLua(LL, 3);
+                    if (entity) (*ptr)->setGlobal(name, entity);
+                    else return luaL_error(LL, "Userdata was passed to setVariable, but it wasn't an entity");
+                }
+
+                // Numbers
+                else if (ltype == LUA_TNUMBER)
+                {
+                    float value = static_cast<float>(lua_tonumber(LL, 3));
+                    (*ptr)->setGlobal(name, value);
+                }
+                else
+                    return luaL_error(LL, "setVariable expects a string, float, or entity as the second argument");
+
+                lua_settop(LL, 1);
+                return 1;
+            }
+        );
+
         lua_setfield(L, -2, "setVariable");
         lua_setfield(L, -2, "__index");
         lua_pushstring(L, "sandboxed");
         lua_setfield(L, -2, "__metatable");
     }
+
     lua_setmetatable(L, -2);
 
     gameGlobalInfo->additional_scripts.push_back(std::move(env));
+
     return 1;
 }
 
 static int luaSectorToXY(lua_State* L)
 {
     string sector = luaL_checkstring(L, 1);
-    constexpr float sector_size = 20000;
+    constexpr float sector_size = 20000.0f;
 
-    if (sector.length() < 5) {
+    if (sector.length() < 5)
+    {
         lua_pushnumber(L, 0);
         lua_pushnumber(L, 0);
         lua_pushboolean(L, false);
@@ -360,30 +419,40 @@ static int luaSectorToXY(lua_State* L)
 
     int pos = 0;
     int block_y = 0;
-    if (pos < (int)sector.length() && sector[pos] >= 'A' && sector[pos] <= 'M') {
-        while (pos < (int)sector.length() && sector[pos] >= 'A' && sector[pos] <= 'M') {
+
+    if (pos < static_cast<int>(sector.length()) && sector[pos] >= 'A' && sector[pos] <= 'M')
+    {
+        while (pos < static_cast<int>(sector.length()) && sector[pos] >= 'A' && sector[pos] <= 'M')
+        {
             block_y = block_y * 13 + (sector[pos] - 'A' + 1);
             pos++;
         }
+
         block_y = -block_y;
-    } else if (pos < (int)sector.length() && sector[pos] >= 'N' && sector[pos] <= 'Z') {
-        while (pos < (int)sector.length() && sector[pos] >= 'N' && sector[pos] <= 'Z') {
+    }
+    else if (pos < static_cast<int>(sector.length()) && sector[pos] >= 'N' && sector[pos] <= 'Z')
+    {
+        while (pos < static_cast<int>(sector.length()) && sector[pos] >= 'N' && sector[pos] <= 'Z')
+        {
             block_y = block_y * 13 + (sector[pos] - 'N' + 1);
             pos++;
         }
     }
 
-    if (pos + 2 > (int)sector.length()) {
+    if (pos + 2 > static_cast<int>(sector.length()))
+    {
         lua_pushnumber(L, 0);
         lua_pushnumber(L, 0);
         lua_pushboolean(L, false);
         return 3;
     }
+
     string row_str = sector.substr(pos, pos + 2);
     int local_row = row_str.toInt();
     pos += 2;
 
-    if (pos >= (int)sector.length()) {
+    if (pos >= static_cast<int>(sector.length()))
+    {
         lua_pushnumber(L, 0);
         lua_pushnumber(L, 0);
         lua_pushboolean(L, false);
@@ -391,44 +460,55 @@ static int luaSectorToXY(lua_State* L)
     }
 
     int block_x = 0;
-    if (sector[pos] == '-') {
+
+    if (sector[pos] == '-')
         pos++;
-    } else if (sector[pos] >= 'A' && sector[pos] <= 'M') {
-        while (pos < (int)sector.length() && sector[pos] >= 'A' && sector[pos] <= 'M') {
+    else if (sector[pos] >= 'A' && sector[pos] <= 'M')
+    {
+        while (pos < static_cast<int>(sector.length()) && sector[pos] >= 'A' && sector[pos] <= 'M')
+        {
             block_x = block_x * 13 + (sector[pos] - 'A' + 1);
             pos++;
         }
+
         block_x = -block_x;
-    } else if (sector[pos] >= 'N' && sector[pos] <= 'Z') {
-        while (pos < (int)sector.length() && sector[pos] >= 'N' && sector[pos] <= 'Z') {
+    }
+    else if (sector[pos] >= 'N' && sector[pos] <= 'Z')
+    {
+        while (pos < static_cast<int>(sector.length()) && sector[pos] >= 'N' && sector[pos] <= 'Z')
+        {
             block_x = block_x * 13 + (sector[pos] - 'N' + 1);
             pos++;
         }
-    } else {
+    }
+    else
+    {
         lua_pushnumber(L, 0);
         lua_pushnumber(L, 0);
         lua_pushboolean(L, false);
         return 3;
     }
 
-    if (pos + 2 > (int)sector.length()) {
+    if (pos + 2 > static_cast<int>(sector.length())) {
         lua_pushnumber(L, 0);
         lua_pushnumber(L, 0);
         lua_pushboolean(L, false);
         return 3;
     }
+
     string col_str = sector.substr(pos, pos + 2);
     int local_col = col_str.toInt();
 
     int sector_x = block_x * 100 + local_col;
     int sector_y = block_y * 100 + local_row;
 
-    float x = (sector_x - 50) * sector_size;
-    float y = (sector_y - 50) * sector_size;
+    float x = (sector_x - 50.0f) * sector_size;
+    float y = (sector_y - 50.0f) * sector_size;
 
     lua_pushnumber(L, static_cast<lua_Number>(x));
     lua_pushnumber(L, static_cast<lua_Number>(y));
     lua_pushboolean(L, true);
+
     return 3;
 }
 
@@ -436,8 +516,10 @@ static bool luaIsInsideZone(float x, float y, sp::ecs::Entity e)
 {
     auto zone = e.getComponent<Zone>();
     if (!zone) return false;
+
     auto t = e.getComponent<sp::Transform>();
     if (!t) return false;
+
     return insidePolygon(zone->outline, glm::vec2(x, y) - t->getPosition());
 }
 
@@ -454,8 +536,10 @@ static void luaSetDefaultSkybox(string skybox)
 static float getAudioDuration(const string& filename)
 {
     int n = filename.rfind(".");
+
     if (n > -1)
     {
+        // Get localized audio, if any.
         string filename_with_locale = filename.substr(0, n) + "." + PreferencesManager::get("language", "en_US") + filename.substr(n);
         if (getResourceStream(filename_with_locale))
         {
@@ -463,11 +547,13 @@ static float getAudioDuration(const string& filename)
             return sound.getDuration();
         }
     }
+
     if (getResourceStream(filename))
     {
         sp::audio::Sound sound(filename);
         return sound.getDuration();
     }
+
     return 0.0f;
 }
 
@@ -511,10 +597,11 @@ static int luaSetBriefingPage(lua_State* L)
     if (audio_set && !duration_set)
     {
         float duration = getAudioDuration(briefing->pages[zero_index].audio);
+
         if (duration > 0.0f)
             briefing->pages[zero_index].duration = duration;
         else
-            LOG(Warning, "Invalid briefing audio file: ", briefing->pages[zero_index].audio);
+            LOG(Warning, "[lua] Invalid briefing audio file: ", briefing->pages[zero_index].audio);
     }
 
     return 0;
@@ -522,20 +609,21 @@ static int luaSetBriefingPage(lua_State* L)
 
 static void luaClearBriefing(sp::ecs::Entity entity)
 {
-    if (!entity)
-        return;
+    if (!entity) return;
+
     auto* briefing = entity.getComponent<Briefing>();
-    if (briefing)
-        briefing->pages.clear();
+
+    if (briefing) briefing->pages.clear();
 }
 
 static void luaRemoveBriefingPage(sp::ecs::Entity entity, int index)
 {
-    if (!entity || index < 1)
-        return;
+    if (!entity || index < 1) return;
+
     auto* briefing = entity.getComponent<Briefing>();
-    if (!briefing)
-        return;
+
+    if (!briefing) return;
+
     int zero_index = index - 1;
     if (zero_index < static_cast<int>(briefing->pages.size()))
         briefing->pages.erase(briefing->pages.begin() + zero_index);
@@ -830,10 +918,13 @@ static int luaGetAllObjects(lua_State* L)
 {
     lua_newtable(L);
     int idx = 1;
-    for(auto [e, t] : sp::ecs::Query<sp::Transform>()) {
+
+    for (auto [e, t] : sp::ecs::Query<sp::Transform>())
+    {
         sp::script::Convert<sp::ecs::Entity>::toLua(L, e);
         lua_rawseti(L, -2, idx++);
     }
+
     return 1;
 }
 
@@ -858,6 +949,7 @@ static int luaGetObjectsInRadius(lua_State* L)
             }
         }
     }
+
     return 1;
 }
 
@@ -899,13 +991,13 @@ static void luaTransferPlayers(sp::ecs::Entity source, sp::ecs::Entity target, s
 
     if (!target_pc)
     {
-        LOG(Error, "transferPlayersToShip: destination ship has no PlayerControl component.");
+        LOG(Error, "[lua] transferPlayersToShip: Destination ship has no PlayerControl component.");
         return;
     }
 
     if (!target_pc->allowed_positions.mask)
     {
-        LOG(Error, "transferPlayersToShip: destination ship has no allowed crew positions.");
+        LOG(Error, "[lua] transferPlayersToShip: Destination ship has no allowed crew positions.");
         return;
     }
 
@@ -931,12 +1023,14 @@ static void luaTransferPlayers(sp::ecs::Entity source, sp::ecs::Entity target, s
                 // This is probably not what the script user intended, so log
                 // it.
                 for (auto cp : lost)
-                    LOG(Warning, "transferPlayersToShip: player ", i->name, " held the ", crewPositionToString(cp), " crew position, which is prohibited on the destination ship. Reassigning to next allowed position.");
+                    LOG(Warning, "[lua] transferPlayersToShip: Player ", i->name, " held the ", crewPositionToString(cp), " crew position, which is prohibited on the destination ship. Reassigning to next allowed position.");
+
                 // Assign the first allowed position not already held on this
                 // monitor.
                 for (int n = 0; n < static_cast<int>(CrewPosition::MAX); n++)
                 {
                     auto cp = static_cast<CrewPosition>(n);
+
                     if (target_pc->allowed_positions.has(cp) && !cps.has(cp))
                     {
                         cps.add(cp);
@@ -944,6 +1038,7 @@ static void luaTransferPlayers(sp::ecs::Entity source, sp::ecs::Entity target, s
                     }
                 }
             }
+
             cps.mask &= target_pc->allowed_positions.mask;
         }
 
@@ -956,6 +1051,7 @@ static bool luaHasPlayerAtPosition(sp::ecs::Entity source, CrewPosition station)
 {
     for (auto i : player_info_list)
         if (i->ship == source && i->hasPosition(station)) return true;
+
     return false;
 }
 
@@ -963,20 +1059,27 @@ static int luaGetPlayersInfo(lua_State* L)
 {
     auto source = sp::script::Convert<sp::ecs::Entity>::fromLua(L, 1);
     lua_newtable(L);
+
     int index = 1;
     for (auto i : player_info_list)
     {
         if (i->ship != source) continue;
+
         lua_newtable(L);
         lua_pushstring(L, i->name.c_str());
         lua_setfield(L, -2, "name");
+
         CrewPositions positions;
+
         for (auto cp : i->crew_positions) positions.mask |= cp.mask;
+
         sp::script::Convert<CrewPositions>::toLua(L, positions);
         lua_setfield(L, -2, "positions");
         lua_seti(L, -2, index);
+
         index++;
     }
+
     return 1;
 }
 
@@ -984,16 +1087,17 @@ void luaSetPlayerShipCustomFunction(sp::ecs::Entity entity, CustomShipFunctions:
 {
     auto csf = entity.getComponent<CustomShipFunctions>();
     if (!csf) return;
+
     int idx = -1;
-    for(int n=0; n<int(csf->functions.size()); n++) {
-        if (csf->functions[n].name == name) {
-            idx = n;
-        }
-    }
-    if (idx == -1) {
-        idx = int(csf->functions.size());
+    for (int n = 0; n < static_cast<int>(csf->functions.size()); n++)
+        if (csf->functions[n].name == name) idx = n;
+
+    if (idx == -1)
+    {
+        idx = static_cast<int>(csf->functions.size());
         csf->functions.emplace_back();
     }
+
     auto& f = csf->functions[idx];
     f.type = type;
     f.name = name;
@@ -1001,6 +1105,7 @@ void luaSetPlayerShipCustomFunction(sp::ecs::Entity entity, CustomShipFunctions:
     f.crew_positions = positions;
     f.callback = callback;
     f.order = order;
+
     std::stable_sort(csf->functions.begin(), csf->functions.end());
     csf->functions_dirty = true;
 }
@@ -1009,10 +1114,15 @@ void luaRemovePlayerShipCustomFunction(sp::ecs::Entity entity, string name)
 {
     auto csf = entity.getComponent<CustomShipFunctions>();
     if (!csf) return;
-    auto it = std::remove_if(csf->functions.begin(), csf->functions.end(), [name](const CustomShipFunctions::Function& f) {
-        return f.name == name;
-    });
-    if (it != csf->functions.end()) {
+
+    auto it = std::remove_if(csf->functions.begin(), csf->functions.end(),
+        [name](const CustomShipFunctions::Function& f) {
+            return f.name == name;
+        }
+    );
+
+    if (it != csf->functions.end())
+    {
         csf->functions.erase(it, csf->functions.end());
         csf->functions_dirty = true;
     }
@@ -1025,19 +1135,19 @@ void luaAddEntryToShipsLog(sp::ecs::Entity entity, string entry, glm::u8vec4 col
     sl->add(entry, color);
 }
 
-
 static sp::ecs::Entity luaGetPlayerShip(int index)
 {
-    if (index == -1) {
-        for(auto [entity, pc] : sp::ecs::Query<PlayerControl>())
-            return entity;
+    if (index == -1)
+    {
+        for (auto [entity, pc] : sp::ecs::Query<PlayerControl>()) return entity;
         return {};
     }
-    if (index == -2)
-        return my_spaceship;
-    for(auto [entity, pc] : sp::ecs::Query<PlayerControl>())
-        if (--index == 0)
-            return entity;
+
+    if (index == -2) return my_spaceship;
+
+    for (auto [entity, pc] : sp::ecs::Query<PlayerControl>())
+        if (--index == 0) return entity;
+
     return {};
 }
 
@@ -1045,10 +1155,13 @@ static int luaGetActivePlayerShips(lua_State* L)
 {
     lua_newtable(L);
     int index = 1;
-    for(auto [entity, pc] : sp::ecs::Query<PlayerControl>()) {
+
+    for (auto [entity, pc] : sp::ecs::Query<PlayerControl>())
+    {
         sp::script::Convert<sp::ecs::Entity>::toLua(L, entity);
         lua_rawseti(L, -2, index++);
     }
+
     return 1;
 }
 
@@ -1057,7 +1170,8 @@ static string luaGetGameLanguage()
     return PreferencesManager::get("language", "en_US").c_str();
 }
 
-/** Short lived object to do a scenario change on the update loop. See "setScenario" for details */
+// Short lived object to do a scenario change on the update loop. See
+// "setScenario" for details.
 class ScenarioChanger : public Updatable
 {
 public:
@@ -1084,28 +1198,34 @@ static int luaSetScenario(lua_State* L)
     // Script filename must not be an empty string.
     if (script_name == "")
     {
-        LOG(ERROR) << "setScenario() requires a non-empty value.";
+        LOG(Error, "[lua] setScenario() requires a non-empty value.");
         return 1;
     }
 
-    if (lua_type(L, 2) == LUA_TSTRING) {
-        LOG(WARNING) << "LUA: DEPRECATED setScenario() called with scenario variation. Passing the value as the \"variation\" scenario setting instead.";
+    if (lua_type(L, 2) == LUA_TSTRING)
+    {
+        LOG(Warning, "[lua] Deprecated setScenario() called with scenario variation. Passing the value as the \"variation\" scenario setting instead.");
         string variation = lua_tostring(L, 2);
         settings["variation"] = variation;
     }
-    if (lua_istable(L, 2)) {
+
+    if (lua_istable(L, 2))
+    {
         lua_pushnil(L);
-        while(lua_next(L, 2)) {
+        while (lua_next(L, 2))
+        {
             settings[lua_tostring(L, -2)] = lua_tostring(L, -1);
             lua_pop(L, 1);
         }
     }
+
     new ScenarioChanger(script_name, std::move(settings));
 
     // This could be called from a currently active scenario script.
     // Calling GameGlobalInfo::startScenario is unsafe at this point,
     // as this will destroy the lua state that this function is running in.
-    // So use the ScenarioChanger object which will do the change in the update loop. Which is safe.
+    // So use the ScenarioChanger object which will do the change in the update
+    // loop. Which is safe.
     return 0;
 }
 
@@ -1131,7 +1251,7 @@ static void luaSetGameSpeed(float game_speed)
     bool valid = game_speed == 0.0f;
     if (!valid)
     {
-        for(float v : valid_speeds)
+        for (float v : valid_speeds)
         {
             if (fabsf(game_speed - v) < 0.001f)
             {
@@ -1140,10 +1260,10 @@ static void luaSetGameSpeed(float game_speed)
             }
         }
     }
-    if (valid)
-        engine->setGameSpeed(game_speed);
+
+    if (valid) engine->setGameSpeed(game_speed);
     else
-        LOG(Warning, "Lua setGameSpeed: Invalid value ", game_speed, "; must be 0, 0.1, 0.25, 0.5, 1, 2, 4, or 8");
+        LOG(Warning, "[lua] setGameSpeed: Invalid value ", game_speed, "; must be 0, 0.1, 0.25, 0.5, 1, 2, 4, or 8");
 }
 
 static float luaGetGameSpeed()
@@ -1162,12 +1282,15 @@ static void luaPlaySoundFile(string filename)
     if (n > -1)
     {
         string filename_with_locale = filename.substr(0, n) + "." + PreferencesManager::get("language", "en_US") + filename.substr(n);
-        if (getResourceStream(filename_with_locale)) {
+        if (getResourceStream(filename_with_locale))
+        {
             soundManager->playSound(filename_with_locale);
             return;
         }
     }
+
     soundManager->playSound(filename);
+
     return;
 }
 
@@ -1181,139 +1304,180 @@ static int luaGetEEVersion()
     return VERSION_NUMBER;
 }
 
-static nlohmann::json luaToJSONImpl(lua_State* L, int lua_index) {
-    LOG(DEBUG, lua_index);
+static nlohmann::json luaToJSONImpl(lua_State* L, int lua_index)
+{
+    LOG(Debug, "[lua] Lua to JSON index: ", lua_index);
+
     auto ltype = lua_type(L, lua_index);
-    if (ltype == LUA_TBOOLEAN) {
+    if (ltype == LUA_TBOOLEAN)
         return bool(lua_toboolean(L, lua_index));
-    } else if (ltype == LUA_TNUMBER) {
+    else if (ltype == LUA_TNUMBER)
+    {
         if (lua_isinteger(L, lua_index))
             return lua_tointeger(L, lua_index);
+
         return lua_tonumber(L, lua_index);
-    } else if (ltype == LUA_TSTRING) {
+    }
+    else if (ltype == LUA_TSTRING)
         return lua_tostring(L, lua_index);
-    } else if (lua_istable(L, lua_index)) {
-        // Figure out of the table is a list or not.
+    else if (lua_istable(L, lua_index))
+    {
+        // Determine whether the table is a list.
         bool is_array = true;
         int index_max = std::numeric_limits<int>::min();
         int index_min = std::numeric_limits<int>::max();
         lua_pushnil(L);
-        while(is_array && lua_next(L, lua_index)) {
-            if (!lua_isinteger(L, -2)) {
+
+        while (is_array && lua_next(L, lua_index))
+        {
+            if (!lua_isinteger(L, -2))
+            {
                 is_array = false;
                 lua_pop(L, 1);
-            } else {
+            }
+            else
+            {
                 int idx = static_cast<int>(lua_tointeger(L, -2));
                 index_max = std::max(idx, index_max);
                 index_min = std::min(idx, index_min);
             }
+
             lua_pop(L, 1);
         }
-        if (is_array && index_min == 1 && index_max < 0x10000) {
+
+        if (is_array && index_min == 1 && index_max < 0x10000)
+        {
             auto json = nlohmann::json::array();
-            for(int idx=1; idx<=index_max; idx++) {
+            for (int idx = 1; idx <= index_max; idx++)
+            {
                 lua_rawgeti(L, lua_index, idx);
                 json.push_back(luaToJSONImpl(L, lua_gettop(L)));
                 lua_pop(L, 1);
             }
+
             return json;
-        } else {
+        }
+        else
+        {
             auto json = nlohmann::json::object();
             lua_pushnil(L);
-            while(lua_next(L, lua_index)) {
+            while (lua_next(L, lua_index))
+            {
                 std::string key = "?";
                 ltype = lua_type(L, -2);
-                if (ltype == LUA_TBOOLEAN) {
+
+                if (ltype == LUA_TBOOLEAN)
                     key = lua_toboolean(L, -2) ? "true" : "false";
-                } else if (ltype == LUA_TNUMBER) {
+                else if (ltype == LUA_TNUMBER)
+                {
                     if (lua_isinteger(L, -2))
                         key = std::to_string(lua_tointeger(L, -2));
                     else
                         key = std::to_string(lua_tonumber(L, -2));
-                } else if (ltype == LUA_TSTRING) {
-                    key = lua_tostring(L, -2);
                 }
+                else if (ltype == LUA_TSTRING) key = lua_tostring(L, -2);
+
                 json[key] = luaToJSONImpl(L, lua_gettop(L));
+
                 lua_pop(L, 1);
             }
+
             return json;
         }
     }
+
     return {};
 }
 
 static int luaToJSON(lua_State* L)
 {
     auto argc = lua_gettop(L);
-    for(int n=1; n<=argc; n++) {
+    for (int n = 1; n <= argc; n++)
+    {
         auto json = luaToJSONImpl(L, n);
         auto res = json.dump(-1, ' ', false, nlohmann::json::error_handler_t::replace);
         lua_pushstring(L, res.c_str());
     }
+
     return argc;
 }
 
 static void luaFromJSONImpl(lua_State* L, const nlohmann::json& json)
 {
-    if (json.is_boolean()) {
-        lua_pushboolean(L, bool(json));
-    } else if (json.is_string()) {
+    if (json.is_boolean())
+        lua_pushboolean(L, static_cast<bool>(json));
+    else if (json.is_string())
+    {
         auto s = static_cast<std::string>(json);
         lua_pushlstring(L, s.c_str(), s.size());
-    } else if (json.is_number_integer()) {
-        lua_pushinteger(L, int(json));
-    } else if (json.is_number()) {
+    }
+    else if (json.is_number_integer())
+        lua_pushinteger(L, static_cast<int>(json));
+    else if (json.is_number())
         lua_pushnumber(L, json);
-    } else if (json.is_array()) {
+    else if (json.is_array())
+    {
         lua_newtable(L);
         int idx = 1;
-        for(const auto& v : json) {
+        for (const auto& v : json)
+        {
             luaFromJSONImpl(L, v);
             lua_rawseti(L, -2, idx++);
         }
-    } else if (json.is_object()) {
+    }
+    else if (json.is_object())
+    {
         lua_newtable(L);
-        for(const auto& v : json.items()) {
+        for (const auto& v : json.items())
+        {
             lua_pushstring(L, v.key().c_str());
             luaFromJSONImpl(L, v.value());
             lua_rawset(L, -3);
         }
-    } else {
-        lua_pushnil(L);
-    }
+    } else lua_pushnil(L);
 }
 
 static int luaFromJSON(lua_State* L)
 {
     bool error = false;
     auto argc = lua_gettop(L);
-    for(int n=1; n<=argc; n++) {
+
+    for (int n = 1; n <= argc; n++)
+    {
         auto str = lua_tostring(L, n);
         std::string err;
         auto res = sp::json::parse(str, err);
-        if (res.has_value()) {
+
+        if (res.has_value())
             luaFromJSONImpl(L, res.value());
-        } else {
+        else
+        {
             lua_pushstring(L, err.c_str());
             error = true;
             break;
         }
     }
-    if (error)
-        return lua_error(L);
+
+    if (error) return lua_error(L);
+
     return argc;
 }
 
-namespace sp::script {
-template<> struct Convert<EScanningComplexity> {
-    static int toLua(lua_State* L, EScanningComplexity value) {
-        switch(value) {
+namespace sp::script
+{
+template<> struct Convert<EScanningComplexity>
+{
+    static int toLua(lua_State* L, EScanningComplexity value)
+    {
+        switch(value)
+        {
         default:
         case SC_None: lua_pushstring(L, "none"); break;
         case SC_Simple: lua_pushstring(L, "simple"); break;
         case SC_Normal: lua_pushstring(L, "normal"); break;
         case SC_Advanced: lua_pushstring(L, "advanced"); break;
         }
+
         return 1;
     }
 };
@@ -1329,15 +1493,20 @@ static int luaGetHackingDifficulty()
     return gameGlobalInfo->hacking_difficulty;
 }
 
-namespace sp::script {
-template<> struct Convert<EHackingGames> {
-    static int toLua(lua_State* L, EHackingGames value) {
-        switch(value) {
+namespace sp::script
+{
+template<> struct Convert<EHackingGames>
+{
+    static int toLua(lua_State* L, EHackingGames value)
+    {
+        switch(value)
+        {
         case HG_Mine: lua_pushstring(L, "mines"); break;
         case HG_Lights: lua_pushstring(L, "lights"); break;
         default:
         case HG_All: lua_pushstring(L, "all"); break;
         }
+
         return 1;
     }
 };
@@ -1378,79 +1547,138 @@ static bool luaAreMissilesOnLongRangeRadar()
     return gameGlobalInfo->missiles_on_long_range_radar;
 }
 
-void luaCommandTargetRotation(sp::ecs::Entity ship, float rotation) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandTargetRotation(rotation); return; }
-    auto thrusters = ship.getComponent<ManeuveringThrusters>();
-    if (thrusters) { thrusters->stop(); thrusters->target = rotation; }
+void luaCommandTargetRotation(sp::ecs::Entity ship, float rotation)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandTargetRotation(rotation);
+        return;
+    }
+
+    if (auto thrusters = ship.getComponent<ManeuveringThrusters>())
+    {
+        thrusters->stop();
+        thrusters->target = rotation;
+    }
 }
 
-void luaCommandImpulse(sp::ecs::Entity ship, float target) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandImpulse(target); return; }
-    auto engine = ship.getComponent<ImpulseEngine>();
-    if (engine) engine->request = target;
+void luaCommandImpulse(sp::ecs::Entity ship, float target)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandImpulse(target);
+        return;
+    }
+
+    if (auto engine = ship.getComponent<ImpulseEngine>())
+        engine->request = target;
 }
 
-void luaCommandWarp(sp::ecs::Entity ship, int target) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandWarp(target); return; }
-    auto warp = ship.getComponent<WarpDrive>();
-    if (warp) warp->request = target;
+void luaCommandWarp(sp::ecs::Entity ship, int target)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandWarp(target);
+        return;
+    }
+
+    if (auto warp = ship.getComponent<WarpDrive>())
+        warp->request = target;
 }
 
-void luaCommandJump(sp::ecs::Entity ship, float distance) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandJump(distance); return; }
+void luaCommandJump(sp::ecs::Entity ship, float distance)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandJump(distance);
+        return;
+    }
+
     JumpSystem::initializeJump(ship, distance);
 }
 
-void luaCommandAbortJump(sp::ecs::Entity ship) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandAbortJump(); return; }
+void luaCommandAbortJump(sp::ecs::Entity ship)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandAbortJump();
+        return;
+    }
+
     JumpSystem::abortJump(ship);
 }
 
-void luaCommandSetTarget(sp::ecs::Entity ship, sp::ecs::Entity target) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetTarget(target); return; }
+void luaCommandSetTarget(sp::ecs::Entity ship, sp::ecs::Entity target)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandSetTarget(target);
+        return;
+    }
+
     ship.getOrAddComponent<Target>().entity = target;
 }
 
-void luaCommandSetScienceTarget(sp::ecs::Entity ship, sp::ecs::Entity target) {
+void luaCommandSetScienceTarget(sp::ecs::Entity ship, sp::ecs::Entity target)
+{
     luaCommandSetTarget(ship, target);
 }
 
-void luaCommandLoadTube(sp::ecs::Entity ship, int tube_nr, EMissileWeapons type) {
+void luaCommandLoadTube(sp::ecs::Entity ship, int tube_nr, EMissileWeapons type)
+{
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandLoadTube(tube_nr, type); return; }
     auto missiletubes = ship.getComponent<MissileTubes>();
-    if (missiletubes && tube_nr >= 0 && tube_nr < int(missiletubes->mounts.size()))
+    if (missiletubes && tube_nr >= 0 && tube_nr < static_cast<int>(missiletubes->mounts.size()))
         MissileSystem::startLoad(ship, missiletubes->mounts[tube_nr], type);
 }
 
-void luaCommandUnloadTube(sp::ecs::Entity ship, int tube_nr) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandUnloadTube(tube_nr); return; }
+void luaCommandUnloadTube(sp::ecs::Entity ship, int tube_nr)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandUnloadTube(tube_nr);
+        return;
+    }
+
     auto missiletubes = ship.getComponent<MissileTubes>();
-    if (missiletubes && tube_nr >= 0 && tube_nr < int(missiletubes->mounts.size()))
+    if (missiletubes && tube_nr >= 0 && tube_nr < static_cast<int>(missiletubes->mounts.size()))
         MissileSystem::startUnload(ship, missiletubes->mounts[tube_nr]);
 }
 
-void luaCommandFireTube(sp::ecs::Entity ship, int tube_nr, float missile_target_angle) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandFireTube(tube_nr, missile_target_angle); return; }
+void luaCommandFireTube(sp::ecs::Entity ship, int tube_nr, float missile_target_angle)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandFireTube(tube_nr, missile_target_angle);
+        return;
+    }
+
     auto missiletubes = ship.getComponent<MissileTubes>();
-    if (missiletubes && tube_nr >= 0 && tube_nr < int(missiletubes->mounts.size())) {
+    if (missiletubes && tube_nr >= 0 && tube_nr < static_cast<int>(missiletubes->mounts.size()))
+    {
         sp::ecs::Entity target;
-        if (auto t = ship.getComponent<Target>())
-            target = t->entity;
+        if (auto t = ship.getComponent<Target>()) target = t->entity;
         MissileSystem::fire(ship, missiletubes->mounts[tube_nr], missile_target_angle, target);
     }
 }
 
-void luaCommandFireTubeAtTarget(sp::ecs::Entity ship, int tube_nr, sp::ecs::Entity target) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandFireTubeAtTarget(tube_nr, target); return; }
+void luaCommandFireTubeAtTarget(sp::ecs::Entity ship, int tube_nr, sp::ecs::Entity target)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandFireTubeAtTarget(tube_nr, target);
+        return;
+    }
 
-    float targetAngle = 0.0;
+    float targetAngle = 0.0f;
     auto missiletubes = ship.getComponent<MissileTubes>();
 
-    if (!target || !missiletubes || tube_nr < 0 || tube_nr >= int(missiletubes->mounts.size()))
+    if (!target || !missiletubes || tube_nr < 0 || tube_nr >= static_cast<int>(missiletubes->mounts.size()))
         return;
 
     targetAngle = MissileSystem::calculateFiringSolution(ship, missiletubes->mounts[tube_nr], target);
-    if (targetAngle == std::numeric_limits<float>::infinity()) {
+    if (targetAngle == std::numeric_limits<float>::infinity())
+    {
         if (auto transform = ship.getComponent<sp::Transform>())
             targetAngle = transform->getRotation() + missiletubes->mounts[tube_nr].direction;
     }
@@ -1458,19 +1686,28 @@ void luaCommandFireTubeAtTarget(sp::ecs::Entity ship, int tube_nr, sp::ecs::Enti
     luaCommandFireTube(ship, tube_nr, targetAngle);
 }
 
-static void luaCommandSetAlertLevel(sp::ecs::Entity ship, AlertLevel level) {
-    if (my_player_info && my_player_info->ship == ship) {
+static void luaCommandSetAlertLevel(sp::ecs::Entity ship, AlertLevel level)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
         my_player_info->commandSetAlertLevel(level);
         return;
     }
+
     if (auto player_control = ship.getComponent<PlayerControl>())
         player_control->alert_level = level;
 }
 
-void luaCommandSetShields(sp::ecs::Entity ship, bool active) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetShields(active); return; }
-    auto shields = ship.getComponent<Shields>();
-    if (shields) {
+void luaCommandSetShields(sp::ecs::Entity ship, bool active)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandSetShields(active);
+        return;
+    }
+
+    if (auto shields = ship.getComponent<Shields>())
+    {
         if (shields->calibration_delay <= 0.0f && active != shields->active)
         {
             shields->active = active;
@@ -1482,24 +1719,45 @@ void luaCommandSetShields(sp::ecs::Entity ship, bool active) {
     }
 }
 
-void luaCommandMainScreenSetting(sp::ecs::Entity ship, MainScreenSetting mainScreen) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandMainScreenSetting(mainScreen); return; }
+void luaCommandMainScreenSetting(sp::ecs::Entity ship, MainScreenSetting mainScreen)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandMainScreenSetting(mainScreen);
+        return;
+    }
+
     if (auto pc = ship.getComponent<PlayerControl>())
         pc->main_screen_setting = mainScreen;
 }
-void luaCommandMainScreenOverlay(sp::ecs::Entity ship, MainScreenOverlay mainScreen) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandMainScreenOverlay(mainScreen); return; }
+
+void luaCommandMainScreenOverlay(sp::ecs::Entity ship, MainScreenOverlay mainScreen)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandMainScreenOverlay(mainScreen);
+        return;
+    }
+
     if (auto pc = ship.getComponent<PlayerControl>())
         pc->main_screen_overlay = mainScreen;
 }
-void luaCommandScan(sp::ecs::Entity ship, sp::ecs::Entity target) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandScan(target); return; }
+
+void luaCommandScan(sp::ecs::Entity ship, sp::ecs::Entity target)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandScan(target);
+        return;
+    }
+
     if (auto scanner = ship.getComponent<ScienceScanner>())
     {
         scanner->delay = scanner->max_scanning_delay;
         scanner->target = target;
     }
 }
+
 void luaCommandSetSystemPowerRequest(sp::ecs::Entity ship, ShipSystem::Type system, float power_level) {
     if (my_player_info && my_player_info->ship == ship)
     {
@@ -1510,6 +1768,7 @@ void luaCommandSetSystemPowerRequest(sp::ecs::Entity ship, ShipSystem::Type syst
     if (auto sys = ShipSystem::get(ship, system))
         sys->power_request = std::clamp(power_level, 0.0f, 3.0f);
 }
+
 void luaCommandSetSystemCoolantRequest(sp::ecs::Entity ship, ShipSystem::Type system, float coolant_level) {
     if (my_player_info && my_player_info->ship == ship)
     {
@@ -1523,58 +1782,133 @@ void luaCommandSetSystemCoolantRequest(sp::ecs::Entity ship, ShipSystem::Type sy
             sys->coolant_request = std::clamp(coolant_level, 0.0f, std::min(coolant->max_coolant_per_system, coolant->max));
     }
 }
-void luaCommandDock(sp::ecs::Entity ship, sp::ecs::Entity station) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandDock(station); return; }
+
+void luaCommandDock(sp::ecs::Entity ship, sp::ecs::Entity station)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandDock(station);
+        return;
+    }
+
     DockingSystem::requestDock(ship, station);
 }
-void luaCommandUndock(sp::ecs::Entity ship) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandUndock(); return; }
+
+void luaCommandUndock(sp::ecs::Entity ship)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandUndock();
+        return;
+    }
+
     DockingSystem::requestUndock(ship);
 }
-void luaCommandAbortDock(sp::ecs::Entity ship) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandAbortDock(); return; }
+
+void luaCommandAbortDock(sp::ecs::Entity ship)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandAbortDock();
+        return;
+    }
+
     DockingSystem::abortDock(ship);
 }
-void luaCommandOpenTextComm(sp::ecs::Entity ship, sp::ecs::Entity obj) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandOpenTextComm(obj); return; }
+
+void luaCommandOpenTextComm(sp::ecs::Entity ship, sp::ecs::Entity obj)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandOpenTextComm(obj);
+        return;
+    }
+
     CommsSystem::openTo(ship, obj);
 }
-void luaCommandCloseTextComm(sp::ecs::Entity ship) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandCloseTextComm(); return; }
+
+void luaCommandCloseTextComm(sp::ecs::Entity ship)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandCloseTextComm();
+        return;
+    }
+
     CommsSystem::close(ship);
 }
-void luaCommandAnswerCommHail(sp::ecs::Entity ship, bool awnser) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandAnswerCommHail(awnser); return; }
+
+void luaCommandAnswerCommHail(sp::ecs::Entity ship, bool awnser)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandAnswerCommHail(awnser);
+        return;
+    }
+
     CommsSystem::answer(ship, awnser);
 }
-void luaCommandSendComm(sp::ecs::Entity ship, int index) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSendComm(index); return; }
+
+void luaCommandSendComm(sp::ecs::Entity ship, int index)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandSendComm(index);
+        return;
+    }
+
     CommsSystem::selectScriptReply(ship, index);
 }
-void luaCommandSendCommPlayer(sp::ecs::Entity ship, string message) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSendCommPlayer(message); return; }
+
+void luaCommandSendCommPlayer(sp::ecs::Entity ship, string message)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandSendCommPlayer(message);
+        return;
+    }
+
     CommsSystem::textReply(ship, message);
 }
 
-void luaCommandSetAutoRepair(sp::ecs::Entity ship, bool enabled) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetAutoRepair(enabled); return; }
+void luaCommandSetAutoRepair(sp::ecs::Entity ship, bool enabled)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandSetAutoRepair(enabled);
+        return;
+    }
+
     if (auto ir = ship.getComponent<InternalRooms>())
         ir->auto_repair_enabled = enabled;
 }
 
-void luaCommandSetBeamFrequency(sp::ecs::Entity ship, int frequency) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetBeamFrequency(frequency); return; }
+void luaCommandSetBeamFrequency(sp::ecs::Entity ship, int frequency)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandSetBeamFrequency(frequency);
+        return;
+    }
+
     if (auto beamweapons = ship.getComponent<BeamWeaponSys>())
         beamweapons->setFrequency(frequency);
 }
 
-void luaCommandSetBeamSystemTarget(sp::ecs::Entity ship, ShipSystem::Type type) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetBeamSystemTarget(type); return; }
+void luaCommandSetBeamSystemTarget(sp::ecs::Entity ship, ShipSystem::Type type)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandSetBeamSystemTarget(type);
+        return;
+    }
+
     if (auto beamweapons = ship.getComponent<BeamWeaponSys>())
         beamweapons->system_target = type;
 }
 
-void luaCommandSetUtilityBeam(sp::ecs::Entity ship, bool active) {
+void luaCommandSetUtilityBeam(sp::ecs::Entity ship, bool active)
+{
     if (my_player_info && my_player_info->ship == ship)
     {
         my_player_info->commandSetUtilityBeam(active);
@@ -1586,6 +1920,7 @@ void luaCommandSetUtilityBeam(sp::ecs::Entity ship, bool active) {
         if (active != utility->active)
         {
             utility->active = active;
+
             if (active)
                 gameGlobalInfo->playSoundOnMainScreen(ship, "sfx/shield_up.wav");
             else
@@ -1594,7 +1929,8 @@ void luaCommandSetUtilityBeam(sp::ecs::Entity ship, bool active) {
     }
 }
 
-void luaCommandSetUtilityBeamBearing(sp::ecs::Entity ship, float bearing) {
+void luaCommandSetUtilityBeamBearing(sp::ecs::Entity ship, float bearing)
+{
     auto utility_beam = ship.getComponent<UtilityBeam>();
     if (!utility_beam) return;
 
@@ -1607,7 +1943,8 @@ void luaCommandSetUtilityBeamBearing(sp::ecs::Entity ship, float bearing) {
     utility_beam->bearing = bearing;
 }
 
-void luaCommandSetUtilityBeamArc(sp::ecs::Entity ship, float arc) {
+void luaCommandSetUtilityBeamArc(sp::ecs::Entity ship, float arc)
+{
     auto utility_beam = ship.getComponent<UtilityBeam>();
     if (!utility_beam) return;
 
@@ -1620,7 +1957,8 @@ void luaCommandSetUtilityBeamArc(sp::ecs::Entity ship, float arc) {
     utility_beam->arc = arc;
 }
 
-void luaCommandSetUtilityBeamRange(sp::ecs::Entity ship, float range) {
+void luaCommandSetUtilityBeamRange(sp::ecs::Entity ship, float range)
+{
     auto utility_beam = ship.getComponent<UtilityBeam>();
     if (!utility_beam) return;
 
@@ -1633,21 +1971,20 @@ void luaCommandSetUtilityBeamRange(sp::ecs::Entity ship, float range) {
     utility_beam->range = range;
 }
 
-void luaSetCustomUtilityBeamMode(sp::ecs::Entity ship, string name, int order, float energy_per_sec, float heat_per_sec, bool requires_target, sp::script::Callback callback, sp::script::Callback deactivate_callback) {
+void luaSetCustomUtilityBeamMode(sp::ecs::Entity ship, string name, int order, float energy_per_sec, float heat_per_sec, bool requires_target, sp::script::Callback callback, sp::script::Callback deactivate_callback)
+{
     auto utility_beam = ship.getComponent<UtilityBeam>();
     if (!utility_beam) return;
+
     auto& cbm = utility_beam->custom_beam_modes;
 
     int idx = -1;
-    for (int n = 0; n < int(cbm.size()); n++)
-    {
-        if (cbm[n].name == name)
-            idx = n;
-    }
+    for (int n = 0; n < static_cast<int>(cbm.size()); n++)
+        if (cbm[n].name == name) idx = n;
 
     if (idx == -1)
     {
-        idx = int(cbm.size());
+        idx = static_cast<int>(cbm.size());
         cbm.emplace_back();
     }
 
@@ -1659,140 +1996,235 @@ void luaSetCustomUtilityBeamMode(sp::ecs::Entity ship, string name, int order, f
     f.deactivate_callback = deactivate_callback;
     f.order = order;
     f.requires_target = requires_target;
+
     std::stable_sort(cbm.begin(), cbm.end());
 }
 
-void luaSetCustomUtilityBeamModeProgress(sp::ecs::Entity ship, string name, float progress) {
+void luaSetCustomUtilityBeamModeProgress(sp::ecs::Entity ship, string name, float progress)
+{
     auto utility_beam = ship.getComponent<UtilityBeam>();
     if (!utility_beam) return;
+
     auto& cbm = utility_beam->custom_beam_modes;
 
     int idx = -1;
-    for (int n = 0; n < int(cbm.size()); n++)
-    {
-        if (cbm[n].name == name)
-            idx = n;
-    }
+    for (int n = 0; n < static_cast<int>(cbm.size()); n++)
+        if (cbm[n].name == name) idx = n;
+
     if (idx == -1) return;
 
     auto& f = cbm[idx];
     f.progress = progress;
-    LOG(INFO) << "f.progress: " << f.progress;
 }
 
-void luaRemoveCustomUtilityBeamMode(sp::ecs::Entity ship, string name) {
+void luaRemoveCustomUtilityBeamMode(sp::ecs::Entity ship, string name)
+{
     auto utility_beam = ship.getComponent<UtilityBeam>();
     if (!utility_beam) return;
+
     auto cbm = utility_beam->custom_beam_modes;
     if (cbm.size() < 1) return;
 
-    auto it = std::remove_if(cbm.begin(), cbm.end(), [cbm, name](const UtilityBeam::CustomBeamMode& f) {
-        return f.name == name;
-    });
+    auto it = std::remove_if(cbm.begin(), cbm.end(),
+        [cbm, name](const UtilityBeam::CustomBeamMode& f)
+        {
+            return f.name == name;
+        }
+    );
 
-    if (it != cbm.end()) {
-        cbm.erase(it, cbm.end());
-    }
+    if (it != cbm.end()) cbm.erase(it, cbm.end());
 }
 
-void luaCommandSetShieldFrequency(sp::ecs::Entity ship, int frequency) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetShieldFrequency(frequency); return; }
+void luaCommandSetShieldFrequency(sp::ecs::Entity ship, int frequency)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandSetShieldFrequency(frequency);
+        return;
+    }
+
     auto shields = ship.getComponent<Shields>();
     if (shields && shields->calibration_delay <= 0.0f && frequency != shields->frequency)
     {
-        shields->frequency = frequency;
+        shields->frequency = std::clamp(frequency, 0, BeamWeaponSys::max_frequency);
         shields->calibration_delay = shields->calibration_time;
         shields->active = false;
-        if (shields->frequency < 0)
-            shields->frequency = 0;
-        if (shields->frequency > BeamWeaponSys::max_frequency)
-            shields->frequency = BeamWeaponSys::max_frequency;
     }
 }
 
-static void luaCommandAddWaypoint(sp::ecs::Entity ship, float x, float y, int set_id = 1) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandAddWaypoint({x, y}, set_id); return; }
-    if (auto wp = ship.getComponent<Waypoints>())
-        wp->addNew({x, y}, set_id);
+static void luaCommandAddWaypoint(sp::ecs::Entity ship, float x, float y, int set_id = 1)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandAddWaypoint({x, y}, set_id);
+        return;
+    }
+
+    if (auto wp = ship.getComponent<Waypoints>()) wp->addNew({x, y}, set_id);
 }
 
-static void luaCommandRemoveWaypoint(sp::ecs::Entity ship, int index, int set_id = 1) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandRemoveWaypoint(index, set_id); return; }
-    if (auto wp = ship.getComponent<Waypoints>())
-        wp->remove(index, set_id);
+static void luaCommandRemoveWaypoint(sp::ecs::Entity ship, int index, int set_id = 1)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandRemoveWaypoint(index, set_id);
+        return;
+    }
+
+    if (auto wp = ship.getComponent<Waypoints>()) wp->remove(index, set_id);
 }
-static void luaCommandMoveWaypoint(sp::ecs::Entity ship, int index, float x, float y, int set_id = 1) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandMoveWaypoint(index, {x, y}, set_id); return; }
+
+static void luaCommandMoveWaypoint(sp::ecs::Entity ship, int index, float x, float y, int set_id = 1)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandMoveWaypoint(index, {x, y}, set_id);
+        return;
+    }
+
     if (auto wp = ship.getComponent<Waypoints>())
         wp->move(index, {x, y}, set_id);
 }
-static void luaCommandSetWaypointRoute(sp::ecs::Entity ship, bool is_route, int set_id = 1) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetWaypointRoute(is_route, set_id); return; }
+
+static void luaCommandSetWaypointRoute(sp::ecs::Entity ship, bool is_route, int set_id = 1)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandSetWaypointRoute(is_route, set_id);
+        return;
+    }
+
     if (auto wp = ship.getComponent<Waypoints>())
         wp->setRoute(is_route, set_id);
 }
-static void luaCommandActivateSelfDestruct(sp::ecs::Entity ship) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandActivateSelfDestruct(); return; }
+
+static void luaCommandActivateSelfDestruct(sp::ecs::Entity ship)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandActivateSelfDestruct();
+        return;
+    }
+
     SelfDestructSystem::activate(ship);
 }
-static void luaCommandCancelSelfDestruct(sp::ecs::Entity ship) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandCancelSelfDestruct(); return; }
-    if (auto self_destruct = ship.getComponent<SelfDestruct>()) {
-        if (self_destruct->countdown <= 0.0f) {
-            self_destruct->active = false;
-        }
+
+static void luaCommandCancelSelfDestruct(sp::ecs::Entity ship)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandCancelSelfDestruct();
+        return;
     }
+
+    if (auto self_destruct = ship.getComponent<SelfDestruct>())
+        if (self_destruct->countdown <= 0.0f) self_destruct->active = false;
 }
-static void luaCommandConfirmDestructCode(sp::ecs::Entity ship, int index, int code) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandConfirmDestructCode(index, code); return; }
-    if (auto self_destruct = ship.getComponent<SelfDestruct>()) {
-        if (index >= 0 && index < SelfDestruct::max_codes && int(self_destruct->code[index]) == code && self_destruct->active)
+
+static void luaCommandConfirmDestructCode(sp::ecs::Entity ship, int index, int code)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandConfirmDestructCode(index, code);
+        return;
+    }
+
+    if (auto self_destruct = ship.getComponent<SelfDestruct>())
+    {
+        if (index >= 0 && index < SelfDestruct::max_codes && static_cast<int>(self_destruct->code[index]) == code && self_destruct->active)
             self_destruct->confirmed[index] = true;
     }
 }
-static void luaCommandCombatManeuverBoost(sp::ecs::Entity ship, float amount) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandCombatManeuverBoost(amount); return; }
+
+static void luaCommandCombatManeuverBoost(sp::ecs::Entity ship, float amount)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandCombatManeuverBoost(amount);
+        return;
+    }
+
     if (auto combat = ship.getComponent<CombatManeuveringThrusters>())
         combat->boost.request = amount;
 }
-static void luaCommandCombatManeuverStrafe(sp::ecs::Entity ship, float amount) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandCombatManeuverStrafe(amount); return; }
+
+static void luaCommandCombatManeuverStrafe(sp::ecs::Entity ship, float amount)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandCombatManeuverStrafe(amount);
+        return;
+    }
+
     if (auto combat = ship.getComponent<CombatManeuveringThrusters>())
         combat->strafe.request = amount;
 }
-static void luaCommandLaunchProbe(sp::ecs::Entity ship, float x, float y) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandLaunchProbe({x, y}); return; }
+
+static void luaCommandLaunchProbe(sp::ecs::Entity ship, float x, float y)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandLaunchProbe({x, y});
+        return;
+    }
+
     ProbeSystem::launch(ship, {x, y});
 }
-static void luaCommandSetScienceLink(sp::ecs::Entity ship, sp::ecs::Entity probe) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetScienceLink(probe); return; }
+
+static void luaCommandSetScienceLink(sp::ecs::Entity ship, sp::ecs::Entity probe)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandSetScienceLink(probe);
+        return;
+    }
+
     if (auto radar_link = ship.getComponent<RadarLink>())
     {
         auto existing_link = radar_link->linked_entity;
+
         // Run on_link callback if present.
         if (radar_link->on_link && probe)
             LuaConsole::checkResult(radar_link->on_link.call<void>(ship, probe));
+
         // Update radar link.
         radar_link->linked_entity = probe;
+
         // Run on_unlink callback if this caused an existing link to be broken.
         if (radar_link->on_unlink && existing_link)
             LuaConsole::checkResult(radar_link->on_unlink.call<void>(ship, existing_link));
     }
 }
-static void luaCommandClearScienceLink(sp::ecs::Entity ship) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandClearScienceLink(); return; }
+
+static void luaCommandClearScienceLink(sp::ecs::Entity ship)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandClearScienceLink();
+        return;
+    }
+
     if (auto radar_link = ship.getComponent<RadarLink>())
     {
         auto existing_link = radar_link->linked_entity;
+
         // Clear radar link.
         radar_link->linked_entity = {};
+
         // Run on_unlink callback if this caused an existing link to be broken.
         if (radar_link->on_unlink && existing_link)
             LuaConsole::checkResult(radar_link->on_unlink.call<void>(ship, existing_link));
     }
 }
-static void luaCommandSetDroneLink(sp::ecs::Entity ship, sp::ecs::Entity drone) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetDroneLink(drone); return; }
+
+static void luaCommandSetDroneLink(sp::ecs::Entity ship, sp::ecs::Entity drone)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandSetDroneLink(drone);
+        return;
+    }
+
     if (ship.getComponent<DroneController>())
     {
         if (!drone)
@@ -1800,13 +2232,22 @@ static void luaCommandSetDroneLink(sp::ecs::Entity ship, sp::ecs::Entity drone) 
             ship.removeComponent<DroneLink>();
             return;
         }
+
         auto adl = drone.getComponent<AllowDroneLink>();
         if (!adl || adl->owner != ship) return;
+
         ship.getOrAddComponent<DroneLink>().linked_drone = drone;
     }
 }
-static void luaCommandClearDroneLink(sp::ecs::Entity ship) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetDroneLink(sp::ecs::Entity{}); return; }
+
+static void luaCommandClearDroneLink(sp::ecs::Entity ship)
+{
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandSetDroneLink(sp::ecs::Entity{});
+        return;
+    }
+
     ship.removeComponent<DroneLink>();
 }
 
@@ -1814,6 +2255,7 @@ static void luaStartThread(sp::script::Callback callback)
 {
     auto res = callback.callCoroutine();
     LuaConsole::checkResult(res);
+
     if (res.isOk() && res.value())
         gameGlobalInfo->new_script_threads.push_back(res.value());
 }
@@ -1840,11 +2282,12 @@ void setupSubEnvironment(sp::script::Environment& env)
 
 bool setupScriptEnvironment(sp::script::Environment& env)
 {
-    // Load core global functions
+    // Load core global functions.
+
     /// void print(..)
     /// Print values to the Lua console. Also writes them to EmptyEpsilon.log or STDOUT, depending on your configuration.
     /// Accepts one or more values of any parseable type, such as strings, numbers, tables, entities, etc.
-    /// The log lines are severity INFO, and the log text is prefixed with "LUA:"
+    /// The log lines are severity Info, and the log text is prefixed with [lua].
     /// This is the same as log(...) and also prints the value on the Lua console.
     /// Examples:
     /// print("This is a message") -- prints "This is a message" to the Lua console and logs it
@@ -1856,7 +2299,7 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Log values to EmptyEpsilon.log or STDOUT, depending on your configuration.
     /// This is the same as print(...) but doesn't print the value on the Lua console.
     /// Examples:
-    /// log("This is a log line") -- logs "[INFO    ]: LUA:This is a log line"
+    /// log("This is a log line") -- logs "[INFO    ]: [lua] This is a log line"
     /// See print(...) for more examples.
     env.setGlobal("log", &luaLog);
     env.setGlobalFuncWithEnvUpvalue("require", &luaRequire);
@@ -2554,7 +2997,6 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Example: areMissilesOnLongRangeRadar() -- returns false by default
     env.setGlobal("areMissilesOnLongRangeRadar", &luaAreMissilesOnLongRangeRadar);
 
-
     /// void addGMFunction(string label, function callback)
     /// Adds a button with the given label to the GM screen. Clicking it calls the callback function.
     /// Example:
@@ -2648,13 +3090,16 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Useful when changing an entity's faction via CMD_RUN_SCRIPT.
     env.setGlobal("findFaction", &luaFindFaction);
 
+    // Load hardcoded script files.
+    // Lua standard library extensions.
     auto res = env.runFile<void>("luax.lua");
     LuaConsole::checkResult(res);
-    if (res.isErr())
-        return false;
+    if (res.isErr()) return false;
+
+    // EmptyEpsilon Lua APIs.
     res = env.runFile<void>("api/all.lua");
     LuaConsole::checkResult(res);
-    if (res.isErr())
-        return false;
+    if (res.isErr()) return false;
+
     return true;
 }

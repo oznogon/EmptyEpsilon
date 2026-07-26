@@ -26,7 +26,7 @@ string initConfiguration(int argc, char** argv)
             configuration_path = path_buffer;
     }
 #endif
-    LOG(Info, "Using ", configuration_path, " as configuration path");
+    LOG(Info, "[config] Using ", configuration_path, " as configuration path.");
     PreferencesManager::load(configuration_path + "/options.ini");
 
     for(int n=1; n<argc; n++)

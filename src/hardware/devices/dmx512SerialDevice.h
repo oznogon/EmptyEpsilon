@@ -5,18 +5,20 @@
 #include <stdint.h>
 #include <thread>
 
-// The DMX512SerialDevice can talk to Open DMX USB hardware, and just about any hardware which is just an serial port connected to a line driver.
+// The DMX512SerialDevice can talk to Open DMX USB hardware, and just about any
+// hardware which is just a serial port connected to a line driver.
 class SerialPort;
+
 class DMX512SerialDevice : public HardwareOutputDevice
 {
 private:
-    SerialPort* port;
+    SerialPort* port = nullptr;
     std::thread update_thread;
 
-    bool run_thread;
-    int channel_count;
-    int resend_delay;
-    uint8_t data_stream[1+512];
+    bool run_thread = false;
+    int channel_count = 512;
+    int resend_delay = 25;
+    uint8_t data_stream[512 + 1];
 public:
     DMX512SerialDevice();
     virtual ~DMX512SerialDevice();

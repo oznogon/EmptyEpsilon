@@ -73,7 +73,7 @@
 #include "systems/scanning.h"
 #include "systems/selfdestruct.h"
 
-//Ship commands
+// Ship commands
 static const uint16_t CMD_TARGET_ROTATION = 0x0001;
 static const uint16_t CMD_IMPULSE = 0x0002;
 static const uint16_t CMD_WARP = 0x0003;
@@ -91,7 +91,7 @@ static const uint16_t CMD_SET_SYSTEM_POWER_REQUEST = 0x000E;
 static const uint16_t CMD_SET_SYSTEM_COOLANT_REQUEST = 0x000F;
 static const uint16_t CMD_DOCK = 0x0010;
 static const uint16_t CMD_UNDOCK = 0x0011;
-static const uint16_t CMD_OPEN_TEXT_COMM = 0x0012; //TEXT communication
+static const uint16_t CMD_OPEN_TEXT_COMM = 0x0012; // TEXT communication
 static const uint16_t CMD_CLOSE_TEXT_COMM = 0x0013;
 static const uint16_t CMD_SEND_TEXT_COMM = 0x0014;
 static const uint16_t CMD_SEND_TEXT_COMM_PLAYER = 0x0015;
@@ -186,13 +186,10 @@ sp::ecs::Entity my_spaceship;
 PVector<PlayerInfo> player_info_list;
 
 REGISTER_MULTIPLAYER_CLASS(PlayerInfo, "PlayerInfo");
+
 PlayerInfo::PlayerInfo()
 : MultiplayerObject("PlayerInfo")
 {
-    client_id = -1;
-    main_screen_control = 0;
-    last_ship_password = "";
-
     registerMemberReplication(&client_id);
     registerMemberReplication(&crew_positions);
     registerMemberReplication(&ship);
@@ -750,7 +747,7 @@ void PlayerInfo::commandSetScienceLink(sp::ecs::Entity probe)
     }
     // Otherwise, it's invalid. Warn and do nothing.
     else
-        LOG(Warning, "commandSetScienceLink received a null or invalid ScanProbe, so no command was sent.");
+        LOG(Warning, "[playerinfo] commandSetScienceLink received a null or invalid ScanProbe, so no command was sent.");
 }
 
 void PlayerInfo::commandClearScienceLink()
@@ -1480,12 +1477,12 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
                 // Move supply drop to the berth.
                 if (!DockingSystem::moveEntityToInternalBay(supply_drop, ship, berth_index))
                 {
-                    LOG(Warning, "Supply drop couldn't be moved to supply berth ", berth_index, " and was destroyed");
+                    LOG(Warning, "[playerinfo] Supply drop couldn't be moved to supply berth ", berth_index, " and was destroyed");
                     supply_drop.destroy();
                 }
             }
             else
-                LOG(Error, "Failed to create SupplyDrop() via Lua: ", result.error());
+                LOG(Error, "[playerinfo] Failed to create SupplyDrop() via Lua: ", result.error());
         }
         break;
     case CMD_ABORT_DOCK:

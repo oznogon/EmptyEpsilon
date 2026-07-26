@@ -990,7 +990,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
             sidebar_systems_page->hide();
         }
         else if (sidebar_pager_selection != "")
-            LOG(Warning, "Invalid pager state: ", sidebar_pager_selection);
+            LOG(Warning, "[sciencescreen] Invalid sidebar pager state: ", sidebar_pager_selection);
 
         // On a full scan, populate tactical and systems data.
         if (scanstate >= ScanState::State::FullScan)

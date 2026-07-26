@@ -10,7 +10,8 @@ BASIC_REPLICATION_IMPL(BriefingReplication, Briefing)
 
         // Map data replication
         {
-            switch(BRR) {
+            switch (BRR)
+            {
             case BasicReplicationRequest::SendAll:
                 vector_flags |= vector_flag;
                 vector_tmp << vector_target->map_data.duration;
@@ -37,6 +38,7 @@ BASIC_REPLICATION_IMPL(BriefingReplication, Briefing)
                 }
                 break;
             }
+
             vector_flag <<= 1;
         }
 
@@ -50,72 +52,107 @@ BASIC_REPLICATION_IMPL(BriefingReplication, Briefing)
             {
                 packet >> kf_flags;
                 if (kf_flags == 0) break;
+
                 packet >> kf_idx;
                 if (kf_idx >= vector_target->map_data.keyframes.size())
                 {
-                    LOG(Warning, "Briefing map keyframe replication index out of range");
+                    LOG(Warning, "[briefing] Map keyframe replication index is out of range.");
                     break;
                 }
             }
 
             auto kf_target = &vector_target->map_data.keyframes[kf_idx];
             auto kf_backup = (vector_backup && kf_idx < vector_backup->map_data.keyframes.size())
-                ? &vector_backup->map_data.keyframes[kf_idx] : nullptr;
+                ? &vector_backup->map_data.keyframes[kf_idx]
+                : nullptr;
             sp::io::DataBuffer kf_tmp;
             uint32_t kf_flag = 1;
 
-            switch(BRR) {
+            switch (BRR)
+            {
             case BasicReplicationRequest::SendAll:
-                kf_flags |= kf_flag; kf_tmp << kf_target->timestamp; break;
+                kf_flags |= kf_flag; kf_tmp << kf_target->timestamp;
+                break;
             case BasicReplicationRequest::Update:
                 if (kf_target->timestamp != kf_backup->timestamp)
-                    { kf_flags |= kf_flag; kf_tmp << kf_target->timestamp; kf_backup->timestamp = kf_target->timestamp; }
+                {
+                    kf_flags |= kf_flag;
+                    kf_tmp << kf_target->timestamp;
+                    kf_backup->timestamp = kf_target->timestamp;
+                }
                 break;
             case BasicReplicationRequest::Receive:
-            {
-                if (kf_flags & kf_flag) packet >> kf_target->timestamp;
-                break;
+                {
+                    if (kf_flags & kf_flag) packet >> kf_target->timestamp;
+                    break;
+                }
             }
-            }
+
             kf_flag <<= 1;
 
-            switch(BRR) {
+            switch (BRR)
+            {
             case BasicReplicationRequest::SendAll:
-                kf_flags |= kf_flag; kf_tmp << kf_target->camera_position.x; kf_tmp << kf_target->camera_position.y; break;
+                kf_flags |= kf_flag;
+                kf_tmp << kf_target->camera_position.x;
+                kf_tmp << kf_target->camera_position.y;
+                break;
             case BasicReplicationRequest::Update:
                 if (kf_target->camera_position != kf_backup->camera_position)
-                    { kf_flags |= kf_flag; kf_tmp << kf_target->camera_position.x; kf_tmp << kf_target->camera_position.y; kf_backup->camera_position = kf_target->camera_position; }
+                {
+                    kf_flags |= kf_flag;
+                    kf_tmp << kf_target->camera_position.x;
+                    kf_tmp << kf_target->camera_position.y;
+                    kf_backup->camera_position = kf_target->camera_position;
+                }
                 break;
             case BasicReplicationRequest::Receive:
-            {
-                if (kf_flags & kf_flag) packet >> kf_target->camera_position.x >> kf_target->camera_position.y;
+                {
+                    if (kf_flags & kf_flag)
+                        packet >> kf_target->camera_position.x >> kf_target->camera_position.y;
+                }
                 break;
             }
-            }
+
             kf_flag <<= 1;
 
-            switch(BRR) {
+            switch (BRR)
+            {
             case BasicReplicationRequest::SendAll:
-                kf_flags |= kf_flag; kf_tmp << kf_target->zoom; break;
+                kf_flags |= kf_flag;
+                kf_tmp << kf_target->zoom;
+                break;
             case BasicReplicationRequest::Update:
                 if (kf_target->zoom != kf_backup->zoom)
-                    { kf_flags |= kf_flag; kf_tmp << kf_target->zoom; kf_backup->zoom = kf_target->zoom; }
+                {
+                    kf_flags |= kf_flag;
+                    kf_tmp << kf_target->zoom;
+                    kf_backup->zoom = kf_target->zoom;
+                }
                 break;
             case BasicReplicationRequest::Receive:
-            {
-                if (kf_flags & kf_flag) packet >> kf_target->zoom;
+                {
+                    if (kf_flags & kf_flag) packet >> kf_target->zoom;
+                }
                 break;
             }
-            }
+
             kf_flag <<= 1;
 
             // Entities count
-            switch(BRR) {
+            switch (BRR)
+            {
             case BasicReplicationRequest::SendAll:
-                kf_flags |= kf_flag; kf_tmp << kf_target->entities.size(); break;
+                kf_flags |= kf_flag;
+                kf_tmp << kf_target->entities.size();
+                break;
             case BasicReplicationRequest::Update:
                 if (kf_target->entities.size() != kf_backup->entities.size())
-                    { kf_flags |= kf_flag; kf_tmp << kf_target->entities.size(); kf_backup->entities.resize(kf_target->entities.size()); }
+                {
+                    kf_flags |= kf_flag;
+                    kf_tmp << kf_target->entities.size();
+                    kf_backup->entities.resize(kf_target->entities.size());
+                }
                 break;
             case BasicReplicationRequest::Receive:
                 if (kf_flags & kf_flag)
@@ -126,6 +163,7 @@ BASIC_REPLICATION_IMPL(BriefingReplication, Briefing)
                 }
                 break;
             }
+
             kf_flag <<= 1;
 
             for (size_t ent_idx = 0;
@@ -137,10 +175,11 @@ BASIC_REPLICATION_IMPL(BriefingReplication, Briefing)
                 {
                     packet >> ent_flags;
                     if (ent_flags == 0) break;
+
                     packet >> ent_idx;
                     if (ent_idx >= kf_target->entities.size())
                     {
-                        LOG(Warning, "Briefing map entity replication index out of range");
+                        LOG(Warning, "[briefing] Briefing map entity replication index is out of range.");
                         break;
                     }
                 }
@@ -152,7 +191,7 @@ BASIC_REPLICATION_IMPL(BriefingReplication, Briefing)
                 uint32_t ent_flag = 1;
 
                 #define REPLICATE_FIELD(FIELD) \
-                    switch(BRR) { \
+                    switch (BRR) { \
                     case BasicReplicationRequest::SendAll: \
                         ent_flags |= ent_flag; ent_tmp << ent_target->FIELD; break; \
                     case BasicReplicationRequest::Update: \

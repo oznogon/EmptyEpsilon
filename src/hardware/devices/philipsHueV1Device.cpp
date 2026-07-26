@@ -28,23 +28,18 @@ PhilipsHueV1Device::~PhilipsHueV1Device()
 bool PhilipsHueV1Device::configure(std::unordered_map<string, string> settings)
 {
     if (settings.find("ip") != settings.end())
-    {
         ip_address = settings["ip"];
-    }
+
     if (settings.find("username") != settings.end())
     {
         username = settings["username"];
         userfile = "";
     }
     else if (settings.find("userfile") != settings.end())
-    {
         userfile = settings["userfile"];
-    }
 
     if (settings.find("port") != settings.end())
-    {
         port = settings["port"].toInt();
-    }
 
     if (username == "")
     {
@@ -58,18 +53,22 @@ bool PhilipsHueV1Device::configure(std::unordered_map<string, string> settings)
         }
     }
 
-    LOG(INFO) << "Attempting to connect to Hue V1 bridge " << ip_address << " on port " << port;
+    LOG(Info, "[huev1] Attempting to connect to Hue V1 bridge ", ip_address, " on port ", port);
 
-    int retry_counter = 120 / 5;
-    while(username == "")
+    int retry_counter = 24; // 120 / 5; every 5 seconds for 2 minutes
+
+    while (username == "")
     {
-        sp::io::http::Request http(ip_address,port);
+        sp::io::http::Request http(ip_address, port);
+        http.setHeader("Content-Type", "application/json");
 
-        LOG(INFO) << "No philips hue username. Going to request one. Be sure to press the button on the hue bridge.";
+        LOG(Info, "[huev1] No Philips Hue username provided. Going to request one. Press the link button on the Philips Hue V1 bridge.");
         auto response = http.post("/api", "{\"devicetype\":\"EmptyEpsilon#EmptyEpsilon\"}");
+
         if (response.status == 200)
         {
             const auto& body = response.body;
+
             int idx = body.find("\"username\"");
             if (idx > 0)
             {
@@ -83,8 +82,8 @@ bool PhilipsHueV1Device::configure(std::unordered_map<string, string> settings)
                         if (end_idx > 0)
                         {
                             username = body.substr(idx + 1, end_idx);
-                            LOG(INFO) << body;
-                            LOG(INFO) << "Got username from philips hue bridge: " << username;
+                            LOG(Info, "[huev1] ", body);
+                            LOG(Info, "[huev1] Got username from Philips Hue V1 bridge: ", username);
                             break;
                         }
                     }
@@ -93,21 +92,19 @@ bool PhilipsHueV1Device::configure(std::unordered_map<string, string> settings)
         }
         else
         {
-            LOG(WARNING) << "Failed to contact philips hue bridge: " << response.status;
-            LOG(WARNING) << response.body;
-            if (response.status < 0)
-                return false;
-            if (response.status == 404)
-                return false;
+            LOG(Warning, "[huev1] Failed to contact Philips Hue V1 bridge: ", response.status);
+            LOG(Warning, "[huev1] ", response.body);
+
+            if (response.status < 0 || response.status == 404) return false;
         }
 
-        if (retry_counter > 0)
-            retry_counter--;
+        if (retry_counter > 0) retry_counter--;
         else
         {
-            LOG(WARNING) << "Philips hue retry count exceeded.";
+            LOG(Warning, "[huev1] Philips Hue V1 retry count exceeded. Not connecting to the bridge.");
             return false;
         }
+
         std::this_thread::sleep_for(std::chrono::milliseconds(5000));
     }
 
@@ -115,16 +112,14 @@ bool PhilipsHueV1Device::configure(std::unordered_map<string, string> settings)
     {
         sp::io::http::Request http(ip_address,port);
         auto response = http.get(string{ "/api/" } + username + "/lights");
+
         if (response.status != 200)
         {
-            LOG(WARNING) << "Failed to validate username on philips hue bridge: " << response.status;
-            LOG(WARNING) << response.body;
+            LOG(Warning, "[huev1] Failed to validate username on Philips Hue V1 bridge: ", response.status);
+            LOG(Warning, "[huev1] ", response.body);
             username = "";
 
-            if (response.status < 0)
-                return false;
-            if (response.status == 404)
-                return false;
+            if (response.status < 0 || response.status == 404) return false;
 
             if (userfile != "")
 #ifdef _MSC_VER
@@ -137,14 +132,16 @@ bool PhilipsHueV1Device::configure(std::unordered_map<string, string> settings)
         {
             const auto& body = response.body;
             std::string err;
+
             if (auto json = sp::json::parse(body, err); json)
             {
                 auto hue_json = json.value();
                 light_count = 0;
+
                 for (const auto& entry : hue_json.items())
                 {
                     auto currentInt = string(entry.key()).toInt();
-                    LOG(DEBUG) << "Got key from Hue API " << currentInt;
+                    LOG(Debug, "[huev1] Got key from Hue API: ", currentInt);
                     if (currentInt >= light_count) light_count = currentInt;
                 }
 
@@ -157,10 +154,7 @@ bool PhilipsHueV1Device::configure(std::unordered_map<string, string> settings)
                     fclose(f);
                 }
             }
-            else
-            {
-                LOG(ERROR) << "Json parsing failed: " << err;
-            }
+            else LOG(Error, "[huev1] JSON parsing failed: ", err);
         }
     }
 
@@ -176,16 +170,41 @@ bool PhilipsHueV1Device::configure(std::unordered_map<string, string> settings)
 void PhilipsHueV1Device::setChannelData(int channel, float value)
 {
     int light_idx = channel / 4;
-    if (light_idx < 0 || light_idx >= light_count)
-        return;
+    if (light_idx < 0 || light_idx >= light_count) return;
 
+    auto light = lights[light_idx];
     std::lock_guard<std::mutex> lock(mutex);
-    switch(channel % 4)
+
+    switch (channel % 4)
     {
-    case 0: if (lights[light_idx].brightness != static_cast<int>(value * 254)) lights[light_idx].dirty = true; lights[light_idx].brightness = static_cast<int>(value * 254); break;
-    case 1: if (lights[light_idx].saturation != static_cast<int>(value * 254)) lights[light_idx].dirty = true; lights[light_idx].saturation = static_cast<int>(value * 254); break;
-    case 2: if (lights[light_idx].hue != static_cast<int>(value * 65535)) lights[light_idx].dirty = true; lights[light_idx].hue = static_cast<int>(value * 65535); break;
-    case 3: if (lights[light_idx].transitiontime != static_cast<int>(value)) lights[light_idx].dirty = true; lights[light_idx].transitiontime = static_cast<int>(value); break;
+    case 0:
+        {
+            const int new_brightness = static_cast<int>(value * 254);
+            if (light.brightness != new_brightness) light.dirty = true;
+            light.brightness = new_brightness;
+        }
+        break;
+    case 1:
+        {
+            const int new_saturation = static_cast<int>(value * 254);
+            if (light.saturation != new_saturation) light.dirty = true;
+            light.saturation = new_saturation;
+        }
+        break;
+    case 2:
+        {
+            const int new_hue = static_cast<int>(value * 65535);
+            if (light.hue != new_hue) light.dirty = true;
+            light.hue = new_hue;
+        }
+        break;
+    case 3:
+        {
+            const int new_transitiontime = static_cast<int>(value);
+            if (light.transitiontime != new_transitiontime) light.dirty = true;
+            light.transitiontime = new_transitiontime;
+        }
+        break;
     }
 }
 
@@ -198,35 +217,40 @@ void PhilipsHueV1Device::updateLoop()
 {
     sp::io::http::Request http(ip_address,port);
 
-    while(run_thread)
+    while (run_thread)
     {
-        for(int n=0; n<light_count; n++)
+        for (int n = 0; n < light_count; n++)
         {
             if (lights[n].dirty)
             {
                 LightInfo info;
+
                 {
                     std::lock_guard<std::mutex> lock(mutex);
                     lights[n].dirty = false;
                     info = lights[n];
                 }
+
                 string post_data;
                 if (info.laststate != "sat-" + string(info.saturation) + "-bri-" + string(info.brightness) + "-hue-" + string(info.hue) + "-transition-" + string(info.transitiontime))
                 {
                     lights[n].laststate = "sat-" + string(info.saturation) + "-bri-" + string(info.brightness) + "-hue-" + string(info.hue) + "-transition-" + string(info.transitiontime);
+
                     if (info.brightness > 0)
                         post_data = "{\"on\":true, \"sat\":"+string(info.saturation)+", \"bri\":"+string(info.brightness)+",\"hue\":"+string(info.hue)+", \"transitiontime\": "+string(info.transitiontime)+"}";
                     else
                         post_data = "{\"on\":false, \"transitiontime\": "+string(info.transitiontime)+"}";
+
                     auto response = http.request("PUT", string{ "/api/" } + username + "/lights/" + string(n + 1) + "/state", post_data);
                     if (response.status != 200)
                     {
-                        LOG(WARNING) << "Failed to set light [" << (n + 1) << "] philips hue bridge: " << response.status;
-                        LOG(WARNING) << response.body;
+                        LOG(Warning, "[huev1] Failed to set light [", (n + 1), "] on Philips Hue V1 bridge: ", response.status);
+                        LOG(Warning, "[huev1] ", response.body);
                     }
                 }
             }
         }
+
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }
 }

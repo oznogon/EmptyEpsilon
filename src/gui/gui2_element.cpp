@@ -19,7 +19,7 @@ GuiElement::GuiElement(GuiContainer* owner, const string& id)
 GuiElement::~GuiElement()
 {
     if (owner)
-        LOG(Error, "GuiElement was destroyed while it still had an owner");
+        LOG(Error, "[guielement] Destroyed while it still had an owner.");
 }
 
 bool GuiElement::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
@@ -109,7 +109,7 @@ glm::vec2 GuiElement::getSize() const
 float GuiElement::getAspectRatio() const
 {
     if (layout.size.y > 0.0f) return layout.size.x / layout.size.y;
-    LOG(Warning, "GuiElement ", id ," has height of 0 and can't report its aspect ratio");
+    LOG(Warning, "[guielement] GuiElement ", id ," has a height of 0 and can't report its aspect ratio.");
     return 0.0f;
 }
 
@@ -156,12 +156,10 @@ GuiElement* GuiElement::setParent(GuiContainer* new_parent)
             }
         }
         else if (!new_parent)
-        {
-            LOG(Debug, "GuiElement::setParent called, but new parent is invalid.");
-        }
+            LOG(Debug, "[guielement] setParent() called, but new parent is invalid.");
     }
     else
-        LOG(Debug, "GuiElement::setParent called, but old owner is invalid.");
+        LOG(Debug, "[guielement] setParent() called, but the old owner is invalid.");
 
     return this;
 }

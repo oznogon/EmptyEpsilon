@@ -1023,9 +1023,8 @@ bool GuiRadarView::onMouseDown(sp::io::Pointer::Button button, glm::vec2 positio
 {
     if (style == Circular || style == CircularMasked)
     {
-        float radius = std::min(rect.size.x, rect.size.y) / 2.0f;
-        if (glm::length(position - getCenterPoint()) > radius)
-            return false;
+        const float radius = std::min(rect.size.x, rect.size.y) * 0.5f;
+        if (glm::length(position - getCenterPoint()) > radius) return false;
     }
 
     if (enable_gestures && button == sp::io::Pointer::Button::Touch)
@@ -1038,13 +1037,14 @@ bool GuiRadarView::onMouseDown(sp::io::Pointer::Button button, glm::vec2 positio
             gesture_start_pinch = gesture_tracker.getPinchDistance();
             gesture_prev_pinch = gesture_start_pinch;
             gesture_start_centroid = gesture_tracker.getCentroid();
-            LOG(Info, "Gesture start: distance=", gesture_start_distance, " pinch=", gesture_start_pinch, " centroid=", gesture_start_centroid.x, ",", gesture_start_centroid.y);
+            LOG(Debug, "[radarview] Gesture start: distance=", gesture_start_distance, " pinch=", gesture_start_pinch, " centroid=", gesture_start_centroid.x, ",", gesture_start_centroid.y);
         }
         else
         {
             if (mouse_down_func)
                 mouse_down_func(button, screenToWorld(position));
         }
+
         return true;
     }
 
@@ -1080,7 +1080,7 @@ void GuiRadarView::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
 
                 gesture_prev_pinch = pinch;
 
-                LOG(Info, "Pinch gesture: prev_pinch=", gesture_prev_pinch, " current_pinch=", pinch, " new_distance=", new_distance);
+                LOG(Debug, "[radarview] Pinch gesture: prev_pinch=", gesture_prev_pinch, " current_pinch=", pinch, " new_distance=", new_distance);
             }
 
             return;
@@ -1094,8 +1094,9 @@ void GuiRadarView::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
                 if (mouse_down_func)
                     mouse_down_func(sp::io::Pointer::Button::Touch, screenToWorld(position));
             }
-            if (mouse_drag_func)
-                mouse_drag_func(screenToWorld(position));
+
+            if (mouse_drag_func) mouse_drag_func(screenToWorld(position));
+
             return;
         }
     }
@@ -1114,7 +1115,7 @@ void GuiRadarView::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
         {
             gesture_start_pinch = 0.0f;
             gesture_prev_pinch = 0.0f;
-            LOG(Info, "Gesture end");
+            LOG(Debug, "[radarview] Gesture end");
         }
 
         if (gesture_tracker.getFingerCount() == 0)

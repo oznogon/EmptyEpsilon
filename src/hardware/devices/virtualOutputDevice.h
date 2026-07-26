@@ -26,7 +26,7 @@ private:
 
     VirtualOutputRenderer* renderer;
 
-    int channel_count;
+    int channel_count = 512;
     ChannelData channel_data[512];
 public:
     VirtualOutputDevice();

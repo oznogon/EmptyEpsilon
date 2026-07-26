@@ -235,7 +235,7 @@ ShipSelectionScreen::ShipSelectionScreen()
             {
                 if (gameGlobalInfo->gm_control_code.length() > 0)
                 {
-                    LOG(Info, "Player selected game master mode, which has a control code.");
+                    LOG(Info, "[shipselect] Player selected game master mode, which requires a control code.");
                     focus(password_dialog->entry);
                     password_dialog->open(tr("Enter the GM control code:"), "",
                         [](string code)
@@ -281,7 +281,7 @@ ShipSelectionScreen::ShipSelectionScreen()
             {
                 if (gameGlobalInfo->gm_control_code.length() > 0)
                 {
-                    LOG(Info, "Player selected limited game master mode, which has a control code.");
+                    LOG(Info, "[shipselect] Player selected limited game master mode, which requires a control code.");
                     focus(password_dialog->entry);
                     password_dialog->open(tr("Enter the GM control code:"), "",
                         [](string code)
@@ -324,7 +324,7 @@ ShipSelectionScreen::ShipSelectionScreen()
         {
             if (gameGlobalInfo->gm_control_code.length() > 0)
             {
-                LOG(Info, "Player selected spectate mode, which has a control code.");
+                LOG(Info, "[shipselect] Player selected spectate mode, which requires a control code.");
                 focus(password_dialog->entry);
                 password_dialog->open(tr("Enter the GM control code:"), "",
                     [](string code)
@@ -366,7 +366,7 @@ ShipSelectionScreen::ShipSelectionScreen()
         {
             if (gameGlobalInfo->gm_control_code.length() > 0)
             {
-                LOG(Info, "Player selected cinematic view mode, which has a control code.");
+                LOG(Info, "[shipselect] Player selected cinematic view mode, which requires a control code.");
                 focus(password_dialog->entry);
                 password_dialog->open(tr("Enter the GM control code:"), "",
                     [](string code)
@@ -976,7 +976,7 @@ void ShipSelectionScreen::joinPlayerShip(string entity_string)
         // ... and it has a control code, ask the player for it.
         if (pc->control_code.length() > 0)
         {
-            LOG(Info, "Player selected ", ship.getComponent<CallSign>() ? ship.getComponent<CallSign>()->callsign : string("[NO CALLSIGN]"), ", which has a control code.");
+            LOG(Info, "[shipselect] Player selected ", ship.getComponent<CallSign>() ? ship.getComponent<CallSign>()->callsign : string("[NO CALLSIGN]"), ", which requires a control code.");
 
             // Hide the ship selection UI temporarily to deter sneaky ship thieves.
             left_container->hide();

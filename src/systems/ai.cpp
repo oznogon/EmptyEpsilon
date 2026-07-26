@@ -137,7 +137,7 @@ void AISystem::update(float delta)
         metrics_snapshot.immediate_heavy_count = immediate_heavy_count;
         metrics_snapshot.heavy_budget = MAX_HEAVY_PER_FRAME;
 
-        LOG(Debug, "[AISystem] ", total_ai_count, " AIs | ",
+        LOG(Debug, "[aisystem] ", total_ai_count, " AIs | ",
                    "light=", light_per_frame_us, "us | ",
                    "heavy=", heavy_per_frame_us, "us | ",
                    "total=", total_ms, "ms/frame ",

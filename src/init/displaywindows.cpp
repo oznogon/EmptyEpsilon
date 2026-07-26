@@ -103,9 +103,9 @@ bool createDisplayWindows()
     if (wants_gl_debug)
     {
         if (sp::gl::enableDebugOutput(wants_gl_debug_synchronous))
-            LOG(Info, "GL Debug output enabled.");
+            LOG(Info, "[displaywin] GL Debug output enabled.");
         else
-            LOG(Warning, "GL Debug output requested but not available on this system.");
+            LOG(Warning, "[displaywin] GL Debug output requested but not available on this system.");
     }
 
     for (size_t n = 0; n < windows.size(); n++)
@@ -127,7 +127,7 @@ bool createDisplayWindows()
     {
         if (!ShaderRegistry::Shader::initialize())
         {
-            LOG(Error, "Failed to initialize shaders, exiting.");
+            LOG(Error, "[displaywin] Failed to initialize shaders, exiting.");
             SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to initialize shaders (possible cause: cannot find shader files)", nullptr);
             return false;
         }

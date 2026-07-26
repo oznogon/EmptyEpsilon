@@ -33,12 +33,12 @@ void StdinLuaConsole::update(float delta)
     FD_ZERO(&fds);
     FD_SET(STDIN_FILENO, &fds);
     select(STDIN_FILENO+1, &fds, NULL, NULL, &tv);
+
     if (FD_ISSET(0, &fds))
     {
         char buffer[128];
         int amount = read(0, buffer, sizeof(buffer));
-        for (int n=0; n<amount; n++)
-            addInput(buffer[n]);
+        for (int n = 0; n < amount; n++) addInput(buffer[n]);
     }
 #endif
 }
@@ -51,11 +51,8 @@ void StdinLuaConsole::addInput(char c)
         buffer.clear();
     }
     else if (c == 8 || c == 127)
-    {
         if (!buffer.empty()) buffer.pop_back();
-    }
-    else if (c >= 32)
-        buffer.push_back(c);
+    else if (c >= 32) buffer.push_back(c);
 }
 
 void StdinLuaConsole::executeCommand(const string& cmd)
@@ -94,6 +91,7 @@ void StdinLuaConsole::executeCommand(const string& cmd)
     {
         string filename = cmd.substr(6);
         FILE* f = fopen(filename.c_str(), "w");
+
         if (!f)
         {
             printf("Can't write to %s\n", filename.c_str());
@@ -101,8 +99,7 @@ void StdinLuaConsole::executeCommand(const string& cmd)
             return;
         }
 
-        for (const auto& line : history)
-            fprintf(f, "%s\n", line.c_str());
+        for (const auto& line : history) fprintf(f, "%s\n", line.c_str());
 
         fclose(f);
         printf("History written to %s\n", filename.c_str());
@@ -126,7 +123,7 @@ void StdinLuaConsole::executeCommand(const string& cmd)
         int n = std::stoi(cmd.substr(1));
         if (n < 1 || n > static_cast<int>(history.size()))
         {
-            LOG(Error, "Event ", n, " not found");
+            LOG(Error, "[stdin] Event ", n, " not found");
             printPrompt();
             return;
         }

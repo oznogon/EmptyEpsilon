@@ -870,14 +870,17 @@ void ShipAI::flyTowards(glm::vec2 target, float keep_distance)
 {
     auto docking_port = owner.getComponent<DockingPort>();
     auto ot = owner.getComponent<sp::Transform>();
+
+    // If we don't have a transform, we might be internally docked.
+    // But we're moving now, so undock.
     if (!ot)
     {
-        // If we don't have a transform, we might be internally docked.
-        // But we're moving now, so undock.
         if (docking_port && docking_port->state == DockingPort::State::Docked)
             DockingSystem::requestUndock(owner);
+
         // Otherwise, we don't have a position, so we can't fly toward anything.
-        LOG(Warning, "Fly Toward order issued to entity ", owner.toString(), " without a Transform.");
+        LOG(Warning, "[ai] Fly Toward order issued to entity ", owner.toString(), " without a Transform.");
+
         return;
     }
 

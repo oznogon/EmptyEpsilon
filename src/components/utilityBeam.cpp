@@ -5,16 +5,18 @@ bool UtilityBeam::setArc(float arc_request)
 {
     if (max_arc <= 0.0f)
     {
-        LOG(DEBUG) << "Attempted to set utility beam arc when max arc <= 0";
+        LOG(Debug, "[utilitybeam] Attempted to set utility beam arc when max arc <= 0");
         return false;
     }
+
     if (fixed_arc)
     {
-        LOG(DEBUG) << "Attempted to set arc on fixed-arc utility beam";
+        LOG(Debug, "[utilitybeam] Attempted to set arc on fixed-arc utility beam");
         return false;
     }
+
     if (arc_request <= 0.0f || arc_request >= 360.0f)
-        LOG(WARNING) << "Attempted invalid utility beam arc request of " << arc_request;
+        LOG(Warning, "[utilitybeam] Attempted invalid utility beam arc request of ", arc_request);
 
     arc = std::max(std::min(arc_request, max_arc), MIN_ARC);
     return true;
@@ -32,16 +34,18 @@ bool UtilityBeam::setRange(float range_request)
 {
     if (max_range <= 0.0f)
     {
-        LOG(DEBUG) << "Attempted to set utility beam range when max range <= 0";
+        LOG(Debug, "[utilitybeam] Attempted to set utility beam range when max range <= 0");
         return false;
     }
+
     if (fixed_range)
     {
-        LOG(DEBUG) << "Attempted to set range on fixed-range utility beam";
+        LOG(Debug, "[utilitybeam] Attempted to set range on fixed-range utility beam");
         return false;
     }
+
     if (range_request <= 0.0f)
-        LOG(WARNING) << "Attempted invalid utility beam range request of " << range_request;
+        LOG(Warning, "[utilitybeam] Attempted invalid utility beam range request of ", range_request);
 
     range = std::max(std::min(range_request, max_range), MIN_RANGE);
     return true;

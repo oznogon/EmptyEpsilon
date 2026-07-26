@@ -105,19 +105,9 @@ void UtilityBeamSystem::update(float delta)
                                     // we'll potentially affect.
                                     if (distance <= utility_beam.range)
                                         fire(this_entity, utility_beam, beam_mode, transform, entity_in_range, distance, angle_diff);
-                                    /*
-                                    else
-                                    {
-                                        LOG(DEBUG) << "Beam is active but target is not in the beam's range";
-                                    }
-                                    */
+                                    // else LOG(Debug, "[utilitybeam] Beam is active but target is not in the beam's range.");
                                 }
-                                /*
-                                else
-                                {
-                                    LOG(DEBUG) << "Beam is active but target is not in the beam's arc";
-                                }
-                                */
+                                // else LOG(Debug, "[utilitybeam] Beam is active but target is not in the beam's arc.");
                             }
                         }
                     }

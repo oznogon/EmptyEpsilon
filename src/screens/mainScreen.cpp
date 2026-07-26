@@ -31,27 +31,52 @@ ScreenMainScreen::ScreenMainScreen(RenderLayer* render_layer)
     new GuiOverlay(this, "", glm::u8vec4(0,0,0,255));
 
     viewport = new GuiViewportMainScreen(this, "VIEWPORT");
-    viewport->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    viewport
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Radars
     main_screen_radar = new GuiRadarView(viewport, "VIEWPORT_RADAR", nullptr);
-    main_screen_radar->setStyle(GuiRadarView::CircularMasked)->setSize(200, 200)->setPosition(-20, 20, sp::Alignment::TopRight);
+    main_screen_radar
+        ->setStyle(GuiRadarView::CircularMasked)
+        ->setPosition(-20.0f, 20.0f, sp::Alignment::TopRight)
+        ->setSize(200.0f, 200.0f);
 
     tactical_radar = new GuiRadarView(this, "TACTICAL", nullptr);
-    tactical_radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    tactical_radar->setRangeIndicatorStepSize(1000.0f)->shortRange()->enableCallsigns()->hide();
+    tactical_radar
+        ->setRangeIndicatorStepSize(1000.0f)
+        ->shortRange()
+        ->enableCallsigns()
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->hide();
     long_range_radar = new GuiRadarView(this, "LONG_RANGE", nullptr);
-    long_range_radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    long_range_radar->setRangeIndicatorStepSize(5000.0f)->longRange()->enableCallsigns()->hide();
-    long_range_radar->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
+    long_range_radar
+        ->setRangeIndicatorStepSize(5000.0f)
+        ->longRange()
+        ->enableCallsigns()
+        ->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar)
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->hide();
     strategic_map = new GuiRadarView(this, "STRATEGIC", 50000.0f, nullptr);
-    strategic_map->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    strategic_map->longRange()->enableWaypoints()->enableCallsigns()->setStyle(GuiRadarView::Rectangular)->hide();
-    strategic_map->setAutoCentering(true)->setFogOfWarStyle(GuiRadarView::FriendlysShortRangeFogOfWar);
+    strategic_map
+        ->longRange()
+        ->enableWaypoints()
+        ->enableCallsigns()
+        ->setAutoCentering(true)
+        ->setFogOfWarStyle(GuiRadarView::FriendlysShortRangeFogOfWar)
+        ->setStyle(GuiRadarView::Rectangular)
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->hide();
 
     // Overlays
     onscreen_comms = new GuiCommsOverlay(this);
-    onscreen_comms->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setVisible(false);
+    onscreen_comms
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setVisible(false);
+
     new GuiShipDestroyedPopup(this);
     new GuiJumpIndicator(this);
     new GuiSelfDestructIndicator(this);
@@ -67,13 +92,18 @@ ScreenMainScreen::ScreenMainScreen(RenderLayer* render_layer)
     if (PreferencesManager::get("music_enabled") != "0")
     {
         threat_estimate = new ThreatLevelEstimate();
-        threat_estimate->setCallbacks([](){
-            LOG(INFO) << "Switching to ambient music";
-            soundManager->playMusicSet(findResources("music/ambient/*.ogg"));
-        }, []() {
-            LOG(INFO) << "Switching to combat music";
-            soundManager->playMusicSet(findResources("music/combat/*.ogg"));
-        });
+        threat_estimate->setCallbacks(
+            []()
+            {
+                LOG(Info, "[mainscreen] Threat estimate reduced, switching to ambient music");
+                soundManager->playMusicSet(findResources("music/ambient/*.ogg"));
+            },
+            []()
+            {
+                LOG(Info, "[mainscreen] Threat estimate increased, switching to combat music");
+                soundManager->playMusicSet(findResources("music/combat/*.ogg"));
+            }
+        );
     }
 
     // Initialize and play the impulse engine sound.
@@ -83,8 +113,7 @@ ScreenMainScreen::ScreenMainScreen(RenderLayer* render_layer)
 
 void ScreenMainScreen::destroy()
 {
-    if (threat_estimate)
-        threat_estimate->destroy();
+    if (threat_estimate) threat_estimate->destroy();
     PObject::destroy();
 }
 
@@ -102,7 +131,10 @@ void ScreenMainScreen::update(float delta)
     if (keys.help.getDown()) keyboard_help->toggle();
 
     if (keys.pause.getDown())
-        if (game_server && !gameGlobalInfo->getVictoryFaction()) engine->setGameSpeed(engine->getGameSpeed() > 0.0f ? 0.0f : 1.0f);
+    {
+        if (game_server && !gameGlobalInfo->getVictoryFaction())
+            engine->setGameSpeed(engine->getGameSpeed() > 0.0f ? 0.0f : 1.0f);
+    }
 
     if (game_client && game_client->getStatus() == GameClient::Disconnected)
     {
@@ -240,10 +272,8 @@ void ScreenMainScreen::update(float delta)
 
 bool ScreenMainScreen::onPointerDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
-    if (GuiCanvas::onPointerDown(button, position, id))
-        return true;
-    if (!my_spaceship)
-        return false;
+    if (GuiCanvas::onPointerDown(button, position, id)) return true;
+    if (!my_spaceship) return false;
 
     auto pc = my_spaceship.getComponent<PlayerControl>();
     if (!pc)
@@ -341,5 +371,6 @@ bool ScreenMainScreen::onPointerDown(sp::io::Pointer::Button button, glm::vec2 p
     default:
         break;
     }
+
     return true;
 }

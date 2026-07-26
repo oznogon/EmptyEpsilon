@@ -18,13 +18,13 @@ public:
 
 VirtualOutputDevice::VirtualOutputDevice()
 {
-    channel_count = 512;
-    for(int n=0; n<512; n++)
+    for (int n = 0; n < 512; n++)
     {
         channel_data[n].value = 0;
         channel_data[n].type = White;
         channel_data[n].composition = 1;
     }
+
     renderer = new VirtualOutputRenderer(this);
 }
 
@@ -36,21 +36,21 @@ VirtualOutputDevice::~VirtualOutputDevice()
 bool VirtualOutputDevice::configure(std::unordered_map<string, string> settings)
 {
     if (settings.find("channels") != settings.end())
-    {
         channel_count = std::max(1, std::min(512, settings["channels"].toInt()));
-    }
+
     if (settings.find("virtual_types") != settings.end())
     {
         std::vector<string> virtual_types = settings["virtual_types"].split(",");
         unsigned int index = 0;
-        for(string type_string : virtual_types)
+        for (string type_string : virtual_types)
         {
             type_string = type_string.strip();
-            if (type_string.length() < 1)
-                type_string = "W";
-            if (index + type_string.length() < (unsigned int)(channel_count))
+
+            if (type_string.length() < 1) type_string = "W";
+
+            if (index + type_string.length() < static_cast<unsigned int>(channel_count))
             {
-                for(char c : type_string)
+                for (char c : type_string)
                 {
                     channel_data[index].composition = static_cast<int>(type_string.length());
                     switch(c)
@@ -61,7 +61,7 @@ bool VirtualOutputDevice::configure(std::unordered_map<string, string> settings)
                     default:
                         channel_data[index].type = White;
                     }
-                    LOG(DEBUG) << c << ":" << index << ":" << channel_data[index].type;
+                    LOG(Debug, "[virtualdevice] ", c, ":", index, ":", channel_data[index].type);
                     index++;
                 }
             }
@@ -76,7 +76,7 @@ void VirtualOutputDevice::setChannelData(int channel, float value)
         channel_data[channel].value = value;
 }
 
-//Return the number of output channels supported by this device.
+// Return the number of output channels supported by this device.
 int VirtualOutputDevice::getChannelCount()
 {
     return channel_count;
@@ -85,31 +85,39 @@ int VirtualOutputDevice::getChannelCount()
 void VirtualOutputDevice::render(sp::RenderTarget& renderer)
 {
     int location = 0;
-    for(int n=0; n<channel_count; n+=channel_data[n].composition, location++)
+    for (int n = 0; n < channel_count; n += channel_data[n].composition, location++)
     {
         glm::u8vec4 color(0, 0, 0, 255);
-        for(int offset=0; offset<channel_data[n].composition; offset++)
+        for (int offset = 0; offset < channel_data[n].composition; offset++)
         {
             ChannelData& data = channel_data[n + offset];
             switch(data.type)
             {
             case White:
-                color.r = std::min(255, int(color.r + data.value * 255));
-                color.g = std::min(255, int(color.g + data.value * 255));
-                color.b = std::min(255, int(color.b + data.value * 255));
+                color.r = std::min(255, static_cast<int>(color.r + data.value * 255));
+                color.g = std::min(255, static_cast<int>(color.g + data.value * 255));
+                color.b = std::min(255, static_cast<int>(color.b + data.value * 255));
                 break;
             case Red:
-                color.r = std::min(255, int(color.r + data.value * 255));
+                color.r = std::min(255, static_cast<int>(color.r + data.value * 255));
                 break;
             case Green:
-                color.g = std::min(255, int(color.g + data.value * 255));
+                color.g = std::min(255, static_cast<int>(color.g + data.value * 255));
                 break;
             case Blue:
-                color.b = std::min(255, int(color.b + data.value * 255));
+                color.b = std::min(255, static_cast<int>(color.b + data.value * 255));
                 break;
             }
         }
 
-        renderer.fillRect(sp::Rect(static_cast<float>((location % 32) * 32 + 64), static_cast<float>((location / 32) * 32 + 64), 32.0f, 32.0f), color);
+        renderer.fillRect(
+            sp::Rect(
+                static_cast<float>((location % 32) * 32 + 64),
+                static_cast<float>((location / 32) * 32 + 64),
+                32.0f,
+                32.0f
+            ),
+            color
+        );
     }
 }

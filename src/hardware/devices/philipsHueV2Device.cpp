@@ -47,8 +47,7 @@ bool PhilipsHueV2Device::configure(std::unordered_map<string, string> settings)
         for (const auto& id : settings["lights"].split(","))
         {
             auto stripped = id.strip();
-            if (stripped.length() > 0)
-                requested_lights.push_back(stripped);
+            if (stripped.length() > 0) requested_lights.push_back(stripped);
         }
     }
 
@@ -66,11 +65,11 @@ bool PhilipsHueV2Device::configure(std::unordered_map<string, string> settings)
 
     if (api_key == "")
     {
-        LOG(Error, "No Philips Hue v2 API key configured. Set 'apikey' or 'keyfile' in the device config.");
+        LOG(Error, "[huev2] No Philips Hue V2 API key configured. Set 'apikey' or 'keyfile' in the device config.");
         return false;
     }
 
-    LOG(Info, "Attempting to connect to Philips Hue V2 bridge ", ip_address, " on port ", port, " (HTTPS)");
+    LOG(Info, "[huev2] Attempting to connect to Philips Hue V2 bridge ", ip_address, " on port ", port, " (HTTPS)");
 
     sp::io::http::Request http(ip_address, port, sp::io::http::Request::Scheme::Https);
     http.setHeader("hue-application-key", api_key);
@@ -82,10 +81,12 @@ bool PhilipsHueV2Device::configure(std::unordered_map<string, string> settings)
     {
         const auto& body = response.body;
         std::string err;
+
         if (auto json = sp::json::parse(body, err); json)
         {
             auto root = json.value();
             auto& data = root["data"];
+
             if (data.is_array())
             {
                 std::vector<LightInfo> discovered;
@@ -94,7 +95,7 @@ bool PhilipsHueV2Device::configure(std::unordered_map<string, string> settings)
                     LightInfo info;
                     info.light_id = light["id"].get<std::string>();
                     discovered.push_back(info);
-                    LOG(Info, "Discovered light: ", info.light_id);
+                    LOG(Info, "[huev2] Discovered light: ", info.light_id);
                 }
 
                 if (!requested_lights.empty())
@@ -113,19 +114,17 @@ bool PhilipsHueV2Device::configure(std::unordered_map<string, string> settings)
                             }
                         }
                         if (!found)
-                            LOG(Warning, "Requested light not found on bridge: ", req_id);
+                            LOG(Warning, "[huev2] Requested light not found on bridge: ", req_id);
                     }
                 }
-                else
-                {
-                    lights = std::move(discovered);
-                }
+                else lights = std::move(discovered);
+
                 light_count = static_cast<int>(lights.size());
             }
         }
         else
         {
-            LOG(Error, "JSON parsing failed: ", err);
+            LOG(Error, "[huev2] JSON parsing failed: ", err);
             return false;
         }
 
@@ -134,23 +133,53 @@ bool PhilipsHueV2Device::configure(std::unordered_map<string, string> settings)
         return true;
     }
 
-    LOG(Error, "Failed to connect to Philips Hue V2 bridge: ", response.status);
-    if (response.body.length() > 0) LOG(Warning, response.body);
+    LOG(Error, "[huev2] Failed to connect to Philips Hue V2 bridge: ", response.status);
+    if (response.body.length() > 0) LOG(Warning, "[huev2] ", response.body);
+
     return false;
 }
 
 void PhilipsHueV2Device::setChannelData(int channel, float value)
 {
-    int light_idx = channel / 4;
+    const int light_idx = channel / 4;
     if (light_idx < 0 || light_idx >= light_count) return;
 
+    auto light = lights[light_idx];
     std::lock_guard<std::mutex> lock(mutex);
     switch(channel % 4)
     {
-    case 0: if (lights[light_idx].brightness != value) lights[light_idx].dirty = true; lights[light_idx].brightness = value; break;
-    case 1: if (lights[light_idx].saturation != value) lights[light_idx].dirty = true; lights[light_idx].saturation = value; break;
-    case 2: if (lights[light_idx].hue != value) lights[light_idx].dirty = true; lights[light_idx].hue = value; break;
-    case 3: if (lights[light_idx].transitiontime != static_cast<int>(value)) lights[light_idx].dirty = true; lights[light_idx].transitiontime = static_cast<int>(value); break;
+    case 0:
+        {
+            if (light.brightness != value)
+                light.dirty = true;
+
+            light.brightness = value;
+        }
+        break;
+    case 1:
+        {
+            if (light.saturation != value)
+                light.dirty = true;
+
+            light.saturation = value;
+        }
+        break;
+    case 2:
+        {
+            if (light.hue != value)
+                light.dirty = true;
+
+            light.hue = value;
+        }
+        break;
+    case 3:
+        {
+            if (light.transitiontime != static_cast<int>(value))
+                light.dirty = true;
+
+            light.transitiontime = static_cast<int>(value);
+        }
+        break;
     }
 }
 
@@ -219,10 +248,12 @@ void PhilipsHueV2Device::updateLoop()
                 }
 
                 string state_key = "bri-" + string(static_cast<int>(info.brightness * 100.0f)) + "-sat-" + string(static_cast<int>(info.saturation * 100.0f)) + "-hue-" + string(static_cast<int>(info.hue * 360.0f)) + "-transition-" + string(info.transitiontime);
+
                 if (info.laststate != state_key)
                 {
                     lights[n].laststate = state_key;
                     string post_data;
+
                     if (info.brightness > 0.0f)
                     {
                         float hue_deg = info.hue * 360.0f;
@@ -234,11 +265,11 @@ void PhilipsHueV2Device::updateLoop()
                     }
                     else post_data = "{\"on\":{\"on\":false}}";
 
-                    auto response = http.request("PUT", string{ "/clip/v2/resource/light/" } + info.light_id, post_data);
+                    auto response = http.request("PUT", string{"/clip/v2/resource/light/"} + info.light_id, post_data);
                     if (response.status != 200)
                     {
-                        LOG(Warning, "Failed to set light [", info.light_id, "] philips hue v2 bridge: ", response.status);
-                        LOG(Warning, response.body);
+                        LOG(Warning, "[huev2] Failed to set light [", info.light_id, "] on Philips Hue V2 bridge: ", response.status);
+                        LOG(Warning, "[huev2] ", response.body);
                     }
                 }
             }

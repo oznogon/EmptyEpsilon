@@ -1,43 +1,47 @@
+#include "serialDriver.h"
 #include "logging.h"
 #ifdef _WIN32
-    #include <windows.h>
+#include <windows.h>
 #endif
 #ifdef __gnu_linux__
-    //Including ioctl or termios conflicts with asm/termios.h which we need for TCGETS2. So locally define the ioctl and tcsendbreak functions. Yes, it's dirty, but it works.
-    //#include <sys/ioctl.h>
-    //#include <termios.h>
+// Including ioctl or termios conflicts with asm/termios.h, which we need
+// for TCGETS2. So locally define the ioctl and tcsendbreak functions. Yes,
+// it's dirty, but it works.
+// #include <sys/ioctl.h>
+// #include <termios.h>
 #ifndef ANDROID
-    extern "C" {
+extern "C"
+{
     extern int ioctl (int __fd, unsigned long int __request, ...) __THROW;
     extern int tcsendbreak (int __fd, int __duration) __THROW;
-    }
+}
 #endif
-    #include <asm/termios.h>
-    #include <fcntl.h>
-    #include <unistd.h>
-    #include <dirent.h>
+#include <asm/termios.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <dirent.h>
 #endif
 #if defined(__APPLE__) && defined(__MACH__)
-    #include <IOKit/serial/ioss.h>
-    #include <sys/ioctl.h>
-    #include <fcntl.h>
-    #include <unistd.h>
-    #include <termios.h>
+#include <IOKit/serial/ioss.h>
+#include <sys/ioctl.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <termios.h>
 
-    //Define the IOCTL for OSX that allows you to set a custom serial speed, if it's not defined by one of the includes.
-    #ifndef IOSSIOSPEED
-    #define IOSSIOSPEED _IOW('T', 2, speed_t)
-    #endif
+// Define the IOCTL for OSX that allows you to set a custom serial speed, if
+// it's not defined by one of the includes.
+#ifndef IOSSIOSPEED
+#define IOSSIOSPEED _IOW('T', 2, speed_t)
 #endif
-
-#include "serialDriver.h"
+#endif
 
 SerialPort::SerialPort(string name)
 {
     std::vector<string> ports = portsByPseudoDriverName(name);
+
     if (ports.size() > 0)
     {
-        LOG(INFO) << "Selected port: " << ports[0] << " for pseudo name: " << name;
+        LOG(Info, "[serial] Selected port: ", ports[0], " for pseudo name: ", name);
         name = ports[0];
     }
 #ifdef _WIN32
@@ -52,25 +56,20 @@ SerialPort::SerialPort(string name)
         timeouts.WriteTotalTimeoutConstant = 0;
 
         if (!SetCommTimeouts(handle, &timeouts))
-        {
-            LOG(WARNING) << "SetCommTimeouts failed!";
-        }
+            LOG(Warning, "[serial] SetCommTimeouts failed.");
     }
 #endif
 #if defined(__gnu_linux__) || (defined(__APPLE__) && defined(__MACH__))
-    if (!name.startswith("/dev/"))
-        name = "/dev/" + name;
+    if (!name.startswith("/dev/")) name = "/dev/" + name;
     handle = open(name.c_str(), O_RDWR | O_NOCTTY | O_NDELAY);
 #endif
 
-    if (!isOpen())
-        LOG(WARNING) << "Failed to open: " << name;
+    if (!isOpen()) LOG(Warning, "[serial] Failed to open: ", name);
 }
 
 SerialPort::~SerialPort()
 {
-    if (!isOpen())
-        return;
+    if (!isOpen()) return;
 
 #ifdef _WIN32
     CloseHandle(handle);
@@ -95,22 +94,24 @@ bool SerialPort::isOpen()
 
 void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits stopbits)
 {
-    if (!isOpen())
-        return;
+    if (!isOpen()) return;
 #ifdef _WIN32
     FlushFileBuffers(handle);
 
     DCB dcb;
     memset(&dcb, 0, sizeof(DCB));
+
     if (!GetCommState(handle, &dcb))
     {
         DWORD error;
         ClearCommError(handle, &error, nullptr);
-        LOG(ERROR) << "GetCommState failed!" << error;
+        LOG(Error, "[serial] GetCommState failed: ", error);
         return;
     }
+
     dcb.BaudRate = baudrate;
     dcb.ByteSize = databits;
+
     switch(parity)
     {
     case NoParity:
@@ -126,6 +127,7 @@ void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits
         dcb.Parity = MARKPARITY;
         break;
     }
+
     switch(stopbits)
     {
     case OneStopBit:
@@ -139,16 +141,17 @@ void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits
         break;
     }
 
-    //Do not handle parity errors.
+    // Don't handle parity errors.
     dcb.fParity = false;
 
-    //Do not discard null chars.
+    // Don't discard null chars.
     dcb.fNull = false;
 
-    //Abort on error. Need to call ClearCommError when an error is returned.
+    // Abort on error. Need to call ClearCommError when an error is returned.
     dcb.fAbortOnError = false;
 
-    //Disable all flow control settings, so we can control the DTR and RTS lines manually.
+    // Disable all flow control settings, so we can control the DTR and RTS
+    // lines manually.
     dcb.fOutxCtsFlow = false;
     dcb.fOutxDsrFlow = false;
     dcb.fDsrSensitivity = false;
@@ -156,11 +159,11 @@ void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits
     dcb.fDtrControl = DTR_CONTROL_DISABLE;
     dcb.fTXContinueOnXoff = false;
 
-    if(!SetCommState(handle, &dcb))
+    if (!SetCommState(handle, &dcb))
     {
         DWORD error;
         ClearCommError(handle, &error, nullptr);
-        LOG(ERROR) << "SetCommState failed!" << error;
+        LOG(Error, "[serial] SetCommState failed: ", error);
     }
 #endif
 #ifdef __gnu_linux__
@@ -169,19 +172,19 @@ void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits
     struct termios2 tio;
     ioctl(handle, TCGETS2, &tio);
 
-    // Clear handshake, parity, stopbits and size
+    // Clear handshake, parity, stopbits and size.
     tio.c_cflag = CLOCAL;
     tio.c_iflag = 0;
     tio.c_oflag = 0;
     tio.c_lflag = 0;
 
-    // Set the baudrate
+    // Set the baudrate.
     tio.c_cflag &= ~CBAUD;
     tio.c_cflag |= BOTHER;
     tio.c_ispeed = baudrate;
     tio.c_ospeed = baudrate;
 
-    // Enable the receiver
+    // Enable the receiver.
     tio.c_cflag |= CREAD;
 
     switch (databits)
@@ -201,7 +204,7 @@ void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits
         break;
     }
 
-    switch(parity)
+    switch (parity)
     {
     case NoParity:
         break;
@@ -215,12 +218,13 @@ void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits
         tio.c_cflag |= PARENB | PARODD | CMSPAR;
         break;
     }
-    switch(stopbits)
+
+    switch (stopbits)
     {
     case OneStopBit:
         break;
     case OneAndAHalfStopBit:
-        LOG(WARNING) << "OneAndAHalfStopBit not supported on linux!";
+        LOG(Warning, "[serial] OneAndAHalfStopBit isn't supported on Linux.");
         break;
     case TwoStopbits:
         tio.c_cflag |= CSTOPB;
@@ -233,13 +237,13 @@ void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits
     struct termios tio;
     tcgetattr(handle, &tio);
 
-    // Clear handshake, parity, stopbits and size
+    // Clear handshake, parity, stopbits, and size.
     tio.c_cflag = CLOCAL;
     tio.c_iflag = 0;
     tio.c_oflag = 0;
     tio.c_lflag = 0;
 
-    // Enable the receiver
+    // Enable the receiver.
     tio.c_cflag |= CREAD;
 
     switch (databits)
@@ -259,7 +263,7 @@ void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits
         break;
     }
 
-    switch(parity)
+    switch (parity)
     {
     case NoParity:
         tio.c_cflag &= (tcflag_t) ~(PARENB | PARODD);
@@ -275,12 +279,12 @@ void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits
         break;
     }
 
-    switch(stopbits)
+    switch (stopbits)
     {
     case OneStopBit:
         break;
     case OneAndAHalfStopBit:
-        LOG(WARNING) << "OneAndAHalfStopBit not supported on posix!";
+        LOG(Warning, "[serial] OneAndAHalfStopBit isn't supported on POSIX.");
         break;
     case TwoStopbits:
         tio.c_cflag |= CSTOPB;
@@ -291,19 +295,16 @@ void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits
 
     // setting nonstandard baud rate
     speed_t speed = baudrate;
-    if (ioctl (handle, IOSSIOSPEED, &speed, 1) < 0) {
-        LOG(ERROR) << "setting baud rate failed. errno:" << errno;
-    }
-
+    if (ioctl (handle, IOSSIOSPEED, &speed, 1) < 0)
+        LOG(Error, "[serial] Setting baud rate failed. errno: ", errno);
 #endif
 }
 
 void SerialPort::send(void* data, int data_size)
 {
-    if (!isOpen())
-        return;
+    if (!isOpen()) return;
 #ifdef _WIN32
-    while(data_size > 0)
+    while (data_size > 0)
     {
         DWORD written = 0;
         if (!WriteFile(handle, data, data_size, &written, NULL))
@@ -313,16 +314,16 @@ void SerialPort::send(void* data, int data_size)
             ClearCommError(handle, &dwErrors, &comStat);
             return;
         }
+
         data = ((char*)data) + written;
         data_size -= written;
     }
 #endif
 #if defined(__gnu_linux__) || (defined(__APPLE__) && defined(__MACH__))
-    while(data_size > 0)
+    while (data_size > 0)
     {
         int written = write(handle, data, data_size);
-        if (written < 1)
-            return;
+        if (written < 1) return;
         data = ((char*)data) + written;
         data_size -= written;
     }
@@ -331,33 +332,31 @@ void SerialPort::send(void* data, int data_size)
 
 int SerialPort::recv(void* data, int data_size)
 {
-    if (!isOpen())
-        return 0;
+    if (!isOpen()) return 0;
 
 #ifdef _WIN32
     DWORD read_size = 0;
+
     if (!ReadFile(handle, data, data_size, &read_size, NULL))
     {
         COMSTAT comStat;
-        DWORD   dwErrors;
+        DWORD dwErrors;
         ClearCommError(handle, &dwErrors, &comStat);
         return 0;
     }
+
     return read_size;
 #endif
 #if defined(__gnu_linux__) || (defined(__APPLE__) && defined(__MACH__))
     int bytes_read = read(handle, data, data_size);
-    if (bytes_read > 0)
-        return bytes_read;
-    return 0;
+    if (bytes_read > 0) return bytes_read;
 #endif
     return 0;
 }
 
 void SerialPort::setDTR()
 {
-    if (!isOpen())
-        return;
+    if (!isOpen()) return;
 #ifdef _WIN32
     EscapeCommFunction(handle, SETDTR);
 #endif
@@ -372,8 +371,7 @@ void SerialPort::setDTR()
 
 void SerialPort::clearDTR()
 {
-    if (!isOpen())
-        return;
+    if (!isOpen()) return;
 #ifdef _WIN32
     EscapeCommFunction(handle, CLRDTR);
 #endif
@@ -388,8 +386,7 @@ void SerialPort::clearDTR()
 
 void SerialPort::setRTS()
 {
-    if (!isOpen())
-        return;
+    if (!isOpen()) return;
 #ifdef _WIN32
     EscapeCommFunction(handle, SETRTS);
 #endif
@@ -404,8 +401,7 @@ void SerialPort::setRTS()
 
 void SerialPort::clearRTS()
 {
-    if (!isOpen())
-        return;
+    if (!isOpen()) return;
 #ifdef _WIN32
     EscapeCommFunction(handle, CLRRTS);
 #endif
@@ -454,9 +450,8 @@ std::vector<string> SerialPort::getAvailablePorts()
             data_size = sizeof(value);
         }
         RegCloseKey(key);
-    }else{
-        LOG(ERROR) << "Failed to open registry key for serial port list.";
     }
+    else LOG(Error, "[serial] Failed to open registry key for serial port list.");
 #endif
 #ifdef __gnu_linux__
     DIR* dir = opendir("/dev/");
@@ -468,11 +463,14 @@ std::vector<string> SerialPort::getAvailablePorts()
             string filename = entry->d_name;
             if (!filename.startswith("tty"))
                 continue;
+
             if (filename.startswith("ttyACM"))
                 names.push_back(filename);
+
             if (filename.startswith("ttyUSB"))
                 names.push_back(filename);
         }
+
         closedir(dir);
     }
 #endif
@@ -484,6 +482,7 @@ string SerialPort::getPseudoDriverName(string port)
 #ifdef _WIN32
     string ret;
     HKEY key;
+
     if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, "HARDWARE\\DEVICEMAP\\SERIALCOMM", 0, KEY_READ | KEY_QUERY_VALUE, &key) == ERROR_SUCCESS)
     {
         char value[2048];
@@ -492,14 +491,14 @@ string SerialPort::getPseudoDriverName(string port)
         unsigned long data_size = sizeof(data);
         int index = 0;
 
-        while(RegEnumValue(key, index, value, &value_size, NULL, NULL, data, &data_size) == ERROR_SUCCESS)
+        while (RegEnumValue(key, index, value, &value_size, NULL, NULL, data, &data_size) == ERROR_SUCCESS)
         {
             if (string((char*)data) == port)
             {
-                //Replace numbers by underscores so matching drivers is easier. As these device names are numbered.
-                for(unsigned int n=0; n<value_size; n++)
-                    if(value[n] >= '0' && value[n] <= '9')
-                        value[n] = '@';
+                // These device names are numbered. Replace numbers with
+                // underscores to make matching drivers easier.
+                for (unsigned int n = 0; n < value_size; n++)
+                    if (value[n] >= '0' && value[n] <= '9') value[n] = '@';
 
                 ret = string(value);
             }
@@ -507,32 +506,37 @@ string SerialPort::getPseudoDriverName(string port)
             value_size = sizeof(value);
             data_size = sizeof(value);
         }
+
         RegCloseKey(key);
-    }else{
-        LOG(ERROR) << "Failed to open registry key for serial port list.";
     }
+    else LOG(Error, "[serial] Failed to open registry key for serial port list.");
+
     return ret;
 #endif
 #ifdef __gnu_linux__
     FILE* f = fopen(("/sys/class/tty/" + port + "/device/modalias").c_str(), "rt");
-    if (!f)
-        return "";
+    if (!f) return "";
+
     char buffer[128];
     buffer[127] = '\0';
     if (!fgets(buffer, 127, f))
+
     buffer[0] = '\0';
     fclose(f);
+
     return string(buffer);
 #endif
 #if defined(__APPLE__) && defined(__MACH__)
     FILE* f = fopen(("/dev/tty." + port).c_str(), "rt");
-    if (!f)
-        return "";
+    if (!f) return "";
+
     char buffer[128];
     buffer[127] = '\0';
     if (!fgets(buffer, 127, f))
+
     buffer[0] = '\0';
     fclose(f);
+
     return string(buffer);
 #endif
     return "";
@@ -542,13 +546,12 @@ std::vector<string> SerialPort::portsByPseudoDriverName(string driver_name)
 {
     std::vector<string> driver_names = driver_name.split(";");
     std::vector<string> names;
-    for(string driver : driver_names)
+
+    for (string driver : driver_names)
     {
-        for(string port : getAvailablePorts())
-        {
-            if (getPseudoDriverName(port) == driver)
-                names.push_back(port);
-        }
+        for (string port : getAvailablePorts())
+            if (getPseudoDriverName(port) == driver) names.push_back(port);
     }
+
     return names;
 }

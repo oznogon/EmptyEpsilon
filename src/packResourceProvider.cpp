@@ -50,7 +50,7 @@ PackResourceProvider::PackResourceProvider(string filename)
     if (version == 0)
     {
         int file_count = readInt(f);
-        LOG(Info, "[pack] Loaded: ", filename, " with ", file_count, " files");
+        LOG(Info, "[pack] Loaded pack: ", filename, " with ", file_count, " files");
         for(int n = 0; n < file_count; n++)
         {
             string file_name = readString(f);
@@ -116,7 +116,7 @@ void PackResourceProvider::addPackResourcesForDirectory(const string directory)
 
     if (asset_manager)
     {
-        LOG(Info, "[pack] Looking for packs in " << directory);
+        LOG(Info, "[pack] Looking for packs in ", directory);
         auto stripped = directory.rstrip("/");
         AAssetDir* dir = AAssetManager_openDir(asset_manager, stripped.c_str());
         if (dir)

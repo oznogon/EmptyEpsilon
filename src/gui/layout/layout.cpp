@@ -14,10 +14,10 @@ void GuiLayout::updateLoop(GuiContainer& container, const sp::Rect& rect)
         update(container, rect);
         if (--repeat_counter < 1)
         {
-            LOG(Warning, "Possible infinite loop in gui layout.");
+            LOG(Warning, "[guilayout] Possible infinite loop in GuiLayout.");
             return;
         }
-    } while(require_repeat);
+    } while (require_repeat);
 }
 
 void GuiLayout::update(GuiContainer& container, const sp::Rect& rect)
@@ -25,9 +25,7 @@ void GuiLayout::update(GuiContainer& container, const sp::Rect& rect)
     for(auto& w_ptr : container.getChildren())
     {
         GuiElement* w = w_ptr.get();
-        if (w->isDestroyed() || !w->isVisible()) {
-            continue;
-        }
+        if (w->isDestroyed() || !w->isVisible()) continue;
         basicLayout(rect, *w);
     }
 }

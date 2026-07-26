@@ -47,7 +47,7 @@ AutoConnectScreen::AutoConnectScreen(std::vector<AutoConnectPosition> positions,
             ship_filters[key] = "1";
         else if (key_value.size() == 2)
             ship_filters[key] = key_value[1].strip();
-        LOG(Info, "Auto connect filter: ", key, " = ", ship_filters[key]);
+        LOG(Info, "[autoconnect] Auto connect filter: ", key, " = ", ship_filters[key]);
     }
 
     if (PreferencesManager::get("instance_name") != "")
@@ -85,12 +85,12 @@ void AutoConnectScreen::update(float delta)
 
                 if (autoconnect_port < 1024 || autoconnect_port > 65535)
                 {
-                    LOG(Warning, "Invalid autoconnect port " + string(autoconnect_port));
+                    LOG(Warning, "[autoconnect] Invalid autoconnect port " + string(autoconnect_port));
                     autoconnect_port = DEFAULT_SERVER_PORT;
                 }
             }
 
-            LOG(Info, "Connecting to server at " + autoconnect_address + ":" + string(autoconnect_port));
+            LOG(Info, "[autoconnect] Connecting to server at " + autoconnect_address + ":" + string(autoconnect_port));
             status_label->setText(tr("Using autoconnect server ") + autoconnect_address + ":" + string(autoconnect_port));
             connect_to_address = autoconnect_address;
             connect_to_port = autoconnect_port;
@@ -246,7 +246,7 @@ bool AutoConnectScreen::isValidShip(sp::ecs::Entity ship)
                 return false;
         }
         else
-            LOG(Warning, "Unknown ship filter: ", it.first, " = ", it.second);
+            LOG(Warning, "[autoconnect] Unknown ship filter: ", it.first, " = ", it.second);
     }
 
     return true;
@@ -277,14 +277,13 @@ AutoConnectPosition::AutoConnectPosition(string value)
     {
         CrewPosition crew_position;
         auto parse_result = tryParseCrewPosition(part);
-        if (parse_result.has_value())
-            crew_position = *parse_result;
+        if (parse_result.has_value()) crew_position = *parse_result;
         else
         {
             auto pos = part.toInt();
             if (!pos)
             {
-                LOG(Error, "Unknown crew position ", part);
+                LOG(Error, "[autoconnect] Unknown crew position ", part);
                 continue;
             }
 
@@ -295,16 +294,15 @@ AutoConnectPosition::AutoConnectPosition(string value)
                 continue;
             }
 
-            pos -= 1; // Shift for legacy compatibility
+            // Shift for legacy compatibility
+            pos -= 1;
             if (pos < 0) pos = 0;
             if (pos > static_cast<int>(CrewPosition::MAX)) pos = static_cast<int>(CrewPosition::MAX);
             crew_position = CrewPosition(pos);
         }
 
-        if (crew_position == CrewPosition::MAX)
-            is_main_screen = true;
-        else
-            crew_positions.add(crew_position);
+        if (crew_position == CrewPosition::MAX) is_main_screen = true;
+        else crew_positions.add(crew_position);
     }
 }
 

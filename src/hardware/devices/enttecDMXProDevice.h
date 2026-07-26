@@ -11,12 +11,12 @@ class SerialPort;
 class EnttecDMXProDevice : public HardwareOutputDevice
 {
 private:
-    SerialPort* port;
+    SerialPort* port = nullptr;
     std::thread update_thread;
 
     bool run_thread;
-    int channel_count;
-    int resend_delay;
+    int channel_count = 512;
+    int resend_delay = 25;
     uint8_t channel_data[512];
 public:
     EnttecDMXProDevice();

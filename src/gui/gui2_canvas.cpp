@@ -152,19 +152,19 @@ void GuiCanvas::runUpdates(GuiContainer* parent)
     std::vector<GuiElement*> children_copy;
     for (const auto& ptr : parent->getChildren())
         children_copy.push_back(ptr.get());
+
     for (GuiElement* element : children_copy)
     {
         if (!element)
         {
-            LOG(Warning, "GuiElement in GuiCanvas::runUpdates is in the for loop but doesn't exist");
+            LOG(Warning, "[guicanvas] GuiElement in GuiCanvas::runUpdates is in the for loop but doesn't exist");
             continue;
         }
 
         // Verify the element is still owned by this parent.
         auto it = std::find_if(parent->getChildren().begin(), parent->getChildren().end(),
             [element](const std::unique_ptr<GuiElement>& ptr) { return ptr.get() == element; });
-        if (it == parent->getChildren().end())
-            continue;
+        if (it == parent->getChildren().end()) continue;
 
         element->onUpdate();
         runUpdates(element);
@@ -174,20 +174,27 @@ void GuiCanvas::runUpdates(GuiContainer* parent)
 #ifdef DEBUG
 static void dumpGuiTree(FILE* f, GuiContainer* c)
 {
-    for(auto& child_ptr : c->getChildren()) {
+    for (auto& child_ptr : c->getChildren())
+    {
         GuiElement* child = child_ptr.get();
         auto r = child->getRect();
+
         fprintf(f, "<div style='position:fixed;left:%fpx;top:%fpx;width:%fpx;height:%fpx;background:rgba(0,0,0,0.1);'>ID:%s", double(r.position.x), double(r.position.y), double(r.size.x), double(r.size.y), child->getID().c_str());
         fprintf(f, "<br>%s", typeid(child).name());
         fprintf(f, "<br>size=%f,%f", double(child->getLayout().size.x), double(child->getLayout().size.y));
+
         if (child->getLayout().match_content_x)
             fprintf(f, "<br>match_content_x=true");
+
         if (child->getLayout().match_content_y)
             fprintf(f, "<br>match_content_y=true");
+
         if (child->getLayout().fill_width)
             fprintf(f, "<br>fill_width=true");
+
         if (child->getLayout().fill_height)
             fprintf(f, "<br>fill_height=true");
+
         dumpGuiTree(f, child);
         fprintf(f, "</div>");
     }
@@ -197,6 +204,7 @@ void GuiCanvas::renderDebugDumps()
 {
     static float update_timer = 0.0f;
     update_timer += 1.0f / 60.0f;
+
     if (update_timer > 1.0f)
     {
         update_timer = 0.0f;

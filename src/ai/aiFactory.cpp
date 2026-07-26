@@ -11,9 +11,10 @@ ShipAIFactory::ShipAIFactory(string name, shipAIFactoryFunc_t func)
 
 shipAIFactoryFunc_t ShipAIFactory::getAIFactory(string name)
 {
-    for(ShipAIFactory* f = shipAIFactoryList; f; f = f->next)
-        if (f->name == name)
-            return f->func;
-    LOG(ERROR) << "AI not found: " << name;
+    for (ShipAIFactory* f = shipAIFactoryList; f; f = f->next)
+        if (f->name == name) return f->func;
+
+    LOG(Error, "[aifactory] AI not found: ", name);
+
     return nullptr;
 }

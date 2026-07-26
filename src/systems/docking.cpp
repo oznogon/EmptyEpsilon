@@ -482,7 +482,7 @@ bool DockingSystem::assignInternalEntityToBerth(sp::ecs::Entity entity)
     }
 
     // No empty berth found
-    LOG(Debug, "No empty berth available for ", entity.toString(), ", undocking.");
+    LOG(Debug, "[docking] No empty berth available for ", entity.toString(), ", undocking.");
     requestUndock(entity);
     port->state = DockingPort::State::NotDocking;
     // If the docking ship is AI-controlled, revert to roaming if denied docking.
@@ -613,7 +613,7 @@ void DockingSystem::assignInternalEntitiesToBerths(std::vector<sp::ecs::Entity> 
 
         if (!was_assigned)
         {
-            LOG(Debug, "More ships than berths, undocking.");
+            LOG(Debug, "[docking] More ships than berths, undocking.");
             if (port->target == carrier) requestUndock(entity);
         }
     }
