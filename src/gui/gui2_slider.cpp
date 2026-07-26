@@ -53,18 +53,7 @@ void GuiBasicSlider::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
     else
         new_value = (position.y - rect.position.y - (rect.size.x / 2.0f)) / (rect.size.y - rect.size.x);
     new_value = min_value + (max_value - min_value) * new_value;
-    if (min_value < max_value)
-    {
-        if (new_value < min_value)
-            new_value = min_value;
-        if (new_value > max_value)
-            new_value = max_value;
-    }else{
-        if (new_value > min_value)
-            new_value = min_value;
-        if (new_value < max_value)
-            new_value = max_value;
-    }
+    new_value = std::clamp(new_value, std::min(min_value, max_value), std::max(min_value, max_value));
     if (value != new_value)
     {
         value = new_value;
@@ -79,14 +68,14 @@ void GuiBasicSlider::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
 void GuiBasicSlider::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
     dragging = false;
+    release_delay = 6;
 }
 
 GuiBasicSlider* GuiBasicSlider::setValue(float value)
 {
-    if (min_value < max_value)
-        this->value = std::clamp(value, min_value, max_value);
-    else
-        this->value = std::clamp(value, max_value, min_value);
+    if (release_delay > 0) return this;
+
+    this->value = std::clamp(value, std::min(min_value, max_value), std::max(min_value, max_value));
 
     return this;
 }
@@ -104,7 +93,10 @@ float GuiBasicSlider::getValue() const
     return value;
 }
 
-
+void GuiBasicSlider::onUpdate()
+{
+    if (release_delay > 0) release_delay--;
+}
 
 GuiSlider::GuiSlider(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func)
 : GuiBasicSlider(owner, id, min_value, max_value, start_value, func)
@@ -127,7 +119,7 @@ void GuiSlider::onDraw(sp::RenderTarget& renderer)
         float range = max_value - min_value;
         float f = (range != 0.0f) ? (value - min_value) / range : 0.5f;
 
-        for(TSnapPoint& point : snap_points)
+        for (TSnapPoint& point : snap_points)
         {
             float point_f = (range != 0.0f) ? (point.value - min_value) / range : 0.5f;
             x = rect.position.x + (rect.size.x - rect.size.y) * point_f;
@@ -137,12 +129,14 @@ void GuiSlider::onDraw(sp::RenderTarget& renderer)
         x = rect.position.x + (rect.size.x - rect.size.y) * f;
 
         renderer.drawSprite(front.texture, glm::vec2(x + rect.size.y * 0.5f, rect.position.y + rect.size.y * 0.5f), rect.size.y, front.color);
-    }else{
+    }
+    else
+    {
         float y;
         float range = max_value - min_value;
         float f = (range != 0.0f) ? (value - min_value) / range : 0.5f;
 
-        for(TSnapPoint& point : snap_points)
+        for (TSnapPoint& point : snap_points)
         {
             float point_f = (range != 0.0f) ? (point.value - min_value) / range : 0.5f;
             y = rect.position.y + (rect.size.y - rect.size.x) * point_f;
@@ -172,24 +166,17 @@ void GuiSlider::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
         new_value = (position.x - rect.position.x - (rect.size.y / 2.0f)) / (rect.size.x - rect.size.y);
     else
         new_value = (position.y - rect.position.y - (rect.size.x / 2.0f)) / (rect.size.y - rect.size.x);
+
     new_value = min_value + (max_value - min_value) * new_value;
-    for(TSnapPoint& point : snap_points)
+
+    for (TSnapPoint& point : snap_points)
     {
         if (fabs(new_value - point.value) < point.range)
             new_value = point.value;
     }
-    if (min_value < max_value)
-    {
-        if (new_value < min_value)
-            new_value = min_value;
-        if (new_value > max_value)
-            new_value = max_value;
-    }else{
-        if (new_value > min_value)
-            new_value = min_value;
-        if (new_value < max_value)
-            new_value = max_value;
-    }
+
+    new_value = std::clamp(new_value, std::min(min_value, max_value), std::max(min_value, max_value));
+
     if (value != new_value)
     {
         value = new_value;
@@ -204,6 +191,7 @@ void GuiSlider::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
 void GuiSlider::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
     dragging = false;
+    release_delay = 6;
 }
 
 GuiSlider* GuiSlider::clearSnapValues()
@@ -273,30 +261,8 @@ void GuiSlider2D::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
         if (fabs(new_value.x - point.value.x) < point.range.x && fabs(new_value.y - point.value.y) < point.range.y)
             new_value = point.value;
     }
-    if (min_value.x < max_value.x)
-    {
-        if (new_value.x < min_value.x)
-            new_value.x = min_value.x;
-        if (new_value.x > max_value.x)
-            new_value.x = max_value.x;
-    }else{
-        if (new_value.x > min_value.x)
-            new_value.x = min_value.x;
-        if (new_value.x < max_value.x)
-            new_value.x = max_value.x;
-    }
-    if (min_value.y < max_value.y)
-    {
-        if (new_value.y < min_value.y)
-            new_value.y = min_value.y;
-        if (new_value.y > max_value.y)
-            new_value.y = max_value.y;
-    }else{
-        if (new_value.y > min_value.y)
-            new_value.y = min_value.y;
-        if (new_value.y < max_value.y)
-            new_value.y = max_value.y;
-    }
+    new_value.x = std::clamp(new_value.x, std::min(min_value.x, max_value.x), std::max(min_value.x, max_value.x));
+    new_value.y = std::clamp(new_value.y, std::min(min_value.y, max_value.y), std::max(min_value.y, max_value.y));
     if (value != new_value)
     {
         value = new_value;
@@ -308,6 +274,7 @@ void GuiSlider2D::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
 void GuiSlider2D::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
     dragging = false;
+    release_delay = 6;
 }
 
 GuiSlider2D* GuiSlider2D::clearSnapValues()
@@ -326,30 +293,11 @@ GuiSlider2D* GuiSlider2D::addSnapValue(glm::vec2 value, glm::vec2 range)
 
 GuiSlider2D* GuiSlider2D::setValue(glm::vec2 value)
 {
-    if (min_value.x < max_value.x)
-    {
-        if (value.x < min_value.x)
-            value.x = min_value.x;
-        if (value.x > max_value.x)
-            value.x = max_value.x;
-    }else{
-        if (value.x > min_value.x)
-            value.x = min_value.x;
-        if (value.x < max_value.x)
-            value.x = max_value.x;
-    }
-    if (min_value.y < max_value.y)
-    {
-        if (value.y < min_value.y)
-            value.y = min_value.y;
-        if (value.y > max_value.y)
-            value.y = max_value.y;
-    }else{
-        if (value.y > min_value.y)
-            value.y = min_value.y;
-        if (value.y < max_value.y)
-            value.y = max_value.y;
-    }
+    if (release_delay > 0)
+        return this;
+
+    value.x = std::clamp(value.x, std::min(min_value.x, max_value.x), std::max(min_value.x, max_value.x));
+    value.y = std::clamp(value.y, std::min(min_value.y, max_value.y), std::max(min_value.y, max_value.y));
     this->value = value;
     return this;
 }
@@ -357,4 +305,10 @@ GuiSlider2D* GuiSlider2D::setValue(glm::vec2 value)
 glm::vec2 GuiSlider2D::getValue()
 {
     return value;
+}
+
+void GuiSlider2D::onUpdate()
+{
+    if (release_delay > 0)
+        release_delay--;
 }

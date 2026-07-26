@@ -21,6 +21,7 @@ public:
     GuiBasicSlider(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func);
 
     virtual void onDraw(sp::RenderTarget& renderer) override;
+    virtual void onUpdate() override;
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
@@ -34,6 +35,7 @@ public:
 
 protected:
     bool dragging = false;
+    int release_delay = 0;
 };
 
 class GuiSlider : public GuiBasicSlider
@@ -88,6 +90,7 @@ public:
     GuiSlider2D(GuiContainer* owner, string id, glm::vec2 min_value, glm::vec2 max_value, glm::vec2 start_value, func_t func);
 
     virtual void onDraw(sp::RenderTarget& renderer) override;
+    virtual void onUpdate() override;
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
@@ -101,4 +104,5 @@ public:
 
 protected:
     bool dragging = false;
+    int release_delay = 0;
 };
