@@ -151,3 +151,5 @@ GinjaNinja32/get-wall-clock 20260720 -- add getWallClock() Lua function
 sdl-fake-gestures 20260722 -- add rudimentary fingerDown/Up gestures
 
 hue-v2 20260725 -- Add Hue V2 device support, with SSL baggage
+
+lua-missile-weapon-data 20260726 -- Lua-defined missile weapon types
