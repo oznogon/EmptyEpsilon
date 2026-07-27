@@ -650,7 +650,8 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     (new GuiLabel(supply_controls_right, "", tr("dockingbay", "Carrier"), 20.0f))
         ->setSize(GuiElement::GuiSizeMax, kv_size);
 
-    auto populateMissiles = [](GuiKeyValueDisplay* supply_missiles[MW_MaxTypes], GuiElement* column) {
+    auto populateMissiles = [](GuiKeyValueDisplay* supply_missiles[MW_MaxTypes], GuiElement* column)
+    {
         for (int i = 0; i < MW_MaxTypes; i++)
         {
             supply_missiles[i] = new GuiKeyValueDisplay(column, "", kv_split, MissileWeaponDataRegistry::instance().getNameForIndex(i), "");
@@ -822,6 +823,9 @@ void DockingBayScreen::onDraw(sp::RenderTarget& renderer)
     }
 
     auto bay = my_spaceship.getComponent<DockingBay>();
+
+    // Keep missile type labels/icons in sync with the registry.
+    refreshMissileLabels();
 
     // Check for changes in the berths.
     bool list_changed = cached_berth_entities.size() != bay->berths.size();
@@ -1340,6 +1344,26 @@ void DockingBayScreen::updateSelectedEntityDisplay()
     {
         move_controls_row->show();
         move_progress_row->hide();
+    }
+}
+
+void DockingBayScreen::refreshMissileLabels()
+{
+    for (int i = 0; i < MW_MaxTypes; i++)
+    {
+        const string& name = MissileWeaponDataRegistry::instance().getNameForIndex(i);
+        const string& icon = MissileWeaponDataRegistry::instance().getIcon(i);
+
+        entity_missiles[i]->setKey(name);
+        berth_missiles[i]->setKey(name);
+        carrier_missiles[i]->setKey(name);
+
+        if (!icon.empty())
+        {
+            entity_missiles[i]->setIcon(icon);
+            berth_missiles[i]->setIcon(icon);
+            carrier_missiles[i]->setIcon(icon);
+        }
     }
 }
 

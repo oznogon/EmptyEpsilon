@@ -86,6 +86,7 @@ private:
     void updateSelectedEntityDisplay();
     void updateBerthsList();
     void updateBerthsLabels();
+    void refreshMissileLabels();
     void updateMissileDisplay(GuiKeyValueDisplay* display, MissileTubes* tubes, int type);
     void updateMissileDisplay(GuiKeyValueDisplay* display, PickupCallback* pickup, int type);
 
