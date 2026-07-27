@@ -747,6 +747,7 @@ void initComponentScriptBindings()
     BIND_MEMBER(MissileWeaponData, name);
     BIND_MEMBER(MissileWeaponData, locale_name);
     BIND_MEMBER(MissileWeaponData, order);
+    BIND_MEMBER(MissileWeaponData, icon);
     BIND_MEMBER(MissileWeaponData, speed);
     BIND_MEMBER(MissileWeaponData, turnrate);
     BIND_MEMBER(MissileWeaponData, lifetime);
@@ -768,6 +769,10 @@ void initComponentScriptBindings()
     BIND_MEMBER(MissileWeaponData, avoid_object_delay);
     BIND_MEMBER(MissileWeaponData, circle_collision);
     BIND_MEMBER(MissileWeaponData, no_lifetime_on_missile);
+    BIND_MEMBER(MissileWeaponData, on_spawn);
+    BIND_MEMBER(MissileWeaponData, on_collision);
+    BIND_MEMBER(MissileWeaponData, on_lifetime_expire);
+    BIND_MEMBER(MissileWeaponData, on_explode);
 
     sp::script::ComponentHandler<MissileTubes>::name("missile_tubes");
     BIND_SHIP_SYSTEM(MissileTubes);

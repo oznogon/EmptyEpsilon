@@ -15,13 +15,13 @@
   - Missile spawn behavior data-driven: explosion type, damage, SFX, homing, and special flags all configurable per type
   - GM Tweak screen missile weapon editor supports dynamic types
   - New `findMissileWeaponData()` C++ binding exposed to Lua
-
+  - Missile weapon data lifecycle callbacks added (`on_spawn`, `on_collision`, `on_lifetime_expire`, `on_explode`) triggered at missile projectile events
+  - GM Tweak screen MissileWeaponData editor added with full property browser and "Missile weapons" side panel
 - Touchscreen pinch-to-zoom gestures on RadarViews
   - Pinch with two fingers to zoom, centered on the pinch point like mousewheel zoom
   - Single-finger touch continues to support tap-to-select and drag-to-pan
   - GuiCanvas updated to correctly forward multi-touch DOWN and UP events
   - Map recentering suppressed after pinch gesture release
-
 - Map pages for BriefingMap screen, with new briefing map script functions
   - Map mimics Relay/Strategic Map, using script-defined pseudoentities
   - Supports keyframe animation

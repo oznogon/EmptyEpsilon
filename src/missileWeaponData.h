@@ -2,6 +2,7 @@
 
 #include "ecs/entity.h"
 #include "systems/damage.h"
+#include "script/callback.h"
 #include <glm/gtc/type_precision.hpp>
 #include <array>
 #include <unordered_map>
@@ -33,6 +34,7 @@ public:
     float getLifetime(int index) const;
     glm::u8vec4 getColor(int index) const;
     float getHomingRange(int index) const;
+    const string& getIcon(int index) const;
     const string& getFireSound(int index) const;
     const string& getRadarTrace(int index) const;
 
@@ -50,6 +52,11 @@ public:
     int getAvoidObjectDelay(int index) const;
     bool getCircleCollision(int index) const;
     bool getNoLifetimeOnMissile(int index) const;
+
+    sp::script::Callback& getOnSpawn(int index);
+    sp::script::Callback& getOnCollision(int index);
+    sp::script::Callback& getOnLifetimeExpire(int index);
+    sp::script::Callback& getOnExplode(int index);
 
     std::vector<string> getTypeNames() const;
     std::vector<int> getTypeIndices() const;
@@ -86,6 +93,7 @@ public:
     string name;
     string locale_name;
     int order = 0;
+    string icon;
     float speed = 200.0f;
     float turnrate = 10.0f;
     float lifetime = 27.0f;
@@ -108,6 +116,11 @@ public:
     int avoid_object_delay = 0;
     bool circle_collision = false;
     bool no_lifetime_on_missile = false;
+
+    sp::script::Callback on_spawn;
+    sp::script::Callback on_collision;
+    sp::script::Callback on_lifetime_expire;
+    sp::script::Callback on_explode;
 
     static float convertSizeToCategoryModifier(EMissileSizes size);
     static EMissileSizes convertCategoryModifierToSize(float size);

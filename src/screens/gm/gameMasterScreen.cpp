@@ -354,7 +354,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         }
     ))
         ->setPosition(280.0f, -120.0f, sp::Alignment::BottomLeft)
-        ->setSize(120.0f, GuiElement::GuiSizeRow);
+        ->setSize(150.0f, GuiElement::GuiSizeRow);
 
     // Missile weapon data browser button and panel
     auto mwd_browser_panel = new GuiPanel(this, "MISSILE_WEAPON_DATA_BROWSER");
@@ -395,18 +395,20 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         ->setPosition(10.0f, -10.0f, sp::Alignment::BottomLeft)
         ->setSize(200.0f, GuiElement::GuiSizeRow);
 
-    (new GuiButton(this, "MISSILE_WEAPON_DATA_BROWSER_BTN", tr("button", "Missile weapons"),
+    (new GuiButton(this, "MISSILE_WEAPON_DATA_BROWSER_BTN", tr("button", "Missile types"),
         [mwd_listbox, mwd_browser_panel]()
         {
             mwd_listbox->setOptions({});
             auto& registry = MissileWeaponDataRegistry::instance();
+
             for (int i = 0; i < registry.getTypeCount(); i++)
                 mwd_listbox->addEntry(registry.getNameForIndex(i), string(i));
+
             mwd_browser_panel->show();
         }
     ))
-        ->setPosition(420.0f, -120.0f, sp::Alignment::BottomLeft)
-        ->setSize(120.0f, GuiElement::GuiSizeRow);
+        ->setPosition(280.0f, -70.0f, sp::Alignment::BottomLeft)
+        ->setSize(150.0f, GuiElement::GuiSizeRow);
 
     // Player ship hailing controls
     player_comms_hail = new GuiButton(this, "HAIL_PLAYER", tr("button", "Hail ship"), [this]() {

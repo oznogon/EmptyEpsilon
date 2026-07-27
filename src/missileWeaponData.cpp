@@ -161,6 +161,14 @@ float MissileWeaponDataRegistry::getHomingRange(int index) const
     return 0.0f;
 }
 
+const string& MissileWeaponDataRegistry::getIcon(int index) const
+{
+    static const string empty;
+
+    if (auto* c = getComponent(getEntityForIndex(index))) return c->icon;
+    return empty;
+}
+
 const string& MissileWeaponDataRegistry::getFireSound(int index) const
 {
     static const string empty;
@@ -270,6 +278,38 @@ bool MissileWeaponDataRegistry::getNoLifetimeOnMissile(int index) const
     if (auto* c = getComponent(getEntityForIndex(index)))
         return c->no_lifetime_on_missile;
     return false;
+}
+
+sp::script::Callback& MissileWeaponDataRegistry::getOnSpawn(int index)
+{
+    static sp::script::Callback empty;
+    if (auto* c = getComponent(getEntityForIndex(index)))
+        return c->on_spawn;
+    return empty;
+}
+
+sp::script::Callback& MissileWeaponDataRegistry::getOnCollision(int index)
+{
+    static sp::script::Callback empty;
+    if (auto* c = getComponent(getEntityForIndex(index)))
+        return c->on_collision;
+    return empty;
+}
+
+sp::script::Callback& MissileWeaponDataRegistry::getOnLifetimeExpire(int index)
+{
+    static sp::script::Callback empty;
+    if (auto* c = getComponent(getEntityForIndex(index)))
+        return c->on_lifetime_expire;
+    return empty;
+}
+
+sp::script::Callback& MissileWeaponDataRegistry::getOnExplode(int index)
+{
+    static sp::script::Callback empty;
+    if (auto* c = getComponent(getEntityForIndex(index)))
+        return c->on_explode;
+    return empty;
 }
 
 std::vector<string> MissileWeaponDataRegistry::getTypeNames() const

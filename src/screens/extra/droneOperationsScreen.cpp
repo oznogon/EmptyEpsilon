@@ -615,12 +615,6 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
             ->setSize(200.0f, 40.0f);
     }
 
-    missile_type_rows[0].button->setIcon("gui/icons/weapon-homing.png");
-    missile_type_rows[1].button->setIcon("gui/icons/weapon-nuke.png");
-    missile_type_rows[2].button->setIcon("gui/icons/weapon-mine.png");
-    missile_type_rows[3].button->setIcon("gui/icons/weapon-emp.png");
-    missile_type_rows[4].button->setIcon("gui/icons/weapon-hvli.png");
-
     // Manual aim toggle button near tube controls.
     manual_aim_button = new GuiToggleButton(radar_pane, "MANUAL_AIM", tr("missile", "Lock"),
         [this](bool value)
@@ -835,8 +829,14 @@ void DroneOperationsScreen::updateTubeRows(sp::ecs::Entity drone_entity)
         tube_rows[n].layout->show();
         auto& tube = missiletubes->mounts[n];
 
-        if (tube.canOnlyLoad(2))
-            tube_rows[n].fire_button->setIcon("gui/icons/weapon-mine", sp::Alignment::CenterLeft);
+        if (tube.type_loaded >= 0)
+        {
+            auto icon = MissileWeaponDataRegistry::instance().getIcon(tube.type_loaded);
+            if (!icon.empty())
+                tube_rows[n].fire_button->setIcon(icon, sp::Alignment::CenterLeft);
+            else
+                tube_rows[n].fire_button->setIcon("gui/icons/missile", sp::Alignment::CenterLeft, tube.direction);
+        }
         else
             tube_rows[n].fire_button->setIcon("gui/icons/missile", sp::Alignment::CenterLeft, tube.direction);
 
@@ -1151,8 +1151,11 @@ void DroneOperationsScreen::onUpdate()
         {
             if (tubes)
             {
-                missile_type_rows[n].button->setText(MissileWeaponDataRegistry::instance().getNameForIndex(n) + " [" + string(tubes->storage[n]) + "/" + string(tubes->storage_max[n]) + "]");
+                auto& registry = MissileWeaponDataRegistry::instance();
+                missile_type_rows[n].button->setText(registry.getNameForIndex(n) + " [" + string(tubes->storage[n]) + "/" + string(tubes->storage_max[n]) + "]");
                 missile_type_rows[n].layout->setVisible(tubes->storage_max[n] > 0);
+                auto icon = registry.getIcon(n);
+                if (!icon.empty()) missile_type_rows[n].button->setIcon(icon);
             }
             else missile_type_rows[n].layout->hide();
         }

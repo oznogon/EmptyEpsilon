@@ -126,13 +126,9 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     {
         entity_missiles[i] = new GuiKeyValueDisplay(selected_entity_kvs_1, "", kv_split, MissileWeaponDataRegistry::instance().getNameForIndex(i), "");
         entity_missiles[i]->setSize(GuiElement::GuiSizeMax, kv_size);
+        auto icon = MissileWeaponDataRegistry::instance().getIcon(i);
+        if (!icon.empty()) entity_missiles[i]->setIcon(icon);
     }
-
-    entity_missiles[0]->setIcon("gui/icons/weapon-homing");
-    entity_missiles[1]->setIcon("gui/icons/weapon-nuke");
-    entity_missiles[2]->setIcon("gui/icons/weapon-mine");
-    entity_missiles[3]->setIcon("gui/icons/weapon-emp");
-    entity_missiles[4]->setIcon("gui/icons/weapon-hvli");
 
     GuiElement* selected_entity_kvs_2 = new GuiElement(docking_bay_info, "");
     selected_entity_kvs_2
@@ -659,13 +655,9 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         {
             supply_missiles[i] = new GuiKeyValueDisplay(column, "", kv_split, MissileWeaponDataRegistry::instance().getNameForIndex(i), "");
             supply_missiles[i]->setSize(200.0f, kv_size);
+            auto icon = MissileWeaponDataRegistry::instance().getIcon(i);
+            if (!icon.empty()) supply_missiles[i]->setIcon(icon);
         }
-
-        supply_missiles[0]->setIcon("gui/icons/weapon-homing");
-        supply_missiles[1]->setIcon("gui/icons/weapon-nuke");
-        supply_missiles[3]->setIcon("gui/icons/weapon-emp");
-        supply_missiles[4]->setIcon("gui/icons/weapon-hvli");
-        supply_missiles[2]->setIcon("gui/icons/weapon-mine");
 
         return supply_missiles;
     };

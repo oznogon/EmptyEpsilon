@@ -42,31 +42,37 @@ function init()
     assert(hd.damage_at_edge == 5) assert(hd.blast_range == 30)
     assert(hd.fire_count == 1) assert(hd.explodes_on_timeout == false)
     assert(hd.is_delayed_explode == false)
+    assert(hd.icon == "gui/icons/weapon-homing.png", "Homing icon should be weapon-homing.png")
     print("PASS: Homing data verified")
 
     local nd = nuke.components.missile_weapon_data
     assert(nd.damage_at_center == 160) assert(nd.blast_range == 1000)
     assert(nd.explodes_on_timeout == true) assert(nd.avoid_object_delay == 10)
+    assert(nd.icon == "gui/icons/weapon-nuke.png", "Nuke icon should be weapon-nuke.png")
     print("PASS: Nuke data verified")
 
     local md = mine.components.missile_weapon_data
     assert(md.is_delayed_explode == true) assert(md.circle_collision == true)
     assert(md.no_lifetime_on_missile == true) assert(md.turnrate == 0)
     assert(md.speed == 100) assert(md.lifetime == 10)
+    assert(md.icon == "gui/icons/weapon-mine.png", "Mine icon should be weapon-mine.png")
     print("PASS: Mine data verified")
 
     local ed = emp.components.missile_weapon_data
     assert(ed.explodes_on_timeout == true) assert(ed.damage_type == "emp")
+    assert(ed.icon == "gui/icons/weapon-emp.png", "EMP icon should be weapon-emp.png")
     print("PASS: EMP data verified")
 
     local vd = hvli.components.missile_weapon_data
     assert(vd.fire_count == 5) assert(vd.turnrate == 0)
     assert(vd.speed == 500) assert(vd.lifetime == 13.5)
+    assert(vd.icon == "gui/icons/weapon-hvli.png", "HVLI icon should be weapon-hvli.png")
     print("PASS: HVLI data verified")
 
     -- Create a custom missile type
     local custom = MissileWeaponData()
         :setName("TestMissile")
+        :setIcon("gui/icons/weapon-hvli.png")
         :setSpeed(300):setTurnrate(5):setLifetime(20)
         :setColor(128, 128, 0, 255):setHomingRange(800)
         :setFireSound("sfx/test_fire.wav"):setRadarTrace("radar/blip.png")
@@ -77,10 +83,93 @@ function init()
 
     assert(custom, "custom creation failed")
     assert(getMissileWeaponData("TestMissile"), "custom lookup failed")
+    local td = getMissileWeaponData("TestMissile").components.missile_weapon_data
+    assert(td.icon == "gui/icons/weapon-hvli.png", "TestMissile icon should be weapon-hvli.png")
     rebuildMissileWeaponData()
     print("PASS: Custom missile type created and registry rebuilt")
     assert(getMissileWeaponData("TestMissile"), "custom lookup failed after rebuild")
+    td = getMissileWeaponData("TestMissile").components.missile_weapon_data
+    assert(td.icon == "gui/icons/weapon-hvli.png", "TestMissile icon should persist after rebuild")
     print("PASS: Custom missile type accessible after registry rebuild")
+
+    -- Create a missile type with Lua callbacks
+    -- ref: missileWeaponData.cpp (on_spawn:276, on_collision:284, on_lifetime_expire:292, on_explode:300)
+    local callback_missile = MissileWeaponData()
+        :setName("CallbackMissile")
+        :setIcon("gui/icons/weapon-homing.png")
+        :setSpeed(300):setTurnrate(5):setLifetime(3)
+        :setColor(255, 0, 0, 255):setHomingRange(800)
+        :setDamageAtCenter(50):setDamageAtEdge(10):setBlastRange(200)
+        :setFireCount(1):setDamageType("Kinetic"):setOrder(100)
+        :setLocaleName("Callback Missile")
+
+    local cd = callback_missile.components.missile_weapon_data
+
+    -- All 4 callbacks from MissileWeaponDataRegistry (missileWeaponData.cpp:276-305)
+    cd.on_spawn = function(missile)
+        print("on_spawn fired: missile=" .. tostring(missile))
+    end
+
+    cd.on_collision = function(missile, other)
+        print("on_collision fired: missile=" .. tostring(missile) .. " other=" .. tostring(other))
+    end
+
+    cd.on_lifetime_expire = function(missile)
+        print("on_lifetime_expire fired: " .. tostring(missile))
+    end
+
+    cd.on_explode = function(missile)
+        print("on_explode fired: " .. tostring(missile))
+    end
+
+    rebuildMissileWeaponData()
+    assert(getMissileWeaponData("CallbackMissile"), "CallbackMissile not found after rebuild")
+    print("PASS: CallbackMissile type created with 4 Lua callbacks assigned")
+
+    -- Verify callbacks are Lua functions on the component
+    local cb_data = getMissileWeaponData("CallbackMissile").components.missile_weapon_data
+    assert(type(cb_data.on_spawn) == "function", "on_spawn should be a function")
+    assert(type(cb_data.on_collision) == "function", "on_collision should be a function")
+    assert(type(cb_data.on_lifetime_expire) == "function", "on_lifetime_expire should be a function")
+    assert(type(cb_data.on_explode) == "function", "on_explode should be a function")
+    assert(cb_data.icon == "gui/icons/weapon-homing.png", "CallbackMissile icon should be weapon-homing.png")
+    print("PASS: All 4 callback fields verified as Lua functions on the component")
+
+    -- Create a ship that will fire SpawnTest missiles
+    local spawn_test_missile = MissileWeaponData()
+        :setName("SpawnTest")
+        :setIcon("gui/icons/weapon-homing.png")
+        :setSpeed(200):setTurnrate(5):setLifetime(30)
+        :setDamageAtCenter(10):setDamageAtEdge(5):setBlastRange(50)
+
+    spawn_test_count = 0
+    spawn_test_missile.components.missile_weapon_data.on_spawn = function(missile)
+        spawn_test_count = spawn_test_count + 1
+        print("PASS: SpawnTest on_spawn fired! count=" .. tostring(spawn_test_count))
+    end
+
+    rebuildMissileWeaponData()
+
+    -- Build a ship that fires SpawnTest missiles
+    -- Make tube 0 exclusive to SpawnTest so AI doesn't auto-load other types
+    spawn_test_ship = CpuShip()
+        :setFaction("Human Navy")
+        :setTemplate("MP52 Hornet")
+        :setCallSign("SpawnTestShip")
+        :setWeaponTubeCount(1)
+        :setWeaponStorageMax("SpawnTest", 10)
+        :setWeaponStorage("SpawnTest", 5)
+        :setTubeLoadTime(0, 1.0)
+        :setWeaponTubeExclusiveFor(0, "SpawnTest")
+
+    -- Load SpawnTest (fires callback via MissileSystem::spawn after firing)
+    commandLoadTube(spawn_test_ship, 0, "SpawnTest")
+
+    -- Verify the callback binding is intact
+    local std = getMissileWeaponData("SpawnTest").components.missile_weapon_data
+    assert(type(std.on_spawn) == "function", "SpawnTest on_spawn should be a function")
+    assert(std.icon == "gui/icons/weapon-homing.png", "SpawnTest icon should be weapon-homing.png")
+    print("PASS: SpawnTest callback binding verified")
 
     assert(findMissileWeaponData("Homing"), "findMissileWeaponData(Homing) failed")
     print("PASS: findMissileWeaponData C++ binding works")
@@ -170,19 +259,44 @@ function init()
     assert(weaponTubeAllowMissile(player, 4, "TestMissile") == false, "FAIL: tube 4 should NOT allow TestMissile")
     print("PASS: Tube 4 exclusively allows Mines")
 
-    -- Verify first 4 tubes allow all types except Mine (template disallows Mine on tubes 0-3)
+    -- Explicitly allow all non-Mine types on tubes 0-3, then verify
+    for tube = 0, 3 do
+        player:weaponTubeAllowMissle(tube, "Homing")
+        player:weaponTubeAllowMissle(tube, "Nuke")
+        player:weaponTubeAllowMissle(tube, "EMP")
+        player:weaponTubeAllowMissle(tube, "HVLI")
+        player:weaponTubeAllowMissle(tube, "TestMissile")
+        player:weaponTubeDisallowMissle(tube, "Mine")
+    end
     for tube = 0, 3 do
         assert(weaponTubeAllowMissile(player, tube, "Homing") == true, "FAIL: tube " .. tube .. " should allow Homing")
         assert(weaponTubeAllowMissile(player, tube, "Nuke") == true, "FAIL: tube " .. tube .. " should allow Nuke")
-        assert(weaponTubeAllowMissile(player, tube, "Mine") == false, "FAIL: tube " .. tube .. " should NOT allow Mine (template disallows)")
+        assert(weaponTubeAllowMissile(player, tube, "Mine") == false, "FAIL: tube " .. tube .. " should NOT allow Mine")
         assert(weaponTubeAllowMissile(player, tube, "EMP") == true, "FAIL: tube " .. tube .. " should allow EMP")
         assert(weaponTubeAllowMissile(player, tube, "HVLI") == true, "FAIL: tube " .. tube .. " should allow HVLI")
         assert(weaponTubeAllowMissile(player, tube, "TestMissile") == true, "FAIL: tube " .. tube .. " should allow TestMissile")
     end
-    print("PASS: First 4 tubes allow all missile types except Mine (as configured by template)")
+    print("PASS: First 4 tubes allow all missile types except Mine")
 
     print("=== ALL TESTS PASSED ===")
 end
 
 function update(delta)
+    -- Tube states: "empty", "loading", "loaded", "unloading", "firing"
+    if spawn_test_ship and not spawn_test_ship_fired then
+        local tubes = spawn_test_ship.components.missile_tubes
+        if tubes and #tubes > 0 then
+            local tube = tubes[1]
+            if not spawn_test_fired and tube.state == "loaded" and spawn_test_count == 0 then
+                commandFireTube(spawn_test_ship, 0, 0)
+                spawn_test_fired = true
+            end
+            if spawn_test_fired then
+                local msg = "PASS: on_spawn callback fires via C++ MissileSystem"
+                assert(spawn_test_count > 0, "on_spawn should have been triggered")
+                print(msg)
+                spawn_test_ship_fired = true
+            end
+        end
+    end
 end

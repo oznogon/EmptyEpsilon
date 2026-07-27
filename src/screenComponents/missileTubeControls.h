@@ -41,8 +41,8 @@ private:
     TypeRow load_type_rows[MW_MaxTypes];
     int load_type = MW_None;
 
-    bool manual_aim;
-    float missile_target_angle;
+    bool manual_aim = false;
+    float missile_target_angle = 0.0f;
 
     void createTubeRow();
     void removeTubeRow();

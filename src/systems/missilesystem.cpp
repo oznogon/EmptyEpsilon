@@ -7,6 +7,7 @@
 
 #include "components/avoidobject.h"
 #include "components/collision.h"
+#include "components/destroy.h"
 #include "components/docking.h"
 #include "components/faction.h"
 #include "components/hull.h"
@@ -14,11 +15,14 @@
 #include "components/missile.h"
 #include "components/missiletubes.h"
 #include "components/missileWeaponTarget.h"
+#include "components/pickup.h"
 #include "components/radar.h"
 #include "components/rendering.h"
 #include "components/sfx.h"
 #include "components/target.h"
 #include "components/warpdrive.h"
+
+#include "menus/luaConsole.h"
 
 MissileSystem::MissileSystem()
 {
@@ -427,6 +431,36 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
     auto& hull = missile.addComponent<Hull>();
     hull.current = 1.0f;
     hull.max = 1.0f;
+
+    // Handle collision callback.
+    auto& on_collision_cb = registry.getOnCollision(type_index);
+    if (on_collision_cb)
+    {
+        auto& cc = missile.getOrAddComponent<CollisionCallback>();
+        cc.player = false;
+        cc.callback = on_collision_cb;
+    }
+
+    // Handle lifetime callback.
+    auto& on_lifetime_expire_cb = registry.getOnLifetimeExpire(type_index);
+    if (on_lifetime_expire_cb && missile.hasComponent<LifeTime>())
+    {
+        auto& lt = *missile.getComponent<LifeTime>();
+        lt.on_expire = on_lifetime_expire_cb;
+    }
+
+    // Handle destruction/explosion callback.
+    auto& on_explode_cb = registry.getOnExplode(type_index);
+    if (on_explode_cb)
+    {
+        auto& od = missile.addComponent<OnDestroyed>();
+        od.callback = on_explode_cb;
+    }
+
+    // Handle spawn callback.
+    auto& on_spawn_cb = registry.getOnSpawn(type_index);
+    if (on_spawn_cb)
+        LuaConsole::checkResult(on_spawn_cb.call<void>(missile));
 }
 
 static float calculateTurnAngle(glm::vec2 aim_position, float turn_direction, float turn_radius)

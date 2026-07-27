@@ -33,6 +33,16 @@ function Entity:setOrder(n)
     end
     return self
 end
+--- Sets the icon path for this missile type in the weapon selection UI.
+--- The path is relative to the resources/ directory.
+--- Example: mwd:setIcon("gui/icons/weapon-homing.png")
+function Entity:setIcon(icon_path)
+    if self.components.missile_weapon_data then
+        self.components.missile_weapon_data.icon = icon_path
+    end
+    return self
+end
+
 --- Sets the missile's travel speed in units per second.
 --- Example: mwd:setSpeed(200)
 function Entity:setSpeed(v)
