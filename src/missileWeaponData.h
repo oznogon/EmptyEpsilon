@@ -87,12 +87,12 @@ public:
     string locale_name;
     int order = 0;
     float speed = 200.0f;
-    float turnrate = 10.f;
+    float turnrate = 10.0f;
     float lifetime = 27.0f;
     glm::u8vec4 color = {255, 255, 255, 255};
     float homing_range = 0.0f;
-    string fire_sound;
-    string radar_trace;
+    string fire_sound = "sfx/rlaunch.wav";
+    string radar_trace = "radar/missile.png";
 
     float damage_at_center = 35.0f;
     float damage_at_edge = 5.0f;
