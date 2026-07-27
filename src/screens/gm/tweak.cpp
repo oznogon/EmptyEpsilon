@@ -5211,6 +5211,43 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Duration (sec):"), Briefing, pages, duration);
     addPageToGroup(player_group);
 
+    // Missile weapon data definition page
+    ADD_PAGE(tr("tweak-tab", "Missile weapon data"), MissileWeaponData);
+    new_page->description = tr("tweak-missile-data", "Defines a missile weapon type's properties. Use the Missile types button to select weapon type entities.\n\nTo create new weapon types, register them using Lua scripts. See missileWeaponData.lua for the default types.");
+
+    ADD_TEXT_TWEAK(tr("tweak-text", "Name:"), MissileWeaponData, name);
+    ADD_TEXT_TWEAK(tr("tweak-text", "Locale name:"), MissileWeaponData, locale_name);
+    ADD_INT_SLIDER_TWEAK(tr("tweak-text", "Order:"), MissileWeaponData, 0, 15, order);
+
+    ADD_LABEL(tr("tweak-text", "Flight characteristics"));
+    ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Speed:"), MissileWeaponData, 0.0f, 1000.0f, speed);
+    ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Turn rate:"), MissileWeaponData, 0.0f, 359.9f, turnrate);
+    ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Lifetime:"), MissileWeaponData, 0.0f, 300.0f, lifetime);
+    ADD_BOOL_TWEAK(tr("tweak-text", "Infinite lifetime"), MissileWeaponData, no_lifetime_on_missile);
+    ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Homing range:"), MissileWeaponData, 0.0f, 30000.0f, homing_range);
+    ADD_INT_SLIDER_TWEAK(tr("tweak-text", "Fire count:"), MissileWeaponData, 1, 64, fire_count);
+
+    ADD_LABEL(tr("tweak-text", "Damage"));
+    ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Damage at center:"), MissileWeaponData, 0.0f, 1000.0f, damage_at_center);
+    ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Damage at edge:"), MissileWeaponData, 0.0f, 1000.0f, damage_at_edge);
+    ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Blast range:"), MissileWeaponData, 0.0f, 5000.0f, blast_range);
+    ADD_ENUM_TWEAK(tr("tweak-text", "Damage type:"), MissileWeaponData, damage_type,
+        static_cast<int>(DamageType::Energy), static_cast<int>(DamageType::EMP), damageTypeToString);
+
+    ADD_LABEL(tr("tweak-text", "Audio/visual"));
+    ADD_TEXT_TWEAK(tr("tweak-text", "Fire sound:"), MissileWeaponData, fire_sound);
+    ADD_TEXT_TWEAK(tr("tweak-text", "Explosion SFX:"), MissileWeaponData, explosion_sfx);
+    ADD_TEXT_TWEAK(tr("tweak-text", "Radar trace:"), MissileWeaponData, radar_trace);
+    ADD_COLOR_TWEAK(tr("tweak-text", "Color:"), MissileWeaponData, color);
+
+    ADD_LABEL(tr("tweak-text", "Behavior flags"));
+    ADD_BOOL_TWEAK(tr("tweak-text", "Explodes on timeout"), MissileWeaponData, explodes_on_timeout);
+    ADD_BOOL_TWEAK(tr("tweak-text", "Delayed explosion"), MissileWeaponData, is_delayed_explode);
+    ADD_BOOL_TWEAK(tr("tweak-text", "Circle collision"), MissileWeaponData, circle_collision);
+    ADD_INT_SLIDER_TWEAK(tr("tweak-text", "Avoid object delay"), MissileWeaponData, 0, 60, avoid_object_delay);
+
+    addPageToGroup(projectiles_group);
+
     for (GuiTweakPage* page : pages)
     {
         page

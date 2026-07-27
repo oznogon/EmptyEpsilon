@@ -320,13 +320,10 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
     float radar_b = registry.getRadarB(type_index);
     bool explodes_on_timeout = registry.getExplodesOnTimeout(type_index);
     bool is_delayed_explode = registry.getIsDelayedExplode(type_index);
-    string damage_type_str = registry.getDamageTypeStr(type_index);
+    DamageType dmg_type = registry.getDamageType(type_index);
     int avoid_object_delay = registry.getAvoidObjectDelay(type_index);
     bool circle_collision = registry.getCircleCollision(type_index);
     bool no_lifetime_on_missile = registry.getNoLifetimeOnMissile(type_index);
-
-    DamageType dmg_type = DamageType::Kinetic;
-    if (damage_type_str == "EMP") dmg_type = DamageType::EMP;
 
     sp::ecs::Entity missile = sp::ecs::Entity::create();
 

@@ -10,6 +10,7 @@
 #include "clipboard.h"
 #include "chatDialog.h"
 #include "ecs/query.h"
+
 #include "components/ai.h"
 #include "components/database.h"
 #include "components/radar.h"
@@ -22,13 +23,13 @@
 #include "components/player.h"
 #include "components/name.h"
 #include "components/docking.h"
+#include "missileWeaponData.h"
+
 #include "systems/collision.h"
 
 #include "screenComponents/radarView.h"
 #include "screenComponents/radarZoomSlider.h"
 #include "screenComponents/helpOverlay.h"
-
-#include <cmath>
 
 #include "gui/mouseRenderer.h"
 #include "gui/gui2_togglebutton.h"
@@ -40,7 +41,8 @@
 #include "gui/gui2_textentry.h"
 #include "gui/gui2_tooltip.h"
 
-namespace {
+namespace
+{
     constexpr float game_speed_values[] = {0.1f, 0.25f, 0.5f, 1.0f, 2.0f, 4.0f, 8.0f};
 }
 
@@ -284,47 +286,129 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     tweak_button->setPosition(20, -120, sp::Alignment::BottomLeft)->setSize(250, 50)->hide();
     (new GuiTextTooltip(tweak_button, "TWEAK_OBJECT_TIP", tr("gm_tooltip", "Edit properties of the selected entity."), 20.0f))->setWidth(280.0f);
 
-    // Database Browser button and panel
+    // Database browser button and panel
     auto database_browser_panel = new GuiPanel(this, "DATABASE_BROWSER");
-    database_browser_panel->setPosition(300, 100, sp::Alignment::TopLeft)->setSize(500, 600)->hide();
-    (new GuiLabel(database_browser_panel, "", tr("Database Entries"), 30))
-        ->setPosition(0, 0, sp::Alignment::TopCenter)->setSize(GuiElement::GuiSizeMax, 50);
+    database_browser_panel
+        ->setPosition(300.0f, 100.0f, sp::Alignment::TopLeft)
+        ->setSize(500.0f, 600.0f)
+        ->hide();
 
-    auto db_listbox = new GuiListbox(database_browser_panel, "", [this, database_browser_panel](int index, string value) {
-        // Get all database entities
-        auto db_entities = sp::ecs::Query<Database>();
-        int current = 0;
-        for(auto [entity, db] : db_entities) {
-            if (current == index) {
-                tweak_dialog->open(entity, "Database");
-                database_browser_panel->hide();
-                return;
+    (new GuiLabel(database_browser_panel, "", tr("Database entries"), GuiElement::GuiSizeLabel))
+        ->setPosition(0, 0, sp::Alignment::TopCenter)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+
+    auto db_listbox = new GuiListbox(database_browser_panel, "",
+        [this, database_browser_panel](int index, string value)
+        {
+            // Get all database entities
+            auto db_entities = sp::ecs::Query<Database>();
+            int current = 0;
+            for (auto [entity, db] : db_entities)
+            {
+                if (current == index)
+                {
+                    tweak_dialog->open(entity, "Database");
+                    database_browser_panel->hide();
+                    return;
+                }
+
+                current++;
             }
-            current++;
         }
-    });
-    db_listbox->setPosition(10, 60, sp::Alignment::TopLeft)->setSize(480, 480);
+    );
+    db_listbox
+        ->setPosition(10.0f, 60.0f, sp::Alignment::TopLeft)
+        ->setSize(480.0f, 460.0f);
 
-    (new GuiButton(database_browser_panel, "", tr("button", "Close"), [database_browser_panel]() {
-        database_browser_panel->hide();
-    }))->setPosition(10, -10, sp::Alignment::BottomLeft)->setSize(200, 50);
+    (new GuiButton(database_browser_panel, "", tr("button", "Close"),
+        [database_browser_panel]()
+        {
+            database_browser_panel->hide();
+        }
+    ))
+        ->setPosition(10.0f, -10.0f, sp::Alignment::BottomLeft)
+        ->setSize(200.0f, GuiElement::GuiSizeRow);
 
-    (new GuiButton(this, "DATABASE_BROWSER_BTN", tr("button", "Database"), [db_listbox, database_browser_panel]() {
-        // Populate listbox with all database entries
-        db_listbox->setOptions({});
-        for(auto [entity, db] : sp::ecs::Query<Database>()) {
-            string display_name = db.name.empty() ? "(unnamed)" : db.name;
-            // Show parent name if available
-            if (db.parent) {
-                if (auto parent_db = db.parent.getComponent<Database>()) {
-                    display_name = parent_db->name + " > " + display_name;
+    (new GuiButton(this, "DATABASE_BROWSER_BTN", tr("button", "Database"),
+        [db_listbox, database_browser_panel]()
+        {
+            // Populate listbox with all database entries
+            db_listbox->setOptions({});
+            for (auto [entity, db] : sp::ecs::Query<Database>())
+            {
+                string display_name = db.name.empty()
+                    ? tr("(unnamed)")
+                    : db.name;
+
+                // Show parent name if available
+                if (db.parent)
+                {
+                    if (auto parent_db = db.parent.getComponent<Database>())
+                        display_name = parent_db->name + " > " + display_name;
+                }
+
+                db_listbox->addEntry(display_name, entity.toString());
+            }
+
+            database_browser_panel->show();
+        }
+    ))
+        ->setPosition(280.0f, -120.0f, sp::Alignment::BottomLeft)
+        ->setSize(120.0f, GuiElement::GuiSizeRow);
+
+    // Missile weapon data browser button and panel
+    auto mwd_browser_panel = new GuiPanel(this, "MISSILE_WEAPON_DATA_BROWSER");
+    mwd_browser_panel
+        ->setPosition(300.0f, 100.0f, sp::Alignment::TopLeft)
+        ->setSize(500.0f, 600.0f)
+        ->hide();
+
+    (new GuiLabel(mwd_browser_panel, "", tr("Missile weapon types"), GuiElement::GuiSizeLabel))
+        ->setPosition(0, 0, sp::Alignment::TopCenter)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+
+    auto mwd_listbox = new GuiListbox(mwd_browser_panel, "",
+        [this, mwd_browser_panel](int index, string value)
+        {
+            auto& registry = MissileWeaponDataRegistry::instance();
+            if (index >= 0 && index < registry.getTypeCount())
+            {
+                auto entity = registry.getEntityForIndex(index);
+                if (entity)
+                {
+                    tweak_dialog->open(entity, "weapon data");
+                    mwd_browser_panel->hide();
                 }
             }
-            db_listbox->addEntry(display_name, entity.toString());
         }
-        database_browser_panel->show();
-    }))->setPosition(280, -120, sp::Alignment::BottomLeft)->setSize(120, 50);
+    );
+    mwd_listbox
+        ->setPosition(10.0f, 60.0f, sp::Alignment::TopLeft)
+        ->setSize(380.0f, 460.0f);
 
+    (new GuiButton(mwd_browser_panel, "", tr("button", "Close"),
+        [mwd_browser_panel]()
+        {
+            mwd_browser_panel->hide();
+        }
+    ))
+        ->setPosition(10.0f, -10.0f, sp::Alignment::BottomLeft)
+        ->setSize(200.0f, GuiElement::GuiSizeRow);
+
+    (new GuiButton(this, "MISSILE_WEAPON_DATA_BROWSER_BTN", tr("button", "Missile weapons"),
+        [mwd_listbox, mwd_browser_panel]()
+        {
+            mwd_listbox->setOptions({});
+            auto& registry = MissileWeaponDataRegistry::instance();
+            for (int i = 0; i < registry.getTypeCount(); i++)
+                mwd_listbox->addEntry(registry.getNameForIndex(i), string(i));
+            mwd_browser_panel->show();
+        }
+    ))
+        ->setPosition(420.0f, -120.0f, sp::Alignment::BottomLeft)
+        ->setSize(120.0f, GuiElement::GuiSizeRow);
+
+    // Player ship hailing controls
     player_comms_hail = new GuiButton(this, "HAIL_PLAYER", tr("button", "Hail ship"), [this]() {
         for(auto obj : targets.getTargets())
         {

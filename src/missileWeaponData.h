@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ecs/entity.h"
+#include "systems/damage.h"
 #include <glm/gtc/type_precision.hpp>
 #include <array>
 #include <unordered_map>
@@ -45,7 +46,7 @@ public:
     bool getExplodesOnTimeout(int index) const;
     bool getIsDelayedExplode(int index) const;
     int getFireCount(int index) const;
-    const string& getDamageTypeStr(int index) const;
+    DamageType getDamageType(int index) const;
     int getAvoidObjectDelay(int index) const;
     bool getCircleCollision(int index) const;
     bool getNoLifetimeOnMissile(int index) const;
@@ -103,7 +104,7 @@ public:
     bool explodes_on_timeout = false;
     bool is_delayed_explode = false;
     int fire_count = 1;
-    string damage_type = "Kinetic";
+    DamageType damage_type = DamageType::Kinetic;
     int avoid_object_delay = 0;
     bool circle_collision = false;
     bool no_lifetime_on_missile = false;

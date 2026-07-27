@@ -244,13 +244,11 @@ int MissileWeaponDataRegistry::getFireCount(int index) const
     return 1;
 }
 
-const string& MissileWeaponDataRegistry::getDamageTypeStr(int index) const
+DamageType MissileWeaponDataRegistry::getDamageType(int index) const
 {
-    static const string kinetic = "Kinetic";
-
     if (auto* c = getComponent(getEntityForIndex(index)))
         return c->damage_type;
-    return kinetic;
+    return DamageType::Kinetic;
 }
 
 int MissileWeaponDataRegistry::getAvoidObjectDelay(int index) const

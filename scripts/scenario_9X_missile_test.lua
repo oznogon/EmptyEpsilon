@@ -56,7 +56,7 @@ function init()
     print("PASS: Mine data verified")
 
     local ed = emp.components.missile_weapon_data
-    assert(ed.explodes_on_timeout == true) assert(ed.damage_type == "EMP")
+    assert(ed.explodes_on_timeout == true) assert(ed.damage_type == "emp")
     print("PASS: EMP data verified")
 
     local vd = hvli.components.missile_weapon_data
@@ -170,16 +170,16 @@ function init()
     assert(weaponTubeAllowMissile(player, 4, "TestMissile") == false, "FAIL: tube 4 should NOT allow TestMissile")
     print("PASS: Tube 4 exclusively allows Mines")
 
-    -- Verify first 4 tubes allow all types (default)
+    -- Verify first 4 tubes allow all types except Mine (template disallows Mine on tubes 0-3)
     for tube = 0, 3 do
         assert(weaponTubeAllowMissile(player, tube, "Homing") == true, "FAIL: tube " .. tube .. " should allow Homing")
         assert(weaponTubeAllowMissile(player, tube, "Nuke") == true, "FAIL: tube " .. tube .. " should allow Nuke")
-        assert(weaponTubeAllowMissile(player, tube, "Mine") == true, "FAIL: tube " .. tube .. " should allow Mine")
+        assert(weaponTubeAllowMissile(player, tube, "Mine") == false, "FAIL: tube " .. tube .. " should NOT allow Mine (template disallows)")
         assert(weaponTubeAllowMissile(player, tube, "EMP") == true, "FAIL: tube " .. tube .. " should allow EMP")
         assert(weaponTubeAllowMissile(player, tube, "HVLI") == true, "FAIL: tube " .. tube .. " should allow HVLI")
         assert(weaponTubeAllowMissile(player, tube, "TestMissile") == true, "FAIL: tube " .. tube .. " should allow TestMissile")
     end
-    print("PASS: First 4 tubes allow all missile types")
+    print("PASS: First 4 tubes allow all missile types except Mine (as configured by template)")
 
     print("=== ALL TESTS PASSED ===")
 end
