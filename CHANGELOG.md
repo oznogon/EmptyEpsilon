@@ -92,6 +92,7 @@
   - `getSectorName()` used instead of hardcoded sector names in scenarios and scripts
 - PanelBackground transparent padding removed from default theme's sprite
 - Beam weapons can now target non-friendly entities, not only hostiles
+- Headless mode no longer loads visual resources (images, 3D meshes, textures).
 
 ### Fixed
 

@@ -153,3 +153,5 @@ sdl-fake-gestures 20260722 -- add rudimentary fingerDown/Up gestures
 hue-v2 20260725 -- Add Hue V2 device support, with SSL baggage
 
 lua-missile-weapon-data 20260726 -- Lua-defined missile weapon types
+
+more-headless 20260727 -- don't load visual resources on headless server mode
