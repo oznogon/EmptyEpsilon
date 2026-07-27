@@ -1,6 +1,7 @@
 #pragma once
 
 #include <glm/vec3.hpp>
+#include <vector>
 #include "graphics/font.h"
 #include "Renderable.h"
 #include "postProcessManager.h"
@@ -18,6 +19,13 @@ extern PostProcessor* glitchPostProcessor;
 extern PostProcessor* warpPostProcessor;
 extern PVector<Window> windows;
 extern std::vector<RenderLayer*> window_render_layers;
+
+struct CosmeticShader
+{
+    string name;
+    PostProcessor* processor;
+};
+extern std::vector<CosmeticShader> cosmeticShaders;
 
 void returnToMainMenu(RenderLayer*);
 void returnToShipSelection(RenderLayer*);

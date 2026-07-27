@@ -61,6 +61,7 @@ RenderLayer* consoleRenderLayer;
 RenderLayer* mouseLayer;
 PostProcessor* glitchPostProcessor;
 PostProcessor* warpPostProcessor;
+std::vector<CosmeticShader> cosmeticShaders;
 PVector<Window> windows;
 std::vector<RenderLayer*> window_render_layers;
 

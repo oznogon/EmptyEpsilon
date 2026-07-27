@@ -40,6 +40,7 @@
   - Existing entity APIs are unchanged. For example, `Asteroid()` and `VisualAsteroid()` still work as expected and can take chained functions that modify it further
   - `isObjectType()` and GM entity export now use the prefab's identity to determine type, instead of identifying entity type by arbitrary component properties, such as mesh filenames and unique component combinations
   - Engine-spawned entities without prefab identity continue to use the component-based fallback
+- Add optional full-screen cosmetic shaders (i.e. color, CRT effects) in `resources/shaders/cosmetic`, which makes them selectable by filename from the Options menu.
 
 ### Changed
 

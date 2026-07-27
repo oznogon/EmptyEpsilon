@@ -829,6 +829,31 @@ void OptionsMenu::setupGraphicsOptions()
             20.0f))
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeLabel);
     }
+
+    // Cosmetic shaders section.
+    if (!cosmeticShaders.empty())
+    {
+        (new GuiLabel(graphics_page, "COSMETIC_LABEL", tr("options_section", "Cosmetic shaders"), GuiElement::GuiSizeLabel))
+            ->addBackground()
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+            ->setAttribute("margin", "0, 0, 0, 10");
+
+        for (size_t i = 0; i < cosmeticShaders.size(); i++)
+        {
+            string pref_key = "cosmetic_shader_" + cosmeticShaders[i].name;
+            auto* toggle = new GuiToggleButton(graphics_page, "COSMETIC_" + cosmeticShaders[i].name,
+                cosmeticShaders[i].name,
+                [i](bool value)
+                {
+                    cosmeticShaders[i].processor->enabled = value;
+                    PreferencesManager::set("cosmetic_shader_" + cosmeticShaders[i].name, value ? "1" : "0");
+                }
+            );
+            toggle
+                ->setValue(cosmeticShaders[i].processor->enabled)
+                ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+        }
+    }
 }
 
 void OptionsMenu::setupAudioOptions()
