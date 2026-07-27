@@ -27,7 +27,7 @@ carrier = PlayerSpaceship()
     :setRepairDocked(false)
     :setRestocksMissilesDocked(false)
 fighter_classes = {
-    "Striker",
+    "Crow",
     "MT52 Hornet",
     "MU52 Hornet",
     "Adder MK5",
@@ -68,8 +68,8 @@ end
 
 player_fighter = PlayerSpaceship()
     :setFaction("Human Navy")
-    :setTemplate("Striker")
-    :setCallSign("Stingray")
+    :setTemplate("Crow")
+    :setCallSign("Crow")
     :setWeaponTubeCount(7)
     :weaponTubeAllowMissle(0, "Homing")
     :weaponTubeAllowMissle(1, "Nuke")
@@ -123,7 +123,7 @@ for i=1,10 do
   local fighter = CpuShip()
     :setFaction("Kraylor")
     :setPosition(2000,2000)
-    :setTemplate("Striker")
+    :setTemplate("Crow")
     :setScannedByFaction("Human Navy", true)
 end
 
