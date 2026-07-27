@@ -790,7 +790,9 @@ void OptionsMenu::setupGraphicsOptions()
             }
         );
         graphics_draw_distance_slider
-            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+            ->setAttribute("margin", "0, 0, 20, 0");
+
         (new GuiTextTooltip(graphics_draw_distance_slider, "DRAW_DISTANCE_TIP", tr("tooltips", "Set how far the main screen camera renders objects."), 20.0f))->setWidth(280.0f);
 
         graphics_draw_distance_overlay_label = new GuiLabel(graphics_draw_distance_slider, "GRAPHICS_DRAW_DISTANCE_SLIDER_LABEL", tr("options", "Draw distance: {dist}").format({
@@ -798,6 +800,31 @@ void OptionsMenu::setupGraphicsOptions()
         }) + DISTANCE_UNIT_1K, GuiElement::GuiSizeLabel);
         graphics_draw_distance_overlay_label
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    }
+
+    // Cosmetic shaders section.
+    if (!cosmeticShaders.empty())
+    {
+        (new GuiLabel(graphics_page, "COSMETIC_LABEL", tr("options_section", "Cosmetic shaders"), GuiElement::GuiSizeLabel))
+            ->addBackground()
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+            ->setAttribute("margin", "0, 0, 0, 10");
+
+        for (size_t i = 0; i < cosmeticShaders.size(); i++)
+        {
+            string pref_key = "cosmetic_shader_" + cosmeticShaders[i].name;
+            auto* toggle = new GuiToggleButton(graphics_page, "COSMETIC_" + cosmeticShaders[i].name,
+                cosmeticShaders[i].name,
+                [i](bool value)
+                {
+                    cosmeticShaders[i].processor->enabled = value;
+                    PreferencesManager::set("cosmetic_shader_" + cosmeticShaders[i].name, value ? "1" : "0");
+                }
+            );
+            toggle
+                ->setValue(cosmeticShaders[i].processor->enabled)
+                ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+        }
     }
 }
 

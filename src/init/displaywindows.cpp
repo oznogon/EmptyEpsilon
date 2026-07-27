@@ -1,16 +1,19 @@
 #include "displaywindows.h"
 #include "main.h"
-#include "menus/luaConsole.h"
 #include <preferenceManager.h>
 #include "windowManager.h"
-#include "gui/mouseRenderer.h"
-#include "gui/gui2_canvas.h"
-#include "graphics/opengl.h"
-#include "menus/shipSelectionScreen.h"
 #include "shaderRegistry.h"
+#include "glObjects.h"
+#include "graphics/opengl.h"
+#include <filesystem>
+
+#include "menus/luaConsole.h"
+#include "menus/shipSelectionScreen.h"
+
 #include "gui/debugRenderer.h"
 #include "gui/hotkeyConfig.h"
-#include "glObjects.h"
+#include "gui/mouseRenderer.h"
+#include "gui/gui2_canvas.h"
 
 class DebugVisibilityToggle : public Renderable
 {
@@ -38,6 +41,31 @@ bool createDisplayWindows()
     glitchPostProcessor->enabled = false;
     warpPostProcessor = new PostProcessor("shaders/warp", glitchPostProcessor);
     warpPostProcessor->enabled = false;
+    // Cosmetic full-screen shaders: auto-discover from resources/shaders/cosmetic/.
+    cosmeticShaders.clear();
+    namespace fs = std::filesystem;
+    fs::path cosmetic_dir = "resources/shaders/cosmetic";
+    if (fs::exists(cosmetic_dir))
+    {
+        std::vector<std::string> shader_names;
+        for (auto& entry : fs::directory_iterator(cosmetic_dir))
+        {
+            if (entry.path().extension() == ".shader")
+                shader_names.push_back(entry.path().stem().string());
+        }
+        std::sort(shader_names.begin(), shader_names.end());
+        RenderChain* inner = warpPostProcessor;
+        for (const auto& stem : shader_names)
+        {
+            string name = stem.c_str();
+            string pref_key = "cosmetic_shader_" + name;
+            bool enabled = PreferencesManager::get(pref_key, "0").toInt() != 0;
+            auto* pp = new PostProcessor("shaders/cosmetic/" + name, inner);
+            pp->enabled = enabled;
+            cosmeticShaders.push_back({name, pp});
+            inner = pp;
+        }
+    }
 
     new LuaConsole();
 
@@ -70,7 +98,7 @@ bool createDisplayWindows()
     }
 #endif
 
-    windows.push_back(new Window({width, height}, fullscreen, warpPostProcessor, fsaa));
+    windows.push_back(new Window({width, height}, fullscreen, cosmeticShaders.empty() ? static_cast<RenderChain*>(warpPostProcessor) : static_cast<RenderChain*>(cosmeticShaders.back().processor), fsaa));
     window_render_layers.push_back(defaultRenderLayer);
 
     auto n = PreferencesManager::get("multimonitor", "0").toInt();
