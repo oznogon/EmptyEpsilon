@@ -339,7 +339,7 @@ template = ShipTemplate()
     :setSpeed(120, 30, 25)
     :setDefaultAI("fighter")
 
--- Strix
+-- Strix (fka Strikeship)
 template = ShipTemplate()
     :setName("Strix")
     :setLocaleName(_("ship", "Strix"))
@@ -362,6 +362,7 @@ template = ShipTemplate()
     :setSpeed(70, 12, 12)
     :setWarpSpeed(1000)
 
+-- Magpie (fka Advanced Striker)
 template = ShipTemplate()
     :setName("Magpie")
     :setLocaleName(_("ship", "Magpie"))
@@ -384,6 +385,7 @@ template = ShipTemplate()
     :setSpeed(45, 12, 15)
     :setJumpDrive(true)
 
+-- Crow (fka Striker)
 variation = template
     :copy("Crow")
     :setLocaleName(_("playerShip", "Crow"))
