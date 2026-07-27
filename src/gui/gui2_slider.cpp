@@ -73,8 +73,6 @@ void GuiBasicSlider::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 
 GuiBasicSlider* GuiBasicSlider::setValue(float value)
 {
-    if (release_delay > 0) return this;
-
     this->value = std::clamp(value, std::min(min_value, max_value), std::max(min_value, max_value));
 
     return this;
@@ -293,9 +291,6 @@ GuiSlider2D* GuiSlider2D::addSnapValue(glm::vec2 value, glm::vec2 range)
 
 GuiSlider2D* GuiSlider2D::setValue(glm::vec2 value)
 {
-    if (release_delay > 0)
-        return this;
-
     value.x = std::clamp(value.x, std::min(min_value.x, max_value.x), std::max(min_value.x, max_value.x));
     value.y = std::clamp(value.y, std::min(min_value.y, max_value.y), std::max(min_value.y, max_value.y));
     this->value = value;

@@ -32,6 +32,7 @@ public:
     float getRangeMin() const { return min_value; }
     float getRangeMax() const { return max_value; }
     bool isDragging() const { return dragging; }
+    int getReleaseDelay() const { return release_delay; }
 
 protected:
     bool dragging = false;
@@ -101,6 +102,7 @@ public:
     glm::vec2 getValue();
 
     bool isDragging() const { return dragging; }
+    int getReleaseDelay() const { return release_delay; }
 
 protected:
     bool dragging = false;
