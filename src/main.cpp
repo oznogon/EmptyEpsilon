@@ -169,55 +169,55 @@ int main(int argc, char** argv)
         new EEHttpServer(port_nr, PreferencesManager::get("www_directory", "www"));
     }
 
-    string theme_name = PreferencesManager::get("guitheme", "default");
-    if (!GuiTheme::loadTheme(theme_name, "gui/" + theme_name + ".theme.txt"))
+    if (PreferencesManager::get("headless") == "")
     {
-        LOG(Error, "[main] Failed to load " + theme_name + " theme, trying default. Resources missing or contains errors? Check gui/" + theme_name + ".theme.txt");
-
-        if (!GuiTheme::loadTheme("default", "gui/default.theme.txt"))
+        string theme_name = PreferencesManager::get("guitheme", "default");
+        if (!GuiTheme::loadTheme(theme_name, "gui/" + theme_name + ".theme.txt"))
         {
-            // We might try to load the default theme twice, but this should be
-            // a rare error case which always exits.
-            LOG(Error, "[main] Failed to load default theme, exiting. Check gui/default.theme.txt");
-            SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load gui theme, resources missing or contains errors? Check gui/default.theme.txt", nullptr);
+            LOG(Error, "[main] Failed to load " + theme_name + " theme, trying default. Resources missing or contains errors? Check gui/" + theme_name + ".theme.txt");
+
+            if (!GuiTheme::loadTheme("default", "gui/default.theme.txt"))
+            {
+                // We might try to load the default theme twice, but this should be
+                // a rare error case which always exits.
+                LOG(Error, "[main] Failed to load default theme, exiting. Check gui/default.theme.txt");
+                SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load gui theme, resources missing or contains errors? Check gui/default.theme.txt", nullptr);
+                return 1;
+            }
+
+            GuiTheme::setCurrentTheme("default");
+        }
+        else GuiTheme::setCurrentTheme(theme_name);
+
+        // Apply atlas size mode from preferences before window creation.
+        {
+            auto atlas_pref = PreferencesManager::get("atlas_size", "auto");
+            if (atlas_pref == "4k")
+                sp::RenderTarget::setAtlasSizeMode(sp::RenderTarget::AtlasSizeMode::Force4K);
+            else if (atlas_pref == "2k")
+                sp::RenderTarget::setAtlasSizeMode(sp::RenderTarget::AtlasSizeMode::Force2K);
+            else
+                sp::RenderTarget::setAtlasSizeMode(sp::RenderTarget::AtlasSizeMode::Automatic);
+        }
+
+        if (!createDisplayWindows()) return 1;
+
+        const auto& active_theme = GuiTheme::getCurrentTheme();
+        main_font = active_theme->getStyle("base")->get(GuiElement::State::Normal).font;
+        bold_font = active_theme->getStyle("bold")->get(GuiElement::State::Normal).font;
+        if (!main_font || !bold_font)
+        {
+            LOG(Error, "[main] Can't load UI beacuse either the main and/or bold fonts are missing from the theme.");
+            SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load main or bold font, resources missing?", nullptr);
             return 1;
         }
 
-        GuiTheme::setCurrentTheme("default");
-    }
-    else GuiTheme::setCurrentTheme(theme_name);
-
-    // Apply atlas size mode from preferences before window creation.
-    {
-        auto atlas_pref = PreferencesManager::get("atlas_size", "auto");
-        if (atlas_pref == "4k")
-            sp::RenderTarget::setAtlasSizeMode(sp::RenderTarget::AtlasSizeMode::Force4K);
-        else if (atlas_pref == "2k")
-            sp::RenderTarget::setAtlasSizeMode(sp::RenderTarget::AtlasSizeMode::Force2K);
-        else
-            sp::RenderTarget::setAtlasSizeMode(sp::RenderTarget::AtlasSizeMode::Automatic);
-    }
-
-    if (PreferencesManager::get("headless") == "")
-    {
-        if (!createDisplayWindows()) return 1;
+        sp::RenderTarget::setDefaultFont(main_font);
     }
     else new StdinLuaConsole();
 
     soundManager->setMusicVolume(PreferencesManager::get("music_volume", "50").toFloat());
     soundManager->setMasterSoundVolume(PreferencesManager::get("sound_volume", "50").toFloat());
-
-    const auto& active_theme = GuiTheme::getCurrentTheme();
-    main_font = active_theme->getStyle("base")->get(GuiElement::State::Normal).font;
-    bold_font = active_theme->getStyle("bold")->get(GuiElement::State::Normal).font;
-    if (!main_font || !bold_font)
-    {
-        LOG(Error, "[main] Can't load UI beacuse either the main and/or bold fonts are missing from the theme.");
-        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load main or bold font, resources missing?", nullptr);
-        return 1;
-    }
-
-    sp::RenderTarget::setDefaultFont(main_font);
 
     // On Android, this requires the 'record audio' permissions,
     // which is always a scary thing for users.

@@ -1,12 +1,13 @@
 #include "mesh.h"
+#include "resources.h"
+#include "random.h"
+#include "preferenceManager.h"
+
 #include <graphics/opengl.h>
 #include <unordered_map>
 #include <SDL3/SDL.h>
 #include <meshoptimizer.h>
 #include <glm/gtx/norm.hpp>
-
-#include "resources.h"
-#include "random.h"
 
 struct ModelDataVertex
 {
@@ -173,6 +174,8 @@ struct IndexInfo
 
 Mesh* Mesh::getMesh(const string& filename)
 {
+    if (PreferencesManager::get("headless") != "") return nullptr;
+
     Mesh* ret = meshMap[filename];
     if (ret) return ret;
 

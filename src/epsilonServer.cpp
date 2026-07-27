@@ -9,8 +9,6 @@
 #include "main.h"
 #include "config.h"
 
-static PrometheusMetricsServer* metrics_server = nullptr;
-
 EpsilonServer::EpsilonServer(int server_port)
 : GameServer("Server", VERSION_NUMBER, server_port)
 {

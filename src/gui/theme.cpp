@@ -1,5 +1,6 @@
 #include "gui/theme.h"
 #include "resources.h"
+#include "preferenceManager.h"
 #include <io/keyValueTreeLoader.h>
 #include <graphics/freetypefont.h>
 #include <logging.h>
@@ -125,6 +126,8 @@ GuiTheme* GuiTheme::getCurrentTheme()
 
 bool GuiTheme::loadTheme(const string& name, const string& resource_name)
 {
+    if (PreferencesManager::get("headless") != "") return false;
+
     LOG(Debug, "[guitheme] Loading theme ", name, " from ", resource_name);
     GuiTheme* theme = new GuiTheme(name);
 
@@ -378,6 +381,8 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
 GuiTheme::GuiTheme(const string& name)
 : name(name)
 {
+    if (PreferencesManager::get("headless") != "") return;
+
     themes[name] = this;
 
     GuiThemeStyle::StateStyle fallback_state;
