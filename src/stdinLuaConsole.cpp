@@ -51,7 +51,9 @@ void StdinLuaConsole::addInput(char c)
         buffer.clear();
     }
     else if (c == 8 || c == 127)
+    {
         if (!buffer.empty()) buffer.pop_back();
+    }
     else if (c >= 32) buffer.push_back(c);
 }
 

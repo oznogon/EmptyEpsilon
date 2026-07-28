@@ -13,28 +13,29 @@ namespace sp::io {
     template<typename T> static inline DataBuffer& operator >> (DataBuffer& packet, std::vector<T>& v) { uint32_t size = 0; packet >> size; v.resize(size); for(size_t n=0; n<v.size(); n++) packet >> v[n]; return packet; }
 }
 
-namespace sp::multiplayer {
-    template<typename Q>
-    static inline Q quantize(float v, float fmin, float fmax)
-    {
-        constexpr float qmin = static_cast<float>(std::numeric_limits<Q>::lowest());
-        constexpr float qmax = static_cast<float>(std::numeric_limits<Q>::max());
-        return static_cast<Q>(std::clamp((v - fmin) / (fmax - fmin), 0.0f, 1.0f) * (qmax - qmin) + qmin + 0.5f);
-    }
+namespace sp::multiplayer
+{
+template<typename Q>
+static inline Q quantize(float v, float fmin, float fmax)
+{
+    constexpr float qmin = static_cast<float>(std::numeric_limits<Q>::lowest());
+    constexpr float qmax = static_cast<float>(std::numeric_limits<Q>::max());
+    return static_cast<Q>(std::clamp((v - fmin) / (fmax - fmin), 0.0f, 1.0f) * (qmax - qmin) + qmin + 0.5f);
+}
 
-    template<typename Q>
-    static inline float dequantize(Q q, float fmin, float fmax)
-    {
-        constexpr float qmin = static_cast<float>(std::numeric_limits<Q>::lowest());
-        constexpr float qmax = static_cast<float>(std::numeric_limits<Q>::max());
-        return (static_cast<float>(q) - qmin) / (qmax - qmin) * (fmax - fmin) + fmin;
-    }
+template<typename Q>
+static inline float dequantize(Q q, float fmin, float fmax)
+{
+    constexpr float qmin = static_cast<float>(std::numeric_limits<Q>::lowest());
+    constexpr float qmax = static_cast<float>(std::numeric_limits<Q>::max());
+    return (static_cast<float>(q) - qmin) / (qmax - qmin) * (fmax - fmin) + fmin;
+}
 
-    static inline void warnIfOutOfRange(float v, float fmin, float fmax, const char* field_name)
-    {
-        if (v < fmin || v > fmax)
-            LOG(Warning) << "Quantization clamp on '" << field_name << "': value " << v << " outside [" << fmin << ", " << fmax << "]";
-    }
+static inline void warnIfOutOfRange(float v, float fmin, float fmax, const char* field_name)
+{
+    if (v < fmin || v > fmax)
+        LOG(Warning, "[basic] Quantization clamp on '", field_name, "': value ", v, " outside of range [", fmin, ", ", fmax, "]");
+}
 }
 
 enum class BasicReplicationRequest {
