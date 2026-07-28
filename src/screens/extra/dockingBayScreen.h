@@ -66,8 +66,11 @@ private:
     GuiSlider* thermal_venting_direction;
     GuiElement* heat_gauges_row;
     GuiElement* supply_controls;
+    GuiElement* supply_controls_row;
+    GuiElement* generate_supply_drop_row;
     GuiKeyValueDisplay* berth_missiles[MW_MaxTypes];
     GuiKeyValueDisplay* carrier_missiles[MW_MaxTypes];
+    GuiElement* supply_center_rows[MW_MaxTypes];
     GuiKeyValueDisplay* berth_scan_probes;
     GuiKeyValueDisplay* carrier_scan_probes;
     GuiButton* generate_supply_drop;

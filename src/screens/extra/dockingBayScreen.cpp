@@ -115,7 +115,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setSize(200.0f, GuiElement::GuiSizeMax)
         ->setAttribute("margin", "0, 10, 0, 0");
 
-    GuiElement* selected_entity_kvs_1 = new GuiElement(docking_bay_info, "");
+    GuiElement* selected_entity_kvs_1 = new GuiScrollContainer(docking_bay_info, "");
     selected_entity_kvs_1
         ->setSize(200.0f, 200.0f)
         ->setAttribute("layout", "vertical");
@@ -618,29 +618,35 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
 
-    GuiElement* supply_controls_row = new GuiElement(supply_controls, "DOCKING_BAY_SUPPLY_CONTROLS_ROW");
+    GuiScrollContainer* supply_controls_scroll = new GuiScrollContainer(supply_controls, "");
+    supply_controls_scroll
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    supply_controls_row = new GuiElement(supply_controls_scroll, "DOCKING_BAY_SUPPLY_CONTROLS_ROW");
     supply_controls_row
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setSize(GuiElement::GuiSizeMax, 1.0f)
         ->setAttribute("layout", "horizontal");
+    supply_controls_row->getLayout().match_content_y = true;
 
     (new GuiElement(supply_controls_row, "SPACER"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     GuiElement* supply_controls_left = new GuiElement(supply_controls_row, "DOCKING_BAY_SUPPLY_CONTROLS_LEFT");
     supply_controls_left
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setSize(250.0f, 1.0f)
         ->setAttribute("layout", "vertical");
+    supply_controls_left->getLayout().match_content_y = true;
 
     GuiElement* supply_controls_center = new GuiElement(supply_controls_row, "DOCKING_BAY_SUPPLY_CONTROLS_CENTER");
     supply_controls_center
-        ->setSize(kv_size * 2.0f, GuiElement::GuiSizeMax)
+        ->setSize(kv_size * 2.0f, 1.0f)
         ->setAttribute("layout", "vertical");
-    supply_controls_center
-        ->setAttribute("margin", "10, 0");
+    supply_controls_center->getLayout().match_content_y = true;
 
     GuiElement* supply_controls_right = new GuiElement(supply_controls_row, "DOCKING_BAY_SUPPLY_CONTROLS_RIGHT");
     supply_controls_right
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setSize(250.0f, 1.0f)
         ->setAttribute("layout", "vertical");
+    supply_controls_right->getLayout().match_content_y = true;
 
     (new GuiElement(supply_controls_row, "SPACER"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
@@ -655,7 +661,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         for (int i = 0; i < MW_MaxTypes; i++)
         {
             supply_missiles[i] = new GuiKeyValueDisplay(column, "", kv_split, MissileWeaponDataRegistry::instance().getNameForIndex(i), "");
-            supply_missiles[i]->setSize(200.0f, kv_size);
+            supply_missiles[i]->setSize(GuiElement::GuiSizeMax, kv_size);
             auto icon = MissileWeaponDataRegistry::instance().getIcon(i);
             if (!icon.empty()) supply_missiles[i]->setIcon(icon);
         }
@@ -683,14 +689,19 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
             ->setSize(GuiElement::GuiSizeMax, kv_size)
             ->setAttribute("layout", "horizontal");
 
+        supply_center_rows[i] = supply_controls_center_row;
+
         to_berth[i] = new GuiButton(supply_controls_center_row, "", "<",
             [this, i]()
             {
                 if (!my_spaceship || !my_player_info) return;
+
                 auto bay = my_spaceship.getComponent<DockingBay>();
                 if (!bay) return;
+
                 auto carrier_tubes = my_spaceship.getComponent<MissileTubes>();
                 if (!carrier_tubes) return;
+
                 if (selected_berth_index < 0 || selected_berth_index >= static_cast<int>(bay->berths.size())) return;
 
                 auto selected_entity = bay->berths[selected_berth_index].docked_entity;
@@ -705,10 +716,13 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
             {
                 // TODO: DRY with to_berth
                 if (!my_spaceship || !my_player_info) return;
+
                 auto bay = my_spaceship.getComponent<DockingBay>();
                 if (!bay) return;
+
                 auto carrier_tubes = my_spaceship.getComponent<MissileTubes>();
                 if (!carrier_tubes) return;
+
                 if (selected_berth_index < 0 || selected_berth_index >= static_cast<int>(bay->berths.size())) return;
 
                 auto selected_entity = bay->berths[selected_berth_index].docked_entity;
@@ -723,11 +737,11 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     berth_scan_probes = new GuiKeyValueDisplay(supply_controls_left, "", kv_split, tr("dockingbay", "Probes"), "-");
     berth_scan_probes
         ->setIcon("/gui/icons/scan-probe.png")
-        ->setSize(200.0f, kv_size);
+        ->setSize(GuiElement::GuiSizeMax, kv_size);
     carrier_scan_probes = new GuiKeyValueDisplay(supply_controls_right, "", kv_split, tr("dockingbay", "Probes"), "-");
     carrier_scan_probes
         ->setIcon("/gui/icons/scan-probe.png")
-        ->setSize(200.0f, kv_size);
+        ->setSize(GuiElement::GuiSizeMax, kv_size);
 
     supply_controls_center_row = new GuiElement(supply_controls_center, "");
         supply_controls_center_row
@@ -770,18 +784,19 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         }
     ))->setSize(kv_size, kv_size);
 
-    supply_controls_row = new GuiElement(supply_controls, "DOCKING_BAY_SUPPLY_CONTROLS_ROW");
-    supply_controls_row
-        ->setSize(GuiElement::GuiSizeMax, kv_size)
-        ->setAttribute("layout", "horizontal");
+    generate_supply_drop_row = new GuiElement(supply_controls, "");
+    generate_supply_drop_row->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
-    generate_supply_drop = new GuiButton(supply_controls_row, "DOCKING_BAY_SUPPLY_DROP", tr("dockingbay", "Generate supply drop"),
+    generate_supply_drop = new GuiButton(generate_supply_drop_row, "DOCKING_BAY_SUPPLY_DROP", tr("dockingbay", "Generate supply drop"),
         [this]()
         {
             if (!my_spaceship || !my_player_info) return;
+
             auto bay = my_spaceship.getComponent<DockingBay>();
             if (!bay) return;
+
             if (selected_berth_index < 0 || selected_berth_index >= static_cast<int>(bay->berths.size())) return;
+
             if (bay->berths[selected_berth_index].docked_entity != sp::ecs::Entity()) return;
 
             // Call the Lua SupplyDrop() function
@@ -938,19 +953,6 @@ void DockingBayScreen::selectBerth(int berth_index)
             supply_controls->show();
             repair_controls->hide();
             storage_controls->hide();
-            {
-                // Show supply drop generation button only if Cargo
-                // class can dock internally and the berth is empty.
-                bool can_generate = false;
-
-                if (auto bay = my_spaceship.getComponent<DockingBay>())
-                {
-                    can_generate = (bay->internal_dock_classes.find(tr("class", "Cargo")) != bay->internal_dock_classes.end())
-                        && bay->berths[berth_index].docked_entity == sp::ecs::Entity();
-                }
-
-                generate_supply_drop->setVisible(can_generate);
-            }
             break;
         case DockingBay::Berth::Type::Repair:
             hangar_controls->hide();
@@ -1281,7 +1283,7 @@ void DockingBayScreen::updateSelectedEntityDisplay()
                 float heating_diff = system->getHeatingDelta();
                 info.heat_arrow
                     ->setAngle(heating_diff > 0.0f ? 90.0f : -90.0f)
-                    ->setColor(glm::u8vec4(255, 255, 255, std::min(255, int(255.0f * fabs(heating_diff)))))
+                    ->setColor(glm::u8vec4(255, 255, 255, std::min(255, static_cast<int>(255.0f * fabs(heating_diff)))))
                     ->setVisible(heat > 0.0f);
 
                 info.heat_icon->setVisible(heat > 0.9f);
@@ -1291,14 +1293,29 @@ void DockingBayScreen::updateSelectedEntityDisplay()
         }
     }
 
-    // Update move controls and progress bar visibility
+    // Show supply drop generation button only if Cargo
+    // class can dock internally and the berth is empty.
+    {
+        bool can_generate = false;
+
+        if (bay)
+        {
+            can_generate = (bay->internal_dock_classes.find(tr("class", "Cargo")) != bay->internal_dock_classes.end())
+                && bay->berths[selected_berth_index].docked_entity == sp::ecs::Entity();
+        }
+
+        generate_supply_drop_row->setVisible(can_generate);
+    }
+
+    // Update move controls and progress bar visibility.
     bool is_moving_out = false;
     bool is_moving_in = false;
     float progress = 0.0f;
     string move_text = "";
     sp::ecs::Entity moving_entity;
 
-    if (bay && selected_berth_index >= 0 && selected_berth_index < static_cast<int>(bay->berths.size())) {
+    if (bay && selected_berth_index >= 0 && selected_berth_index < static_cast<int>(bay->berths.size()))
+    {
         const auto& selected_berth = bay->berths[selected_berth_index];
 
         // Check if selected berth is moving an entity out.
@@ -1353,6 +1370,14 @@ void DockingBayScreen::refreshMissileLabels()
     {
         const string& name = MissileWeaponDataRegistry::instance().getNameForIndex(i);
         const string& icon = MissileWeaponDataRegistry::instance().getIcon(i);
+        bool has_type = !name.empty();
+
+        entity_missiles[i]->setVisible(has_type);
+        berth_missiles[i]->setVisible(has_type);
+        carrier_missiles[i]->setVisible(has_type);
+        supply_center_rows[i]->setVisible(has_type);
+
+        if (!has_type) continue;
 
         entity_missiles[i]->setKey(name);
         berth_missiles[i]->setKey(name);
@@ -1372,8 +1397,7 @@ void DockingBayScreen::updateMissileDisplay(GuiKeyValueDisplay* display, Missile
     if (tubes->storage_max[type] > 0)
     {
         display
-            ->setValue(static_cast<string>(tubes->storage[type]) + "/" +
-                      static_cast<string>(tubes->storage_max[type]));
+            ->setValue(static_cast<string>(tubes->storage[type]) + "/" + static_cast<string>(tubes->storage_max[type]));
     }
     else display->setValue("-");
 }
