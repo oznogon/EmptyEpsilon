@@ -46,13 +46,13 @@ public:
     float getRadarThermal(int index) const;
     float getRadarGravitational(int index) const;
 
-    bool getExplodesOnTimeout(int index) const;
-    bool getIsDelayedExplode(int index) const;
+    bool explodesOnTimeout(int index) const;
+    bool isDelayedExplode(int index) const;
     int getFireCount(int index) const;
     DamageType getDamageType(int index) const;
     int getAvoidObjectDelay(int index) const;
-    bool getCircleCollision(int index) const;
-    bool getNoLifetimeOnMissile(int index) const;
+    bool hasCircleCollision(int index) const;
+    bool hasNoLifetime(int index) const;
     bool isPlayerWeapon(int index) const;
 
     sp::script::Callback& getOnSpawn(int index);

@@ -232,14 +232,14 @@ float MissileWeaponDataRegistry::getRadarGravitational(int index) const
     return 0.0f;
 }
 
-bool MissileWeaponDataRegistry::getExplodesOnTimeout(int index) const
+bool MissileWeaponDataRegistry::explodesOnTimeout(int index) const
 {
     if (auto* c = getComponent(getEntityForIndex(index)))
         return c->explodes_on_timeout;
     return false;
 }
 
-bool MissileWeaponDataRegistry::getIsDelayedExplode(int index) const
+bool MissileWeaponDataRegistry::isDelayedExplode(int index) const
 {
     if (auto* c = getComponent(getEntityForIndex(index)))
         return c->is_delayed_explode;
@@ -266,14 +266,14 @@ int MissileWeaponDataRegistry::getAvoidObjectDelay(int index) const
     return 0;
 }
 
-bool MissileWeaponDataRegistry::getCircleCollision(int index) const
+bool MissileWeaponDataRegistry::hasCircleCollision(int index) const
 {
     if (auto* c = getComponent(getEntityForIndex(index)))
         return c->circle_collision;
     return false;
 }
 
-bool MissileWeaponDataRegistry::getNoLifetimeOnMissile(int index) const
+bool MissileWeaponDataRegistry::hasNoLifetime(int index) const
 {
     if (auto* c = getComponent(getEntityForIndex(index)))
         return c->no_lifetime_on_missile;
