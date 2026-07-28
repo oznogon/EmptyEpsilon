@@ -759,9 +759,9 @@ void initComponentScriptBindings()
     BIND_MEMBER(MissileWeaponData, damage_at_edge);
     BIND_MEMBER(MissileWeaponData, blast_range);
     BIND_MEMBER(MissileWeaponData, explosion_sfx);
-    BIND_MEMBER(MissileWeaponData, radar_r);
-    BIND_MEMBER(MissileWeaponData, radar_g);
-    BIND_MEMBER(MissileWeaponData, radar_b);
+    BIND_MEMBER(MissileWeaponData, radar_electrical);
+    BIND_MEMBER(MissileWeaponData, radar_thermal);
+    BIND_MEMBER(MissileWeaponData, radar_gravitational);
     BIND_MEMBER(MissileWeaponData, explodes_on_timeout);
     BIND_MEMBER(MissileWeaponData, is_delayed_explode);
     BIND_MEMBER(MissileWeaponData, fire_count);
@@ -769,6 +769,7 @@ void initComponentScriptBindings()
     BIND_MEMBER(MissileWeaponData, avoid_object_delay);
     BIND_MEMBER(MissileWeaponData, circle_collision);
     BIND_MEMBER(MissileWeaponData, no_lifetime_on_missile);
+    BIND_MEMBER(MissileWeaponData, player);
     BIND_MEMBER(MissileWeaponData, on_spawn);
     BIND_MEMBER(MissileWeaponData, on_collision);
     BIND_MEMBER(MissileWeaponData, on_lifetime_expire);

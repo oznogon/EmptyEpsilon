@@ -18,9 +18,9 @@ BASIC_REPLICATION_IMPL(MissileWeaponDataReplication, MissileWeaponData)
     BASIC_REPLICATION_FIELD(damage_at_edge);
     BASIC_REPLICATION_FIELD(blast_range);
     BASIC_REPLICATION_FIELD(explosion_sfx);
-    BASIC_REPLICATION_FIELD(radar_r);
-    BASIC_REPLICATION_FIELD(radar_g);
-    BASIC_REPLICATION_FIELD(radar_b);
+    BASIC_REPLICATION_FIELD(radar_electrical);
+    BASIC_REPLICATION_FIELD(radar_thermal);
+    BASIC_REPLICATION_FIELD(radar_gravitational);
     BASIC_REPLICATION_FIELD(explodes_on_timeout);
     BASIC_REPLICATION_FIELD(is_delayed_explode);
     BASIC_REPLICATION_FIELD(fire_count);
@@ -28,6 +28,7 @@ BASIC_REPLICATION_IMPL(MissileWeaponDataReplication, MissileWeaponData)
     BASIC_REPLICATION_FIELD(avoid_object_delay);
     BASIC_REPLICATION_FIELD(circle_collision);
     BASIC_REPLICATION_FIELD(no_lifetime_on_missile);
+    BASIC_REPLICATION_FIELD(player);
 
     if constexpr (BRR == BasicReplicationRequest::Receive)
         MissileWeaponDataRegistry::instance().rebuild();

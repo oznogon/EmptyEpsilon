@@ -319,9 +319,9 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
     float damage_at_edge = registry.getDamageAtEdge(type_index) * category_modifier;
     float blast_range = registry.getBlastRange(type_index) * category_modifier;
     string explosion_sfx = registry.getExplosionSfx(type_index);
-    float radar_r = registry.getRadarR(type_index);
-    float radar_g = registry.getRadarG(type_index);
-    float radar_b = registry.getRadarB(type_index);
+    float radar_electrical = registry.getRadarElectrical(type_index);
+    float radar_thermal = registry.getRadarThermal(type_index);
+    float radar_gravitational = registry.getRadarGravitational(type_index);
     bool explodes_on_timeout = registry.getExplodesOnTimeout(type_index);
     bool is_delayed_explode = registry.getIsDelayedExplode(type_index);
     DamageType dmg_type = registry.getDamageType(type_index);
@@ -341,7 +341,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
         mc.damage_at_edge = damage_at_edge;
         mc.blast_range = blast_range;
         mc.explosion_sfx = explosion_sfx;
-        missile.addComponent<RawRadarSignatureInfo>(radar_r, radar_g, radar_b);
+        missile.addComponent<RawRadarSignatureInfo>(radar_gravitational, radar_electrical, radar_thermal);
 
         if (avoid_object_delay > 0)
             missile.addComponent<DelayedAvoidObject>(static_cast<float>(avoid_object_delay), blast_range);
@@ -355,7 +355,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
         mc.blast_range = blast_range;
         mc.damage_type = dmg_type;
         mc.explosion_sfx = explosion_sfx;
-        missile.addComponent<RawRadarSignatureInfo>(radar_r, radar_g, radar_b);
+        missile.addComponent<RawRadarSignatureInfo>(radar_gravitational, radar_electrical, radar_thermal);
 
         if (explodes_on_timeout) missile.addComponent<ExplodeOnTimeout>();
         if (avoid_object_delay > 0)

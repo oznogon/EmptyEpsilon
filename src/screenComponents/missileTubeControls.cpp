@@ -85,7 +85,7 @@ void GuiMissileTubeControls::onUpdate()
     {
         auto& registry = MissileWeaponDataRegistry::instance();
         load_type_rows[n].button->setText(registry.getNameForIndex(n) + " [" + string(tubes->storage[n]) + "/" + string(tubes->storage_max[n]) + "]");
-        load_type_rows[n].layout->setVisible(tubes->storage_max[n] > 0);
+        load_type_rows[n].layout->setVisible(tubes->storage_max[n] > 0 && registry.isPlayerWeapon(n));
 
         auto icon = registry.getIcon(n);
         if (!icon.empty()) load_type_rows[n].button->setIcon(icon);

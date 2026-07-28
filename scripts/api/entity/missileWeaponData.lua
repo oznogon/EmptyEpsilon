@@ -132,13 +132,14 @@ function Entity:setExplosionSfx(s)
     end
     return self
 end
---- Sets the radar signature color (RGB floats).
+--- Sets the radar signature (electrical, thermal, gravitational).
+--- Values are floats, typically in the 0.0–1.0 range.
 --- Example: mwd:setRadarSignature(0.0, 0.1, 0.2)
-function Entity:setRadarSignature(r, g, b)
+function Entity:setRadarSignature(electrical, thermal, gravitational)
     if self.components.missile_weapon_data then
-        self.components.missile_weapon_data.radar_r = r
-        self.components.missile_weapon_data.radar_g = g
-        self.components.missile_weapon_data.radar_b = b
+        self.components.missile_weapon_data.radar_electrical = electrical
+        self.components.missile_weapon_data.radar_thermal = thermal
+        self.components.missile_weapon_data.radar_gravitational = gravitational
     end
     return self
 end
@@ -195,6 +196,17 @@ end
 function Entity:setNoLifetimeOnMissile(bool)
     if self.components.missile_weapon_data then
         self.components.missile_weapon_data.no_lifetime_on_missile = bool
+    end
+    return self
+end
+--- Sets whether this missile type appears on player crew screens.
+--- If true (default), the missile type is visible on crew screens.
+--- If false, the missile type is hidden from crew screens and only
+--- accessible via scripting and GM screens.
+--- Example: mwd:setPlayer(false)
+function Entity:setPlayer(bool)
+    if self.components.missile_weapon_data then
+        self.components.missile_weapon_data.player = bool
     end
     return self
 end
