@@ -8855,7 +8855,7 @@ function rescueDyingScientist(delta)
                 "Prototype device intended for ship system integration"
             )
         )
-        :setRadarSignatureInfo(10, 50, 5)
+        :setRadarSignatureInfo(0.1, 0.5, 0.05)
     for i, p in ipairs(getActivePlayerShips()) do
         p:addToShipLog(
             string.format(

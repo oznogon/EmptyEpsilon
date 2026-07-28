@@ -4408,7 +4408,7 @@ function setPlayer(pobj, playerIndex)
                         _("scienceDescription-flag", "Flag"),
                         _("scienceDescription-flag", "Human Navy Flag")
                     )
-                    :setRadarSignatureInfo(15, 10, 5)
+                    :setRadarSignatureInfo(0.15, 0.10, 0.05)
                     :setScanningParameters(flagScanComplexity, flagScanDepth)
                 if flag_reveal then
                     if flag_drop < 2 then
@@ -4448,7 +4448,7 @@ function setPlayer(pobj, playerIndex)
                         _("scienceDescription-flag", "Flag"),
                         _("scienceDescription-flag", "Kraylor Flag")
                     )
-                    :setRadarSignatureInfo(15, 10, 5)
+                    :setRadarSignatureInfo(0.15, 0.10, 0.05)
                     :setScanningParameters(flagScanComplexity, flagScanDepth)
                 if flag_reveal then
                     if flag_drop < 2 then
@@ -11665,7 +11665,7 @@ function transitionFromPreparationToHunt()
                 _("scienceDescription-flag", "Flag"),
                 _("scienceDescription-flag", "Human Navy Flag")
             )
-            :setRadarSignatureInfo(15, 10, 5)
+            :setRadarSignatureInfo(0.15, 0.10, 0.05)
             :setScanningParameters(flagScanComplexity, flagScanDepth)
         table.insert(human_flags, p1Flag)
         if difficulty < 1 then
@@ -11713,7 +11713,7 @@ function transitionFromPreparationToHunt()
                 _("scienceDescription-flag", "Flag"),
                 _("scienceDescription-flag", "Kraylor Flag")
             )
-            :setRadarSignatureInfo(15, 10, 5)
+            :setRadarSignatureInfo(0.15, 0.10, 0.05)
             :setScanningParameters(flagScanComplexity, flagScanDepth)
         table.insert(kraylor_flags, p2Flag)
         if difficulty < 1 then
@@ -11756,14 +11756,14 @@ function transitionFromPreparationToHunt()
                 table.insert(human_flags, decoyH1)
                 if difficulty > 1 then
                     decoyH1
-                        :setRadarSignatureInfo(15, 10, 5)
+                        :setRadarSignatureInfo(0.15, 0.10, 0.05)
                         :setScanningParameters(
                             flagScanComplexity,
                             flagScanDepth
                         )
                 else
                     decoyH1
-                        :setRadarSignatureInfo(20, 15, 10)
+                        :setRadarSignatureInfo(0.20, 0.15, 0.10)
                         :setScanningParameters(
                             flagScanComplexity,
                             flagScanDepth
@@ -11790,14 +11790,14 @@ function transitionFromPreparationToHunt()
                 table.insert(kraylor_flags, decoyK1)
                 if difficulty > 1 then
                     decoyK1
-                        :setRadarSignatureInfo(15, 10, 5)
+                        :setRadarSignatureInfo(0.15, 0.10, 0.05)
                         :setScanningParameters(
                             flagScanComplexity,
                             flagScanDepth
                         )
                 else
                     decoyK1
-                        :setRadarSignatureInfo(20, 15, 10)
+                        :setRadarSignatureInfo(0.20, 0.15, 0.10)
                         :setScanningParameters(
                             flagScanComplexity,
                             flagScanDepth
@@ -11824,14 +11824,14 @@ function transitionFromPreparationToHunt()
                 table.insert(human_flags, decoyH2)
                 if difficulty > 1 then
                     decoyH2
-                        :setRadarSignatureInfo(15, 10, 5)
+                        :setRadarSignatureInfo(0.15, 0.10, 0.05)
                         :setScanningParameters(
                             flagScanComplexity,
                             flagScanDepth
                         )
                 else
                     decoyH2
-                        :setRadarSignatureInfo(20, 15, 10)
+                        :setRadarSignatureInfo(0.20, 0.15, 0.10)
                         :setScanningParameters(
                             flagScanComplexity,
                             flagScanDepth
@@ -11858,14 +11858,14 @@ function transitionFromPreparationToHunt()
                 table.insert(kraylor_flags, decoyK2)
                 if difficulty > 1 then
                     decoyK2
-                        :setRadarSignatureInfo(15, 10, 5)
+                        :setRadarSignatureInfo(0.15, 0.10, 0.05)
                         :setScanningParameters(
                             flagScanComplexity,
                             flagScanDepth
                         )
                 else
                     decoyK2
-                        :setRadarSignatureInfo(20, 15, 10)
+                        :setRadarSignatureInfo(0.20, 0.15, 0.10)
                         :setScanningParameters(
                             flagScanComplexity,
                             flagScanDepth
@@ -11892,14 +11892,14 @@ function transitionFromPreparationToHunt()
                 table.insert(human_flags, decoyH3)
                 if difficulty > 1 then
                     decoyH3
-                        :setRadarSignatureInfo(15, 10, 5)
+                        :setRadarSignatureInfo(0.15, 0.10, 0.05)
                         :setScanningParameters(
                             flagScanComplexity,
                             flagScanDepth
                         )
                 else
                     decoyH3
-                        :setRadarSignatureInfo(20, 15, 10)
+                        :setRadarSignatureInfo(0.20, 0.15, 0.10)
                         :setScanningParameters(
                             flagScanComplexity,
                             flagScanDepth
@@ -11926,14 +11926,14 @@ function transitionFromPreparationToHunt()
                 table.insert(kraylor_flags, decoyK3)
                 if difficulty > 1 then
                     decoyK3
-                        :setRadarSignatureInfo(15, 10, 5)
+                        :setRadarSignatureInfo(0.15, 0.10, 0.05)
                         :setScanningParameters(
                             flagScanComplexity,
                             flagScanDepth
                         )
                 else
                     decoyK3
-                        :setRadarSignatureInfo(20, 15, 10)
+                        :setRadarSignatureInfo(0.20, 0.15, 0.10)
                         :setScanningParameters(
                             flagScanComplexity,
                             flagScanDepth
@@ -12174,7 +12174,7 @@ function manageHuntPhaseMechanics()
                                                     "Human Navy Flag"
                                                 )
                                             )
-                                            :setRadarSignatureInfo(15, 10, 5)
+                                            :setRadarSignatureInfo(0.15, 0.10, 0.05)
                                             :setScanningParameters(
                                                 flagScanComplexity,
                                                 flagScanDepth
@@ -12466,7 +12466,7 @@ function manageHuntPhaseMechanics()
                                                     "Kraylor Flag"
                                                 )
                                             )
-                                            :setRadarSignatureInfo(15, 10, 5)
+                                            :setRadarSignatureInfo(0.15, 0.10, 0.05)
                                             :setScanningParameters(
                                                 flagScanComplexity,
                                                 flagScanDepth
