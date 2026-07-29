@@ -75,7 +75,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setAttribute("layout", "vertical");
 
     // Left column: Docking bay berths
-    (new GuiLabel(left_column, "DOCKING_BAY_BERTHS_LABEL", tr("dockingbay", "Berths"), 30.0f))
+    (new GuiLabel(left_column, "DOCKING_BAY_BERTHS_LABEL", tr("dockingbay", "Berths"), GuiElement::GuiSizeLabel))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -100,7 +100,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
     (new GuiElement(top_row, "SPACER"))->setSize(250.0f, GuiElement::GuiSizeMax);
 
-    (new GuiLabel(docking_bay_info_layout, "DOCKING_BAY_INFO_LABEL", tr("dockingbay", "Selected berth"), 30.0f))
+    (new GuiLabel(docking_bay_info_layout, "DOCKING_BAY_INFO_LABEL", tr("dockingbay", "Selected berth"), GuiElement::GuiSizeLabel))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -124,8 +124,8 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
     for (int i = 0; i < MW_MaxTypes; i++)
     {
-        entity_missiles[i] = new GuiKeyValueDisplay(selected_entity_kvs_1, "", kv_split, MissileWeaponDataRegistry::instance().getNameForIndex(i), "");
-        entity_missiles[i]->setSize(GuiElement::GuiSizeMax, kv_size);
+        entity_missiles[i] = new GuiKeyValueDisplay(selected_entity_kvs_1, "", KV_SPLIT_MISSILES, MissileWeaponDataRegistry::instance().getNameForIndex(i), "");
+        entity_missiles[i]->setSize(GuiElement::GuiSizeMax, KV_SIZE);
         auto icon = MissileWeaponDataRegistry::instance().getIcon(i);
         if (!icon.empty()) entity_missiles[i]->setIcon(icon);
     }
@@ -135,18 +135,18 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setSize(200.0f, 200.0f)
         ->setAttribute("layout", "vertical");
 
-    entity_energy = new GuiKeyValueDisplay(selected_entity_kvs_2, "", kv_split, tr("dockingbay", "Energy"), "");
+    entity_energy = new GuiKeyValueDisplay(selected_entity_kvs_2, "", KV_SPLIT, tr("dockingbay", "Energy"), "");
     entity_energy
         ->setIcon("gui/icons/energy")
-        ->setSize(GuiElement::GuiSizeMax, kv_size);
-    entity_hull = new GuiKeyValueDisplay(selected_entity_kvs_2, "", kv_split, tr("dockingbay", "Hull"), "");
+        ->setSize(GuiElement::GuiSizeMax, KV_SIZE);
+    entity_hull = new GuiKeyValueDisplay(selected_entity_kvs_2, "", KV_SPLIT, tr("dockingbay", "Hull"), "");
     entity_hull
         ->setIcon("gui/icons/hull")
-        ->setSize(GuiElement::GuiSizeMax, kv_size);
-    entity_probes = new GuiKeyValueDisplay(selected_entity_kvs_2, "", kv_split, tr("dockingbay", "Probes"), "");
+        ->setSize(GuiElement::GuiSizeMax, KV_SIZE);
+    entity_probes = new GuiKeyValueDisplay(selected_entity_kvs_2, "", KV_SPLIT, tr("dockingbay", "Probes"), "");
     entity_probes
         ->setIcon("/gui/icons/scan-probe.png")
-        ->setSize(GuiElement::GuiSizeMax, kv_size);
+        ->setSize(GuiElement::GuiSizeMax, KV_SIZE);
 
     // Right column, bottom row
     (new GuiLabel(right_column, "DOCKING_BAY_BERTH_LABEL", tr("dockingbay", "Berth operations"), 30.0f))
@@ -176,10 +176,10 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
     (new GuiElement(move_controls_row, "SPACER"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    energy_carrier = new GuiKeyValueDisplay(move_controls_row, "", kv_split, tr("dockingbay", "Carrier"), "");
+    energy_carrier = new GuiKeyValueDisplay(move_controls_row, "", KV_SPLIT, tr("dockingbay", "Carrier"), "");
     energy_carrier
         ->setIcon("gui/icons/energy")
-        ->setSize(200.0f, kv_size)
+        ->setSize(200.0f, KV_SIZE)
         ->setAttribute("alignment", "center");
 
     (new GuiElement(move_controls_row, "SPACER"))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -452,7 +452,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
         info.row = new GuiElement(n < ShipSystem::COUNT / 2 ? heat_gauges_left : heat_gauges_right, id);
         info.row
-            ->setSize(GuiElement::GuiSizeMax, kv_size)
+            ->setSize(GuiElement::GuiSizeMax, KV_SIZE)
             ->hide()
             ->setAttribute("layout", "horizontal");
 
@@ -583,7 +583,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
         info.row = new GuiElement(n < ShipSystem::COUNT / 2 ? damage_gauges_left : damage_gauges_right, id);
         info.row
-            ->setSize(GuiElement::GuiSizeMax, kv_size)
+            ->setSize(GuiElement::GuiSizeMax, KV_SIZE)
             ->hide()
             ->setAttribute("layout", "horizontal");
 
@@ -638,7 +638,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
     GuiElement* supply_controls_center = new GuiElement(supply_controls_row, "DOCKING_BAY_SUPPLY_CONTROLS_CENTER");
     supply_controls_center
-        ->setSize(kv_size * 2.0f, 1.0f)
+        ->setSize(KV_SIZE * 2.0f, 1.0f)
         ->setAttribute("layout", "vertical");
     supply_controls_center->getLayout().match_content_y = true;
 
@@ -652,16 +652,16 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
     // Header labels for supply columns
     (new GuiLabel(supply_controls_left, "", tr("dockingbay", "Berth"), 20.0f))
-        ->setSize(GuiElement::GuiSizeMax, kv_size);
+        ->setSize(GuiElement::GuiSizeMax, KV_SIZE);
     (new GuiLabel(supply_controls_right, "", tr("dockingbay", "Carrier"), 20.0f))
-        ->setSize(GuiElement::GuiSizeMax, kv_size);
+        ->setSize(GuiElement::GuiSizeMax, KV_SIZE);
 
     auto populateMissiles = [](GuiKeyValueDisplay* supply_missiles[MW_MaxTypes], GuiElement* column)
     {
         for (int i = 0; i < MW_MaxTypes; i++)
         {
-            supply_missiles[i] = new GuiKeyValueDisplay(column, "", kv_split, MissileWeaponDataRegistry::instance().getNameForIndex(i), "");
-            supply_missiles[i]->setSize(GuiElement::GuiSizeMax, kv_size);
+            supply_missiles[i] = new GuiKeyValueDisplay(column, "", KV_SPLIT, MissileWeaponDataRegistry::instance().getNameForIndex(i), "");
+            supply_missiles[i]->setSize(GuiElement::GuiSizeMax, KV_SIZE);
             auto icon = MissileWeaponDataRegistry::instance().getIcon(i);
             if (!icon.empty()) supply_missiles[i]->setIcon(icon);
         }
@@ -679,14 +679,14 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
     GuiElement* supply_controls_center_row = new GuiElement(supply_controls_center, "");
     // Blank spacer for first row.
     supply_controls_center_row
-        ->setSize(GuiElement::GuiSizeMax, kv_size)
+        ->setSize(GuiElement::GuiSizeMax, KV_SIZE)
         ->setAttribute("layout", "horizontal");
 
     for (int i = 0; i < MW_MaxTypes; i++)
     {
         supply_controls_center_row = new GuiElement(supply_controls_center, "");
         supply_controls_center_row
-            ->setSize(GuiElement::GuiSizeMax, kv_size)
+            ->setSize(GuiElement::GuiSizeMax, KV_SIZE)
             ->setAttribute("layout", "horizontal");
 
         supply_center_rows[i] = supply_controls_center_row;
@@ -709,7 +709,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
                     my_player_info->commandTransferMissile(selected_entity, i, 1);
             }
         );
-        to_berth[i]->setSize(kv_size, kv_size);
+        to_berth[i]->setSize(KV_SIZE, KV_SIZE);
 
         to_carrier[i] = new GuiButton(supply_controls_center_row, "", ">",
             [this, i]()
@@ -730,22 +730,22 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
                     my_player_info->commandTransferMissile(selected_entity, i, -1);
             }
         );
-        to_carrier[i]->setSize(kv_size, kv_size);
+        to_carrier[i]->setSize(KV_SIZE, KV_SIZE);
     }
 
     // Populate scan probe key/value displays
-    berth_scan_probes = new GuiKeyValueDisplay(supply_controls_left, "", kv_split, tr("dockingbay", "Probes"), "-");
+    berth_scan_probes = new GuiKeyValueDisplay(supply_controls_left, "", KV_SPLIT, tr("dockingbay", "Probes"), "-");
     berth_scan_probes
         ->setIcon("/gui/icons/scan-probe.png")
-        ->setSize(GuiElement::GuiSizeMax, kv_size);
-    carrier_scan_probes = new GuiKeyValueDisplay(supply_controls_right, "", kv_split, tr("dockingbay", "Probes"), "-");
+        ->setSize(GuiElement::GuiSizeMax, KV_SIZE);
+    carrier_scan_probes = new GuiKeyValueDisplay(supply_controls_right, "", KV_SPLIT, tr("dockingbay", "Probes"), "-");
     carrier_scan_probes
         ->setIcon("/gui/icons/scan-probe.png")
-        ->setSize(GuiElement::GuiSizeMax, kv_size);
+        ->setSize(GuiElement::GuiSizeMax, KV_SIZE);
 
     supply_controls_center_row = new GuiElement(supply_controls_center, "");
         supply_controls_center_row
-            ->setSize(GuiElement::GuiSizeMax, kv_size)
+            ->setSize(GuiElement::GuiSizeMax, KV_SIZE)
             ->setAttribute("layout", "horizontal");
 
     // Populate scan probe transfer buttons
@@ -764,7 +764,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
             if (selected_entity && selected_entity != sp::ecs::Entity())
                 my_player_info->commandTransferProbe(selected_entity, 1);
         }
-    ))->setSize(kv_size, kv_size);
+    ))->setSize(KV_SIZE, KV_SIZE);
 
     // To carrier
     (new GuiButton(supply_controls_center_row, "", ">",
@@ -782,7 +782,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
             if (selected_entity && selected_entity != sp::ecs::Entity())
                 my_player_info->commandTransferProbe(selected_entity, -1);
         }
-    ))->setSize(kv_size, kv_size);
+    ))->setSize(KV_SIZE, KV_SIZE);
 
     generate_supply_drop_row = new GuiElement(supply_controls, "");
     generate_supply_drop_row->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);

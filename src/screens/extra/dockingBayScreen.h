@@ -20,8 +20,9 @@ class PickupCallback;
 class DockingBayScreen : public GuiOverlay
 {
 private:
-    static constexpr float kv_size = 40.0f;
-    static constexpr float kv_split = 0.5f;
+    static constexpr float KV_SIZE = 40.0f;
+    static constexpr float KV_SPLIT = 0.5f;
+    static constexpr float KV_SPLIT_MISSILES = 0.6f;
 
     class SystemRow
     {
