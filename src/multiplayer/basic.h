@@ -138,7 +138,7 @@ enum class BasicReplicationRequest {
             packet >> vector_flags; \
             if (vector_flags == 0) break; \
             packet >> idx; \
-            if (idx >= target.FIELD.size()) { LOG(Warning, "Vector replication index out of range..."); break; } \
+            if (idx >= target.FIELD.size()) { LOG(Warning, "[basic] Vector replication index out of range."); break; } \
         } \
         auto vector_target = &target.FIELD[idx]; \
         auto vector_backup = backup ? &backup->FIELD[idx] : nullptr; \
