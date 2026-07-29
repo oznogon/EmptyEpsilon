@@ -1,13 +1,15 @@
+#include "mainScreen.h"
+#include <i18n.h>
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
-#include "mainScreen.h"
 #include "main.h"
 #include "epsilonServer.h"
 #include "preferenceManager.h"
 #include "soundManager.h"
 #include "multiplayer_client.h"
-#include "components/cinematicCamera.h"
 #include "ecs/query.h"
+
+#include "components/cinematicCamera.h"
 
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/selfDestructIndicator.h"
@@ -23,12 +25,10 @@
 #include "gui/gui2_panel.h"
 #include "gui/gui2_overlay.h"
 
-#include <i18n.h>
-
 ScreenMainScreen::ScreenMainScreen(RenderLayer* render_layer)
 : GuiCanvas(render_layer)
 {
-    new GuiOverlay(this, "", glm::u8vec4(0,0,0,255));
+    new GuiOverlay(this, "", glm::u8vec4(0, 0, 0, 255));
 
     viewport = new GuiViewportMainScreen(this, "VIEWPORT");
     viewport
@@ -83,7 +83,11 @@ ScreenMainScreen::ScreenMainScreen(RenderLayer* render_layer)
     new GuiGlobalMessage(this);
     (new GuiIndicatorOverlays(this))->hasGlobalMessage();
 
-    std::vector<string> hotkey_categories = {tr("hotkey_menu", "Console"), tr("hotkey_menu", "Basic"), tr("hotkey_menu", "Main Screen")};
+    std::vector<string> hotkey_categories = {
+        tr("hotkey_menu", "Console"),
+        tr("hotkey_menu", "Basic"),
+        tr("hotkey_menu", "Main Screen")
+    };
     if (PreferencesManager::get("voice_chat_enabled", "1") == "1")
         hotkey_categories.emplace_back(tr("hotkey_menu", "Voice Chat"));
     keyboard_help = new GuiHotkeyHelpOverlay(this, hotkey_categories);
@@ -150,7 +154,7 @@ void ScreenMainScreen::update(float delta)
     {
         if (auto pc = my_spaceship.getComponent<PlayerControl>())
         {
-            switch(pc->main_screen_setting)
+            switch (pc->main_screen_setting)
             {
             case MainScreenSetting::Front:
             case MainScreenSetting::Back:
@@ -184,7 +188,8 @@ void ScreenMainScreen::update(float delta)
             }
 
             // Apply camera view if in Camera mode
-            if (pc->main_screen_setting == MainScreenSetting::Camera && pc->main_screen_camera)
+            if (pc->main_screen_setting == MainScreenSetting::Camera
+                && pc->main_screen_camera)
             {
                 // Get the camera and transform components
                 auto cam = pc->main_screen_camera.getComponent<CinematicCamera>();
@@ -192,18 +197,17 @@ void ScreenMainScreen::update(float delta)
 
                 if (cam && transform)
                 {
-                    // Apply camera position and orientation to global camera
-                    camera_position.x = transform->getPosition().x;
-                    camera_position.y = transform->getPosition().y;
-                    camera_position.z = cam->z_position;
-                    camera_yaw = transform->getRotation(); // Yaw comes from Transform rotation
+                    // Apply camera position and orientation to global camera.
+                    camera_position = {transform->getPosition(), cam->z_position};
+                    // Yaw comes from Transform rotation.
+                    camera_yaw = transform->getRotation();
                     camera_pitch = cam->pitch;
                     camera_roll = cam->roll;
 
-                    // Apply field of view
+                    // Apply field of view.
                     viewport->modifyFoV(cam->field_of_view - viewport->getBaseFoV());
 
-                    // Disable ship-specific visual effects for camera view
+                    // Disable ship-specific visual effects for camera view.
                     viewport->hideHeadings();
                     viewport->hideSpacedust();
                 }
@@ -214,16 +218,14 @@ void ScreenMainScreen::update(float delta)
                 uint8_t flags = PreferencesManager::get("main_screen_flags","7").toInt();
                 if (flags & GuiViewportMainScreen::flag_headings)
                     viewport->showHeadings();
-                else
-                    viewport->hideHeadings();
+                else viewport->hideHeadings();
 
                 if (flags & GuiViewportMainScreen::flag_spacedust)
                     viewport->showSpacedust();
-                else
-                    viewport->hideSpacedust();
+                else viewport->hideSpacedust();
             }
 
-            switch(pc->main_screen_overlay)
+            switch (pc->main_screen_overlay)
             {
             case MainScreenOverlay::ShowComms:
                 onscreen_comms->clearElements();
@@ -239,12 +241,10 @@ void ScreenMainScreen::update(float delta)
         // Update impulse sound volume and pitch.
         impulse_sound->update(delta);
     }
-    else
-    {
-        // If we're not the player ship (ie. we exploded), don't play impulse
-        // engine sounds.
-        impulse_sound->stop();
-    }
+    // If we're not the player ship (ie. we exploded), don't play impulse
+    // engine sounds.
+    else impulse_sound->stop();
+
     utility_beam_sound->update(delta);
 
     if (my_spaceship)
@@ -276,8 +276,7 @@ bool ScreenMainScreen::onPointerDown(sp::io::Pointer::Button button, glm::vec2 p
     if (!my_spaceship) return false;
 
     auto pc = my_spaceship.getComponent<PlayerControl>();
-    if (!pc)
-        return false;
+    if (!pc) return false;
 
     if (button == sp::io::Pointer::Button::Touch && id != sp::io::Pointer::mouse)
     {
@@ -286,7 +285,7 @@ bool ScreenMainScreen::onPointerDown(sp::io::Pointer::Button button, glm::vec2 p
         auto check_radar = [position](const auto& radar)
         {
             auto size = radar.getRect().size;
-            auto radius = std::min(size.x, size.y) / 2.f;
+            auto radius = std::min(size.x, size.y) * 0.5f;
             if (glm::length(position - radar.getCenterPoint()) < radius)
                 return sp::io::Pointer::Button::Middle;
 
@@ -305,26 +304,26 @@ bool ScreenMainScreen::onPointerDown(sp::io::Pointer::Button button, glm::vec2 p
             button = check_radar(*strategic_map);
             break;
         default:
-            // Tapping the radar brings it up (middle mouse)
+            // Tapping the radar brings it up (middle mouse).
             if (main_screen_radar->getRect().contains(position))
                 button = sp::io::Pointer::Button::Middle;
             else
+            // Split screen in two, tapping left rotates left (as if
+            // left mouse), and tapping right rotates right as right mouse.
             {
-                // Split screen in two - tapping left rotates left (as if left mouse), and right... right.
                 if (position.x < viewport->getCenterPoint().x)
                     button = sp::io::Pointer::Button::Left;
-                else
-                    button = sp::io::Pointer::Button::Right;
+                else button = sp::io::Pointer::Button::Right;
             }
         }
     }
 
-    switch(button)
+    switch (button)
     {
     case sp::io::Pointer::Button::Left:
         [[fallthrough]];
     case sp::io::Pointer::Button::Touch:
-        switch(pc->main_screen_setting)
+        switch (pc->main_screen_setting)
         {
         case MainScreenSetting::Front: my_player_info->commandMainScreenSetting(MainScreenSetting::Left); break;
         case MainScreenSetting::Left: my_player_info->commandMainScreenSetting(MainScreenSetting::Back); break;
@@ -334,7 +333,7 @@ bool ScreenMainScreen::onPointerDown(sp::io::Pointer::Button button, glm::vec2 p
         }
         break;
     case sp::io::Pointer::Button::Right:
-        switch(pc->main_screen_setting)
+        switch (pc->main_screen_setting)
         {
         case MainScreenSetting::Front: my_player_info->commandMainScreenSetting(MainScreenSetting::Right); break;
         case MainScreenSetting::Right: my_player_info->commandMainScreenSetting(MainScreenSetting::Back); break;
@@ -344,7 +343,7 @@ bool ScreenMainScreen::onPointerDown(sp::io::Pointer::Button button, glm::vec2 p
         }
         break;
     case sp::io::Pointer::Button::Middle:
-        switch(pc->main_screen_setting)
+        switch (pc->main_screen_setting)
         {
         default:
             if (gameGlobalInfo->allow_main_screen_tactical_radar)
