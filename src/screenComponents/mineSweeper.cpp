@@ -3,6 +3,7 @@
 #include "random.h"
 #include "miniGame.h"
 #include "hackingDialog.h"
+
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_progressbar.h"
@@ -14,14 +15,14 @@ MineSweeper::MineSweeper(GuiPanel* owner, GuiHackingDialog* parent, int difficul
     field_size = difficulty * 2 + 6;
     bomb_count = difficulty * 2 + 6;
 
-    // Create attempts remaining label
+    // Create attempts remaining label.
     attempts_label = new GuiLabel(owner, "MINESWEEPER_ATTEMPTS_COUNT", "", 25.0f);
     attempts_label
         ->setAlignment(sp::Alignment::CenterRight)
         ->setPosition(-185.0f, -25.0f, sp::Alignment::BottomRight)
         ->setSize(150.0f, GuiElement::GuiSizeRow);
 
-    // Create flag mode toggle button for touch/no right click
+    // Create flag mode toggle button for touch/no right click.
     flag_mode_toggle = new GuiToggleButton(owner, "MINESWEEPER_FLAG_MODE", "",
         [this](bool value)
         {
@@ -33,9 +34,9 @@ MineSweeper::MineSweeper(GuiPanel* owner, GuiHackingDialog* parent, int difficul
         ->setPosition(185.0f, -25.0f, sp::Alignment::BottomLeft)
         ->setSize(GuiElement::GuiSizeRow, GuiElement::GuiSizeRow);
 
-    for(int x=0; x<field_size; x++)
+    for (int x = 0; x < field_size; x++)
     {
-        for(int y=0; y<field_size; y++)
+        for (int y = 0; y < field_size; y++)
         {
             FieldItem* item = new FieldItem(
                 owner, "", "",
@@ -51,8 +52,12 @@ MineSweeper::MineSweeper(GuiPanel* owner, GuiHackingDialog* parent, int difficul
             );
 
             item
-                ->setSize(50, 50)
-                ->setPosition(static_cast<float>(x * 50 - field_size * 25), static_cast<float>(25 + y * 50 - field_size * 25), sp::Alignment::Center);
+                ->setSize(50.0f, 50.0f)
+                ->setPosition(
+                    static_cast<float>(x * 50 - field_size * 25),
+                    static_cast<float>(25 + y * 50 - field_size * 25),
+                    sp::Alignment::Center
+                );
             board.emplace_back(item);
         }
     }
@@ -69,9 +74,10 @@ MineSweeper::~MineSweeper()
 void MineSweeper::disable()
 {
     MiniGame::disable();
-    for(int x=0; x < field_size; x++)
+
+    for (int x = 0; x < field_size; x++)
     {
-        for(int y=0; y < field_size; y++)
+        for (int y = 0; y < field_size; y++)
         {
             FieldItem* item = getFieldItem(x, y);
             item
@@ -81,6 +87,7 @@ void MineSweeper::disable()
                 ->disable();
         }
     }
+
     attempts_label->hide();
     flag_mode_toggle->hide();
 }
@@ -88,9 +95,10 @@ void MineSweeper::disable()
 void MineSweeper::reset()
 {
     MiniGame::reset();
-    for(int x=0; x < field_size; x++)
+
+    for (int x = 0; x < field_size; x++)
     {
-        for(int y=0; y < field_size; y++)
+        for (int y = 0; y < field_size; y++)
         {
             FieldItem* item = getFieldItem(x, y);
             item
@@ -101,7 +109,8 @@ void MineSweeper::reset()
             item->bomb = false;
         }
     }
-    for(int n=0; n < bomb_count; n++)
+
+    for (int n = 0; n < bomb_count; n++)
     {
         int x = irandom(0, field_size - 1);
         int y = irandom(0, field_size - 1);
@@ -111,20 +120,24 @@ void MineSweeper::reset()
             n--;
             continue;
         }
+
         getFieldItem(x, y)->bomb = true;
     }
+
     error_count = 0;
     correct_count = 0;
     flag_mode = false;
-    flag_mode_toggle->setValue(false);
+    flag_mode_toggle
+        ->setValue(false)
+        ->show();
     attempts_label->show();
-    flag_mode_toggle->show();
+
     updateAttemptsLabel();
 }
 
 float MineSweeper::getProgress()
 {
-    return (float)correct_count / (float)(field_size * field_size - bomb_count);
+    return static_cast<float>(correct_count) / static_cast<float>(field_size * field_size - bomb_count);
 }
 
 void MineSweeper::gameComplete()
@@ -136,18 +149,20 @@ void MineSweeper::gameComplete()
 
 glm::vec2 MineSweeper::getBoardSize()
 {
-    return glm::vec2(field_size*50, field_size*50);
+    return glm::vec2(field_size * 50, field_size * 50);
 }
 
 void MineSweeper::onFieldClick(int x, int y)
 {
     FieldItem* item = getFieldItem(x, y);
 
-    if (item->getValue() || item->getText() == "X" || item->getIcon() == "waypoint.png" || error_count > 1 || correct_count == (field_size * field_size - bomb_count))
-    {
-        //Unpressing an already pressed button, or flagged tile, or game over.
-        return;
-    }
+    // Unpressing an already pressed button, or flagged tile, or game over.
+    if (item->getValue()
+        || item->getText() == "X"
+        || item->getIcon() == "waypoint.png"
+        || error_count > 1
+        || correct_count == (field_size * field_size - bomb_count)
+    ) return;
 
     item->setValue(true);
 
@@ -163,6 +178,7 @@ void MineSweeper::onFieldClick(int x, int y)
     {
         correct_count++;
         int proximity = 0;
+
         if (x > 0 && y > 0 && getFieldItem(x - 1, y - 1)->bomb) proximity++;
         if (x > 0 && getFieldItem(x - 1, y)->bomb) proximity++;
         if (x > 0 && y < field_size - 1 && getFieldItem(x - 1, y + 1)->bomb) proximity++;
@@ -174,14 +190,12 @@ void MineSweeper::onFieldClick(int x, int y)
         if (x < field_size - 1 && getFieldItem(x + 1, y)->bomb) proximity++;
         if (x < field_size - 1 && y < field_size - 1 && getFieldItem(x + 1, y + 1)->bomb) proximity++;
 
-        if (proximity < 1)
-            item->setText("");
-        else
-            item->setText(string(proximity));
+        if (proximity < 1) item->setText("");
+        else item->setText(string(proximity));
 
         if (proximity < 1)
         {
-            //if no bombs found in proximity, auto click on all surrounding tiles
+            // If no bombs found in proximity, auto-click all surrounding tiles.
             if (x > 0 && y > 0) onFieldClick(x - 1, y - 1);
             if (x > 0) onFieldClick(x - 1, y);
             if (x > 0 && y < field_size - 1) onFieldClick(x - 1, y + 1);
@@ -195,23 +209,22 @@ void MineSweeper::onFieldClick(int x, int y)
         }
     }
 
-    if (error_count > 1 || correct_count == (field_size * field_size - bomb_count))
-    {
-        gameComplete();
-    }
+    if (error_count > 1
+        || correct_count == (field_size * field_size - bomb_count)
+    ) gameComplete();
 }
 
 void MineSweeper::onFieldRightClick(int x, int y)
 {
     FieldItem* item = getFieldItem(x, y);
 
-    // Don't allow flagging already revealed tiles or revealed bombs
+    // Don't allow flagging already revealed tiles or revealed bombs.
     if (item->getValue() || item->getText() == "X") return;
 
-    // Don't allow flagging after game is over
+    // Don't allow flagging after game is over.
     if (error_count > 1 || correct_count == (field_size * field_size - bomb_count)) return;
 
-    // Toggle flag
+    // Toggle flag.
     if (item->getIcon() == "waypoint.png") item->setIcon("");
     else item->setIcon("waypoint.png", sp::Alignment::Center);
 }
@@ -219,9 +232,15 @@ void MineSweeper::onFieldRightClick(int x, int y)
 void MineSweeper::updateAttemptsLabel()
 {
     int attempts_remaining = MAX_ATTEMPTS - error_count;
-    string attempts_text = static_cast<string>("{remaining}/{max}").format({{"remaining", attempts_remaining}, {"max", MAX_ATTEMPTS}});
-    if (difficulty > 1) attempts_text = tr("minesweeper", "Attempts: ") + attempts_text;
+    string attempts_text = static_cast<string>("{remaining}/{max}").format({
+        {"remaining", attempts_remaining},
+        {"max", MAX_ATTEMPTS}}
+    );
+
+    if (difficulty > 1)
+        attempts_text = tr("minesweeper", "Attempts: ") + attempts_text;
     else attempts_text = "X: " + attempts_text;
+
     attempts_label->setText(attempts_text);
 }
 
@@ -231,7 +250,7 @@ MineSweeper::FieldItem* MineSweeper::getFieldItem(int x, int y)
 }
 
 MineSweeper::FieldItem::FieldItem(GuiContainer* owner, string id, string text, func_t left_func, func_t right_func)
-: GuiToggleButton(owner, id, text, nullptr), bomb(false), left_click_func(left_func), right_click_func(right_func), last_button(sp::io::Pointer::Button::Unknown)
+: GuiToggleButton(owner, id, text, nullptr), left_click_func(left_func), right_click_func(right_func)
 {
 }
 

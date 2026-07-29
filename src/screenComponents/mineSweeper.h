@@ -5,20 +5,20 @@
 
 class GuiLabel;
 
-/** An implementation of mineSweeper for use as a hacking minigame.
- *  Original implementation by https://github.com/daid
- */
-class MineSweeper : public MiniGame {
-  public:
+// An implementation of mineSweeper for use as a hacking minigame.
+// Original implementation by https://github.com/daid
+class MineSweeper : public MiniGame
+{
+public:
     MineSweeper(GuiPanel* owner, GuiHackingDialog* parent, int difficulty);
     virtual ~MineSweeper();
     virtual void reset() override;
     virtual void disable() override;
     virtual float getProgress() override;
     virtual glm::vec2 getBoardSize() override;
-  protected:
+protected:
     virtual void gameComplete() override;
-  private:
+private:
     static constexpr int MAX_ATTEMPTS = 2;
 
     void onFieldClick(int x, int y);
@@ -43,11 +43,11 @@ class MineSweeper : public MiniGame {
         virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
 
         bool bomb = false;
-
     private:
         func_t left_click_func;
         func_t right_click_func;
-        sp::io::Pointer::Button last_button;
+        sp::io::Pointer::Button last_button = sp::io::Pointer::Button::Unknown;
     };
+
     FieldItem* getFieldItem(int x, int y);
 };
