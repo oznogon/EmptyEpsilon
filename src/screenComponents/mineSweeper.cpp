@@ -52,7 +52,7 @@ MineSweeper::MineSweeper(GuiPanel* owner, GuiHackingDialog* parent, int difficul
             );
 
             item
-                ->setSize(50.0f, 50.0f)
+                ->setSize(GuiElement::GuiSizeRow, GuiElement::GuiSizeRow)
                 ->setPosition(
                     static_cast<float>(x * 50 - field_size * 25),
                     static_cast<float>(25 + y * 50 - field_size * 25),
@@ -61,12 +61,13 @@ MineSweeper::MineSweeper(GuiPanel* owner, GuiHackingDialog* parent, int difficul
             board.emplace_back(item);
         }
     }
+
     reset();
 }
 
 MineSweeper::~MineSweeper()
 {
-    // Explicitly destroy GUI controls
+    // Explicitly destroy GUI controls.
     if (attempts_label) attempts_label->destroy();
     if (flag_mode_toggle) flag_mode_toggle->destroy();
 }
@@ -178,34 +179,40 @@ void MineSweeper::onFieldClick(int x, int y)
     {
         correct_count++;
         int proximity = 0;
+        // Model directions clockwise from top-left.
+        int directions[8][2] = {
+            {-1, -1}, {-1,  0}, {-1,  1},
+            { 0, -1},           { 0,  1},
+            { 1, -1}, { 1,  0}, { 1,  1}
+        };
 
-        if (x > 0 && y > 0 && getFieldItem(x - 1, y - 1)->bomb) proximity++;
-        if (x > 0 && getFieldItem(x - 1, y)->bomb) proximity++;
-        if (x > 0 && y < field_size - 1 && getFieldItem(x - 1, y + 1)->bomb) proximity++;
+        // Increment proximity for each adjacent bomb.
+        for (int i = 0; i < 8; i++)
+        {
+            const int nx = x + directions[i][0];
+            const int ny = y + directions[i][1];
+            if (nx >= 0 && nx < field_size
+                && ny >= 0 && ny < field_size
+                && getFieldItem(nx, ny)->bomb
+            ) proximity++;
+        }
 
-        if (y > 0 && getFieldItem(x, y - 1)->bomb) proximity++;
-        if (y < field_size - 1 && getFieldItem(x, y + 1)->bomb) proximity++;
+        // Write the number of adjacent bombs into the cell.
+        item->setText(proximity > 0
+            ? string(proximity)
+            : ""
+        );
 
-        if (x < field_size - 1 && y > 0 && getFieldItem(x + 1, y - 1)->bomb) proximity++;
-        if (x < field_size - 1 && getFieldItem(x + 1, y)->bomb) proximity++;
-        if (x < field_size - 1 && y < field_size - 1 && getFieldItem(x + 1, y + 1)->bomb) proximity++;
-
-        if (proximity < 1) item->setText("");
-        else item->setText(string(proximity));
-
+        // If no bombs found in proximity, auto-click all surrounding tiles.
         if (proximity < 1)
         {
-            // If no bombs found in proximity, auto-click all surrounding tiles.
-            if (x > 0 && y > 0) onFieldClick(x - 1, y - 1);
-            if (x > 0) onFieldClick(x - 1, y);
-            if (x > 0 && y < field_size - 1) onFieldClick(x - 1, y + 1);
-
-            if (y > 0) onFieldClick(x, y - 1);
-            if (y < field_size - 1) onFieldClick(x, y + 1);
-
-            if (x < field_size - 1 && y > 0) onFieldClick(x + 1, y - 1);
-            if (x < field_size - 1) onFieldClick(x + 1, y);
-            if (x < field_size - 1 && y < field_size - 1) onFieldClick(x + 1, y + 1);
+            for (int i = 0; i < 8; i++)
+            {
+                const int nx = x + directions[i][0];
+                const int ny = y + directions[i][1];
+                if (nx >= 0 && nx < field_size && ny >= 0 && ny < field_size)
+                    onFieldClick(nx, ny);
+            }
         }
     }
 
@@ -257,6 +264,13 @@ MineSweeper::FieldItem::FieldItem(GuiContainer* owner, string id, string text, f
 bool MineSweeper::FieldItem::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     last_button = button;
+
+    if (button == sp::io::Pointer::Button::Touch)
+    {
+        touch_count++;
+        if (touch_count > peak_touch_count) peak_touch_count = touch_count;
+    }
+
     return true;
 }
 
@@ -264,12 +278,27 @@ void MineSweeper::FieldItem::onMouseUp(glm::vec2 position, sp::io::Pointer::ID i
 {
     if (!rect.contains(position)) return;
 
-    if (last_button == sp::io::Pointer::Button::Left && left_click_func)
+    sp::io::Pointer::Button button = last_button;
+
+    // Handle touch-only events.
+    // One-finger touch = left click, two or more = right click.
+    if (button == sp::io::Pointer::Button::Touch)
+    {
+        touch_count--;
+        if (touch_count > 0) return;
+
+        if (peak_touch_count >= 2) button = sp::io::Pointer::Button::Right;
+        else button = sp::io::Pointer::Button::Left;
+
+        peak_touch_count = 0;
+    }
+
+    if (button == sp::io::Pointer::Button::Left && left_click_func)
     {
         func_t f = left_click_func;
         f(getValue());
     }
-    else if (last_button == sp::io::Pointer::Button::Right && right_click_func)
+    else if (button == sp::io::Pointer::Button::Right && right_click_func)
     {
         func_t f = right_click_func;
         f(getValue());

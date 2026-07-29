@@ -47,6 +47,8 @@ private:
         func_t left_click_func;
         func_t right_click_func;
         sp::io::Pointer::Button last_button = sp::io::Pointer::Button::Unknown;
+        int touch_count = 0;
+        int peak_touch_count = 0;
     };
 
     FieldItem* getFieldItem(int x, int y);
