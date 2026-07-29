@@ -4,6 +4,7 @@
 #include "textureManager.h"
 #include "vectorUtils.h"
 #include "shaderRegistry.h"
+#include "engine.h"
 #include <graphics/opengl.h>
 #include <glm/gtc/type_ptr.hpp>
 #include "tween.h"
@@ -573,15 +574,18 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
     float f = (1.0f - (ee.lifetime / ee.max_lifetime));
     float scale;
     float alpha = 0.5f;
-    if (f < 0.2f) {
+    if (f < 0.2f)
+    {
         scale = (f / 0.2f);
-        if (ee.electrical)
-            scale *= 0.8f;
-    } else {
+        if (ee.electrical) scale *= 0.8f;
+    }
+    else
+    {
         if (ee.electrical)
             scale = Tween<float>::easeOutQuad(f, 0.2f, 1.0f, 0.8f, 1.0f);
         else
             scale = Tween<float>::easeOutQuad(f, 0.2f, 1.0f, 1.0f, 1.3f);
+
         alpha = Tween<float>::easeInQuad(f, 0.2f, 1.0f, 0.5f, 0.0f);
     }
 
@@ -593,25 +597,36 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
     auto explosion_matrix = glm::scale(model_matrix, glm::vec3(scale * ee.size));
     ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Basic);
     {
-        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(explosion_matrix));
-        glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
+        // Render sphere mesh opaque with depth writes.
+        glDisable(GL_BLEND);
+        glDepthMask(GL_TRUE);
+
+        ShaderRegistry::ScopedShader explosion_shader(ShaderRegistry::Shaders::Explosion);
+        glUniformMatrix4fv(explosion_shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(explosion_matrix));
+        glUniform4f(explosion_shader.get().uniform(ShaderRegistry::Uniforms::Color), 1.0f, 1.0f, 1.0f, 1.0f);
+        glUniform1f(explosion_shader.get().uniform(ShaderRegistry::Uniforms::Time), engine->getElapsedTime() + e.getIndex() * 1.771f);
         if (ee.electrical)
             textureManager.getTexture("texture/electric_sphere_texture.png")->bind();
-        else
-            textureManager.getTexture("texture/fire_sphere_texture.png")->bind();
+        else textureManager.getTexture("texture/explosion.png")->bind();
 
-        gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
-        gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
-        gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
-        gl::ScopedVertexAttribArray tangents(shader.get().attribute(ShaderRegistry::Attributes::Tangent));
+        gl::ScopedVertexAttribArray positions(explosion_shader.get().attribute(ShaderRegistry::Attributes::Position));
+        gl::ScopedVertexAttribArray texcoords(explosion_shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+        gl::ScopedVertexAttribArray normals(explosion_shader.get().attribute(ShaderRegistry::Attributes::Normal));
+        gl::ScopedVertexAttribArray tangents(explosion_shader.get().attribute(ShaderRegistry::Attributes::Tangent));
 
         Mesh* m = Mesh::getMesh("mesh/sphere.obj");
         m->render(positions.get(), texcoords.get(), normals.get(), tangents.get());
-        if (ee.electrical) {
-            glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(glm::scale(explosion_matrix, glm::vec3(.5f))));
+        if (ee.electrical)
+        {
+            glUniformMatrix4fv(explosion_shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(glm::scale(explosion_matrix, glm::vec3(.5f))));
             m->render(positions.get(), texcoords.get(), normals.get(), tangents.get());
         }
+
+        // Restore transparent state for fire ring and particles.
+        glEnable(GL_BLEND);
+        glDepthMask(GL_FALSE);
     }
+    shader.get().get()->bind();
     std::vector<glm::vec3> vertices(4 * ee.max_quad_count);
 
     if (!ee.particles_buffers) {

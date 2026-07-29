@@ -37,6 +37,7 @@ namespace ShaderRegistry
         ObjectSpecularIlluminationNormal,
         Planet,
         Shield,
+        Explosion,
 
         Count
     };
