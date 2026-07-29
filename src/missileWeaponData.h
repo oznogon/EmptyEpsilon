@@ -42,16 +42,18 @@ public:
     float getDamageAtEdge(int index) const;
     float getBlastRange(int index) const;
     const string& getExplosionSfx(int index) const;
-    float getRadarR(int index) const;
-    float getRadarG(int index) const;
-    float getRadarB(int index) const;
-    bool getExplodesOnTimeout(int index) const;
-    bool getIsDelayedExplode(int index) const;
+    float getRadarElectrical(int index) const;
+    float getRadarThermal(int index) const;
+    float getRadarGravitational(int index) const;
+
+    bool explodesOnTimeout(int index) const;
+    bool isDelayedExplode(int index) const;
     int getFireCount(int index) const;
     DamageType getDamageType(int index) const;
     int getAvoidObjectDelay(int index) const;
-    bool getCircleCollision(int index) const;
-    bool getNoLifetimeOnMissile(int index) const;
+    bool hasCircleCollision(int index) const;
+    bool hasNoLifetime(int index) const;
+    bool isPlayerWeapon(int index) const;
 
     sp::script::Callback& getOnSpawn(int index);
     sp::script::Callback& getOnCollision(int index);
@@ -106,9 +108,6 @@ public:
     float damage_at_edge = 5.0f;
     float blast_range = 30.0f;
     string explosion_sfx = "sfx/explosion.wav";
-    float radar_r = 0.0f;
-    float radar_g = 0.1f;
-    float radar_b = 0.2f;
     bool explodes_on_timeout = false;
     bool is_delayed_explode = false;
     int fire_count = 1;
@@ -116,6 +115,10 @@ public:
     int avoid_object_delay = 0;
     bool circle_collision = false;
     bool no_lifetime_on_missile = false;
+    float radar_electrical = 0.2f;
+    float radar_thermal = 0.1f;
+    float radar_gravitational = 0.0f;
+    bool player = true;
 
     sp::script::Callback on_spawn;
     sp::script::Callback on_collision;

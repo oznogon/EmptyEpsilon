@@ -1368,9 +1368,10 @@ void DockingBayScreen::refreshMissileLabels()
 {
     for (int i = 0; i < MW_MaxTypes; i++)
     {
-        const string& name = MissileWeaponDataRegistry::instance().getNameForIndex(i);
-        const string& icon = MissileWeaponDataRegistry::instance().getIcon(i);
-        bool has_type = !name.empty();
+        auto& registry = MissileWeaponDataRegistry::instance();
+        const string& name = registry.getNameForIndex(i);
+        const string& icon = registry.getIcon(i);
+        bool has_type = !name.empty() && registry.isPlayerWeapon(i);
 
         entity_missiles[i]->setVisible(has_type);
         berth_missiles[i]->setVisible(has_type);

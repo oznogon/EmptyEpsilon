@@ -214,32 +214,32 @@ const string& MissileWeaponDataRegistry::getExplosionSfx(int index) const
     return empty;
 }
 
-float MissileWeaponDataRegistry::getRadarR(int index) const
+float MissileWeaponDataRegistry::getRadarElectrical(int index) const
 {
-    if (auto* c = getComponent(getEntityForIndex(index))) return c->radar_r;
+    if (auto* c = getComponent(getEntityForIndex(index))) return c->radar_electrical;
     return 0.0f;
 }
 
-float MissileWeaponDataRegistry::getRadarG(int index) const
+float MissileWeaponDataRegistry::getRadarThermal(int index) const
 {
-    if (auto* c = getComponent(getEntityForIndex(index))) return c->radar_g;
+    if (auto* c = getComponent(getEntityForIndex(index))) return c->radar_thermal;
     return 0.0f;
 }
 
-float MissileWeaponDataRegistry::getRadarB(int index) const
+float MissileWeaponDataRegistry::getRadarGravitational(int index) const
 {
-    if (auto* c = getComponent(getEntityForIndex(index))) return c->radar_b;
+    if (auto* c = getComponent(getEntityForIndex(index))) return c->radar_gravitational;
     return 0.0f;
 }
 
-bool MissileWeaponDataRegistry::getExplodesOnTimeout(int index) const
+bool MissileWeaponDataRegistry::explodesOnTimeout(int index) const
 {
     if (auto* c = getComponent(getEntityForIndex(index)))
         return c->explodes_on_timeout;
     return false;
 }
 
-bool MissileWeaponDataRegistry::getIsDelayedExplode(int index) const
+bool MissileWeaponDataRegistry::isDelayedExplode(int index) const
 {
     if (auto* c = getComponent(getEntityForIndex(index)))
         return c->is_delayed_explode;
@@ -266,18 +266,25 @@ int MissileWeaponDataRegistry::getAvoidObjectDelay(int index) const
     return 0;
 }
 
-bool MissileWeaponDataRegistry::getCircleCollision(int index) const
+bool MissileWeaponDataRegistry::hasCircleCollision(int index) const
 {
     if (auto* c = getComponent(getEntityForIndex(index)))
         return c->circle_collision;
     return false;
 }
 
-bool MissileWeaponDataRegistry::getNoLifetimeOnMissile(int index) const
+bool MissileWeaponDataRegistry::hasNoLifetime(int index) const
 {
     if (auto* c = getComponent(getEntityForIndex(index)))
         return c->no_lifetime_on_missile;
     return false;
+}
+
+bool MissileWeaponDataRegistry::isPlayerWeapon(int index) const
+{
+    if (auto* c = getComponent(getEntityForIndex(index)))
+        return c->player;
+    return true;
 }
 
 sp::script::Callback& MissileWeaponDataRegistry::getOnSpawn(int index)

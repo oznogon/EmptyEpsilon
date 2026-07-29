@@ -1057,7 +1057,7 @@ function generateStaticWorld()
     artAnchor1 = Artifact()
         :setPosition(150000, -30000)
         :setScanningParameters(3, 2)
-        :setRadarSignatureInfo(random(2, 8), random(22, 87), random(2, 8))
+        :setRadarSignatureInfo(random(0.02, 0.08), random(0.22, 0.87), random(0.02, 0.08))
     artAnchor1:setModel("artifact3"):allowPickup(false):setDescriptions(
         _("scienceDescription-artifact", "Unusual object"),
         _(
@@ -1068,7 +1068,7 @@ function generateStaticWorld()
     artAnchor2 = Artifact()
         :setPosition(random(0, 100000), random(70000, 100000))
         :setScanningParameters(2, 3)
-        :setRadarSignatureInfo(random(2, 8), random(22, 87), random(2, 8))
+        :setRadarSignatureInfo(random(0.02, 0.08), random(0.22, 0.87), random(0.02, 0.08))
     artAnchor2:setModel("artifact5"):allowPickup(false):setDescriptions(
         _("scienceDescription-artifact", "Object outside of normal parameters"),
         _("scienceDescription-artifact", "Good research material")

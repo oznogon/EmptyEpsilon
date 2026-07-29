@@ -9527,7 +9527,7 @@ function setWormArt()
                 "Object shows rapidly building energy"
             )
         )
-        :setRadarSignatureInfo(50, 10, 5)
+        :setRadarSignatureInfo(0.50, 0.10, 0.05)
     wormArt.travelAngle = random(0, 360)
     wormArt.tempAngle = -90
     wormArt.travel = 5

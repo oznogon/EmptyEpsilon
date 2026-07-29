@@ -102,6 +102,7 @@ function init()
         :setDamageAtCenter(50):setDamageAtEdge(10):setBlastRange(200)
         :setFireCount(1):setDamageType("Kinetic"):setOrder(100)
         :setLocaleName("Callback Missile")
+        :setPlayer(false)
 
     local cd = callback_missile.components.missile_weapon_data
 

@@ -1250,7 +1250,7 @@ float ShipAI::calculateFiringSolution(sp::ecs::Entity target, const MissileTubes
         return std::numeric_limits<float>::infinity();
     }
 
-    if (MissileWeaponDataRegistry::instance().getExplodesOnTimeout(type))
+    if (MissileWeaponDataRegistry::instance().explodesOnTimeout(type))
     {
         auto target_position = tt->getPosition();
 

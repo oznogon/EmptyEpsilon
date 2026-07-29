@@ -1153,7 +1153,7 @@ void DroneOperationsScreen::onUpdate()
             {
                 auto& registry = MissileWeaponDataRegistry::instance();
                 missile_type_rows[n].button->setText(registry.getNameForIndex(n) + " [" + string(tubes->storage[n]) + "/" + string(tubes->storage_max[n]) + "]");
-                missile_type_rows[n].layout->setVisible(tubes->storage_max[n] > 0);
+                missile_type_rows[n].layout->setVisible(tubes->storage_max[n] > 0 && registry.isPlayerWeapon(n));
                 auto icon = registry.getIcon(n);
                 if (!icon.empty()) missile_type_rows[n].button->setIcon(icon);
             }
