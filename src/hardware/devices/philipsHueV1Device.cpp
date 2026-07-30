@@ -7,7 +7,6 @@
 #include <unistd.h>
 #endif
 #include "io/json.h"
-
 #include "io/http/request.h"
 
 PhilipsHueV1Device::PhilipsHueV1Device()
