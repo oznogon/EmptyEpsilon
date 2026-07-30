@@ -61,7 +61,7 @@ bool PhilipsHueV1Device::configure(std::unordered_map<string, string> settings)
         sp::io::http::Request http(ip_address, port);
         http.setHeader("Content-Type", "application/json");
 
-        LOG(Info, "[huev1] No Philips Hue username provided. Going to request one. Press the link button on the Philips Hue V1 bridge.");
+        LOG(Info, "[huev1] No Philips Hue username provided. Requesting one. Press the link button on the Philips Hue V1 bridge.");
         auto response = http.post("/api", "{\"devicetype\":\"EmptyEpsilon#EmptyEpsilon\"}");
 
         if (response.status == 200)
