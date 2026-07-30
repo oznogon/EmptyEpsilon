@@ -573,6 +573,7 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
 {
     float f = (1.0f - (ee.lifetime / ee.max_lifetime));
     float scale;
+    float alpha = 0.5f;
 
     if (f < 0.2f)
     {

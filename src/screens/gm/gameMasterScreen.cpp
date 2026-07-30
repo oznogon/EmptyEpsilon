@@ -818,6 +818,13 @@ void GameMasterScreen::update(float delta)
     gm_route_toggle->setVisible(gameGlobalInfo->enable_waypoint_routes && main_radar->getWaypoints());
     gm_waypoint_set_selector->setVisible(gameGlobalInfo->enable_multiple_waypoint_sets && main_radar->getWaypoints());
 
+    // Move waypoint controls up when both AI orders and waypoints are visible.
+    gm_player_waypoint_layout->setPosition(
+        -20.0f,
+        has_cpu_ship && has_player_ship ? -300.0f : -240.0f,
+        sp::Alignment::BottomRight
+    );
+
     if (!gameGlobalInfo->enable_multiple_waypoint_sets && gm_waypoint_set != 1)
     {
         gm_waypoint_set = 1;
