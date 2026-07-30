@@ -109,11 +109,11 @@ void HullInfoDisplay::onUpdate()
     setVisible(hull);
     if (hull)
     {
-        setValue(toNearbyIntString(hull->percentage()) + "%");
+        setValue(string(hull->percentage()) + "%");
+
         if (hull->current < hull->max * 0.25f)
             setBackColor(glm::u8vec4(255, 0, 0, 255));
-        else
-            setBackColor(glm::u8vec4{255, 255, 255, 255});
+        else setBackColor(glm::u8vec4{255, 255, 255, 255});
     }
 }
 

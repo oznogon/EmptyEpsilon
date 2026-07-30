@@ -440,9 +440,9 @@ bool HardwareController::getVariableValue(string variable_name, float& value)
     }
 
     /// Hull: Remaining hull percentage.
-    SHIP_VARIABLE("Hull", Hull, c->percentage());
+    SHIP_VARIABLE("Hull", Hull, static_cast<float>(c->percentage()));
     /// Energy: Reactor energy percentage.
-    SHIP_VARIABLE("Energy", Reactor, c->energyPercentage());
+    SHIP_VARIABLE("Energy", Reactor, static_cast<float>(c->energyPercentage()));
     /// FrontShield: Alias for Shield0.
     SHIP_VARIABLE("FrontShield", Shields, c->entries.size() > 0 ? c->entries[0].percentage() : 0.0f);
     /// Shield0: First shield segment percentage. On ships with 2 segments, this
