@@ -26,8 +26,45 @@ PhilipsHueV2Device::~PhilipsHueV2Device()
 
 bool PhilipsHueV2Device::configure(std::unordered_map<string, string> settings)
 {
-    if (settings.find("ip") != settings.end())
-        ip_address = settings["ip"];
+    if (settings.find("ip") != settings.end()) ip_address = settings["ip"];
+    else
+    {
+        LOG(Info, "[huev2] Discovering IP address of Hue V2 bridge via https://discovery.meethue.com. This device must be on the same network as the Hue V2 bridge.");
+        sp::io::http::Request http("discovery.meethue.com", port, sp::io::http::Request::Scheme::Https);
+        http.setSSLVerify(false);
+
+        auto response = http.get("/");
+        if (response.status == 200)
+        {
+            const auto& body = response.body;
+            std::string err;
+
+            if (auto json = sp::json::parse(body, err); json)
+            {
+                auto root = json.value();
+
+                // [{"id":"0123456789ABCDEF","internalipaddress":"192.168.0.11","port":443}]
+                if (root.is_array() && !root.empty())
+                    ip_address = root[0]["internalipaddress"].get<std::string>();
+                else
+                {
+                    LOG(Error, "[huev2] No IP address provided, and discovery.meethue.com returned no bridges.");
+                    return false;
+                }
+            }
+            else
+            {
+                LOG(Error, "[huev2] No IP address provided, and JSON parsing of discovery.meethue.com failed: ", err);
+                return false;
+            }
+
+        }
+        else
+        {
+            LOG(Error, "[huev2] No IP address provided, and discovery.meethue.com returned status ", response.status);
+            return false;
+        }
+    }
 
     if (settings.find("apikey") != settings.end())
     {
@@ -73,13 +110,12 @@ bool PhilipsHueV2Device::configure(std::unordered_map<string, string> settings)
 
     while (api_key == "")
     {
-        LOG(Info, "[huev2] Requesting API key from Hue V2 bridge ", ip_address, " on port ", port, " (HTTPS).");
+        LOG(Info, "[huev2] Requesting API key from Hue V2 bridge ", ip_address, " on port ", port, " (HTTPS). Press the link button on the Philips Hue V2 bridge.");
 
         sp::io::http::Request http(ip_address, port, sp::io::http::Request::Scheme::Https);
         http.setSSLVerify(false);
         http.setHeader("Content-Type", "application/json");
 
-        LOG(Info, "[huev2] Press the link button on the Philips Hue V2 bridge.");
         auto response = http.post("/api", "{\"devicetype\":\"EmptyEpsilon#EmptyEpsilon\"}");
 
         if (response.status == 200)
@@ -185,7 +221,7 @@ bool PhilipsHueV2Device::configure(std::unordered_map<string, string> settings)
             }
             else
             {
-                LOG(Error, "[huev2] JSON parsing failed: ", err);
+                LOG(Error, "[huev2] JSON parsing of /clip/v2/resource/light request failed: ", err);
                 return false;
             }
 
