@@ -106,6 +106,7 @@ void GuiScrollContainer::updateLayout(const sp::Rect& bounds)
     // Compute content_height from children.
     float min_top = std::numeric_limits<float>::max();
     float max_bottom = 0.0f;
+
     for (auto& child_ptr : children)
     {
         GuiElement* child = child_ptr.get();
@@ -117,7 +118,14 @@ void GuiScrollContainer::updateLayout(const sp::Rect& bounds)
         const float bottom = child->getRect().position.y + child->getRect().size.y + child->getLayout().margin.bottom - rect.position.y + scroll_offset;
         if (bottom > max_bottom) max_bottom = bottom;
     }
-    content_height = max_bottom - min_top;
+
+    if (min_top == std::numeric_limits<float>::max())
+    {
+        content_height = 0.0f;
+        min_top = 0.0f;
+        max_bottom = 0.0f;
+    }
+    else content_height = max_bottom - min_top;
 
     // Determine scroll range. At scroll_offset 0, content is at its default
     // layout position. Content can extend above the content area (negative
@@ -156,7 +164,14 @@ void GuiScrollContainer::updateLayout(const sp::Rect& bounds)
             const float bottom = child->getRect().position.y + child->getRect().size.y + child->getLayout().margin.bottom - rect.position.y + scroll_offset;
             if (bottom > max_bottom) max_bottom = bottom;
         }
-        content_height = max_bottom - min_top;
+
+        if (min_top == std::numeric_limits<float>::max())
+        {
+            content_height = 0.0f;
+            min_top = 0.0f;
+            max_bottom = 0.0f;
+        }
+        else content_height = max_bottom - min_top;
 
         // Recompute overflow and scroll range.
         overflow_above = std::max(0.0f, content_area_top - min_top);
@@ -193,7 +208,14 @@ void GuiScrollContainer::updateLayout(const sp::Rect& bounds)
             const float bottom = child->getRect().position.y + child->getRect().size.y + child->getLayout().margin.bottom - rect.position.y + scroll_offset;
             if (bottom > max_bottom) max_bottom = bottom;
         }
-        content_height = max_bottom - min_top;
+
+        if (min_top == std::numeric_limits<float>::max())
+        {
+            content_height = 0.0f;
+            min_top = 0.0f;
+            max_bottom = 0.0f;
+        }
+        else content_height = max_bottom - min_top;
 
         // Recompute overflow and scroll range.
         overflow_above = std::max(0.0f, content_area_top - min_top);
