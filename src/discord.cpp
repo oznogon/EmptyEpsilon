@@ -1,5 +1,11 @@
 #include "discord.h"
 #include <discord_game_sdk.h>
+#ifdef interface
+#undef interface
+#endif
+#ifdef TRANSPARENT
+#undef TRANSPARENT
+#endif
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 
