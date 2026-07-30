@@ -98,7 +98,7 @@ bool PhilipsHueV2Device::configure(std::unordered_map<string, string> settings)
                         int end_idx = body.find("\"", idx + 1);
                         if (end_idx > 0)
                         {
-                            username = body.substr(idx + 1, end_idx);
+                            api_key = body.substr(idx + 1, end_idx);
                             LOG(Debug, "[huev2] ", body);
                             LOG(Info, "[huev2] Got API key from Philips Hue V2 bridge.");
                             break;
@@ -193,16 +193,18 @@ bool PhilipsHueV2Device::configure(std::unordered_map<string, string> settings)
             update_thread = std::thread(&PhilipsHueV2Device::updateLoop, this);
             return true;
         }
+        else
+        {
+            LOG(Error, "[huev2] Failed to connect to Philips Hue V2 bridge: ", response.status);
+            if (response.body.length() > 0) LOG(Error, "[huev2] ", response.body);
+            return false;
+        }
     }
     else
     {
         LOG(Error, "[huev2] Failed to request Philips Hue V2 API key.");
         return false;
     }
-
-    LOG(Error, "[huev2] Failed to connect to Philips Hue V2 bridge: ", response.status);
-    if (response.body.length() > 0) LOG(Error, "[huev2] ", response.body);
-    return false;
 }
 
 void PhilipsHueV2Device::setChannelData(int channel, float value)
