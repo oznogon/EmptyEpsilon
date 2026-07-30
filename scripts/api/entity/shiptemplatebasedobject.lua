@@ -288,20 +288,6 @@ function Entity:setShieldsMax(...)
     end
     return self
 end
---- Sets the radar trace image for this entity.
---- Valid values are filenames of PNG images relative to the resources/radar directory.
---- Radar trace images should be white with a transparent background.
---- Unscanned entities appear on player radar as their defined radar_trace.icon by default, unless radar_trace.arrow_if_not_scanned=true, in which case the entity appears as an arrow (equivalent to an argument value of "ship.png").
---- Examples:
---- entity:setRadarTrace("arrow.png") -- sets the radar trace for this entity to resources/radar/arrow.png
---- entity:setRadarTrace("blip.png") -- displays a dot for this entity on radar when scanned
-function Entity:setRadarTrace(filename)
-    if self.components.radar_trace then
-        self.components.radar_trace.icon = "radar/" .. filename
-    end
-    return self
-end
-
 --- Sets this entity's impulse engine sound effect.
 --- Valid values are filenames of WAV files relative to the resources/ directory.
 --- Use a looping sound file that tolerates being pitched up and down as the ship's impulse speed changes.

@@ -49,17 +49,6 @@ function Entity:setPoints(...)
     end
     return self
 end
---- Sets this Zone's color when drawn on radar.
---- Defaults to white (255,255,255).
---- Sets both the outline and fill color.
---- Example: zone:setColor(255,140,0)
-function Entity:setColor(r, g, b)
-    if self.components.zone then
-        self.components.zone.color = { r, g, b, 255 }
-        self.components.zone.fill_color = { r, g, b, 64 }
-    end
-    return self
-end
 --- Sets this Zone's fill color when drawn on radar. The fill color defaults to white with alpha 64.
 --- If the fill alpha is 0, the filled area is not drawn.
 --- Example: zone:setFillColor(0, 0, 255, 32) -- translucent blue fill

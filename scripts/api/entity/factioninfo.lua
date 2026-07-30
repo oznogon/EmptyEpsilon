@@ -34,15 +34,6 @@ function getFactionInfo(name)
     return __faction_info[name]
 end
 
---- Sets this faction's name as presented in the user interface.
---- Wrap the string in the _() function to make it available for translation.
---- Example: faction:setLocaleName(_("USN"))
-function Entity:setLocaleName(name)
-    if self.components.faction_info then
-        self.components.faction_info.locale_name = name
-    end
-    return self
-end
 --- Sets the RGB color used for entities of this faction as seen on the GM and Spectator views.
 --- Defaults to white (255,255,255).
 --- Example: faction:setGMColor(255,0,0) -- sets the color to red

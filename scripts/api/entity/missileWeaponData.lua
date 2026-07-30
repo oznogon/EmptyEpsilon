@@ -43,36 +43,11 @@ function Entity:setIcon(icon_path)
     return self
 end
 
---- Sets the missile's travel speed in units per second.
---- Example: mwd:setSpeed(200)
-function Entity:setSpeed(v)
-    if self.components.missile_weapon_data then
-        self.components.missile_weapon_data.speed = v
-    end
-    return self
-end
 --- Sets the missile's turn rate in degrees per second.
 --- Example: mwd:setTurnrate(10)
 function Entity:setTurnrate(v)
     if self.components.missile_weapon_data then
         self.components.missile_weapon_data.turnrate = v
-    end
-    return self
-end
---- Sets the missile's lifetime in seconds before it despawns.
---- Example: mwd:setLifetime(27)
-function Entity:setLifetime(v)
-    if self.components.missile_weapon_data then
-        self.components.missile_weapon_data.lifetime = v
-    end
-    return self
-end
---- Sets the RGBA color of the missile's trail and model.
---- Values are unsigned bytes (0-255).
---- Example: mwd:setColor(255, 0, 0, 255)
-function Entity:setColor(r, g, b, a)
-    if self.components.missile_weapon_data then
-        self.components.missile_weapon_data.color = { r, g, b, a }
     end
     return self
 end
@@ -89,14 +64,6 @@ end
 function Entity:setFireSound(s)
     if self.components.missile_weapon_data then
         self.components.missile_weapon_data.fire_sound = s
-    end
-    return self
-end
---- Sets the radar trace image for this missile type.
---- Example: mwd:setRadarTrace("radar/blip.png")
-function Entity:setRadarTrace(s)
-    if self.components.missile_weapon_data then
-        self.components.missile_weapon_data.radar_trace = s
     end
     return self
 end

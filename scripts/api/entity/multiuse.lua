@@ -120,6 +120,72 @@ function Entity:setEnergy(amount)
     return self
 end
 
+--- Sets the speed of ScanProbes and missiles.
+--- For ScanProbes: sets the travel speed (default 1000, 1U/second).
+--- For missiles: sets the missile's travel speed in units per second.
+--- Examples:
+---   probe:setSpeed(2000)
+---   mwd:setSpeed(200)
+function Entity:setSpeed(speed)
+    if self.components.move_to then
+        self.components.move_to.speed = speed
+    end
+    if self.components.missile_weapon_data then
+        self.components.missile_weapon_data.speed = speed
+    end
+    return self
+end
+
+--- Sets the remaining lifetime of ScanProbes and missiles.
+--- For ScanProbes: lifetime in seconds (default 600).
+--- For missiles: lifetime in seconds before it despawns.
+--- Examples:
+---   probe:setLifetime(60 * 5) -- 5 minutes
+---   mwd:setLifetime(27)
+function Entity:setLifetime(lifetime)
+    if self.components.lifetime then
+        self.components.lifetime.lifetime = lifetime
+    end
+    if self.components.missile_weapon_data then
+        self.components.missile_weapon_data.lifetime = lifetime
+    end
+    return self
+end
+
+--- Sets the radar trace image for entities and missiles.
+--- For ship entities: prepends "radar/" to the filename. Valid values are filenames relative to the resources/radar directory.
+--- For missiles: sets the raw radar trace image path.
+--- Examples:
+---   entity:setRadarTrace("arrow.png") -- resources/radar/arrow.png
+---   mwd:setRadarTrace("radar/blip.png")
+function Entity:setRadarTrace(filename)
+    if self.components.radar_trace then
+        self.components.radar_trace.icon = "radar/" .. filename
+    end
+    if self.components.missile_weapon_data then
+        self.components.missile_weapon_data.radar_trace = filename
+    end
+    return self
+end
+
+--- Sets the color of Zones and missiles.
+--- For Zones: sets both outline and fill color. Values are unsigned bytes (0-255).
+--- For missiles: sets the RGBA color of the missile's trail and model.
+--- Examples:
+---   zone:setColor(255,140,0)
+---   mwd:setColor(255, 0, 0, 255)
+function Entity:setColor(r, g, b, a)
+    local alpha = a ~= nil and a or 255
+    if self.components.zone then
+        self.components.zone.color = { r, g, b, alpha }
+        self.components.zone.fill_color = { r, g, b, 64 }
+    end
+    if self.components.missile_weapon_data then
+        self.components.missile_weapon_data.color = { r, g, b, alpha }
+    end
+    return self
+end
+
 --- Returns this ship's weapons target.
 --- For a CPU ship, this can differ from its orders target.
 --- Example: target = ship:getTarget()

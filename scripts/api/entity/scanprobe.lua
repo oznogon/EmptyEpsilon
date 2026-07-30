@@ -41,16 +41,6 @@ function ScanProbe()
 end
 
 local Entity = getLuaEntityFunctionTable()
---- Sets this ScanProbe's speed.
---- Probes move at a fixed rate of speed and ignore collisions and physics while moving.
---- Defaults to 1000 (1U/second).
---- Example: probe:setSpeed(2000)
-function Entity:setSpeed(speed)
-    if self.components.move_to then
-        self.components.move_to.speed = speed
-    end
-    return self
-end
 --- Returns this ScanProbe's speed.
 --- Example: probe:getSpeed()
 function Entity:getSpeed()
@@ -58,15 +48,6 @@ function Entity:getSpeed()
         return self.components.move_to.speed
     end
     return 0.0
-end
---- Sets this ScanProbe's remaining lifetime, in seconds.
---- Defaults to 600 seconds (10 minutes).
---- Example: probe:setLifetime(60 * 5) -- sets the lifetime to 5 minutes
-function Entity:setLifetime(lifetime)
-    if self.components.lifetime then
-        self.components.lifetime.lifetime = lifetime
-    end
-    return self
 end
 --- Returns this ScanProbe's remaining lifetime.
 --- Example: probe:getLifetime()
