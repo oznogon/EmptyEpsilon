@@ -778,10 +778,17 @@ endif()
 
 if(WIN32 AND WITH_SSL)
     # Add OpenSSL, required for Hue V2 control
-    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different "$<TARGET_FILE:OpenSSL::SSL>" "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different "$<TARGET_FILE:OpenSSL::Crypto>" "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
-    )
+    if(TARGET OpenSSL::SSL)
+        add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different "$<TARGET_FILE:OpenSSL::SSL>" "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different "$<TARGET_FILE:OpenSSL::Crypto>" "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
+        )
+    elseif(OPENSSL_SSL_LIBRARY AND OPENSSL_CRYPTO_LIBRARY)
+        add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different "${OPENSSL_SSL_LIBRARY}" "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different "${OPENSSL_CRYPTO_LIBRARY}" "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
+        )
+    endif()
 endif()
 
 target_compile_definitions(${PROJECT_NAME}
