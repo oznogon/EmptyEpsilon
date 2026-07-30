@@ -573,7 +573,7 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
 {
     float f = (1.0f - (ee.lifetime / ee.max_lifetime));
     float scale;
-    float alpha = 0.5f;
+
     if (f < 0.2f)
     {
         scale = (f / 0.2f);
@@ -583,8 +583,7 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
     {
         if (ee.electrical)
             scale = Tween<float>::easeOutQuad(f, 0.2f, 1.0f, 0.8f, 1.0f);
-        else
-            scale = Tween<float>::easeOutQuad(f, 0.2f, 1.0f, 1.0f, 1.3f);
+        else scale = Tween<float>::easeOutQuad(f, 0.2f, 1.0f, 1.0f, 1.3f);
 
         alpha = Tween<float>::easeInQuad(f, 0.2f, 1.0f, 0.5f, 0.0f);
     }
@@ -605,6 +604,7 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
         glUniformMatrix4fv(explosion_shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(explosion_matrix));
         glUniform4f(explosion_shader.get().uniform(ShaderRegistry::Uniforms::Color), 1.0f, 1.0f, 1.0f, f);
         glUniform1f(explosion_shader.get().uniform(ShaderRegistry::Uniforms::Time), engine->getElapsedTime() + e.getIndex() * 1.771f);
+
         if (ee.electrical)
             textureManager.getTexture("texture/electric_sphere_texture.png")->bind();
         else textureManager.getTexture("texture/explosion.png")->bind();
@@ -616,6 +616,7 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
 
         Mesh* m = Mesh::getMesh("mesh/sphere.obj");
         m->render(positions.get(), texcoords.get(), normals.get(), tangents.get());
+
         if (ee.electrical)
         {
             glUniformMatrix4fv(explosion_shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(glm::scale(explosion_matrix, glm::vec3(.5f))));
@@ -676,7 +677,10 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
     if (!ee.electrical)
     {
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        { float fire_val = Tween<float>::easeInQuartic(f, 0.0f, 1.0f, 1.0f, 0.0f); glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), fire_val, fire_val, fire_val, fire_val); }
+        {
+            float fire_val = Tween<float>::easeInQuartic(f, 0.0f, 1.0f, 1.0f, 0.0f);
+            glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), fire_val, fire_val, fire_val, fire_val);
+        }
 
         textureManager.getTexture("texture/fire_ring.png")->bind();
 
@@ -684,9 +688,9 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
         glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(explosion_matrix));
 
         vertices[0] = glm::vec3(-1, -1, 0);
-        vertices[1] = glm::vec3(1, -1, 0);
-        vertices[2] = glm::vec3(1, 1, 0);
-        vertices[3] = glm::vec3(-1, 1, 0);
+        vertices[1] = glm::vec3( 1, -1, 0);
+        vertices[2] = glm::vec3( 1,  1, 0);
+        vertices[3] = glm::vec3(-1,  1, 0);
         {
             gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
             gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
@@ -694,7 +698,7 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
             glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (GLvoid*)0);
             glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(glm::vec2), (GLvoid*)(vertices.size() * sizeof(glm::vec3)));
 
-            // upload single vertex
+            // Upload single vertex.
             glBufferSubData(GL_ARRAY_BUFFER, 0, 4 * sizeof(glm::vec3), vertices.data());
 
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, nullptr);
@@ -715,23 +719,26 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
     float r = Tween<float>::easeInQuad(f, 0.f, 1.f, 1.0f, 0.0f);
     float g = Tween<float>::easeOutQuad(f, 0.f, 1.f, 1.0f, 0.0f);
     float b = Tween<float>::easeOutQuad(f, 0.f, 1.f, 1.0f, 0.0f);
-    if (ee.electrical) {
+
+    if (ee.electrical)
+    {
         scale = Tween<float>::easeInCubic(f, 0.f, 1.f, 0.3f, 3.0f);
         r = Tween<float>::easeOutQuad(f, 0.f, 1.f, 1.0f, 0.0f);
         g = Tween<float>::easeOutQuad(f, 0.f, 1.f, 1.0f, 0.0f);
         b = Tween<float>::easeInQuad(f, 0.f, 1.f, 1.0f, 0.0f);
     }
+
     glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), r, g, b, ee.size / 32.0f);
 
     glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (GLvoid*)0);
     glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(glm::vec2), (GLvoid*)(vertices.size() * sizeof(glm::vec3)));
 
     const size_t quad_count = ee.max_quad_count;
-    // We're drawing particles `quad_count` at a time.
+    // Draw particles `quad_count` at a time.
     for (size_t n = 0; n < ee.particle_count;)
     {
         auto active_quads = std::min(quad_count, ee.particle_count - n);
-        // setup quads
+        // Setup quads.
         for (auto p = 0U; p < active_quads; ++p)
         {
             glm::vec3 v = ee.particle_directions[n + p] * scale * ee.size;
@@ -740,7 +747,8 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
             vertices[4 * p + 2] = v;
             vertices[4 * p + 3] = v;
         }
-        // upload
+
+        // Upload.
         glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(glm::vec3), vertices.data());
 
         glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(6 * active_quads), GL_UNSIGNED_SHORT, nullptr);
