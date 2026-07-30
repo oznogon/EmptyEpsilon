@@ -603,7 +603,7 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
 
         ShaderRegistry::ScopedShader explosion_shader(ShaderRegistry::Shaders::Explosion);
         glUniformMatrix4fv(explosion_shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(explosion_matrix));
-        glUniform4f(explosion_shader.get().uniform(ShaderRegistry::Uniforms::Color), 1.0f, 1.0f, 1.0f, 1.0f);
+        glUniform4f(explosion_shader.get().uniform(ShaderRegistry::Uniforms::Color), 1.0f, 1.0f, 1.0f, f);
         glUniform1f(explosion_shader.get().uniform(ShaderRegistry::Uniforms::Time), engine->getElapsedTime() + e.getIndex() * 1.771f);
         if (ee.electrical)
             textureManager.getTexture("texture/electric_sphere_texture.png")->bind();

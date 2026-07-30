@@ -240,5 +240,13 @@ void main() {
   vec2 tPos = vec2(0.0, 1.3 * v_noise + r);
   vec4 color = texture2D(u_textureMap, tPos);
 
+  // Disintegrate during last 20% of lifetime (u_color.w = lifetime fraction).
+  float f = u_color.w;
+  if (f > 0.8) {
+    float t = (f - 0.8) / 0.2;
+    if (random(vec3(12.9898, 78.233, 151.7182), v_noise) < t)
+      discard;
+  }
+
   gl_FragColor = vec4(color.rgb * u_color.rgb, 1.0);
 }
