@@ -1759,6 +1759,7 @@ void luaCommandScan(sp::ecs::Entity ship, sp::ecs::Entity target)
     {
         scanner->delay = scanner->max_scanning_delay;
         scanner->target = target;
+        scanner->scan_target = target;
     }
 }
 

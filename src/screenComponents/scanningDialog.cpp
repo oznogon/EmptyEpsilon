@@ -108,8 +108,7 @@ void GuiScanningDialog::onUpdate()
     {
         // Handle scan input key/button bindings.
         float adjust = ((keys.science_scan_param_increase[n].isDiscreteStepDown() || keys.science_scan_param_increase[n].isRepeatReady()) - (keys.science_scan_param_decrease[n].isDiscreteStepDown() || keys.science_scan_param_decrease[n].isRepeatReady())) * 0.01f;
-        adjust += (keys.science_scan_param_increase[n].getContinuousValue() + keys.science_scan_param_increase[n].getAxis0Value() + keys.science_scan_param_increase[n].getAxis1Value()
-            - keys.science_scan_param_decrease[n].getContinuousValue() - keys.science_scan_param_decrease[n].getAxis0Value() - keys.science_scan_param_decrease[n].getAxis1Value()) * 0.005f;
+        adjust += (keys.science_scan_param_increase[n].getContinuousValue() + keys.science_scan_param_increase[n].getAxis0Value() + keys.science_scan_param_increase[n].getAxis1Value() - keys.science_scan_param_decrease[n].getContinuousValue() - keys.science_scan_param_decrease[n].getAxis0Value() - keys.science_scan_param_decrease[n].getAxis1Value()) * 0.005f;
 
         // If the input results in an adjustment, apply it to the sliders accordingly.
         if (adjust != 0.0f)
@@ -123,11 +122,13 @@ void GuiScanningDialog::onUpdate()
         if (axis1_value != 0.0f || set_active[n])
         {
             float set_value = (axis1_value + 1.0f) / 2.0f;
+
             if (set_value != sliders[n]->getValue())
             {
                 sliders[n]->setValue(set_value);
                 updateSignal();
             }
+
             // Make sure the next update is send, even if it is back to zero.
             set_active[n] = axis1_value != 0.0f;
         }
@@ -267,8 +268,9 @@ std::pair<int, int> GuiScanningDialog::getScanComplexityDepth()
     // Return zeroes if we lack a scanner or the target lacks a scan state.
     auto ss = my_spaceship.getComponent<ScienceScanner>();
     if (!ss) return {0, 0};
-    if (!ss->target) return {0, 0};
-    auto scanstate = ss->target.getComponent<ScanState>();
+    if (!ss->scan_target) return {0, 0};
+
+    auto scanstate = ss->scan_target.getComponent<ScanState>();
     if (!scanstate) return {0, 0};
 
     auto complexity = scanstate->complexity;

@@ -1314,6 +1314,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             {
                 scanner->delay = scanner->max_scanning_delay;
                 scanner->target = e;
+                scanner->scan_target = e;
                 if (source) scanner->source = source;
                 else scanner->source = ship;
 
@@ -1333,15 +1334,16 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         if (auto scanner = ship.getComponent<ScienceScanner>())
         {
             // Fire onScanCancelled callback
-            if (scanner->target)
+            if (scanner->scan_target)
             {
-                if (auto ss = scanner->target.getComponent<ScanState>())
+                if (auto ss = scanner->scan_target.getComponent<ScanState>())
                 {
                     if (ss->on_scan_cancelled)
-                        LuaConsole::checkResult(ss->on_scan_cancelled.call<void>(scanner->target, ship, scanner->source));
+                        LuaConsole::checkResult(ss->on_scan_cancelled.call<void>(scanner->scan_target, ship, scanner->source));
                 }
             }
 
+            scanner->scan_target = {};
             scanner->delay = 0.0f;
         }
         break;

@@ -824,6 +824,7 @@ void initComponentScriptBindings()
     BIND_MEMBER(ScienceScanner, delay);
     BIND_MEMBER(ScienceScanner, max_scanning_delay);
     BIND_MEMBER(ScienceScanner, target);
+    BIND_MEMBER(ScienceScanner, scan_target);
     sp::script::ComponentHandler<ScanState>::name("scan_state");
     BIND_MEMBER(ScanState, allow_simple_scan);
     BIND_MEMBER(ScanState, complexity);
