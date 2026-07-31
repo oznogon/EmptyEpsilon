@@ -1006,7 +1006,7 @@ end
 --- Returns a Boolean value indicating success.
 --- The crew_index is 1-indexed. If the crew_index is invalid, this returns false.
 --- If the x,y coordinates are outside of any room, this returns false. Otherwise, this returns true.
---- Using this function to assign multiple crews to the same coordinates will stack them on the same square, which players should not be able to do!
+--- If the coordinates are already claimed by another repair crew, this returns false to prevent crews from stacking on the same coordinates.
 --- Example:
 --- target_position = {3, 2} -- must be a table
 --- entity:moveRepairCrewToPosition(1, target_position)
@@ -1025,6 +1025,8 @@ function Entity:moveRepairCrewToPosition(crew_index, pos)
         return false
     end
 
+    if self:isCellClaimed(crew_index, pos) then return false end
+
     crew[crew_index].components.internal_crew.target_position = pos
     return true
 end
@@ -1032,7 +1034,7 @@ end
 --- Returns a Boolean value indicating success.
 --- The crew_index is 1-indexed. If the crew_index is invalid, this returns false.
 --- The crew is assigned a random set of coordinates within the room.
---- Using this function to assign multiple crews to the same room can stack them on the same square, which players should not be able to do!
+--- If the room has no free coordinates, this returns false to prevent crews from stacking on the same coordinates.
 --- Example:
 --- target_room = entity:getInternalRoomForSystem("beamweapons")
 --- entity:moveRepairCrewToRoom(1, target_room)
@@ -1048,12 +1050,49 @@ function Entity:moveRepairCrewToRoom(crew_index, room)
     end
 
     local coordinates_list = self:getCoordinatesForInternalRoom(room)
-    if not coordinates_list or #coordinates_list == 0 then
-        return false
+    if not coordinates_list or #coordinates_list == 0 then return false end
+
+    local free_coordinates = {}
+    for _, coords in ipairs(coordinates_list) do
+        if not self:isCellClaimed(crew_index, coords) then
+            table.insert(free_coordinates, coords)
+        end
     end
-    local coords = coordinates_list[math.random(#coordinates_list)]
+    if #free_coordinates == 0 then return false end
+
+    local coords = free_coordinates[math.random(#free_coordinates)]
     crew[crew_index].components.internal_crew.target_position = coords
     return true
+end
+--- Returns true if the given internal room coordinates are already claimed by another repair crew on the given entity, either as that crew's current position or as its target position.
+--- The crew_index is 1-indexed. If the crew_index is invalid, this returns false.
+--- The crew with the given crew_index is excluded from the check.
+--- Example:
+--- target_position = {3, 2} -- must be a table
+--- entity:isCellClaimed(1, target_position) -- returns true if a crew other than #1 is either in or moving to 3,2
+function Entity:isCellClaimed(crew_index, pos)
+    local ir = self.components.internal_rooms
+    if not ir then return false end
+
+    local crew = self:getRepairCrew()
+    if not crew[crew_index] then return false end
+
+    for _, other in ipairs(crew) do
+        if other ~= crew[crew_index] then
+            local ic = other.components.internal_crew
+            if ic.position and ic.position[1] >= -0.5
+                and math.floor(ic.position[1] + 0.5) == pos[1]
+                and math.floor(ic.position[2] + 0.5) == pos[2]
+            then
+                return true
+            end
+
+            if ic.target_position and ic.target_position[1] == pos[1] and ic.target_position[2] == pos[2] then
+                return true
+            end
+        end
+    end
+    return false
 end
 --- Defines whether automatic coolant distribution is enabled on this entity.
 --- If true, coolant is automatically distributed proportionally to the amount of heat in that system.

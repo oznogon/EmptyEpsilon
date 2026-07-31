@@ -67,6 +67,7 @@
 
 #include "systems/comms.h"
 #include "systems/docking.h"
+#include "systems/internalcrew.h"
 #include "systems/jumpsystem.h"
 #include "systems/missilesystem.h"
 #include "systems/probe.h"
@@ -1774,7 +1775,8 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
     case CMD_CREW_SET_TARGET:{
             auto [crew, position] = packet.read<sp::ecs::Entity, glm::ivec2>();
             if (auto ic = crew.getComponent<InternalCrew>())
-                ic->target_position = position;
+                if (!internalCrewIsCellOccupied(ic->ship, position, crew))
+                    ic->target_position = position;
         }break;
     case CMD_SET_UTILITY_BEAM:
         {

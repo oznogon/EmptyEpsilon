@@ -34,6 +34,24 @@ static std::vector<std::pair<glm::ivec2, float>> astarGetNeighbors(glm::ivec2 po
 
 static float astarGetDistance(glm::ivec2 a, glm::ivec2 b) { return glm::length(glm::vec2(b - a)); }
 
+bool internalCrewIsCellOccupied(sp::ecs::Entity ship, glm::ivec2 cell, sp::ecs::Entity self)
+{
+    for (auto [entity, ic] : sp::ecs::Query<InternalCrew>())
+    {
+        if (entity == self || ic.ship != ship) continue;
+
+        if (ic.position.x >= -0.5f)
+        {
+            glm::ivec2 current(ic.position.x + 0.5f, ic.position.y + 0.5f);
+            if (current == cell) return true;
+        }
+
+        if (ic.target_position == cell) return true;
+    }
+
+    return false;
+}
+
 void InternalCrewSystem::update(float delta)
 {
     for(auto [entity, ic] : sp::ecs::Query<InternalCrew>()) {
@@ -54,10 +72,26 @@ void InternalCrewSystem::update(float delta)
 
         if (ic.position.x < -0.5f)
         {
-            int n = irandom(0, static_cast<int>(ir->rooms.size()) - 1);
-            ic.position.x = static_cast<float>(ir->rooms[n].position.x + (ir->rooms[n].size.x > 0 ? irandom(0, ir->rooms[n].size.x - 1) : 0));
-            ic.position.y = static_cast<float>(ir->rooms[n].position.y + (ir->rooms[n].size.y > 0 ? irandom(0, ir->rooms[n].size.y - 1) : 0));
-            ic.target_position = glm::ivec2(ic.position);
+            std::vector<glm::ivec2> free_positions;
+
+            for (const auto& room : ir->rooms)
+            {
+                for (int x = room.position.x; x < room.position.x + room.size.x; x++)
+                {
+                    for (int y = room.position.y; y < room.position.y + room.size.y; y++)
+                    {
+                        if (!internalCrewIsCellOccupied(ic.ship, {x, y}, entity))
+                            free_positions.emplace_back(x, y);
+                    }
+                }
+            }
+
+            if (!free_positions.empty())
+            {
+                auto pos = free_positions[irandom(0, int(free_positions.size()) - 1)];
+                ic.position = glm::vec2(pos);
+                ic.target_position = pos;
+            }
         }
 
         ic.action_delay -= delta;
@@ -99,13 +133,25 @@ void InternalCrewSystem::update(float delta)
                         system = ShipSystem::get(ic.ship, ShipSystem::Type(n));
                         if (system && system->health < system->health_max)
                         {
-                            for(unsigned int idx=0; idx<ir->rooms.size(); idx++)
+                            std::vector<glm::ivec2> candidates;
+
+                            for (unsigned int idx = 0; idx < ir->rooms.size(); idx++)
                             {
                                 if (ir->rooms[idx].system == ShipSystem::Type(n))
                                 {
-                                    ic.target_position = ir->rooms[idx].position + glm::ivec2(ir->rooms[idx].size.x > 0 ? irandom(0, ir->rooms[idx].size.x - 1) : 0, ir->rooms[idx].size.y > 0 ? irandom(0, ir->rooms[idx].size.y - 1) : 0);
+                                    for (int x = ir->rooms[idx].position.x; x < ir->rooms[idx].position.x + ir->rooms[idx].size.x; x++)
+                                    {
+                                        for (int y = ir->rooms[idx].position.y; y < ir->rooms[idx].position.y + ir->rooms[idx].size.y; y++)
+                                        {
+                                            if (glm::ivec2(x, y) != pos && !internalCrewIsCellOccupied(ic.ship, {x, y}, entity))
+                                                candidates.emplace_back(x, y);
+                                        }
+                                    }
                                 }
                             }
+
+                            if (!candidates.empty())
+                                ic.target_position = candidates[irandom(0, int(candidates.size()) - 1)];
                         }
                     }
                 }
