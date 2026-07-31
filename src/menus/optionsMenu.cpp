@@ -798,17 +798,24 @@ void OptionsMenu::setupGraphicsOptions()
         }) + DISTANCE_UNIT_1K, GuiElement::GuiSizeLabel);
         graphics_draw_distance_overlay_label
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    }
 
-    // Multimonitor toggle.
-    (new GuiToggleButton(graphics_page, "MULTIMONITOR", tr("Multimonitor"),
-        [](bool value)
-        {
-            PreferencesManager::set("multimonitor", value ? "1" : "0");
-        }
-    ))
-        ->setValue(PreferencesManager::get("multimonitor", "1") == "1")
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+        // Multimonitor toggle.
+        auto multimonitor_toggle = new GuiToggleButton(graphics_page, "MULTIMONITOR_TOGGLE", tr("options", "Multimonitor mode"),
+            [](bool value)
+            {
+                PreferencesManager::set("multimonitor", value ? "1" : "0");
+            }
+        );
+        multimonitor_toggle
+            ->setValue(PreferencesManager::get("multimonitor", "1") == "1")
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
+        (new GuiTextTooltip(multimonitor_toggle, "MULTIMONITOR_TIP", tr("tooltips", "Toggle multimonitor mode, which opens additional windows for each detected monitor. Requires a restart to take effect."), 20.0f))->setWidth(280.0f);
+
+        (new GuiLabel(graphics_page, "MULTIMONITOR_APPLICATION_NOTE",
+            tr("options", "Restart EmptyEpsilon to apply multimonitor mode change"),
+            20.0f))
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeLabel);
+    }
 }
 
 void OptionsMenu::setupAudioOptions()
