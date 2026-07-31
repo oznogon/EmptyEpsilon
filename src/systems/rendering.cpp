@@ -573,7 +573,6 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
 {
     float f = (1.0f - (ee.lifetime / ee.max_lifetime));
     float scale;
-    float alpha = 0.5f;
 
     if (f < 0.2f)
     {
@@ -585,8 +584,6 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
         if (ee.electrical)
             scale = Tween<float>::easeOutQuad(f, 0.2f, 1.0f, 0.8f, 1.0f);
         else scale = Tween<float>::easeOutQuad(f, 0.2f, 1.0f, 1.0f, 1.3f);
-
-        alpha = Tween<float>::easeInQuad(f, 0.2f, 1.0f, 0.5f, 0.0f);
     }
 
     auto position = transform.getPosition();
