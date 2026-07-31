@@ -14,7 +14,21 @@
 #include "components/probe.h"
 #include "components/reactor.h"
 #include "ecs/query.h"
+#include "logging.h"
 #include "multiplayer_server.h"
+#include "vectorUtils.h"
+
+// Compute the angle a docking ship should face so that reversing moves it
+// toward the nearest edge of the target station.
+static float dockingApproachAngle(sp::ecs::Entity ship, sp::ecs::Entity station)
+{
+    auto ship_transform = ship.getComponent<sp::Transform>();
+    auto station_transform = station.getComponent<sp::Transform>();
+    if (!ship_transform || !station_transform)
+        return 0.0f;
+
+    return vec2ToAngle(ship_transform->getPosition() - station_transform->getPosition());
+}
 
 DockingSystem::DockingSystem()
 {
@@ -25,43 +39,52 @@ void DockingSystem::update(float delta)
 {
     if (!game_server.isAlive()) return;
 
-    for (auto [entity, docking_port, transform] : sp::ecs::Query<DockingPort, sp::ecs::optional<sp::Transform>>()) {
+    for (auto [entity, docking_port, transform] : sp::ecs::Query<DockingPort, sp::ecs::optional<sp::Transform>>())
+    {
         sp::Transform* target_transform;
-        switch(docking_port.state) {
+        switch (docking_port.state)
+        {
         case DockingPort::State::NotDocking:
+            // If we aren't docking then we don't need to be here.
             break;
         case DockingPort::State::Docking:
-            if (!docking_port.target || !(target_transform = docking_port.target.getComponent<sp::Transform>())) {
+            if (!docking_port.target || !(target_transform = docking_port.target.getComponent<sp::Transform>()))
                 docking_port.state = DockingPort::State::NotDocking;
-            } else {
-                auto engine = entity.getComponent<ImpulseEngine>();
+            else
+            {
                 auto thrusters = entity.getComponent<ManeuveringThrusters>();
                 if (thrusters)
-                    thrusters->target = vec2ToAngle(transform->getPosition() - target_transform->getPosition());
-                if (engine) {
-                    if (thrusters && fabs(angleDifference(thrusters->target, transform->getRotation())) < 10.0f)
-                        engine->request = -1.f;
-                    else
-                        engine->request = 0.f;
+                    thrusters->target = dockingApproachAngle(entity, docking_port.target);
+
+                if (auto engine = entity.getComponent<ImpulseEngine>())
+                {
+                    // If aligned to dock, full reverse. Otherwise, full stop.
+                    if (thrusters && fabs(angleDifference(thrusters->target, transform->getRotation())) < 25.0f)
+                        engine->request = -1.0f;
+                    else engine->request = 0.0f;
                 }
+                // Otherwise, uh, good luck. Hope someone can tow you.
+
+                // If warping, exit warp.
                 if (auto warp = entity.getComponent<WarpDrive>())
                     warp->request = 0;
             }
+
             break;
         case DockingPort::State::Docked:
             auto& carrier_entity = docking_port.target;
 
+            // If we're internally docked and our bay was destroyed, we were
+            // also destroyed.
             if (!carrier_entity || !(target_transform = carrier_entity.getComponent<sp::Transform>()))
             {
                 docking_port.state = DockingPort::State::NotDocking;
-                // We're internally docked and our bay was destroyed, so destroy
-                // ourselves as well.
                 if (!transform) entity.destroy();
             }
             else
             {
-                // Manage our position if we're externally docked, indicated by
-                // our ship still having a Transform.
+                // Manage our position if we're externally docked, indicated by our
+                // ship still having a Transform.
                 if (transform)
                 {
                     transform->setPosition(target_transform->getPosition() + rotateVec2(docking_port.docked_offset, target_transform->getRotation()));
@@ -69,6 +92,7 @@ void DockingSystem::update(float delta)
                     if (auto thrusters = entity.getComponent<ManeuveringThrusters>()) thrusters->stop();
                 }
 
+                // If the carrier has a DockingBay, deal with berths.
                 if (auto bay = carrier_entity.getComponent<DockingBay>())
                 {
                     float bay_effectiveness = 1.0f;
@@ -290,13 +314,18 @@ void DockingSystem::update(float delta)
 
                             float system_count = 0.0f;
                             for (auto i = 0; i < static_cast<int>(ShipSystem::Type::COUNT); i++)
-                                if (ShipSystem::get(destination_entity, static_cast<ShipSystem::Type>(i))) system_count++;
+                            {
+                                if (ShipSystem::get(destination_entity, static_cast<ShipSystem::Type>(i)))
+                                    system_count++;
+                            }
                             if (system_count <= 0.0f) return;
 
                             float per_system = amount / system_count;
                             for (auto i = 0; i < static_cast<int>(ShipSystem::Type::COUNT); i++)
+                            {
                                 if (auto dst_sys = ShipSystem::get(destination_entity, static_cast<ShipSystem::Type>(i)))
                                     dst_sys->addHeat(per_system);
+                            }
                         };
 
                         if (my_berth.transfer_direction == DockingBay::Berth::TransferDirection::ToDocked)
@@ -353,7 +382,7 @@ void DockingSystem::update(float delta)
                             bool needs_missile = false;
                             for (int n = 0; n < MissileWeaponDataRegistry::instance().getTypeCount(); n++)
                             {
-                                if  (tubes->storage[n] < tubes->storage_max[n])
+                                if (tubes->storage[n] < tubes->storage_max[n])
                                 {
                                     if (docking_port.auto_reload_missile_delay <= 0.0f)
                                     {
@@ -361,8 +390,7 @@ void DockingSystem::update(float delta)
                                         docking_port.auto_reload_missile_delay = docking_port.auto_reload_missile_time;
                                         break;
                                     }
-                                    else
-                                        needs_missile = true;
+                                    else needs_missile = true;
                                 }
                             }
 
@@ -379,6 +407,7 @@ void DockingSystem::update(float delta)
                 }
             }
 
+            // Reset propulsion.
             if (auto engine = entity.getComponent<ImpulseEngine>())
             {
                 engine->request = 0.0f;
@@ -389,11 +418,12 @@ void DockingSystem::update(float delta)
                 warp->request = 0;
                 warp->current = 0.0f;
             }
+
             break;
         }
     }
 
-    // Process in-progress berth moves
+    // Process in-progress berth moves.
     for (auto [carrier, bay] : sp::ecs::Query<DockingBay>())
     {
         float bay_effectiveness = 1.0f;
@@ -404,30 +434,30 @@ void DockingSystem::update(float delta)
         {
             auto& berth = bay.berths[i];
 
-            // Check if this berth has an entity moving to another berth
+            // Check if this berth has an entity moving to another berth.
             if (berth.move_target_berth >= 0
                 && berth.move_target_berth < static_cast<int>(bay.berths.size()))
             {
                 auto& target_berth = bay.berths[berth.move_target_berth];
 
-                // Validate target berth is still empty
+                // Validate target berth is still empty.
                 if (target_berth.docked_entity && target_berth.docked_entity != sp::ecs::Entity())
                 {
-                    // Target berth occupied, cancel move
+                    // Target berth occupied, cancel move.
                     berth.move_target_berth = -1;
                     berth.move_progress = 0.0f;
                     target_berth.move_progress = 0.0f;
                     continue;
                 }
 
-                // Update progress
+                // Update progress.
                 berth.move_progress += delta * bay_effectiveness;
                 target_berth.move_progress += delta * bay_effectiveness;
 
-                // Check if move completed
+                // Check if move completed.
                 if (berth.move_progress >= berth.move_time)
                 {
-                    // Complete the move
+                    // Complete the move.
                     target_berth.docked_entity = berth.docked_entity;
                     berth.docked_entity = sp::ecs::Entity();
                     berth.move_target_berth = -1;
@@ -451,9 +481,11 @@ bool DockingSystem::moveEntityToInternalBay(sp::ecs::Entity entity, sp::ecs::Ent
     port->state = DockingPort::State::Docked;
     port->target = carrier;
 
+    // Remove Transform from internally docked entities.
     if (entity.hasComponent<sp::Transform>())
         entity.removeComponent<sp::Transform>();
 
+    // Programmatically assign to an internal berth, unless overridden.
     if (berth_index >= 0)
         return assignInternalEntityToBerth(entity, berth_index);
 
@@ -471,7 +503,7 @@ bool DockingSystem::assignInternalEntityToBerth(sp::ecs::Entity entity)
     if (!bay || !(port->canDockOn(*bay) == DockingStyle::Internal) || bay->berths.empty())
         return false;
 
-    // Find first empty berth (not occupied and not receiving a ship)
+    // Find first empty berth (not occupied and not receiving a ship).
     for (auto& berth : bay->berths)
     {
         if (berth.docked_entity == sp::ecs::Entity() && berth.move_progress <= 0.0f)
@@ -481,14 +513,17 @@ bool DockingSystem::assignInternalEntityToBerth(sp::ecs::Entity entity)
         }
     }
 
-    // No empty berth found
+    // If no empty berth was found, don't dock.
     LOG(Debug, "[docking] No empty berth available for ", entity.toString(), ", undocking.");
     requestUndock(entity);
     port->state = DockingPort::State::NotDocking;
+
     // If the docking ship is AI-controlled, revert to roaming if denied docking.
     // Should this revert to defending the carrier instead?
-    // Should AIs roaming for supplies ignore carriers with no unoccupied berths?
+    // Should AIs roaming for supplies ignore carriers with no unoccupied
+    // berths?
     if (auto ai = entity.getComponent<AIController>()) ai->orders = AIOrder::Roaming;
+
     return false;
 }
 
@@ -501,7 +536,7 @@ bool DockingSystem::assignInternalEntityToBerth(sp::ecs::Entity entity, DockingB
     auto bay = carrier.getComponent<DockingBay>();
     if (!bay || !(port->canDockOn(*bay) == DockingStyle::Internal) || bay->berths.empty()) return false;
 
-    // Find which berth currently contains this entity (if any)
+    // Find which berth currently contains this entity (if any).
     int origin_berth_index = -1;
     for (size_t i = 0; i < bay->berths.size(); i++)
     {
@@ -512,7 +547,8 @@ bool DockingSystem::assignInternalEntityToBerth(sp::ecs::Entity entity, DockingB
         }
     }
 
-    // Find an empty berth of the requested type (not occupied and not receiving a ship)
+    // Find an empty berth of the requested type (not occupied and not receiving
+    // a ship).
     for (size_t i = 0; i < bay->berths.size(); i++)
     {
         auto& berth = bay->berths[i];
@@ -549,11 +585,12 @@ bool DockingSystem::assignInternalEntityToBerth(sp::ecs::Entity entity, int inde
 
     auto& target_berth = bay->berths[index];
 
-    // If the target berth is occupied by a different entity or receiving a ship, can't assign
+    // If the target berth is occupied by a different entity or receiving a
+    // ship, we can't assign it.
     if (target_berth.docked_entity && target_berth.docked_entity != entity) return false;
     if (target_berth.move_progress > 0.0f) return false;
 
-    // Find which berth currently contains this entity (if any)
+    // Find which berth currently contains this entity (if any).
     int origin_berth_index = -1;
     for (size_t i = 0; i < bay->berths.size(); i++)
     {
@@ -564,21 +601,21 @@ bool DockingSystem::assignInternalEntityToBerth(sp::ecs::Entity entity, int inde
         }
     }
 
-    // If entity not found in any berth, assign directly (instant, not a move)
+    // If entity not found in any berth, assign directly (instant, not a move).
     if (origin_berth_index == -1)
     {
         target_berth.docked_entity = entity;
         return true;
     }
 
-    // If assigning to same berth, no-op
-    if (origin_berth_index == index)
-        return true;
+    // If assigning to same berth, no-op.
+    if (origin_berth_index == index) return true;
 
-    // Otherwise, it's a move between berths - initiate progress tracking
+    // Otherwise, it's a move between berths. Initiate progress tracking.
     auto& origin_berth = bay->berths[origin_berth_index];
     origin_berth.move_target_berth = index;
     origin_berth.move_progress = 0.0f;
+
     return true;
 }
 
@@ -592,14 +629,14 @@ void DockingSystem::assignInternalEntitiesToBerths(std::vector<sp::ecs::Entity> 
         auto port = entity.getComponent<DockingPort>();
         if (!port || !(port->canDockOn(*bay) == DockingStyle::Internal)) continue;
 
-        // First, clear entity from any berth it's currently in
+        // First, clear entity from any berth it's currently in.
         for (auto& berth : bay->berths)
         {
             if (berth.docked_entity == entity)
                 berth.docked_entity = sp::ecs::Entity();
         }
 
-        // Then try to assign it to an empty berth (not occupied and not receiving a ship)
+        // Try assignomg it to an empty berth (not occupied or receiving a ship)
         bool was_assigned = false;
         for (auto& berth : bay->berths)
         {
@@ -628,13 +665,13 @@ bool DockingSystem::cancelInternalEntityMove(sp::ecs::Entity entity)
     auto bay = carrier.getComponent<DockingBay>();
     if (!bay) return false;
 
-    // Find the berth that has this entity and is in the middle of a move
+    // Find the berth that has this entity and is in the middle of a move.
     for (size_t i = 0; i < bay->berths.size(); i++)
     {
         auto& berth = bay->berths[i];
         if (berth.docked_entity == entity && berth.move_target_berth >= 0)
         {
-            // Reset target berth's progress before cancelling
+            // Reset target berth's progress before cancelling.
             if (berth.move_target_berth < static_cast<int>(bay->berths.size()))
                 bay->berths[berth.move_target_berth].move_progress = 0.0f;
 
@@ -651,10 +688,13 @@ bool DockingSystem::canStartDocking(sp::ecs::Entity entity)
     auto port = entity.getComponent<DockingPort>();
     if (!port) return false;
     if (port->state != DockingPort::State::NotDocking) return false;
+
     auto warp = entity.getComponent<WarpDrive>();
     if (warp && warp->current > 0.0f) return false;
+
     auto jump = entity.getComponent<JumpDrive>();
     if (jump && jump->delay > 0.0f) return false;
+
     return true;
 }
 
@@ -665,13 +705,16 @@ void DockingSystem::collision(sp::ecs::Entity carried, sp::ecs::Entity carrier, 
     {
         auto position = carried.getComponent<sp::Transform>();
         auto other_position = carrier.getComponent<sp::Transform>();
-        auto thrusters = carried.getComponent<ManeuveringThrusters>();
 
-        if (position && other_position && thrusters && fabs(angleDifference(thrusters->target, position->getRotation())) < 10.0f)
+        if (position && other_position)
         {
             port->state = DockingPort::State::Docked;
-            port->docked_offset = rotateVec2(position->getPosition() - other_position->getPosition(), -other_position->getRotation());
+            port->docked_offset = rotateVec2(
+                position->getPosition() - other_position->getPosition(),
+                -other_position->getRotation()
+            );
             float length = glm::length(port->docked_offset);
+
             if (length > 0.0f)
                 port->docked_offset = port->docked_offset / length * (length + 2.0f);
 
@@ -689,27 +732,32 @@ void DockingSystem::collision(sp::ecs::Entity carried, sp::ecs::Entity carrier, 
 
 void DockingSystem::requestDock(sp::ecs::Entity entity, sp::ecs::Entity target)
 {
-    if (!canStartDocking(entity))
-        return;
+    if (!target) return;
+
+    if (!canStartDocking(entity)) return;
 
     auto docking_port = entity.getComponent<DockingPort>();
     if (!docking_port || docking_port->state != DockingPort::State::NotDocking) return;
-    if (!target) return;
+
     auto bay = target.getComponent<DockingBay>();
     if (!bay || docking_port->canDockOn(*bay) == DockingStyle::None) return;
+
     auto position = entity.getComponent<sp::Transform>();
     if (!position) return;
+
     auto target_position = target.getComponent<sp::Transform>();
     if (!target_position) return;
+
     auto target_physics = target.getComponent<sp::Physics>();
     if (!target_physics) return;
 
-    if (glm::length(position->getPosition() - target_position->getPosition()) > 1000.0f + target_physics->getSize().x)
+    if (glm::length(position->getPosition() - target_position->getPosition()) > 1000.0f + std::max(target_physics->getSize().x, target_physics->getSize().y))
         return;
 
     docking_port->state = DockingPort::State::Docking;
     docking_port->target = target;
 
+    // Exit warp.
     if (auto warp = entity.getComponent<WarpDrive>()) warp->request = 0;
 }
 
@@ -722,6 +770,7 @@ void DockingSystem::requestUndock(sp::ecs::Entity entity)
     {
         auto target_transform = docking_port->target.getComponent<sp::Transform>();
         if (!target_transform) return;
+
         auto& t = entity.addComponent<sp::Transform>();
         t.setPosition(target_transform->getPosition() + rotateVec2(docking_port->docked_offset, target_transform->getRotation()));
         t.setRotation(target_transform->getRotation() + vec2ToAngle(docking_port->docked_offset));
@@ -766,7 +815,7 @@ void DockingSystem::abortDock(sp::ecs::Entity entity)
 
     // Reset propulsion systems upon abort.
     docking_port->state = DockingPort::State::NotDocking;
-    if (auto impulse = entity.getComponent<ImpulseEngine>()) impulse->request = 0.f;
+    if (auto impulse = entity.getComponent<ImpulseEngine>()) impulse->request = 0.0f;
     if (auto warp = entity.getComponent<WarpDrive>()) warp->request = 0;
     if (auto thrusters = entity.getComponent<ManeuveringThrusters>()) thrusters->stop();
 }

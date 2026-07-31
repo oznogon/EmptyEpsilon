@@ -65,13 +65,6 @@ public:
     bool hasPendingAsyncJob() const { return pending_async_job; }
     void clear();
 
-    // Check whether the first waypoint on the current route is still
-    // reachable from the given position. Returns true when the line of
-    // sight between `from` and `route[0]` is blocked by a non-formation
-    // obstacle. Called reactively from runLight so stale routes are
-    // discarded before the ship flies into a newly-arrived obstacle.
-    bool isBlocked(glm::vec2 from, float my_radius, sp::ecs::Entity exclude_entity = {}) const;
-
 private:
     // Cap expansions, cell dimensions, and grid sizes.
     static constexpr int MAX_EXPANSIONS = 5000;

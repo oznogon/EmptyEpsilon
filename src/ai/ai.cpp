@@ -108,20 +108,24 @@ void ShipAI::runLight(float delta)
         pathfind_cooldown = random(0.0f, 1.0f);
     had_target_last_frame = has_target;
 
-    // Execute movement from the existing cached route. No decision-making,
-    // no collision queries, no path re-planning. Heavy strategy work is
-    // deferred to runHeavy().
+    // Execute movement from the existing cached route. Defer heavy work to
+    // runHeavy().
     if (pathPlanner.route.size() > 0)
     {
         auto docking_port = owner.getComponent<DockingPort>();
         auto ai = owner.getComponent<AIController>();
 
         // We're moving, so abort any dock unless the AI itself ordered
-        // docking and the approach is already underway. Let the
-        // DockingSystem control the approach.
-        bool docking_in_progress = (docking_port
-            && docking_port->state == DockingPort::State::Docking
-            && ai && ai->orders == AIOrder::Dock);
+        // docking and the approach is already underway. Allow the
+        // DockingSystem to control both the approach and docked state.
+        bool docking_in_progress = (
+            docking_port
+            && (
+                docking_port->state == DockingPort::State::Docking
+                || docking_port->state == DockingPort::State::Docked
+            ) && ai
+            && ai->orders == AIOrder::Dock
+        );
 
         if (docking_port && !docking_in_progress)
         {
@@ -134,79 +138,60 @@ void ShipAI::runLight(float delta)
         auto ot = owner.getComponent<sp::Transform>();
         if (ot && !docking_in_progress)
         {
-            // Discard the route if another obstacle moved between us and the
-            // next waypoint since the route was planned, so that the heavy
-            // update recalculates a new path instead of flying the ship into a
-            // freshly arrived obstacle.
-            {
-                auto my_radius = 300.0f;
-                if (auto physics = owner.getComponent<sp::Physics>())
-                    my_radius = std::max(physics->getSize().x, physics->getSize().y);
+            auto diff = pathPlanner.route[0] - ot->getPosition();
+            float distance = glm::length(diff);
+            auto target_rotation = vec2ToAngle(diff);
+            float rotation_diff = fabs(angleDifference(target_rotation, ot->getRotation()));
 
-                if (pathPlanner.isBlocked(ot->getPosition(), my_radius, owner))
+            if (auto thrusters = owner.getComponent<ManeuveringThrusters>())
+                thrusters->target = target_rotation;
+
+            auto warp = owner.getComponent<WarpDrive>();
+            auto jump = owner.getComponent<JumpDrive>();
+            if ((warp || jump) && !WarpSystem::isWarpJammed(owner))
+            {
+                if (warp)
+                    warp->request = (rotation_diff < 30.0f && distance > 2000.0f) ? 1 : 0;
+
+                if (distance > 10000.0f
+                    && jump
+                    && jump->delay <= 0.0f
+                    && jump->charge >= jump->max_distance)
                 {
-                    pathPlanner.clear();
-                    pathfind_cooldown = 0.0f;
+                    if (rotation_diff < 1.0f)
+                    {
+                        float jump_distance = distance;
+                        if (pathPlanner.route.size() < 2)
+                        {
+                            jump_distance -= 3000.0f;
+                            if (has_missiles) jump_distance -= 5000.0f;
+                        }
+
+                        float jump_limit = std::max({long_range - 5000.0f, 15000.0f, jump->max_distance - 1500.0f});
+                        if (jump_distance > jump_limit)
+                            jump_distance = jump_limit;
+
+                        jump_distance += random(-1500.0f, 1500.0f);
+                        JumpSystem::initializeJump(owner, jump_distance);
+                    }
                 }
             }
 
-            if (pathPlanner.route.size() > 0)
+            float keep_distance = 0.0f;
+            if (pathPlanner.route.size() > 1) keep_distance = 0.0f;
+
+            auto impulse = owner.getComponent<ImpulseEngine>();
+            if (impulse && impulse->max_speed_forward > 0.0f)
             {
-                auto diff = pathPlanner.route[0] - ot->getPosition();
-                float distance = glm::length(diff);
-                auto target_rotation = vec2ToAngle(diff);
-                float rotation_diff = fabs(angleDifference(target_rotation, ot->getRotation()));
+                if (distance > keep_distance + impulse->max_speed_forward * 5.0f)
+                    impulse->request = 1.0f;
+                else
+                    impulse->request = (distance - keep_distance) / impulse->max_speed_forward * 5.0f;
 
-                if (auto thrusters = owner.getComponent<ManeuveringThrusters>())
-                    thrusters->target = target_rotation;
-
-                auto warp = owner.getComponent<WarpDrive>();
-                auto jump = owner.getComponent<JumpDrive>();
-                if ((warp || jump) && !WarpSystem::isWarpJammed(owner))
-                {
-                    if (warp)
-                        warp->request = (rotation_diff < 30.0f && distance > 2000.0f) ? 1 : 0;
-
-                    if (distance > 10000.0f
-                        && jump
-                        && jump->delay <= 0.0f
-                        && jump->charge >= jump->max_distance)
-                    {
-                        if (rotation_diff < 1.0f)
-                        {
-                            float jump_distance = distance;
-                            if (pathPlanner.route.size() < 2)
-                            {
-                                jump_distance -= 3000.0f;
-                                if (has_missiles) jump_distance -= 5000.0f;
-                            }
-
-                            float jump_limit = std::max({long_range - 5000.0f, 15000.0f, jump->max_distance - 1500.0f});
-                            if (jump_distance > jump_limit)
-                                jump_distance = jump_limit;
-
-                            jump_distance += random(-1500.0f, 1500.0f);
-                            JumpSystem::initializeJump(owner, jump_distance);
-                        }
-                    }
-                }
-
-                float keep_distance = 0.0f;
-                if (pathPlanner.route.size() > 1) keep_distance = 0.0f;
-
-                auto impulse = owner.getComponent<ImpulseEngine>();
-                if (impulse && impulse->max_speed_forward > 0.0f)
-                {
-                    if (distance > keep_distance + impulse->max_speed_forward * 5.0f)
-                        impulse->request = 1.0f;
-                    else
-                        impulse->request = (distance - keep_distance) / impulse->max_speed_forward * 5.0f;
-
-                    if (rotation_diff > 90.0f)
-                        impulse->request = -impulse->request;
-                    else if (rotation_diff < 45.0f)
-                        impulse->request *= 1.0f - ((rotation_diff - 45.0f) / 45.0f);
-                }
+                if (rotation_diff > 90.0f)
+                    impulse->request = -impulse->request;
+                else if (rotation_diff < 45.0f)
+                    impulse->request *= 1.0f - ((rotation_diff - 45.0f) / 45.0f);
             }
         }
     }

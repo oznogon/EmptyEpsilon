@@ -67,12 +67,16 @@ void PathFindingSystem::update(float delta)
     max_obstacle_radius = 100.0f;
 
     // Auto-add AvoidObject to all physical entities except sensors, so they're
-    // considered obstacles by AI pathfinding.
+    // considered obstacles by AI pathfinding. AI-controlled ships get a wider
+    // avoidance radius so they keep a larger distance from each other.
     for (auto [entity, hull, physics, transform] : sp::ecs::Query<Hull, sp::Physics, sp::Transform>())
     {
         if (entity.hasComponent<AvoidObject>()) continue;
         if (physics.getType() == sp::Physics::Type::Sensor) continue;
-        entity.addComponent<AvoidObject>().setRange(std::max(physics.getSize().x, physics.getSize().y));
+        auto range = std::max(physics.getSize().x, physics.getSize().y);
+        if (entity.hasComponent<AIController>())
+            range *= 2.0f;
+        entity.addComponent<AvoidObject>().setRange(range);
     }
 
     // Process delayed avoidance objects, such as launched mines.
@@ -189,12 +193,6 @@ PathPlanner::PathPlanner()
 void PathPlanner::clear()
 {
     route.clear();
-}
-
-bool PathPlanner::isBlocked(glm::vec2 from, float my_radius, sp::ecs::Entity exclude_entity) const
-{
-    if (route.empty()) return false;
-    return !lineOfSight(from, route[0], my_radius, exclude_entity);
 }
 
 float PathPlanner::segmentPointDistance2(glm::vec2 p, glm::vec2 a, glm::vec2 b) const
