@@ -17,7 +17,7 @@ void ManeuveringSystem::update(float delta)
         float rotationDiff = 0.0f;
         if (thrusters.rotation_request != std::numeric_limits<float>::min())
             rotationDiff = thrusters.rotation_request;
-        if (thrusters.target != std::numeric_limits<float>::min())
+        else if (thrusters.target != std::numeric_limits<float>::min())
             rotationDiff = angleDifference(transform.getRotation(), thrusters.target);
 
         auto maxSpeed = thrusters.speed * thrusters.getSystemEffectiveness();

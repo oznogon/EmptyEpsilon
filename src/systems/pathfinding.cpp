@@ -191,6 +191,12 @@ void PathPlanner::clear()
     route.clear();
 }
 
+bool PathPlanner::isBlocked(glm::vec2 from, float my_radius, sp::ecs::Entity exclude_entity) const
+{
+    if (route.empty()) return false;
+    return !lineOfSight(from, route[0], my_radius, exclude_entity);
+}
+
 float PathPlanner::segmentPointDistance2(glm::vec2 p, glm::vec2 a, glm::vec2 b) const
 {
     const glm::vec2 ab = b - a;
