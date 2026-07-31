@@ -1079,5 +1079,15 @@ function update(delta)
                 enemy_count
             )
         )
+    else
+        setBanner(
+            string.format(
+                _(
+                    "msgSpectbanner",
+                    "Mission in progress - Enemies: %d"
+                ),
+                enemy_count
+            )
+        )
     end
 end
