@@ -54,12 +54,32 @@ void GuiRotationDial::onDraw(sp::RenderTarget& renderer)
         ? handle_arc
         : handle_style->get(state).size;
 
-    // Draw ring track, using the texture if defined or drawCircleOutline if not.
+    // Draw ring track, using the texture if defined or a flat-colored ring if not.
     if (!back.texture.empty())
         renderer.drawStretched(rect, back.texture, back.color);
-    else {
-        // TODO: Fix this rendering behavior on Utility Beam
-        renderer.drawCircleOutline(center, radius, effective_thickness, back.color);
+    else
+    {
+        // Draw the flat-colored ring as a triangle strip in the normal vertex
+        // batch. drawCircleOutline draws into a separate line batch that is
+        // flushed on top of all normal geometry at end of frame, which would
+        // render the ring over the handle and other UI.
+        const float outer_r = radius;
+        const float inner_r = radius - effective_thickness;
+        const int ring_segments = std::max(16, static_cast<int>(std::ceil(4.0f * std::sqrt(radius))));
+
+        std::vector<glm::vec2> positions;
+        positions.reserve((ring_segments + 1) * 2);
+
+        for (int i = 0; i <= ring_segments; i++)
+        {
+            const float angle = static_cast<float>(i) / static_cast<float>(ring_segments) * static_cast<float>(M_PI) * 2.0f;
+            const float angle_sin = sinf(angle);
+            const float angle_cos = cosf(angle);
+            positions.push_back(center + glm::vec2{angle_sin * outer_r, angle_cos * outer_r});
+            positions.push_back(center + glm::vec2{angle_sin * inner_r, angle_cos * inner_r});
+        }
+
+        renderer.drawTriangleStrip(positions, back.color);
     }
 
     // Draw handle as an arc segment centered on the current value position.

@@ -6,8 +6,10 @@
 #include "crewPosition.h"
 #include "script/callback.h"
 #include "io/dataBuffer.h"
+#include "vectorUtils.h"
 #include <glm/vec3.hpp>
 #include <glm/gtc/type_precision.hpp>
+#include <algorithm>
 #include <vector>
 #include <string>
 
@@ -47,27 +49,50 @@ struct Mount
 {
     MountType type = MountType::BeamWeapon;
 
-    // ---- Common (all types) ----
+    // Common (all types)
     glm::vec3 position{};
     float direction = 0.0f;
+    float cycle_time = 6.0f;
     float turret_arc = 0.0f;
     float turret_direction = 0.0f;
     float turret_rotation_rate = 0.0f;
-    float cycle_time = 6.0f;
+    bool turret_locked = false;
 
-    // ---- BeamWeapon-specific ----
+    // Common to beams (BeamWeapon, UtilityBeam)
     float arc = 0.0f;
     float range = 0.0f;
-    float damage = 1.0f;
     float energy_per_beam_fire = 3.0f;
     float heat_per_beam_fire = 0.02f;
     glm::u8vec4 arc_color{255, 0, 0, 128};
     glm::u8vec4 arc_color_fire{255, 255, 0, 128};
-    DamageType damage_type = DamageType::Energy;
     string texture = "texture/beam_orange.png";
     float cooldown = 0.0f;
 
-    // ---- MissileWeapon-specific ----
+    // BeamWeapon-specific
+    float damage = 1.0f;
+    DamageType damage_type = DamageType::Energy;
+
+    // UtilityBeam-specific
+    float max_arc = 90.0f;
+    bool fixed_arc = false;
+    float max_range = 2000.0f;
+    bool fixed_range = false;
+    float strength = 500.0f;
+    float energy_use_per_second = 6.0f;
+    float heat_per_second = 0.02f;
+    bool active = false;
+    bool is_firing = false;
+    string custom_beam_mode = "";
+    CrewPositions crew_positions = []
+    {
+        CrewPositions cp;
+        cp.add(CrewPosition::scienceOfficer);
+        cp.add(CrewPosition::operationsOfficer);
+        return cp;
+    }();
+    std::vector<CustomBeamMode> custom_beam_modes;
+
+    // MissileWeapon-specific
     float load_time = 8.0f;
     uint32_t type_allowed_mask = (1 << MW_MaxTypes) - 1;
     EMissileSizes missile_size = MS_Medium;
@@ -77,36 +102,48 @@ struct Mount
     int fire_count = 0;
     float target_angle = 0.0f;
 
-    // ---- UtilityBeam-specific ----
-    float max_arc = 90.0f;
-    bool fixed_arc = false;
-    float max_range = 2000.0f;
-    bool fixed_range = false;
-    float bearing = 0.0f;
-    bool fixed_bearing = false;
-    float strength = 500.0f;
-    float energy_use_per_second = 6.0f;
-    float heat_per_second = 0.02f;
-    bool active = false;
-    bool is_firing = false;
-    string custom_beam_mode = "";
-    CrewPositions crew_positions = [] {
-        CrewPositions cp;
-        cp.add(CrewPosition::scienceOfficer);
-        cp.add(CrewPosition::operationsOfficer);
-        return cp;
-    }();
-    std::vector<CustomBeamMode> custom_beam_modes;
-
     bool canLoad(int type_index) const
     {
         if (type_index < 0) return false;
         return (type_allowed_mask & (1 << type_index));
     }
+
     bool canOnlyLoad(int type_index) const
     {
         if (type_index < 0) return false;
         return (type_allowed_mask == (1U << type_index));
+    }
+
+    // Rotate a turreted mount's aim angle toward a target angle within the mount's
+    // turret arc, at the given rotation rate. If the target is outside of the
+    // turret arc, rotate the aim angle back toward the mount's default turret
+    // direction instead.
+    float rotateMountTurretTowards(float aim_angle, float ship_rotation, float target_angle, float turret_direction, float turret_arc, float rotation_rate)
+    {
+        const float turret_angle_diff = angleDifference(turret_direction + ship_rotation, target_angle);
+
+        // The target is outside of the turret arc, so rotate back toward the
+        // mount's default turret direction.
+        if (fabsf(turret_angle_diff) >= turret_arc * 0.5f)
+            return resetMountTurret(aim_angle, turret_direction, rotation_rate);
+
+        // Rotate the aim angle toward the target.
+        const float angle_diff = angleDifference(aim_angle + ship_rotation, target_angle);
+
+        if (fabsf(angle_diff) <= 0.0f) return aim_angle;
+
+        return aim_angle + (angle_diff / fabsf(angle_diff)) * std::min(rotation_rate, fabsf(angle_diff));
+    }
+
+    // Rotate a turreted mount's aim angle back toward its default turret direction,
+    // at the given rotation rate.
+    float resetMountTurret(float aim_angle, float turret_direction, float rotation_rate)
+    {
+        const float reset_angle_diff = angleDifference(aim_angle, turret_direction);
+
+        if (fabsf(reset_angle_diff) <= 0.0f) return aim_angle;
+
+        return aim_angle + (reset_angle_diff / fabsf(reset_angle_diff)) * std::min(rotation_rate, fabsf(reset_angle_diff));
     }
 };
 
@@ -155,10 +192,10 @@ namespace sp::io {
                << m.type_loaded << static_cast<uint8_t>(m.state) << m.delay
                << m.fire_count << m.target_angle
                << m.max_arc << m.fixed_arc << m.max_range << m.fixed_range
-               << m.bearing << m.fixed_bearing << m.strength
+               << m.strength
                << m.energy_use_per_second << m.heat_per_second
                << m.active << m.is_firing << m.custom_beam_mode << m.crew_positions.mask
-               << m.custom_beam_modes;
+               << m.custom_beam_modes << m.turret_locked;
         return packet;
     }
     static inline DataBuffer& operator >> (DataBuffer& packet, Mount& m)
@@ -189,10 +226,11 @@ namespace sp::io {
         }
         packet >> m.delay >> m.fire_count >> m.target_angle
                >> m.max_arc >> m.fixed_arc >> m.max_range >> m.fixed_range
-               >> m.bearing >> m.fixed_bearing >> m.strength
+               >> m.strength
                >> m.energy_use_per_second >> m.heat_per_second
                >> m.active >> m.is_firing >> m.custom_beam_mode >> m.crew_positions.mask
-               >> m.custom_beam_modes;
+               >> m.custom_beam_modes >> m.turret_locked;
+
         return packet;
     }
 }

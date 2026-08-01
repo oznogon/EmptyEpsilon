@@ -55,6 +55,62 @@ void UtilityBeamSystem::update(float delta)
         }
         if (!utility_mount) continue;
 
+        // Turreted utility beams rotate their direction toward a target within
+        // the turret arc, and return to their default direction when there is
+        // no target or the target is outside of the turret arc.
+        if (utility_mount->turret_arc > 0.0f && utility_mount->turret_rotation_rate > 0.0f && !utility_mount->turret_locked)
+        {
+            auto position = transform.getPosition();
+            auto rotation = transform.getRotation();
+            float rotation_rate = utility_mount->turret_rotation_rate * utility_beam.getSystemEffectiveness();
+
+            sp::ecs::Entity aim_target;
+            float aim_angle_diff = 0.0f;
+            bool found = false;
+            if (utility_mount->active && utility_mount->range > 0.0f)
+            {
+                for (auto entity_in_range : sp::CollisionSystem::queryArea(position - glm::vec2(utility_mount->range, utility_mount->range), position + glm::vec2(utility_mount->range, utility_mount->range)))
+                {
+                    // Don't match ourselves.
+                    if (entity_in_range == this_entity) continue;
+
+                    if (auto target_transform = entity_in_range.getComponent<sp::Transform>())
+                    {
+                        auto diff = target_transform->getPosition() - position;
+                        if (glm::length(diff) > utility_mount->range) continue;
+                        float angle = vec2ToAngle(diff);
+                        float turret_angle_diff = angleDifference(utility_mount->turret_direction + rotation, angle);
+                        if (fabsf(turret_angle_diff) >= utility_mount->turret_arc * 0.5f) continue;
+
+                        // Prefer the target closest to the turret's direction.
+                        if (!found || fabsf(turret_angle_diff) < aim_angle_diff)
+                        {
+                            found = true;
+                            aim_angle_diff = fabsf(turret_angle_diff);
+                            aim_target = entity_in_range;
+                        }
+                    }
+                }
+            }
+
+            if (found)
+            {
+                if (auto aim_transform = aim_target.getComponent<sp::Transform>())
+                {
+                    float target_angle = vec2ToAngle(aim_transform->getPosition() - position);
+                    utility_mount->direction = utility_mount->rotateMountTurretTowards(utility_mount->direction, rotation, target_angle, utility_mount->turret_direction, utility_mount->turret_arc, rotation_rate);
+                }
+                else
+                {
+                    utility_mount->direction = utility_mount->resetMountTurret(utility_mount->direction, utility_mount->turret_direction, rotation_rate);
+                }
+            }
+            else
+            {
+                utility_mount->direction = utility_mount->resetMountTurret(utility_mount->direction, utility_mount->turret_direction, rotation_rate);
+            }
+        }
+
         // Ensure effect_target_entity is valid, recreate if it was deleted
         if (!utility_beam.effect_target_entity)
             utility_beam.effect_target_entity = sp::ecs::Entity::create();
@@ -94,7 +150,7 @@ void UtilityBeamSystem::update(float delta)
                             if (auto target_transform = entity_in_range.getComponent<sp::Transform>())
                             {
                                 auto diff = target_transform->getPosition() - (position + rotateVec2(glm::vec2(utility_mount->position.x, utility_mount->position.y), rotation));
-                                float angle_diff = angleDifference(utility_mount->bearing + rotation, vec2ToAngle(diff));
+                                float angle_diff = angleDifference(utility_mount->direction + rotation, vec2ToAngle(diff));
 
                                 // If the entity is in the beam's arc and range, calculate the distance between us and
                                 // the entity.
@@ -131,13 +187,13 @@ void UtilityBeamSystem::update(float delta)
                         // as its "target" and gives that target a transform.
                         // The script can add other components to that entity
                         // as required. This entity is positioned at the end of
-                        // the arc on the beam's bearing and moves with the arc.
+                        // the arc on the beam's direction and moves with the arc.
                         auto& effect_target_transform = utility_beam.effect_target_entity.getOrAddComponent<sp::Transform>();
 
-                        glm::vec2 offset = vec2FromAngle(utility_mount->bearing + rotation) * utility_mount->range;
+                        glm::vec2 offset = vec2FromAngle(utility_mount->direction + rotation) * utility_mount->range;
                         effect_target_transform.setPosition(position + offset);
                         auto diff = effect_target_transform.getPosition() - (position + rotateVec2(glm::vec2(utility_mount->position.x, utility_mount->position.y), rotation));
-                        float angle_diff = angleDifference(utility_mount->bearing + rotation, vec2ToAngle(diff));
+                        float angle_diff = angleDifference(utility_mount->direction + rotation, vec2ToAngle(diff));
 
                         fire(this_entity, *utility_mount, beam_mode, transform, utility_beam.effect_target_entity, utility_mount->range, angle_diff);
                     }
@@ -361,10 +417,39 @@ void UtilityBeamSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entit
     if (utility_mount->range == 0.0f) return;
 
     // If the beam is cooling down, flash and fade the arc color.
-    glm::u8vec4 color = Tween<glm::u8vec4>::linear(std::max(0.0f, utility_mount->cooldown), 0, utility_mount->cycle_time, utility_mount->arc_color, utility_mount->arc_color_fire);
+    glm::u8vec4 color = Tween<glm::u8vec4>::linear(
+        std::max(0.0f, utility_mount->cooldown),
+        0,
+        utility_mount->cycle_time,
+        utility_mount->arc_color,
+        utility_mount->arc_color_fire
+    );
 
     // Set the beam's origin on radar to its relative position on the mesh.
     auto arc_center = rotateVec2(glm::vec2(utility_mount->position.x, utility_mount->position.y) * scale, rotation) + screen_position;
 
-    drawArc(renderer, arc_center, rotation + (utility_mount->bearing - utility_mount->arc / 2.0f), utility_mount->arc, utility_mount->range * scale, color);
+    drawArc(
+        renderer,
+        arc_center,
+        rotation + (utility_mount->direction - utility_mount->arc * 0.5f),
+        utility_mount->arc,
+        utility_mount->range * scale,
+        color
+    );
+
+    // If the beam is turreted, draw the turret's arc.
+    if (utility_mount->turret_arc > 0.0f)
+    {
+        glm::u8vec4 turret_arc_color = utility_mount->arc_color;
+        turret_arc_color.a /= 4;
+
+        drawArc(
+            renderer,
+            arc_center,
+            rotation + (utility_mount->turret_direction - utility_mount->turret_arc * 0.5f),
+            utility_mount->turret_arc,
+            utility_mount->range * scale,
+            turret_arc_color
+        );
+    }
 }

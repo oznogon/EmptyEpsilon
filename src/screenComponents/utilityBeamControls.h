@@ -22,11 +22,12 @@ private:
     GuiToggleButton* utility_toggle;
     // GuiSelector* utility_mode;
     GuiSelector* custom_utility_mode;
-    GuiSlider* utility_bearing;
+    GuiSlider* utility_turret_direction;
     GuiKeyValueDisplay* utility_bearing_fixed;
     GuiSlider* utility_range;
     GuiKeyValueDisplay* utility_range_fixed;
     GuiSlider* utility_arc;
     GuiKeyValueDisplay* utility_arc_fixed;
     GuiProgressbar* utility_progress_bar;
+    GuiToggleButton* turret_lock;
 };

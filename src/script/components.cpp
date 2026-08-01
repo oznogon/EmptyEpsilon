@@ -783,8 +783,6 @@ void initComponentScriptBindings()
     BIND_ARRAY_MEMBER(Mounts, mounts, fixed_arc);
     BIND_ARRAY_MEMBER(Mounts, mounts, max_range);
     BIND_ARRAY_MEMBER(Mounts, mounts, fixed_range);
-    BIND_ARRAY_MEMBER(Mounts, mounts, bearing);
-    BIND_ARRAY_MEMBER(Mounts, mounts, fixed_bearing);
     BIND_ARRAY_MEMBER(Mounts, mounts, strength);
     BIND_ARRAY_MEMBER(Mounts, mounts, energy_use_per_second);
     BIND_ARRAY_MEMBER(Mounts, mounts, heat_per_second);

@@ -1,5 +1,18 @@
 # Changelog
 
+## [2026-08]
+
+### Changed
+
+- Raise weapon mount arrays to a first-class component (`Mounts`) and incorporate features across beam weapons, missile weapons, and utility beamss
+  - Missile weapon tubes can now be turreted. Turreted tubes' indicators and firing arcs update to reflect turret direction
+  - Utility Beam directional control is now managed as a turret within a defined arc
+  - Mounts GM Tweak page manages all weapon mounts across weapon types
+
+### Fixed
+
+- Utility Beam rotation dial background outline no longer renders over the handle and other UI elements
+
 ## [2026-07]
 
 ### New features

@@ -72,6 +72,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
         ->shortRange()
         ->enableCallsigns()
         ->enableHeadingIndicators()
+        ->enableMissileTubeIndicators()
         ->setStyle(GuiRadarView::Circular)
         ->setCallbacks(
             // Button down: Select combined weapons targets within 0.25U of the
@@ -104,7 +105,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     missile_aim
         ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMatchHeight, 850.0f);
-    (new GuiTextTooltip(missile_aim, "MISSILE_AIM_TIP", tr("tooltips", "Drag to manually set the missile launch angle."), 20.0f))->setWidth(280.0f);
+    // (new GuiTextTooltip(missile_aim, "MISSILE_AIM_TIP", tr("tooltips", "Drag to manually set the missile launch angle."), 20.0f))->setWidth(280.0f);
 
     tube_controls = new GuiMissileTubeControls(weapons_controls, "MISSILE_TUBES");
     tube_controls->setPosition(20.0f, -20.0f, sp::Alignment::BottomLeft);
@@ -115,7 +116,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     lock_aim
         ->setPosition(250.0f, 20.0f, sp::Alignment::TopCenter)
         ->setSize(150.0f, GuiElement::GuiSizeRow);
-    (new GuiTextTooltip(lock_aim, "LOCK_AIM_TIP", tr("tooltips", "Lock missile aim to the current target or switch to manual aim."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(lock_aim, "LOCK_AIM_TIP", tr("tooltips", "Toggle whether to lock missile aim to the current target or manually set the launch angle."), 20.0f))->setWidth(280.0f);
 
     // Beam controls beneath the radar.
     beam_info_box = new GuiElement(weapons_controls, "BEAM_INFO_BOX");
@@ -158,7 +159,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
         ->setIcon("gui/icons/lock-beams")
         ->setPosition(250.0f, 70.0f, sp::Alignment::TopCenter)
         ->setSize(150.0f, GuiElement::GuiSizeRow);
-    (new GuiTextTooltip(beam_safety, "BEAM_SAFETY_TIP", tr("tooltips", "Toggle beam weapons autofire."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(beam_safety, "BEAM_SAFETY_TIP", tr("tooltips", "Toggle whether beam weapons automatically fire at the active target within their firing arc."), 20.0f))->setWidth(280.0f);
 
     auto stats = new GuiElement(weapons_controls, "WEAPONS_STATS");
     stats
@@ -172,7 +173,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
         ->setTextSize(20.0f)
         ->setSize(240.0f, 40.0f);
 
-    front_shield_display = new GuiKeyValueDisplay(stats, "FRONT_SHIELD_DISPLAY", 0.45f, tr("shields","Front"), "");
+    front_shield_display = new GuiKeyValueDisplay(stats, "FRONT_SHIELD_DISPLAY", 0.45f, tr("shields", "Front"), "");
     front_shield_display
         ->setIcon("gui/icons/shields-fore")
         ->setTextSize(20.0f)
@@ -202,29 +203,36 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
         (new GuiTextTooltip(shields_enable, "SHIELDS_ENABLE_TIP", tr("tooltips", "Toggle shields. Active shields deflect incoming damage."), 20.0f))->setWidth(280.0f);
     }
 
-    auto mounts_comp = my_spaceship.getComponent<Mounts>();
     const Mount* ub_mount = nullptr;
-    if (mounts_comp) {
-        for (auto& m : mounts_comp->mounts) {
-            if (m.type == MountType::UtilityBeam) { ub_mount = &m; break; }
+    if (auto mounts_comp = my_spaceship.getComponent<Mounts>())
+    {
+        for (auto& m : mounts_comp->mounts)
+        {
+            if (m.type == MountType::UtilityBeam)
+            {
+                ub_mount = &m;
+                break;
+            }
         }
     }
 
-    sidebar_selector = new GuiSelector(weapons_controls, "WEAPONS_SIDEBAR_SELECTOR", [this](int index, string value)
-    {
-        if (value == "func")
+    sidebar_selector = new GuiSelector(weapons_controls, "WEAPONS_SIDEBAR_SELECTOR",
+        [this](int index, string value)
         {
-            custom_function_sidebar->setVisible(custom_function_sidebar->hasEntries());
-            utility_beam_sidebar->hide();
-            utility_beam_dial->hide();
+            if (value == "func")
+            {
+                custom_function_sidebar->setVisible(custom_function_sidebar->hasEntries());
+                utility_beam_sidebar->hide();
+                utility_beam_dial->hide();
+            }
+            else if (value == "util")
+            {
+                custom_function_sidebar->hide();
+                utility_beam_sidebar->show();
+                utility_beam_dial->show();
+            }
         }
-        else if (value == "util")
-        {
-            custom_function_sidebar->hide();
-            utility_beam_sidebar->show();
-            utility_beam_dial->show();
-        }
-    });
+    );
     sidebar_selector
         ->setPosition(-20.0f, 120.0f, sp::Alignment::TopRight)
         ->setSize(250.0f, GuiElement::GuiSizeRow)
@@ -279,8 +287,9 @@ void WeaponsScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
-        auto beam_sys = my_spaceship.getComponent<BeamWeaponSys>();
-        if (beam_sys) beam_safety->setValue(beam_sys->is_firing_enabled);
+        if (auto beam_sys = my_spaceship.getComponent<BeamWeaponSys>())
+            beam_safety->setValue(beam_sys->is_firing_enabled);
+
         auto shields = my_spaceship.getComponent<Shields>();
 
         const bool has_any_ability = crewPositionRequirements::hasRequirements(CrewPosition::weaponsOfficer, my_spaceship);
@@ -424,11 +433,16 @@ void WeaponsScreen::onUpdate()
         }
     }
 
-    auto mounts_comp = my_spaceship.getComponent<Mounts>();
     const Mount* ub_mount = nullptr;
-    if (mounts_comp) {
-        for (auto& m : mounts_comp->mounts) {
-            if (m.type == MountType::UtilityBeam) { ub_mount = &m; break; }
+    if (auto mounts_comp = my_spaceship.getComponent<Mounts>())
+    {
+        for (auto& m : mounts_comp->mounts)
+        {
+            if (m.type == MountType::UtilityBeam)
+            {
+                ub_mount = &m;
+                break;
+            }
         }
     }
 

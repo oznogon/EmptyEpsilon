@@ -520,7 +520,7 @@ function init()
                     end
                     emitter_utility_beam.is_firing = true
 
-                    local tractor_heading = utility_beam.bearing
+                    local tractor_heading = utility_beam.direction
                         + beam_emitter:getHeading()
                     while tractor_heading > 360.0 do
                         tractor_heading = tractor_heading - 360.0

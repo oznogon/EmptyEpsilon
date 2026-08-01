@@ -12,6 +12,7 @@ class MissileSystem
 : public sp::ecs::System
 , public sp::CollisionHandler
 , public RenderRadarInterface<DelayedExplodeOnTouch, 10, RadarRenderSystem::FlagGM>
+, public RenderRadarInterface<MissileTubes, 22, RadarRenderSystem::FlagShortRange>
 {
 public:
     MissileSystem();
@@ -19,6 +20,7 @@ public:
     void update(float delta) override;
     void collision(sp::ecs::Entity a, sp::ecs::Entity b, float force) override;
     void renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e, glm::vec2 screen_position, float scale, float rotation, DelayedExplodeOnTouch& component) override;
+    void renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e, glm::vec2 screen_position, float scale, float rotation, MissileTubes& tubes) override;
 
     static void startLoad(sp::ecs::Entity source, Mount& tube, int type_index);
     static void startUnload(sp::ecs::Entity source, Mount& tube);

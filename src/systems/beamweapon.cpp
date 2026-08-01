@@ -72,32 +72,10 @@ void BeamWeaponSystem::update(float delta)
 
                         if (mount.turret_arc > 0)
                         {
-                            // Get the target's angle relative to the turret's
-                            // direction.
-                            float turret_angle_diff = angleDifference(mount.turret_direction + transform.getRotation(), angle);
-
-                            // If the turret can rotate ...
-                            if (mount.turret_rotation_rate > 0)
+                            float rotation_rate = mount.turret_rotation_rate * beamsys.getSystemEffectiveness();
+                            if (rotation_rate > 0)
                             {
-                                // ... and if the target is within the turret's
-                                // arc ...
-                                if (fabsf(turret_angle_diff) < mount.turret_arc / 2.0f)
-                                {
-                                    // ... rotate the turret's beam toward the
-                                    // target.
-                                    if (fabsf(angle_diff) > 0)
-                                        mount.direction += (angle_diff / fabsf(angle_diff)) * std::min(mount.turret_rotation_rate * beamsys.getSystemEffectiveness(), fabsf(angle_diff));
-                                // If the target is outside of the turret's arc ...
-                                }
-                                else
-                                {
-                                    // ... rotate the turret's beam toward the
-                                    // turret's direction to reset it.
-                                    float reset_angle_diff = angleDifference(mount.direction, mount.turret_direction);
-
-                                    if (fabsf(reset_angle_diff) > 0)
-                                        mount.direction += (reset_angle_diff / fabsf(reset_angle_diff)) * std::min(mount.turret_rotation_rate * beamsys.getSystemEffectiveness(), fabsf(reset_angle_diff));
-                                }
+                                mount.direction = mount.rotateMountTurretTowards(mount.direction, transform.getRotation(), angle, mount.turret_direction, mount.turret_arc, rotation_rate);
                             }
                         }
 
@@ -178,13 +156,9 @@ void BeamWeaponSystem::update(float delta)
             // reset it if necessary.
             else if (mount.range > 0.0f
                 && mount.turret_arc > 0.0f
-                && mount.direction != mount.turret_direction
                 && mount.turret_rotation_rate > 0)
             {
-                const float reset_angle_diff = angleDifference(mount.direction, mount.turret_direction);
-
-                if (fabsf(reset_angle_diff) > 0)
-                    mount.direction += (reset_angle_diff / fabsf(reset_angle_diff)) * std::min(mount.turret_rotation_rate * beamsys.getSystemEffectiveness(), fabsf(reset_angle_diff));
+                mount.direction = mount.resetMountTurret(mount.direction, mount.turret_direction, mount.turret_rotation_rate * beamsys.getSystemEffectiveness());
             }
         }
     }

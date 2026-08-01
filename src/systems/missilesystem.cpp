@@ -1,4 +1,5 @@
 #include "systems/missilesystem.h"
+#include "systems/beamweapon.h"
 #include "multiplayer_server.h"
 #include "particleEffect.h"
 #include "random.h"
@@ -37,6 +38,43 @@ void MissileSystem::update(float delta)
         for (auto& tube : mounts.mounts)
         {
             if (tube.type != MountType::MissileWeapon) continue;
+
+            // Turreted missile tubes rotate their direction toward a target
+            // within the turret arc, and return to their default direction when
+            // there is no target or the target is outside of the turret arc.
+            if (tube.turret_arc > 0.0f)
+            {
+                auto transform = entity.getComponent<sp::Transform>();
+                if (transform)
+                {
+                    sp::ecs::Entity target_entity;
+                    if (auto mt = entity.getComponent<MissileWeaponTarget>())
+                        target_entity = mt->entity;
+                    else if (auto tgt = entity.getComponent<Target>())
+                        target_entity = tgt->entity;
+
+                    float rotation_rate = tube.turret_rotation_rate * tubes.getSystemEffectiveness();
+                    if (rotation_rate > 0.0f)
+                    {
+                        if (target_entity)
+                        {
+                            if (auto target_transform = target_entity.getComponent<sp::Transform>())
+                            {
+                                float target_angle = vec2ToAngle(target_transform->getPosition() - transform->getPosition());
+                                tube.direction = tube.rotateMountTurretTowards(tube.direction, transform->getRotation(), target_angle, tube.turret_direction, tube.turret_arc, rotation_rate);
+                            }
+                            else
+                            {
+                                tube.direction = tube.resetMountTurret(tube.direction, tube.turret_direction, rotation_rate);
+                            }
+                        }
+                        else
+                        {
+                            tube.direction = tube.resetMountTurret(tube.direction, tube.turret_direction, rotation_rate);
+                        }
+                    }
+                }
+            }
 
             if (tube.delay > 0.0f)
                 tube.delay -= delta * tubes.getSystemEffectiveness();
@@ -221,6 +259,27 @@ void MissileSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e,
             ? glm::u8vec4(255, 0, 0, 128)
             : glm::u8vec4(255, 255, 255, 128)
     );
+}
+
+void MissileSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity entity, glm::vec2 screen_position, float scale, float rotation, MissileTubes& tubes)
+{
+    auto mounts = entity.getComponent<Mounts>();
+    if (!mounts) return;
+
+    for (auto& mount : mounts->mounts)
+    {
+        if (mount.type != MountType::MissileWeapon) continue;
+        if (mount.turret_arc == 0.0f) continue;
+
+        // Draw the turret's bounds, at low opacity to visually distinguish
+        // from beam turret arcs.
+        glm::u8vec4 color{128, 160, 255, 48};
+
+        auto arc_center = rotateVec2(glm::vec2(mount.position.x, mount.position.y) * scale, rotation) + screen_position;
+        float display_range = 2000.0f * scale;
+
+        drawArc(renderer, arc_center, rotation + (mount.turret_direction - mount.turret_arc * 0.5f), mount.turret_arc, display_range, color);
+    }
 }
 
 void MissileSystem::explode(sp::ecs::Entity source, sp::ecs::Entity target, ExplodeOnTouch& eot)

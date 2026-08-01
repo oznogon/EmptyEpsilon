@@ -131,9 +131,10 @@ public:
 
     void commandSetUtilityBeam(bool enabled);
     void commandSetCustomUtilityBeamMode(string name);
-    void commandSetUtilityBeamBearing(float bearing);
+    void commandSetUtilityBeamDirection(float direction);
     void commandSetUtilityBeamArc(float arc);
     void commandSetUtilityBeamRange(float range);
+    void commandSetUtilityBeamTurretLock(bool locked);
 
     virtual void onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet) override;
 

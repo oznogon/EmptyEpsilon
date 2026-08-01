@@ -1989,11 +1989,11 @@ void luaCommandSetUtilityBeam(sp::ecs::Entity ship, bool active)
     }
 }
 
-void luaCommandSetUtilityBeamBearing(sp::ecs::Entity ship, float bearing)
+void luaCommandSetUtilityBeamDirection(sp::ecs::Entity ship, float direction)
 {
     if (my_player_info && my_player_info->ship == ship)
     {
-        my_player_info->commandSetUtilityBeamBearing(bearing);
+        my_player_info->commandSetUtilityBeamDirection(direction);
         return;
     }
 
@@ -2003,7 +2003,12 @@ void luaCommandSetUtilityBeamBearing(sp::ecs::Entity ship, float bearing)
         {
             if (mount.type == MountType::UtilityBeam)
             {
-                mount.bearing = bearing;
+                if (mount.turret_arc > 0.0f)
+                {
+                    const float aim_swing = std::max(0.0f, (mount.turret_arc - mount.arc) * 0.5f);
+                    direction = std::clamp(direction, mount.turret_direction - aim_swing, mount.turret_direction + aim_swing);
+                }
+                mount.direction = direction;
                 return;
             }
         }

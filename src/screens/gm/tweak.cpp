@@ -3874,8 +3874,11 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Arc:"), Mounts, mounts, arc);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Max arc:"), Mounts, mounts, max_arc);
     ADD_VECTOR_BOOL_TWEAK(tr("tweak-text", "Fixed arc:"), Mounts, mounts, fixed_arc);
-    ADD_VECTOR_ROTATION_TWEAK(tr("tweak-text", "Bearing:"), Mounts, mounts, bearing);
-    ADD_VECTOR_BOOL_TWEAK(tr("tweak-text", "Fixed bearing:"), Mounts, mounts, fixed_bearing);
+    ADD_VECTOR_ROTATION_TWEAK(tr("tweak-text", "Beam direction:"), Mounts, mounts, direction);
+    ADD_VECTOR_NUM_SLIDER_TWEAK(tr("tweak-text", "Turret arc:"), Mounts, mounts, 0.0f, 360.0f, turret_arc);
+    ADD_VECTOR_ROTATION_TWEAK(tr("tweak-text", "Turret direction:"), Mounts, mounts, turret_direction);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Turret rotation rate:"), Mounts, mounts, turret_rotation_rate);
+    ADD_VECTOR_BOOL_TWEAK(tr("tweak-text", "Turret locked:"), Mounts, mounts, turret_locked);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Range:"), Mounts, mounts, range);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Max range:"), Mounts, mounts, max_range);
     ADD_VECTOR_BOOL_TWEAK(tr("tweak-text", "Fixed range:"), Mounts, mounts, fixed_range);
@@ -4049,8 +4052,11 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_VECTOR_BOOL_TWEAK(tr("tweak-text", "Is firing:"), Mounts, mounts, is_firing);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Max arc:"), Mounts, mounts, max_arc);
     ADD_VECTOR_BOOL_TWEAK(tr("tweak-text", "Fixed arc:"), Mounts, mounts, fixed_arc);
-    ADD_VECTOR_ROTATION_TWEAK(tr("tweak-text", "Bearing:"), Mounts, mounts, bearing);
-    ADD_VECTOR_BOOL_TWEAK(tr("tweak-text", "Fixed bearing:"), Mounts, mounts, fixed_bearing);
+    ADD_VECTOR_ROTATION_TWEAK(tr("tweak-text", "Beam direction:"), Mounts, mounts, direction);
+    ADD_VECTOR_NUM_SLIDER_TWEAK(tr("tweak-text", "Turret arc:"), Mounts, mounts, 0.0f, 360.0f, turret_arc);
+    ADD_VECTOR_ROTATION_TWEAK(tr("tweak-text", "Turret direction:"), Mounts, mounts, turret_direction);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Turret rotation rate:"), Mounts, mounts, turret_rotation_rate);
+    ADD_VECTOR_BOOL_TWEAK(tr("tweak-text", "Turret locked:"), Mounts, mounts, turret_locked);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Max range:"), Mounts, mounts, max_range);
     ADD_VECTOR_BOOL_TWEAK(tr("tweak-text", "Fixed range:"), Mounts, mounts, fixed_range);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Strength:"), Mounts, mounts, strength);

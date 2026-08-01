@@ -1,59 +1,57 @@
 #include "scienceScreen.h"
+#include "i18n.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
 #include "multiplayer_client.h"
-#include "i18n.h"
 #include "featureDefs.h"
 #include "crewPositionRequirements.h"
+#include "random.h"
+#include "ecs/query.h"
 
 #include "components/beamweapon.h"
 #include "components/beamWeaponTarget.h"
-#include "components/customshipfunction.h"
-#include "components/utilityBeam.h"
-#include "components/shields.h"
-#include "components/hull.h"
 #include "components/collision.h"
-#include "components/missile.h"
-#include "components/radar.h"
+#include "components/customshipfunction.h"
 #include "components/drone.h"
-#include "components/scanning.h"
-#include "components/name.h"
+#include "components/hull.h"
+#include "components/missile.h"
 #include "components/mounts.h"
+#include "components/name.h"
+#include "components/radar.h"
+#include "components/scanning.h"
+#include "components/shields.h"
 #include "components/target.h"
-
-#include "ecs/query.h"
+#include "components/utilityBeam.h"
 
 #include "systems/radarblock.h"
 
+#include "screenComponents/alertOverlay.h"
+#include "screenComponents/customShipFunctions.h"
+#include "screenComponents/databaseView.h"
+#include "screenComponents/frequencyCurve.h"
+#include "screenComponents/powerDamageIndicator.h"
 #include "screenComponents/radarView.h"
 #include "screenComponents/radarZoomSlider.h"
 #include "screenComponents/rawScannerDataRadarOverlay.h"
-#include "screenComponents/scanTargetButton.h"
-#include "screenComponents/frequencyCurve.h"
-#include "screenComponents/signalQualityIndicator.h"
 #include "screenComponents/scanningDialog.h"
-#include "screenComponents/databaseView.h"
-#include "screenComponents/alertOverlay.h"
-#include "screenComponents/customShipFunctions.h"
-#include "screenComponents/powerDamageIndicator.h"
+#include "screenComponents/scanTargetButton.h"
+#include "screenComponents/signalQualityIndicator.h"
 #include "screenComponents/utilityBeamControls.h"
+#include "screenComponents/utilityBeamRotationDial.h"
 
 #include "gui/theme.h"
-#include "random.h"
-
 #include "gui/gui2_button.h"
+#include "gui/gui2_image.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_label.h"
-#include "gui/gui2_togglebutton.h"
-#include "gui/gui2_selector.h"
+#include "gui/gui2_listbox.h"
 #include "gui/gui2_scrollcontainer.h"
 #include "gui/gui2_scrolltextcontainer.h"
-#include "gui/gui2_listbox.h"
+#include "gui/gui2_selector.h"
 #include "gui/gui2_slider.h"
-#include "gui/gui2_image.h"
+#include "gui/gui2_togglebutton.h"
 #include "gui/gui2_tooltip.h"
-#include "screenComponents/utilityBeamRotationDial.h"
 
 ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
 : GuiOverlay(owner, "SCIENCE_SCREEN", GuiTheme::getColor("background")), crew_position(crew_position)
@@ -61,9 +59,16 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     auto lrr = my_spaceship.getComponent<LongRangeRadar>();
     auto mounts_comp = my_spaceship.getComponent<Mounts>();
     const Mount* ub_mount = nullptr;
-    if (mounts_comp) {
-        for (auto& m : mounts_comp->mounts) {
-            if (m.type == MountType::UtilityBeam) { ub_mount = &m; break; }
+
+    if (mounts_comp)
+    {
+        for (auto& m : mounts_comp->mounts)
+        {
+            if (m.type == MountType::UtilityBeam)
+            {
+                ub_mount = &m;
+                break;
+            }
         }
     }
 
@@ -167,30 +172,32 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
 
     probe_raw_signals = new RawScannerDataRadarOverlay(probe_radar, "");
 
-    sidebar_selector = new GuiSelector(radar_view, "", [this](int index, string value)
-    {
-        if (value == "scan")
+    sidebar_selector = new GuiSelector(radar_view, "",
+        [this](int index, string value)
         {
-            info_scan_content->show();
-            custom_function_sidebar->hide();
-            utility_beam_sidebar->hide();
-            utility_beam_dial->hide();
-        }
-        else if (value == "func")
-        {
-            info_scan_content->hide();
-            custom_function_sidebar->setVisible(custom_function_sidebar->hasEntries());
-            utility_beam_sidebar->hide();
-            utility_beam_dial->hide();
-        }
-        else if (value == "util")
-        {
-            info_scan_content->hide();
-            custom_function_sidebar->hide();
-            utility_beam_sidebar->show();
-            utility_beam_dial->show();
-        }
-    });
+            if (value == "scan")
+            {
+                info_scan_content->show();
+                custom_function_sidebar->hide();
+                utility_beam_sidebar->hide();
+                utility_beam_dial->hide();
+            }
+            else if (value == "func")
+            {
+                info_scan_content->hide();
+                custom_function_sidebar->setVisible(custom_function_sidebar->hasEntries());
+                utility_beam_sidebar->hide();
+                utility_beam_dial->hide();
+            }
+            else if (value == "util")
+            {
+                info_scan_content->hide();
+                custom_function_sidebar->hide();
+                utility_beam_sidebar->show();
+                utility_beam_dial->show();
+            }
+       }
+    );
 
     sidebar_selector->setOptions(
         {tr("scienceTab", "Scanning")},
@@ -207,7 +214,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         ->setSelectionIndex(0)
         ->setPosition(-20.0f, 120.0f, sp::Alignment::TopRight)
         ->setSize(250.0f, GuiElement::GuiSizeRow);
-    (new GuiTextTooltip(sidebar_selector, "SCIENCE_SIDEBAR_TIP", tr("tooltips", "Switch between scanning data, custom functions, and utility beam controls."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(sidebar_selector, "SCIENCE_SIDEBAR_TIP", tr("tooltips", "Switch between available science control and data views."), 20.0f))->setWidth(280.0f);
 
     // Target scan data sidebar.
     info_sidebar = new GuiElement(radar_view, "SIDEBAR");
