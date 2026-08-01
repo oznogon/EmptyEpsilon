@@ -157,6 +157,31 @@ function ModelData:setCollisionBox(w, h)
     self.physics.size = { w, h }
     return self
 end
+--- Adds a mount origin position to this ModelData.
+--- The type argument determines the mount type: 0=BeamWeapon, 1=MissileWeapon, 2=UtilityBeam.
+--- If no origin positions are defined, this defaults to the model's origin (0,0,0).
+--- If you view the model in Blender, these coordinate values are equivalent to -X,+Y,+Z.
+--- Example:
+--- -- Add a beam mount position at the given model X/Y/Z coordinates.
+--- model:addMountPosition(0, 21, -28.2, -2)
+function ModelData:addMountPosition(type, x, y, z)
+    if self.__mount_positions == nil then
+        self.__mount_positions = {}
+    end
+    self.__mount_positions[#self.__mount_positions + 1] = { type, x, y, z }
+    if self.__beam_positions == nil then
+        self.__beam_positions = {}
+    end
+    if self.__tube_positions == nil then
+        self.__tube_positions = {}
+    end
+    if type == 0 then
+        self.__beam_positions[#self.__beam_positions + 1] = { x, y, z }
+    elseif type == 1 then
+        self.__tube_positions[#self.__tube_positions + 1] = { x, y, z }
+    end
+    return self
+end
 --- Adds a beam weapons origin position to this ModelData.
 --- If no origin positions are defined, this defaults to the model's origin (0,0,0).
 --- If you view the model in Blender, these coordinate values are equivalent to -X,+Y,+Z.
@@ -164,11 +189,7 @@ end
 --- -- Add a beam position at the given model X/Y/Z coordinates.
 --- model:addBeamPosition(21, -28.2, -2)
 function ModelData:addBeamPosition(x, y, z)
-    if self.__beam_positions == nil then
-        self.__beam_positions = {}
-    end
-    self.__beam_positions[#self.__beam_positions + 1] = { x, y, z }
-    return self
+    return self:addMountPosition(0, x, y, z)
 end
 --- Adds a weapons tube origin position to this ModelData.
 --- If no origin positions are defined, this defaults to the model's origin (0,0,0).
@@ -176,11 +197,7 @@ end
 --- -- Add a tube position at the given model X/Y/Z coordinates.
 --- model:addTubePosition(21, -28.2, -2)
 function ModelData:addTubePosition(x, y, z)
-    if self.__tube_positions == nil then
-        self.__tube_positions = {}
-    end
-    self.__tube_positions[#self.__tube_positions + 1] = { x, y, z }
-    return self
+    return self:addMountPosition(1, x, y, z)
 end
 --- [DEPRECATED]
 --- Use ModelData:addEngineEmitter().

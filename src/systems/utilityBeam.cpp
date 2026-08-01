@@ -12,6 +12,7 @@
 
 #include "components/scanning.h"
 #include "components/utilityBeam.h"
+#include "components/mounts.h"
 #include "components/collision.h"
 #include "components/docking.h"
 #include "components/reactor.h"
@@ -40,30 +41,42 @@ void UtilityBeamSystem::update(float delta)
     if (!game_server.isAlive()) return;
     if (delta <= 0.0f) return;
 
-    for (auto [this_entity, utility_beam, transform] : sp::ecs::Query<UtilityBeam, sp::Transform>())
+    for (auto [this_entity, utility_beam, mounts, transform] : sp::ecs::Query<UtilityBeam, Mounts, sp::Transform>())
     {
+        // Find the utility beam mount
+        Mount* utility_mount = nullptr;
+        for (auto& m : mounts.mounts)
+        {
+            if (m.type == MountType::UtilityBeam)
+            {
+                utility_mount = &m;
+                break;
+            }
+        }
+        if (!utility_mount) continue;
+
         // Ensure effect_target_entity is valid, recreate if it was deleted
         if (!utility_beam.effect_target_entity)
             utility_beam.effect_target_entity = sp::ecs::Entity::create();
 
-        if (utility_beam.active)
+        if (utility_mount->active)
         {
             // TODO: Skip logic if cooldown is active
             // The beam is active. Reset its cooldown period and tick its
             // activity time.
-            utility_beam.cooldown = utility_beam.cycle_time;
-            utility_beam.is_firing = false;
+            utility_mount->cooldown = utility_mount->cycle_time;
+            utility_mount->is_firing = false;
 
             // If the beam's range or arc are 0, beam is no-op.
-            if (utility_beam.range <= 0.0f) continue;
-            if (utility_beam.arc <= 0.0f) continue;
+            if (utility_mount->range <= 0.0f) continue;
+            if (utility_mount->arc <= 0.0f) continue;
 
             auto position = transform.getPosition();
             auto rotation = transform.getRotation();
 
-            for (auto beam_mode : utility_beam.custom_beam_modes)
+            for (auto beam_mode : utility_mount->custom_beam_modes)
             {
-                if (utility_beam.custom_beam_mode == beam_mode.name)
+                if (utility_mount->custom_beam_mode == beam_mode.name)
                 {
                     if (beam_mode.requires_target)
                     {
@@ -71,7 +84,7 @@ void UtilityBeamSystem::update(float delta)
                         utility_beam.effect_target_entity.removeComponent<sp::Transform>();
 
                         // Get a list of all entities with transforms within range.
-                        for (auto entity_in_range : sp::CollisionSystem::queryArea(position - glm::vec2(utility_beam.range, utility_beam.range), position + glm::vec2(utility_beam.range, utility_beam.range)))
+                        for (auto entity_in_range : sp::CollisionSystem::queryArea(position - glm::vec2(utility_mount->range, utility_mount->range), position + glm::vec2(utility_mount->range, utility_mount->range)))
                         {
                             // Don't match ourselves.
                             if (entity_in_range == this_entity) continue;
@@ -80,12 +93,12 @@ void UtilityBeamSystem::update(float delta)
                             // If it doesn't have a transform, skip it.
                             if (auto target_transform = entity_in_range.getComponent<sp::Transform>())
                             {
-                                auto diff = target_transform->getPosition() - (position + rotateVec2(glm::vec2(utility_beam.position.x, utility_beam.position.y), rotation));
-                                float angle_diff = angleDifference(utility_beam.bearing + rotation, vec2ToAngle(diff));
+                                auto diff = target_transform->getPosition() - (position + rotateVec2(glm::vec2(utility_mount->position.x, utility_mount->position.y), rotation));
+                                float angle_diff = angleDifference(utility_mount->bearing + rotation, vec2ToAngle(diff));
 
                                 // If the entity is in the beam's arc and range, calculate the distance between us and
                                 // the entity.
-                                if (fabsf(angle_diff) < utility_beam.arc * 0.5f)
+                                if (fabsf(angle_diff) < utility_mount->arc * 0.5f)
                                 {
                                     float distance = glm::length(diff);
 
@@ -103,8 +116,8 @@ void UtilityBeamSystem::update(float delta)
                                     // Narrow the group to entities that are also within
                                     // the beam's range. These are the only entities that
                                     // we'll potentially affect.
-                                    if (distance <= utility_beam.range)
-                                        fire(this_entity, utility_beam, beam_mode, transform, entity_in_range, distance, angle_diff);
+                                    if (distance <= utility_mount->range)
+                                        fire(this_entity, *utility_mount, beam_mode, transform, entity_in_range, distance, angle_diff);
                                     // else LOG(Debug, "[utilitybeam] Beam is active but target is not in the beam's range.");
                                 }
                                 // else LOG(Debug, "[utilitybeam] Beam is active but target is not in the beam's arc.");
@@ -121,12 +134,12 @@ void UtilityBeamSystem::update(float delta)
                         // the arc on the beam's bearing and moves with the arc.
                         auto& effect_target_transform = utility_beam.effect_target_entity.getOrAddComponent<sp::Transform>();
 
-                        glm::vec2 offset = vec2FromAngle(utility_beam.bearing + rotation) * utility_beam.range;
+                        glm::vec2 offset = vec2FromAngle(utility_mount->bearing + rotation) * utility_mount->range;
                         effect_target_transform.setPosition(position + offset);
-                        auto diff = effect_target_transform.getPosition() - (position + rotateVec2(glm::vec2(utility_beam.position.x, utility_beam.position.y), rotation));
-                        float angle_diff = angleDifference(utility_beam.bearing + rotation, vec2ToAngle(diff));
+                        auto diff = effect_target_transform.getPosition() - (position + rotateVec2(glm::vec2(utility_mount->position.x, utility_mount->position.y), rotation));
+                        float angle_diff = angleDifference(utility_mount->bearing + rotation, vec2ToAngle(diff));
 
-                        fire(this_entity, utility_beam, beam_mode, transform, utility_beam.effect_target_entity, utility_beam.range, angle_diff);
+                        fire(this_entity, *utility_mount, beam_mode, transform, utility_beam.effect_target_entity, utility_mount->range, angle_diff);
                     }
 
                     break;
@@ -141,9 +154,9 @@ void UtilityBeamSystem::update(float delta)
             {
                 auto position = transform.getPosition();
 
-                for (auto& beam_mode : utility_beam.custom_beam_modes)
+                for (auto& beam_mode : utility_mount->custom_beam_modes)
                 {
-                    if (utility_beam.custom_beam_mode == beam_mode.name && beam_mode.deactivate_callback)
+                    if (utility_mount->custom_beam_mode == beam_mode.name && beam_mode.deactivate_callback)
                     {
                         if (beam_mode.requires_target)
                         {
@@ -151,7 +164,7 @@ void UtilityBeamSystem::update(float delta)
                             utility_beam.effect_target_entity.removeComponent<sp::Transform>();
 
                             // Get a list of all entities with transforms within range.
-                            for (auto entity_in_range : sp::CollisionSystem::queryArea(position - glm::vec2(utility_beam.range, utility_beam.range), position + glm::vec2(utility_beam.range, utility_beam.range)))
+                            for (auto entity_in_range : sp::CollisionSystem::queryArea(position - glm::vec2(utility_mount->range, utility_mount->range), position + glm::vec2(utility_mount->range, utility_mount->range)))
                             {
                                 // Don't match ourselves.
                                 if (entity_in_range == this_entity) continue;
@@ -166,14 +179,14 @@ void UtilityBeamSystem::update(float delta)
                 }
             }
 
-            if (utility_beam.cooldown > 0.0f) utility_beam.cooldown -= delta;
-            utility_beam.is_firing = false;
+            if (utility_mount->cooldown > 0.0f) utility_mount->cooldown -= delta;
+            utility_mount->is_firing = false;
             // Remove the transform from the targetless beam's spoofed entity
             // to prevent it from showing up (i.e. if assigned a trace) when
             // the beam is inactive.
             utility_beam.effect_target_entity.removeComponent<sp::Transform>();
         }
-        utility_beam.was_active = utility_beam.active;
+        utility_beam.was_active = utility_mount->active;
 
         // Prune stale entries from beam_effect_entities map.
         for (auto it = utility_beam.beam_effect_entities.begin(); it != utility_beam.beam_effect_entities.end(); )
@@ -183,18 +196,20 @@ void UtilityBeamSystem::update(float delta)
             else
                 ++it;
         }
+
+        mounts.mounts_dirty = true;
     }
 }
 
-void UtilityBeamSystem::fire(sp::ecs::Entity firing_entity, UtilityBeam& utility_beam, UtilityBeam::CustomBeamMode& beam_mode, sp::Transform& transform, sp::ecs::Entity target_entity, float distance, float angle_diff)
+void UtilityBeamSystem::fire(sp::ecs::Entity firing_entity, Mount& utility_mount, CustomBeamMode& beam_mode, sp::Transform& transform, sp::ecs::Entity target_entity, float distance, float angle_diff)
 {
-    utility_beam.heat_per_second = beam_mode.heat_per_sec;
-    utility_beam.energy_use_per_second = beam_mode.energy_per_sec;
+    utility_mount.heat_per_second = beam_mode.heat_per_sec;
+    utility_mount.energy_use_per_second = beam_mode.energy_per_sec;
 
-    utility_beam.is_firing = false;
+    utility_mount.is_firing = false;
     LuaConsole::checkResult(beam_mode.callback.call<void>(firing_entity, target_entity, distance, angle_diff));
 
-    if (utility_beam.is_firing)
+    if (utility_mount.is_firing)
     {
         if (auto target_transform = target_entity.getComponent<sp::Transform>())
         {
@@ -206,7 +221,10 @@ void UtilityBeamSystem::fire(sp::ecs::Entity firing_entity, UtilityBeam& utility
                     hit_location -= glm::normalize(direction) * target_physics->getSize().x;
             }
 
-            auto& effect_entity = utility_beam.beam_effect_entities[target_entity];
+            auto utility_beam = firing_entity.getComponent<UtilityBeam>();
+            if (!utility_beam) return;
+
+            auto& effect_entity = utility_beam->beam_effect_entities[target_entity];
             if (!effect_entity || !effect_entity.hasComponent<BeamEffect>())
             {
                 effect_entity = sp::ecs::Entity::create();
@@ -216,7 +234,7 @@ void UtilityBeamSystem::fire(sp::ecs::Entity firing_entity, UtilityBeam& utility
             auto& beam_effect = effect_entity.getOrAddComponent<BeamEffect>();
             beam_effect.source = firing_entity;
             beam_effect.target = target_entity;
-            beam_effect.beam_texture = utility_beam.texture;
+            beam_effect.beam_texture = utility_mount.texture;
             beam_effect.fire_ring = false;
             beam_effect.lifetime = 1.0f;
 
@@ -324,15 +342,29 @@ void UtilityBeamSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entit
             return;
     }
 
+    auto mounts = entity.getComponent<Mounts>();
+    if (!mounts) return;
+
+    Mount* utility_mount = nullptr;
+    for (auto& m : mounts->mounts)
+    {
+        if (m.type == MountType::UtilityBeam)
+        {
+            utility_mount = &m;
+            break;
+        }
+    }
+    if (!utility_mount) return;
+
     // Draw beam arcs only if the beam has a range.
     // A beam with range of 0 effectively doesn't exist.
-    if (utility_beam.range == 0.0f) return;
+    if (utility_mount->range == 0.0f) return;
 
     // If the beam is cooling down, flash and fade the arc color.
-    glm::u8vec4 color = Tween<glm::u8vec4>::linear(std::max(0.0f, utility_beam.cooldown), 0, utility_beam.cycle_time, utility_beam.arc_color, utility_beam.arc_color_fire);
+    glm::u8vec4 color = Tween<glm::u8vec4>::linear(std::max(0.0f, utility_mount->cooldown), 0, utility_mount->cycle_time, utility_mount->arc_color, utility_mount->arc_color_fire);
 
     // Set the beam's origin on radar to its relative position on the mesh.
-    auto arc_center = rotateVec2(glm::vec2(utility_beam.position.x, utility_beam.position.y) * scale, rotation) + screen_position;
+    auto arc_center = rotateVec2(glm::vec2(utility_mount->position.x, utility_mount->position.y) * scale, rotation) + screen_position;
 
-    drawArc(renderer, arc_center, rotation + (utility_beam.bearing - utility_beam.arc / 2.0f), utility_beam.arc, utility_beam.range * scale, color);
+    drawArc(renderer, arc_center, rotation + (utility_mount->bearing - utility_mount->arc / 2.0f), utility_mount->arc, utility_mount->range * scale, color);
 }

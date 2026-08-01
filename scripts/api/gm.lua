@@ -660,13 +660,26 @@ function __exportShipChanges(entity, template, default_scan_state)
         end
     end
 
-    -- Beam weapons (0-based index for setters, 1-based for ECS component array)
-    local bw = entity.components.beam_weapons
-    local t_bw = template.beam_weapons
-    if bw then
-        for i = 1, #bw do
-            local b = bw[i]
-            local tb = t_bw and t_bw[i]
+    -- Beam weapons: compare against template beam mounts (from unified mounts component)
+    local em = entity.components.mounts
+    if em then
+        local e_beams = {}
+        for i = 1, #em do
+            local m = em[i]
+            if m.type == "beam" then
+                table.insert(e_beams, m)
+            end
+        end
+        local t_beams = {}
+        if template.mounts and template.mounts.mounts then
+            for _, m in ipairs(template.mounts.mounts) do
+                if m.type == 0 then
+                    table.insert(t_beams, m)
+                end
+            end
+        end
+        for i, b in ipairs(e_beams) do
+            local tb = t_beams[i]
             local idx = i - 1
             if
                 not tb

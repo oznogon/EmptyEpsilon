@@ -13,6 +13,7 @@
 #include "components/radar.h"
 #include "components/comms.h"
 #include "components/drone.h"
+#include "components/mounts.h"
 
 namespace crewPositionRequirements
 {
@@ -33,11 +34,17 @@ bool hasRequirements(CrewPosition cp, sp::ecs::Entity ship)
 
     case CrewPosition::weaponsOfficer:
     {
-        auto beam_sys = ship.getComponent<BeamWeaponSys>();
-        auto missile_tubes = ship.getComponent<MissileTubes>();
+        auto mounts = ship.getComponent<Mounts>();
         auto shields = ship.getComponent<Shields>();
-        return (beam_sys && beam_sys->mounts.size() > 0)
-            || (missile_tubes && missile_tubes->mounts.size() > 0)
+        bool has_beam = false, has_missile = false;
+        if (mounts) {
+            for (auto& m : mounts->mounts) {
+                if (m.type == MountType::BeamWeapon) has_beam = true;
+                if (m.type == MountType::MissileWeapon) has_missile = true;
+            }
+        }
+        return has_beam
+            || has_missile
             || (shields && shields->entries.size() > 0);
     }
 
@@ -46,28 +53,40 @@ bool hasRequirements(CrewPosition cp, sp::ecs::Entity ship)
 
     case CrewPosition::tacticalOfficer:
     {
-        auto beam_sys = ship.getComponent<BeamWeaponSys>();
-        auto missile_tubes = ship.getComponent<MissileTubes>();
+        auto mounts = ship.getComponent<Mounts>();
+        bool has_beam = false, has_missile = false;
+        if (mounts) {
+            for (auto& m : mounts->mounts) {
+                if (m.type == MountType::BeamWeapon) has_beam = true;
+                if (m.type == MountType::MissileWeapon) has_missile = true;
+            }
+        }
         return ship.hasComponent<ImpulseEngine>()
             || ship.hasComponent<JumpDrive>()
             || ship.hasComponent<WarpDrive>()
             || ship.hasComponent<CombatManeuveringThrusters>()
             || ship.hasComponent<ManeuveringThrusters>()
             || ship.hasComponent<DockingPort>()
-            || (beam_sys && beam_sys->mounts.size() > 0)
-            || (missile_tubes && missile_tubes->mounts.size() > 0);
+            || has_beam
+            || has_missile;
     }
 
     case CrewPosition::beamWeaponsOfficer:
     {
-        auto beam_sys = ship.getComponent<BeamWeaponSys>();
-        return beam_sys && beam_sys->mounts.size() > 0;
+        auto mounts = ship.getComponent<Mounts>();
+        if (!mounts) return false;
+        for (auto& m : mounts->mounts)
+            if (m.type == MountType::BeamWeapon) return true;
+        return false;
     }
 
     case CrewPosition::missileWeaponsOfficer:
     {
-        auto missile_tubes = ship.getComponent<MissileTubes>();
-        return missile_tubes && missile_tubes->mounts.size() > 0;
+        auto mounts = ship.getComponent<Mounts>();
+        if (!mounts) return false;
+        for (auto& m : mounts->mounts)
+            if (m.type == MountType::MissileWeapon) return true;
+        return false;
     }
 
     case CrewPosition::commsOnly:

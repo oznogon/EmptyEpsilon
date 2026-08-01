@@ -444,42 +444,43 @@ function isObjectType(obj, typ)
         return false
     end
 
+    local result = false
     --- ShipTemplateBasedObject-derived types
     -- STBOs typically require a ship template applied with setTemplate().
     -- These conditions might fail if no template is applied, especially for
     -- SpaceStations
     if typ == "SpaceStation" then
-        return obj.components.docking_bay
+        result = obj.components.docking_bay
             and obj.components.physics
             and obj.components.physics.type == "static"
     elseif typ == "PlayerSpaceship" then
-        return obj.components.player_control
+        result = obj.components.player_control
     elseif typ == "CpuShip" then
-        return obj.components.ai_controller
+        result = obj.components.ai_controller
     --- Probes
     elseif typ == "ScanProbe" then
-        return obj.components.allow_radar_link
+        result = obj.components.allow_radar_link
     --- Terrain
     -- Asteroids are uniquely identified by having Spin, AvoidObject, and
     -- ExplodeOnTouch. Missiles don't Spin and Mines use DelayedExplodeOnTouch
     elseif typ == "Asteroid" then
-        return obj.components.spin
+        result = obj.components.spin
             and obj.components.avoid_object
             and obj.components.explode_on_touch
     -- VisualAsteroids lack physics or avoid_object. This can match a false
     -- positive for non-asteroid decorative objects, but are there any that
     -- didn't use either VisualAsteroid or Planet?
     elseif typ == "VisualAsteroid" then
-        return obj.components.spin
+        result = obj.components.spin
             and obj.components.mesh_render
             and not obj.components.physics
             and not obj.components.avoid_object
     elseif typ == "Nebula" then
-        return obj.components.nebula_renderer
+        result = obj.components.nebula_renderer
     elseif typ == "Planet" then
-        return obj.components.planet_render
+        result = obj.components.planet_render
     elseif typ == "BlackHole" then
-        return obj.components.gravity
+        result = obj.components.gravity
             and obj.components.billboard_render
             and obj.components.gravity.damage
     -- All Gravity components have a default wormhole_target of {0,0}, so
@@ -487,7 +488,7 @@ function isObjectType(obj, typ)
     -- damage or pointing to {0,0}. A wormhole pointing to {0,0} therefore won't
     -- be detected as a wormhole.
     elseif typ == "WormHole" then
-        return obj.components.gravity
+        result = obj.components.gravity
             and obj.components.billboard_render
             and not obj.components.gravity.damage
             and (
@@ -498,14 +499,14 @@ function isObjectType(obj, typ)
     -- Artifact check is fragile because its mesh filename doesn't need to
     -- contain `mesh/Artifact`.
     elseif typ == "Artifact" then
-        return obj.components.mesh_render
+        result = obj.components.mesh_render
             and string.sub(obj.components.mesh_render.mesh, 1, 13)
                 == "mesh/Artifact"
     -- A SupplyDrop must carry at least one supply, distinguishing it from an
     -- Artifact with allowPickup(true). This check therefore doesn't match a
     -- SupplyDrop that doesn't have any supplies.
     elseif typ == "SupplyDrop" then
-        return obj.components.pickup
+        result = obj.components.pickup
             and (
                 obj.components.pickup.give_energy > 0
                 or obj.components.pickup.give_homing > 0
@@ -516,54 +517,56 @@ function isObjectType(obj, typ)
             )
     --- Countermeasures
     elseif typ == "WarpJammer" then
-        return obj.components.warp_jammer
+        result = obj.components.warp_jammer
     --- Weapons
     -- Launched mines have missile_flight, scripted mines don't, so that
     -- unintuitively isn't checked for the Mine type
     elseif typ == "Mine" then
-        return obj.components.delayed_explode_on_touch
+        result = obj.components.delayed_explode_on_touch
             and obj.components.constant_particle_emitter
     -- HVLIs lack homing, HomingMissiles lack ExplodeOnTimeout, Nukes lack EMP
     -- damage
     elseif typ == "EMPMissile" then
-        return obj.components.missile_flight
+        result = obj.components.missile_flight
             and obj.components.missile_homing
             and obj.components.explode_on_timeout
             and obj.components.explode_on_touch
             and obj.components.explode_on_touch.damage_type == "emp"
     elseif typ == "Nuke" then
-        return obj.components.missile_flight
+        result = obj.components.missile_flight
             and obj.components.missile_homing
             and obj.components.explode_on_timeout
             and obj.components.explode_on_touch
             and obj.components.explode_on_touch.damage_type ~= "emp"
     elseif typ == "HomingMissile" then
-        return obj.components.missile_flight
+        result = obj.components.missile_flight
             and obj.components.missile_homing
             and obj.components.explode_on_touch
             and not obj.components.explode_on_timeout
     elseif typ == "HVLI" then
-        return obj.components.missile_flight
+        result = obj.components.missile_flight
             and not obj.components.missile_homing
             and obj.components.explode_on_touch
             and not obj.components.explode_on_timeout
     --- Weapon effects
     elseif typ == "ExplosionEffect" then
-        return obj.components.explosion_effect
+        result = obj.components.explosion_effect
             and not obj.components.explosion_effect.electrical
     elseif typ == "ElectricExplosionEffect" then
-        return obj.components.explosion_effect
+        result = obj.components.explosion_effect
             and obj.components.explosion_effect.electrical
     elseif typ == "BeamEffect" then
-        return obj.components.beam_effect
+        result = obj.components.beam_effect
     --- Data
     elseif typ == "Zone" then
-        return obj.components.zone
+        result = obj.components.zone
     elseif typ == "ScienceDatabase" then
-        return obj.components.science_database
+        result = obj.components.science_database
     elseif typ == "FactionInfo" then
-        return obj.components.faction_info
-    else
-        return false
+        result = obj.components.faction_info
     end
+
+    -- Components are truthy, but coerce to a real boolean so this function
+    -- always returns true or false as documented.
+    return not not result
 end

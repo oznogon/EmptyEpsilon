@@ -6,6 +6,7 @@
 #include "engine.h"
 
 #include "components/beamweapon.h"
+#include "components/mounts.h"
 #include "components/coolant.h"
 #include "components/hull.h"
 #include "components/impulse.h"
@@ -572,11 +573,11 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                     addSystemEffect(tr("Firing rate"), toNearbyIntString(effectiveness * 100.0f) + "%");
                     // If the ship has a turret, also note that the rotation rate
                     // is affected.
-                    if (auto beamweapons = my_spaceship.getComponent<BeamWeaponSys>())
+                    if (auto mounts = my_spaceship.getComponent<Mounts>())
                     {
-                        for (auto& mount : beamweapons->mounts)
+                        for (auto& mount : mounts->mounts)
                         {
-                            if (mount.turret_arc > 0)
+                            if (mount.type == MountType::BeamWeapon && mount.turret_arc > 0)
                             {
                                 addSystemEffect(tr("Engineer", "Turret rotation rate"), toNearbyIntString(effectiveness * 100) + "%");
                                 break;

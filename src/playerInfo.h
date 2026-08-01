@@ -55,10 +55,10 @@ public:
     void commandSetScienceLink(sp::ecs::Entity probe);
     void commandClearScienceLink();
     void commandProbeTargetRotation(float target);
-    void commandLoadTube(uint32_t tubeNumber, int missileType);
-    void commandUnloadTube(uint32_t tubeNumber);
-    void commandFireTube(uint32_t tubeNumber, float missile_target_angle);
-    void commandFireTubeAtTarget(uint32_t tubeNumber, sp::ecs::Entity target);
+    void commandLoadTube(uint32_t tube_number, int missileType);
+    void commandUnloadTube(uint32_t tube_number);
+    void commandFireTube(uint32_t tube_number, float missile_target_angle);
+    void commandFireTubeAtTarget(uint32_t tube_number, sp::ecs::Entity target);
     void commandTransferMissile(sp::ecs::Entity target, int missile_type, int quantity);
     void commandSetShields(bool enabled);
     void commandMainScreenSetting(MainScreenSetting mainScreen);
@@ -109,9 +109,9 @@ public:
     void commandDroneAbortJump();
     void commandDroneSetTarget(sp::ecs::Entity target);
     void commandDroneSetShields(bool enabled);
-    void commandDroneLoadTube(uint32_t tube_nr, int type);
-    void commandDroneUnloadTube(uint32_t tube_nr);
-    void commandDroneFireTube(uint32_t tube_nr, float missile_target_angle);
+    void commandDroneLoadTube(uint32_t tube_number, int type);
+    void commandDroneUnloadTube(uint32_t tube_number);
+    void commandDroneFireTube(uint32_t tube_number, float missile_target_angle);
     void commandDroneCombatManeuverBoost(float amount);
     void commandDroneCombatManeuverStrafe(float strafe);
     void commandDroneSetBeamFrequency(int32_t frequency);

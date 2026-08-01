@@ -57,8 +57,10 @@ void GuiRotationDial::onDraw(sp::RenderTarget& renderer)
     // Draw ring track, using the texture if defined or drawCircleOutline if not.
     if (!back.texture.empty())
         renderer.drawStretched(rect, back.texture, back.color);
-    else
+    else {
+        // TODO: Fix this rendering behavior on Utility Beam
         renderer.drawCircleOutline(center, radius, effective_thickness, back.color);
+    }
 
     // Draw handle as an arc segment centered on the current value position.
     float fraction = (value - min_value) / (max_value - min_value);

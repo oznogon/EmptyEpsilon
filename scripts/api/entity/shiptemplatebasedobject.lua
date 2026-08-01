@@ -17,15 +17,25 @@ function Entity:setTemplate(template_name)
     local template = __ship_templates[template_name]
     local comp = self.components
     if template == nil then
-        error("Failed to find template: " .. tostring(template_name), 2)
+        error("[stbo] Failed to find template: " .. tostring(template_name), 2)
     end
     local isNewPlayerShip = comp.player_control and not comp.physics
     -- print("Setting template:" .. template_name)
     for key, value in next, template, nil do
         if string.sub(key, 1, 2) ~= "__" then
-            comp[key] = value
+            if key == "mounts" and value and value.mounts then
+                -- Restructure mounts to 1-indexed
+                local restructured = {}
+                for i, m in ipairs(value.mounts) do
+                    restructured[i] = m
+                end
+                comp[key] = restructured
+            else
+                comp[key] = value
+            end
         end
     end
+
     if template.__type == "station" then
         comp.physics.type = "static"
     elseif template.__type == "playership" then
@@ -123,7 +133,7 @@ function Entity:setTemplate(template_name)
         local res = { pcall(__on_new_player_ship, self) }
         if not res[1] then
             print(
-                "onNewPlayerShip callback function error:",
+                "[stbo] onNewPlayerShip callback function error:",
                 table.unpack(res, 2)
             )
         end
@@ -375,14 +385,35 @@ end
 --- Defines this ship's utility beam, a scenario-defined scriptable ship system.
 --- Example: stbo:setUtilityBeam(180, 5000, 1, 500)
 function Entity:setUtilityBeam(max_arc, max_range, cycle_time, strength)
-    if self.components.utility_beam == nil then
+    if not self.components.utility_beam then
         self.components.utility_beam = {}
     end
-
-    self.components.utility_beam.max_arc = max_arc
-    self.components.utility_beam.max_range = max_range
-    self.components.utility_beam.cycle_time = cycle_time
-    self.components.utility_beam.strength = strength
+    local mc = self.components.mounts
+    if mc then
+        local existing_idx = nil
+        for i = 1, #mc do
+            local m = mc[i]
+            if m and m.type == "utility" then
+                existing_idx = i
+                break
+            end
+        end
+        local new_mount = {
+            type = 2,
+            arc = max_arc,
+            direction = 0,
+            range = max_range,
+            cycle_time = cycle_time,
+            max_arc = max_arc,
+            max_range = max_range,
+            strength = strength,
+        }
+        if existing_idx then
+            mc[existing_idx] = new_mount
+        else
+            mc[#mc + 1] = new_mount
+        end
+    end
 
     return self
 end

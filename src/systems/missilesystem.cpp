@@ -14,6 +14,7 @@
 #include "components/lifetime.h"
 #include "components/missile.h"
 #include "components/missiletubes.h"
+#include "components/mounts.h"
 #include "components/missileWeaponTarget.h"
 #include "components/pickup.h"
 #include "components/radar.h"
@@ -31,10 +32,12 @@ MissileSystem::MissileSystem()
 
 void MissileSystem::update(float delta)
 {
-    for (auto [entity, tubes] : sp::ecs::Query<MissileTubes>())
+    for (auto [entity, tubes, mounts] : sp::ecs::Query<MissileTubes, Mounts>())
     {
-        for (auto& tube : tubes.mounts)
+        for (auto& tube : mounts.mounts)
         {
+            if (tube.type != MountType::MissileWeapon) continue;
+
             if (tube.delay > 0.0f)
                 tube.delay -= delta * tubes.getSystemEffectiveness();
             else
@@ -43,16 +46,16 @@ void MissileSystem::update(float delta)
 
                 switch (tube.state)
                 {
-                case MissileTubes::MountPoint::State::Loading:
-                    tube.state = MissileTubes::MountPoint::State::Loaded;
+                case MountState::Loading:
+                    tube.state = MountState::Loaded;
                     break;
-                case MissileTubes::MountPoint::State::Unloading:
-                    tube.state = MissileTubes::MountPoint::State::Empty;
+                case MountState::Unloading:
+                    tube.state = MountState::Empty;
                     if (tubes.storage[tube.type_loaded] < tubes.storage_max[tube.type_loaded])
                         tubes.storage[tube.type_loaded]++;
                     tube.type_loaded = MW_None;
                     break;
-                case MissileTubes::MountPoint::State::Firing:
+                case MountState::Firing:
                     if (game_server.isAlive())
                     {
                         sp::ecs::Entity target_entity;
@@ -69,7 +72,7 @@ void MissileSystem::update(float delta)
                         if (tube.fire_count > 0) tube.delay = 1.5f;
                         else
                         {
-                            tube.state = MissileTubes::MountPoint::State::Empty;
+                            tube.state = MountState::Empty;
                             tube.type_loaded = MW_None;
                         }
                     }
@@ -78,6 +81,7 @@ void MissileSystem::update(float delta)
                     break;
                 }
             }
+            mounts.mounts_dirty = true;
         }
     }
 
@@ -244,32 +248,32 @@ void MissileSystem::explode(sp::ecs::Entity source, sp::ecs::Entity target, Expl
     source.destroy();
 }
 
-void MissileSystem::startLoad(sp::ecs::Entity source, MissileTubes::MountPoint& tube, int type_index)
+void MissileSystem::startLoad(sp::ecs::Entity source, Mount& tube, int type_index)
 {
     if (!tube.canLoad(type_index)) return;
-    if (tube.state != MissileTubes::MountPoint::State::Empty) return;
+    if (tube.state != MountState::Empty) return;
 
     auto tubes = source.getComponent<MissileTubes>();
     if (!tubes) return;
 
     if (tubes->storage[type_index] <= 0) return;
 
-    tube.state = MissileTubes::MountPoint::State::Loading;
+    tube.state = MountState::Loading;
     tube.delay = tube.load_time;
     tube.type_loaded = type_index;
     tubes->storage[type_index]--;
 }
 
-void MissileSystem::startUnload(sp::ecs::Entity source, MissileTubes::MountPoint& tube)
+void MissileSystem::startUnload(sp::ecs::Entity source, Mount& tube)
 {
-    if (tube.state == MissileTubes::MountPoint::State::Loaded)
+    if (tube.state == MountState::Loaded)
     {
-        tube.state = MissileTubes::MountPoint::State::Unloading;
+        tube.state = MountState::Unloading;
         tube.delay = tube.load_time;
     }
 }
 
-void MissileSystem::fire(sp::ecs::Entity source, MissileTubes::MountPoint& tube, float target_angle, sp::ecs::Entity target)
+void MissileSystem::fire(sp::ecs::Entity source, Mount& tube, float target_angle, sp::ecs::Entity target)
 {
     Faction::didAnOffensiveAction(source);
 
@@ -278,7 +282,7 @@ void MissileSystem::fire(sp::ecs::Entity source, MissileTubes::MountPoint& tube,
 
     auto warp = source.getComponent<WarpDrive>();
     if (warp && warp->current > 0.0f) return;
-    if (tube.state != MissileTubes::MountPoint::State::Loaded) return;
+    if (tube.state != MountState::Loaded) return;
 
     auto& registry = MissileWeaponDataRegistry::instance();
     int fire_count = registry.getFireCount(tube.type_loaded);
@@ -287,23 +291,23 @@ void MissileSystem::fire(sp::ecs::Entity source, MissileTubes::MountPoint& tube,
     {
         tube.fire_count = fire_count;
         tube.target_angle = target_angle;
-        tube.state = MissileTubes::MountPoint::State::Firing;
+        tube.state = MountState::Firing;
         tube.delay = 0.0f;
     }
     else
     {
         spawnProjectile(source, tube, target_angle, target);
-        tube.state = MissileTubes::MountPoint::State::Empty;
+        tube.state = MountState::Empty;
         tube.type_loaded = MW_None;
     }
 }
 
-void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountPoint& tube, float target_angle, sp::ecs::Entity target)
+void MissileSystem::spawnProjectile(sp::ecs::Entity source, Mount& tube, float target_angle, sp::ecs::Entity target)
 {
     auto source_transform = source.getComponent<sp::Transform>();
     if (!source_transform) return;
     auto fire_location = source_transform->getPosition() + rotateVec2(glm::vec2(tube.position), source_transform->getRotation());
-    auto category_modifier = MissileWeaponData::convertSizeToCategoryModifier(tube.size);
+    auto category_modifier = MissileWeaponData::convertSizeToCategoryModifier(tube.missile_size);
     auto& registry = MissileWeaponDataRegistry::instance();
     int type_index = tube.type_loaded;
 
@@ -481,7 +485,7 @@ static float calculateTurnAngle(glm::vec2 aim_position, float turn_direction, fl
     return turn_angle;
 }
 
-float MissileSystem::calculateFiringSolution(sp::ecs::Entity source, const MissileTubes::MountPoint& tube, sp::ecs::Entity target)
+float MissileSystem::calculateFiringSolution(sp::ecs::Entity source, const Mount& tube, sp::ecs::Entity target)
 {
     if (!target) return std::numeric_limits<float>::infinity();
 

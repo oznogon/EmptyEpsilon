@@ -576,18 +576,39 @@ function __fillDefaultDatabaseData()
                 )
             end
 
-            if ship_template.beam_weapons then
-                for idx, data in ipairs(ship_template.beam_weapons) do
-                    if data.range > 0 then
+            if ship_template.mounts and ship_template.mounts.mounts then
+                for _idx, mount in ipairs(ship_template.mounts.mounts) do
+                    if mount.type == 0 and mount.range and mount.range > 0 then
                         entry:addKeyValue(
                             string.format(
                                 _("database", "%s beam weapon"),
-                                directionLabel(data.direction)
+                                directionLabel(mount.direction)
                             ),
                             string.format(
                                 _("database", "%.1f dmg. / %.1f sec."),
-                                data.damage,
-                                data.cycle_time
+                                mount.damage,
+                                mount.cycle_time
+                            )
+                        )
+                    end
+                end
+            end
+
+            if ship_template.mounts and ship_template.mounts.mounts then
+                for _idx, mount in ipairs(ship_template.mounts.mounts) do
+                    if mount.type == 1 then
+                        local key = _("database", "%s tube")
+                        if mount.missile_size == "small" then
+                            key = _("database", "%s small tube")
+                        end
+                        if mount.missile_size == "large" then
+                            key = _("database", "%s large tube")
+                        end
+                        entry:addKeyValue(
+                            string.format(key, directionLabel(mount.direction)),
+                            string.format(
+                                _("database", "%.1f sec."),
+                                mount.load_time
                             )
                         )
                     end
@@ -595,23 +616,6 @@ function __fillDefaultDatabaseData()
             end
 
             if ship_template.missile_tubes then
-                for idx, data in ipairs(ship_template.missile_tubes) do
-                    local key = _("database", "%s tube")
-                    if data.size == "small" then
-                        key = _("database", "%s small tube")
-                    end
-                    if data.size == "large" then
-                        key = _("database", "%s large tube")
-                    end
-                    entry:addKeyValue(
-                        string.format(key, directionLabel(data.direction)),
-                        string.format(
-                            _("database", "%.1f sec."),
-                            data.load_time
-                        )
-                    )
-                end
-
                 -- TODO: Localize and centralize MISSILE_TYPES
                 local MISSILE_TYPES =
                     { "Homing", "Nuke", "Mine", "EMP", "HVLI" }

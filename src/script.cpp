@@ -36,6 +36,7 @@
 #include "components/shiplog.h"
 #include "components/target.h"
 #include "components/utilityBeam.h"
+#include "components/mounts.h"
 #include "components/warpdrive.h"
 #include "components/zone.h"
 
@@ -1631,9 +1632,22 @@ void luaCommandLoadTube(sp::ecs::Entity ship, int tube_nr, string type_name)
     if (type_index < 0)
         return;
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandLoadTube(tube_nr, type_index); return; }
-    auto missiletubes = ship.getComponent<MissileTubes>();
-    if (missiletubes && tube_nr >= 0 && tube_nr < static_cast<int>(missiletubes->mounts.size()))
-        MissileSystem::startLoad(ship, missiletubes->mounts[tube_nr], type_index);
+    auto mounts = ship.getComponent<Mounts>();
+    if (mounts && tube_nr >= 0)
+    {
+        for (auto& mount : mounts->mounts)
+        {
+            if (mount.type == MountType::MissileWeapon)
+            {
+                if (tube_nr == 0)
+                {
+                    MissileSystem::startLoad(ship, mount, type_index);
+                    return;
+                }
+                tube_nr--;
+            }
+        }
+    }
 }
 
 void luaCommandUnloadTube(sp::ecs::Entity ship, int tube_nr)
@@ -1644,9 +1658,22 @@ void luaCommandUnloadTube(sp::ecs::Entity ship, int tube_nr)
         return;
     }
 
-    auto missiletubes = ship.getComponent<MissileTubes>();
-    if (missiletubes && tube_nr >= 0 && tube_nr < static_cast<int>(missiletubes->mounts.size()))
-        MissileSystem::startUnload(ship, missiletubes->mounts[tube_nr]);
+    auto mounts = ship.getComponent<Mounts>();
+    if (mounts && tube_nr >= 0)
+    {
+        for (auto& mount : mounts->mounts)
+        {
+            if (mount.type == MountType::MissileWeapon)
+            {
+                if (tube_nr == 0)
+                {
+                    MissileSystem::startUnload(ship, mount);
+                    return;
+                }
+                tube_nr--;
+            }
+        }
+    }
 }
 
 void luaCommandFireTube(sp::ecs::Entity ship, int tube_nr, float missile_target_angle)
@@ -1657,12 +1684,23 @@ void luaCommandFireTube(sp::ecs::Entity ship, int tube_nr, float missile_target_
         return;
     }
 
-    auto missiletubes = ship.getComponent<MissileTubes>();
-    if (missiletubes && tube_nr >= 0 && tube_nr < static_cast<int>(missiletubes->mounts.size()))
+    auto mounts = ship.getComponent<Mounts>();
+    if (mounts && tube_nr >= 0)
     {
-        sp::ecs::Entity target;
-        if (auto t = ship.getComponent<Target>()) target = t->entity;
-        MissileSystem::fire(ship, missiletubes->mounts[tube_nr], missile_target_angle, target);
+        for (auto& mount : mounts->mounts)
+        {
+            if (mount.type == MountType::MissileWeapon)
+            {
+                if (tube_nr == 0)
+                {
+                    sp::ecs::Entity target;
+                    if (auto t = ship.getComponent<Target>()) target = t->entity;
+                    MissileSystem::fire(ship, mount, missile_target_angle, target);
+                    return;
+                }
+                tube_nr--;
+            }
+        }
     }
 }
 
@@ -1675,19 +1713,29 @@ void luaCommandFireTubeAtTarget(sp::ecs::Entity ship, int tube_nr, sp::ecs::Enti
     }
 
     float targetAngle = 0.0f;
-    auto missiletubes = ship.getComponent<MissileTubes>();
+    auto mounts = ship.getComponent<Mounts>();
 
-    if (!target || !missiletubes || tube_nr < 0 || tube_nr >= static_cast<int>(missiletubes->mounts.size()))
+    if (!target || !mounts)
         return;
 
-    targetAngle = MissileSystem::calculateFiringSolution(ship, missiletubes->mounts[tube_nr], target);
-    if (targetAngle == std::numeric_limits<float>::infinity())
+    for (auto& mount : mounts->mounts)
     {
-        if (auto transform = ship.getComponent<sp::Transform>())
-            targetAngle = transform->getRotation() + missiletubes->mounts[tube_nr].direction;
+        if (mount.type == MountType::MissileWeapon)
+        {
+            if (tube_nr == 0)
+            {
+                targetAngle = MissileSystem::calculateFiringSolution(ship, mount, target);
+                if (targetAngle == std::numeric_limits<float>::infinity())
+                {
+                    if (auto transform = ship.getComponent<sp::Transform>())
+                        targetAngle = transform->getRotation() + mount.direction;
+                }
+                MissileSystem::fire(ship, mount, targetAngle, target);
+                return;
+            }
+            tube_nr--;
+        }
     }
-
-    luaCommandFireTube(ship, tube_nr, targetAngle);
 }
 
 static void luaCommandSetAlertLevel(sp::ecs::Entity ship, AlertLevel level)
@@ -1920,124 +1968,179 @@ void luaCommandSetUtilityBeam(sp::ecs::Entity ship, bool active)
         return;
     }
 
-    if (auto utility = ship.getComponent<UtilityBeam>())
+    if (auto mounts = ship.getComponent<Mounts>())
     {
-        if (active != utility->active)
+        for (auto& mount : mounts->mounts)
         {
-            utility->active = active;
+            if (mount.type == MountType::UtilityBeam)
+            {
+                if (active != mount.active)
+                {
+                    mount.active = active;
 
-            if (active)
-                gameGlobalInfo->playSoundOnMainScreen(ship, "sfx/shield_up.wav");
-            else
-                gameGlobalInfo->playSoundOnMainScreen(ship, "sfx/shield_down.wav");
+                    if (active)
+                        gameGlobalInfo->playSoundOnMainScreen(ship, "sfx/shield_up.wav");
+                    else
+                        gameGlobalInfo->playSoundOnMainScreen(ship, "sfx/shield_down.wav");
+                }
+                return;
+            }
         }
     }
 }
 
 void luaCommandSetUtilityBeamBearing(sp::ecs::Entity ship, float bearing)
 {
-    auto utility_beam = ship.getComponent<UtilityBeam>();
-    if (!utility_beam) return;
-
     if (my_player_info && my_player_info->ship == ship)
     {
         my_player_info->commandSetUtilityBeamBearing(bearing);
         return;
     }
 
-    utility_beam->bearing = bearing;
+    if (auto mounts = ship.getComponent<Mounts>())
+    {
+        for (auto& mount : mounts->mounts)
+        {
+            if (mount.type == MountType::UtilityBeam)
+            {
+                mount.bearing = bearing;
+                return;
+            }
+        }
+    }
 }
 
 void luaCommandSetUtilityBeamArc(sp::ecs::Entity ship, float arc)
 {
-    auto utility_beam = ship.getComponent<UtilityBeam>();
-    if (!utility_beam) return;
-
     if (my_player_info && my_player_info->ship == ship)
     {
         my_player_info->commandSetUtilityBeamArc(arc);
         return;
     }
 
-    utility_beam->arc = arc;
+    if (auto mounts = ship.getComponent<Mounts>())
+    {
+        for (auto& mount : mounts->mounts)
+        {
+            if (mount.type == MountType::UtilityBeam)
+            {
+                utilityBeamSetArc(mount, arc);
+                return;
+            }
+        }
+    }
 }
 
 void luaCommandSetUtilityBeamRange(sp::ecs::Entity ship, float range)
 {
-    auto utility_beam = ship.getComponent<UtilityBeam>();
-    if (!utility_beam) return;
-
     if (my_player_info && my_player_info->ship == ship)
     {
         my_player_info->commandSetUtilityBeamRange(range);
         return;
     }
 
-    utility_beam->range = range;
+    if (auto mounts = ship.getComponent<Mounts>())
+    {
+        for (auto& mount : mounts->mounts)
+        {
+            if (mount.type == MountType::UtilityBeam)
+            {
+                utilityBeamSetRange(mount, range);
+                return;
+            }
+        }
+    }
 }
 
 void luaSetCustomUtilityBeamMode(sp::ecs::Entity ship, string name, int order, float energy_per_sec, float heat_per_sec, bool requires_target, sp::script::Callback callback, sp::script::Callback deactivate_callback)
 {
-    auto utility_beam = ship.getComponent<UtilityBeam>();
-    if (!utility_beam) return;
+    ship.getOrAddComponent<UtilityBeam>();
+    auto mounts = ship.getComponent<Mounts>();
+    if (!mounts) return;
 
-    auto& cbm = utility_beam->custom_beam_modes;
-
-    int idx = -1;
-    for (int n = 0; n < static_cast<int>(cbm.size()); n++)
-        if (cbm[n].name == name) idx = n;
-
-    if (idx == -1)
+    for (auto& mount : mounts->mounts)
     {
-        idx = static_cast<int>(cbm.size());
-        cbm.emplace_back();
+        if (mount.type == MountType::UtilityBeam)
+        {
+            auto& cbm = mount.custom_beam_modes;
+
+            int idx = -1;
+            for (int n = 0; n < static_cast<int>(cbm.size()); n++)
+                if (cbm[n].name == name) idx = n;
+
+            if (idx == -1)
+            {
+                idx = static_cast<int>(cbm.size());
+                cbm.emplace_back();
+            }
+
+            auto& f = cbm[idx];
+            f.name = name;
+            f.energy_per_sec = energy_per_sec;
+            f.heat_per_sec = heat_per_sec;
+            f.callback = callback;
+            f.deactivate_callback = deactivate_callback;
+            f.order = order;
+            f.requires_target = requires_target;
+
+            std::stable_sort(cbm.begin(), cbm.end());
+            mounts->mounts_dirty = true;
+            return;
+        }
     }
-
-    auto& f = cbm[idx];
-    f.name = name;
-    f.energy_per_sec = energy_per_sec;
-    f.heat_per_sec = heat_per_sec;
-    f.callback = callback;
-    f.deactivate_callback = deactivate_callback;
-    f.order = order;
-    f.requires_target = requires_target;
-
-    std::stable_sort(cbm.begin(), cbm.end());
 }
 
 void luaSetCustomUtilityBeamModeProgress(sp::ecs::Entity ship, string name, float progress)
 {
-    auto utility_beam = ship.getComponent<UtilityBeam>();
-    if (!utility_beam) return;
+    ship.getOrAddComponent<UtilityBeam>();
+    auto mounts = ship.getComponent<Mounts>();
+    if (!mounts) return;
 
-    auto& cbm = utility_beam->custom_beam_modes;
+    for (auto& mount : mounts->mounts)
+    {
+        if (mount.type == MountType::UtilityBeam)
+        {
+            auto& cbm = mount.custom_beam_modes;
 
-    int idx = -1;
-    for (int n = 0; n < static_cast<int>(cbm.size()); n++)
-        if (cbm[n].name == name) idx = n;
+            int idx = -1;
+            for (int n = 0; n < static_cast<int>(cbm.size()); n++)
+                if (cbm[n].name == name) idx = n;
 
-    if (idx == -1) return;
+            if (idx == -1) return;
 
-    auto& f = cbm[idx];
-    f.progress = progress;
+            auto& f = cbm[idx];
+            f.progress = progress;
+            mounts->mounts_dirty = true;
+            return;
+        }
+    }
 }
 
 void luaRemoveCustomUtilityBeamMode(sp::ecs::Entity ship, string name)
 {
-    auto utility_beam = ship.getComponent<UtilityBeam>();
-    if (!utility_beam) return;
+    ship.getOrAddComponent<UtilityBeam>();
+    auto mounts = ship.getComponent<Mounts>();
+    if (!mounts) return;
 
-    auto cbm = utility_beam->custom_beam_modes;
-    if (cbm.size() < 1) return;
-
-    auto it = std::remove_if(cbm.begin(), cbm.end(),
-        [cbm, name](const UtilityBeam::CustomBeamMode& f)
+    for (auto& mount : mounts->mounts)
+    {
+        if (mount.type == MountType::UtilityBeam)
         {
-            return f.name == name;
-        }
-    );
+            auto& cbm = mount.custom_beam_modes;
+            if (cbm.size() < 1) return;
 
-    if (it != cbm.end()) cbm.erase(it, cbm.end());
+            auto it = std::remove_if(cbm.begin(), cbm.end(),
+                [name](const CustomBeamMode& f)
+                {
+                    return f.name == name;
+                }
+            );
+
+            if (it != cbm.end()) cbm.erase(it, cbm.end());
+            mounts->mounts_dirty = true;
+            return;
+        }
+    }
 }
 
 void luaCommandSetShieldFrequency(sp::ecs::Entity ship, int frequency)
@@ -2322,28 +2425,66 @@ static void luaSetWeaponStorageMaxImpl(sp::ecs::Entity entity, string type_name,
 
 static bool luaWeaponTubeAllowMissileImpl(sp::ecs::Entity entity, int mount_index, string type_name)
 {
-    if (auto tubes = entity.getComponent<MissileTubes>())
-        return tubes->isMountAllowed(mount_index, type_name);
+    int type_index = MissileWeaponDataRegistry::instance().getIndexForName(type_name);
+    if (type_index < 0) return false;
+    if (auto mounts = entity.getComponent<Mounts>())
+    {
+        for (auto& mount : mounts->mounts)
+        {
+            if (mount.type == MountType::MissileWeapon)
+            {
+                if (mount_index == 0)
+                    return mount.canLoad(type_index);
+                mount_index--;
+            }
+        }
+    }
     return false;
 }
 
 static void luaSetWeaponTubeAllowMissileImpl(sp::ecs::Entity entity, int mount_index, string type_name, bool allowed)
 {
-    if (auto tubes = entity.getComponent<MissileTubes>())
-        tubes->setMountAllowed(mount_index, type_name, allowed);
+    int type_index = MissileWeaponDataRegistry::instance().getIndexForName(type_name);
+    if (type_index < 0) return;
+    if (auto mounts = entity.getComponent<Mounts>())
+    {
+        for (auto& mount : mounts->mounts)
+        {
+            if (mount.type == MountType::MissileWeapon)
+            {
+                if (mount_index == 0)
+                {
+                    if (allowed)
+                        mount.type_allowed_mask |= (1U << type_index);
+                    else
+                        mount.type_allowed_mask &= ~(1U << type_index);
+                    return;
+                }
+                mount_index--;
+            }
+        }
+    }
 }
 
 static void luaSetWeaponTubeExclusiveImpl(sp::ecs::Entity entity, int mount_index, string type_name)
 {
     auto& registry = MissileWeaponDataRegistry::instance();
-    if (auto tubes = entity.getComponent<MissileTubes>())
+    int mwi = registry.getIndexForName(type_name);
+    if (mwi < 0) return;
+    if (auto mounts = entity.getComponent<Mounts>())
     {
-        if (mount_index < 0 || mount_index >= static_cast<int>(tubes->mounts.size()))
-            return;
-        tubes->mounts[mount_index].type_allowed_mask = 0;
-        int mwi = registry.getIndexForName(type_name);
-        if (mwi >= 0)
-            tubes->mounts[mount_index].type_allowed_mask = 1U << mwi;
+        for (auto& mount : mounts->mounts)
+        {
+            if (mount.type == MountType::MissileWeapon)
+            {
+                if (mount_index == 0)
+                {
+                    mount.type_allowed_mask = 1U << mwi;
+                    return;
+                }
+                mount_index--;
+            }
+        }
     }
 }
 

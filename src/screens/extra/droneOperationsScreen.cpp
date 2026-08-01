@@ -13,6 +13,7 @@
 #include "components/coolant.h"
 #include "components/docking.h"
 #include "components/drone.h"
+#include "components/mounts.h"
 #include "components/impulse.h"
 #include "components/jumpdrive.h"
 #include "components/maneuveringthrusters.h"
@@ -47,6 +48,32 @@
 #include "gui/gui2_selector.h"
 #include "gui/gui2_slider.h"
 #include "gui/gui2_togglebutton.h"
+
+namespace {
+    Mount* getNthMissileMount(sp::ecs::Entity entity, size_t index)
+    {
+        auto mounts = entity.getComponent<Mounts>();
+        if (!mounts) return nullptr;
+        size_t count = 0;
+        for (auto& m : mounts->mounts) {
+            if (m.type == MountType::MissileWeapon) {
+                if (count == index) return &m;
+                count++;
+            }
+        }
+        return nullptr;
+    }
+
+    size_t getMissileMountCount(sp::ecs::Entity entity)
+    {
+        auto mounts = entity.getComponent<Mounts>();
+        if (!mounts) return 0;
+        size_t count = 0;
+        for (auto& m : mounts->mounts)
+            if (m.type == MountType::MissileWeapon) count++;
+        return count;
+    }
+}
 
 DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
 : GuiOverlay(owner, "DRONE_OPERATOR_SCREEN", GuiTheme::getColor("background"))
@@ -741,7 +768,7 @@ void DroneOperationsScreen::updateTubeRows(sp::ecs::Entity drone_entity)
     if (!missiletubes) return;
 
     // Grow the row vector as needed.
-    while (tube_rows.size() < missiletubes->mounts.size())
+    while (tube_rows.size() < getMissileMountCount(drone_entity))
     {
         uint32_t row_idx = static_cast<uint32_t>(tube_rows.size());
         TubeRow row;
@@ -756,11 +783,10 @@ void DroneOperationsScreen::updateTubeRows(sp::ecs::Entity drone_entity)
                 auto drone = connectedDrone();
                 if (!drone) return;
 
-                auto tubes = drone.getComponent<MissileTubes>();
-                if (!tubes || row_idx >= tubes->mounts.size()) return;
+                auto* tube = getNthMissileMount(drone, row_idx);
+                if (!tube) return;
 
-                auto& tube = tubes->mounts[row_idx];
-                if (tube.state == MissileTubes::MountPoint::State::Empty)
+                if (tube->state == MountState::Empty)
                 {
                     if (selected_missile_type >= 0)
                         my_player_info->commandDroneLoadTube(row_idx, selected_missile_type);
@@ -777,21 +803,20 @@ void DroneOperationsScreen::updateTubeRows(sp::ecs::Entity drone_entity)
                 auto drone = connectedDrone();
                 if (!drone) return;
 
-                auto tubes = drone.getComponent<MissileTubes>();
-                if (!tubes || row_idx >= tubes->mounts.size()) return;
-                auto& tube = tubes->mounts[row_idx];
-                if (tube.state == MissileTubes::MountPoint::State::Loaded)
+                auto* tube = getNthMissileMount(drone, row_idx);
+                if (!tube) return;
+                if (tube->state == MountState::Loaded)
                 {
                     float target_angle = missile_aim->getValue();
 
                     if (!use_manual_aim)
                     {
                         auto target = drone.getComponent<Target>();
-                        target_angle = MissileSystem::calculateFiringSolution(drone, tube, target ? target->entity : sp::ecs::Entity{});
+                        target_angle = MissileSystem::calculateFiringSolution(drone, *tube, target ? target->entity : sp::ecs::Entity{});
                         if (target_angle == std::numeric_limits<float>::infinity())
                         {
                             auto transform = drone.getComponent<sp::Transform>();
-                            target_angle = (transform ? transform->getRotation() : 0.0f) + tube.direction;
+                            target_angle = (transform ? transform->getRotation() : 0.0f) + tube->direction;
                         }
                     }
                     my_player_info->commandDroneFireTube(row_idx, target_angle);
@@ -821,13 +846,14 @@ void DroneOperationsScreen::updateTubeRows(sp::ecs::Entity drone_entity)
     // Update row visibility and labels.
     for (size_t n = 0; n < tube_rows.size(); n++)
     {
-        if (n >= missiletubes->mounts.size())
+        auto* tube_ptr = getNthMissileMount(drone_entity, n);
+        if (!tube_ptr)
         {
             tube_rows[n].layout->hide();
             continue;
         }
         tube_rows[n].layout->show();
-        auto& tube = missiletubes->mounts[n];
+        auto& tube = *tube_ptr;
 
         if (tube.type_loaded >= 0)
         {
@@ -842,7 +868,7 @@ void DroneOperationsScreen::updateTubeRows(sp::ecs::Entity drone_entity)
 
         switch(tube.state)
         {
-        case MissileTubes::MountPoint::State::Empty:
+        case MountState::Empty:
             tube_rows[n].load_button
                 ->setText(tr("missile", "Load"))
                 ->setEnable(selected_missile_type >= 0 && tube.canLoad(selected_missile_type));
@@ -854,7 +880,7 @@ void DroneOperationsScreen::updateTubeRows(sp::ecs::Entity drone_entity)
                 ->show();
             tube_rows[n].loading_bar->hide();
             break;
-        case MissileTubes::MountPoint::State::Loaded:
+        case MountState::Loaded:
             tube_rows[n].load_button->setText(tr("missile", "Unload"));
             if (health <= 0.0f || power_level <= 0.0f)
             {
@@ -877,7 +903,7 @@ void DroneOperationsScreen::updateTubeRows(sp::ecs::Entity drone_entity)
             tube_rows[n].fire_button->setText(getTubeName(tube.direction) + ": " + MissileWeaponDataRegistry::instance().getNameForIndex(tube.type_loaded));
             tube_rows[n].loading_bar->hide();
             break;
-        case MissileTubes::MountPoint::State::Loading:
+        case MountState::Loading:
             tube_rows[n].load_button
                 ->setText(tr("missile", "Load"))
                 ->disable();
@@ -889,7 +915,7 @@ void DroneOperationsScreen::updateTubeRows(sp::ecs::Entity drone_entity)
                 ->show();
             tube_rows[n].loading_label->setText(tr("missile", "Loading"));
             break;
-        case MissileTubes::MountPoint::State::Unloading:
+        case MountState::Unloading:
             tube_rows[n].load_button
                 ->setText(tr("missile", "Unload"))
                 ->disable();
@@ -901,7 +927,7 @@ void DroneOperationsScreen::updateTubeRows(sp::ecs::Entity drone_entity)
                 ->show();
             tube_rows[n].loading_label->setText(tr("missile", "Unloading"));
             break;
-        case MissileTubes::MountPoint::State::Firing:
+        case MountState::Firing:
             tube_rows[n].load_button
                 ->setText(tr("missile", "Load"))
                 ->disable();
@@ -1194,11 +1220,12 @@ void DroneOperationsScreen::onUpdate()
 
         if (tubes)
         {
-            for (unsigned int n = 0; n < std::min(tubes->mounts.size(), static_cast<size_t>(16)); n++)
+            for (unsigned int n = 0; n < std::min(getMissileMountCount(drone), static_cast<size_t>(16)); n++)
             {
                 if (keys.weapons_load_tube[n].getDown())
                 {
-                    if (tubes->mounts[n].state == MissileTubes::MountPoint::State::Empty && selected_missile_type >= 0)
+                    auto* tube = getNthMissileMount(drone, n);
+                    if (tube && tube->state == MountState::Empty && selected_missile_type >= 0)
                         my_player_info->commandDroneLoadTube(n, selected_missile_type);
                 }
 
@@ -1207,19 +1234,20 @@ void DroneOperationsScreen::onUpdate()
 
                 if (keys.weapons_fire_tube[n].getDown())
                 {
-                    if (tubes->mounts[n].state == MissileTubes::MountPoint::State::Loaded)
+                    auto* tube = getNthMissileMount(drone, n);
+                    if (tube && tube->state == MountState::Loaded)
                     {
                         float target_angle = missile_aim->getValue();
 
                         if (!use_manual_aim)
                         {
                             auto target = drone.getComponent<Target>();
-                            target_angle = MissileSystem::calculateFiringSolution(drone, tubes->mounts[n], target ? target->entity : sp::ecs::Entity{});
+                            target_angle = MissileSystem::calculateFiringSolution(drone, *tube, target ? target->entity : sp::ecs::Entity{});
 
                             if (target_angle == std::numeric_limits<float>::infinity())
                             {
                                 auto transform = drone.getComponent<sp::Transform>();
-                                target_angle = (transform ? transform->getRotation() : 0.0f) + tubes->mounts[n].direction;
+                                target_angle = (transform ? transform->getRotation() : 0.0f) + tube->direction;
                             }
                         }
 

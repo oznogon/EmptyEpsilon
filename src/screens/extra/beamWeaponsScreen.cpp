@@ -14,6 +14,7 @@
 #include "components/shields.h"
 #include "components/target.h"
 #include "components/utilityBeam.h"
+#include "components/mounts.h"
 
 #include "screenComponents/alertOverlay.h"
 #include "screenComponents/beamFrequencySelector.h"
@@ -184,8 +185,14 @@ BeamWeaponsScreen::BeamWeaponsScreen(GuiContainer* owner)
         sidebar_selector->show();
     }
 
-    auto ub = my_spaceship.getComponent<UtilityBeam>();
-    if (ub && ub->crew_positions.has(CrewPosition::weaponsOfficer))
+    auto mounts_comp = my_spaceship.getComponent<Mounts>();
+    const Mount* ub_mount = nullptr;
+    if (mounts_comp) {
+        for (auto& m : mounts_comp->mounts) {
+            if (m.type == MountType::UtilityBeam) { ub_mount = &m; break; }
+        }
+    }
+    if (ub_mount && ub_mount->crew_positions.has(CrewPosition::weaponsOfficer))
     {
         sidebar_selector->addEntry(tr("weaponsTab", "Utility Beam"), "util");
         sidebar_selector->show();
@@ -377,8 +384,14 @@ void BeamWeaponsScreen::onUpdate()
     }
 
     // Synchronize the Utility Beam sidebar tab with the current crew_positions mask.
-    auto utility_beam = my_spaceship.getComponent<UtilityBeam>();
-    bool should_have_util_tab = utility_beam && utility_beam->crew_positions.has(CrewPosition::weaponsOfficer);
+    auto mounts_comp = my_spaceship.getComponent<Mounts>();
+    const Mount* ub_mount = nullptr;
+    if (mounts_comp) {
+        for (auto& m : mounts_comp->mounts) {
+            if (m.type == MountType::UtilityBeam) { ub_mount = &m; break; }
+        }
+    }
+    bool should_have_util_tab = ub_mount && ub_mount->crew_positions.has(CrewPosition::weaponsOfficer);
     bool has_util_tab = sidebar_selector->indexByValue("util") != -1;
     if (should_have_util_tab && !has_util_tab)
     {

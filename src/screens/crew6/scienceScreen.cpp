@@ -19,6 +19,7 @@
 #include "components/drone.h"
 #include "components/scanning.h"
 #include "components/name.h"
+#include "components/mounts.h"
 #include "components/target.h"
 
 #include "ecs/query.h"
@@ -58,7 +59,13 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
 : GuiOverlay(owner, "SCIENCE_SCREEN", GuiTheme::getColor("background")), crew_position(crew_position)
 {
     auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-    auto utility_beam = my_spaceship.getComponent<UtilityBeam>();
+    auto mounts_comp = my_spaceship.getComponent<Mounts>();
+    const Mount* ub_mount = nullptr;
+    if (mounts_comp) {
+        for (auto& m : mounts_comp->mounts) {
+            if (m.type == MountType::UtilityBeam) { ub_mount = &m; break; }
+        }
+    }
 
     float effective_short_range = lrr ? lrr->short_range : DEFAULT_MIN_ZOOM_DISTANCE;
     float effective_long_range = lrr ? lrr->long_range : DEFAULT_MAX_ZOOM_DISTANCE;
@@ -190,9 +197,9 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         {"scan"}
     );
 
-    if (utility_beam)
+    if (ub_mount)
     {
-        if (utility_beam->crew_positions.has(crew_position))
+        if (ub_mount->crew_positions.has(crew_position))
             sidebar_selector->addEntry(tr("scienceTab", "Utility Beam"), "util");
     }
 
@@ -1136,9 +1143,11 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 
                 if (beam_target != my_spaceship) continue;
 
-                for (const auto& mount : beamsys.mounts)
+                auto mounts = entity.getComponent<Mounts>();
+                if (mounts) {
+                for (const auto& mount : mounts->mounts)
                 {
-                    if (mount.range <= 0.0f) continue;
+                    if (mount.type != MountType::BeamWeapon || mount.range <= 0.0f) continue;
 
                     auto mount_world = transform.getPosition() + rotateVec2(glm::vec2(mount.position.x, mount.position.y), transform.getRotation());
                     float distance = glm::length(my_transform->getPosition() - mount_world);
@@ -1151,6 +1160,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
                         beam_threat = true;
                         break;
                     }
+                }
                 }
 
                 if (beam_threat) break;
@@ -1170,7 +1180,13 @@ void ScienceScreen::onUpdate()
     auto science_scanner = my_spaceship.getComponent<ScienceScanner>();
     auto my_transform = my_spaceship.getComponent<sp::Transform>();
 
-    auto utility_beam = my_spaceship.getComponent<UtilityBeam>();
+    auto mounts_comp = my_spaceship.getComponent<Mounts>();
+    const Mount* ub_mount = nullptr;
+    if (mounts_comp) {
+        for (auto& m : mounts_comp->mounts) {
+            if (m.type == MountType::UtilityBeam) { ub_mount = &m; break; }
+        }
+    }
 
     // Synchronize the Functions sidebar tab with current custom ship functions.
     bool should_have_func_tab = custom_function_sidebar->hasEntries();
@@ -1192,7 +1208,7 @@ void ScienceScreen::onUpdate()
     }
 
     // Synchronize the Utility Beam sidebar tab with the current crew_positions mask.
-    bool should_have_util_tab = utility_beam && utility_beam->crew_positions.has(crew_position);
+    bool should_have_util_tab = ub_mount && ub_mount->crew_positions.has(crew_position);
     bool has_util_tab = sidebar_selector->indexByValue("util") != -1;
     if (should_have_util_tab && !has_util_tab)
         sidebar_selector->addEntry(tr("scienceTab", "Utility Beam"), "util");

@@ -1,5 +1,6 @@
 #include "components/ai.h"
 #include "components/missiletubes.h"
+#include "components/mounts.h"
 #include "components/maneuveringthrusters.h"
 #include "components/collision.h"
 #include "systems/missilesystem.h"
@@ -72,32 +73,41 @@ void MissileVolleyAI::runAttack(sp::ecs::Entity target)
 
     if (distance < 4500)
     {
+        auto mounts = owner.getComponent<Mounts>();
         bool all_possible_loaded = true;
-        for(auto& tube : tubes->mounts)
-        {
-            //Base AI class already loads the tubes with available missiles.
-            //If a tube is not loaded, but is currently being load with a new missile, then we still have missiles to load before we want to fire.
-            if (tube.state == MissileTubes::MountPoint::State::Loading)
+        if (mounts) {
+            for(auto& tube : mounts->mounts)
             {
-                all_possible_loaded = false;
-                break;
+                if (tube.type != MountType::MissileWeapon) continue;
+                //Base AI class already loads the tubes with available missiles.
+                //If a tube is not loaded, but is currently being load with a new missile, then we still have missiles to load before we want to fire.
+                if (tube.state == MountState::Loading)
+                {
+                    all_possible_loaded = false;
+                    break;
+                }
             }
         }
 
         if (all_possible_loaded)
         {
             int can_fire_count = 0;
-            for(auto& tube : tubes->mounts)
-            {
-                float target_angle = calculateFiringSolution(target, tube);
-                if (target_angle != std::numeric_limits<float>::infinity())
+            if (mounts) {
+                for(auto& tube : mounts->mounts)
                 {
-                    can_fire_count++;
+                    if (tube.type != MountType::MissileWeapon) continue;
+                    float target_angle = calculateFiringSolution(target, tube);
+                    if (target_angle != std::numeric_limits<float>::infinity())
+                    {
+                        can_fire_count++;
+                    }
                 }
             }
 
-            for(auto& tube : tubes->mounts)
-            {
+            if (mounts) {
+                for(auto& tube : mounts->mounts)
+                {
+                    if (tube.type != MountType::MissileWeapon) continue;
                 float target_angle = calculateFiringSolution(target, tube);
                 if (target_angle != std::numeric_limits<float>::infinity())
                 {
@@ -108,6 +118,7 @@ void MissileVolleyAI::runAttack(sp::ecs::Entity target)
                         MissileSystem::fire(owner, tube, target_angle + 20.0f * (can_fire_count / 2), target);
                     else
                         MissileSystem::fire(owner, tube, target_angle - 20.0f * ((can_fire_count + 1) / 2), target);
+                }
                 }
             }
         }

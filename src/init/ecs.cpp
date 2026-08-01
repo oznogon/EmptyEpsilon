@@ -36,6 +36,7 @@
 #include "multiplayer/scanning.h"
 #include "multiplayer/missile.h"
 #include "multiplayer/missiletubes.h"
+#include "multiplayer/mounts.h"
 #include "multiplayer/missileWeaponDataRep.h"
 #include "multiplayer/internalrooms.h"
 #include "multiplayer/orbit.h"
@@ -164,6 +165,7 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<sp::multiplayer::TransformReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<sp::multiplayer::PhysicsReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<CinematicCameraReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<MountsReplication>();
 
     sp::ecs::Entity::setPreDestroyCallback(OnDestroySystem::destroyCallback);
 

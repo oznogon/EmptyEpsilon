@@ -11,6 +11,7 @@
 
 #include "components/scanning.h"
 #include "components/beamweapon.h"
+#include "components/mounts.h"
 #include "components/collision.h"
 #include "components/docking.h"
 #include "components/reactor.h"
@@ -31,7 +32,7 @@ void BeamWeaponSystem::update(float delta)
     if (!game_server.isAlive()) return;
     if (delta <= 0.0f) return;
 
-    for (auto [entity, beamsys, transform, reactor, docking_port, warp] : sp::ecs::Query<BeamWeaponSys, sp::Transform, sp::ecs::optional<Reactor>, sp::ecs::optional<DockingPort>, sp::ecs::optional<WarpDrive>>())
+    for (auto [entity, beamsys, mounts, transform, reactor, docking_port, warp] : sp::ecs::Query<BeamWeaponSys, Mounts, sp::Transform, sp::ecs::optional<Reactor>, sp::ecs::optional<DockingPort>, sp::ecs::optional<WarpDrive>>())
     {
         sp::ecs::Entity target_entity;
 
@@ -40,8 +41,10 @@ void BeamWeaponSystem::update(float delta)
         else if (auto t = entity.getComponent<Target>())
             target_entity = t->entity;
 
-        for (auto& mount : beamsys.mounts)
+        for (auto& mount : mounts.mounts)
         {
+            if (mount.type != MountType::BeamWeapon) continue;
+
             if (mount.cooldown > 0.0f)
                 mount.cooldown -= delta * beamsys.getSystemEffectiveness();
             if (!target_entity) continue;
@@ -165,6 +168,8 @@ void BeamWeaponSystem::update(float delta)
                             info.frequency = beamsys.frequency;
                             info.system_target = beamsys.system_target;
                             DamageSystem::applyDamage(target_entity, mount.damage, info);
+
+                            mounts.mounts_dirty = true;
                         }
                     }
                 }
@@ -408,9 +413,14 @@ void BeamWeaponSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity
             return;
     }
 
-    // For each beam ...
-    for (auto& mount : beamsystem.mounts)
+    auto mounts = entity.getComponent<Mounts>();
+    if (!mounts) return;
+
+    // For each beam mount ...
+    for (auto& mount : mounts->mounts)
     {
+        if (mount.type != MountType::BeamWeapon) continue;
+
         // Draw beam arcs only if the beam has a range. A beam with range 0
         // effectively doesn't exist; exit if that's the case.
         if (mount.range == 0.0f) continue;

@@ -106,34 +106,6 @@ template<BasicReplicationRequest BRR> void UtilityBeamReplication::field_impl(sp
     BASIC_REPLICATION_FIELD(power_change_rate_per_second);
     BASIC_REPLICATION_FIELD(auto_repair_per_second);
     BASIC_REPLICATION_FIELD(damage_per_second_on_overheat);
-
-    BASIC_REPLICATION_FIELD(crew_positions.mask);
-    BASIC_REPLICATION_FIELD(active);
-    BASIC_REPLICATION_FIELD(is_firing);
-    BASIC_REPLICATION_FIELD(position);
-    BASIC_REPLICATION_FIELD(arc);
-    BASIC_REPLICATION_FIELD(max_arc);
-    BASIC_REPLICATION_FIELD(bearing);
-    BASIC_REPLICATION_FIELD(fixed_bearing);
-    BASIC_REPLICATION_FIELD(range);
-    BASIC_REPLICATION_FIELD(max_range);
-    BASIC_REPLICATION_FIELD(cycle_time);
-    BASIC_REPLICATION_FIELD(strength);
-    BASIC_REPLICATION_FIELD(energy_use_per_second);
-    BASIC_REPLICATION_FIELD(heat_per_second);
-    BASIC_REPLICATION_FIELD(arc_color);
-    BASIC_REPLICATION_FIELD(arc_color_fire);
-    BASIC_REPLICATION_FIELD(cooldown);
-    BASIC_REPLICATION_FIELD(texture);
-    BASIC_REPLICATION_FIELD(custom_beam_mode);
-    BASIC_REPLICATION_VECTOR(custom_beam_modes)
-        VECTOR_REPLICATION_FIELD(name)
-        VECTOR_REPLICATION_FIELD(order)
-        VECTOR_REPLICATION_FIELD(energy_per_sec)
-        VECTOR_REPLICATION_FIELD(heat_per_sec)
-        VECTOR_REPLICATION_FIELD(requires_target)
-        VECTOR_REPLICATION_FIELD(progress)
-    VECTOR_REPLICATION_END();
 }
 
 BASIC_REPLICATION_IMPL(UtilityBeamEffectReplication, UtilityBeamEffect)

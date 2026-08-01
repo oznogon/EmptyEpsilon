@@ -9,6 +9,7 @@
 #include "components/hull.h"
 #include "components/beamweapon.h"
 #include "components/missiletubes.h"
+#include "components/mounts.h"
 #include "components/maneuveringthrusters.h"
 #include "components/target.h"
 #include "components/faction.h"
@@ -208,21 +209,27 @@ void ShipAI::runLight(float delta)
                     float distance = glm::length(tt->getPosition() - ot->getPosition());
                     if (distance < 4500.0f)
                     {
-                        if (auto tubes = owner.getComponent<MissileTubes>())
+                    if (auto mounts = owner.getComponent<Mounts>())
+                    {
+                        int missile_mount_count = 0;
+                        for (auto& m : mounts->mounts) {
+                            if (m.type == MountType::MissileWeapon) missile_mount_count++;
+                        }
+                        for (auto& mount : mounts->mounts)
                         {
-                            for (auto& tube : tubes->mounts)
+                            if (mount.type != MountType::MissileWeapon)
+                                continue;
+                            if (mount.state == MountState::Loaded && missile_fire_delay <= 0.0f)
                             {
-                                if (tube.state == MissileTubes::MountPoint::State::Loaded && missile_fire_delay <= 0.0f)
+                                const float target_angle = calculateFiringSolution(target_component->entity, mount);
+                                if (target_angle != std::numeric_limits<float>::infinity())
                                 {
-                                    const float target_angle = calculateFiringSolution(target_component->entity, tube);
-                                    if (target_angle != std::numeric_limits<float>::infinity())
-                                    {
-                                        MissileSystem::fire(owner, tube, target_angle, target_component->entity);
-                                        missile_fire_delay = tube.load_time / tubes->mounts.size() / 2.0f;
-                                    }
+                                    MissileSystem::fire(owner, mount, target_angle, target_component->entity);
+                                    missile_fire_delay = mount.load_time / missile_mount_count / 2.0f;
                                 }
                             }
                         }
+                    }
                     }
                 }
             }
@@ -292,18 +299,21 @@ void ShipAI::updateWeaponState(float delta)
 
     //If we have weapon tubes, load them with torpedoes
     auto tubes = owner.getComponent<MissileTubes>();
+    auto mounts = owner.getComponent<Mounts>();
     auto& registry = MissileWeaponDataRegistry::instance();
-    if (tubes)
+    if (tubes && mounts)
     {
-        for(auto& tube : tubes->mounts)
+        for(auto& mount : mounts->mounts)
         {
-            if (tube.state == MissileTubes::MountPoint::State::Empty)
+            if (mount.type != MountType::MissileWeapon)
+                continue;
+            if (mount.state == MountState::Empty)
             {
                 int best_idx = MW_None;
                 float best_strength = 0.0f;
                 for (int i = 0; i < registry.getTypeCount(); i++)
                 {
-                    if (tubes->storage[i] > 0 && tube.canLoad(i))
+                    if (tubes->storage[i] > 0 && mount.canLoad(i))
                     {
                         float strength = getMissileWeaponStrength(i);
                         if (strength > best_strength)
@@ -314,21 +324,22 @@ void ShipAI::updateWeaponState(float delta)
                     }
                 }
                 if (best_idx >= 0)
-                    MissileSystem::startLoad(owner, tube, best_idx);
+                    MissileSystem::startLoad(owner, mount, best_idx);
             }
 
-            if (tube.state == MissileTubes::MountPoint::State::Loading || tube.state == MissileTubes::MountPoint::State::Loaded || tube.state == MissileTubes::MountPoint::State::Firing)
+            if (mount.state == MountState::Loading || mount.state == MountState::Loaded || mount.state == MountState::Firing)
             {
-                int index = getDirectionIndex(tube.direction, 90);
+                int index = getDirectionIndex(mount.direction, 90);
                 if (index >= 0)
-                    tube_strength_per_direction[index] += getMissileWeaponStrength(tube.type_loaded) / tube.load_time;
+                    tube_strength_per_direction[index] += getMissileWeaponStrength(mount.type_loaded) / mount.load_time;
             }
         }
     }
 
-    auto beamsystem = owner.getComponent<BeamWeaponSys>();
-    if (beamsystem) {
-        for(auto& mount : beamsystem->mounts) {
+    if (mounts) {
+        for(auto& mount : mounts->mounts) {
+            if (mount.type != MountType::BeamWeapon)
+                continue;
             if (mount.range > 0.0f) {
                 int index = getDirectionIndex(mount.direction, mount.arc);
                 if (index >= 0 && mount.cycle_time > 0.0f)
@@ -358,10 +369,12 @@ void ShipAI::updateWeaponState(float delta)
     has_beams = best_beam_index > -1;
     has_missiles = best_tube_index > -1;
 
-    if (has_beams && beamsystem)
+    if (has_beams && mounts)
     {
         //Figure out our beam weapon range.
-        for(auto& mount : beamsystem->mounts) {
+        for(auto& mount : mounts->mounts) {
+            if (mount.type != MountType::BeamWeapon)
+                continue;
             if (mount.range > 0.0f) {
                 int index = getDirectionIndex(mount.direction, mount.arc);
                 if (index == best_beam_index && mount.cycle_time > 0.0f)
@@ -372,20 +385,22 @@ void ShipAI::updateWeaponState(float delta)
 
     // Prioritize available missiles to ensure stronger missiles are fired
     // first.
-    if (has_missiles && tubes)
+    if (has_missiles && mounts)
     {
         float best_strength = 0.0f;
-        for (auto& tube : tubes->mounts)
+        for (auto& mount : mounts->mounts)
         {
-            if (tube.state == MissileTubes::MountPoint::State::Loading
-                || tube.state == MissileTubes::MountPoint::State::Loaded
-                || tube.state == MissileTubes::MountPoint::State::Firing)
+            if (mount.type != MountType::MissileWeapon)
+                continue;
+            if (mount.state == MountState::Loading
+                || mount.state == MountState::Loaded
+                || mount.state == MountState::Firing)
             {
-                float strength = getMissileWeaponStrength(tube.type_loaded);
+                float strength = getMissileWeaponStrength(mount.type_loaded);
                 if (strength > best_strength)
                 {
                     best_strength = strength;
-                    best_missile_type = tube.type_loaded;
+                    best_missile_type = mount.type_loaded;
                 }
             }
         }
@@ -591,7 +606,17 @@ void ShipAI::runOrders()
             else
             {
                 auto tubes = owner.getComponent<MissileTubes>();
-                if (tubes && tubes->mounts.size() > 0)
+                auto mounts = owner.getComponent<Mounts>();
+                bool has_missile_weapon_mount = false;
+                if (mounts) {
+                    for (auto& m : mounts->mounts) {
+                        if (m.type == MountType::MissileWeapon) {
+                            has_missile_weapon_mount = true;
+                            break;
+                        }
+                    }
+                }
+                if (tubes && has_missile_weapon_mount)
                 {
                     // Find an entity that can re-stock our weapons.
                     if (auto new_target = findBestMissileRestockTarget(ot->getPosition(), long_range))
@@ -775,17 +800,23 @@ void ShipAI::runAttack(sp::ecs::Entity target)
     // Attack with missiles, if we have weapon tubes.
     if (distance < 4500.0f && has_missiles)
     {
-        if (auto tubes = owner.getComponent<MissileTubes>())
+        if (auto mounts = owner.getComponent<Mounts>())
         {
-            for (auto& tube : tubes->mounts)
+            int missile_mount_count = 0;
+            for (auto& m : mounts->mounts) {
+                if (m.type == MountType::MissileWeapon) missile_mount_count++;
+            }
+            for (auto& mount : mounts->mounts)
             {
-                if (tube.state == MissileTubes::MountPoint::State::Loaded && missile_fire_delay <= 0.0f)
+                if (mount.type != MountType::MissileWeapon)
+                    continue;
+                if (mount.state == MountState::Loaded && missile_fire_delay <= 0.0f)
                 {
-                    const float target_angle = calculateFiringSolution(target, tube);
+                    const float target_angle = calculateFiringSolution(target, mount);
                     if (target_angle != std::numeric_limits<float>::infinity())
                     {
-                        MissileSystem::fire(owner, tube, target_angle, target);
-                        missile_fire_delay = tube.load_time / tubes->mounts.size() / 2.0f;
+                        MissileSystem::fire(owner, mount, target_angle, target);
+                        missile_fire_delay = mount.load_time / missile_mount_count / 2.0f;
                     }
                 }
             }
@@ -1133,8 +1164,7 @@ float ShipAI::targetScore(sp::ecs::Entity target)
     // distance, and state.
     float score = -distance - std::abs(angle_difference / (thrusters ? thrusters->speed : 10.0f) * (impulse ? impulse->max_speed_forward : 0.0f)) * 1.5f;
     // Take out entiites with weapons before attacking defenseless entities.
-    if (target.hasComponent<BeamWeaponSys>()) score += 2500.0f;
-    if (target.hasComponent<MissileTubes>()) score += 2500.0f;
+    if (target.hasComponent<Mounts>()) score += 5000.0f;
     // Docking Bay ships usually have escorts, so prioritize them.
     if (target.hasComponent<DockingBay>()) score -= 1500.0f;
 
@@ -1153,10 +1183,12 @@ float ShipAI::targetScore(sp::ecs::Entity target)
     // If a target's in beam range, prioritize it.
     if (distance < beam_weapon_range)
     {
-        if (auto beam_system = owner.getComponent<BeamWeaponSys>())
+        if (auto mounts_comp = owner.getComponent<Mounts>())
         {
-            for (auto& mount : beam_system->mounts)
+            for (auto& mount : mounts_comp->mounts)
             {
+                if (mount.type != MountType::BeamWeapon)
+                    continue;
                 if (distance < mount.range)
                 {
                     if (fabs(angleDifference(angle_difference, mount.direction)) < mount.arc * 0.5f)
@@ -1183,7 +1215,7 @@ bool ShipAI::betterTarget(sp::ecs::Entity new_target, sp::ecs::Entity current_ta
     return false;
 }
 
-float ShipAI::calculateFiringSolution(sp::ecs::Entity target, const MissileTubes::MountPoint& tube)
+float ShipAI::calculateFiringSolution(sp::ecs::Entity target, const Mount& mount)
 {
     // If we don't exist, we can't shoot.
     auto ot = owner.getComponent<sp::Transform>();
@@ -1197,7 +1229,7 @@ float ShipAI::calculateFiringSolution(sp::ecs::Entity target, const MissileTubes
     if (target.hasComponent<MoveTo>() && target.hasComponent<ShareShortRangeRadar>())
         return std::numeric_limits<float>::infinity();
 
-    int type = tube.type_loaded;
+    int type = mount.type_loaded;
 
     // Determine whether a non-hostile ship might be damaged by a missile attack
     // on a line of fire within our short-range radar range.
@@ -1205,7 +1237,7 @@ float ShipAI::calculateFiringSolution(sp::ecs::Entity target, const MissileTubes
     auto target_position = tt->getPosition();
     const float target_distance = glm::length(ot->getPosition() - target_position);
     const float search_distance = std::min(short_range, target_distance + 500.0f);
-    const float fire_angle = ot->getRotation() + tube.direction;
+    const float fire_angle = ot->getRotation() + mount.direction;
     const float search_angle = 5.0f;
 
     // Attempt to confirm that the missle won't hit a friendly.
@@ -1285,7 +1317,7 @@ float ShipAI::calculateFiringSolution(sp::ecs::Entity target, const MissileTubes
     }
 
     // Use the general weapon tube targeting to get the final firing solution.
-    return MissileSystem::calculateFiringSolution(owner, tube, target);
+    return MissileSystem::calculateFiringSolution(owner, mount, target);
 }
 
 sp::ecs::Entity ShipAI::findBestMissileRestockTarget(glm::vec2 position, float radius)

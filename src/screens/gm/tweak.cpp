@@ -31,6 +31,7 @@
 #include "components/maneuveringthrusters.h"
 #include "components/missile.h"
 #include "components/missiletubes.h"
+#include "components/mounts.h"
 #include "components/moveto.h"
 #include "components/name.h"
 #include "components/orbit.h"
@@ -111,16 +112,29 @@ static string damageTypeToString(DamageType t)
     return tr("Unknown");
 }
 
-// Convert missile tube mount point state to string.
-static string getMountPointStateString(MissileTubes::MountPoint::State state)
+// Convert mount state to string.
+static string getMountPointStateString(MountState state)
 {
     switch (state)
     {
-    case MissileTubes::MountPoint::State::Empty:     return tr("tube_state", "Empty");
-    case MissileTubes::MountPoint::State::Loading:   return tr("tube_state", "Loading");
-    case MissileTubes::MountPoint::State::Loaded:    return tr("tube_state", "Loaded");
-    case MissileTubes::MountPoint::State::Unloading: return tr("tube_state", "Unloading");
-    case MissileTubes::MountPoint::State::Firing:    return tr("tube_state", "Firing");
+    case MountState::Empty:     return tr("tube_state", "Empty");
+    case MountState::Loading:   return tr("tube_state", "Loading");
+    case MountState::Loaded:    return tr("tube_state", "Loaded");
+    case MountState::Unloading: return tr("tube_state", "Unloading");
+    case MountState::Firing:    return tr("tube_state", "Firing");
+    }
+
+    return tr("Unknown");
+}
+
+// Convert mount type to string.
+static string mountTypeToString(MountType t)
+{
+    switch (t)
+    {
+    case MountType::BeamWeapon:   return tr("mount_type", "Beam Weapon");
+    case MountType::MissileWeapon: return tr("mount_type", "Missile Weapon");
+    case MountType::UtilityBeam:  return tr("mount_type", "Utility Beam");
     }
 
     return tr("Unknown");
@@ -508,6 +522,20 @@ public:
     }
 
     std::function<size_t()> update_func;
+    // Maps a selector entry index to the corresponding vector element index.
+    // Used to filter the entries shown by this selector to a subset of the
+    // vector. If not set, the entry index is used directly.
+    std::function<int(int)> index_map;
+
+    // Returns the vector element index for the current selection, translating
+    // through index_map when set. Returns -1 if the selection doesn't map to a
+    // vector element.
+    int getSelectedVectorIndex()
+    {
+        const int selection = getSelectionIndex();
+        if (index_map) return index_map(selection);
+        return selection;
+    }
 };
 
 // A GuiSelector that tweaks an integer value using the selected entry's index.
@@ -2416,13 +2444,13 @@ private:
         (new GuiLabel(row, "", LABEL, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
         auto ui = new GuiTextTweak(row); \
         ui->update_func = [this, vector_selector, ui]() -> string { auto v = entity.getComponent<COMPONENT>(); \
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                return string(v->VECTOR[vector_selector->getSelectionIndex()].VALUE); \
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) \
+                return string(v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE); \
             return ui->getText(); \
         }; \
         ui->callback([this, vector_selector](string text) { auto v = entity.getComponent<COMPONENT>(); \
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                v->VECTOR[vector_selector->getSelectionIndex()].VALUE = static_cast<decltype(v->VECTOR[vector_selector->getSelectionIndex()].VALUE)>(text.toFloat()); \
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) \
+                v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE = static_cast<decltype(v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE)>(text.toFloat()); \
         }); \
     } while(0)
 // Add text fields to tweak a float value and its corresponding maximum value
@@ -2433,19 +2461,19 @@ private:
         (new GuiLabel(row, "", LABEL, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
         auto ui = new GuiValueMaxTweak(row); \
         ui->val_update_func = [this, vector_selector, ui]() -> float { auto v = entity.getComponent<COMPONENT>(); \
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                return static_cast<float>(v->VECTOR[vector_selector->getSelectionIndex()].VALUE); \
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) \
+                return static_cast<float>(v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE); \
             return ui->val_input->getText().toFloat(); }; \
         ui->max_update_func = [this, vector_selector, ui]() -> float { auto v = entity.getComponent<COMPONENT>(); \
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                return static_cast<float>(v->VECTOR[vector_selector->getSelectionIndex()].MAX_VALUE); \
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) \
+                return static_cast<float>(v->VECTOR[vector_selector->getSelectedVectorIndex()].MAX_VALUE); \
             return ui->max_input->getText().toFloat(); }; \
         ui->val_callback = [this, vector_selector](float val) { auto v = entity.getComponent<COMPONENT>(); \
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                v->VECTOR[vector_selector->getSelectionIndex()].VALUE = static_cast<std::remove_reference_t<decltype(v->VECTOR[0].VALUE)>>(val); }; \
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) \
+                v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE = static_cast<std::remove_reference_t<decltype(v->VECTOR[0].VALUE)>>(val); }; \
         ui->max_callback = [this, vector_selector](float val) { auto v = entity.getComponent<COMPONENT>(); \
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                v->VECTOR[vector_selector->getSelectionIndex()].MAX_VALUE = static_cast<std::remove_reference_t<decltype(v->VECTOR[0].MAX_VALUE)>>(val); }; \
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) \
+                v->VECTOR[vector_selector->getSelectedVectorIndex()].MAX_VALUE = static_cast<std::remove_reference_t<decltype(v->VECTOR[0].MAX_VALUE)>>(val); }; \
     } while(0)
 // Add a toggle button to tweak a Boolean value in a vector of the given
 // component.
@@ -2456,11 +2484,11 @@ private:
             ->setAttribute("layout", "horizontal"); \
         (new GuiLabel(row, "", LABEL, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
         auto ui = new GuiToggleTweak(row, "", [this, vector_selector](bool value) { auto v = entity.getComponent<COMPONENT>(); \
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                v->VECTOR[vector_selector->getSelectionIndex()].VALUE = value; }); \
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) \
+                v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE = value; }); \
         ui->update_func = [this, vector_selector, ui]() -> bool { auto v = entity.getComponent<COMPONENT>(); \
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                return v->VECTOR[vector_selector->getSelectionIndex()].VALUE; \
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) \
+                return v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE; \
             return ui->getValue(); }; \
     } while(0)
 // Add toggle buttons to tweak a bitwise mask in a vector of the given
@@ -2469,12 +2497,12 @@ private:
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
         auto ui = new GuiToggleTweak(row, LABEL, [this, vector_selector](bool value) { auto v = entity.getComponent<COMPONENT>(); \
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) { \
-                if (value) v->VECTOR[vector_selector->getSelectionIndex()].VALUE |= (MASK); else v->VECTOR[vector_selector->getSelectionIndex()].VALUE &=~(MASK); } \
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) { \
+                if (value) v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE |= (MASK); else v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE &=~(MASK); } \
             }); \
         ui->update_func = [this, vector_selector, ui]() -> bool { auto v = entity.getComponent<COMPONENT>(); \
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                return v->VECTOR[vector_selector->getSelectionIndex()].VALUE & (MASK); \
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) \
+                return v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE & (MASK); \
             return ui->getValue(); }; \
     } while(0)
 // Add a slider and text field to tweak a float value in a vector within a range
@@ -2485,13 +2513,13 @@ private:
         (new GuiLabel(row, "", LABEL, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
         auto ui = new GuiSliderTweak(row, "", MIN_VALUE, MAX_VALUE, 0.0f, [this, vector_selector](float number) { \
             auto v = entity.getComponent<COMPONENT>(); \
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                v->VECTOR[vector_selector->getSelectionIndex()].VALUE = number; \
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) \
+                v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE = number; \
         }); \
         ui->addOverlay(2u, 20.0f); \
         ui->update_func = [this, vector_selector, ui]() -> float { auto v = entity.getComponent<COMPONENT>(); \
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                return v->VECTOR[vector_selector->getSelectionIndex()].VALUE; \
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) \
+                return v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE; \
             return ui->value_entry->getText().toFloat(); \
         }; \
     } while(0)
@@ -2516,12 +2544,12 @@ private:
         (new GuiLabel(row, "", LABEL, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
         auto ui = new GuiRotationDialTweak(row); \
         ui->update_func = [this, vector_selector, ui]() -> float { auto v = entity.getComponent<COMPONENT>(); \
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                return static_cast<float>(v->VECTOR[vector_selector->getSelectionIndex()].VALUE); \
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) \
+                return static_cast<float>(v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE); \
             return ui->value_entry->getText().toFloat(); }; \
         ui->callback = [this, vector_selector](float val) { auto v = entity.getComponent<COMPONENT>(); \
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                v->VECTOR[vector_selector->getSelectionIndex()].VALUE = static_cast<std::remove_reference_t<decltype(v->VECTOR[0].VALUE)>>(val); }; \
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) \
+                v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE = static_cast<std::remove_reference_t<decltype(v->VECTOR[0].VALUE)>>(val); }; \
     } while(0)
 // Add a selector to tweak an enumerated value in a vector of the given
 // component.
@@ -2530,14 +2558,14 @@ private:
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
         (new GuiLabel(row, "", LABEL, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
         auto ui = new GuiSelectorTweak(row, "", [this, vector_selector](int index, string value) { auto v = entity.getComponent<COMPONENT>(); \
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                v->VECTOR[vector_selector->getSelectionIndex()].VALUE = static_cast<decltype(decltype(COMPONENT::VECTOR)::value_type::VALUE)>(index + MIN_VALUE); \
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) \
+                v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE = static_cast<decltype(decltype(COMPONENT::VECTOR)::value_type::VALUE)>(index + MIN_VALUE); \
         }); \
         for (int enum_value = MIN_VALUE; enum_value <= MAX_VALUE; enum_value++) \
             ui->addEntry(STRING_CONVERT_FUNCTION(static_cast<decltype(decltype(COMPONENT::VECTOR)::value_type::VALUE)>(enum_value)), string(enum_value)); \
         ui->update_func = [this, vector_selector, ui]() -> int { auto v = entity.getComponent<COMPONENT>(); \
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                return static_cast<int>(v->VECTOR[vector_selector->getSelectionIndex()].VALUE) - static_cast<int>(MIN_VALUE); \
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) \
+                return static_cast<int>(v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE) - static_cast<int>(MIN_VALUE); \
             return ui->getSelectionIndex(); \
         }; \
     } while(0)
@@ -3014,13 +3042,13 @@ private:
         (new GuiLabel(row, "", LABEL, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
         auto ui = new GuiTextTweak(row); \
         ui->update_func = [this, vector_selector, ui]() -> string { auto v = entity.getComponent<COMPONENT>(); \
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                return v->VECTOR[vector_selector->getSelectionIndex()].VALUE; \
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) \
+                return v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE; \
             return ui->getText(); \
         }; \
         ui->callback([this, vector_selector](string text) { auto v = entity.getComponent<COMPONENT>(); \
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                v->VECTOR[vector_selector->getSelectionIndex()].VALUE = text; \
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) \
+                v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE = text; \
         }); \
     } while(0)
 // Add sliders and text fields to tweak an RGBA color value in a vector of the
@@ -3032,8 +3060,8 @@ private:
         auto ui = new GuiColorPicker(row); \
         ui->update_func = [this, vector_selector, ui]() -> glm::u8vec4 { \
             auto v = entity.getComponent<COMPONENT>(); \
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                return v->VECTOR[vector_selector->getSelectionIndex()].VALUE; \
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) \
+                return v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE; \
             return glm::u8vec4( \
                 static_cast<uint8_t>(ui->r_slider->getValue()), \
                 static_cast<uint8_t>(ui->g_slider->getValue()), \
@@ -3042,8 +3070,8 @@ private:
         }; \
         ui->callback = [this, vector_selector](glm::u8vec4 val) { \
             auto v = entity.getComponent<COMPONENT>(); \
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                v->VECTOR[vector_selector->getSelectionIndex()].VALUE = val; \
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) \
+                v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE = val; \
         }; \
     } while(0)
 // Add text fields to tweak a glm::vec3 value for the given component.
@@ -3079,37 +3107,37 @@ private:
         (new GuiLabel(row, "", LABEL, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
         auto x_ui = new GuiTextTweak(row); \
         x_ui->update_func = [this, vector_selector]() -> string { auto v = entity.getComponent<COMPONENT>(); \
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                return string(v->VECTOR[vector_selector->getSelectionIndex()].VALUE.x, 3); \
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) \
+                return string(v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE.x, 3); \
             return ""; }; \
         x_ui->callback([this, vector_selector](string text) { auto v = entity.getComponent<COMPONENT>(); \
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                v->VECTOR[vector_selector->getSelectionIndex()].VALUE.x = text.toFloat(); }); \
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) \
+                v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE.x = text.toFloat(); }); \
         auto y_ui = new GuiTextTweak(row); \
         y_ui->update_func = [this, vector_selector]() -> string { auto v = entity.getComponent<COMPONENT>(); \
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                return string(v->VECTOR[vector_selector->getSelectionIndex()].VALUE.y, 3); \
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) \
+                return string(v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE.y, 3); \
             return ""; }; \
         y_ui->callback([this, vector_selector](string text) { auto v = entity.getComponent<COMPONENT>(); \
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                v->VECTOR[vector_selector->getSelectionIndex()].VALUE.y = text.toFloat(); }); \
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) \
+                v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE.y = text.toFloat(); }); \
         auto z_ui = new GuiTextTweak(row); \
         z_ui->update_func = [this, vector_selector]() -> string { auto v = entity.getComponent<COMPONENT>(); \
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                return string(v->VECTOR[vector_selector->getSelectionIndex()].VALUE.z, 3); \
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) \
+                return string(v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE.z, 3); \
             return ""; }; \
         z_ui->callback([this, vector_selector](string text) { auto v = entity.getComponent<COMPONENT>(); \
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                v->VECTOR[vector_selector->getSelectionIndex()].VALUE.z = text.toFloat(); }); \
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) \
+                v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE.z = text.toFloat(); }); \
         new_page->apply_functions.push_back([this, vector_selector, x_ui, y_ui, z_ui]() { \
             auto v = entity.getComponent<COMPONENT>(); \
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) { \
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) { \
                 string x_text = x_ui->getText(); \
                 string y_text = y_ui->getText(); \
                 string z_text = z_ui->getText(); \
-                if (!x_text.empty()) v->VECTOR[vector_selector->getSelectionIndex()].VALUE.x = x_text.toFloat(); \
-                if (!y_text.empty()) v->VECTOR[vector_selector->getSelectionIndex()].VALUE.y = y_text.toFloat(); \
-                if (!z_text.empty()) v->VECTOR[vector_selector->getSelectionIndex()].VALUE.z = z_text.toFloat(); \
+                if (!x_text.empty()) v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE.x = x_text.toFloat(); \
+                if (!y_text.empty()) v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE.y = y_text.toFloat(); \
+                if (!z_text.empty()) v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE.z = z_text.toFloat(); \
             } \
         }); \
     } while(0)
@@ -3156,8 +3184,8 @@ private:
         (new GuiLabel(row, "", LABEL, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
         auto ui = new GuiProgressbarTweak(row, "", MIN_VALUE, MAX_VALUE, 0.0f); \
         ui->update_func = [this, vector_selector]() -> float { auto v = entity.getComponent<COMPONENT>(); \
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->VECTOR.size())) \
-                return v->VECTOR[vector_selector->getSelectionIndex()].VALUE; \
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) \
+                return v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE; \
             return 0.0f; \
         }; \
     } while(0)
@@ -3718,6 +3746,91 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Strafe heat/sec:"), CombatManeuveringThrusters, strafe.heat_per_second);
     addPageToGroup(position_movement_group);
 
+    // Add a mount selector that lists only mounts of the given type. Selector
+    // entries map to the entity's matching mounts, so type-specific tweaks
+    // display only for mounts of the same type.
+    auto addMountSelector = [&](MountType type)
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeLabel)
+            ->setAttribute("layout", "horizontal");
+
+        (new GuiLabel(row, "", tr("tweak-vector", "Mount"), 20.0f))
+            ->setAlignment(sp::Alignment::CenterRight)
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+        vector_selector = new GuiVectorTweak(row, "VECTOR_SELECTOR");
+        vector_selector->update_func = [this, type]() -> size_t
+        {
+            if (auto v = entity.getComponent<Mounts>())
+            {
+                size_t count = 0;
+
+                for (const auto& mount : v->mounts)
+                    if (mount.type == type) count++;
+
+                return count;
+            }
+
+            return 0;
+        };
+        vector_selector->index_map = [this, type](int selector_index) -> int
+        {
+            if (auto v = entity.getComponent<Mounts>())
+            {
+                int seen = 0;
+                for (int i = 0; i < static_cast<int>(v->mounts.size()); i++)
+                {
+                    if (v->mounts[i].type == type)
+                    {
+                        if (seen == selector_index) return i;
+                        seen++;
+                    }
+                }
+            }
+
+            return -1;
+        };
+
+        auto add = new GuiButton(row, "", tr("tweak-button", "Add"),
+            [this, type, vector_selector]()
+            {
+                if (auto v = entity.getComponent<Mounts>())
+                {
+                    v->mounts.emplace_back();
+                    v->mounts.back().type = type;
+                    size_t count = 0;
+
+                    for (const auto& mount : v->mounts)
+                        if (mount.type == type) count++;
+
+                    vector_selector->setSelectionIndex(static_cast<int>(count) - 1);
+                }
+            }
+        );
+        add
+            ->setTextSize(20.0f)
+            ->setSize(50.0f, GuiElement::GuiSizeMax);
+
+        auto del = new GuiButton(row, "", tr("tweak-button", "Del"),
+            [this, vector_selector]()
+            {
+                auto v = entity.getComponent<Mounts>();
+                int mount_index = vector_selector->getSelectedVectorIndex();
+
+                if (v && mount_index >= 0 && mount_index < static_cast<int>(v->mounts.size()))
+                {
+                    v->mounts.erase(v->mounts.begin() + mount_index);
+                    vector_selector->setSelectionIndex(0);
+                }
+            }
+        );
+        del
+            ->setTextSize(20.0f)
+            ->setSize(50.0f, GuiElement::GuiSizeMax);
+    };
+
     ADD_PAGE(tr("tweak-tab", "Beam system"), BeamWeaponSys);
     new_page->description =  tr("tweak-beam-system", "Ship system providing beam weapon configuration. Beam frequency affects damage against shields.\n\nEach beam weapon has a mount that defines its firing arc, the direction the arc points in, and its range, damage, and cycle time. It also optionally supports functioning as a rotating turret with a defined speed in tracking targets. If a turret arc is defined, the beam direction rotates the beam arc within the larger turret arc and direction. Beam and turret performance are affected by the Beam weapon system, and firing generates additional heat into the system.");
     ADD_INT_SLIDER_TWEAK(tr("tweak-text", "Frequency:"), BeamWeaponSys, 0.0f, BeamWeaponSys::max_frequency, frequency);
@@ -3726,68 +3839,76 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_SHIP_SYSTEM_TWEAK(BeamWeaponSys);
 
     ADD_LABEL(tr("tweak-text", "Beam mounts"));
-    ADD_VECTOR(tr("tweak-vector", "Mount"), BeamWeaponSys, mounts);
-    ADD_VECTOR_VEC3_TWEAK(tr("tweak-text", "Position:"), BeamWeaponSys, mounts, position);
-    ADD_VECTOR_NUM_SLIDER_TWEAK(tr("tweak-text", "Beam arc:"), BeamWeaponSys, mounts, 0.0f, 360.0f, arc);
-    ADD_VECTOR_ROTATION_TWEAK(tr("tweak-text", "Beam direction:"), BeamWeaponSys, mounts, direction);
-    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Range:"), BeamWeaponSys, mounts, range);
-    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Cycle time:"), BeamWeaponSys, mounts, cycle_time);
-    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Damage:"), BeamWeaponSys, mounts, damage);
-    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Energy per fire:"), BeamWeaponSys, mounts, energy_per_beam_fire);
-    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Heat per fire:"), BeamWeaponSys, mounts, heat_per_beam_fire);
-    ADD_VECTOR_COLOR_TWEAK(tr("tweak-text", "Arc color:"), BeamWeaponSys, mounts, arc_color);
-    ADD_VECTOR_COLOR_TWEAK(tr("tweak-text", "Arc color fire:"), BeamWeaponSys, mounts, arc_color_fire);
-    ADD_VECTOR_ENUM_TWEAK(tr("tweak-text", "Damage type:"), BeamWeaponSys, mounts, damage_type, static_cast<int>(DamageType::Energy), static_cast<int>(DamageType::EMP), damageTypeToString);
-    ADD_VECTOR_NUM_BAR_TWEAK(tr("tweak-text", "Cooldown:"), BeamWeaponSys, mounts, 0.0f, 10.0f, cooldown);
-    ADD_VECTOR_TEXT_TWEAK(tr("tweak-text", "Texture:"), BeamWeaponSys, mounts, texture);
-    ADD_VECTOR_NUM_SLIDER_TWEAK(tr("tweak-text", "Turret arc:"), BeamWeaponSys, mounts, 0.0f, 360.0f, turret_arc);
-    ADD_VECTOR_ROTATION_TWEAK(tr("tweak-text", "Turret direction:"), BeamWeaponSys, mounts, turret_direction);
-    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Turret rotation rate:"), BeamWeaponSys, mounts, turret_rotation_rate);
+    addMountSelector(MountType::BeamWeapon);
+    ADD_VECTOR_ENUM_TWEAK(tr("tweak-text", "Mount type:"), Mounts, mounts, type, static_cast<int>(MountType::BeamWeapon), static_cast<int>(MountType::UtilityBeam), mountTypeToString);
+    ADD_VECTOR_VEC3_TWEAK(tr("tweak-text", "Position:"), Mounts, mounts, position);
+    ADD_VECTOR_NUM_SLIDER_TWEAK(tr("tweak-text", "Beam arc:"), Mounts, mounts, 0.0f, 360.0f, arc);
+    ADD_VECTOR_ROTATION_TWEAK(tr("tweak-text", "Beam direction:"), Mounts, mounts, direction);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Range:"), Mounts, mounts, range);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Cycle time:"), Mounts, mounts, cycle_time);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Damage:"), Mounts, mounts, damage);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Energy per fire:"), Mounts, mounts, energy_per_beam_fire);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Heat per fire:"), Mounts, mounts, heat_per_beam_fire);
+    ADD_VECTOR_COLOR_TWEAK(tr("tweak-text", "Arc color:"), Mounts, mounts, arc_color);
+    ADD_VECTOR_COLOR_TWEAK(tr("tweak-text", "Arc color fire:"), Mounts, mounts, arc_color_fire);
+    ADD_VECTOR_ENUM_TWEAK(tr("tweak-text", "Damage type:"), Mounts, mounts, damage_type, static_cast<int>(DamageType::Energy), static_cast<int>(DamageType::EMP), damageTypeToString);
+    ADD_VECTOR_NUM_BAR_TWEAK(tr("tweak-text", "Cooldown:"), Mounts, mounts, 0.0f, 10.0f, cooldown);
+    ADD_VECTOR_TEXT_TWEAK(tr("tweak-text", "Texture:"), Mounts, mounts, texture);
+    ADD_VECTOR_NUM_SLIDER_TWEAK(tr("tweak-text", "Turret arc:"), Mounts, mounts, 0.0f, 360.0f, turret_arc);
+    ADD_VECTOR_ROTATION_TWEAK(tr("tweak-text", "Turret direction:"), Mounts, mounts, turret_direction);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Turret rotation rate:"), Mounts, mounts, turret_rotation_rate);
     addPageToGroup(combat_group);
 
     ADD_PAGE(tr("tweak-tab", "Utility beam system"), UtilityBeam);
     new_page->description = tr("tweak-utility-beam", "Ship system providing a configurable utility beam.\n\nCallback members inside custom_beam_modes can't be tweaked via this dialog.");
-    ADD_TEXT_TWEAK(tr("tweak-text", "Custom beam mode:"), UtilityBeam, custom_beam_mode);
     ADD_ENTITY_TWEAK(tr("tweak-text", "Effect target entity:"), UtilityBeam, effect_target_entity);
-    ADD_BOOL_TWEAK(tr("tweak-text", "Active:"), UtilityBeam, active);
     ADD_BOOL_TWEAK(tr("tweak-text", "Was active:"), UtilityBeam, was_active);
-    ADD_BOOL_TWEAK(tr("tweak-text", "Is firing:"), UtilityBeam, is_firing);
-    ADD_VEC3_TWEAK(tr("tweak-text", "Position:"), UtilityBeam, position);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Arc:"), UtilityBeam, arc);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max arc:"), UtilityBeam, max_arc);
-    ADD_BOOL_TWEAK(tr("tweak-text", "Fixed arc:"), UtilityBeam, fixed_arc);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Bearing:"), UtilityBeam, bearing);
-    ADD_BOOL_TWEAK(tr("tweak-text", "Fixed bearing:"), UtilityBeam, fixed_bearing);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Range:"), UtilityBeam, range);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max range:"), UtilityBeam, max_range);
-    ADD_BOOL_TWEAK(tr("tweak-text", "Fixed range:"), UtilityBeam, fixed_range);
     ADD_VEC2_TWEAK(tr("tweak-text", "Target coordinates:"), UtilityBeam, utility_target_coordinates);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Cycle time:"), UtilityBeam, cycle_time);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Strength:"), UtilityBeam, strength);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Energy use per sec.:"), UtilityBeam, energy_use_per_second);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Heat per sec.:"), UtilityBeam, heat_per_second);
-    ADD_COLOR_TWEAK(tr("tweak-text", "Arc color:"), UtilityBeam, arc_color);
-    ADD_COLOR_TWEAK(tr("tweak-text", "Arc color fire:"), UtilityBeam, arc_color_fire);
-    ADD_TEXT_TWEAK(tr("tweak-text", "Texture:"), UtilityBeam, texture);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Cooldown:"), UtilityBeam, cooldown);
+
+    ADD_LABEL(tr("tweak-text", "Utility beam mount"));
+    addMountSelector(MountType::UtilityBeam);
+    ADD_VECTOR_ENUM_TWEAK(tr("tweak-text", "Mount type:"), Mounts, mounts, type, static_cast<int>(MountType::BeamWeapon), static_cast<int>(MountType::UtilityBeam), mountTypeToString);
+    ADD_VECTOR_VEC3_TWEAK(tr("tweak-text", "Position:"), Mounts, mounts, position);
+    ADD_VECTOR_BOOL_TWEAK(tr("tweak-text", "Active:"), Mounts, mounts, active);
+    ADD_VECTOR_BOOL_TWEAK(tr("tweak-text", "Is firing:"), Mounts, mounts, is_firing);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Arc:"), Mounts, mounts, arc);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Max arc:"), Mounts, mounts, max_arc);
+    ADD_VECTOR_BOOL_TWEAK(tr("tweak-text", "Fixed arc:"), Mounts, mounts, fixed_arc);
+    ADD_VECTOR_ROTATION_TWEAK(tr("tweak-text", "Bearing:"), Mounts, mounts, bearing);
+    ADD_VECTOR_BOOL_TWEAK(tr("tweak-text", "Fixed bearing:"), Mounts, mounts, fixed_bearing);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Range:"), Mounts, mounts, range);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Max range:"), Mounts, mounts, max_range);
+    ADD_VECTOR_BOOL_TWEAK(tr("tweak-text", "Fixed range:"), Mounts, mounts, fixed_range);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Cycle time:"), Mounts, mounts, cycle_time);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Strength:"), Mounts, mounts, strength);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Energy use per sec.:"), Mounts, mounts, energy_use_per_second);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Heat per sec.:"), Mounts, mounts, heat_per_second);
+    ADD_VECTOR_COLOR_TWEAK(tr("tweak-text", "Arc color:"), Mounts, mounts, arc_color);
+    ADD_VECTOR_COLOR_TWEAK(tr("tweak-text", "Arc color fire:"), Mounts, mounts, arc_color_fire);
+    ADD_VECTOR_TEXT_TWEAK(tr("tweak-text", "Texture:"), Mounts, mounts, texture);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Cooldown:"), Mounts, mounts, cooldown);
+    ADD_VECTOR_TEXT_TWEAK(tr("tweak-text", "Custom beam mode:"), Mounts, mounts, custom_beam_mode);
     ADD_LABEL(tr("tweak-text", "Allowed crew positions"));
     for (int i = 0; i < static_cast<int>(CrewPosition::MAX); i++)
     {
         auto row = new GuiElement(new_page->tweaks, "");
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal");
         auto ui = new GuiToggleTweak(row, crewPositionToString(CrewPosition(i)),
-            [this, i](bool value)
+            [this, i, vector_selector](bool value)
             {
-                if (auto v = entity.getComponent<UtilityBeam>())
+                auto v = entity.getComponent<Mounts>();
+                int mount_index = vector_selector->getSelectedVectorIndex();
+                if (v && mount_index >= 0 && mount_index < static_cast<int>(v->mounts.size()))
                 {
-                    if (value) v->crew_positions.add(CrewPosition(i));
-                    else v->crew_positions.remove(CrewPosition(i));
+                    auto& mount = v->mounts[mount_index];
+                    if (value) mount.crew_positions.add(CrewPosition(i));
+                    else mount.crew_positions.remove(CrewPosition(i));
                 }
             }
         );
-        ui->update_func = [this, i]() -> bool {
-            auto v = entity.getComponent<UtilityBeam>();
-            return v && v->crew_positions.has(CrewPosition(i));
+        ui->update_func = [this, i, vector_selector]() -> bool {
+            auto v = entity.getComponent<Mounts>();
+            return v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->mounts.size()) && v->mounts[vector_selector->getSelectedVectorIndex()].crew_positions.has(CrewPosition(i));
         };
     }
     ADD_LABEL(tr("tweak-text", "Utility beam system"));
@@ -3820,31 +3941,147 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_SHIP_SYSTEM_TWEAK(MissileTubes);
 
     ADD_LABEL(tr("tweak-text", "Weapon tube mounts"));
-    ADD_VECTOR(tr("tweak-vector", "Mount"), MissileTubes, mounts);
-    ADD_VECTOR_ROTATION_TWEAK(tr("tweak-text", "Direction:"), MissileTubes, mounts, direction);
-    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Load time:"), MissileTubes, mounts, load_time);
-    ADD_VECTOR_ENUM_TWEAK(tr("tweak-text", "Size:"), MissileTubes, mounts, size, MS_Small, MS_Large, getMissileSizeString);
+    addMountSelector(MountType::MissileWeapon);
+    ADD_VECTOR_ENUM_TWEAK(tr("tweak-text", "Mount type:"), Mounts, mounts, type, static_cast<int>(MountType::BeamWeapon), static_cast<int>(MountType::UtilityBeam), mountTypeToString);
+    ADD_VECTOR_ROTATION_TWEAK(tr("tweak-text", "Direction:"), Mounts, mounts, direction);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Load time:"), Mounts, mounts, load_time);
+    ADD_VECTOR_ENUM_TWEAK(tr("tweak-text", "Size:"), Mounts, mounts, missile_size, MS_Small, MS_Large, getMissileSizeString);
     for (int mwi = 0; mwi < MissileWeaponDataRegistry::instance().getTypeCount(); mwi++)
     {
         string label = tr("tweak-text", "Allow {type} in this tube").replace("{type}", MissileWeaponDataRegistry::instance().getNameForIndex(mwi));
         auto row = new GuiElement(new_page->tweaks, "");
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal");
-        auto ui = new GuiToggleTweak(row, label, [this, vector_selector, mwi](bool value) { auto v = entity.getComponent<MissileTubes>();
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->mounts.size())) {
+        auto ui = new GuiToggleTweak(row, label, [this, vector_selector, mwi](bool value) { auto v = entity.getComponent<Mounts>();
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->mounts.size())) {
                 uint32_t mask = 1 << mwi;
-                if (value) v->mounts[vector_selector->getSelectionIndex()].type_allowed_mask |= mask;
-                else v->mounts[vector_selector->getSelectionIndex()].type_allowed_mask &= ~mask; }
+                if (value) v->mounts[vector_selector->getSelectedVectorIndex()].type_allowed_mask |= mask;
+                else v->mounts[vector_selector->getSelectedVectorIndex()].type_allowed_mask &= ~mask; }
             });
-        ui->update_func = [this, vector_selector, ui, mwi]() -> bool { auto v = entity.getComponent<MissileTubes>();
-            if (v && vector_selector->getSelectionIndex() >= 0 && vector_selector->getSelectionIndex() < static_cast<int>(v->mounts.size()))
-                return v->mounts[vector_selector->getSelectionIndex()].type_allowed_mask & (1U << mwi);
+        ui->update_func = [this, vector_selector, ui, mwi]() -> bool { auto v = entity.getComponent<Mounts>();
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->mounts.size()))
+                return v->mounts[vector_selector->getSelectedVectorIndex()].type_allowed_mask & (1U << mwi);
             return ui->getValue(); };
     }
-    ADD_VECTOR_VEC3_TWEAK(tr("tweak-text", "Position:"), MissileTubes, mounts, position);
-    ADD_VECTOR_ENUM_TWEAK(tr("tweak-text", "Type loaded:"), MissileTubes, mounts, type_loaded, MW_None, MW_MaxTypes - 1, getMissileWeaponNameForTweak);
-    ADD_VECTOR_ENUM_TWEAK(tr("tweak-text", "State:"), MissileTubes, mounts, state, static_cast<int>(MissileTubes::MountPoint::State::Empty), static_cast<int>(MissileTubes::MountPoint::State::Firing), getMountPointStateString);
-    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Delay:"), MissileTubes, mounts, delay);
-    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Fire count:"), MissileTubes, mounts, fire_count);
+    ADD_VECTOR_VEC3_TWEAK(tr("tweak-text", "Position:"), Mounts, mounts, position);
+    ADD_VECTOR_ENUM_TWEAK(tr("tweak-text", "Type loaded:"), Mounts, mounts, type_loaded, MW_None, MW_MaxTypes - 1, getMissileWeaponNameForTweak);
+    ADD_VECTOR_ENUM_TWEAK(tr("tweak-text", "State:"), Mounts, mounts, state, static_cast<int>(MountState::Empty), static_cast<int>(MountState::Firing), getMountPointStateString);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Delay:"), Mounts, mounts, delay);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Fire count:"), Mounts, mounts, fire_count);
+    addPageToGroup(combat_group);
+
+    // Mounts component. This standalone page combines the mount editors used by
+    // the beam, utility beam, and missile system pages so all mounts on the
+    // entity can be managed here regardless of mount type. The mount type
+    // determines which type-specific fields apply.
+    ADD_PAGE(tr("tweak-tab", "Mounts"), Mounts);
+    new_page->description = tr("tweak-mounts", "Defines beam weapon, missile weapon, and utility beam mounts on this entity.\n\nEach mount has a type that determines which fields apply. Beam weapons fire within an arc in a direction, and optionally function as rotating turrets. Missile weapons load and fire ammunition types allowed by their mask. Utility beams project effects toward targets.\n\nThe Mount type selector changes which type-specific fields are used. Callback members inside custom_beam_modes can't be tweaked via this dialog.");
+    ADD_VECTOR(tr("tweak-vector", "Mount"), Mounts, mounts);
+    ADD_LABEL(tr("tweak-text", "Common"));
+    ADD_VECTOR_ENUM_TWEAK(tr("tweak-text", "Mount type:"), Mounts, mounts, type, static_cast<int>(MountType::BeamWeapon), static_cast<int>(MountType::UtilityBeam), mountTypeToString);
+    ADD_VECTOR_VEC3_TWEAK(tr("tweak-text", "Position:"), Mounts, mounts, position);
+    ADD_VECTOR_ROTATION_TWEAK(tr("tweak-text", "Direction:"), Mounts, mounts, direction);
+    ADD_VECTOR_NUM_SLIDER_TWEAK(tr("tweak-text", "Turret arc:"), Mounts, mounts, 0.0f, 360.0f, turret_arc);
+    ADD_VECTOR_ROTATION_TWEAK(tr("tweak-text", "Turret direction:"), Mounts, mounts, turret_direction);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Turret rotation rate:"), Mounts, mounts, turret_rotation_rate);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Cycle time:"), Mounts, mounts, cycle_time);
+
+    // Conditions for showing or hiding type-specific mount properties based on
+    // the selected mount's type.
+    auto mountTypeCondition = [this, vector_selector](MountType type) -> std::function<bool()>
+    {
+        return [this, vector_selector, type]() -> bool {
+            auto v = entity.getComponent<Mounts>();
+            return v
+                && vector_selector->getSelectedVectorIndex() >= 0
+                && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->mounts.size())
+                && v->mounts[vector_selector->getSelectedVectorIndex()].type == type;
+        };
+    };
+
+    // Beam weapon-specific properties.
+    size_t beam_begin = new_page->tweaks->getChildCount();
+    ADD_LABEL(tr("tweak-text", "Beam weapon"));
+    ADD_VECTOR_NUM_SLIDER_TWEAK(tr("tweak-text", "Beam arc:"), Mounts, mounts, 0.0f, 360.0f, arc);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Range:"), Mounts, mounts, range);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Damage:"), Mounts, mounts, damage);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Energy per fire:"), Mounts, mounts, energy_per_beam_fire);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Heat per fire:"), Mounts, mounts, heat_per_beam_fire);
+    ADD_VECTOR_COLOR_TWEAK(tr("tweak-text", "Arc color:"), Mounts, mounts, arc_color);
+    ADD_VECTOR_COLOR_TWEAK(tr("tweak-text", "Arc color fire:"), Mounts, mounts, arc_color_fire);
+    ADD_VECTOR_ENUM_TWEAK(tr("tweak-text", "Damage type:"), Mounts, mounts, damage_type, static_cast<int>(DamageType::Energy), static_cast<int>(DamageType::EMP), damageTypeToString);
+    ADD_VECTOR_NUM_BAR_TWEAK(tr("tweak-text", "Cooldown:"), Mounts, mounts, 0.0f, 10.0f, cooldown);
+    ADD_VECTOR_TEXT_TWEAK(tr("tweak-text", "Texture:"), Mounts, mounts, texture);
+    size_t beam_end = new_page->tweaks->getChildCount();
+    new_page->conditional_tweaks.push_back({beam_begin, beam_end, mountTypeCondition(MountType::BeamWeapon)});
+
+    // Missile weapon-specific properties.
+    size_t missile_begin = new_page->tweaks->getChildCount();
+    ADD_LABEL(tr("tweak-text", "Missile weapon"));
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Load time:"), Mounts, mounts, load_time);
+    ADD_VECTOR_ENUM_TWEAK(tr("tweak-text", "Size:"), Mounts, mounts, missile_size, MS_Small, MS_Large, getMissileSizeString);
+    for (int mwi = 0; mwi < MissileWeaponDataRegistry::instance().getTypeCount(); mwi++)
+    {
+        string label = tr("tweak-text", "Allow {type} in this tube").replace("{type}", MissileWeaponDataRegistry::instance().getNameForIndex(mwi));
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal");
+        auto ui = new GuiToggleTweak(row, label, [this, vector_selector, mwi](bool value) { auto v = entity.getComponent<Mounts>();
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->mounts.size())) {
+                uint32_t mask = 1 << mwi;
+                if (value) v->mounts[vector_selector->getSelectedVectorIndex()].type_allowed_mask |= mask;
+                else v->mounts[vector_selector->getSelectedVectorIndex()].type_allowed_mask &= ~mask; }
+            });
+        ui->update_func = [this, vector_selector, ui, mwi]() -> bool { auto v = entity.getComponent<Mounts>();
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->mounts.size()))
+                return v->mounts[vector_selector->getSelectedVectorIndex()].type_allowed_mask & (1U << mwi);
+            return ui->getValue(); };
+    }
+    ADD_VECTOR_ENUM_TWEAK(tr("tweak-text", "Type loaded:"), Mounts, mounts, type_loaded, MW_None, MW_MaxTypes - 1, getMissileWeaponNameForTweak);
+    ADD_VECTOR_ENUM_TWEAK(tr("tweak-text", "State:"), Mounts, mounts, state, static_cast<int>(MountState::Empty), static_cast<int>(MountState::Firing), getMountPointStateString);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Delay:"), Mounts, mounts, delay);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Fire count:"), Mounts, mounts, fire_count);
+    size_t missile_end = new_page->tweaks->getChildCount();
+    new_page->conditional_tweaks.push_back({missile_begin, missile_end, mountTypeCondition(MountType::MissileWeapon)});
+
+    // Utility beam-specific properties.
+    size_t utility_begin = new_page->tweaks->getChildCount();
+    ADD_LABEL(tr("tweak-text", "Utility beam"));
+    ADD_VECTOR_BOOL_TWEAK(tr("tweak-text", "Active:"), Mounts, mounts, active);
+    ADD_VECTOR_BOOL_TWEAK(tr("tweak-text", "Is firing:"), Mounts, mounts, is_firing);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Max arc:"), Mounts, mounts, max_arc);
+    ADD_VECTOR_BOOL_TWEAK(tr("tweak-text", "Fixed arc:"), Mounts, mounts, fixed_arc);
+    ADD_VECTOR_ROTATION_TWEAK(tr("tweak-text", "Bearing:"), Mounts, mounts, bearing);
+    ADD_VECTOR_BOOL_TWEAK(tr("tweak-text", "Fixed bearing:"), Mounts, mounts, fixed_bearing);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Max range:"), Mounts, mounts, max_range);
+    ADD_VECTOR_BOOL_TWEAK(tr("tweak-text", "Fixed range:"), Mounts, mounts, fixed_range);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Strength:"), Mounts, mounts, strength);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Energy use per sec.:"), Mounts, mounts, energy_use_per_second);
+    ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Heat per sec.:"), Mounts, mounts, heat_per_second);
+    ADD_VECTOR_TEXT_TWEAK(tr("tweak-text", "Custom beam mode:"), Mounts, mounts, custom_beam_mode);
+    ADD_LABEL(tr("tweak-text", "Allowed crew positions"));
+    for (int i = 0; i < static_cast<int>(CrewPosition::MAX); i++)
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal");
+        auto ui = new GuiToggleTweak(row, crewPositionToString(CrewPosition(i)),
+            [this, i, vector_selector](bool value)
+            {
+                auto v = entity.getComponent<Mounts>();
+                int mount_index = vector_selector->getSelectedVectorIndex();
+                if (v && mount_index >= 0 && mount_index < static_cast<int>(v->mounts.size()))
+                {
+                    auto& mount = v->mounts[mount_index];
+                    if (value) mount.crew_positions.add(CrewPosition(i));
+                    else mount.crew_positions.remove(CrewPosition(i));
+                }
+            }
+        );
+        ui->update_func = [this, i, vector_selector]() -> bool {
+            auto v = entity.getComponent<Mounts>();
+            return v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->mounts.size()) && v->mounts[vector_selector->getSelectedVectorIndex()].crew_positions.has(CrewPosition(i));
+        };
+    }
+    size_t utility_end = new_page->tweaks->getChildCount();
+    new_page->conditional_tweaks.push_back({utility_begin, utility_end, mountTypeCondition(MountType::UtilityBeam)});
     addPageToGroup(combat_group);
 
     ADD_PAGE(tr("tweak-tab", "Shields"), Shields);
@@ -5450,6 +5687,15 @@ void GuiTweakPage::onDraw(sp::RenderTarget& target)
     {
         add_remove_button->setText(tr("tweak-button", "Create component"));
         add_remove_button->setStyle("button.toggle.off");
+    }
+
+    // Show or hide conditional tweak rows based on their conditions.
+    for (auto& ct : conditional_tweaks)
+    {
+        bool visible = ct.condition ? ct.condition() : true;
+        const auto& children = tweaks->getChildren();
+        for (size_t i = ct.begin; i < ct.end && i < children.size(); i++)
+            children[i]->setVisible(visible);
     }
 
     tweaks->show();

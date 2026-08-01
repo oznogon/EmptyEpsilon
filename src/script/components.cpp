@@ -34,6 +34,7 @@
 #include "components/maneuveringthrusters.h"
 #include "components/missile.h"
 #include "components/missiletubes.h"
+#include "components/mounts.h"
 #include "components/missileWeaponTarget.h"
 #include "missileWeaponData.h"
 #include "components/moveto.h"
@@ -617,23 +618,6 @@ void initComponentScriptBindings()
     BIND_SHIP_SYSTEM(BeamWeaponSys);
     BIND_MEMBER_GS(BeamWeaponSys, "frequency", getFrequency, setFrequency);
     BIND_MEMBER(BeamWeaponSys, system_target);
-    BIND_ARRAY(BeamWeaponSys, mounts);
-    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, position);
-    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, arc);
-    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, direction);
-    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, range);
-    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, turret_arc);
-    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, turret_direction);
-    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, turret_rotation_rate);
-    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, cycle_time);
-    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, damage);
-    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, energy_per_beam_fire);
-    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, heat_per_beam_fire);
-    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, arc_color);
-    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, arc_color_fire);
-    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, damage_type);
-    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, texture);
-    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, cooldown);
     sp::script::ComponentHandler<Target>::name("weapons_target");
     BIND_MEMBER(Target, entity);
     sp::script::ComponentHandler<BeamWeaponTarget>::name("beam_weapon_target");
@@ -657,32 +641,6 @@ void initComponentScriptBindings()
 
     sp::script::ComponentHandler<UtilityBeam>::name("utility_beam");
     BIND_SHIP_SYSTEM(UtilityBeam);
-    BIND_MEMBER(UtilityBeam, active);
-    BIND_MEMBER(UtilityBeam, is_firing);
-    BIND_MEMBER(UtilityBeam, arc);
-    BIND_MEMBER(UtilityBeam, max_arc);
-    BIND_MEMBER(UtilityBeam, fixed_arc);
-    BIND_MEMBER(UtilityBeam, bearing);
-    BIND_MEMBER(UtilityBeam, fixed_bearing);
-    BIND_MEMBER(UtilityBeam, range);
-    BIND_MEMBER(UtilityBeam, max_range);
-    BIND_MEMBER(UtilityBeam, fixed_range);
-    BIND_MEMBER(UtilityBeam, cycle_time);
-    BIND_MEMBER(UtilityBeam, strength);
-    BIND_MEMBER(UtilityBeam, energy_use_per_second);
-    BIND_MEMBER(UtilityBeam, heat_per_second);
-    BIND_MEMBER(UtilityBeam, arc_color);
-    BIND_MEMBER(UtilityBeam, arc_color_fire);
-    BIND_ARRAY(UtilityBeam, custom_beam_modes);
-    BIND_ARRAY_MEMBER(UtilityBeam, custom_beam_modes, name);
-    BIND_ARRAY_MEMBER(UtilityBeam, custom_beam_modes, callback);
-    BIND_ARRAY_MEMBER(UtilityBeam, custom_beam_modes, deactivate_callback);
-    BIND_ARRAY_MEMBER(UtilityBeam, custom_beam_modes, order);
-    BIND_ARRAY_MEMBER(UtilityBeam, custom_beam_modes, energy_per_sec);
-    BIND_ARRAY_MEMBER(UtilityBeam, custom_beam_modes, heat_per_sec);
-    BIND_ARRAY_MEMBER(UtilityBeam, custom_beam_modes, requires_target);
-    BIND_ARRAY_MEMBER(UtilityBeam, custom_beam_modes, progress);
-    BIND_MEMBER(UtilityBeam, crew_positions);
 
     sp::script::ComponentHandler<Reactor>::name("reactor");
     BIND_SHIP_SYSTEM(Reactor);
@@ -787,19 +745,53 @@ void initComponentScriptBindings()
     BIND_MEMBER_NAMED(MissileTubes, storage_max[3], "max_emp");
     BIND_MEMBER_NAMED(MissileTubes, storage[4], "storage_hvli");
     BIND_MEMBER_NAMED(MissileTubes, storage_max[4], "max_hvli");
-    BIND_ARRAY(MissileTubes, mounts);
-    BIND_ARRAY_MEMBER(MissileTubes, mounts, position);
-    BIND_ARRAY_MEMBER(MissileTubes, mounts, load_time);
-    BIND_ARRAY_MEMBER_FLAG(MissileTubes, mounts, type_allowed_mask, "allow_homing", 1 << 0);
-    BIND_ARRAY_MEMBER_FLAG(MissileTubes, mounts, type_allowed_mask, "allow_nuke", 1 << 1);
-    BIND_ARRAY_MEMBER_FLAG(MissileTubes, mounts, type_allowed_mask, "allow_mine", 1 << 2);
-    BIND_ARRAY_MEMBER_FLAG(MissileTubes, mounts, type_allowed_mask, "allow_emp", 1 << 3);
-    BIND_ARRAY_MEMBER_FLAG(MissileTubes, mounts, type_allowed_mask, "allow_hvli", 1 << 4);
-    BIND_ARRAY_MEMBER(MissileTubes, mounts, direction);
-    BIND_ARRAY_MEMBER(MissileTubes, mounts, size);
-    BIND_ARRAY_MEMBER(MissileTubes, mounts, type_loaded);
-    BIND_ARRAY_MEMBER(MissileTubes, mounts, state);
-    BIND_ARRAY_MEMBER(MissileTubes, mounts, delay);
+
+    sp::script::ComponentHandler<Mounts>::name("mounts");
+    BIND_ARRAY(Mounts, mounts);
+    BIND_ARRAY_MEMBER(Mounts, mounts, type);
+    // Common
+    BIND_ARRAY_MEMBER(Mounts, mounts, position);
+    BIND_ARRAY_MEMBER(Mounts, mounts, direction);
+    BIND_ARRAY_MEMBER(Mounts, mounts, turret_arc);
+    BIND_ARRAY_MEMBER(Mounts, mounts, turret_direction);
+    BIND_ARRAY_MEMBER(Mounts, mounts, turret_rotation_rate);
+    BIND_ARRAY_MEMBER(Mounts, mounts, cycle_time);
+    // Beam-specific
+    BIND_ARRAY_MEMBER(Mounts, mounts, arc);
+    BIND_ARRAY_MEMBER(Mounts, mounts, range);
+    BIND_ARRAY_MEMBER(Mounts, mounts, damage);
+    BIND_ARRAY_MEMBER(Mounts, mounts, energy_per_beam_fire);
+    BIND_ARRAY_MEMBER(Mounts, mounts, heat_per_beam_fire);
+    BIND_ARRAY_MEMBER(Mounts, mounts, arc_color);
+    BIND_ARRAY_MEMBER(Mounts, mounts, arc_color_fire);
+    BIND_ARRAY_MEMBER(Mounts, mounts, damage_type);
+    BIND_ARRAY_MEMBER(Mounts, mounts, texture);
+    BIND_ARRAY_MEMBER(Mounts, mounts, cooldown);
+    // Missile-specific
+    BIND_ARRAY_MEMBER(Mounts, mounts, load_time);
+    BIND_ARRAY_MEMBER_FLAG(Mounts, mounts, type_allowed_mask, "allow_homing", 1 << 0);
+    BIND_ARRAY_MEMBER_FLAG(Mounts, mounts, type_allowed_mask, "allow_nuke", 1 << 1);
+    BIND_ARRAY_MEMBER_FLAG(Mounts, mounts, type_allowed_mask, "allow_mine", 1 << 2);
+    BIND_ARRAY_MEMBER_FLAG(Mounts, mounts, type_allowed_mask, "allow_emp", 1 << 3);
+    BIND_ARRAY_MEMBER_FLAG(Mounts, mounts, type_allowed_mask, "allow_hvli", 1 << 4);
+    BIND_ARRAY_MEMBER(Mounts, mounts, missile_size);
+    BIND_ARRAY_MEMBER(Mounts, mounts, type_loaded);
+    BIND_ARRAY_MEMBER(Mounts, mounts, state);
+    BIND_ARRAY_MEMBER(Mounts, mounts, delay);
+    // Utility-specific
+    BIND_ARRAY_MEMBER(Mounts, mounts, max_arc);
+    BIND_ARRAY_MEMBER(Mounts, mounts, fixed_arc);
+    BIND_ARRAY_MEMBER(Mounts, mounts, max_range);
+    BIND_ARRAY_MEMBER(Mounts, mounts, fixed_range);
+    BIND_ARRAY_MEMBER(Mounts, mounts, bearing);
+    BIND_ARRAY_MEMBER(Mounts, mounts, fixed_bearing);
+    BIND_ARRAY_MEMBER(Mounts, mounts, strength);
+    BIND_ARRAY_MEMBER(Mounts, mounts, energy_use_per_second);
+    BIND_ARRAY_MEMBER(Mounts, mounts, heat_per_second);
+    BIND_ARRAY_MEMBER(Mounts, mounts, active);
+    BIND_ARRAY_MEMBER(Mounts, mounts, is_firing);
+    BIND_ARRAY_MEMBER(Mounts, mounts, custom_beam_mode);
+    BIND_ARRAY_MEMBER(Mounts, mounts, crew_positions);
 
     sp::script::ComponentHandler<MissileFlight>::name("missile_flight");
     BIND_MEMBER(MissileFlight, speed);

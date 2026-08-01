@@ -15,6 +15,7 @@
 #include "components/shields.h"
 #include "components/target.h"
 #include "components/utilityBeam.h"
+#include "components/mounts.h"
 
 #include "screenComponents/aimLock.h"
 #include "screenComponents/alertOverlay.h"
@@ -121,7 +122,13 @@ MissileWeaponsScreen::MissileWeaponsScreen(GuiContainer* owner)
         ->setTextSize(20.0f)
         ->setSize(240.0f, 40.0f);
 
-    auto ub = my_spaceship.getComponent<UtilityBeam>();
+    auto mounts_comp = my_spaceship.getComponent<Mounts>();
+    const Mount* ub_mount = nullptr;
+    if (mounts_comp) {
+        for (auto& m : mounts_comp->mounts) {
+            if (m.type == MountType::UtilityBeam) { ub_mount = &m; break; }
+        }
+    }
 
     sidebar_selector = new GuiSelector(this, "MISSILE_WEAPONS_SIDEBAR_SELECTOR",
         [this](int index, string value)
@@ -169,7 +176,7 @@ MissileWeaponsScreen::MissileWeaponsScreen(GuiContainer* owner)
         sidebar_selector->show();
     }
 
-    if (ub && ub->crew_positions.has(CrewPosition::weaponsOfficer))
+    if (ub_mount && ub_mount->crew_positions.has(CrewPosition::weaponsOfficer))
     {
         sidebar_selector->addEntry(tr("weaponsTab", "Utility beam"), "util");
         sidebar_selector->show();
@@ -317,7 +324,13 @@ void MissileWeaponsScreen::onUpdate()
         }
     }
 
-    auto utility_beam = my_spaceship.getComponent<UtilityBeam>();
+    auto mounts_comp = my_spaceship.getComponent<Mounts>();
+    const Mount* ub_mount = nullptr;
+    if (mounts_comp) {
+        for (auto& m : mounts_comp->mounts) {
+            if (m.type == MountType::UtilityBeam) { ub_mount = &m; break; }
+        }
+    }
 
     // Synchronize the Functions sidebar tab with current custom ship functions.
     bool should_have_func_tab = custom_function_sidebar->hasEntries();
@@ -363,7 +376,7 @@ void MissileWeaponsScreen::onUpdate()
     }
 
     // Synchronize the Utility Beam sidebar tab with the current crew_positions mask.
-    bool should_have_util_tab = utility_beam && utility_beam->crew_positions.has(CrewPosition::weaponsOfficer);
+    bool should_have_util_tab = ub_mount && ub_mount->crew_positions.has(CrewPosition::weaponsOfficer);
     bool has_util_tab = sidebar_selector->indexByValue("util") != -1;
     if (should_have_util_tab && !has_util_tab)
     {

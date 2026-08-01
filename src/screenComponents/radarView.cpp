@@ -15,6 +15,7 @@
 #include "components/hull.h"
 #include "components/impulse.h"
 #include "components/missiletubes.h"
+#include "components/mounts.h"
 #include "components/missileWeaponTarget.h"
 #include "components/name.h"
 #include "components/radar.h"
@@ -646,11 +647,12 @@ void GuiRadarView::drawTargetProjections(sp::RenderTarget& renderer)
 
     if (transform && has_aim)
     {
-        if (auto tubes = entity.getComponent<MissileTubes>())
+        if (auto mounts = entity.getComponent<Mounts>())
         {
-            for (auto& mount : tubes->mounts)
+            for (auto& mount : mounts->mounts)
             {
-                if (mount.state != MissileTubes::MountPoint::State::Loaded) continue;
+                if (mount.type != MountType::MissileWeapon) continue;
+                if (mount.state != MountState::Loaded) continue;
                 auto fire_position = transform->getPosition() + rotateVec2(glm::vec2(mount.position), transform->getRotation());
 
                 auto& registry = MissileWeaponDataRegistry::instance();
@@ -794,16 +796,17 @@ void GuiRadarView::drawMissileTubes(sp::RenderTarget& renderer)
     float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
     auto entity = target_projection_entity ? target_projection_entity : my_spaceship;
 
-    auto tubes = entity.getComponent<MissileTubes>();
-    if (!tubes) return;
+    auto mounts = entity.getComponent<Mounts>();
+    if (!mounts) return;
 
     auto transform = entity.getComponent<sp::Transform>();
     if (!transform) return;
 
     const auto& color = theme->getStyle("radar.missile_tubes")->get(getState()).color;
 
-    for (auto& mount : tubes->mounts)
+    for (auto& mount : mounts->mounts)
     {
+        if (mount.type != MountType::MissileWeapon) continue;
         auto fire_position = transform->getPosition() + rotateVec2(glm::vec2(mount.position), transform->getRotation());
         auto fire_draw_position = worldToScreen(fire_position);
 

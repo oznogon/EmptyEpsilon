@@ -42,6 +42,16 @@ public:
     string description;
     // Callbacks run when applying changes to the tweak page.
     std::vector<std::function<void()>> apply_functions;
+    // Tweak rows with conditional visibility, for context-dependent properties.
+    struct ConditionalTweaks
+    {
+        // First and last child index of the tweaks container to show or hide.
+        size_t begin;
+        size_t end;
+        // Condition that must hold for the rows to be visible.
+        std::function<bool()> condition;
+    };
+    std::vector<ConditionalTweaks> conditional_tweaks;
 
     // Entity selected for tweaking.
     sp::ecs::Entity entity;

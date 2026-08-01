@@ -249,6 +249,41 @@ function ShipTemplate:setRepairCrewCount(amount)
     self.__repair_crew_count = amount
     return self
 end
+function ShipTemplate:__initMounts()
+    if self.mounts == nil then
+        self.mounts = { mounts = {} }
+    end
+    if self.mounts.mounts == nil then
+        self.mounts.mounts = {}
+    end
+end
+
+function ShipTemplate:__findNthMountOfType(mount_type, index)
+    self:__initMounts()
+    local count = 0
+    for i, m in ipairs(self.mounts.mounts) do
+        if m.type == mount_type then
+            if count == index then
+                return i, m
+            end
+            count = count + 1
+        end
+    end
+    return nil, nil
+end
+
+function ShipTemplate:__countMountsOfType(mount_type)
+    local count = 0
+    if self.mounts and self.mounts.mounts then
+        for _, m in ipairs(self.mounts.mounts) do
+            if m.type == mount_type then
+                count = count + 1
+            end
+        end
+    end
+    return count
+end
+
 --- As ShipTemplate:setBeamWeapon().
 function ShipTemplate:setBeam(index, arc, direction, range, cycle_time, damage)
     return self:setBeamWeapon(index, arc, direction, range, cycle_time, damage)
@@ -271,11 +306,27 @@ function ShipTemplate:setBeamWeapon(
     cycle_time,
     damage
 )
-    if self.beam_weapons == nil then
+    self:__initMounts()
+    if not self.beam_weapons then
         self.beam_weapons = {}
     end
-    while #self.beam_weapons < index + 1 do
-        self.beam_weapons[#self.beam_weapons + 1] = {}
+    local beam_count = self:__countMountsOfType(0)
+    while beam_count <= index do
+        local m = { type = 0 }
+        table.insert(self.mounts.mounts, m)
+        beam_count = beam_count + 1
+    end
+
+    local beam_idx = 0
+    local abs_idx
+    for i, m in ipairs(self.mounts.mounts) do
+        if m.type == 0 then
+            if beam_idx == index then
+                abs_idx = i
+                break
+            end
+            beam_idx = beam_idx + 1
+        end
     end
 
     local model = __model_data[self.__model_data_name]
@@ -284,16 +335,15 @@ function ShipTemplate:setBeamWeapon(
     if pos then
         pos = { pos[1] * scale, pos[2] * scale, pos[3] * scale }
     end
-    self.beam_weapons[index + 1] = {
-        arc = arc,
-        direction = direction,
-        range = range,
-        cycle_time = cycle_time,
-        damage = damage,
-        position = pos,
-    }
-    if range <= 0 and #self.beam_weapons == index + 1 then
-        self.beam_weapons[index + 1] = nil
+    local m = self.mounts.mounts[abs_idx]
+    m.arc = arc
+    m.direction = direction
+    m.range = range
+    m.cycle_time = cycle_time
+    m.damage = damage
+    m.position = pos
+    if range <= 0 and abs_idx == #self.mounts.mounts then
+        self.mounts.mounts[abs_idx] = nil
     end
     return self
 end
@@ -308,16 +358,22 @@ end
 --- -- Makes beam weapon 0 a turret with a 200-degree turret arc centered on 90 degrees from forward, rotating at 5 degrees per tick (unit?)
 --- template:setBeamWeaponTurret(0,200,90,5)
 function ShipTemplate:setBeamWeaponTurret(index, arc, direction, rotation_rate)
-    self.beam_weapons[index + 1].turret_arc = arc
-    self.beam_weapons[index + 1].turret_direction = direction
-    self.beam_weapons[index + 1].turret_rotation_rate = rotation_rate
+    local _, m = self:__findNthMountOfType(0, index)
+    if m then
+        m.turret_arc = arc
+        m.turret_direction = direction
+        m.turret_rotation_rate = rotation_rate
+    end
     return self
 end
 --- Sets the BeamEffect texture, by filename, for the BeamWeapon with the given index on ships created from this ShipTemplate.
 --- See BeamEffect:setTexture().
 --- Example: template:setBeamTexture(0, "texture/beam_blue.png")
 function ShipTemplate:setBeamTexture(index, texture)
-    self.beam_weapons[index + 1].texture = texture
+    local _, m = self:__findNthMountOfType(0, index)
+    if m then
+        m.texture = texture
+    end
     return self
 end
 --- Sets how much energy is drained each time the BeamWeapon with the given index is fired.
@@ -325,7 +381,10 @@ end
 --- Defaults to 3.0, as defined in src/components/beamweapon.h.
 --- Example: template:setBeamWeaponEnergyPerFire(0,1) -- sets beam 0 to use 1 energy per firing
 function ShipTemplate:setBeamWeaponEnergyPerFire(index, amount)
-    self.beam_weapons[index + 1].energy_per_beam_fire = amount
+    local _, m = self:__findNthMountOfType(0, index)
+    if m then
+        m.energy_per_beam_fire = amount
+    end
     return self
 end
 --- Sets how much "beamweapon" system heat is generated, in percentage of total system heat capacity, each time the BeamWeapon with the given index is fired.
@@ -333,21 +392,43 @@ end
 --- Defaults to 0.02, as defined in src/components/beamweapon.h.
 --- Example: template:setBeamWeaponHeatPerFire(0,0.5) -- sets beam 0 to generate 0.5 (50%) system heat per firing
 function ShipTemplate:setBeamWeaponHeatPerFire(index, amount)
-    self.beam_weapons[index + 1].heat_per_beam_fire = amount
+    local _, m = self:__findNthMountOfType(0, index)
+    if m then
+        m.heat_per_beam_fire = amount
+    end
     return self
 end
 
 --- Defines the ship's Utility Beam and sets its maximum arc, range, cycle_time, and strength.
 function ShipTemplate:setUtilityBeam(max_arc, max_range, cycle_time, strength)
-    if self.utility_beam == nil then
+    if not self.utility_beam then
         self.utility_beam = {}
     end
-    self.utility_beam = {
+
+    self:__initMounts()
+    local existing_idx = nil
+    for i, m in ipairs(self.mounts.mounts) do
+        if m.type == 2 then
+            existing_idx = i
+            break
+        end
+    end
+
+    if existing_idx then
+        table.remove(self.mounts.mounts, existing_idx)
+    end
+
+    table.insert(self.mounts.mounts, {
+        type = 2,
+        arc = max_arc,
+        direction = 0,
+        range = max_range,
+        cycle_time = cycle_time,
         max_arc = max_arc,
         max_range = max_range,
-        cycle_time = cycle_time,
         strength = strength,
-    }
+    })
+
     return self
 end
 
@@ -357,24 +438,34 @@ end
 --- The default ShipTemplate adds 0 tubes and an 8-second loading time.
 --- Example: template:setTubes(6,15.0) -- creates 6 weapon tubes with 15-second loading times
 function ShipTemplate:setTubes(amount, loading_time)
-    if self.missile_tubes == nil then
+    self:__initMounts()
+    if not self.missile_tubes then
         self.missile_tubes = {}
     end
-    for n = 1, amount do
-        if #self.missile_tubes < n then
-            self.missile_tubes[n] = { load_time = loading_time }
-        else
-            self.missile_tubes[n].load_time = loading_time
+    local new_mounts = {}
+    for _, m in ipairs(self.mounts.mounts) do
+        if m.type ~= 1 then
+            table.insert(new_mounts, m)
         end
     end
-    self.missile_tubes[amount + 1] = nil
+    for n = 1, amount do
+        table.insert(new_mounts, {
+            type = 1,
+            direction = 0,
+            load_time = loading_time
+        })
+    end
+    self.mounts.mounts = new_mounts
     return self
 end
 --- Sets the delay, in seconds, for loading and unloading the WeaponTube with the given index.
 --- Defaults to 8.0.
 --- Example: template:setTubeLoadTime(0,12) -- sets the loading time for tube 0 to 12 seconds
 function ShipTemplate:setTubeLoadTime(index, time)
-    self.missile_tubes[index + 1].load_time = time
+    local _, m = self:__findNthMountOfType(1, index)
+    if m then
+        m.load_time = time
+    end
     return self
 end
 --- Sets which weapon types the WeaponTube with the given index can load.
@@ -382,7 +473,10 @@ end
 --- Example: template:weaponTubeAllowMissle(0,"Homing") -- allows Homing missiles to be loaded in tube 0
 function ShipTemplate:weaponTubeAllowMissle(index, type)
     local type = string.lower(type)
-    self.missile_tubes[index + 1]["allow_" .. type] = true
+    local _, m = self:__findNthMountOfType(1, index)
+    if m then
+        m["allow_" .. type] = true
+    end
     return self
 end
 --- Sets which weapon types the WeaponTube with the given index can't load.
@@ -390,19 +484,25 @@ end
 --- Example: template:weaponTubeDisallowMissle(0,"Homing") -- prevents Homing missiles from being loaded in tube 0
 function ShipTemplate:weaponTubeDisallowMissle(index, type)
     local type = string.lower(type)
-    self.missile_tubes[index + 1]["allow_" .. type] = false
+    local _, m = self:__findNthMountOfType(1, index)
+    if m then
+        m["allow_" .. type] = false
+    end
     return self
 end
 --- Sets a WeaponTube with the given index to allow loading only the given weapon type.
 --- Example: template:setWeaponTubeExclusiveFor(0,"Homing") -- allows only Homing missiles to be loaded in tube 0
 function ShipTemplate:setWeaponTubeExclusiveFor(index, type)
     local type = string.lower(type)
-    self.missile_tubes[index + 1]["allow_homing"] = false
-    self.missile_tubes[index + 1]["allow_nuke"] = false
-    self.missile_tubes[index + 1]["allow_mine"] = false
-    self.missile_tubes[index + 1]["allow_emp"] = false
-    self.missile_tubes[index + 1]["allow_hvli"] = false
-    self.missile_tubes[index + 1]["allow_" .. type] = true
+    local _, m = self:__findNthMountOfType(1, index)
+    if m then
+        m["allow_homing"] = false
+        m["allow_nuke"] = false
+        m["allow_mine"] = false
+        m["allow_emp"] = false
+        m["allow_hvli"] = false
+        m["allow_" .. type] = true
+    end
     return self
 end
 --- Sets the angle, relative to the entity's forward bearing, toward which the WeaponTube with the given index points.
@@ -411,14 +511,20 @@ end
 --- -- Sets tube 0 to point 90 degrees right of forward, and tube 1 to point 90 degrees left of forward
 --- template:setTubeDirection(0,90):setTubeDirection(1,-90)
 function ShipTemplate:setTubeDirection(index, direction)
-    self.missile_tubes[index + 1].direction = direction
+    local _, m = self:__findNthMountOfType(1, index)
+    if m then
+        m.direction = direction
+    end
     return self
 end
 --- Sets the weapon size launched from the WeaponTube with the given index.
 --- Defaults to "medium".
 --- Example: template:setTubeSize(0,"large") -- sets tube 0 to fire large weapons
 function ShipTemplate:setTubeSize(index, size)
-    self.missile_tubes[index + 1].size = size
+    local _, m = self:__findNthMountOfType(1, index)
+    if m then
+        m.missile_size = size
+    end
     return self
 end
 --- Sets the number of default hull points for entities created from this ShipTemplate.

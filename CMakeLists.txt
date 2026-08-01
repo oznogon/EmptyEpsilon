@@ -380,6 +380,7 @@ set(MAIN_SOURCES
     src/components/shields.cpp
     src/components/beamweapon.h
     src/components/beamweapon.cpp
+    src/components/mounts.h
     src/components/utilityBeam.h
     src/components/utilityBeam.cpp
     src/components/target.h
@@ -556,6 +557,8 @@ set(MAIN_SOURCES
     src/multiplayer/missile.cpp
     src/multiplayer/missiletubes.h
     src/multiplayer/missiletubes.cpp
+    src/multiplayer/mounts.h
+    src/multiplayer/mounts.cpp
     src/multiplayer/missileWeaponDataRep.h
     src/multiplayer/missileWeaponDataRep.cpp
     src/multiplayer/sfx.h

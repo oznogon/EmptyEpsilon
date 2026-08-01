@@ -69,6 +69,8 @@ variation
     :setSpeed(55, 10, 10)
     :weaponTubeDisallowMissle(0, "Mine")
     :weaponTubeDisallowMissle(1, "Mine")
+    :setTubeDirection(0, -1)
+    :setTubeDirection(1, 1)
     :setTubeDirection(2, 180)
     :setWeaponTubeExclusiveFor(2, "Mine")
 

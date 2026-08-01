@@ -7,8 +7,29 @@
 
 require("utils.lua")
 
+function getEmitterUtilityBeam(entity)
+    local mounts = entity.components.mounts
+    if mounts then
+        for i = 1, #mounts do
+            local m = mounts[i]
+            if m and m.type == "utility" then
+                return m
+            end
+        end
+    end
+    return nil
+end
+
+function getUtilityBeamHeatRate(entity)
+    local utility_beam = getEmitterUtilityBeam(entity)
+    if utility_beam then
+        return utility_beam.heat_per_second
+    end
+    return 0.0
+end
+
 function checkBeamCapability(beam_emitter)
-    local emitter_utility_beam = beam_emitter.components.utility_beam
+    local emitter_utility_beam = getEmitterUtilityBeam(beam_emitter)
     local emitter_utility_beam_effectiveness = math.max(
         beam_emitter:getSystemHealth("utilitybeam"),
         0.0
@@ -68,7 +89,7 @@ function transferHomingMissile(
         beam_emitter:setSystemHeat(
             "utilitybeam",
             beam_emitter:getSystemHeat("utilitybeam")
-                + emitter_utility_beam.heat_add_rate_per_second
+                + getUtilityBeamHeatRate(beam_emitter)
                     * beam_emitter:getSystemPower("utilitybeam")
                     * global_delta
         )
@@ -129,7 +150,7 @@ function transferRepairCrew(
         beam_emitter:setSystemHeat(
             "utilitybeam",
             beam_emitter:getSystemHeat("utilitybeam")
-                + emitter_utility_beam.heat_add_rate_per_second
+                + getUtilityBeamHeatRate(beam_emitter)
                     * beam_emitter:getSystemPower("utilitybeam")
                     * global_delta
         )
@@ -197,7 +218,7 @@ function convertFaction(
         beam_emitter:setSystemHeat(
             "utilitybeam",
             beam_emitter:getSystemHeat("utilitybeam")
-                + emitter_utility_beam.heat_add_rate_per_second
+                + getUtilityBeamHeatRate(beam_emitter)
                     * beam_emitter:getSystemPower("utilitybeam")
                     * global_delta
         )
@@ -277,11 +298,18 @@ function init()
         :setTemplate("Small Station")
         :setFaction("Human Navy")
         :setRotation(random(0, 360))
-    Asteroid():setPosition(-600, 0):setSize(100)
-    Asteroid():setPosition(-600, 100):setSize(100)
-    Asteroid():setPosition(-600, -100):setSize(100)
 
-    local utility_beam = player_ship.components.utility_beam
+    function MineableAsteroid()
+        e = Asteroid()
+        e.can_be_mined = true
+        return e
+    end
+
+    MineableAsteroid():setPosition(-600, 0):setSize(100)
+    MineableAsteroid():setPosition(-600, 250):setSize(100)
+    Asteroid():setPosition(-600, -250):setSize(100)
+
+    local utility_beam = getEmitterUtilityBeam(player_ship)
     incremental_effect = 0
 
     if utility_beam then
@@ -306,7 +334,7 @@ function init()
                             beam_emitter,
                             beam_target,
                             emitter_utility_beam_energy_use_per_delta,
-                            emitter_utility_beam.heat_add_rate_per_second,
+                            getUtilityBeamHeatRate(beam_emitter),
                             emitter_utility_beam_effectiveness,
                             distance,
                             angle_diff
@@ -368,7 +396,7 @@ function init()
                             beam_emitter,
                             beam_target,
                             emitter_utility_beam_energy_use_per_delta,
-                            emitter_utility_beam.heat_add_rate_per_second,
+                            getUtilityBeamHeatRate(beam_emitter),
                             emitter_utility_beam_effectiveness,
                             distance,
                             angle_diff
@@ -432,7 +460,7 @@ function init()
                             beam_emitter,
                             beam_target,
                             emitter_utility_beam_energy_use_per_delta,
-                            emitter_utility_beam.heat_add_rate_per_second,
+                            getUtilityBeamHeatRate(beam_emitter),
                             emitter_utility_beam_effectiveness,
                             distance,
                             angle_diff
@@ -480,7 +508,7 @@ function init()
                             beam_emitter,
                             beam_target,
                             emitter_utility_beam_energy_use_per_delta,
-                            emitter_utility_beam.heat_add_rate_per_second,
+                            getUtilityBeamHeatRate(beam_emitter),
                             emitter_utility_beam_effectiveness,
                             distance,
                             angle_diff
@@ -543,7 +571,7 @@ function init()
                         beam_emitter:setSystemHeat(
                             "utilitybeam",
                             beam_emitter:getSystemHeat("utilitybeam")
-                                + emitter_utility_beam.heat_add_rate_per_second
+                                + getUtilityBeamHeatRate(beam_emitter)
                                     * global_delta
                         )
                     else
@@ -565,7 +593,7 @@ function init()
 
                     local can_fire, emitter_utility_beam, emitter_utility_beam_effectiveness, emitter_utility_beam_energy_use_per_delta =
                         checkBeamCapability(beam_emitter)
-                    local drain_amount = emitter_utility_beam.heat_add_rate_per_second
+                    local drain_amount = getUtilityBeamHeatRate(beam_emitter)
                         * 100
                         * global_delta
 
@@ -581,7 +609,7 @@ function init()
                         beam_emitter:setSystemHeat(
                             "utilitybeam",
                             beam_emitter:getSystemHeat("utilitybeam")
-                                + emitter_utility_beam.heat_add_rate_per_second
+                                + getUtilityBeamHeatRate(beam_emitter)
                                     * global_delta
                         )
                     else
@@ -602,8 +630,8 @@ function init()
 
                     if
                         can_fire
-                        and beam_target.components.missile_tubes
-                        and beam_emitter.components.missile_tubes
+                        and beam_target.components.mounts
+                        and beam_emitter.components.mounts
                         and beam_target:isFriendly(beam_emitter)
                     then
                         transferHomingMissile(
@@ -635,8 +663,8 @@ function init()
 
                     if
                         can_fire
-                        and beam_target.components.missile_tubes
-                        and beam_emitter.components.missile_tubes
+                        and beam_target.components.mounts
+                        and beam_emitter.components.mounts
                     then
                         transferHomingMissile(
                             beam_emitter,
@@ -668,8 +696,9 @@ function init()
                     if
                         can_fire
                         and isObjectType(beam_target, "Asteroid") == true
+                        and beam_target.can_be_mined == true
                     then
-                        -- log("Inside mine asteroid - isObjectType Asteroid is true")
+                        log("Inside mine asteroid - isObjectType Asteroid is true")
                         -- Beam strength = amount mined per 10 seconds
                         local amount_mined_per_tick = emitter_utility_beam.strength
                             * 0.01
@@ -678,7 +707,7 @@ function init()
                         local hull = beam_emitter.components.hull
 
                         if hull then
-                            -- log("- Hull component check passed. hull.current = " .. hull.current .. " hull.max = " .. hull.max)
+                            log("- Hull component check passed. hull.current = " .. hull.current .. " hull.max = " .. hull.max)
 
                             if hull.current < hull.max then
                                 beam_emitter:setEnergy(
@@ -688,7 +717,7 @@ function init()
                                 beam_emitter:setSystemHeat(
                                     "utilitybeam",
                                     beam_emitter:getSystemHeat("utilitybeam")
-                                        + emitter_utility_beam.heat_add_rate_per_second
+                                        + getUtilityBeamHeatRate(beam_emitter)
                                             * beam_emitter:getSystemPower(
                                                 "utilitybeam"
                                             )
@@ -701,12 +730,12 @@ function init()
                                 if amount_mined_per_tick > asteroid_size then
                                     incremental_effect = incremental_effect
                                         + asteroid_size
-                                    -- log("- amount_mined: " .. incremental_effect .. " and asteroid destroyed")
+                                    log("- amount_mined: " .. incremental_effect .. " and asteroid destroyed")
                                     beam_target:destroy()
                                 else
                                     incremental_effect = incremental_effect
                                         + amount_mined_per_tick
-                                    -- log("- amount_mined: " .. incremental_effect .. ", asteroid_size: " .. asteroid_size)
+                                    log("- amount_mined: " .. incremental_effect .. ", asteroid_size: " .. asteroid_size)
                                     beam_target:setSize(
                                         asteroid_size - amount_mined_per_tick
                                     )
@@ -715,18 +744,18 @@ function init()
                                 if incremental_effect > 1 then
                                     incremental_effect = incremental_effect - 1
                                     hull.current = hull.current + 0.1
-                                    -- log("- amount_mined: " .. incremental_effect .. " after repairing hull")
+                                    log("- amount_mined: " .. incremental_effect .. " after repairing hull")
                                 end
                             else
-                                -- log("- Hull component capacity check failed. hull.current = " .. hull.current .. " hull.max = " .. hull.max)
+                                log("- Hull component capacity check failed. hull.current = " .. hull.current .. " hull.max = " .. hull.max)
                                 emitter_utility_beam.is_firing = false
                             end
                         else
-                            -- log("- Hull component presence check failed.")
+                            log("- Hull component presence check failed.")
                             emitter_utility_beam.is_firing = false
                         end
                     else
-                        -- log("Inside mine asteroid - isObjectType Asteroid is false")
+                        log("Inside mine asteroid - isObjectType Asteroid is false")
                         emitter_utility_beam.is_firing = false
                     end
                 end
@@ -868,7 +897,7 @@ function init()
                     beam_emitter:setSystemHeat(
                         "utilitybeam",
                         beam_emitter:getSystemHeat("utilitybeam")
-                            + emitter_utility_beam.heat_add_rate_per_second
+                            + getUtilityBeamHeatRate(beam_emitter)
                                 * beam_emitter:getSystemPower("utilitybeam")
                                 * global_delta
                     )
@@ -893,7 +922,7 @@ function init()
                         beam_emitter:setSystemHeat(
                             "utilitybeam",
                             beam_emitter:getSystemHeat("utilitybeam")
-                                + emitter_utility_beam.heat_add_rate_per_second
+                                + getUtilityBeamHeatRate(beam_emitter)
                                     * beam_emitter:getSystemPower("utilitybeam")
                                     * global_delta
                         )
@@ -940,7 +969,7 @@ function init()
                         beam_emitter:setSystemHeat(
                             "utilitybeam",
                             beam_emitter:getSystemHeat("utilitybeam")
-                                + emitter_utility_beam.heat_add_rate_per_second
+                                + getUtilityBeamHeatRate(beam_emitter)
                                     * beam_emitter:getSystemPower("utilitybeam")
                                     * global_delta
                         )
@@ -979,7 +1008,7 @@ function init()
                         checkBeamCapability(beam_emitter)
                     local target_shields = beam_target.components.shields
                     local emitter_beam_weapons =
-                        beam_emitter.components.beam_weapons
+                        beam_emitter.components.mounts
                     if can_fire and target_shields and emitter_beam_weapons then
                         -- Initialize harmonization progress counter if necessary
                         if beam_target.harmonize_progress == nil then
@@ -1000,7 +1029,7 @@ function init()
                         beam_emitter:setSystemHeat(
                             "utilitybeam",
                             beam_emitter:getSystemHeat("utilitybeam")
-                                + emitter_utility_beam.heat_add_rate_per_second
+                                + getUtilityBeamHeatRate(beam_emitter)
                                     * beam_emitter:getSystemPower("utilitybeam")
                                     * global_delta
                         )
@@ -1123,7 +1152,7 @@ function init()
                         beam_emitter:setSystemHeat(
                             "utilitybeam",
                             beam_emitter:getSystemHeat("utilitybeam")
-                                + emitter_utility_beam.heat_add_rate_per_second
+                                + getUtilityBeamHeatRate(beam_emitter)
                                     * beam_emitter:getSystemPower("utilitybeam")
                                     * global_delta
                         )
@@ -1166,7 +1195,7 @@ function init()
                         beam_emitter:setSystemHeat(
                             "utilitybeam",
                             beam_emitter:getSystemHeat("utilitybeam")
-                                + emitter_utility_beam.heat_add_rate_per_second
+                                + getUtilityBeamHeatRate(beam_emitter)
                                     * beam_emitter:getSystemPower("utilitybeam")
                                     * global_delta
                         )
@@ -1236,7 +1265,7 @@ function init()
                             beam_emitter:setSystemHeat(
                                 "utilitybeam",
                                 beam_emitter:getSystemHeat("utilitybeam")
-                                    + emitter_utility_beam.heat_add_rate_per_second
+                                    + getUtilityBeamHeatRate(beam_emitter)
                                         * beam_emitter:getSystemPower(
                                             "utilitybeam"
                                         )
@@ -1353,7 +1382,7 @@ function tractorBeamSetup(
     distance,
     angle_diff
 )
-    local utility_beam = beam_emitter.components.utility_beam
+    local utility_beam = getEmitterUtilityBeam(beam_emitter)
 
     -- Don't bother if physics are static.
     -- TODO Check for redundancy with distance and angle_diff params

@@ -6,6 +6,7 @@
 #include "components/docking.h"
 #include "components/missiletubes.h"
 #include "components/beamweapon.h"
+#include "components/mounts.h"
 #include "components/utilityBeam.h"
 #include "components/collision.h"
 #include "components/jumpdrive.h"
@@ -159,18 +160,21 @@ float EvasionAI::evasionDangerScore(sp::ecs::Entity ship, float scan_radius)
     float enemy_max_utility_range = 0.0f;
     float enemy_missile_strength = 0.0f;
 
-    auto tubes = ship.getComponent<MissileTubes>();
-    if (tubes) {
-        for(auto& tube : tubes->mounts)
+    auto ship_mounts = ship.getComponent<Mounts>();
+    if (ship_mounts) {
+        for(auto& mount : ship_mounts->mounts)
         {
-            if (tube.state != MissileTubes::MountPoint::State::Empty)
-                enemy_missile_strength += getMissileWeaponStrength(tube.type_loaded);
+            if (mount.type != MountType::MissileWeapon)
+                continue;
+            if (mount.state != MountState::Empty)
+                enemy_missile_strength += getMissileWeaponStrength(mount.type_loaded);
         }
     }
 
-    auto beamsystem = ship.getComponent<BeamWeaponSys>();
-    if (beamsystem) {
-        for(auto& mount : beamsystem->mounts) {
+    if (ship_mounts) {
+        for(auto& mount : ship_mounts->mounts) {
+            if (mount.type != MountType::BeamWeapon)
+                continue;
             if (mount.range > 0.0f) {
                 enemy_max_beam_range = std::max(enemy_max_beam_range, mount.range);
                 if (mount.cycle_time > 0.0f)
@@ -179,11 +183,14 @@ float EvasionAI::evasionDangerScore(sp::ecs::Entity ship, float scan_radius)
         }
     }
 
-    auto utility = ship.getComponent<UtilityBeam>();
-    if (utility) {
-        if (utility->range > 0.0f)
-        {
-            enemy_max_utility_range = std::max(enemy_max_utility_range, utility->range);
+    if (ship_mounts) {
+        for(auto& mount : ship_mounts->mounts) {
+            if (mount.type != MountType::UtilityBeam)
+                continue;
+            if (mount.max_range > 0.0f)
+            {
+                enemy_max_utility_range = std::max(enemy_max_utility_range, mount.max_range);
+            }
         }
     }
 

@@ -12,6 +12,7 @@
 #include "components/impulse.h"
 #include "components/jumpdrive.h"
 #include "components/missiletubes.h"
+#include "components/mounts.h"
 #include "components/player.h"
 #include "components/reactor.h"
 #include "components/selfdestruct.h"
@@ -512,28 +513,51 @@ bool HardwareController::getVariableValue(string variable_name, float& value)
     /// if the ship's self-destruct system has been authorized.
     SHIP_VARIABLE("SelfDestructCountdown", SelfDestruct, c->countdown / PreferencesManager::get("self_destruct_countdown", "10").toFloat());
     /// UtilityBeamActive: Returns 1.0 if the Utility Beam is active.
-    SHIP_VARIABLE("UtilityBeamActive", UtilityBeam, c->active ? 1.0f : 0.0f);
-    /// UtilityBeamFiring: Returns 1.0 if the Utility Beam is active and also
-    /// firing at a target.
-    SHIP_VARIABLE("UtilityBeamFiring", UtilityBeam, c->is_firing ? 1.0f : 0.0f);
-    /// UtilityBeamCooldown: Returns the percentage of the remaining
-    /// Utility Beam cooldown.
-    SHIP_VARIABLE("UtilityBeamCooldown", UtilityBeam, c->cycle_time > 0.0f ? c->cooldown / c->cycle_time : 0.0f);
+    if (auto mounts = ship.getComponent<Mounts>())
+    {
+        for (auto& m : mounts->mounts)
+        {
+            if (m.type == MountType::UtilityBeam)
+            {
+                if (variable_name == "UtilityBeamActive") { value = m.active ? 1.0f : 0.0f; return true; }
+                /// UtilityBeamFiring: Returns 1.0 if the Utility Beam is active and also
+                /// firing at a target.
+                if (variable_name == "UtilityBeamFiring") { value = m.is_firing ? 1.0f : 0.0f; return true; }
+                /// UtilityBeamCooldown: Returns the percentage of the remaining
+                /// Utility Beam cooldown.
+                if (variable_name == "UtilityBeamCooldown") { value = m.cycle_time > 0.0f ? m.cooldown / m.cycle_time : 0.0f; return true; }
+                break;
+            }
+        }
+    }
 
     for (unsigned int n = 0; n < 16; n++)
     {
-        /// TubeLoaded0 to TubeLoaded15: Returns 1 if the given weapon tube's
-        /// state is Loaded.
-        SHIP_VARIABLE("TubeLoaded" + string(n), MissileTubes, c->mounts.size() > n && c->mounts[n].state == MissileTubes::MountPoint::State::Loaded ? 1.0f : 0.0f);
-        /// TubeLoading0 to TubeLoading15: Returns 1 if the given weapon tube's
-        /// state is Loading.
-        SHIP_VARIABLE("TubeLoading" + string(n), MissileTubes, c->mounts.size() > n && c->mounts[n].state == MissileTubes::MountPoint::State::Loading ? 1.0f : 0.0f);
-        /// TubeUnloading0 to TubeUnloading15: Returns 1 if the given weapon
-        /// tube's state is Unloading.
-        SHIP_VARIABLE("TubeUnloading" + string(n), MissileTubes, c->mounts.size() > n && c->mounts[n].state == MissileTubes::MountPoint::State::Unloading ? 1.0f : 0.0f);
-        /// TubeFiring0 to TubeFiring15: Returns 1 if the given weapon tube's
-        /// state is Firing.
-        SHIP_VARIABLE("TubeFiring" + string(n), MissileTubes, c->mounts.size() > n && c->mounts[n].state == MissileTubes::MountPoint::State::Firing ? 1.0f : 0.0f);
+        if (auto mounts = ship.getComponent<Mounts>())
+        {
+            unsigned int count = 0;
+            for (auto& m : mounts->mounts)
+            {
+                if (m.type != MountType::MissileWeapon) continue;
+                if (count == n)
+                {
+                    /// TubeLoaded0 to TubeLoaded15: Returns 1 if the given weapon tube's
+                    /// state is Loaded.
+                    if (variable_name == "TubeLoaded" + string(n)) { value = m.state == MountState::Loaded ? 1.0f : 0.0f; return true; }
+                    /// TubeLoading0 to TubeLoading15: Returns 1 if the given weapon tube's
+                    /// state is Loading.
+                    if (variable_name == "TubeLoading" + string(n)) { value = m.state == MountState::Loading ? 1.0f : 0.0f; return true; }
+                    /// TubeUnloading0 to TubeUnloading15: Returns 1 if the given weapon
+                    /// tube's state is Unloading.
+                    if (variable_name == "TubeUnloading" + string(n)) { value = m.state == MountState::Unloading ? 1.0f : 0.0f; return true; }
+                    /// TubeFiring0 to TubeFiring15: Returns 1 if the given weapon tube's
+                    /// state is Firing.
+                    if (variable_name == "TubeFiring" + string(n)) { value = m.state == MountState::Firing ? 1.0f : 0.0f; return true; }
+                    break;
+                }
+                count++;
+            }
+        }
     }
 
     for (int n = 0; n < ShipSystem::COUNT; n++)

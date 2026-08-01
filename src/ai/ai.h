@@ -4,6 +4,7 @@
 #include "graphics/renderTarget.h"
 #include "systems/pathfinding.h"
 #include "components/missiletubes.h"
+#include "components/mounts.h"
 
 // Base for all ship AIs. This base class handles basic AI which just follows
 // orders straight on and attacks head on. ShipAI objects are created only on
@@ -93,7 +94,7 @@ protected:
     bool betterTarget(sp::ecs::Entity new_target, sp::ecs::Entity current_target);
 
     // Used for missiles, which require some planning to fire.
-    float calculateFiringSolution(sp::ecs::Entity target, const MissileTubes::MountPoint& tube);
+    float calculateFiringSolution(sp::ecs::Entity target, const Mount& mount);
     sp::ecs::Entity findBestMissileRestockTarget(glm::vec2 position, float radius);
 
     // Return scoring estimates for missile types.

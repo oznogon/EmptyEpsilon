@@ -285,7 +285,7 @@ end
 function update(delta)
     -- Tube states: "empty", "loading", "loaded", "unloading", "firing"
     if spawn_test_ship and not spawn_test_ship_fired then
-        local tubes = spawn_test_ship.components.missile_tubes
+        local tubes = spawn_test_ship.components.mounts
         if tubes and #tubes > 0 then
             local tube = tubes[1]
             if not spawn_test_fired and tube.state == "loaded" and spawn_test_count == 0 then

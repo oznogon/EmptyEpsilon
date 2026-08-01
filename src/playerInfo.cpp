@@ -51,6 +51,7 @@
 #include "components/maneuveringthrusters.h"
 #include "components/missiletubes.h"
 #include "components/missileWeaponTarget.h"
+#include "components/mounts.h"
 #include "components/moveto.h"
 #include "components/pickup.h"
 #include "components/probe.h"
@@ -390,43 +391,61 @@ void PlayerInfo::commandSetUtilityBeamTarget(sp::ecs::Entity target)
     sendClientCommand(packet);
 }
 
-void PlayerInfo::commandLoadTube(uint32_t tubeNumber, int missileType)
+void PlayerInfo::commandLoadTube(uint32_t tube_number, int missileType)
 {
     sp::io::DataBuffer packet;
-    packet << CMD_LOAD_TUBE << tubeNumber << missileType;
+    packet << CMD_LOAD_TUBE << tube_number << missileType;
     sendClientCommand(packet);
 }
 
-void PlayerInfo::commandUnloadTube(uint32_t tubeNumber)
+void PlayerInfo::commandUnloadTube(uint32_t tube_number)
 {
     sp::io::DataBuffer packet;
-    packet << CMD_UNLOAD_TUBE << tubeNumber;
+    packet << CMD_UNLOAD_TUBE << tube_number;
     sendClientCommand(packet);
 }
 
-void PlayerInfo::commandFireTube(uint32_t tubeNumber, float missile_target_angle)
+void PlayerInfo::commandFireTube(uint32_t tube_number, float missile_target_angle)
 {
     sp::io::DataBuffer packet;
-    packet << CMD_FIRE_TUBE << tubeNumber << missile_target_angle;
+    packet << CMD_FIRE_TUBE << tube_number << missile_target_angle;
     sendClientCommand(packet);
 }
 
-void PlayerInfo::commandFireTubeAtTarget(uint32_t tubeNumber, sp::ecs::Entity target)
+void PlayerInfo::commandFireTubeAtTarget(uint32_t tube_number, sp::ecs::Entity target)
 {
-    auto missiletubes = ship.getComponent<MissileTubes>();
+    if (!target) return;
 
-    if (!target || !missiletubes || tubeNumber >= missiletubes->mounts.size())
-        return;
+    auto mounts = ship.getComponent<Mounts>();
+    if (!mounts) return;
 
-    float target_angle = MissileSystem::calculateFiringSolution(ship, missiletubes->mounts[tubeNumber], target);
+    int missile_index = 0;
+    Mount* found_mount = nullptr;
 
+    for (auto& m : mounts->mounts)
+    {
+        if (m.type == MountType::MissileWeapon)
+        {
+            if (missile_index == static_cast<int>(tube_number))
+            {
+                found_mount = &m;
+                break;
+            }
+
+            missile_index++;
+        }
+    }
+
+    if (!found_mount) return;
+
+    float target_angle = MissileSystem::calculateFiringSolution(ship, *found_mount, target);
     if (target_angle == std::numeric_limits<float>::infinity())
     {
         if (auto transform = ship.getComponent<sp::Transform>())
-            target_angle = transform->getRotation() + missiletubes->mounts[tubeNumber].direction;
+            target_angle = transform->getRotation() + found_mount->direction;
     }
 
-    commandFireTube(tubeNumber, target_angle);
+    commandFireTube(tube_number, target_angle);
 }
 
 void PlayerInfo::commandTransferMissile(sp::ecs::Entity target, int missile_type, int quantity)
@@ -922,24 +941,24 @@ void PlayerInfo::commandDroneSetShields(bool enabled)
     sendClientCommand(packet);
 }
 
-void PlayerInfo::commandDroneLoadTube(uint32_t tube_nr, int type)
+void PlayerInfo::commandDroneLoadTube(uint32_t tube_number, int type)
 {
     sp::io::DataBuffer packet;
-    packet << CMD_DRONE_LOAD_TUBE << tube_nr << type;
+    packet << CMD_DRONE_LOAD_TUBE << tube_number << type;
     sendClientCommand(packet);
 }
 
-void PlayerInfo::commandDroneUnloadTube(uint32_t tube_nr)
+void PlayerInfo::commandDroneUnloadTube(uint32_t tube_number)
 {
     sp::io::DataBuffer packet;
-    packet << CMD_DRONE_UNLOAD_TUBE << tube_nr;
+    packet << CMD_DRONE_UNLOAD_TUBE << tube_number;
     sendClientCommand(packet);
 }
 
-void PlayerInfo::commandDroneFireTube(uint32_t tube_nr, float missile_target_angle)
+void PlayerInfo::commandDroneFireTube(uint32_t tube_number, float missile_target_angle)
 {
     sp::io::DataBuffer packet;
-    packet << CMD_DRONE_FIRE_TUBE << tube_nr << missile_target_angle;
+    packet << CMD_DRONE_FIRE_TUBE << tube_number << missile_target_angle;
     sendClientCommand(packet);
 }
 
@@ -1125,42 +1144,85 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         break;
     case CMD_LOAD_TUBE:
         {
-            uint32_t tube_nr;
+            uint32_t tube_number;
             int type;
-            packet >> tube_nr >> type;
+            packet >> tube_number >> type;
 
-            auto missiletubes = ship.getComponent<MissileTubes>();
-            if (missiletubes && tube_nr < missiletubes->mounts.size())
-                MissileSystem::startLoad(ship, missiletubes->mounts[tube_nr], type);
+            if (auto mounts = ship.getComponent<Mounts>())
+            {
+                int missile_index = 0;
+
+                for (auto& m : mounts->mounts)
+                {
+                    if (m.type == MountType::MissileWeapon)
+                    {
+                        if (missile_index == static_cast<int>(tube_number))
+                        {
+                            MissileSystem::startLoad(ship, m, type);
+                            break;
+                        }
+
+                        missile_index++;
+                    }
+                }
+            }
         }
         break;
     case CMD_UNLOAD_TUBE:
         {
-            uint32_t tube_nr;
-            packet >> tube_nr;
+            uint32_t tube_number;
+            packet >> tube_number;
 
-            auto missiletubes = ship.getComponent<MissileTubes>();
-            if (missiletubes && tube_nr < missiletubes->mounts.size())
-                MissileSystem::startUnload(ship, missiletubes->mounts[tube_nr]);
+            if (auto mounts = ship.getComponent<Mounts>())
+            {
+                int missile_index = 0;
+
+                for (auto& m : mounts->mounts)
+                {
+                    if (m.type == MountType::MissileWeapon)
+                    {
+                        if (missile_index == static_cast<int>(tube_number))
+                        {
+                            MissileSystem::startUnload(ship, m);
+                            break;
+                        }
+
+                        missile_index++;
+                    }
+                }
+            }
         }
         break;
     case CMD_FIRE_TUBE:
         {
-            uint32_t tube_nr;
+            uint32_t tube_number;
             float missile_target_angle;
-            packet >> tube_nr >> missile_target_angle;
+            packet >> tube_number >> missile_target_angle;
 
-            auto missiletubes = ship.getComponent<MissileTubes>();
-            if (missiletubes && tube_nr < missiletubes->mounts.size())
+            if (auto mounts = ship.getComponent<Mounts>())
             {
-                sp::ecs::Entity target;
+                int missile_index = 0;
 
-                if (auto mt = ship.getComponent<MissileWeaponTarget>())
-                    target = mt->entity;
-                else if (auto t = ship.getComponent<Target>())
-                    target = t->entity;
+                for (auto& m : mounts->mounts)
+                {
+                    if (m.type == MountType::MissileWeapon)
+                    {
+                        if (missile_index == static_cast<int>(tube_number))
+                        {
+                            sp::ecs::Entity target;
 
-                MissileSystem::fire(ship, missiletubes->mounts[tube_nr], missile_target_angle, target);
+                            if (auto mt = ship.getComponent<MissileWeaponTarget>())
+                                target = mt->entity;
+                            else if (auto t = ship.getComponent<Target>())
+                                target = t->entity;
+
+                            MissileSystem::fire(ship, m, missile_target_angle, target);
+                            break;
+                        }
+
+                        missile_index++;
+                    }
+                }
             }
         }
         break;
@@ -1783,8 +1845,19 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             bool active;
             packet >> active;
 
-            if (auto utility = ship.getComponent<UtilityBeam>())
-                utility->active = active;
+            auto mounts = ship.getComponent<Mounts>();
+            if (mounts)
+            {
+                for (auto& m : mounts->mounts)
+                {
+                    if (m.type == MountType::UtilityBeam)
+                    {
+                        m.active = active;
+                        mounts->mounts_dirty = true;
+                        break;
+                    }
+                }
+            }
         }
         break;
     case CMD_SET_CUSTOM_UTILITY_BEAM_MODE:
@@ -1792,8 +1865,19 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             string name;
             packet >> name;
 
-            if (auto utility_beam = ship.getComponent<UtilityBeam>())
-                utility_beam->custom_beam_mode = name;
+            auto mounts = ship.getComponent<Mounts>();
+            if (mounts)
+            {
+                for (auto& m : mounts->mounts)
+                {
+                    if (m.type == MountType::UtilityBeam)
+                    {
+                        m.custom_beam_mode = name;
+                        mounts->mounts_dirty = true;
+                        break;
+                    }
+                }
+            }
         }
         break;
     case CMD_SET_UTILITY_BEAM_BEARING:
@@ -1801,8 +1885,19 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             float f;
             packet >> f;
 
-            if (auto utility = ship.getComponent<UtilityBeam>())
-                if (!utility->fixed_bearing) utility->bearing = f;
+            auto mounts = ship.getComponent<Mounts>();
+            if (mounts)
+            {
+                for (auto& m : mounts->mounts)
+                {
+                    if (m.type == MountType::UtilityBeam)
+                    {
+                        if (!m.fixed_bearing) m.bearing = f;
+                        mounts->mounts_dirty = true;
+                        break;
+                    }
+                }
+            }
         }
         break;
     case CMD_SET_UTILITY_BEAM_ARC:
@@ -1810,8 +1905,19 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             float f;
             packet >> f;
 
-            if (auto utility = ship.getComponent<UtilityBeam>())
-                utility->setArcAndAdjustRange(f);
+            auto mounts = ship.getComponent<Mounts>();
+            if (mounts)
+            {
+                for (auto& m : mounts->mounts)
+                {
+                    if (m.type == MountType::UtilityBeam)
+                    {
+                        utilityBeamSetArcAndAdjustRange(m, f);
+                        mounts->mounts_dirty = true;
+                        break;
+                    }
+                }
+            }
         }
         break;
     case CMD_SET_UTILITY_BEAM_RANGE:
@@ -1819,8 +1925,19 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             float f;
             packet >> f;
 
-            if (auto utility = ship.getComponent<UtilityBeam>())
-                utility->setRangeAndAdjustArc(f);
+            auto mounts = ship.getComponent<Mounts>();
+            if (mounts)
+            {
+                for (auto& m : mounts->mounts)
+                {
+                    if (m.type == MountType::UtilityBeam)
+                    {
+                        utilityBeamSetRangeAndAdjustArc(m, f);
+                        mounts->mounts_dirty = true;
+                        break;
+                    }
+                }
+            }
         }
         break;
 
@@ -1925,43 +2042,89 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         break;
     case CMD_DRONE_LOAD_TUBE:
         {
-            uint32_t tube_nr;
+            uint32_t tube_number;
             int type;
-            packet >> tube_nr >> type;
+            packet >> tube_number >> type;
+
             if (auto dl = ship.getComponent<DroneLink>())
             {
-                auto missiletubes = dl->linked_drone.getComponent<MissileTubes>();
-                if (missiletubes && tube_nr < missiletubes->mounts.size())
-                    MissileSystem::startLoad(dl->linked_drone, missiletubes->mounts[tube_nr], type);
+                if (auto mounts = dl->linked_drone.getComponent<Mounts>())
+                {
+                    int missile_index = 0;
+
+                    for (auto& m : mounts->mounts)
+                    {
+                        if (m.type == MountType::MissileWeapon)
+                        {
+                            if (missile_index == static_cast<int>(tube_number))
+                            {
+                                MissileSystem::startLoad(dl->linked_drone, m, type);
+                                break;
+                            }
+
+                            missile_index++;
+                        }
+                    }
+                }
             }
         }
         break;
     case CMD_DRONE_UNLOAD_TUBE:
         {
-            uint32_t tube_nr;
-            packet >> tube_nr;
+            uint32_t tube_number;
+            packet >> tube_number;
+
             if (auto dl = ship.getComponent<DroneLink>())
             {
-                auto missiletubes = dl->linked_drone.getComponent<MissileTubes>();
-                if (missiletubes && tube_nr < missiletubes->mounts.size())
-                    MissileSystem::startUnload(dl->linked_drone, missiletubes->mounts[tube_nr]);
+                if (auto mounts = dl->linked_drone.getComponent<Mounts>())
+                {
+                    int missile_index = 0;
+
+                    for (auto& m : mounts->mounts)
+                    {
+                        if (m.type == MountType::MissileWeapon)
+                        {
+                            if (missile_index == static_cast<int>(tube_number))
+                            {
+                                MissileSystem::startUnload(dl->linked_drone, m);
+                                break;
+                            }
+
+                            missile_index++;
+                        }
+                    }
+                }
             }
         }
         break;
     case CMD_DRONE_FIRE_TUBE:
         {
-            uint32_t tube_nr;
+            uint32_t tube_number;
             float missile_target_angle;
-            packet >> tube_nr >> missile_target_angle;
+            packet >> tube_number >> missile_target_angle;
+
             if (auto dl = ship.getComponent<DroneLink>())
             {
-                auto missiletubes = dl->linked_drone.getComponent<MissileTubes>();
-                if (missiletubes && tube_nr < missiletubes->mounts.size())
+                if (auto mounts = dl->linked_drone.getComponent<Mounts>())
                 {
-                    sp::ecs::Entity target;
-                    if (auto t = dl->linked_drone.getComponent<Target>())
-                        target = t->entity;
-                    MissileSystem::fire(dl->linked_drone, missiletubes->mounts[tube_nr], missile_target_angle, target);
+                    int missile_index = 0;
+
+                    for (auto& m : mounts->mounts)
+                    {
+                        if (m.type == MountType::MissileWeapon)
+                        {
+                            if (missile_index == static_cast<int>(tube_number))
+                            {
+                                sp::ecs::Entity target;
+                                if (auto t = dl->linked_drone.getComponent<Target>())
+                                    target = t->entity;
+                                MissileSystem::fire(dl->linked_drone, m, missile_target_angle, target);
+                                break;
+                            }
+
+                            missile_index++;
+                        }
+                    }
                 }
             }
         }

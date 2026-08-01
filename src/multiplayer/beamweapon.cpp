@@ -21,25 +21,6 @@ BASIC_REPLICATION_IMPL(BeamWeaponSysReplication, BeamWeaponSys)
     BASIC_REPLICATION_FIELD(frequency);
     BASIC_REPLICATION_FIELD(system_target);
     BASIC_REPLICATION_FIELD(is_firing_enabled);
-
-    BASIC_REPLICATION_VECTOR(mounts)
-        VECTOR_REPLICATION_FIELD(position);
-        VECTOR_REPLICATION_FIELD(arc);
-        VECTOR_REPLICATION_FIELD(direction);
-        VECTOR_REPLICATION_FIELD(range);
-        VECTOR_REPLICATION_FIELD(turret_arc);
-        VECTOR_REPLICATION_FIELD_QUANTIZED(turret_direction, int16_t, -360.0f, 360.0f);
-        VECTOR_REPLICATION_FIELD(turret_rotation_rate);
-        VECTOR_REPLICATION_FIELD(cycle_time);
-        VECTOR_REPLICATION_FIELD(damage);
-        VECTOR_REPLICATION_FIELD(energy_per_beam_fire);
-        VECTOR_REPLICATION_FIELD(heat_per_beam_fire);
-        VECTOR_REPLICATION_FIELD(arc_color);
-        VECTOR_REPLICATION_FIELD(arc_color_fire);
-        VECTOR_REPLICATION_FIELD(damage_type);
-        VECTOR_REPLICATION_FIELD_QUANTIZED(cooldown, uint8_t, 0.0f, 20.0f);
-        VECTOR_REPLICATION_FIELD(texture);
-    VECTOR_REPLICATION_END();
 }
 
 

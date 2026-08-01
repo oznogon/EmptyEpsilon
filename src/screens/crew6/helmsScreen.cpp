@@ -27,6 +27,7 @@
 
 #include "components/customshipfunction.h"
 #include "components/utilityBeam.h"
+#include "components/mounts.h"
 
 #include "gui/gui2_selector.h"
 
@@ -157,7 +158,13 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     docking_button->setPosition(20, -20, sp::Alignment::BottomLeft)->setSize(280, 50)->setVisible(my_spaceship.hasComponent<DockingPort>());
     (new GuiTextTooltip(docking_button, "DOCKING_TIP", tr("tooltips", "Request docking with or undocking from the nearest station or ship."), 20.0f))->setWidth(280.0f);
 
-    auto ub = my_spaceship.getComponent<UtilityBeam>();
+    auto mounts_comp = my_spaceship.getComponent<Mounts>();
+    const Mount* ub_mount = nullptr;
+    if (mounts_comp) {
+        for (auto& m : mounts_comp->mounts) {
+            if (m.type == MountType::UtilityBeam) { ub_mount = &m; break; }
+        }
+    }
 
     sidebar_selector = new GuiSelector(helms_controls, "HELMS_SIDEBAR_SELECTOR", [this](int index, string value)
     {
@@ -195,7 +202,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
         sidebar_selector->addEntry(tr("helmsTab", "Functions"), "func");
         sidebar_selector->show();
     }
-    if (ub && ub->crew_positions.has(CrewPosition::helmsOfficer))
+    if (ub_mount && ub_mount->crew_positions.has(CrewPosition::helmsOfficer))
     {
         sidebar_selector->addEntry(tr("helmsTab", "Utility Beam"), "util");
         sidebar_selector->show();
@@ -272,7 +279,13 @@ void HelmsScreen::onUpdate()
         continuous_turning = false;
     }
 
-    auto utility_beam = my_spaceship.getComponent<UtilityBeam>();
+    auto mounts_comp = my_spaceship.getComponent<Mounts>();
+    const Mount* ub_mount = nullptr;
+    if (mounts_comp) {
+        for (auto& m : mounts_comp->mounts) {
+            if (m.type == MountType::UtilityBeam) { ub_mount = &m; break; }
+        }
+    }
 
     // Synchronize the Functions sidebar tab with current custom ship functions.
     bool should_have_func_tab = custom_function_sidebar->hasEntries();
@@ -316,7 +329,7 @@ void HelmsScreen::onUpdate()
     }
 
     // Synchronize the Utility Beam sidebar tab with the current crew_positions mask.
-    bool should_have_util_tab = utility_beam && utility_beam->crew_positions.has(CrewPosition::helmsOfficer);
+    bool should_have_util_tab = ub_mount && ub_mount->crew_positions.has(CrewPosition::helmsOfficer);
     bool has_util_tab = sidebar_selector->indexByValue("util") != -1;
     if (should_have_util_tab && !has_util_tab)
     {

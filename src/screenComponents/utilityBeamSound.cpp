@@ -3,6 +3,7 @@
 #include "soundManager.h"
 #include "playerInfo.h"
 #include "components/utilityBeam.h"
+#include "components/mounts.h"
 #include "gui/theme.h"
 #include "gui/gui2_element.h"
 
@@ -43,7 +44,14 @@ void UtilityBeamSound::update(float delta)
 
     if (auto utility_beam = my_spaceship.getComponent<UtilityBeam>())
     {
-        if (utility_beam->is_firing)
+        auto mounts = my_spaceship.getComponent<Mounts>();
+        bool is_firing = false;
+        if (mounts) {
+            for (auto& m : mounts->mounts) {
+                if (m.type == MountType::UtilityBeam) { is_firing = m.is_firing; break; }
+            }
+        }
+        if (is_firing)
         {
             if (!beam_audible)
             {

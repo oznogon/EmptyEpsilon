@@ -5,6 +5,7 @@
 #include "components/collision.h"
 #include "components/target.h"
 #include "components/beamweapon.h"
+#include "components/mounts.h"
 #include "systems/missilesystem.h"
 #include "ai/fighterAI.h"
 #include "ai/aiFactory.h"
@@ -88,17 +89,24 @@ void FighterAI::runAttack(sp::ecs::Entity target)
     case State::Dive:
         if (distance < 2500 + (target_physics ? target_physics->getSize().x : 0.0f) && has_missiles)
         {
-            auto tubes = owner.getComponent<MissileTubes>();
-            for(auto& tube : tubes->mounts)
-            {
-                if (tube.state == MissileTubes::MountPoint::State::Loaded && missile_fire_delay <= 0.0f)
+            auto mounts = owner.getComponent<Mounts>();
+            if (mounts) {
+                size_t missile_mount_count = 0;
+                for (auto& m : mounts->mounts)
+                    if (m.type == MountType::MissileWeapon) missile_mount_count++;
+
+                for(auto& tube : mounts->mounts)
                 {
-                    float target_angle = calculateFiringSolution(target, tube);
-                    if (target_angle != std::numeric_limits<float>::infinity())
+                    if (tube.type != MountType::MissileWeapon) continue;
+                    if (tube.state == MountState::Loaded && missile_fire_delay <= 0.0f)
                     {
-                        MissileSystem::fire(owner, tube, target_angle, target);
-                        missile_fire_delay = tube.load_time / tubes->mounts.size() / 2.0f;
-                        strafing_fired = true;
+                        float target_angle = calculateFiringSolution(target, tube);
+                        if (target_angle != std::numeric_limits<float>::infinity())
+                        {
+                            MissileSystem::fire(owner, tube, target_angle, target);
+                            missile_fire_delay = tube.load_time / missile_mount_count / 2.0f;
+                            strafing_fired = true;
+                        }
                     }
                 }
             }

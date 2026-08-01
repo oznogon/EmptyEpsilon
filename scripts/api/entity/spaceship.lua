@@ -1,5 +1,61 @@
 local Entity = getLuaEntityFunctionTable()
 
+local function __mountTypeName(mount_type)
+    if mount_type == 0 then
+        return "beam"
+    elseif mount_type == 1 then
+        return "missile"
+    elseif mount_type == 2 then
+        return "utility"
+    end
+    return mount_type
+end
+
+local function __mountToTable(m)
+    local t = {}
+    for k, v in pairs(m) do
+        if k ~= "length" then
+            t[k] = v
+        end
+    end
+    return t
+end
+
+function __findNthMountOfType(entity, mount_type, index)
+    local comp = entity.components.mounts
+    if comp == nil then
+        return nil
+    end
+    local type_name = __mountTypeName(mount_type)
+    local count = 0
+    for i = 1, #comp do
+        local m = comp[i]
+        if m and m.type == type_name then
+            if count == index then
+                return m
+            end
+            count = count + 1
+        end
+    end
+    return nil
+end
+
+function __countMountsOfType(entity, mount_type)
+    local comp = entity.components.mounts
+    if comp == nil then
+        return 0
+    end
+    local type_name = __mountTypeName(mount_type)
+    local count = 0
+    for i = 1, #comp do
+        local m = comp[i]
+        if m and m.type == type_name then
+            count = count + 1
+        end
+    end
+    return count
+end
+
 --- These functions relate to ship systems, weapons, drives, docking, and other ship-specific behaviors.
 --- They apply to entities that have the relevant components, such as those created by CpuShip() and PlayerSpaceship().
 
@@ -657,66 +713,54 @@ end
 --- Returns the arc, in degrees, for the BeamWeapon with the given index on this ship.
 --- Example: ship:getBeamWeaponArc(0); -- returns beam weapon 0's arc
 function Entity:getBeamWeaponArc(index)
-    if
-        self.components.beam_weapons
-        and #self.components.beam_weapons > index
-    then
-        return self.components.beam_weapons[index + 1].arc
+    local m = __findNthMountOfType(self, 0, index)
+    if m then
+        return m.arc or 0.0
     end
     return 0.0
 end
 --- Returns the direction, in degrees relative to the ship's forward bearing, for the arc's center of the BeamWeapon with the given index on this ship.
 --- Example: ship:getBeamWeaponDirection(0); -- returns beam weapon 0's direction
 function Entity:getBeamWeaponDirection(index)
-    if
-        self.components.beam_weapons
-        and #self.components.beam_weapons > index
-    then
-        return self.components.beam_weapons[index + 1].direction
+    local m = __findNthMountOfType(self, 0, index)
+    if m then
+        return m.direction or 0.0
     end
     return 0.0
 end
 --- Returns the range for the BeamWeapon with the given index on this ship.
 --- Example: ship:getBeamWeaponRange(0); -- returns beam weapon 0's range
 function Entity:getBeamWeaponRange(index)
-    if
-        self.components.beam_weapons
-        and #self.components.beam_weapons > index
-    then
-        return self.components.beam_weapons[index + 1].range
+    local m = __findNthMountOfType(self, 0, index)
+    if m then
+        return m.range or 0.0
     end
     return 0.0
 end
 --- Returns the turret arc, in degrees, for the BeamWeapon with the given index on this ship.
 --- Example: ship:getBeamWeaponTurretArc(0); -- returns beam weapon 0's turret arc
 function Entity:getBeamWeaponTurretArc(index)
-    if
-        self.components.beam_weapons
-        and #self.components.beam_weapons > index
-    then
-        return self.components.beam_weapons[index + 1].turret_arc
+    local m = __findNthMountOfType(self, 0, index)
+    if m then
+        return m.turret_arc or 0.0
     end
     return 0.0
 end
 --- Returns the direction, in degrees relative to the ship's forward bearing, for the turret arc's center for the BeamWeapon with the given index on this ship.
 --- Example: ship:getBeamWeaponTurretDirection(0); -- returns beam weapon 0's turret direction
 function Entity:getBeamWeaponTurretDirection(index)
-    if
-        self.components.beam_weapons
-        and #self.components.beam_weapons > index
-    then
-        return self.components.beam_weapons[index + 1].turret_direction
+    local m = __findNthMountOfType(self, 0, index)
+    if m then
+        return m.turret_direction or 0.0
     end
     return 0.0
 end
 --- Returns the turret's rotation rate, in degrees per tick, for the BeamWeapon with the given index on this ship.
 --- Example: ship:getBeamWeaponTurretRotationRate(0) -- returns beam weapon 0's turret rotation rate
 function Entity:getBeamWeaponTurretRotationRate(index)
-    if
-        self.components.beam_weapons
-        and #self.components.beam_weapons > index
-    then
-        return self.components.beam_weapons[index + 1].turret_rotation_rate
+    local m = __findNthMountOfType(self, 0, index)
+    if m then
+        return m.turret_rotation_rate or 0.0
     end
     return 0.0
 end
@@ -724,11 +768,9 @@ end
 --- Actual cycle time can be modified by "beamweapon" system effectiveness.
 --- Example: ship:getBeamWeaponCycleTime(0); -- returns beam weapon 0's cycle time
 function Entity:getBeamWeaponCycleTime(index)
-    if
-        self.components.beam_weapons
-        and #self.components.beam_weapons > index
-    then
-        return self.components.beam_weapons[index + 1].cycle_time
+    local m = __findNthMountOfType(self, 0, index)
+    if m then
+        return m.cycle_time or 0.0
     end
     return 0.0
 end
@@ -736,11 +778,9 @@ end
 --- Actual damage can be modified by "beamweapon" system effectiveness.
 --- Example: ship:getBeamWeaponDamage(0); -- returns beam weapon 0's damage
 function Entity:getBeamWeaponDamage(index)
-    if
-        self.components.beam_weapons
-        and #self.components.beam_weapons > index
-    then
-        return self.components.beam_weapons[index + 1].damage
+    local m = __findNthMountOfType(self, 0, index)
+    if m then
+        return m.damage or 0.0
     end
     return 0.0
 end
@@ -748,11 +788,9 @@ end
 --- Actual drain can be modified by "beamweapon" system effectiveness.
 --- Example: ship:getBeamWeaponEnergyPerFire(0); -- returns beam weapon 0's energy use per firing
 function Entity:getBeamWeaponEnergyPerFire(index)
-    if
-        self.components.beam_weapons
-        and #self.components.beam_weapons > index
-    then
-        return self.components.beam_weapons[index + 1].energy_per_beam_fire
+    local m = __findNthMountOfType(self, 0, index)
+    if m then
+        return m.energy_per_beam_fire or 0.0
     end
     return 0.0
 end
@@ -760,11 +798,9 @@ end
 --- Actual heat generation can be modified by "beamweapon" system effectiveness.
 --- Example: ship:getBeamWeaponHeatPerFire(0); -- returns beam weapon 0's heat generation per firing
 function Entity:getBeamWeaponHeatPerFire(index)
-    if
-        self.components.beam_weapons
-        and #self.components.beam_weapons > index
-    then
-        return self.components.beam_weapons[index + 1].heat_per_beam_fire
+    local m = __findNthMountOfType(self, 0, index)
+    if m then
+        return m.heat_per_beam_fire or 0.0
     end
     return 0.0
 end
@@ -780,19 +816,23 @@ end
 --- -- Creates a beam weapon with index 0, arc of 90 degrees, direction pointing backward, range of 1U, base cycle time of 1 second, and base damage of 1 point
 --- ship:setBeamWeapon(0,90,180,1000,1,1)
 function Entity:setBeamWeapon(index, arc, direction, range, cycle_time, damage)
-    if self.components.beam_weapons == nil then
-        self.components.beam_weapons = {}
+    local comp = self.components.mounts
+    if comp == nil then
+        return self
     end
-    while #self.components.beam_weapons < index + 1 do
-        self.components.beam_weapons[#self.components.beam_weapons + 1] = {}
+    local beam_count = __countMountsOfType(self, 0)
+    while beam_count <= index do
+        comp[#comp + 1] = { type = 0 }
+        beam_count = beam_count + 1
     end
-    self.components.beam_weapons[index + 1] = {
-        arc = arc,
-        direction = direction,
-        range = range,
-        cycle_time = cycle_time,
-        damage = damage,
-    }
+    local m = __findNthMountOfType(self, 0, index)
+    if m then
+        m.arc = arc
+        m.direction = direction
+        m.range = range
+        m.cycle_time = cycle_time
+        m.damage = damage
+    end
     return self
 end
 --- Converts a BeamWeapon with the given index on this ship into a turret and defines its traits.
@@ -806,54 +846,46 @@ end
 --- -- Makes beam weapon 0 a turret with a 200-degree turret arc centered on 90 degrees from forward, rotating at 5 degrees per tick (unit?)
 --- ship:setBeamWeaponTurret(0,200,90,5)
 function Entity:setBeamWeaponTurret(index, arc, direction, rotation_rate)
-    if
-        self.components.beam_weapons == nil
-        or #self.components.beam_weapons <= index
-    then
+    local m = __findNthMountOfType(self, 0, index)
+    if m == nil then
         return self
     end
-    self.components.beam_weapons[index + 1].turret_arc = arc
-    self.components.beam_weapons[index + 1].turret_direction = direction
-    self.components.beam_weapons[index + 1].turret_rotation_rate = rotation_rate
+    m.turret_arc = arc
+    m.turret_direction = direction
+    m.turret_rotation_rate = rotation_rate
     return self
 end
 --- Sets the BeamEffect texture, by filename, for the BeamWeapon with the given index on this ship.
 --- See BeamEffect:setTexture().
 --- Example: ship:setBeamWeaponTexture(0,"texture/beam_blue.png")
 function Entity:setBeamWeaponTexture(index, texture)
-    if
-        self.components.beam_weapons == nil
-        or #self.components.beam_weapons <= index
-    then
+    local m = __findNthMountOfType(self, 0, index)
+    if m == nil then
         return self
     end
-    self.components.beam_weapons[index + 1].texture = texture
+    m.texture = texture
     return self
 end
 --- Sets how much energy is drained each time the BeamWeapon with the given index is fired on this ship.
 --- Only player ships consume energy. Setting this for other entity types has no effect.
 --- Example: ship:setBeamWeaponEnergyPerFire(0,1) -- sets beam 0 to use 1 energy per firing
 function Entity:setBeamWeaponEnergyPerFire(index, energy)
-    if
-        self.components.beam_weapons == nil
-        or #self.components.beam_weapons <= index
-    then
+    local m = __findNthMountOfType(self, 0, index)
+    if m == nil then
         return self
     end
-    self.components.beam_weapons[index + 1].energy_per_beam_fire = energy
+    m.energy_per_beam_fire = energy
     return self
 end
 --- Sets how much "beamweapon" system heat is generated, in percentage of total system heat capacity, each time the BeamWeapon with the given index is fired on this ship.
 --- Only player ships generate and manage heat. Setting this for other entity types has no effect.
 --- Example: ship:setBeamWeaponHeatPerFire(0,0.02) -- sets beam 0 to generate 0.02 (2%) system heat per firing
 function Entity:setBeamWeaponHeatPerFire(index, heat)
-    if
-        self.components.beam_weapons == nil
-        or #self.components.beam_weapons <= index
-    then
+    local m = __findNthMountOfType(self, 0, index)
+    if m == nil then
         return self
     end
-    self.components.beam_weapons[index + 1].heat_per_beam_fire = heat
+    m.heat_per_beam_fire = heat
     return self
 end
 --- Sets the colors used to draw the radar arc for the BeamWeapon with the given index on this ship.
@@ -868,61 +900,63 @@ function Entity:setBeamWeaponArcColor(
     fire_g,
     fire_b
 )
-    if
-        self.components.beam_weapons == nil
-        or #self.components.beam_weapons <= index
-    then
+    local m = __findNthMountOfType(self, 0, index)
+    if m == nil then
         return self
     end
-    self.components.beam_weapons[index + 1].arc_color =
+    m.arc_color =
         { 255 * idle_r, 255 * idle_g, 255 * idle_b, 255 }
-    self.components.beam_weapons[index + 1].arc_color_fire =
+    m.arc_color_fire =
         { 255 * fire_r, 255 * fire_g, 255 * fire_b, 255 }
     return self
 end
 --- Sets the damage type dealt by the BeamWeapon with the given index on this ship.
 --- Example: ship:setBeamWeaponDamageType(0,"emp") -- makes beam 0 deal EMP damage
 function Entity:setBeamWeaponDamageType(index, damage_type)
-    if
-        self.components.beam_weapons == nil
-        or #self.components.beam_weapons <= index
-    then
+    local m = __findNthMountOfType(self, 0, index)
+    if m == nil then
         return self
     end
-    self.components.beam_weapons[index + 1].damage_type = damage_type
+    m.damage_type = damage_type
     return self
 end
 --- Sets the number of WeaponTubes for this ship.
 --- Weapon tubes are 0-indexed. For example, 3 tubes would be indexed 0, 1, and 2.
 --- Example: ship:setWeaponTubeCount(4)
 function Entity:setWeaponTubeCount(amount)
-    if self.components.missile_tubes == nil then
-        self.components.missile_tubes = {}
+    local comp = self.components.mounts
+    if comp == nil then
+        return self
+    end
+    local new_mounts = {}
+    for i = 1, #comp do
+        local m = __mountToTable(comp[i])
+        if m.type ~= "missile" then
+            table.insert(new_mounts, m)
+        end
     end
     for n = 1, amount do
-        self.components.missile_tubes[n] = {}
+        table.insert(new_mounts, { type = "missile" })
     end
-    while #self.components.missile_tubes > amount do
-        self.components.missile_tubes[#self.components.missile_tubes] = nil
+    while #comp > 0 do
+        comp[#comp] = nil
     end
+    self.components.mounts = new_mounts
     return self
 end
 --- Returns the number of WeaponTube on this ship.
 --- Example: ship:getWeaponTubeCount()
 function Entity:getWeaponTubeCount()
-    if self.components.missile_tubes then
-        return #self.components.missile_tubes
-    end
-    return 0
+    return __countMountsOfType(self, 1)
 end
 --- Returns the weapon type loaded into the WeaponTube with the given index on this ship.
 --- Returns no value if no weapon is loaded, which includes the tube being in a loading or unloading state.
 --- Example: ship:getWeaponTubeLoadType(0)
 function Entity:getWeaponTubeLoadType(index)
-    local tubes = self.components.missile_tubes
+    local m = __findNthMountOfType(self, 1, index)
     local missile_type = "none"
-    if tubes and index >= 0 and index < #tubes then
-        missile_type = tubes[index + 1].type_loaded
+    if m then
+        missile_type = m.type_loaded or "none"
     end
     if missile_type == "none" then
         return nil
@@ -957,45 +991,45 @@ end
 --- -- Sets tube 0 to point 90 degrees right of forward, and tube 1 to point 90 degrees left of forward
 --- ship:setWeaponTubeDirection(0, 90):setWeaponTubeDirection(1, -90)
 function Entity:setWeaponTubeDirection(index, direction)
-    local tubes = self.components.missile_tubes
-    if tubes and index >= 0 and index < #tubes then
-        self.components.missile_tubes[index + 1].direction = direction
+    local m = __findNthMountOfType(self, 1, index)
+    if m then
+        m.direction = direction
     end
     return self
 end
 --- Sets the weapon size launched from the WeaponTube with the given index on this ship.
 --- Example: ship:setTubeSize(0,"large") -- sets tube 0 to fire large weapons
 function Entity:setTubeSize(index, size)
-    local tubes = self.components.missile_tubes
-    if tubes and index >= 0 and index < #tubes then
-        self.components.missile_tubes[index + 1].size = size
+    local m = __findNthMountOfType(self, 1, index)
+    if m then
+        m.missile_size = size
     end
     return self
 end
 --- Returns the size of the weapon tube with the given index on this ship.
 --- Example: ship:getTubeSize(0)
 function Entity:getTubeSize(index)
-    local tubes = self.components.missile_tubes
-    if tubes and index >= 0 and index < #tubes then
-        return self.components.missile_tubes[index + 1].size
+    local m = __findNthMountOfType(self, 1, index)
+    if m then
+        return m.missile_size or "none"
     end
     return "none"
 end
 --- Returns the delay, in seconds, for loading and unloading the WeaponTube with the given index on this ship.
 --- Example: ship:getTubeLoadTime(0)
 function Entity:getTubeLoadTime(index)
-    local tubes = self.components.missile_tubes
-    if tubes and index >= 0 and index < #tubes then
-        return self.components.missile_tubes[index + 1].load_time
+    local m = __findNthMountOfType(self, 1, index)
+    if m then
+        return m.load_time or 0.0
     end
     return 0.0
 end
 --- Sets the time, in seconds, required to load the weapon tube with the given index on this ship.
 --- Example: ship:setTubeLoadTime(0,12) -- sets the loading time for tube 0 to 12 seconds
 function Entity:setTubeLoadTime(index, load_time)
-    local tubes = self.components.missile_tubes
-    if tubes and index >= 0 and index < #tubes then
-        self.components.missile_tubes[index + 1].load_time = load_time
+    local m = __findNthMountOfType(self, 1, index)
+    if m then
+        m.load_time = load_time
     end
     return self
 end

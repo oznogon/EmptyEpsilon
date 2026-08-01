@@ -8,8 +8,8 @@
 function Asteroid()
     local z = random(-50, 50)
     local size = random(110, 130)
-
     local model_number = irandom(1, 10)
+
     local e = createEntity()
     e.components = {
         transform = { rotation = random(0, 360) },
@@ -45,6 +45,7 @@ function Asteroid()
             max = 1,
         },
     }
+
     return e
 end
 

@@ -12,6 +12,7 @@
 #include "components/missiletubes.h"
 #include "components/customshipfunction.h"
 #include "missileWeaponData.h"
+#include "components/mounts.h"
 
 
 namespace sp::script {
@@ -219,33 +220,7 @@ template<> struct Convert<ShipSystem::Type> {
         return ShipSystem::Type::None;
     }
 };
-template<> struct Convert<MissileTubes::MountPoint::State> {
-    static int toLua(lua_State* L, MissileTubes::MountPoint::State value) {
-        switch(value) {
-        case MissileTubes::MountPoint::State::Empty: lua_pushstring(L, "empty"); break;
-        case MissileTubes::MountPoint::State::Loading: lua_pushstring(L, "loading"); break;
-        case MissileTubes::MountPoint::State::Loaded: lua_pushstring(L, "loaded"); break;
-        case MissileTubes::MountPoint::State::Unloading: lua_pushstring(L, "unloading"); break;
-        case MissileTubes::MountPoint::State::Firing: lua_pushstring(L, "firing"); break;
-        }
-        return 1;
-    }
-    static MissileTubes::MountPoint::State fromLua(lua_State* L, int idx) {
-        string str = string(luaL_checkstring(L, idx)).lower();
-        if (str == "empty")
-            return MissileTubes::MountPoint::State::Empty;
-        else if (str == "loading")
-            return MissileTubes::MountPoint::State::Loading;
-        else if (str == "loaded")
-            return MissileTubes::MountPoint::State::Loaded;
-        else if (str == "unloading")
-            return MissileTubes::MountPoint::State::Unloading;
-        else if (str == "firing")
-            return MissileTubes::MountPoint::State::Firing;
-        luaL_error(L, "Unknown MissileTubes::MountPoint::State type: %s", str.c_str());
-        return MissileTubes::MountPoint::State::Empty;
-    }
-};
+
 template<> struct Convert<DockingPort::State> {
     static int toLua(lua_State* L, DockingPort::State value) {
         switch(value) {
@@ -442,6 +417,95 @@ template<> struct Convert<MainScreenOverlay> {
             return MainScreenOverlay::ShowComms;
         luaL_error(L, "Unknown MainScreenOverlay: %s", str.c_str());
         return MainScreenOverlay::HideComms;
+    }
+};
+
+template<> struct Convert<MountType>
+{
+    static int toLua(lua_State* L, MountType value)
+    {
+        switch (value)
+        {
+        case MountType::BeamWeapon:
+            lua_pushstring(L, "beam");
+            break;
+        case MountType::MissileWeapon:
+            lua_pushstring(L, "missile");
+            break;
+        case MountType::UtilityBeam:
+            lua_pushstring(L, "utility");
+            break;
+        default:
+            lua_pushstring(L, "beam");
+            break;
+        }
+
+        return 1;
+    }
+    static MountType fromLua(lua_State* L, int idx)
+    {
+        if (lua_type(L, idx) == LUA_TNUMBER)
+        {
+            int v = static_cast<int>(lua_tonumber(L, idx));
+            if (v >= 0 && v <= 2) return static_cast<MountType>(v);
+        }
+
+        string str = string(luaL_checkstring(L, idx)).lower();
+
+        if (str == "beam") return MountType::BeamWeapon;
+        else if (str == "missile") return MountType::MissileWeapon;
+        else if (str == "utility") return MountType::UtilityBeam;
+
+        luaL_error(L, "[enum] Unknown MountType: %s", str.c_str());
+        return MountType::BeamWeapon;
+    }
+};
+
+template<> struct Convert<MountState>
+{
+    static int toLua(lua_State* L, MountState value)
+    {
+        switch (value)
+        {
+        case MountState::Empty:
+            lua_pushstring(L, "empty");
+            break;
+        case MountState::Loading:
+            lua_pushstring(L, "loading");
+            break;
+        case MountState::Loaded:
+            lua_pushstring(L, "loaded");
+            break;
+        case MountState::Unloading:
+            lua_pushstring(L, "unloading");
+            break;
+        case MountState::Firing:
+            lua_pushstring(L, "firing");
+            break;
+        }
+
+        return 1;
+    }
+
+    static MountState fromLua(lua_State* L, int idx)
+    {
+        if (lua_type(L, idx) == LUA_TNUMBER)
+        {
+            int v = static_cast<int>(lua_tonumber(L, idx));
+            if (v >= 0 && v <= 4) return static_cast<MountState>(v);
+        }
+
+        string str = string(luaL_checkstring(L, idx)).lower();
+
+        if (str == "empty") return MountState::Empty;
+        else if (str == "loading") return MountState::Loading;
+        else if (str == "loaded") return MountState::Loaded;
+        else if (str == "unloading") return MountState::Unloading;
+        else if (str == "firing") return MountState::Firing;
+
+        luaL_error(L, "[enum] Unknown MountState type: %s", str.c_str());
+
+        return MountState::Empty;
     }
 };
 

@@ -21,6 +21,7 @@
 #include "components/radar.h"
 #include "components/drone.h"
 #include "components/utilityBeam.h"
+#include "components/mounts.h"
 
 #include "screenComponents/aimLock.h"
 #include "screenComponents/alertOverlay.h"
@@ -153,7 +154,13 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     lock_aim = new AimLockButton(this, "LOCK_AIM", tube_controls, missile_aim);
     lock_aim->setPosition(250, 70, sp::Alignment::TopCenter)->setSize(130, 50);
 
-    auto ub = my_spaceship.getComponent<UtilityBeam>();
+    auto mounts_comp = my_spaceship.getComponent<Mounts>();
+    const Mount* ub_mount = nullptr;
+    if (mounts_comp) {
+        for (auto& m : mounts_comp->mounts) {
+            if (m.type == MountType::UtilityBeam) { ub_mount = &m; break; }
+        }
+    }
 
     sidebar_selector = new GuiSelector(this, "SINGLEPILOT_SIDEBAR_SELECTOR", [this](int index, string value)
     {
@@ -190,7 +197,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
         sidebar_selector->addEntry(tr("singlePilotTab", "Functions"), "func");
         sidebar_selector->show();
     }
-    if (ub && ub->crew_positions.has(CrewPosition::singlePilot))
+    if (ub_mount && ub_mount->crew_positions.has(CrewPosition::singlePilot))
     {
         sidebar_selector->addEntry(tr("singlePilotTab", "Utility Beam"), "util");
         sidebar_selector->show();
@@ -347,7 +354,13 @@ void SinglePilotScreen::onUpdate()
         }
     }
 
-    auto utility_beam = my_spaceship.getComponent<UtilityBeam>();
+    auto mounts_comp = my_spaceship.getComponent<Mounts>();
+    const Mount* ub_mount = nullptr;
+    if (mounts_comp) {
+        for (auto& m : mounts_comp->mounts) {
+            if (m.type == MountType::UtilityBeam) { ub_mount = &m; break; }
+        }
+    }
 
     // Synchronize the Functions sidebar tab with current custom ship functions.
     bool should_have_func_tab = custom_function_sidebar->hasEntries();
@@ -391,7 +404,7 @@ void SinglePilotScreen::onUpdate()
     }
 
     // Synchronize the Utility Beam sidebar tab with the current crew_positions mask.
-    bool should_have_util_tab = utility_beam && utility_beam->crew_positions.has(CrewPosition::singlePilot);
+    bool should_have_util_tab = ub_mount && ub_mount->crew_positions.has(CrewPosition::singlePilot);
     bool has_util_tab = sidebar_selector->indexByValue("util") != -1;
     if (should_have_util_tab && !has_util_tab)
     {
