@@ -44,7 +44,7 @@
 - Hull component added to missiles and asteroids, making them targetable and destroyable
 - Fractional (<1x) time scales on GM screen (upstream 2887)
 - Multiline text entry now allowed in certain GuiTextEntry fields, primarily LuaConsole (shift+enter for linebreak; linebreaks also copy/paste correctly)
-- Background thread for AI/pathfinding logic
+- AI/pathfinding logic moved to background thread, reducing main thread blocking
 - Expanded music library with Rafael Krux CC-BY tracks
 - Read and display artist-title OGG tags in Options menu music preview
 - StyLua configuration TOML to enforce consistent Lua code formatting
@@ -53,6 +53,27 @@
   - Tooltips on hover added to timing graph to view timings at a specific point in time
   - Timing graph forces GL lines for better performance
 - Long-range missile visibility toggle button in server options
+- Philips Hue V2 smart lighting support
+  - Hue controls split into V1 and new V2 implementations
+  - V2 requires SSL, and support for it is built only when `WITH_SSL=ON`, which adds dependencies on OpenSSL and crypto libraries.
+  - V2 bridge IP discovery via discovery.meethub
+  - Hue/sat color space conversion to V2 XY coordinates
+  - API key request flow with retries and prompts to push the bridge's link button (console/STDOUT only)
+- Vertex displacement noise shader with mapped color intensities added and adapted for use as new explosion effect, replacing plain sphere
+- Multimonitor mode toggle in OptionsMenu, with tooltip and restart label
+- Lua API additions
+  - `reactor.energyPercentage()`, `hull.percentage()`, `shields.percentage()` return integer strings to avoid redundant calculation
+  - `getWallTime()` returns wall clock time (elapsed time including pauses) since scenario start
+  - Target getter functions for split weapon, comms, scan, and hacking targets
+  - Functions to change an InternalRoom's ShipSystem in ShipTemplates and STBOs
+- Scan/abort toggle keybind on Science screen
+- Interface Options toggle to show/hide the Lua console error popup
+- Logging level and output can now be overridden in non-debug builds
+- English (en) locale split into en_GB (UK English) and en_US (US English)
+  - en_US is the new default
+  - Locale update tooling copies missing en_GB PO files from en_US and naively applies basic US-to-UK spelling transformations
+- Alphabetical sort option added to GuiEntryList
+- GM Tweak component filter toggle, to list only tweak pages for components that the selected entity already possesses
 
 ### Changed
 
@@ -106,6 +127,23 @@
 - PanelBackground transparent padding removed from default theme's sprite
 - Beam weapons can now target non-friendly entities, not only hostiles
 - Headless mode no longer loads visual resources (images, 3D meshes, textures).
+- Sector subdivision changed from 8x8 subsectors to 10x10
+- AI behaviors refactored
+  - Ships attempt to avoid colliding with each other
+  - AI docking handler handles both Docking and Docked states, preventing instant/repeated undocks
+  - Direct AI order changes now take immediate effect
+  - FighterAI Evade state now persists across frames
+- ShipTemplate and faction selectors sorted alphabetically on ShipSelection and GM screens
+- `self_destruct_countdown` preference restored; configuration loading buffer size increased
+- FSAA menu options hidden when unsupported by the GPU
+- Keybinds suppressed when the owning screen component is hidden
+- GuiScrollContainer starting scroll position configurable (ScrollStart::Bottom) for chat-like output
+- Multiuse Lua API functions consolidated
+- Metrics server restricted to server processes only
+- Scenarios renamed and renumbered per convention; station and ship names updated across scenarios (Cadet, Race)
+- DebugRenderer timing graph hidden by default in Release builds
+- Health bars hidden for entities with 1 max hull
+- Previous ship template names noted in descriptions; redundant strings split for internationalization reuse
 
 ### Fixed
 
@@ -113,18 +151,57 @@
 - Utility Beam controls now appear on default Science screen when UtilityBeam component is added to a player ship mid-game
 - Tooltip no longer renders in unusual or persistent locations on button hold/release
 - ThreatLevelEstimate more correctly influences music selection and looping
-- French i18n fixes
+- Duplicate and incorrect translations in French internationalization text fixed
 - Line rendering selector options no longer transposed
 - Component description is now correct upon direct GM Tweak page open (i.e. Database editor)
 - GuiScrollContainer layout with `verticalbottom` children no longer breaks GuiScrollContainer scrolling
 - GuiContainer::cleanTree() no longer leaves dangling scroll container pointers
-- Push the Payload scenario fixes
-  - Artifact pickup fixed for ECS in Push the Payload scenario
-  - Player detection and crash on PlayerShip destruction in Push the Payload
-  - Remove unmanaged Coolant component from CpuShip spawns using PlayerShip templates in Push the Payload to prevent ship systems from overheating
-- Kessler scenario end-of-line semicolons removed to prevent script breakage
 - DebugRenderer click capture bounding issues removed by move to GuiResizableDialog
 - `metrics_server` port validity now checked
+- GuiSlider release delay prevents slider values from being overwritten on clients mid-drag
+- Science/scan target cycling now correctly skips radar-blocked entities
+- Relay targeting fixes
+  - Hotkey targeting now correctly limited to hackable, comms-capable, and probe entities
+  - Hacking now prevented on entities without either ShipSystems or a defined HackingDifficulty
+- Scanning refactored to prevent exploiting low-complexity scan targets to advance scanstate on high-complexity scan targets
+- Multiple repair crews now prevented from spawning in or moving into the same internal room cell
+- Radar signature values are now normalized
+- DockingBayScreen regressions fixed
+  - Supply drop visibility on berth selection
+  - Slider release behavior
+- LuaConsole regressions fixed
+  - Popup autoscroll
+  - Click catching on hidden console
+- GM Tweaks now open the correct description upon direct tweak page opening
+- Undefined behavior in `FLT_MAX` cast to int fixed in GuiScrollContainer
+- Segfault when adding too many custom buttons fixed
+- Metrics server no longer runs on clients
+- Scenario fixes
+  - Basic
+    - Status banner now shown even when time set to Unlimited
+    - Asteroids should overlap less frequently upon intiial scenario spawn
+  - Push the Payload
+    - Artifact pickup fixed for ECS in Push the Payload scenario
+    - Player detection and crash on PlayerShip destruction in Push the Payload
+    - Remove unmanaged Coolant component from CpuShip spawns using PlayerShip templates in Push the Payload to prevent ship systems from overheating
+  - Kessler: End-of-line semicolons removed to prevent script breakage
+  - Birth of the Atlantis: Destroy nebula before exploding artifact to avoid nil error
+  - Early Evaluation Exercise: Fix failure when player ship respawns after home station destroyed
+  - Surf's Up: Check for name_pool existence before removing names
+- Crew positions are now cleared only when a different scenario is loaded
+- Default sidebar selector value set on crew screens with a sidebar
+- Duplicate Heracles ship templates removed
+- Sensors ShipSystem added to Lua enum
+- Missile `radar_signature` member names fixed
+- HTML template language codes fixed
+- Striker ShipTemplate references fixed in docking bay test
+- GM screen waypoint control position no longer overlaps with AI orders
+- Science screen no longer warns on invalid pager state when tabs intentionally absent
+- ShipSelectionScreen description now correctly linked to ShipTemplate GuiSelector value regardless of the selector's sort order
+- Compilation fixes
+  - Update Discord header ifdefs for Windows builds
+  - SelfDestruct header include fixed
+  - Compiler warnings fixed (narrowing conversions, unused captures, float-to-double, MSVC `_unlink`)
 
 ## [2026-06]
 
