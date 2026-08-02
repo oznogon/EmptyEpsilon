@@ -161,3 +161,4 @@ hue-v2 20260729 -- Fix Hue V2 error states, add logging
 2901-repair-crew-overload 20260731 -- Prevent stacking of repair crews
 ai-fix 20260731 -- Fix instant undocking, excessive collisions among AI ships
 
+turret-anything 20260801 -- Move weapon mounts to first-class component and implement across beam weapon, missile, and utility beam functions
