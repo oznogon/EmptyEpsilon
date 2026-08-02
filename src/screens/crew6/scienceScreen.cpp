@@ -760,8 +760,12 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     }
 
     auto target = targets.get();
-    if (target != target_entity)
+    if (target != previous_target)
     {
+        // Target changed, so reset the tracked description.
+        previous_description = "";
+        previous_target = target;
+
         info_electrical_signal_band->clearHistory();
         info_gravitational_signal_band->clearHistory();
         info_thermal_signal_band->clearHistory();
