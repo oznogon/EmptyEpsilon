@@ -74,14 +74,16 @@ void ShipAI::runLight(float delta)
     // Collect any completed async pathfinding results.
     pathPlanner.tryCollectResult();
 
+    // Defer A* re-planning to runHeavy, which re-enables this flag.
+    m_allow_path_planning = false;
+
     if (auto thrusters = owner.getComponent<ManeuveringThrusters>())
         thrusters->stop();
 
     if (auto impulse = owner.getComponent<ImpulseEngine>())
         impulse->request = 0.0f;
 
-    if (auto warp = owner.getComponent<WarpDrive>())
-        warp->request = 0;
+    if (auto warp = owner.getComponent<WarpDrive>()) warp->request = 0;
 
     // Update ranges before calculating.
     if (auto lrr = owner.getComponent<LongRangeRadar>())
