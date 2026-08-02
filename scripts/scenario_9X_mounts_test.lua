@@ -2,17 +2,10 @@
 -- Description: Test scenario for the unified Mounts component. Verifies beam weapon, missile weapon, and utility beam mounts.
 -- Type: Development
 
-local function log(msg)
-    print("[MountsTest] " .. msg)
-end
+require("utils.lua")
 
-local function assert_eq(actual, expected, name)
-    if actual ~= expected then
-        log("FAIL: " .. name .. " expected=" .. tostring(expected) .. " got=" .. tostring(actual))
-        return false
-    end
-    log("PASS: " .. name .. " = " .. tostring(actual))
-    return true
+local function mlog(msg)
+    log("[MountsTest] " .. msg)
 end
 
 local function findMountOfType(mounts, mount_type)
@@ -27,7 +20,7 @@ local function findMountOfType(mounts, mount_type)
 end
 
 function init()
-    log("=== Mounts Component Test ===")
+    mlog("=== Mounts Component Test ===")
 
     -- Create a test ship
     local player = PlayerSpaceship()
@@ -40,7 +33,7 @@ function init()
     local mounts = player.components.mounts
     assert_eq(mounts ~= nil, true, "Mounts component exists")
     local num_mounts = #mounts
-    log("Total mounts: " .. num_mounts)
+    mlog("Total mounts: " .. num_mounts)
 
     -- Count mounts by type
     local beam_count = 0
@@ -51,7 +44,7 @@ function init()
         elseif t == "missile" then missile_count = missile_count + 1
         end
     end
-    log("Beam mounts: " .. beam_count .. ", Missile mounts: " .. missile_count)
+    mlog("Beam mounts: " .. beam_count .. ", Missile mounts: " .. missile_count)
 
     -- Verify beam weapon mount properties
     if beam_count > 0 then
@@ -136,7 +129,7 @@ function init()
         assert_eq(mm.turret_arc, 180, "Missile turret_arc set")
         assert_eq(mm.turret_direction, 0, "Missile turret_direction set")
         assert_eq(mm.turret_rotation_rate, 3, "Missile turret_rotation_rate set")
-        log("Phobos M3 missile tube 0 is now turreted")
+        mlog("Phobos M3 missile tube 0 is now turreted")
     end
 
     -- Test utility beam: create a ship and add a utility beam mount
@@ -159,7 +152,7 @@ function init()
             assert_eq(um.max_range, 2000, "Utility max_range")
             assert_eq(um.cycle_time, 6, "Utility cycle_time")
             assert_eq(um.strength, 1000, "Utility strength")
-            log("Utility beam mount verified")
+            mlog("Utility beam mount verified")
         end
     end
     assert_eq(util_found, true, "Found utility beam mount")
@@ -180,7 +173,7 @@ function init()
         assert_eq(um.turret_arc, 150, "Utility turret_arc set")
         assert_eq(um.turret_direction, 0, "Utility turret_direction set")
         assert_eq(um.turret_rotation_rate, 4, "Utility turret_rotation_rate set")
-        log("Hylas utility beam is now turreted")
+        mlog("Hylas utility beam is now turreted")
     end
 
     -- Test runtime mount property modification
@@ -211,6 +204,5 @@ function init()
         end
     end
 
-    log("=== All Mounts component tests complete ===")
-    log("Test scenario ran successfully.")
+    mlog("=== All Mounts component tests complete ===")
 end
