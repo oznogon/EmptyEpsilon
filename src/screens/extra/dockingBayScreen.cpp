@@ -1366,12 +1366,35 @@ void DockingBayScreen::updateSelectedEntityDisplay()
 
 void DockingBayScreen::refreshMissileLabels()
 {
+    auto& registry = MissileWeaponDataRegistry::instance();
+
+    // Refresh labels only when the registry contents changed. Rebuild the
+    // registry only when missile types are registered or modified mid-game.
+    bool registry_changed = (cached_registry_type_count != registry.getTypeCount());
+    if (!registry_changed)
+    {
+        for (int i = 0; i < MW_MaxTypes; i++)
+        {
+            if (cached_missile_names[i] != registry.getNameForIndex(i)
+                || cached_missile_icons[i] != registry.getIcon(i)
+                || cached_missile_player_flags[i] != registry.isPlayerWeapon(i))
+            {
+                registry_changed = true;
+                break;
+            }
+        }
+    }
+    if (!registry_changed) return;
+
+    cached_registry_type_count = registry.getTypeCount();
     for (int i = 0; i < MW_MaxTypes; i++)
     {
-        auto& registry = MissileWeaponDataRegistry::instance();
         const string& name = registry.getNameForIndex(i);
         const string& icon = registry.getIcon(i);
         bool has_type = !name.empty() && registry.isPlayerWeapon(i);
+        cached_missile_names[i] = name;
+        cached_missile_icons[i] = icon;
+        cached_missile_player_flags[i] = has_type;
 
         entity_missiles[i]->setVisible(has_type);
         berth_missiles[i]->setVisible(has_type);

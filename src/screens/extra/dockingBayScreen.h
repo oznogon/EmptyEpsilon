@@ -85,6 +85,12 @@ private:
     int selected_berth_index = -1;
     std::vector<sp::ecs::Entity> cached_berth_entities;
 
+    // Cached missile registry state.
+    std::array<string, MW_MaxTypes> cached_missile_names;
+    std::array<string, MW_MaxTypes> cached_missile_icons;
+    std::array<bool, MW_MaxTypes> cached_missile_player_flags;
+    int cached_registry_type_count = -1;
+
     // Helper methods
     void selectBerth(int berth_index);
     void updateSelectedEntityDisplay();
