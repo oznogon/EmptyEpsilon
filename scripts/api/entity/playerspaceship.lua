@@ -984,6 +984,25 @@ function Entity:getInternalRoomForSystem(system)
 
     return nil
 end
+
+--- Sets an existing room's ship system. Returns nil if either the entity lacks InternalRooms or the room index isn't found.
+--- Example: template:setRoomSystem(1, "reactor") -- sets the ship system of the room with index 1 to Reactor
+function Entity:setRoomSystem(index, system)
+    local ir = self.components.internal_rooms
+    if not ir then
+        return nil
+    end
+
+    for i = 1, #ir do
+        if i == index then
+            ir[i].system = system
+            return self
+        end
+    end
+
+    return nil
+end
+
 --- Returns a table containing tables of all valid {x,y} coordinates for a given internal room.
 --- Example:
 --- local room = entity:getInternalRoomForSystem("beamweapons")

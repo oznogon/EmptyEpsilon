@@ -723,6 +723,17 @@ function ShipTemplate:addRoomSystem(x, y, w, h, system)
         { position = { x, y }, size = { w, h }, system = system }
     return self
 end
+
+--- Sets an existing room's ship system.
+--- Example: template:setRoomSystem(1, "reactor") -- sets the ship system of the room with index 1 to Reactor
+function ShipTemplate:setRoomSystem(index, system)
+    if self.internal_rooms == nil then
+        self.internal_rooms = {}
+    end
+    self.internal_rooms[index] = {system = system}
+    return self
+end
+
 --- Adds a door between rooms in a ShipTemplate.
 --- Doors connect rooms as displayed on the engineering and damcon screens. All doors are 1 damage crew wide.
 --- If a system room isn't accessible via other rooms connected by doors, repair crews on player ships might not be able to repair that system.
