@@ -94,7 +94,8 @@ void LuaConsole::addLog(const string& message)
         console->message_show_timers.emplace_back();
         console->message_show_timers.back().start(5.0f);
         auto linespace = console->log->getLineSpacing();
-        console->top->getLayout().size.y = std::min(450.0f, (0.3f + console->message_show_timers.size()) * linespace);
+        auto padding = console->log_scroll->getLayout().padding.top + console->log_scroll->getLayout().padding.bottom;
+        console->top->getLayout().size.y = std::min(450.0f, (0.3f + console->message_show_timers.size()) * linespace + padding);
         console->top->show();
         console->top->setEnable(false);
     }
@@ -122,7 +123,8 @@ void LuaConsole::update(float delta)
             top->hide();
         } else {
             auto linespace = console->log->getLineSpacing();
-            top->getLayout().size.y = std::min(450.0f, (0.3f + message_show_timers.size()) * linespace);
+            auto padding = console->log_scroll->getLayout().padding.top + console->log_scroll->getLayout().padding.bottom;
+            top->getLayout().size.y = std::min(450.0f, (0.3f + message_show_timers.size()) * linespace + padding);
             log_scroll->setPendingScrollToBottom();
         }
     }
