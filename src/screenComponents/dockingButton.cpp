@@ -1,16 +1,20 @@
+#include "dockingButton.h"
 #include <i18n.h>
 #include "playerInfo.h"
-#include "dockingButton.h"
-#include "gui/gui2_button.h"
-#include "gui/gui2_listbox.h"
-#include "gui/gui2_panel.h"
-#include "systems/collision.h"
-#include "systems/docking.h"
+#include "ecs/query.h"
+
 #include "components/collision.h"
 #include "components/docking.h"
 #include "components/faction.h"
 #include "components/name.h"
-#include "ecs/query.h"
+
+#include "systems/collision.h"
+#include "systems/docking.h"
+
+#include "gui/gui2_button.h"
+#include "gui/gui2_canvas.h"
+#include "gui/gui2_listbox.h"
+#include "gui/gui2_panel.h"
 
 GuiDockingButton::GuiDockingButton(GuiContainer* owner, string id)
 : GuiElement(owner, id)
@@ -25,6 +29,7 @@ GuiDockingButton::GuiDockingButton(GuiContainer* owner, string id)
         [this]()
         {
             if (!my_spaceship || !my_player_info) return;
+
             auto port = my_spaceship.getComponent<DockingPort>();
             if (!port) return;
 
@@ -32,11 +37,13 @@ GuiDockingButton::GuiDockingButton(GuiContainer* owner, string id)
             {
             case DockingPort::State::NotDocking:
                 dock_targets = findDockingTargets();
+
                 // Expand list if it has more than one entry.
                 // Otherwise, just dock.
                 if (dock_targets.size() == 1)
                     my_player_info->commandDock(dock_targets[0]);
                 else if (dock_targets.size() > 1) expanded = true;
+
                 break;
             case DockingPort::State::Docking:
                 my_player_info->commandAbortDock();
@@ -49,19 +56,22 @@ GuiDockingButton::GuiDockingButton(GuiContainer* owner, string id)
     );
     action_button
         ->setIcon("gui/icons/docking")
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
-        ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft);
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     target_list = new GuiListbox(this, id + "_LIST",
         [this](int index, string value)
         {
             if (!my_player_info) return;
+            
             expanded = false;
+
             if (value == "cancel") return;
+
             int idx = value.toInt();
+
             if (idx >= 0 && idx < static_cast<int>(dock_targets.size()))
                 my_player_info->commandDock(dock_targets[idx]);
-
         }
     );
     target_list
@@ -77,6 +87,7 @@ void GuiDockingButton::onUpdate()
         hide();
         return;
     }
+
     auto port = my_spaceship.getComponent<DockingPort>();
     setVisible(port != nullptr);
     if (!port) return;
@@ -86,7 +97,7 @@ void GuiDockingButton::onUpdate()
     {
         if (keys.helms_dock_action.getDown())
         {
-            switch(port->state)
+            switch (port->state)
             {
             case DockingPort::State::NotDocking:
                 {
@@ -136,8 +147,53 @@ void GuiDockingButton::onUpdate()
             }
             target_list->addEntry(tr("Cancel"), "cancel");
 
-            // Expand height to fit all entries.
-            layout.size.y = (dock_targets.size() + 1) * item_height;
+            // Height of the expanded list.
+            const float list_height = (dock_targets.size() + 1) * item_height;
+
+            // Manage list growth direction by buttons anchor alignment.
+            bool expand_up = false;
+            switch (layout.alignment)
+            {
+            case sp::Alignment::BottomLeft:
+            case sp::Alignment::BottomCenter:
+            case sp::Alignment::BottomRight:
+                break;
+            default:
+                if (GuiCanvas* canvas = getRootCanvas())
+                {
+                    const float screen_height = canvas->getRect().size.y;
+
+                    if (screen_height > 0.0f && rect.position.y + list_height > screen_height)
+                        expand_up = true;
+                }
+                break;
+            }
+
+            // Keep the button at row height and hang the list above it.
+            if (expand_up)
+            {
+                layout.size.y = item_height;
+                background_panel
+                    ->setPosition(0.0f, -list_height, sp::Alignment::TopLeft)
+                    ->setSize(GuiElement::GuiSizeMax, list_height);
+                background_panel->getLayout().fill_height = false;
+                target_list
+                    ->setPosition(0.0f, -list_height, sp::Alignment::TopLeft)
+                    ->setSize(GuiElement::GuiSizeMax, list_height);
+                target_list->getLayout().fill_height = false;
+            }
+            // Expand the button to fit all entries.
+            else
+            {
+                layout.size.y = list_height;
+                background_panel
+                    ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
+                    ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+                target_list
+                    ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
+                    ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+            }
+
             background_panel->show();
             action_button->hide();
             target_list->show();
@@ -145,7 +201,7 @@ void GuiDockingButton::onUpdate()
         }
     }
 
-    // If collapsed, just show the action button.
+    // If collapsed, show only the action button.
     layout.size.y = item_height;
     background_panel->hide();
     target_list->hide();
@@ -176,17 +232,25 @@ std::vector<sp::ecs::Entity> GuiDockingButton::findDockingTargets()
 {
     std::vector<sp::ecs::Entity> targets;
     if (!my_spaceship) return targets;
+
     auto port = my_spaceship.getComponent<DockingPort>();
     if (!port) return targets;
+
     auto my_transform = my_spaceship.getComponent<sp::Transform>();
     if (!my_transform) return targets;
 
     for (auto [entity, bay, transform, physics] : sp::ecs::Query<DockingBay, sp::Transform, sp::Physics>())
     {
         if (entity == my_spaceship) continue;
-        if (Faction::getRelation(my_spaceship, entity) == FactionRelation::Enemy) continue;
+
+        if (Faction::getRelation(my_spaceship, entity) == FactionRelation::Enemy) 
+            continue;
+
         if (port->canDockOn(bay) == DockingStyle::None) continue;
-        if (glm::length(transform.getPosition() - my_transform->getPosition()) > 1000.0f + std::max(physics.getSize().x, physics.getSize().y)) continue;
+
+        if (glm::length(transform.getPosition() - my_transform->getPosition()) > 1000.0f + std::max(physics.getSize().x, physics.getSize().y))
+            continue;
+
         targets.push_back(entity);
     }
 
