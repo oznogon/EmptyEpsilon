@@ -40,8 +40,10 @@
 #endif
 
 #include "shaderRegistry.h"
+#include "shaderManager.h"
 #include "glObjects.h"
 #include "particleEffect.h"
+#include "script/environment.h"
 
 // Global 3D camera properties.
 glm::vec3 camera_position;
@@ -351,7 +353,11 @@ int main(int argc, char** argv)
     ParticleEngine::cleanup();
     gl::shutdown();
     windows.clear();
+    gameGlobalInfo->reset();
     delete engine;
+    gameGlobalInfo = nullptr;
+    ShaderManager::cleanup();
+    sp::script::Environment::shutdown();
 
     return 0;
 }

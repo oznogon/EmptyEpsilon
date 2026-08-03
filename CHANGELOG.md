@@ -12,6 +12,7 @@
 ### Fixed
 
 - Utility Beam rotation dial background outline no longer renders over the handle and other UI elements
+- Memory leaks and crashes from SoundManager, Music, ShaderManager, Callback, Lua, and ECS systems
 
 ## [2026-07]
 
