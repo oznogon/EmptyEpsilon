@@ -8,38 +8,47 @@
 #include "tween.h"
 #include "random.h"
 #include "playerInfo.h"
-
-#include "components/scanning.h"
-#include "components/beamweapon.h"
-#include "components/mounts.h"
-#include "components/collision.h"
-#include "components/docking.h"
-#include "components/reactor.h"
-#include "components/warpdrive.h"
-#include "components/target.h"
-#include "components/beamWeaponTarget.h"
-#include "components/shields.h"
-#include "components/faction.h"
-#include "components/coolant.h"
-#include "components/sfx.h"
-
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <graphics/opengl.h>
 
+#include "components/beamweapon.h"
+#include "components/beamWeaponTarget.h"
+#include "components/collision.h"
+#include "components/coolant.h"
+#include "components/docking.h"
+#include "components/faction.h"
+#include "components/mounts.h"
+#include "components/reactor.h"
+#include "components/scanning.h"
+#include "components/sfx.h"
+#include "components/shields.h"
+#include "components/target.h"
+#include "components/warpdrive.h"
+
 void BeamWeaponSystem::update(float delta)
 {
+    // Run on server only.
     if (!game_server.isAlive()) return;
+    // Run only if not paused.
     if (delta <= 0.0f) return;
 
     for (auto [entity, beamsys, mounts, transform, reactor, docking_port, warp] : sp::ecs::Query<BeamWeaponSys, Mounts, sp::Transform, sp::ecs::optional<Reactor>, sp::ecs::optional<DockingPort>, sp::ecs::optional<WarpDrive>>())
     {
         sp::ecs::Entity target_entity;
 
+        // Use BeamWeaponTarget if available, or legacy generic Target if not.
         if (auto bt = entity.getComponent<BeamWeaponTarget>())
             target_entity = bt->entity;
         else if (auto t = entity.getComponent<Target>())
             target_entity = t->entity;
+
+        // An unscanned target's faction is unknown, so beam weapons should
+        // fire on it regardless of faction. Scanned targets are fired on only
+        // when they aren't friendly.
+        bool target_not_scanned = false;
+        if (auto target_scanstate = target_entity.getComponent<ScanState>())
+            target_not_scanned = target_scanstate->getStateFor(entity) == ScanState::State::NotScanned;
 
         for (auto& mount : mounts.mounts)
         {
@@ -50,20 +59,28 @@ void BeamWeaponSystem::update(float delta)
             if (!target_entity) continue;
             if (!beamsys.is_firing_enabled) continue;
 
-            // Check on beam weapons only if we are on the server, have a target, and
-            // not paused, and if the beams are cooled down or have a turret arc.
-            if (mount.range > 0.0f && (Faction::getRelation(entity, target_entity) != FactionRelation::Friendly) && delta > 0.0f && (!warp || warp->current == 0.0f) && (!docking_port || docking_port->state == DockingPort::State::NotDocking))
-            {
+            // Check on beam weapons only if the beams have a range, are cooled
+            // down, or have a turret arc, and if we aren't warping, docking, or
+            // paused, and if we have a target that's either unscanned or
+            // non-Friendly.
+            if (mount.range > 0.0f
+                && (target_not_scanned || Faction::getRelation(entity, target_entity) != FactionRelation::Friendly)
+                && delta > 0.0f
+                && (!warp || warp->current == 0.0f)
+                && (!docking_port || docking_port->state == DockingPort::State::NotDocking)
+            ) {
                 if (auto target_transform = target_entity.getComponent<sp::Transform>())
                 {
                     // Get the angle to the target.
                     auto diff = target_transform->getPosition() - (transform.getPosition() + rotateVec2(glm::vec2(mount.position.x, mount.position.y), transform.getRotation()));
                     float distance = glm::length(diff);
-                    if (auto physics = target_entity.getComponent<sp::Physics>())
-                        distance -= physics->getSize().x;
 
-                    // We also only care if the target is within no more than its
-                    // range * 1.3, which is when we want to start rotating the turret.
+                    if (auto physics = target_entity.getComponent<sp::Physics>())
+                        distance -= std::max(physics->getSize().x, physics->getSize().y);
+
+                    // We also only care if the target is within no more than
+                    // its range * 1.3, which is when we want to start rotating
+                    // the turret.
                     // TODO: Add a manual aim override similar to weapon tubes.
                     if (distance < mount.range * 1.3f)
                     {
@@ -72,10 +89,17 @@ void BeamWeaponSystem::update(float delta)
 
                         if (mount.turret_arc > 0)
                         {
-                            float rotation_rate = mount.turret_rotation_rate * beamsys.getSystemEffectiveness();
+                            const float rotation_rate = mount.turret_rotation_rate * beamsys.getSystemEffectiveness();
                             if (rotation_rate > 0)
                             {
-                                mount.direction = mount.rotateMountTurretTowards(mount.direction, transform.getRotation(), angle, mount.turret_direction, mount.turret_arc, rotation_rate);
+                                mount.direction = mount.rotateMountTurretTowards(
+                                    mount.direction,
+                                    transform.getRotation(),
+                                    angle,
+                                    mount.turret_direction,
+                                    mount.turret_arc,
+                                    rotation_rate
+                                );
                             }
                         }
 
@@ -156,10 +180,8 @@ void BeamWeaponSystem::update(float delta)
             // reset it if necessary.
             else if (mount.range > 0.0f
                 && mount.turret_arc > 0.0f
-                && mount.turret_rotation_rate > 0)
-            {
-                mount.direction = mount.resetMountTurret(mount.direction, mount.turret_direction, mount.turret_rotation_rate * beamsys.getSystemEffectiveness());
-            }
+                && mount.turret_rotation_rate > 0
+            ) mount.direction = mount.resetMountTurret(mount.direction, mount.turret_direction, mount.turret_rotation_rate * beamsys.getSystemEffectiveness());
         }
     }
 
