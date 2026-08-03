@@ -456,6 +456,7 @@ void initComponentScriptBindings()
     BIND_MEMBER(Shields, calibration_delay);
     BIND_MEMBER(Shields, frequency);
     BIND_MEMBER(Shields, energy_use_per_second);
+    BIND_MEMBER(Shields, on_taking_damage);
     BIND_ARRAY(Shields, entries);
     BIND_ARRAY_MEMBER(Shields, entries, level);
     BIND_ARRAY_MEMBER(Shields, entries, max);
