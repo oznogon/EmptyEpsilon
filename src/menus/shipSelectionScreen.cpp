@@ -1285,8 +1285,16 @@ void CrewPositionSelection::onUpdate()
                 crew_position_button[n]->setText(button_text);
 
             bool has_components = crewPositionRequirements::hasRequirements(cp, my_spaceship);
+            bool enabled = (!pc || pc->allowed_positions.has(cp)) && has_components;
 
-            crew_position_button[n]->setEnable((!pc || pc->allowed_positions.has(cp)) && has_components);
+            crew_position_button[n]->setEnable(enabled);
+            // If the crew screen isn't available on this ship, unselect it for
+            // the player.
+            if (!enabled && crew_position_button[n]->getValue())
+            {
+                crew_position_button[n]->setValue(false);
+                my_player_info->commandSetCrewPosition(window_index, cp, false);
+            }
             crew_position_selected = crew_position_selected || crew_position_button[n]->getValue();
         }
     }
