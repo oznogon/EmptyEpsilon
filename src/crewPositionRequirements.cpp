@@ -1,19 +1,18 @@
 #include "crewPositionRequirements.h"
-
 #include <i18n.h>
 
+#include "components/beamweapon.h"
+#include "components/comms.h"
+#include "components/docking.h"
+#include "components/drone.h"
 #include "components/impulse.h"
-#include "components/warpdrive.h"
 #include "components/jumpdrive.h"
 #include "components/maneuveringthrusters.h"
-#include "components/docking.h"
-#include "components/beamweapon.h"
 #include "components/missiletubes.h"
-#include "components/shields.h"
-#include "components/radar.h"
-#include "components/comms.h"
-#include "components/drone.h"
 #include "components/mounts.h"
+#include "components/radar.h"
+#include "components/shields.h"
+#include "components/warpdrive.h"
 
 namespace crewPositionRequirements
 {
@@ -28,7 +27,6 @@ bool hasRequirements(CrewPosition cp, sp::ecs::Entity ship)
         return ship.hasComponent<ImpulseEngine>()
             || ship.hasComponent<JumpDrive>()
             || ship.hasComponent<WarpDrive>()
-            || ship.hasComponent<CombatManeuveringThrusters>()
             || ship.hasComponent<ManeuveringThrusters>()
             || ship.hasComponent<DockingPort>();
 
@@ -37,8 +35,10 @@ bool hasRequirements(CrewPosition cp, sp::ecs::Entity ship)
         auto mounts = ship.getComponent<Mounts>();
         auto shields = ship.getComponent<Shields>();
         bool has_beam = false, has_missile = false;
-        if (mounts) {
-            for (auto& m : mounts->mounts) {
+        if (mounts)
+        {
+            for (auto& m : mounts->mounts)
+            {
                 if (m.type == MountType::BeamWeapon) has_beam = true;
                 if (m.type == MountType::MissileWeapon) has_missile = true;
             }
@@ -55,8 +55,10 @@ bool hasRequirements(CrewPosition cp, sp::ecs::Entity ship)
     {
         auto mounts = ship.getComponent<Mounts>();
         bool has_beam = false, has_missile = false;
-        if (mounts) {
-            for (auto& m : mounts->mounts) {
+        if (mounts)
+        {
+            for (auto& m : mounts->mounts)
+            {
                 if (m.type == MountType::BeamWeapon) has_beam = true;
                 if (m.type == MountType::MissileWeapon) has_missile = true;
             }
@@ -64,7 +66,6 @@ bool hasRequirements(CrewPosition cp, sp::ecs::Entity ship)
         return ship.hasComponent<ImpulseEngine>()
             || ship.hasComponent<JumpDrive>()
             || ship.hasComponent<WarpDrive>()
-            || ship.hasComponent<CombatManeuveringThrusters>()
             || ship.hasComponent<ManeuveringThrusters>()
             || ship.hasComponent<DockingPort>()
             || has_beam
@@ -75,8 +76,10 @@ bool hasRequirements(CrewPosition cp, sp::ecs::Entity ship)
     {
         auto mounts = ship.getComponent<Mounts>();
         if (!mounts) return false;
+
         for (auto& m : mounts->mounts)
             if (m.type == MountType::BeamWeapon) return true;
+
         return false;
     }
 
@@ -84,8 +87,10 @@ bool hasRequirements(CrewPosition cp, sp::ecs::Entity ship)
     {
         auto mounts = ship.getComponent<Mounts>();
         if (!mounts) return false;
+
         for (auto& m : mounts->mounts)
             if (m.type == MountType::MissileWeapon) return true;
+
         return false;
     }
 
