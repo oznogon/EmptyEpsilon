@@ -2,7 +2,7 @@
 -- Description: Test scenario for the unified Mounts component. Verifies beam weapon, missile weapon, and utility beam mounts.
 -- Type: Development
 
-require("utils.lua")
+require("testing.lua")
 
 local function mlog(msg)
     log("[MountsTest] " .. msg)
@@ -31,7 +31,7 @@ function init()
 
     -- Verify the entity has the mounts component
     local mounts = player.components.mounts
-    assert_eq(mounts ~= nil, true, "Mounts component exists")
+    test_eq(mounts ~= nil, true, "Mounts component exists")
     local num_mounts = #mounts
     mlog("Total mounts: " .. num_mounts)
 
@@ -55,14 +55,14 @@ function init()
                 break
             end
         end
-        assert_eq(bm ~= nil, true, "Found beam mount")
+        test_eq(bm ~= nil, true, "Found beam mount")
         if bm then
-            assert_eq(bm.arc, 90, "Beam arc")
-            assert_eq(bm.range, 1200, "Beam range")
-            assert_eq(bm.direction, -15, "Beam direction")
-            assert_eq(bm.cycle_time, 8, "Beam cycle_time")
-            assert_eq(bm.damage, 6, "Beam damage")
-            assert_eq(bm.turret_arc, 0, "Beam turret_arc")
+            test_eq(bm.arc, 90, "Beam arc")
+            test_eq(bm.range, 1200, "Beam range")
+            test_eq(bm.direction, -15, "Beam direction")
+            test_eq(bm.cycle_time, 8, "Beam cycle_time")
+            test_eq(bm.damage, 6, "Beam damage")
+            test_eq(bm.turret_arc, 0, "Beam turret_arc")
         end
     end
 
@@ -70,18 +70,18 @@ function init()
     if beam_count > 0 then
         local bm = findMountOfType(mounts, "beam")
         -- Non-turreted beam mounts default to no turret
-        assert_eq(bm.turret_arc, 0, "Beam turret_arc default (no turret)")
-        assert_eq(bm.turret_direction, 0, "Beam turret_direction default (no turret)")
-        assert_eq(bm.turret_rotation_rate, 0, "Beam turret_rotation_rate default (no turret)")
+        test_eq(bm.turret_arc, 0, "Beam turret_arc default (no turret)")
+        test_eq(bm.turret_direction, 0, "Beam turret_direction default (no turret)")
+        test_eq(bm.turret_rotation_rate, 0, "Beam turret_rotation_rate default (no turret)")
 
         -- Optional turret via the entity API
         player:setBeamWeaponTurret(0, 120, -30, 4)
-        assert_eq(player:getBeamWeaponTurretArc(0), 120, "Beam turret_arc via setBeamWeaponTurret")
-        assert_eq(player:getBeamWeaponTurretDirection(0), -30, "Beam turret_direction via setBeamWeaponTurret")
-        assert_eq(player:getBeamWeaponTurretRotationRate(0), 4, "Beam turret_rotation_rate via setBeamWeaponTurret")
-        assert_eq(bm.turret_arc, 120, "Beam turret_arc persisted on mount")
-        assert_eq(bm.turret_direction, -30, "Beam turret_direction persisted on mount")
-        assert_eq(bm.turret_rotation_rate, 4, "Beam turret_rotation_rate persisted on mount")
+        test_eq(player:getBeamWeaponTurretArc(0), 120, "Beam turret_arc via setBeamWeaponTurret")
+        test_eq(player:getBeamWeaponTurretDirection(0), -30, "Beam turret_direction via setBeamWeaponTurret")
+        test_eq(player:getBeamWeaponTurretRotationRate(0), 4, "Beam turret_rotation_rate via setBeamWeaponTurret")
+        test_eq(bm.turret_arc, 120, "Beam turret_arc persisted on mount")
+        test_eq(bm.turret_direction, -30, "Beam turret_direction persisted on mount")
+        test_eq(bm.turret_rotation_rate, 4, "Beam turret_rotation_rate persisted on mount")
 
         -- A turreted beam defined by a ship template
         local turret_ship = PlayerSpaceship()
@@ -89,11 +89,11 @@ function init()
         turret_ship:setFaction("Independent")
         turret_ship:setPosition(2000, 0)
         local turret_mounts = turret_ship.components.mounts
-        assert_eq(turret_mounts ~= nil, true, "Turreted ship mounts component exists")
+        test_eq(turret_mounts ~= nil, true, "Turreted ship mounts component exists")
         local tbm = findMountOfType(turret_mounts, "beam")
-        assert_eq(tbm.turret_arc, 90, "Turreted beam turret_arc from template")
-        assert_eq(tbm.turret_direction, 35, "Turreted beam turret_direction from template")
-        assert_eq(tbm.turret_rotation_rate, 6, "Turreted beam turret_rotation_rate from template")
+        test_eq(tbm.turret_arc, 90, "Turreted beam turret_arc from template")
+        test_eq(tbm.turret_direction, 35, "Turreted beam turret_direction from template")
+        test_eq(tbm.turret_rotation_rate, 6, "Turreted beam turret_rotation_rate from template")
     end
 
     -- Verify missile mount properties
@@ -105,12 +105,12 @@ function init()
                 break
             end
         end
-        assert_eq(mm ~= nil, true, "Found missile mount")
+        test_eq(mm ~= nil, true, "Found missile mount")
         if mm then
-            assert_eq(mm.load_time, 60, "Missile load_time")
-            assert_eq(mm.direction, -1, "Missile direction")
-            assert_eq(mm.state, "empty", "Missile state (Empty)")
-            assert_eq(mm.missile_size, "medium", "Missile size (Medium)")
+            test_eq(mm.load_time, 60, "Missile load_time")
+            test_eq(mm.direction, -1, "Missile direction")
+            test_eq(mm.state, "empty", "Missile state (Empty)")
+            test_eq(mm.missile_size, "medium", "Missile size (Medium)")
         end
     end
 
@@ -118,17 +118,17 @@ function init()
     if missile_count > 0 then
         local mm = findMountOfType(mounts, "missile")
         -- Non-turreted missile mounts default to no turret
-        assert_eq(mm.turret_arc, 0, "Missile turret_arc default (no turret)")
-        assert_eq(mm.turret_direction, 0, "Missile turret_direction default (no turret)")
-        assert_eq(mm.turret_rotation_rate, 0, "Missile turret_rotation_rate default (no turret)")
+        test_eq(mm.turret_arc, 0, "Missile turret_arc default (no turret)")
+        test_eq(mm.turret_direction, 0, "Missile turret_direction default (no turret)")
+        test_eq(mm.turret_rotation_rate, 0, "Missile turret_rotation_rate default (no turret)")
 
         -- Turret fields are common to all mount types and settable at runtime
         mm.turret_arc = 180
         mm.turret_direction = 0
         mm.turret_rotation_rate = 3
-        assert_eq(mm.turret_arc, 180, "Missile turret_arc set")
-        assert_eq(mm.turret_direction, 0, "Missile turret_direction set")
-        assert_eq(mm.turret_rotation_rate, 3, "Missile turret_rotation_rate set")
+        test_eq(mm.turret_arc, 180, "Missile turret_arc set")
+        test_eq(mm.turret_direction, 0, "Missile turret_direction set")
+        test_eq(mm.turret_rotation_rate, 3, "Missile turret_rotation_rate set")
         mlog("Phobos M3 missile tube 0 is now turreted")
     end
 
@@ -140,7 +140,7 @@ function init()
         :setPosition(1000, 0)
         :setCallSign("UTIL")
     local util_mounts = util_ship.components.mounts
-    assert_eq(util_mounts ~= nil, true, "Utility ship mounts component exists")
+    test_eq(util_mounts ~= nil, true, "Utility ship mounts component exists")
     local util_num = #util_mounts
     local util_found = false
     for i = 1, util_num do
@@ -148,31 +148,31 @@ function init()
             local um = util_mounts[i]
             util_found = true
             um.arc_color = {0, 255, 255, 128}
-            assert_eq(um.max_arc, 90, "Utility max_arc")
-            assert_eq(um.max_range, 2000, "Utility max_range")
-            assert_eq(um.cycle_time, 6, "Utility cycle_time")
-            assert_eq(um.strength, 1000, "Utility strength")
+            test_eq(um.max_arc, 90, "Utility max_arc")
+            test_eq(um.max_range, 2000, "Utility max_range")
+            test_eq(um.cycle_time, 6, "Utility cycle_time")
+            test_eq(um.strength, 1000, "Utility strength")
             mlog("Utility beam mount verified")
         end
     end
-    assert_eq(util_found, true, "Found utility beam mount")
+    test_eq(util_found, true, "Found utility beam mount")
 
     -- Verify optional turrets on the utility beam
     local um = findMountOfType(util_mounts, "utility")
-    assert_eq(um ~= nil, true, "Found utility mount for turret test")
+    test_eq(um ~= nil, true, "Found utility mount for turret test")
     if um then
         -- Non-turreted utility beam mounts default to no turret
-        assert_eq(um.turret_arc, 0, "Utility turret_arc default (no turret)")
-        assert_eq(um.turret_direction, 0, "Utility turret_direction default (no turret)")
-        assert_eq(um.turret_rotation_rate, 0, "Utility turret_rotation_rate default (no turret)")
+        test_eq(um.turret_arc, 0, "Utility turret_arc default (no turret)")
+        test_eq(um.turret_direction, 0, "Utility turret_direction default (no turret)")
+        test_eq(um.turret_rotation_rate, 0, "Utility turret_rotation_rate default (no turret)")
 
         -- Turret fields are common to all mount types and settable at runtime
         um.turret_arc = 150
         um.turret_direction = 0
         um.turret_rotation_rate = 4
-        assert_eq(um.turret_arc, 150, "Utility turret_arc set")
-        assert_eq(um.turret_direction, 0, "Utility turret_direction set")
-        assert_eq(um.turret_rotation_rate, 4, "Utility turret_rotation_rate set")
+        test_eq(um.turret_arc, 150, "Utility turret_arc set")
+        test_eq(um.turret_direction, 0, "Utility turret_direction set")
+        test_eq(um.turret_rotation_rate, 4, "Utility turret_rotation_rate set")
         mlog("Hylas utility beam is now turreted")
     end
 
@@ -181,7 +181,7 @@ function init()
         local bm = mounts[1]
         local orig_cooldown = bm.cooldown
         bm.cooldown = 2.5
-        assert_eq(bm.cooldown, 2.5, "Cooldown can be set")
+        test_eq(bm.cooldown, 2.5, "Cooldown can be set")
         bm.cooldown = orig_cooldown
     end
 
@@ -196,11 +196,11 @@ function init()
         end
         if mm then
             -- Test type_allowed_mask via flags
-            assert_eq(mm.allow_homing, true, "Missile allow_homing")
+            test_eq(mm.allow_homing, true, "Missile allow_homing")
             mm.allow_homing = false
-            assert_eq(mm.allow_homing, false, "Missile allow_homing cleared")
+            test_eq(mm.allow_homing, false, "Missile allow_homing cleared")
             mm.allow_homing = true
-            assert_eq(mm.allow_homing, true, "Missile allow_homing restored")
+            test_eq(mm.allow_homing, true, "Missile allow_homing restored")
         end
     end
 

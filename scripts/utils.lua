@@ -570,14 +570,3 @@ function isObjectType(obj, typ)
     -- always returns true or false as documented.
     return not not result
 end
-
-function assert_eq(actual, expected, name)
-    if actual ~= expected then
-        log("FAIL: " .. name .. " expected=" .. tostring(expected) .. " got=" .. tostring(actual))
-        return false
-    end
-
-    log("PASS: " .. name .. " = " .. tostring(actual))
-
-    return true
-end
