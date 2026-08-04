@@ -349,17 +349,13 @@ void NebulaRenderSystem::update(float delta)
 void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, NebulaRenderer& nr)
 {
     nr.generateCloudsFromSeed();
-    if (nr.clouds.empty())
-        return;
+    if (nr.clouds.empty()) return;
 
     glm::vec2 nebula_pos = transform.getPosition();
-    glm::vec2 camera_2d{ camera_position.x, camera_position.y };
-    float dist_to_center = glm::length(nebula_pos - camera_2d);
-
-    float shell_alpha;
-    if (dist_to_center <= nr.radius) shell_alpha = 1.0f;
-    else shell_alpha = nr.radius / dist_to_center;
-
+    float dist_to_center = glm::length(nebula_pos - glm::vec2{camera_position.x, camera_position.y});
+    float shell_alpha = dist_to_center <= nr.radius
+        ? 1.0f
+        : nr.radius / dist_to_center;
     const float cloud_density = std::max(0.0f, nr.cloud_density);
 
     ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Billboard);
@@ -385,9 +381,9 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    // Pre-compute light contributions for all clouds (batched, not per-draw-call)
+    // Batch pre-compute light contributions for all clouds.
     std::vector<float> cloud_lights(nr.clouds.size(), 0.0f);
-    glm::vec3 ring_center = glm::vec3(nebula_pos.x, nebula_pos.y, 0);
+    glm::vec3 ring_center = glm::vec3(nebula_pos.x, nebula_pos.y, 0.0f);
     for (int i = 0; i < static_cast<int>(nr.clouds.size()); i++)
     {
         glm::vec3 cloud_pos = ring_center + glm::vec3(nr.clouds[i].offset.x, nr.clouds[i].offset.y, 0);
@@ -395,8 +391,8 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
         for (const auto& light : lights)
         {
             glm::vec2 light_pos_2d{light.position.x, light.position.y};
-            if (glm::length(light_pos_2d - nebula_pos) > nr.radius)
-                continue;
+
+            if (glm::length(light_pos_2d - nebula_pos) > nr.radius) continue;
 
             const float dist = glm::length(cloud_pos - light.position);
             if (dist < light.radius)
@@ -414,6 +410,7 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
     {
         float volume_size = nr.radius * (0.3f + v * 0.15f);
         float total = 0.0f;
+
         for (const auto& light : lights)
         {
             glm::vec2 light_pos_2d{light.position.x, light.position.y};
@@ -427,10 +424,11 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
                 total += light.intensity * atten * atten;
             }
         }
+
         ring_lights[v] = std::min(total, 1.0f);
     }
 
-    // Render fog volume billboards when camera is near or inside the nebula
+    // Render fog volume billboards when camera is near or inside the nebula.
     if (shell_alpha > 0.001f)
     {
         for (int v = 0; v < 6; v++)
@@ -443,8 +441,8 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
 
             if (!cloud.texture.ptr)
                 cloud.texture.ptr = textureManager.getTexture(cloud.texture.name);
-            if (cloud.texture.ptr)
-                cloud.texture.ptr->bind();
+            if (cloud.texture.ptr) cloud.texture.ptr->bind();
+
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
@@ -498,13 +496,13 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
     for (int idx : sorted_indices)
     {
         auto& cloud = nr.clouds[idx];
-        glm::vec3 cloud_pos = ring_center + glm::vec3(cloud.offset.x, cloud.offset.y, 0);
+        glm::vec3 cloud_pos = ring_center + glm::vec3(cloud.offset.x, cloud.offset.y, 0.0f);
 
         float per_cloud_alpha = 0.6f * shell_alpha * cloud_density;
 
         if (per_cloud_alpha <= 0.0f) continue;
 
-        // Per-cloud billboard rotation for visual variety
+        // Per-cloud billboard rotation for visual variety.
         const float rotation = glm::mod(cloud.offset.x * 1.73f + cloud.offset.y * 3.14f, 360.0f);
         const float cos_r = glm::cos(glm::radians(rotation));
         const float sin_r = glm::sin(glm::radians(rotation));
@@ -523,8 +521,8 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
 
         if (!cloud.texture.ptr)
             cloud.texture.ptr = textureManager.getTexture(cloud.texture.name);
-        if (cloud.texture.ptr)
-            cloud.texture.ptr->bind();
+        if (cloud.texture.ptr) cloud.texture.ptr->bind();
+
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
