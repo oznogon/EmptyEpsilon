@@ -66,7 +66,7 @@ MainMenu::MainMenu()
         }
     );
     quit_button->setSize(GuiElement::GuiSizeMax, button_height);
-    (new GuiTextTooltip(quit_button, "QUIT_TIP", tr("tooltips", "Exit and close EmptyEpsilon."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(quit_button, "QUIT_TIP", tr("tooltips", "Exit and close EmptyEpsilon.")))->setWidth();
 
     auto* options_button = new GuiButton(menu_selections, "OPEN_OPTIONS", tr("mainMenu", "Options"),
         [this]()
@@ -76,7 +76,7 @@ MainMenu::MainMenu()
         }
     );
     options_button->setSize(GuiElement::GuiSizeMax, button_height);
-    (new GuiTextTooltip(options_button, "OPTIONS_TIP", tr("tooltips", "Open the graphics, audio, and interface settings."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(options_button, "OPTIONS_TIP", tr("tooltips", "Open the graphics, audio, and interface settings.")))->setWidth();
 
 #ifdef DEBUG
     auto* gm_button = new GuiButton(menu_selections, "", tr("mainMenu", "GM screen"),
@@ -94,7 +94,7 @@ MainMenu::MainMenu()
         }
     );
     gm_button->setSize(GuiElement::GuiSizeMax, button_height);
-    (new GuiTextTooltip(gm_button, "GM_SCREEN_TIP", tr("tooltips", "Open a game master console for testing and debugging."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(gm_button, "GM_SCREEN_TIP", tr("tooltips", "Open a game master console for testing and debugging.")))->setWidth();
 #endif
 
     auto* tutorials_button = new GuiButton(menu_selections, "START_TUTORIAL", tr("mainMenu", "Tutorials"),
@@ -105,7 +105,7 @@ MainMenu::MainMenu()
         }
     );
     tutorials_button->setSize(GuiElement::GuiSizeMax, button_height);
-    (new GuiTextTooltip(tutorials_button, "TUTORIALS_TIP", tr("tooltips", "Play through tutorial scenarios to learn the game."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(tutorials_button, "TUTORIALS_TIP", tr("tooltips", "Play through tutorial scenarios to learn the game.")))->setWidth();
 
     auto* join_button = new GuiButton(menu_selections, "START_CLIENT", tr("mainMenu", "Join game"),
         [this]()
@@ -115,7 +115,7 @@ MainMenu::MainMenu()
         }
     );
     join_button->setSize(GuiElement::GuiSizeMax, button_height);
-    (new GuiTextTooltip(join_button, "JOIN_TIP", tr("tooltips", "Browse and connect to LAN or online game servers."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(join_button, "JOIN_TIP", tr("tooltips", "Browse and connect to LAN or online game servers.")))->setWidth();
 
     auto* host_button = new GuiButton(menu_selections, "START_SERVER", tr("mainMenu", "Host game"),
         [this]()
@@ -126,7 +126,7 @@ MainMenu::MainMenu()
     );
     host_button->setSize(GuiElement::GuiSizeMax, button_height);
     host_button->setAttribute("margin", "0, 0, 50, 0");
-    (new GuiTextTooltip(host_button, "HOST_TIP", tr("tooltips", "Create and host a new game server with your chosen scenario."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(host_button, "HOST_TIP", tr("tooltips", "Create and host a new game server with your chosen scenario.")))->setWidth();
 
     auto* username_entry = new GuiTextEntry(menu_selections, "USERNAME", PreferencesManager::get("username"));
     username_entry->callback(
@@ -136,7 +136,7 @@ MainMenu::MainMenu()
         }
     );
     username_entry->setSize(GuiElement::GuiSizeMax, button_height);
-    (new GuiTextTooltip(username_entry, "USERNAME_TIP", tr("tooltips", "Set your player name displayed to other players."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(username_entry, "USERNAME_TIP", tr("tooltips", "Set your player name displayed to other players.")))->setWidth();
 
     (new GuiLabel(menu_selections, "", tr("mainMenu", "Your name:"), 30.0f))
         ->setAlignment(sp::Alignment::CenterLeft)
@@ -153,7 +153,7 @@ MainMenu::MainMenu()
     credits_button
         ->setPosition(0.0f, 0.0f, sp::Alignment::BottomRight)
         ->setSize(250.0f, button_height);
-    (new GuiTextTooltip(credits_button, "CREDITS_TIP", tr("tooltips", "View the credits and acknowledgments."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(credits_button, "CREDITS_TIP", tr("tooltips", "View the credits and acknowledgments.")))->setWidth();
 
     if (PreferencesManager::get("instance_name") != "")
     {

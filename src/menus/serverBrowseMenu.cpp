@@ -68,7 +68,7 @@ ServerBrowserMenu::ServerBrowserMenu(std::optional<GameClient::DisconnectReason>
         ->setPosition(50.0f, -50.0f, sp::Alignment::BottomLeft)
         ->setSize(250.0f, GuiElement::GuiSizeRow);
 
-    (new GuiTextTooltip(back_button, "BACK_TIP", tr("tooltips", "Return to the main menu."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(back_button, "BACK_TIP", tr("tooltips", "Return to the main menu.")))->setWidth();
 
     if (last_attempt)
     {
@@ -92,7 +92,7 @@ ServerBrowserMenu::ServerBrowserMenu(std::optional<GameClient::DisconnectReason>
     connect_button
         ->setPosition(-50.0f, -50.0f, sp::Alignment::BottomRight)
         ->setSize(250.0f, GuiElement::GuiSizeRow);
-    (new GuiTextTooltip(connect_button, "CONNECT_TIP", tr("tooltips", "Connect to the EmptyEpsilon server at this address."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(connect_button, "CONNECT_TIP", tr("tooltips", "Connect to the EmptyEpsilon server at this address.")))->setWidth();
 
     manual_ip = new GuiTextEntry(this, "IP", "");
     manual_ip
@@ -110,7 +110,7 @@ ServerBrowserMenu::ServerBrowserMenu(std::optional<GameClient::DisconnectReason>
         )
         ->setPosition(-50.0f, -120.0f, sp::Alignment::BottomRight)
         ->setSize(250.0f, GuiElement::GuiSizeRow);
-    (new GuiTextTooltip(manual_ip, "MANUAL_IP_TIP", tr("tooltips", "Enter the server's IP address or domain. If it uses a custom port, add a colon (:) and then the port number at the end."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(manual_ip, "MANUAL_IP_TIP", tr("tooltips", "Enter the server's IP address or domain. If it uses a custom port, add a colon (:) and then the port number at the end.")))->setWidth();
 
     server_list_box = new GuiListbox(this, "SERVERS",
         [this](int index, string value)

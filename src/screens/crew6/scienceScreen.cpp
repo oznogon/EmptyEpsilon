@@ -214,7 +214,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         ->setSelectionIndex(0)
         ->setPosition(-20.0f, 120.0f, sp::Alignment::TopRight)
         ->setSize(250.0f, GuiElement::GuiSizeRow);
-    (new GuiTextTooltip(sidebar_selector, "SCIENCE_SIDEBAR_TIP", tr("tooltips", "Switch between available science control and data views."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(sidebar_selector, "SCIENCE_SIDEBAR_TIP", tr("tooltips", "Switch between available science control and data views.")))->setWidth();
 
     // Target scan data sidebar.
     info_sidebar = new GuiElement(radar_view, "SIDEBAR");
@@ -245,7 +245,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     scan_button
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setVisible(my_spaceship.hasComponent<ScienceScanner>());
-    (new GuiTextTooltip(scan_button, "SCAN_BUTTON_TIP", tr("tooltips", "Initiate a scan of the selected target to reveal its data and subsystems."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(scan_button, "SCAN_BUTTON_TIP", tr("tooltips", "Initiate a scan of the selected target to reveal its data and subsystems.")))->setWidth();
 
     // Link target analysis button.
     link_target_analysis_button = new GuiButton(info_scan_content, "LINK_TARGET_ANALYSIS_BUTTON", tr("scienceButton", "Link target analysis"),
@@ -256,7 +256,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         }
     );
     link_target_analysis_button->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
-    (new GuiTextTooltip(link_target_analysis_button, "LINK_TARGET_ANALYSIS_TIP", tr("tooltips", "Send the selected target's data to the analysis screen for comparison."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(link_target_analysis_button, "LINK_TARGET_ANALYSIS_TIP", tr("tooltips", "Send the selected target's data to the analysis screen for comparison.")))->setWidth();
 
     // Simple scan data.
     info_callsign = new GuiKeyValueDisplay(info_scan_content, "SCIENCE_CALLSIGN", 0.4f, tr("science", "Callsign"), "");
@@ -295,7 +295,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         ->setTextSize(20.0f)
         ->setPosition(0.0f, 1.0f, sp::Alignment::TopLeft)
         ->setSize(30.0f, 25.0f);
-    (new GuiTextTooltip(info_faction_button, "FACTION_DB_TIP", tr("tooltips", "Open this faction's entry in the science database."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(info_faction_button, "FACTION_DB_TIP", tr("tooltips", "Open this faction's entry in the science database.")))->setWidth();
 
     info_type = new GuiKeyValueDisplay(info_scan_content, "SCIENCE_TYPE", 0.4f, tr("science", "Type"), "");
     info_type->setSize(GuiElement::GuiSizeMax, 30.0f);
@@ -320,7 +320,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         ->setTextSize(20.0f)
         ->setPosition(0.0f, 1.0f, sp::Alignment::TopLeft)
         ->setSize(30.0f, 25.0f);
-    (new GuiTextTooltip(info_type_button, "TYPE_DB_TIP", tr("tooltips", "Open this ship type's entry in the science database."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(info_type_button, "TYPE_DB_TIP", tr("tooltips", "Open this ship type's entry in the science database.")))->setWidth();
 
     info_shields = new GuiKeyValueDisplay(info_scan_content, "SCIENCE_SHIELDS", 0.4f, tr("science", "Shields"), "");
     info_shields->setSize(GuiElement::GuiSizeMax, 30.0f);
@@ -334,7 +334,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     sidebar_pager
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->hide();
-    (new GuiTextTooltip(sidebar_pager, "SIDEBAR_PAGER_TIP", tr("tooltips", "Browse different data views for the selected target: tactical, systems, signals, or description."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(sidebar_pager, "SIDEBAR_PAGER_TIP", tr("tooltips", "Browse different data views for the selected target: tactical, systems, signals, or description.")))->setWidth();
 
     // Add sidebar pages.
     // If the server uses frequencies, add the Tactical sidebar page.
@@ -396,11 +396,11 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     // Prep and hide the frequency graphs.
     info_shield_frequency = new GuiFrequencyCurve(sidebar_frequencies_page, "SCIENCE_SHIELD_FREQUENCY", GuiFrequencyCurve::FrequencyType::Other, GuiFrequencyCurve::DamageEffect::Positive);
     info_shield_frequency->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    (new GuiTextTooltip(info_shield_frequency, "SHIELD_FREQ_CURVE_TIP", tr("tooltips", "Shield frequency calibration of the target. Match your beam frequency to penetrate."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(info_shield_frequency, "SHIELD_FREQ_CURVE_TIP", tr("tooltips", "Shield frequency calibration of the target. Match your beam frequency to penetrate.")))->setWidth();
 
     info_beam_frequency = new GuiFrequencyCurve(sidebar_frequencies_page, "SCIENCE_BEAM_FREQUENCY", GuiFrequencyCurve::FrequencyType::Beam, GuiFrequencyCurve::DamageEffect::Negative);
     info_beam_frequency->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    (new GuiTextTooltip(info_beam_frequency, "BEAM_FREQ_CURVE_TIP", tr("tooltips", "Beam weapon frequency of the target. Adjust your shield frequency to resist."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(info_beam_frequency, "BEAM_FREQ_CURVE_TIP", tr("tooltips", "Beam weapon frequency of the target. Adjust your shield frequency to resist.")))->setWidth();
 
     // List each system's status.
     for (int n = 0; n < ShipSystem::COUNT; n++)
@@ -481,14 +481,14 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         ->setPosition(20.0f, -120.0f, sp::Alignment::BottomLeft)
         ->setSize(200.0f, GuiElement::GuiSizeRow)
         ->disable();
-    (new GuiTextTooltip(probe_view_button, "PROBE_VIEW_TIP", tr("tooltips", "Switch to the camera view from a linked probe to see from its perspective."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(probe_view_button, "PROBE_VIEW_TIP", tr("tooltips", "Switch to the camera view from a linked probe to see from its perspective.")))->setWidth();
 
     // Draw the zoom slider.
     zoom_slider = new GuiRadarZoomSlider(radar_view, "RADAR_ZOOM", effective_short_range, effective_long_range, effective_long_range, science_radar);
     zoom_slider
         ->setPosition(-20.0f, -20.0f, sp::Alignment::BottomRight)
         ->setSize(250.0f, GuiElement::GuiSizeRow);
-    (new GuiTextTooltip(zoom_slider, "SCIENCE_ZOOM_TIP", tr("tooltips", "Adjust the science radar zoom level for closer or wider views."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(zoom_slider, "SCIENCE_ZOOM_TIP", tr("tooltips", "Adjust the science radar zoom level for closer or wider views.")))->setWidth();
 
     // Radar/database view toggle.
     view_mode_selection = new GuiListbox(this, "VIEW_SELECTION",
@@ -504,7 +504,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         ->setSelectionIndex(0)
         ->setPosition(20.0f, -20.0f, sp::Alignment::BottomLeft)
         ->setSize(200.0f, 100.0f);
-    (new GuiTextTooltip(view_mode_selection, "VIEW_MODE_TIP", tr("tooltips", "Switch between the radar view and the science database browser."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(view_mode_selection, "VIEW_MODE_TIP", tr("tooltips", "Switch between the radar view and the science database browser.")))->setWidth();
 
     // Scanning dialog.
     scanning_dialog = new GuiScanningDialog(this, "SCANNING_DIALOG");
@@ -518,7 +518,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         ->setPosition(20.0f, -25.0f, sp::Alignment::CenterLeft)
         ->setSize(150.0f, GuiElement::GuiSizeRow)
         ->hide();
-    (new GuiTextTooltip(missile_threat_label, "MISSILE_THREAT_TIP", tr("tooltips", "Warning: Incoming missiles detected targeting your ship."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(missile_threat_label, "MISSILE_THREAT_TIP", tr("tooltips", "Warning: Incoming missiles detected targeting your ship.")))->setWidth();
 
     beam_threat_label = new GuiLabel(this, "BEAM_THREAT_LABEL", tr("scienceThreat", "Beam"), 30.0f);
     beam_threat_label
@@ -529,7 +529,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         ->setPosition(20.0f, 25.0f, sp::Alignment::CenterLeft)
         ->setSize(150.0f, GuiElement::GuiSizeRow)
         ->hide();
-    (new GuiTextTooltip(beam_threat_label, "BEAM_THREAT_TIP", tr("tooltips", "Warning: Enemy beam weapons are targeting your ship."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(beam_threat_label, "BEAM_THREAT_TIP", tr("tooltips", "Warning: Enemy beam weapons are targeting your ship.")))->setWidth();
 }
 
 static float calculateSignalError(float signal)

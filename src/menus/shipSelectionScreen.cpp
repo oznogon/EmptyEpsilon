@@ -224,7 +224,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     // Attach a single-text tooltip to a button.
     auto addTooltip = [](GuiElement* btn, const string& id, const string& text)
     {
-        (new GuiTextTooltip(btn, id, text, 20.0f))->setWidth(280.0f);
+        (new GuiTextTooltip(btn, id, text))->setWidth();
     };
 
     // Game Master button (server only)
@@ -801,7 +801,7 @@ ShipSelectionScreen::ShipSelectionScreen()
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
             ->setAttribute("alignment", "bottomcenter");
 
-        (new GuiTextTooltip(server_disconnect_button, "SERVER_DISCONNECT_TIP", tr("tooltips", "End the running scenario and return to the scenario selection screen."), 20.0f))->setWidth(280.0f);
+        (new GuiTextTooltip(server_disconnect_button, "SERVER_DISCONNECT_TIP", tr("tooltips", "End the running scenario and return to the scenario selection screen.")))->setWidth();
     }
     else
     {

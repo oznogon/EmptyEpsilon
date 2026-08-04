@@ -65,7 +65,7 @@ ServerSetupScreen::ServerSetupScreen()
 
     server_name = new GuiTextEntry(row, "SERVER_NAME", "server");
     server_name->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    (new GuiTextTooltip(server_name, "SERVER_NAME_TIP", tr("tooltips", "Set the name that appears in the server browser for other players."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(server_name, "SERVER_NAME_TIP", tr("tooltips", "Set the name that appears in the server browser for other players.")))->setWidth();
 
     // Server password row.
     row = new GuiElement(column, "");
@@ -80,7 +80,7 @@ ServerSetupScreen::ServerSetupScreen()
 
     server_password = new GuiTextEntry(row, "SERVER_PASSWORD", "");
     server_password->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    (new GuiTextTooltip(server_password, "SERVER_PASSWORD_TIP", tr("tooltips", "Set a password to restrict who can join your game. Leave empty for no password."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(server_password, "SERVER_PASSWORD_TIP", tr("tooltips", "Set a password to restrict who can join your game. Leave empty for no password.")))->setWidth();
 
     // GM control code row.
     row = new GuiElement(column, "");
@@ -95,7 +95,7 @@ ServerSetupScreen::ServerSetupScreen()
 
     gm_password = new GuiTextEntry(row, "GM_CONTROL_CODE", "");
     gm_password->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    (new GuiTextTooltip(gm_password, "GM_CODE_TIP", tr("tooltips", "Set the control code players must enter to access game master functions."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(gm_password, "GM_CODE_TIP", tr("tooltips", "Set the control code players must enter to access game master functions.")))->setWidth();
 
     // LAN/Internet row.
     row = new GuiElement(column, "");
@@ -118,7 +118,7 @@ ServerSetupScreen::ServerSetupScreen()
     server_visibility
         ->setValue(false)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    (new GuiTextTooltip(server_visibility, "SERVER_VISIBILITY_TIP", tr("tooltips", "List this server on the internet master registry so players can find it online."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(server_visibility, "SERVER_VISIBILITY_TIP", tr("tooltips", "List this server on the internet master registry so players can find it online.")))->setWidth();
 
     row = new GuiElement(column, "");
     row
@@ -135,7 +135,7 @@ ServerSetupScreen::ServerSetupScreen()
     server_port = new GuiTextEntry(row, "SERVER_PORT", string(DEFAULT_SERVER_PORT));
     server_port
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    (new GuiTextTooltip(server_port, "SERVER_PORT_TIP", tr("tooltips", "Set the network port for the server. Default is 35666."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(server_port, "SERVER_PORT_TIP", tr("tooltips", "Set the network port for the server. Default is 35666.")))->setWidth();
 
     // Server info section.
     (new GuiLabel(column, "INFO_LABEL", tr("Server information"), 30.0f))
@@ -185,7 +185,7 @@ ServerSetupScreen::ServerSetupScreen()
     server_ips
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setAttribute("margin", "0, 0, 0, 40");
-    (new GuiTextTooltip(server_ips, "SERVER_IPS_TIP", tr("tooltips", "Click an IP address to copy it to the clipboard for sharing."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(server_ips, "SERVER_IPS_TIP", tr("tooltips", "Click an IP address to copy it to the clipboard for sharing.")))->setWidth();
 
     for (auto addr_str : sp::io::network::Address::getLocalAddress().getHumanReadable())
     {
@@ -208,7 +208,7 @@ ServerSetupScreen::ServerSetupScreen()
         }
     );
     cancel_server->setSize(250.0f, GuiElement::GuiSizeMax);
-    (new GuiTextTooltip(cancel_server, "CANCEL_SERVER_TIP", tr("tooltips", "Cancel and return to the main menu without starting a server."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(cancel_server, "CANCEL_SERVER_TIP", tr("tooltips", "Cancel and return to the main menu without starting a server.")))->setWidth();
 
     (new GuiElement(row, "SPACER"))
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -241,7 +241,7 @@ ServerSetupScreen::ServerSetupScreen()
         }
     );
     start_server->setSize(250.0f, GuiElement::GuiSizeMax);
-    (new GuiTextTooltip(start_server, "START_SERVER_TIP", tr("tooltips", "Start the server with the configured settings and select a scenario."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(start_server, "START_SERVER_TIP", tr("tooltips", "Start the server with the configured settings and select a scenario.")))->setWidth();
 }
 
 ServerSetupMasterServerRegistrationScreen::ServerSetupMasterServerRegistrationScreen()
@@ -272,7 +272,7 @@ ServerSetupMasterServerRegistrationScreen::ServerSetupMasterServerRegistrationSc
     );
     close_registration->setSize(250.0f, GuiElement::GuiSizeMax);
 
-    (new GuiTextTooltip(close_registration, "CLOSE_REGISTRATION_TIP", tr("tooltips", "Cancel master server registration and return to server setup."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(close_registration, "CLOSE_REGISTRATION_TIP", tr("tooltips", "Cancel master server registration and return to server setup.")))->setWidth();
 
     (new GuiElement(row, "SPACER"))
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -286,7 +286,7 @@ ServerSetupMasterServerRegistrationScreen::ServerSetupMasterServerRegistrationSc
         }
     );
     continue_button->setSize(250.0f, GuiElement::GuiSizeMax);
-    (new GuiTextTooltip(continue_button, "CONTINUE_REGISTRATION_TIP", tr("tooltips", "Proceed to scenario selection after master server registration."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(continue_button, "CONTINUE_REGISTRATION_TIP", tr("tooltips", "Proceed to scenario selection after master server registration.")))->setWidth();
 }
 
 void ServerSetupMasterServerRegistrationScreen::update(float delta)
@@ -371,7 +371,7 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
         }
     );
     category_list->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    (new GuiTextTooltip(category_list, "SCENARIO_CATEGORY_TIP", tr("tooltips", "Filter the scenario list by category."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(category_list, "SCENARIO_CATEGORY_TIP", tr("tooltips", "Filter the scenario list by category.")))->setWidth();
 
     // Scenario list.
     (new GuiLabel(middle, "LIST_LABEL", tr("Scenario"), GuiElement::GuiSizeLabel))
@@ -393,7 +393,7 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
         }
     );
     scenario_list->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    (new GuiTextTooltip(scenario_list, "SCENARIO_LIST_TIP", tr("tooltips", "Select a scenario to host. Its description appears on the right."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(scenario_list, "SCENARIO_LIST_TIP", tr("tooltips", "Select a scenario to host. Its description appears on the right.")))->setWidth();
 
     // Scenario description.
     (new GuiLabel(right, "DESCRIPTION_LABEL", tr("Description"), GuiElement::GuiSizeLabel))
@@ -425,7 +425,7 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
         }
     );
     close_server->setSize(250.0f, GuiElement::GuiSizeMax);
-    (new GuiTextTooltip(close_server, "CLOSE_SERVER_TIP", tr("tooltips", "Stop the server and return to the server setup screen."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(close_server, "CLOSE_SERVER_TIP", tr("tooltips", "Stop the server and return to the server setup screen.")))->setWidth();
 
     (new GuiElement(row, "SPACER"))
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -459,7 +459,7 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
     start_button
         ->setSize(250.0f, GuiElement::GuiSizeMax)
         ->disable();
-    (new GuiTextTooltip(start_button, "START_SCENARIO_TIP", tr("tooltips", "Begin the selected scenario and proceed to ship selection."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(start_button, "START_SCENARIO_TIP", tr("tooltips", "Begin the selected scenario and proceed to ship selection.")))->setWidth();
 
     // Select the previously selected scenario.
     for (const auto& info : ScenarioInfo::getScenarios())
@@ -634,7 +634,7 @@ ServerScenarioOptionsScreen::ServerScenarioOptionsScreen(string filename)
         }
     );
     back_options->setSize(250.0f, GuiElement::GuiSizeMax);
-    (new GuiTextTooltip(back_options, "BACK_OPTIONS_TIP", tr("tooltips", "Return to the scenario selection screen without starting."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(back_options, "BACK_OPTIONS_TIP", tr("tooltips", "Return to the scenario selection screen without starting.")))->setWidth();
 
     (new GuiElement(row, "SPACER"))
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -655,5 +655,5 @@ ServerScenarioOptionsScreen::ServerScenarioOptionsScreen(string filename)
     start_button
         ->setSize(250.0f, GuiElement::GuiSizeMax)
         ->setEnable(scenario_settings.size() >= info.settings.size());
-    (new GuiTextTooltip(start_button, "START_CONFIGURED_SCENARIO_TIP", tr("tooltips", "Begin the scenario with the configured options."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(start_button, "START_CONFIGURED_SCENARIO_TIP", tr("tooltips", "Begin the scenario with the configured options.")))->setWidth();
 }

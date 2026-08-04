@@ -88,7 +88,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
     self_destruct_button
         ->setSize(GuiElement::GuiSizeMax, 100.0f) // Not 50.0f, due to Confirm button
         ->setVisible(my_spaceship && my_spaceship.hasComponent<SelfDestruct>());
-    (new GuiTextTooltip(self_destruct_button, "SELF_DESTRUCT_TIP", tr("tooltips", "Activate the ship's self-destruct sequence. Requires confirmation."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(self_destruct_button, "SELF_DESTRUCT_TIP", tr("tooltips", "Activate the ship's self-destruct sequence. Requires confirmation.")))->setWidth();
 
     // Ship stats key/values.
     auto stats = new GuiElement(top_left, "ENGINEERING_STATS");
@@ -240,7 +240,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
         ->setDrawBackground(false)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setVisible(has_coolant);
-    (new GuiTextTooltip(coolant_remaining_bar, "COOLANT_REMAINING_TIP", tr("tooltips", "Drag to adjust how much coolant is reserved for distribution across all systems."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(coolant_remaining_bar, "COOLANT_REMAINING_TIP", tr("tooltips", "Drag to adjust how much coolant is reserved for distribution across all systems.")))->setWidth();
     (new GuiImage(coolant_remaining_bar, "COOLANT_ICON", "gui/icons/coolant"))
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
@@ -316,18 +316,18 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
 
         if (!gameGlobalInfo->use_system_damage) info.damage_bar->hide();
 
-        (new GuiTextTooltip(info.button, id + "_SELECT_TIP", tr("tooltips", "Select this system for detailed power and coolant adjustment."), 20.0f))->setWidth(280.0f);
+        (new GuiTextTooltip(info.button, id + "_SELECT_TIP", tr("tooltips", "Select this system for detailed power and coolant adjustment.")))->setWidth();
 
         if (gameGlobalInfo->use_system_damage)
-            (new GuiTextTooltip(info.damage_bar, id + "_DAMAGE_TIP", tr("tooltips", "Current damage level of this system. Lower values mean reduced performance."), 20.0f))->setWidth(280.0f);
+            (new GuiTextTooltip(info.damage_bar, id + "_DAMAGE_TIP", tr("tooltips", "Current damage level of this system. Lower values mean reduced performance.")))->setWidth();
 
         if (has_coolant)
         {
-            (new GuiTextTooltip(info.heat_bar, id + "_HEAT_TIP", tr("tooltips", "Current heat level of this system. High heat reduces performance and may cause damage."), 20.0f))->setWidth(280.0f);
-            (new GuiTextTooltip(info.coolant_bar, id + "_COOLANT_TIP", tr("tooltips", "Drag to allocate coolant to this system. Coolant reduces heat buildup."), 20.0f))->setWidth(280.0f);
+            (new GuiTextTooltip(info.heat_bar, id + "_HEAT_TIP", tr("tooltips", "Current heat level of this system. High heat reduces performance and may cause damage.")))->setWidth();
+            (new GuiTextTooltip(info.coolant_bar, id + "_COOLANT_TIP", tr("tooltips", "Drag to allocate coolant to this system. Coolant reduces heat buildup.")))->setWidth();
         }
 
-        (new GuiTextTooltip(info.power_bar, id + "_POWER_TIP", tr("tooltips", "Drag to allocate power to this system. More power improves performance."), 20.0f))->setWidth(280.0f);
+        (new GuiTextTooltip(info.power_bar, id + "_POWER_TIP", tr("tooltips", "Drag to allocate power to this system. More power improves performance.")))->setWidth();
 
         info.coolant_max_indicator = new GuiImage(info.coolant_bar, "", slider_tick_style->get(getState()).texture);
         info.coolant_max_indicator
@@ -386,7 +386,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
     power_slider
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->disable();
-    (new GuiTextTooltip(power_slider, "POWER_SLIDER_TIP", tr("tooltips", "Set the power level for the selected system. Select a system first."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(power_slider, "POWER_SLIDER_TIP", tr("tooltips", "Set the power level for the selected system. Select a system first.")))->setWidth();
     for (float snap_point = 0.0f; snap_point <= power_max; snap_point += 0.5f)
         power_slider->addSnapValue(snap_point, snap_point == 1.0f ? 0.1f : 0.01f);
 
@@ -420,7 +420,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->disable()
         ->setVisible(has_coolant);
-    (new GuiTextTooltip(coolant_slider, "COOLANT_SLIDER_TIP", tr("tooltips", "Set the coolant level for the selected system. Select a system first."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(coolant_slider, "COOLANT_SLIDER_TIP", tr("tooltips", "Set the coolant level for the selected system. Select a system first.")))->setWidth();
     for (float snap_point = 0.0f; snap_point <= 10.0f; snap_point += 2.5f)
         coolant_slider->addSnapValue(snap_point, 0.1f);
 }

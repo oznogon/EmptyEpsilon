@@ -5,8 +5,6 @@
 #include "theme.h"
 #include <algorithm>
 
-static constexpr float LONG_INTERACTION_DURATION = 0.5f;
-
 static bool isTreeHoveredOrPressed(GuiElement* element)
 {
     if (element->isHovered() || element->isPressed()) return true;
@@ -188,6 +186,6 @@ GuiTextTooltip* GuiTextTooltip::setText(string text)
 
 GuiTextTooltip* GuiTextTooltip::setWidth(float width)
 {
-    setSize(width, 0.0f);
+    if (width > 0.0f) setSize(width, 0.0f);
     return this;
 }

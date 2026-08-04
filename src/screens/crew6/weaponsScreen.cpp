@@ -105,18 +105,18 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     missile_aim
         ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMatchHeight, 850.0f);
-    // (new GuiTextTooltip(missile_aim, "MISSILE_AIM_TIP", tr("tooltips", "Drag to manually set the missile launch angle."), 20.0f))->setWidth(280.0f);
+    // (new GuiTextTooltip(missile_aim, "MISSILE_AIM_TIP", tr("tooltips", "Drag to manually set the missile launch angle.")))->setWidth();
 
     tube_controls = new GuiMissileTubeControls(weapons_controls, "MISSILE_TUBES");
     tube_controls->setPosition(20.0f, -20.0f, sp::Alignment::BottomLeft);
-    (new GuiTextTooltip(tube_controls, "MISSILE_TUBES_TIP", tr("tooltips", "Load, aim, and fire weapon tubes."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(tube_controls, "MISSILE_TUBES_TIP", tr("tooltips", "Load, aim, and fire weapon tubes.")))->setWidth();
     radar->enableTargetProjections(tube_controls);
 
     lock_aim = new AimLockButton(weapons_controls, "LOCK_AIM", tube_controls, missile_aim);
     lock_aim
         ->setPosition(250.0f, 20.0f, sp::Alignment::TopCenter)
         ->setSize(150.0f, GuiElement::GuiSizeRow);
-    (new GuiTextTooltip(lock_aim, "LOCK_AIM_TIP", tr("tooltips", "Toggle whether to lock missile aim to the current target or manually set the launch angle."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(lock_aim, "LOCK_AIM_TIP", tr("tooltips", "Toggle whether to lock missile aim to the current target or manually set the launch angle.")))->setWidth();
 
     // Beam controls beneath the radar.
     beam_info_box = new GuiElement(weapons_controls, "BEAM_INFO_BOX");
@@ -135,17 +135,17 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
 
         auto* beam_freq = new GuiBeamFrequencySelector(beam_info_box, "BEAM_FREQUENCY_SELECTOR");
         beam_freq->setSize(132.0f, GuiElement::GuiSizeMax);
-        (new GuiTextTooltip(beam_freq, "BEAM_FREQ_TIP", tr("tooltips", "Set beam weapon frequency."), 20.0f))->setWidth(280.0f);
+        (new GuiTextTooltip(beam_freq, "BEAM_FREQ_TIP", tr("tooltips", "Set beam weapon frequency.")))->setWidth();
 
         auto* beam_target = new GuiBeamTargetSelector(beam_info_box, "BEAM_TARGET_SELECTOR");
         beam_target->setSize(288.0f, GuiElement::GuiSizeMax);
-        (new GuiTextTooltip(beam_target, "BEAM_TARGET_TIP", tr("tooltips", "Select a ship system to target with beam weapons."), 20.0f))->setWidth(280.0f);
+        (new GuiTextTooltip(beam_target, "BEAM_TARGET_TIP", tr("tooltips", "Select a ship system to target with beam weapons.")))->setWidth();
 
         auto* beam_power = new GuiPowerDamageIndicator(beam_info_box, "", ShipSystem::Type::BeamWeapons, sp::Alignment::CenterLeft);
         beam_power
             ->setPosition(0.0f, 0.0f, sp::Alignment::BottomLeft)
             ->setSize(212.0f, GuiElement::GuiSizeMax);
-        (new GuiTextTooltip(beam_power, "BEAM_POWER_TIP", tr("tooltips", "Beam weapon system power and damage status."), 20.0f))->setWidth(280.0f);
+        (new GuiTextTooltip(beam_power, "BEAM_POWER_TIP", tr("tooltips", "Beam weapon system power and damage status.")))->setWidth();
     }
 
     // Beam weapons autofire safety toggle.
@@ -159,7 +159,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
         ->setIcon("gui/icons/lock-beams")
         ->setPosition(250.0f, 70.0f, sp::Alignment::TopCenter)
         ->setSize(150.0f, GuiElement::GuiSizeRow);
-    (new GuiTextTooltip(beam_safety, "BEAM_SAFETY_TIP", tr("tooltips", "Toggle whether beam weapons automatically fire at the active target within their firing arc."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(beam_safety, "BEAM_SAFETY_TIP", tr("tooltips", "Toggle whether beam weapons automatically fire at the active target within their firing arc.")))->setWidth();
 
     auto stats = new GuiElement(weapons_controls, "WEAPONS_STATS");
     stats
@@ -192,7 +192,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
         shield_freq
             ->setPosition(-20.0f, -20.0f, sp::Alignment::BottomRight)
             ->setSize(280.0f, 100.0f);
-        (new GuiTextTooltip(shield_freq, "SHIELD_FREQ_TIP", tr("tooltips", "Calibrate the shield frequency. Calibration temporarily takes shields offline."), 20.0f))->setWidth(280.0f);
+        (new GuiTextTooltip(shield_freq, "SHIELD_FREQ_TIP", tr("tooltips", "Calibrate the shield frequency. Calibration temporarily takes shields offline.")))->setWidth();
     }
     else
     {
@@ -200,7 +200,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
         shields_enable
             ->setPosition(-20.0f, -20.0f, sp::Alignment::BottomRight)
             ->setSize(280.0f, 50.0f);
-        (new GuiTextTooltip(shields_enable, "SHIELDS_ENABLE_TIP", tr("tooltips", "Toggle shields. Active shields deflect incoming damage."), 20.0f))->setWidth(280.0f);
+        (new GuiTextTooltip(shields_enable, "SHIELDS_ENABLE_TIP", tr("tooltips", "Toggle shields. Active shields deflect incoming damage.")))->setWidth();
     }
 
     const Mount* ub_mount = nullptr;
@@ -237,7 +237,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
         ->setPosition(-20.0f, 120.0f, sp::Alignment::TopRight)
         ->setSize(250.0f, GuiElement::GuiSizeRow)
         ->hide();
-    (new GuiTextTooltip(sidebar_selector, "WEAPONS_SIDEBAR_TIP", tr("tooltips", "Switch between custom ship functions and utility beam controls."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(sidebar_selector, "WEAPONS_SIDEBAR_TIP", tr("tooltips", "Switch between custom ship functions and utility beam controls.")))->setWidth();
 
     custom_function_sidebar = new GuiCustomShipFunctions(weapons_controls, CrewPosition::weaponsOfficer, "WEAPONS_CUSTOM_FUNCS");
     custom_function_sidebar

@@ -2625,8 +2625,8 @@ msgstr "Utility beam"
 #: src/screens/crew6/helmsScreen.cpp:71
 msgctxt "tooltips"
 msgid ""
-"Execute combat maneuvers: strafe laterally or boost forward to evade enemies."
-msgstr "Execute combat manoeuvres: strafe laterally or boost forward to evade enemies."
+"Strafe laterally or boost forward to evade enemies."
+msgstr "Strafe laterally or boost forward to evade enemies."
 
 #: src/screens/crew6/helmsScreen.cpp:136
 msgctxt "tooltips"

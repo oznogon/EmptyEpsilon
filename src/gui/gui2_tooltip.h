@@ -24,6 +24,9 @@ class GuiThemeStyle;
 class GuiTooltip : public GuiElement
 {
 public:
+    constexpr static float DEFAULT_WIDTH = 280.0f;
+    constexpr static float LONG_INTERACTION_DURATION = 0.5f;
+
     GuiTooltip(GuiElement* watched, string id);
     virtual ~GuiTooltip();
 
@@ -68,17 +71,17 @@ private:
 // Automatically sizes the panel to the label's rendered height.
 //
 // GuiTextTooltip* tip = new GuiTextTooltip(some_button, "TOOLTIP", tr("text"), 20.0f);
-// tip->setWidth(280.0f);
+// tip;
 class GuiTextTooltip : public GuiTooltip
 {
 public:
-    GuiTextTooltip(GuiElement* watched, string id, string text, float text_size);
+    GuiTextTooltip(GuiElement* watched, string id, string text, float text_size = 20.0f);
 
     virtual void onDraw(sp::RenderTarget& renderer) override;
     virtual void onUpdate() override;
 
     GuiTextTooltip* setText(string text);
-    GuiTextTooltip* setWidth(float width);
+    GuiTextTooltip* setWidth(float width = DEFAULT_WIDTH);
 
 private:
     const GuiThemeStyle* style;

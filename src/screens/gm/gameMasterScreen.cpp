@@ -190,7 +190,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         else engine->setGameSpeed(0.0f);
     });
     pause_button->setValue(engine->getGameSpeed() == 0.0f)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(150, 50);
-    (new GuiTextTooltip(pause_button, "PAUSE_BUTTON_TIP", tr("gm_tooltip", "Toggle pausing the game simulation."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(pause_button, "PAUSE_BUTTON_TIP", tr("gm_tooltip", "Toggle pausing the game simulation.")))->setWidth();
 
     game_time_scale = new GuiSelector(this, "GAME_TIME_SCALE_SELECTOR", [](int index, string value) {
         engine->setGameSpeed(game_speed_values[index]);
@@ -200,13 +200,13 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         ->setSelectionIndex(3)
         ->setPosition(170, 20, sp::Alignment::TopLeft)
         ->setSize(100, 50);
-    (new GuiTextTooltip(game_time_scale, "GAME_TIME_SCALE_TIP", tr("gm_tooltip", "Set the game simulation speed multiplier."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(game_time_scale, "GAME_TIME_SCALE_TIP", tr("gm_tooltip", "Set the game simulation speed multiplier.")))->setWidth();
 
     intercept_comms_button = new GuiToggleButton(this, "INTERCEPT_COMMS_BUTTON", tr("button", "Intercept all comms"), [](bool value) {
         gameGlobalInfo->intercept_all_comms_to_gm = value;
     });
     intercept_comms_button->setValue(gameGlobalInfo->intercept_all_comms_to_gm)->setTextSize(20)->setPosition(300, 20, sp::Alignment::TopLeft)->setSize(200, 25);
-    (new GuiTextTooltip(intercept_comms_button, "INTERCEPT_COMMS_TIP", tr("gm_tooltip", "Toggle intercepting all player communications."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(intercept_comms_button, "INTERCEPT_COMMS_TIP", tr("gm_tooltip", "Toggle intercepting all player communications.")))->setWidth();
 
     faction_selector = new GuiSelector(this, "FACTION_SELECTOR", [this](int index, string value) {
         for (auto obj : targets.getTargets())
@@ -219,13 +219,13 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         ->setSelectionIndex(0)
         ->setPosition(20.0f, 70.0f, sp::Alignment::TopLeft)
         ->setSize(250.0f, GuiElement::GuiSizeRow);
-    (new GuiTextTooltip(faction_selector, "FACTION_SELECTOR_TIP", tr("gm_tooltip", "Change the faction of selected objects."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(faction_selector, "FACTION_SELECTOR_TIP", tr("gm_tooltip", "Change the faction of selected objects.")))->setWidth();
 
     global_message_button = new GuiButton(this, "GLOBAL_MESSAGE_BUTTON", tr("button", "Global message"), [this]() {
         global_message_entry->show();
     });
     global_message_button->setPosition(20, -20, sp::Alignment::BottomLeft)->setSize(250, 50);
-    (new GuiTextTooltip(global_message_button, "GLOBAL_MESSAGE_TIP", tr("gm_tooltip", "Broadcast a message to all players."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(global_message_button, "GLOBAL_MESSAGE_TIP", tr("gm_tooltip", "Broadcast a message to all players.")))->setWidth();
 
     player_ship_selector = new GuiSelector(this, "PLAYER_SHIP_SELECTOR", [this](int index, string value) {
         auto ship = sp::ecs::Entity::fromString(value);
@@ -236,13 +236,13 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         targets.set(ship);
     });
     player_ship_selector->setPosition(270, -20, sp::Alignment::BottomLeft)->setSize(350, 50);
-    (new GuiTextTooltip(player_ship_selector, "PLAYER_SHIP_SELECTOR_TIP", tr("gm_tooltip", "Select a player ship to track on the map."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(player_ship_selector, "PLAYER_SHIP_SELECTOR_TIP", tr("gm_tooltip", "Select a player ship to track on the map.")))->setWidth();
 
     create_button = new GuiButton(this, "CREATE_OBJECT_BUTTON", tr("button", "Create..."), [this]() {
         object_creation_view->show();
     });
     create_button->setPosition(20, -70, sp::Alignment::BottomLeft)->setSize(250, 50);
-    (new GuiTextTooltip(create_button, "CREATE_OBJECT_TIP", tr("gm_tooltip", "Open the object creation menu to spawn new entities."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(create_button, "CREATE_OBJECT_TIP", tr("gm_tooltip", "Open the object creation menu to spawn new entities.")))->setWidth();
 
     zoom_slider = new GuiRadarZoomSlider(this, "ZOOM_SLIDER", MIN_ZOOM_DISTANCE, MAX_ZOOM_DISTANCE, LONG_RANGE_DISTANCE, main_radar);
     zoom_slider
@@ -258,7 +258,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         ->setTextSize(20.0f)
         ->setPosition(-20.0f, -70.0f, sp::Alignment::BottomRight)
         ->setSize(125.0f, 25.0f);
-    (new GuiTextTooltip(copy_scenario_button, "COPY_SCENARIO_TIP", tr("gm_tooltip", "Copy all entities as a Lua script to the clipboard."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(copy_scenario_button, "COPY_SCENARIO_TIP", tr("gm_tooltip", "Copy all entities as a Lua script to the clipboard.")))->setWidth();
 
     copy_selected_button = new GuiButton(this, "COPY_SELECTED_BUTTON", tr("button", "Copy selected"), [this]() {
         Clipboard::setClipboard(getScriptExport(true));
@@ -267,14 +267,14 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         ->setTextSize(20.0f)
         ->setPosition(-145.0f, -70.0f, sp::Alignment::BottomRight)
         ->setSize(125.0f, 25.0f);
-    (new GuiTextTooltip(copy_selected_button, "COPY_SELECTED_TIP", tr("gm_tooltip", "Copy only selected entities as a Lua script to the clipboard."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(copy_selected_button, "COPY_SELECTED_TIP", tr("gm_tooltip", "Copy only selected entities as a Lua script to the clipboard.")))->setWidth();
 
     cancel_action_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", tr("button", "Cancel"), []() {
         gameGlobalInfo->on_gm_click = nullptr;
         gameGlobalInfo->on_gm_preview_trace = std::nullopt;
     });
     cancel_action_button->setPosition(20, -70, sp::Alignment::BottomLeft)->setSize(250, 50)->hide();
-    (new GuiTextTooltip(cancel_action_button, "CANCEL_CREATE_TIP", tr("gm_tooltip", "Cancel the current creation action."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(cancel_action_button, "CANCEL_CREATE_TIP", tr("gm_tooltip", "Cancel the current creation action.")))->setWidth();
 
     tweak_button = new GuiButton(this, "TWEAK_OBJECT", tr("button", "Tweak"), [this]() {
         for(auto entity : targets.getTargets())
@@ -284,7 +284,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         }
     });
     tweak_button->setPosition(20, -120, sp::Alignment::BottomLeft)->setSize(250, 50)->hide();
-    (new GuiTextTooltip(tweak_button, "TWEAK_OBJECT_TIP", tr("gm_tooltip", "Edit properties of the selected entity."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(tweak_button, "TWEAK_OBJECT_TIP", tr("gm_tooltip", "Edit properties of the selected entity.")))->setWidth();
 
     // Database browser button and panel
     auto database_browser_panel = new GuiPanel(this, "DATABASE_BROWSER");
@@ -423,7 +423,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         }
     });
     player_comms_hail->setPosition(20, -170, sp::Alignment::BottomLeft)->setSize(250, 50)->hide();
-    (new GuiTextTooltip(player_comms_hail, "HAIL_PLAYER_TIP", tr("gm_tooltip", "Open a communication channel with the selected player ship."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(player_comms_hail, "HAIL_PLAYER_TIP", tr("gm_tooltip", "Open a communication channel with the selected player ship.")))->setWidth();
 
     info_layout = new GuiElement(this, "INFO_LAYOUT");
     info_layout->setPosition(-20, 20, sp::Alignment::TopRight)->setSize(300, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
@@ -463,7 +463,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         }
     });
     order_defend->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
-    (new GuiTextTooltip(order_defend, "ORDER_DEFEND_TIP", tr("gm_tooltip", "Order selected AI entities to defend their current location."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(order_defend, "ORDER_DEFEND_TIP", tr("gm_tooltip", "Order selected AI entities to defend their current location.")))->setWidth();
 
     GuiButton* order_stand_ground = new GuiButton(order_layout, "ORDER_STAND_GROUND", tr("Stand ground"), [this]() {
         for(auto obj : targets.getTargets()) {
@@ -472,7 +472,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         }
     });
     order_stand_ground->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
-    (new GuiTextTooltip(order_stand_ground, "ORDER_STAND_GROUND_TIP", tr("gm_tooltip", "Order selected AI entities to hold position and attack nearby enemies."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(order_stand_ground, "ORDER_STAND_GROUND_TIP", tr("gm_tooltip", "Order selected AI entities to hold position and attack nearby enemies.")))->setWidth();
 
     GuiButton* order_roaming = new GuiButton(order_layout, "ORDER_ROAMING", tr("Roaming"), [this]() {
         for(auto obj : targets.getTargets()) {
@@ -483,7 +483,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         }
     });
     order_roaming->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
-    (new GuiTextTooltip(order_roaming, "ORDER_ROAMING_TIP", tr("gm_tooltip", "Order selected AI entities to roam freely and engage enemies."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(order_roaming, "ORDER_ROAMING_TIP", tr("gm_tooltip", "Order selected AI entities to roam freely and engage enemies.")))->setWidth();
 
     GuiButton* order_idle = new GuiButton(order_layout, "ORDER_IDLE", tr("Idle"), [this]() {
         for(auto obj : targets.getTargets()) {
@@ -494,7 +494,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     order_idle
         ->setTextSize(20.0f)
         ->setSize(GuiElement::GuiSizeMax, 30.0f);
-    (new GuiTextTooltip(order_idle, "ORDER_IDLE_TIP", tr("gm_tooltip", "Order selected AI entities to stop all actions."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(order_idle, "ORDER_IDLE_TIP", tr("gm_tooltip", "Order selected AI entities to stop all actions.")))->setWidth();
 
     (new GuiLabel(order_layout, "ORDERS_LABEL", tr("Orders"), 20.0f))->addBackground()->setSize(GuiElement::GuiSizeMax, 30.0f);
 

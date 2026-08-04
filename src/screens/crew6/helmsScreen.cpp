@@ -149,7 +149,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     combat_maneuver
         ->setPosition(0.0f, 0.0f, sp::Alignment::BottomRight)
         ->setSize(280.0f, 215.0f);
-    (new GuiTextTooltip(combat_maneuver, "COMBAT_MANEUVER_TIP", tr("tooltips", "Execute combat maneuvers: strafe laterally or boost forward to evade enemies."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(combat_maneuver, "COMBAT_MANEUVER_TIP", tr("tooltips", "Strafe laterally or boost forward to evade enemies.")))->setWidth();
 
     heading_hint = new GuiLabel(helms_controls, "HEADING_HINT", "", GuiElement::GuiSizeLabel);
     heading_hint
@@ -166,15 +166,15 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
 
     auto energy_display = new EnergyInfoDisplay(info_displays, "ENERGY_DISPLAY", 0.45f);
     energy_display ->setSize(GuiElement::GuiSizeMax, KV_HEIGHT);
-    (new GuiTextTooltip(energy_display, "ENERGY_TIP", tr("tooltips", "Current reactor energy level."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(energy_display, "ENERGY_TIP", tr("tooltips", "Current reactor energy level.")))->setWidth();
 
     auto heading_display = new HeadingInfoDisplay(info_displays, "HEADING_DISPLAY", 0.45f);
     heading_display->setSize(GuiElement::GuiSizeMax, KV_HEIGHT);
-    (new GuiTextTooltip(heading_display, "HEADING_TIP", tr("tooltips", "Current ship heading in degrees."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(heading_display, "HEADING_TIP", tr("tooltips", "Current ship heading in degrees.")))->setWidth();
 
     auto velocity_display = new VelocityInfoDisplay(info_displays, "VELOCITY_DISPLAY", 0.45f);
     velocity_display->setSize(GuiElement::GuiSizeMax, KV_HEIGHT);
-    (new GuiTextTooltip(velocity_display, "VELOCITY_TIP", tr("tooltips", "Current ship velocity."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(velocity_display, "VELOCITY_TIP", tr("tooltips", "Current ship velocity.")))->setWidth();
 
     // Propulsion controls.
     const float PROPULSION_WIDTH = 100.0f;
@@ -190,15 +190,15 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
 
     auto* impulse = new GuiImpulseControls(engine_layout, "IMPULSE");
     impulse->setSize(PROPULSION_WIDTH, GuiElement::GuiSizeMax);
-    (new GuiTextTooltip(impulse, "IMPULSE_TIP", tr("tooltips", "Adjust impulse engine throttle for sub-light travel."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(impulse, "IMPULSE_TIP", tr("tooltips", "Adjust impulse engine throttle for sub-light travel.")))->setWidth();
 
     auto* warp = new GuiWarpControls(engine_layout, "WARP");
     warp->setSize(PROPULSION_WIDTH, GuiElement::GuiSizeMax);
-    (new GuiTextTooltip(warp, "WARP_TIP", tr("tooltips", "Engage or disengage the warp drive for faster-than-light travel."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(warp, "WARP_TIP", tr("tooltips", "Engage or disengage the warp drive for faster-than-light travel.")))->setWidth();
 
     auto* jump = new GuiJumpControls(engine_layout, "JUMP");
     jump->setSize(PROPULSION_WIDTH, GuiElement::GuiSizeMax);
-    (new GuiTextTooltip(jump, "JUMP_TIP", tr("tooltips", "Set and activate the jump drive to instantly travel long distances."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(jump, "JUMP_TIP", tr("tooltips", "Set and activate the jump drive to instantly travel long distances.")))->setWidth();
 
     // Docking controls.
     docking_button = new GuiDockingButton(helms_controls, "DOCKING");
@@ -206,7 +206,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
         ->setPosition(0.0f, 0.0f, sp::Alignment::BottomLeft)
         ->setSize(PROPULSION_WIDTH_3X, GuiElement::GuiSizeRow)
         ->setVisible(my_spaceship.hasComponent<DockingPort>());
-    (new GuiTextTooltip(docking_button, "DOCKING_TIP", tr("tooltips", "Request docking with or undocking from the nearest station or ship."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(docking_button, "DOCKING_TIP", tr("tooltips", "Request docking with or undocking from the nearest station or ship.")))->setWidth();
 
     // Check mounts for utility beam controls.
     auto mounts_comp = my_spaceship.getComponent<Mounts>();
@@ -244,7 +244,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
         ->setPosition(0.0f, 100.0f, sp::Alignment::TopRight)
         ->setSize(250.0f, GuiElement::GuiSizeRow)
         ->hide();
-    (new GuiTextTooltip(sidebar_selector, "HELMS_SIDEBAR_TIP", tr("tooltips", "Switch between custom ship functions and utility beam controls."), 20.0f))->setWidth(280.0f);
+    (new GuiTextTooltip(sidebar_selector, "HELMS_SIDEBAR_TIP", tr("tooltips", "Switch between custom ship functions and utility beam controls.")))->setWidth();
 
     custom_function_sidebar = new GuiCustomShipFunctions(helms_controls, CrewPosition::helmsOfficer, "HELMS_CUSTOM_FUNCS");
     custom_function_sidebar
