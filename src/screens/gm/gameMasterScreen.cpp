@@ -12,33 +12,33 @@
 #include "ecs/query.h"
 
 #include "components/ai.h"
-#include "components/database.h"
-#include "components/radar.h"
-#include "components/faction.h"
 #include "components/collision.h"
+#include "components/comms.h"
+#include "components/database.h"
+#include "components/docking.h"
+#include "components/faction.h"
 #include "components/gravity.h"
 #include "components/hull.h"
-#include "components/shields.h"
-#include "components/comms.h"
-#include "components/player.h"
 #include "components/name.h"
-#include "components/docking.h"
+#include "components/player.h"
+#include "components/radar.h"
+#include "components/shields.h"
 #include "missileWeaponData.h"
 
 #include "systems/collision.h"
 
+#include "screenComponents/helpOverlay.h"
 #include "screenComponents/radarView.h"
 #include "screenComponents/radarZoomSlider.h"
-#include "screenComponents/helpOverlay.h"
 
 #include "gui/mouseRenderer.h"
-#include "gui/gui2_togglebutton.h"
-#include "gui/gui2_selector.h"
-#include "gui/gui2_listbox.h"
-#include "gui/gui2_label.h"
-#include "gui/gui2_panel.h"
 #include "gui/gui2_keyvaluedisplay.h"
+#include "gui/gui2_label.h"
+#include "gui/gui2_listbox.h"
+#include "gui/gui2_panel.h"
+#include "gui/gui2_selector.h"
 #include "gui/gui2_textentry.h"
+#include "gui/gui2_togglebutton.h"
 #include "gui/gui2_tooltip.h"
 
 namespace
@@ -293,7 +293,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         ->setSize(500.0f, 600.0f)
         ->hide();
 
-    (new GuiLabel(database_browser_panel, "", tr("Database entries"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(database_browser_panel, "", tr("Database entries")))
         ->setPosition(0, 0, sp::Alignment::TopCenter)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
@@ -363,7 +363,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         ->setSize(500.0f, 600.0f)
         ->hide();
 
-    (new GuiLabel(mwd_browser_panel, "", tr("Missile weapon types"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(mwd_browser_panel, "", tr("Missile weapon types")))
         ->setPosition(0, 0, sp::Alignment::TopCenter)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
@@ -452,17 +452,24 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     order_layout->setPosition(-20.0f, -110.0f, sp::Alignment::BottomRight)->setSize(300.0f, GuiElement::GuiSizeMax)->setAttribute("layout", "verticalbottom");
 
     (new GuiLabel(order_layout, "ORDERS_HELP", tr("Right click to issue movement/target orders"), 20.0f))->setSize(GuiElement::GuiSizeMax, 30.0f);
-    GuiButton* order_defend = new GuiButton(order_layout, "ORDER_DEFEND_LOCATION", tr("Defend location"), [this]() {
-        for(auto target : targets.getTargets()) {
-            if (auto ai = target.getComponent<AIController>()) {
-                if (auto transform = target.getComponent<sp::Transform>()) {
+    GuiButton* order_defend = new GuiButton(order_layout, "ORDER_DEFEND_LOCATION", tr("Defend location"),
+        [this]()
+        {
+        for (auto target : targets.getTargets())
+        {
+            if (auto ai = target.getComponent<AIController>())
+            {
+                if (auto transform = target.getComponent<sp::Transform>())
+                {
                     ai->orders = AIOrder::DefendLocation;
                     ai->order_target_location = transform->getPosition();
                 }
             }
         }
     });
-    order_defend->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
+    order_defend
+        ->setTextSize(20.0f)
+        ->setSize(GuiElement::GuiSizeMax, 30.0f);
     (new GuiTextTooltip(order_defend, "ORDER_DEFEND_TIP", tr("gm_tooltip", "Order selected AI entities to defend their current location.")))->setWidth();
 
     GuiButton* order_stand_ground = new GuiButton(order_layout, "ORDER_STAND_GROUND", tr("Stand ground"), [this]() {
@@ -595,7 +602,12 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     );
     gm_waypoint_set_selector
         ->setTextSize(20.0f)
-        ->setOptions({tr("Waypoint set 1"), tr("Waypoint set 2"), tr("Waypoint set 3"), tr("Waypoint set 4")})
+        ->setOptions({
+            tr("Waypoint set 1"),
+            tr("Waypoint set 2"),
+            tr("Waypoint set 3"),
+            tr("Waypoint set 4")
+        })
         ->setSelectionIndex(0)
         ->setSize(GuiElement::GuiSizeMax, 30.0f);
 
@@ -603,10 +615,8 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     gm_show_waypoints_button = new GuiToggleButton(gm_player_waypoint_layout, "GM_WP_SHOW", tr("button", "Show waypoints"),
         [this](bool value)
         {
-            if (value)
-                main_radar->enableWaypoints();
-            else
-                main_radar->disableWaypoints();
+            if (value) main_radar->enableWaypoints();
+            else main_radar->disableWaypoints();
         }
     );
     gm_show_waypoints_button
@@ -618,7 +628,9 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         ->setSize(GuiElement::GuiSizeMax, 30.0f);
 
     chat_layer = new GuiElement(this, "");
-    chat_layer->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    chat_layer
+        ->setPosition(0.0f, 0.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     tweak_dialog = new GuiEntityTweak(this);
     tweak_dialog->hide();
@@ -629,20 +641,34 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     object_creation_view->hide();
 
     message_frame = new GuiPanel(this, "");
-    message_frame->setPosition(0, 0, sp::Alignment::TopCenter)->setSize(900, 230)->hide();
+    message_frame
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopCenter)
+        ->setSize(900.0f, 230.0f)
+        ->hide();
 
     message_text = new GuiScrollFormattedText(message_frame, "", "");
-    message_text->setTextSize(20)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(900 - 40, 200 - 40);
-    message_close_button = new GuiButton(message_frame, "", tr("button", "Close"), []() {
-        if (!gameGlobalInfo->gm_messages.empty())
+    message_text
+        ->setTextSize(20.0f)
+        ->setPosition(20.0f, 20.0f, sp::Alignment::TopLeft)
+        ->setSize(860 /* 900 - 40 */, 160 /* 200 - 40 */);
+
+    message_close_button = new GuiButton(message_frame, "", tr("button", "Close"),
+        []()
         {
-            gameGlobalInfo->gm_messages.pop_front();
+            if (!gameGlobalInfo->gm_messages.empty())
+                gameGlobalInfo->gm_messages.pop_front();
         }
+    );
+    message_close_button
+        ->setTextSize(30.0f)
+        ->setPosition(-20.0f, -20.0f, sp::Alignment::BottomRight)
+        ->setSize(300.0f, 30.0f);
 
+    keyboard_help = new GuiHotkeyHelpOverlay(this, {
+        tr("hotkey_menu", "Console"),
+        tr("hotkey_menu", "Basic"),
+        tr("hotkey_menu", "GM")
     });
-    message_close_button->setTextSize(30)->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(300, 30);
-
-    keyboard_help = new GuiHotkeyHelpOverlay(this, {tr("hotkey_menu", "Console"), tr("hotkey_menu", "Basic"), tr("hotkey_menu", "GM")});
 
     gameGlobalInfo->on_gm_click = nullptr;
 }
@@ -660,12 +686,13 @@ GameMasterScreen::~GameMasterScreen()
 
 void GameMasterScreen::update(float delta)
 {
-    float mouse_wheel_delta = keys.zoom_in.getContinuousValue() + keys.zoom_in.getAxis0Value() + keys.zoom_in.getAxis1Value()
-        - keys.zoom_out.getContinuousValue() - keys.zoom_out.getAxis0Value() - keys.zoom_out.getAxis1Value();
+    float mouse_wheel_delta = keys.zoom_in.getContinuousValue() + keys.zoom_in.getAxis0Value() + keys.zoom_in.getAxis1Value() - keys.zoom_out.getContinuousValue() - keys.zoom_out.getAxis0Value() - keys.zoom_out.getAxis1Value();
+
     if (mouse_wheel_delta != 0.0f)
     {
         float view_distance = std::clamp(main_radar->getDistance() * (1.0f - (mouse_wheel_delta * 0.1f)), MIN_ZOOM_DISTANCE, MAX_ZOOM_DISTANCE);
         main_radar->setDistance(view_distance);
+
         if (view_distance <= SHORT_RANGE_DISTANCE) main_radar->shortRange();
         else main_radar->longRange();
     }
@@ -673,19 +700,21 @@ void GameMasterScreen::update(float delta)
     {
         float view_distance = std::clamp(main_radar->getDistance() * 0.9f, 5000.0f, 1000000.0f);
         main_radar->setDistance(view_distance);
-        if (view_distance < 10000) main_radar->shortRange();
+
+        if (view_distance < 10000.0f) main_radar->shortRange();
         else main_radar->longRange();
     }
     if (keys.zoom_out.isDiscreteStepDown() || keys.zoom_out.isRepeatReady())
     {
         float view_distance = std::clamp(main_radar->getDistance() * 1.1f, 5000.0f, 1000000.0f);
         main_radar->setDistance(view_distance);
-        if (view_distance < 10000) main_radar->shortRange();
+
+        if (view_distance < 10000.0f) main_radar->shortRange();
         else main_radar->longRange();
     }
 
     if (keys.gm_delete.isDiscreteStepDown())
-        for(auto obj : targets.getTargets()) obj.destroy();
+        for (auto obj : targets.getTargets()) obj.destroy();
 
     if (keys.gm_clipboardcopy.isDiscreteStepDown())
         Clipboard::setClipboard(getScriptExport(false));
@@ -704,11 +733,13 @@ void GameMasterScreen::update(float delta)
     if (keys.pause.getDown())
     {
         if (game_server && !gameGlobalInfo->getVictoryFaction())
+        {
             engine->setGameSpeed(
                 game_speed > 0.0f
                     ? 0.0f
                     : game_speed_values[game_time_scale->getSelectionIndex()]
             );
+        }
     }
 
     if (game_speed == 0.0f)
@@ -725,7 +756,7 @@ void GameMasterScreen::update(float delta)
 
         {
             int idx = -1;
-            for(int i = 0; i < static_cast<int>(sizeof(game_speed_values) / sizeof(game_speed_values[0])); i++)
+            for (int i = 0; i < static_cast<int>(sizeof(game_speed_values) / sizeof(game_speed_values[0])); i++)
             {
                 if (fabsf(game_speed - game_speed_values[i]) < 0.01f)
                 {
@@ -733,8 +764,8 @@ void GameMasterScreen::update(float delta)
                     break;
                 }
             }
-            if (idx >= 0)
-                game_time_scale->setSelectionIndex(idx);
+
+            if (idx >= 0) game_time_scale->setSelectionIndex(idx);
         }
     }
 
@@ -745,10 +776,8 @@ void GameMasterScreen::update(float delta)
     // Toggle waypoint visibility.
     if (keys.gm_show_waypoints.isDiscreteStepDown())
     {
-        if (main_radar->getWaypoints())
-            main_radar->disableWaypoints();
-        else
-            main_radar->enableWaypoints();
+        if (main_radar->getWaypoints()) main_radar->disableWaypoints();
+        else main_radar->enableWaypoints();
     }
 
     // Toggle health bars.
@@ -866,8 +895,7 @@ void GameMasterScreen::update(float delta)
                 selection_info_index[pos_key] = selection_info.size();
                 selection_info.emplace_back(pos_key, pos_val);
             }
-            else
-                selection_info[it->second].second = pos_val;
+            else selection_info[it->second].second = pos_val;
         }
     }
 
@@ -933,8 +961,7 @@ void GameMasterScreen::update(float delta)
         message_text->setText(message);
         message_frame->show();
     }
-    else
-        message_frame->hide();
+    else message_frame->hide();
 
     P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer");
 
@@ -1087,8 +1114,7 @@ void GameMasterScreen::onMouseDown(sp::io::Pointer::Button button, glm::vec2 pos
     }
 
     // While placing or deleting waypoints, don't enter any other drag/select states.
-    if (gm_add_waypoint_mode || gm_delete_waypoint_mode)
-        return;
+    if (gm_add_waypoint_mode || gm_delete_waypoint_mode) return;
 
     if (button == sp::io::Pointer::Button::Right)
     {
@@ -1113,6 +1139,7 @@ void GameMasterScreen::onMouseDown(sp::io::Pointer::Button button, glm::vec2 pos
             }
         }
     }
+
     drag_start_position = position;
     drag_previous_position = position;
 }
@@ -1124,11 +1151,12 @@ void GameMasterScreen::onMouseDrag(glm::vec2 position)
     {
         if (auto wp = gm_drag_waypoint_ship.getComponent<Waypoints>())
             wp->move(gm_drag_waypoint_id, position, gm_drag_waypoint_set);
+
         drag_previous_position = position;
         return;
     }
 
-    switch(click_and_drag_state)
+    switch (click_and_drag_state)
     {
     case ClickAndDragState::DragViewOrOrder:
     case ClickAndDragState::DragView:
@@ -1159,7 +1187,6 @@ void GameMasterScreen::onMouseDrag(glm::vec2 position)
         }
         break;
     case ClickAndDragState::CreateWithDrag:
-        break;
     default:
         break;
     }
@@ -1173,6 +1200,7 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
     {
         if (auto wp = gm_drag_waypoint_ship.getComponent<Waypoints>())
             wp->move(gm_drag_waypoint_id, position, gm_drag_waypoint_set);
+
         gm_drag_waypoint_id  = -1;
         gm_drag_waypoint_set = -1;
         gm_drag_waypoint_ship = {};
@@ -1183,14 +1211,17 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
     if (gm_add_waypoint_mode && gm_waypoint_target_ship)
     {
         bool set_full = false;
+
         if (auto wp = gm_waypoint_target_ship.getComponent<Waypoints>())
             set_full = (wp->addNew(position, gm_waypoint_set) < 0);
+
         if (set_full)
         {
             gm_add_waypoint_mode = false;
             gm_waypoint_target_ship = {};
             gm_add_waypoint_button->setValue(false);
         }
+
         return;
     }
 
@@ -1224,6 +1255,7 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
             for (auto entity : targets.getTargets())
             {
                 if (!entity.hasComponent<AIController>()) continue;
+
                 auto transform = entity.getComponent<sp::Transform>();
                 if (!transform) continue;
 
@@ -1249,10 +1281,13 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
                         {
                             auto port = entity.getComponent<DockingPort>();
                             auto bay = target.getComponent<DockingBay>();
-                            if (!shift_down && port && bay && port->canDockOn(*bay) != DockingStyle::None)
-                                ai->orders = AIOrder::Dock;
-                            else
-                                ai->orders = AIOrder::DefendTarget;
+                            if (!shift_down
+                                && port
+                                && bay
+                                && port->canDockOn(*bay) != DockingStyle::None
+                            ) ai->orders = AIOrder::Dock;
+                            else ai->orders = AIOrder::DefendTarget;
+
                             ai->order_target = target;
                         }
                     }
@@ -1289,26 +1324,29 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
             {
                 for (auto [entity, transform, physics] : sp::ecs::Query<sp::Transform, sp::ecs::optional<sp::Physics>>())
                 {
-                    auto size = physics ? std::max(physics->getSize().x, physics->getSize().y) : 0.0f;
+                    auto size = physics
+                        ? std::max(physics->getSize().x, physics->getSize().y)
+                        : 0.0f;
+
                     if (transform.getPosition().x + size < std::min(drag_start_position.x, position.x)) continue;
                     if (transform.getPosition().x - size > std::max(drag_start_position.x, position.x)) continue;
                     if (transform.getPosition().y + size < std::min(drag_start_position.y, position.y)) continue;
                     if (transform.getPosition().y - size > std::max(drag_start_position.y, position.y)) continue;
+
                     // If mod is Ctrl, select only STBOs as defined by control
                     // type or docking bay.
                     if (ctrl_down
                         && !entity.hasComponent<PlayerControl>()
                         && !entity.hasComponent<AIController>()
                         && !entity.hasComponent<DockingBay>()
-                    )
-                        continue;
+                    ) continue;
+
                     // If mod is Alt, select only entities of the same faction
                     // as the faction selector.
                     if (alt_down
                         && (!entity.hasComponent<Faction>()
                             || (Faction::getInfo(entity).name != faction_selector->getSelectionValue()))
-                    )
-                        continue;
+                    ) continue;
 
                     found(entity, transform);
                 }
