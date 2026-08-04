@@ -242,7 +242,7 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMatchHeight, 650.0f);
 
     // Heading hint label positioned dynamically on radar click.
-    heading_hint = new GuiLabel(radar_pane, "HEADING_HINT", "", 30.0f);
+    heading_hint = new GuiLabel(radar_pane, "HEADING_HINT", "");
     heading_hint
         ->setAlignment(sp::Alignment::Center)
         ->setSize(0.0f, 0.0f)
@@ -574,7 +574,7 @@ DroneOperationsScreen::DroneOperationsScreen(GuiContainer* owner)
         ->hide();
 
     {
-        (new GuiLabel(beam_info_box, "BEAM_LABEL", tr("Beams"), 30.0f))
+        (new GuiLabel(beam_info_box, "BEAM_LABEL", tr("Beams")))
             ->addBackground()
             ->setPosition(0.0f, 0.0f, sp::Alignment::BottomLeft)
             ->setSize(80.0f, GuiElement::GuiSizeRow);

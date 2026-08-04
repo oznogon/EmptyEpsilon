@@ -18,7 +18,7 @@
 JoinServerScreen::JoinServerScreen(const ServerScanner::ServerInfo& target)
 : target(target)
 {
-    status_label = new GuiLabel(this, "STATUS", tr("connectserver", "Connecting..."), GuiElement::GuiSizeLabel);
+    status_label = new GuiLabel(this, "STATUS", tr("connectserver", "Connecting..."));
     status_label
         ->setPosition(0.0f, 300.0f, sp::Alignment::TopCenter)
         ->setSize(0.0f, GuiElement::GuiSizeRow);

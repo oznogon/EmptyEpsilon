@@ -25,7 +25,7 @@ GuiScanningDialog::GuiScanningDialog(GuiContainer* owner, string id)
     box
         ->setAttribute("padding", "20, 20, 0, 20");
 
-    signal_label = new GuiLabel(box, id + "_LABEL", tr("scanning", "Electric signature"), 30.0f);
+    signal_label = new GuiLabel(box, id + "_LABEL", tr("scanning", "Electric signature"));
     signal_label
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);

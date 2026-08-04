@@ -129,7 +129,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     if (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage)
     {
         beam_info_box->show();
-        (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Beams"), GuiElement::GuiSizeLabel))
+        (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Beams")))
             ->addBackground()
             ->setSize(80.0f, GuiElement::GuiSizeMax);
 

@@ -344,13 +344,13 @@ GuiRebindDialog::GuiRebindDialog(GuiContainer* owner, string id)
         ->setMargins(15.0f)
         ->setAttribute("layout", "vertical");
 
-    action_label = new GuiLabel(content, id + "_ACTION", tr("hotkey_menu", "Rebinding: "), GuiElement::GuiSizeLabel);
+    action_label = new GuiLabel(content, id + "_ACTION", tr("hotkey_menu", "Rebinding: "));
     action_label
         ->setAlignment(sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMax, 40.0f)
         ->setMargins(0.0f, 5.0f);
 
-    input_label = new GuiLabel(content, id + "_INPUT", tr("hotkey_menu", "[Press any key or input...]"), GuiElement::GuiSizeLabel);
+    input_label = new GuiLabel(content, id + "_INPUT", tr("hotkey_menu", "[Press any key or input...]"));
     input_label
         ->addBackground()
         ->setAlignment(sp::Alignment::Center)
@@ -377,7 +377,7 @@ GuiRebindDialog::GuiRebindDialog(GuiContainer* owner, string id)
         ->setMargins(0.0f, 5.0f)
         ->setAttribute("layout", "horizontal");
 
-    (new GuiLabel(interaction_row, id + "_INTER_LABEL", tr("hotkey_menu", "Interaction type:"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(interaction_row, id + "_INTER_LABEL", tr("hotkey_menu", "Interaction type:")))
         ->setAlignment(sp::Alignment::CenterRight)
         ->setSize(400.0f, GuiElement::GuiSizeMax);
 

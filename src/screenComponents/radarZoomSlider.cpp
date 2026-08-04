@@ -16,7 +16,7 @@ GuiRadarZoomSlider::GuiRadarZoomSlider(GuiContainer* owner, string id, float min
     );
     slider->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    label = new GuiLabel(slider, "", tr("Zoom: {zoom}x").format({{"zoom", string(1.0f, label_precision)}}), 30.0f);
+    label = new GuiLabel(slider, "", tr("Zoom: {zoom}x").format({{"zoom", string(1.0f, label_precision)}}));
     label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
 

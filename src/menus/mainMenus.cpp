@@ -138,7 +138,7 @@ MainMenu::MainMenu()
     username_entry->setSize(GuiElement::GuiSizeMax, button_height);
     (new GuiTextTooltip(username_entry, "USERNAME_TIP", tr("tooltips", "Set your player name displayed to other players.")))->setWidth();
 
-    (new GuiLabel(menu_selections, "", tr("mainMenu", "Your name:"), 30.0f))
+    (new GuiLabel(menu_selections, "", tr("mainMenu", "Your name:")))
         ->setAlignment(sp::Alignment::CenterLeft)
         ->setSize(GuiElement::GuiSizeMax, button_height);
 
@@ -179,7 +179,7 @@ CreditsScreen::CreditsScreen()
         ->setAttribute("padding", "50");
 
     // Header
-    (new GuiLabel(container, "HEADER", tr("EmptyEpsilon Credits"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(container, "HEADER", tr("EmptyEpsilon Credits")))
         ->addBackground()
         ->setSize(250.0f, GuiElement::GuiSizeRow);
 

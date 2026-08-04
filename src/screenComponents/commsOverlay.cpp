@@ -178,7 +178,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
         ->setAttribute("layout", "horizontal");
 
     // Title label showing the comms target's name.
-    comms_dialog_title_label = new GuiLabel(comms_dialog_title_bar, "COMMS_DIALOG_TITLE", "", 30.0f);
+    comms_dialog_title_label = new GuiLabel(comms_dialog_title_bar, "COMMS_DIALOG_TITLE", "");
     comms_dialog_title_label
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);

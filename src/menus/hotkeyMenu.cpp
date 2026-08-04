@@ -49,13 +49,13 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
 
     (new GuiElement(header_row, "HOTKEY_HEADER_SPACER"))
         ->setSize(KEY_LABEL_WIDTH + KEY_LABEL_MARGIN + KEY_BINDER_MARGIN, GuiElement::GuiSizeMax);
-    (new GuiLabel(header_row, "HOTKEY_HEADER_KB", tr("Keyboard"), 30.0f))
+    (new GuiLabel(header_row, "HOTKEY_HEADER_KB", tr("Keyboard")))
         ->setAlignment(sp::Alignment::CenterLeft)
         ->setSize(KEY_BINDER_WIDTH + KEY_BINDER_MARGIN, GuiElement::GuiSizeMax);
-    (new GuiLabel(header_row, "HOTKEY_HEADER_JS", tr("Joystick"), 30.0f))
+    (new GuiLabel(header_row, "HOTKEY_HEADER_JS", tr("Joystick")))
         ->setAlignment(sp::Alignment::CenterLeft)
         ->setSize(KEY_BINDER_WIDTH + KEY_BINDER_MARGIN, GuiElement::GuiSizeMax);
-    (new GuiLabel(header_row, "HOTKEY_HEADER_MS", tr("Mouse"), 30.0f))
+    (new GuiLabel(header_row, "HOTKEY_HEADER_MS", tr("Mouse")))
         ->setAlignment(sp::Alignment::CenterLeft)
         ->setSize(KEY_BINDER_WIDTH + KEY_BINDER_MARGIN, GuiElement::GuiSizeMax);
 
@@ -74,7 +74,7 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
     // Title label
-    (new GuiLabel(top_row, "HEADER", tr("Configure controls"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(top_row, "HEADER", tr("Configure controls")))
         ->addBackground()
         ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
         ->setSize(300.0f, GuiElement::GuiSizeMax);
@@ -110,7 +110,7 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
         ->setSize(250.0f, GuiElement::GuiSizeMax);
 
     // Reset keybinds confirmation
-    reset_label = new GuiLabel(bottom_row, "RESET_LABEL", tr("Bindings reset to defaults"), GuiElement::GuiSizeLabel);
+    reset_label = new GuiLabel(bottom_row, "RESET_LABEL", tr("Bindings reset to defaults"));
     reset_label
         ->addBackground()
         ->setAlignment(sp::Alignment::Center)
@@ -217,7 +217,7 @@ void HotkeyMenu::setCategory(int cat)
         rebinding_rows.back()->setSize(GuiElement::GuiSizeMax, KEY_ROW_HEIGHT)->setAttribute("layout", "horizontal");
 
         // Add a label to the current row.
-        label_entries.push_back(new GuiLabel(rebinding_rows.back(), "HOTKEY_LABEL_" + item->getName(), item->getLabel(), 30.0f));
+        label_entries.push_back(new GuiLabel(rebinding_rows.back(), "HOTKEY_LABEL_" + item->getName(), item->getLabel()));
         label_entries.back()
             ->setWrapped()
             ->setAlignment(sp::Alignment::TopRight)

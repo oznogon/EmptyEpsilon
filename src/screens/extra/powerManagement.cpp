@@ -182,7 +182,7 @@ bool PowerManagementScreen::populateSystemPanel(int system_index, GuiElement* sy
         systems[system_index].system_container_sliders->setAttribute("layout", "horizontal");
 
         // Build the power slider.
-        systems[system_index].power_label = new GuiLabel(systems[system_index].system_container_sliders, "PWR_SYSTEM_" + string(system_index) + "_POWER_LABEL", tr("button", "Power"), 30.0f);
+        systems[system_index].power_label = new GuiLabel(systems[system_index].system_container_sliders, "PWR_SYSTEM_" + string(system_index) + "_POWER_LABEL", tr("button", "Power"));
         systems[system_index].power_label
             ->setVertical()
             ->setAlignment(sp::Alignment::CenterLeft)
@@ -214,7 +214,7 @@ bool PowerManagementScreen::populateSystemPanel(int system_index, GuiElement* sy
             systems[system_index].power_slider->addSnapValue(snap_point, snap_point == 1.0f ? 0.1f : 0.01f);
 
         // Build the coolant slider.
-        systems[system_index].coolant_label = new GuiLabel(systems[system_index].system_container_sliders, "PWR_SYSTEM_" + string(system_index) + "_COOLANT_LABEL", tr("button", "Coolant"), 30.0f);
+        systems[system_index].coolant_label = new GuiLabel(systems[system_index].system_container_sliders, "PWR_SYSTEM_" + string(system_index) + "_COOLANT_LABEL", tr("button", "Coolant"));
         systems[system_index].coolant_label
             ->setVertical()
             ->setAlignment(sp::Alignment::CenterLeft)
@@ -248,7 +248,7 @@ bool PowerManagementScreen::populateSystemPanel(int system_index, GuiElement* sy
             systems[system_index].coolant_slider->addSnapValue(snap_point, 0.1f);
 
         // Build the heat bar.
-        systems[system_index].heat_label = new GuiLabel(systems[system_index].system_container_sliders, "PWR_SYSTEM_" + string(system_index) + "_HEAT_LABEL", tr("button", "Heat"), 30.0f);
+        systems[system_index].heat_label = new GuiLabel(systems[system_index].system_container_sliders, "PWR_SYSTEM_" + string(system_index) + "_HEAT_LABEL", tr("button", "Heat"));
         systems[system_index].heat_label
             ->setVertical()
             ->setAlignment(sp::Alignment::CenterLeft)

@@ -53,7 +53,7 @@ public:
             ->setPosition(0.0f, 350.0f, sp::Alignment::TopCenter)
             ->setSize(600.0f, 200.0f);
 
-        label = new GuiLabel(entry_box, "PASSWORD_LABEL", tr("Enter this ship's control code:"), GuiElement::GuiSizeLabel);
+        label = new GuiLabel(entry_box, "PASSWORD_LABEL", tr("Enter this ship's control code:"));
         label
             ->setPosition(0.0f, 40.0f, sp::Alignment::TopCenter);
 
@@ -216,7 +216,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     right_panel
         ->setAttribute("margin", "0, 0, 0, 20");
 
-    (new GuiLabel(right_panel, "DIRECT_OPTIONS_LABEL", tr("Additional views and options"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(right_panel, "DIRECT_OPTIONS_LABEL", tr("Additional views and options")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -435,7 +435,7 @@ ShipSelectionScreen::ShipSelectionScreen()
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
             ->setAttribute("layout", "horizontal");
 
-        (new GuiLabel(row, "GAME_SCANNING_COMPLEXITY_LABEL", tr("Scan complexity: "), GuiElement::GuiSizeLabel))
+        (new GuiLabel(row, "GAME_SCANNING_COMPLEXITY_LABEL", tr("Scan complexity: ")))
             ->setAlignment(sp::Alignment::CenterRight)
             ->setSize(250.0f, GuiElement::GuiSizeMax);
 
@@ -460,7 +460,7 @@ ShipSelectionScreen::ShipSelectionScreen()
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
             ->setAttribute("layout", "horizontal");
 
-        (new GuiLabel(row, "GAME_HACKING_DIFFICULTY_LABEL", tr("Hacking difficulty: "), GuiElement::GuiSizeLabel))
+        (new GuiLabel(row, "GAME_HACKING_DIFFICULTY_LABEL", tr("Hacking difficulty: ")))
             ->setAlignment(sp::Alignment::CenterRight)
             ->setSize(250.0f, GuiElement::GuiSizeMax);
 
@@ -485,7 +485,7 @@ ShipSelectionScreen::ShipSelectionScreen()
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
             ->setAttribute("layout", "horizontal");
 
-        (new GuiLabel(row, "GAME_HACKING_GAMES_LABEL", tr("Hacking type: "), GuiElement::GuiSizeLabel))
+        (new GuiLabel(row, "GAME_HACKING_GAMES_LABEL", tr("Hacking type: ")))
             ->setAlignment(sp::Alignment::CenterRight)
             ->setSize(250, GuiElement::GuiSizeMax);
 
@@ -509,7 +509,7 @@ ShipSelectionScreen::ShipSelectionScreen()
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
             ->setAttribute("layout", "horizontal");
 
-        (new GuiLabel(row, "GAME_COLLISION_DAMAGE_LABEL", tr("Collision damage: "), GuiElement::GuiSizeLabel))
+        (new GuiLabel(row, "GAME_COLLISION_DAMAGE_LABEL", tr("Collision damage: ")))
             ->setAlignment(sp::Alignment::CenterRight)
             ->setSize(250.0f, GuiElement::GuiSizeMax);
 
@@ -636,7 +636,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     right_panel_2
         ->setAttribute("padding", "20, 20, 0, 20");
 
-    right_panel_2_label = new GuiLabel(right_panel_2, "RIGHT_PANEL_2_LABEL", tr("Connected players"), GuiElement::GuiSizeLabel);
+    right_panel_2_label = new GuiLabel(right_panel_2, "RIGHT_PANEL_2_LABEL", tr("Connected players"));
     right_panel_2_label
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
@@ -664,7 +664,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     left_panel_2
         ->setAttribute("margin", "0, 0, 0, 20");
 
-    left_panel_2_label = new GuiLabel(left_panel_2, "LEFT_PANEL_2_LABEL", "", GuiElement::GuiSizeLabel);
+    left_panel_2_label = new GuiLabel(left_panel_2, "LEFT_PANEL_2_LABEL", "");
     left_panel_2_label
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
@@ -761,12 +761,12 @@ ShipSelectionScreen::ShipSelectionScreen()
     }
 
     // Player ship selection panel
-    (new GuiLabel(left_panel, "SHIP_SELECTION_LABEL", tr("Select ship"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(left_panel, "SHIP_SELECTION_LABEL", tr("Select ship")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
 
-    no_ships_label = new GuiLabel(left_panel, "SHIP_SELECTION_NO_SHIPS_LABEL", tr("Waiting for server to spawn a ship"), GuiElement::GuiSizeLabel);
+    no_ships_label = new GuiLabel(left_panel, "SHIP_SELECTION_NO_SHIPS_LABEL", tr("Waiting for server to spawn a ship"));
     no_ships_label
         ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -1073,13 +1073,13 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
     limited_crew_panel
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(limited_crew_panel, "CREW_POSITION_SELECT_LABEL", tr("4/3/1 player crew"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(limited_crew_panel, "CREW_POSITION_SELECT_LABEL", tr("4/3/1 player crew")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
 
     // 6/5 player crew panel
-    (new GuiLabel(standard_crew_panel, "CREW_POSITION_SELECT_LABEL", tr("6/5 player crew"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(standard_crew_panel, "CREW_POSITION_SELECT_LABEL", tr("6/5 player crew")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -1129,7 +1129,7 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
     space_screens_panel
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(space_screens_panel, "CREW_POSITION_SELECT_LABEL", tr("3D screens"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(space_screens_panel, "CREW_POSITION_SELECT_LABEL", tr("3D screens")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -1177,7 +1177,7 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
         )
         ->setSize(75.0f, GuiElement::GuiSizeRow);
 
-    window_angle_label = new GuiLabel(window_button_row, "WINDOW_ANGLE_LABEL", "°", GuiElement::GuiSizeLabel);
+    window_angle_label = new GuiLabel(window_button_row, "WINDOW_ANGLE_LABEL", "°");
     window_angle_label->setSize(12.0f, GuiElement::GuiSizeMax);
 
     // Alternative options panel
@@ -1190,7 +1190,7 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
     alternative_options_panel
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(alternative_options_panel, "CREW_POSITION_SELECT_LABEL", tr("Alternative options"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(alternative_options_panel, "CREW_POSITION_SELECT_LABEL", tr("Alternative options")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -1223,7 +1223,7 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
         ->setSize(GuiElement::GuiSizeMax, 325.0f)
         ->setAttribute("margin", "0, 0, 0, 20");
 
-    (new GuiLabel(right_container, "STATION_PLAYERS_LABEL", tr("Crew assignments"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(right_container, "STATION_PLAYERS_LABEL", tr("Crew assignments")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 

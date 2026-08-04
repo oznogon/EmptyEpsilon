@@ -9,7 +9,7 @@ class GuiLabel : public GuiElement
 protected:
     string text;
     float text_size;
-    glm::u8vec4 text_color{255,255,255,255};
+    glm::u8vec4 text_color{255, 255, 255, 255};
     sp::Alignment text_alignment;
     bool background;
     bool override_bg_color;
@@ -18,7 +18,7 @@ protected:
     const GuiThemeStyle* front_style;
     const GuiThemeStyle* back_style;
 public:
-    GuiLabel(GuiContainer* owner, string id, string text, float text_size);
+    GuiLabel(GuiContainer* owner, string id, string text, float text_size = GuiElement::GuiSizeLabel);
 
     virtual void onDraw(sp::RenderTarget& renderer) override;
 

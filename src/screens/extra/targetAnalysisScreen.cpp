@@ -90,7 +90,7 @@ TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
         ->setFillPercentage(0.75f)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    info_callsign = new GuiLabel(model_view_panel, "INFO_CALLSIGN", "", 30.0f);
+    info_callsign = new GuiLabel(model_view_panel, "INFO_CALLSIGN", "");
     info_callsign
         ->setPosition(0.0f, 0.0f, sp::Alignment::TopCenter)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
@@ -101,7 +101,7 @@ TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(description_section, "DESCRIPTION_LABEL", tr("analysis", "Description"), 30.0f))
+    (new GuiLabel(description_section, "DESCRIPTION_LABEL", tr("analysis", "Description")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -114,7 +114,7 @@ TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
 
     /*
     // Custom ship functions
-    (new GuiLabel(left_column, "FUNCTIONS_LABEL", tr("analysis", "Functions"), 30.0f))
+    (new GuiLabel(left_column, "FUNCTIONS_LABEL", tr("analysis", "Functions")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -133,7 +133,7 @@ TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
     basic_info_section
         ->setAttribute("margin", "0, 0, 0, 30");
 
-    (new GuiLabel(basic_info_section, "BASIC_INFO_LABEL", tr("analysis", "Analysis"), 30.0f))
+    (new GuiLabel(basic_info_section, "BASIC_INFO_LABEL", tr("analysis", "Analysis")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -174,7 +174,7 @@ TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(systems_section, "SYSTEMS_LABEL", tr("analysis", "Systems status"), 30.0f))
+    (new GuiLabel(systems_section, "SYSTEMS_LABEL", tr("analysis", "Systems status")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -197,7 +197,7 @@ TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
     frequencies_section
         ->setAttribute("margin", "0, 0, 0, 30");
 
-    (new GuiLabel(frequencies_section, "FREQUENCIES_LABEL", tr("analysis", "Frequencies"), 30.0f))
+    (new GuiLabel(frequencies_section, "FREQUENCIES_LABEL", tr("analysis", "Frequencies")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -223,7 +223,7 @@ TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
     signatures_section
         ->setAttribute("margin", "0, 0, 0, 30");
 
-    (new GuiLabel(signatures_section, "SIGNATURES_LABEL", tr("analysis", "Radar signatures"), 30.0f))
+    (new GuiLabel(signatures_section, "SIGNATURES_LABEL", tr("analysis", "Radar signatures")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -233,7 +233,7 @@ TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
         ->showGreen(false)
         ->showBlue(false)
         ->setSize(GuiElement::GuiSizeMax, KV_HEIGHT * 3.0f);
-    info_electrical_signal_label = new GuiLabel(info_electrical_signal_band, "", tr("Electrical"), 30.0f);
+    info_electrical_signal_label = new GuiLabel(info_electrical_signal_band, "", tr("Electrical"));
     info_electrical_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     info_electrical_signal_band->addModeButton();
 
@@ -242,7 +242,7 @@ TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
         ->showRed(false)
         ->showGreen(false)
         ->setSize(GuiElement::GuiSizeMax, KV_HEIGHT * 3.0f);
-    info_gravitational_signal_label = new GuiLabel(info_gravitational_signal_band, "", tr("Gravitational"), 30.0f);
+    info_gravitational_signal_label = new GuiLabel(info_gravitational_signal_band, "", tr("Gravitational"));
     info_gravitational_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     info_gravitational_signal_band->addModeButton();
 
@@ -251,7 +251,7 @@ TargetAnalysisScreen::TargetAnalysisScreen(GuiContainer* owner)
         ->showRed(false)
         ->showBlue(false)
         ->setSize(GuiElement::GuiSizeMax, KV_HEIGHT * 3.0f);
-    info_thermal_signal_label = new GuiLabel(info_thermal_signal_band, "", tr("Thermal"), 30.0f);
+    info_thermal_signal_label = new GuiLabel(info_thermal_signal_band, "", tr("Thermal"));
     info_thermal_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     info_thermal_signal_band->addModeButton();
 

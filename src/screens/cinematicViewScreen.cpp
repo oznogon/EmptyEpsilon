@@ -257,7 +257,7 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
     keyboard_help->moveToFront();
 
     // Keybind hint label - shown when UI is hidden
-    keybind_hint_label = new GuiLabel(this, "KEYBIND_HINT", "", 30);
+    keybind_hint_label = new GuiLabel(this, "KEYBIND_HINT", "");
     keybind_hint_label
         ->setPosition(0, -100, sp::Alignment::BottomCenter)
         ->setSize(800, 100);

@@ -360,7 +360,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
     power_coolant_box
         ->getLayout().match_content_x = true;
 
-    power_label = new GuiLabel(power_coolant_box, "POWER_LABEL", tr("slider", "Power"), GuiElement::GuiSizeLabel);
+    power_label = new GuiLabel(power_coolant_box, "POWER_LABEL", tr("slider", "Power"));
     power_label
         ->setVertical()
         ->setAlignment(sp::Alignment::Center)
@@ -390,7 +390,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
     for (float snap_point = 0.0f; snap_point <= power_max; snap_point += 0.5f)
         power_slider->addSnapValue(snap_point, snap_point == 1.0f ? 0.1f : 0.01f);
 
-    coolant_label = new GuiLabel(power_coolant_box, "COOLANT_LABEL", tr("slider", "Coolant"), GuiElement::GuiSizeLabel);
+    coolant_label = new GuiLabel(power_coolant_box, "COOLANT_LABEL", tr("slider", "Coolant"));
     coolant_label
         ->setVertical()
         ->setAlignment(sp::Alignment::Center)

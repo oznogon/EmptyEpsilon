@@ -58,7 +58,7 @@ OptionsMenu::OptionsMenu(OptionsMenu::ReturnTo return_to)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 20");
 
-    (new GuiLabel(top_row, "HEADER", tr("title", "Options"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(top_row, "HEADER", tr("title", "Options")))
         ->addBackground()
         ->setSize(250.0f, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 20");
@@ -227,7 +227,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
 {
     // Select language
     {
-        (new GuiLabel(interface_page, "LANGUAGE_OPTIONS_LABEL", tr("options_section", "Language"), GuiElement::GuiSizeLabel))
+        (new GuiLabel(interface_page, "LANGUAGE_OPTIONS_LABEL", tr("options_section", "Language")))
             ->addBackground()
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
@@ -331,7 +331,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
         if (default_elem != themes.end())
             default_index = static_cast<int>(default_elem - themes.begin());
 
-        (new GuiLabel(interface_page, "GUI_THEME_OPTIONS_LABEL", tr("options_section", "Interface theme"), GuiElement::GuiSizeLabel))
+        (new GuiLabel(interface_page, "GUI_THEME_OPTIONS_LABEL", tr("options_section", "Interface theme")))
             ->addBackground()
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
@@ -388,7 +388,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
 
     // Control configuration
     {
-        (new GuiLabel(interface_page, "CONTROL_OPTIONS_LABEL", tr("options_section", "Control options"), GuiElement::GuiSizeLabel))
+        (new GuiLabel(interface_page, "CONTROL_OPTIONS_LABEL", tr("options_section", "Control options")))
             ->addBackground()
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
@@ -413,7 +413,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
             ->setSize(GuiElement::GuiSizeMax, 220.0f)
             ->setAttribute("layout", "vertical");
 
-        (new GuiLabel(radar_rotation_lock, "CONTROL_OPTIONS_LABEL", tr("options_section", "Radar rotation lock"), GuiElement::GuiSizeLabel))
+        (new GuiLabel(radar_rotation_lock, "CONTROL_OPTIONS_LABEL", tr("options_section", "Radar rotation lock")))
             ->addBackground()
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
@@ -515,7 +515,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
 
     // Cinematic view options
     {
-        (new GuiLabel(interface_page, "CINEMATIC_VIEW_OPTIONS_LABEL", tr("options_section", "Cinematic view options"), GuiElement::GuiSizeLabel))
+        (new GuiLabel(interface_page, "CINEMATIC_VIEW_OPTIONS_LABEL", tr("options_section", "Cinematic view options")))
             ->addBackground()
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
@@ -578,7 +578,7 @@ void OptionsMenu::setupGraphicsOptions()
         default: fsaa_index = 0; break;
         }
 
-        (new GuiLabel(graphics_page, "QUALITY_LABEL", tr("options_section", "Quality settings"), GuiElement::GuiSizeLabel))
+        (new GuiLabel(graphics_page, "QUALITY_LABEL", tr("options_section", "Quality settings")))
             ->addBackground()
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
             ->setAttribute("margin", "0, 0, 0, 10");
@@ -720,7 +720,7 @@ void OptionsMenu::setupGraphicsOptions()
 
     // View/window settings.
     {
-        (new GuiLabel(graphics_page, "VIEW_LABEL", tr("options_section", "View settings"), GuiElement::GuiSizeLabel))
+        (new GuiLabel(graphics_page, "VIEW_LABEL", tr("options_section", "View settings")))
             ->addBackground()
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
             ->setAttribute("margin", "0, 0, 0, 10");
@@ -843,7 +843,7 @@ void OptionsMenu::setupAudioOptions()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Engine playback state.
-    (new GuiLabel(audio_page, "IMPULSE_SOUND_LABEL", tr("options_section", "Impulse engine sound"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(audio_page, "IMPULSE_SOUND_LABEL", tr("options_section", "Impulse engine sound")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -896,7 +896,7 @@ void OptionsMenu::setupAudioOptions()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Music playback state.
-    (new GuiLabel(audio_page, "MUSIC_PLAYBACK_LABEL", tr("options_section", "Music"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(audio_page, "MUSIC_PLAYBACK_LABEL", tr("options_section", "Music")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -960,7 +960,7 @@ void OptionsMenu::setupAudioOptions()
     std::vector<string> combat_music_filenames = findResources("music/combat/*.ogg");
     std::sort(combat_music_filenames.begin(), combat_music_filenames.end());
 
-    (new GuiLabel(audio_page, "PREVIEW_LABEL", tr("options_section", "Preview music"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(audio_page, "PREVIEW_LABEL", tr("options_section", "Preview music")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 

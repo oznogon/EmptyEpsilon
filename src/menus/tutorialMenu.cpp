@@ -52,7 +52,7 @@ TutorialMenu::TutorialMenu()
         ->setAttribute("layout", "vertical");
 
     // Scenario categories.
-    (new GuiLabel(left, "SCENARIO_LABEL", tr("Tutorials"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(left, "SCENARIO_LABEL", tr("Tutorials")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -78,7 +78,7 @@ TutorialMenu::TutorialMenu()
     }
 
     // Scenario categories.
-    (new GuiLabel(right, "DESCRIPTION_LABEL", tr("Description"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(right, "DESCRIPTION_LABEL", tr("Description")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");

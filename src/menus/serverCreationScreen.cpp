@@ -34,7 +34,7 @@ ServerSetupScreen::ServerSetupScreen()
     container
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(container, "HEADER", tr("title", "Host game"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(container, "HEADER", tr("title", "Host game")))
         ->addBackground()
         ->setSize(250.0f, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 20");
@@ -47,7 +47,7 @@ ServerSetupScreen::ServerSetupScreen()
         ->setAttribute("alignment", "topcenter");
 
     // Server configuration section.
-    (new GuiLabel(column, "CONFIG_LABEL", tr("Server configuration"), 30.0f))
+    (new GuiLabel(column, "CONFIG_LABEL", tr("Server configuration")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -58,7 +58,7 @@ ServerSetupScreen::ServerSetupScreen()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("layout", "horizontal");
 
-    (new GuiLabel(row, "NAME_LABEL", tr("Server name:"), 30.0f))
+    (new GuiLabel(row, "NAME_LABEL", tr("Server name:")))
         ->setAlignment(sp::Alignment::CenterRight)
         ->setSize(250.0f, GuiElement::GuiSizeMax)
         ->setAttribute("margin", "0, 10, 0, 0");
@@ -73,7 +73,7 @@ ServerSetupScreen::ServerSetupScreen()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("layout", "horizontal");
 
-    (new GuiLabel(row, "PASSWORD_LABEL", tr("Server password:"), 30.0f))
+    (new GuiLabel(row, "PASSWORD_LABEL", tr("Server password:")))
         ->setAlignment(sp::Alignment::CenterRight)
         ->setSize(250.0f, GuiElement::GuiSizeMax)
         ->setAttribute("margin", "0, 10, 0, 0");
@@ -88,7 +88,7 @@ ServerSetupScreen::ServerSetupScreen()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("layout", "horizontal");
 
-    (new GuiLabel(row, "GM_CONTROL_CODE_LABEL", tr("GM control code:"), 30.0f))
+    (new GuiLabel(row, "GM_CONTROL_CODE_LABEL", tr("GM control code:")))
         ->setAlignment(sp::Alignment::CenterRight)
         ->setSize(250.0f, GuiElement::GuiSizeMax)
         ->setAttribute("margin", "0, 10, 0, 0");
@@ -103,7 +103,7 @@ ServerSetupScreen::ServerSetupScreen()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("layout", "horizontal");
 
-    (new GuiLabel(row, "LAN_INTERNET_LABEL", tr("List on internet registry:"), 30.0f))
+    (new GuiLabel(row, "LAN_INTERNET_LABEL", tr("List on internet registry:")))
         ->setAlignment(sp::Alignment::CenterRight)
         ->setSize(250.0f, GuiElement::GuiSizeMax)
         ->setAttribute("margin", "0, 10, 0, 0");
@@ -127,7 +127,7 @@ ServerSetupScreen::ServerSetupScreen()
     row
         ->setAttribute("margin", "0, 0, 0, 20");
 
-    (new GuiLabel(row, "SERVER_PORT", tr("Server port:"), 30.0f))
+    (new GuiLabel(row, "SERVER_PORT", tr("Server port:")))
         ->setAlignment(sp::Alignment::CenterRight)
         ->setSize(250.0f, GuiElement::GuiSizeMax)
         ->setAttribute("margin", "0, 10, 0, 0");
@@ -138,7 +138,7 @@ ServerSetupScreen::ServerSetupScreen()
     (new GuiTextTooltip(server_port, "SERVER_PORT_TIP", tr("tooltips", "Set the network port for the server. Default is 35666.")))->setWidth();
 
     // Server info section.
-    (new GuiLabel(column, "INFO_LABEL", tr("Server information"), 30.0f))
+    (new GuiLabel(column, "INFO_LABEL", tr("Server information")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -150,7 +150,7 @@ ServerSetupScreen::ServerSetupScreen()
         ->setSize(GuiElement::GuiSizeMax, 80.0f)
         ->setVisible(reverse_proxy_value != "");
     // Serverproxy (reverse proxy) is directly configured as a preference.
-    (new GuiLabel(server_proxy_panel, "PROXY_LABEL", tr("Server configured to connect to reverse proxy at "), 30.0f))
+    (new GuiLabel(server_proxy_panel, "PROXY_LABEL", tr("Server configured to connect to reverse proxy at ")))
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
     string proxy_ips;
@@ -160,7 +160,7 @@ ServerSetupScreen::ServerSetupScreen()
         proxy_ips = proxy_ips + sep + "[" + proxy_ip + "]";
         sep = ",";
     }
-    (new GuiLabel(server_proxy_panel, "PROXY_IPS", proxy_ips, 30.0f))
+    (new GuiLabel(server_proxy_panel, "PROXY_IPS", proxy_ips))
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setPosition(0.0f, 30.0f);
 
@@ -170,7 +170,7 @@ ServerSetupScreen::ServerSetupScreen()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "horizontal");
 
-    (new GuiLabel(row, "SERVER_IP_LABEL", tr("Server IPs:\n(click to copy)"), 30.0f))
+    (new GuiLabel(row, "SERVER_IP_LABEL", tr("Server IPs:\n(click to copy)")))
         ->setAlignment(sp::Alignment::TopRight)
         ->setSize(250.0f, GuiElement::GuiSizeMax)
         ->setAttribute("margin", "0, 10, 0, 0");
@@ -251,7 +251,7 @@ ServerSetupMasterServerRegistrationScreen::ServerSetupMasterServerRegistrationSc
     (new GuiOverlay(this, "", glm::u8vec4{255, 255, 255, 255}))
         ->setTextureTiledThemed("background.crosses");
 
-    info_label = new GuiLabel(this, "INFO", "", GuiElement::GuiSizeLabel);
+    info_label = new GuiLabel(this, "INFO", "");
     info_label->setPosition(0.0f, 0.0f, sp::Alignment::Center);
 
     auto* row = new GuiElement(this, "");
@@ -331,7 +331,7 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
     container
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(container, "HEADER", tr("title", "Select scenario"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(container, "HEADER", tr("title", "Select scenario")))
         ->addBackground()
         ->setSize(250.0f, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 20");
@@ -359,7 +359,7 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
         ->setAttribute("layout", "vertical");
 
     // Scenario categories.
-    (new GuiLabel(left, "CATEGORY_LABEL", tr("Category"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(left, "CATEGORY_LABEL", tr("Category")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -374,7 +374,7 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
     (new GuiTextTooltip(category_list, "SCENARIO_CATEGORY_TIP", tr("tooltips", "Filter the scenario list by category.")))->setWidth();
 
     // Scenario list.
-    (new GuiLabel(middle, "LIST_LABEL", tr("Scenario"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(middle, "LIST_LABEL", tr("Scenario")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -396,7 +396,7 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
     (new GuiTextTooltip(scenario_list, "SCENARIO_LIST_TIP", tr("tooltips", "Select a scenario to host. Its description appears on the right.")))->setWidth();
 
     // Scenario description.
-    (new GuiLabel(right, "DESCRIPTION_LABEL", tr("Description"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(right, "DESCRIPTION_LABEL", tr("Description")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -532,7 +532,7 @@ ServerScenarioOptionsScreen::ServerScenarioOptionsScreen(string filename)
     container
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(container, "HEADER", tr("title", "Configure scenario"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(container, "HEADER", tr("title", "Configure scenario")))
         ->addBackground()
         ->setSize(250.0f, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 20");
@@ -572,7 +572,7 @@ ServerScenarioOptionsScreen::ServerScenarioOptionsScreen(string filename)
         }
 
         // Option name.
-        (new GuiLabel(option_container, "", setting.key_localized, 30.0f))
+        (new GuiLabel(option_container, "", setting.key_localized))
             ->addBackground()
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
             ->setAttribute("margin", "0, 0, 0, 10");

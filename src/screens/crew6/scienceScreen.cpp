@@ -372,7 +372,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         ->showBlue(false)
         ->addModeButton()
         ->setSize(GuiElement::GuiSizeMax, 80.0f);
-    info_electrical_signal_label = new GuiLabel(info_electrical_signal_band, "", tr("Electrical"), 30.0f);
+    info_electrical_signal_label = new GuiLabel(info_electrical_signal_band, "", tr("Electrical"));
     info_electrical_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     info_gravitational_signal_band = new GuiSignalQualityIndicator(sidebar_signals_page, "SCIENCE_GRAVITY_SIGNAL");
@@ -381,7 +381,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         ->showGreen(false)
         ->addModeButton()
         ->setSize(GuiElement::GuiSizeMax, 80.0f);
-    info_gravitational_signal_label = new GuiLabel(info_gravitational_signal_band, "", tr("Gravitational"), 30.0f);
+    info_gravitational_signal_label = new GuiLabel(info_gravitational_signal_band, "", tr("Gravitational"));
     info_gravitational_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     info_thermal_signal_band = new GuiSignalQualityIndicator(sidebar_signals_page, "SCIENCE_THERMAL_SIGNAL");
@@ -390,7 +390,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         ->showBlue(false)
         ->addModeButton()
         ->setSize(GuiElement::GuiSizeMax, 80.0f);
-    info_thermal_signal_label = new GuiLabel(info_thermal_signal_band, "", tr("Thermal"), 30.0f);
+    info_thermal_signal_label = new GuiLabel(info_thermal_signal_band, "", tr("Thermal"));
     info_thermal_signal_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Prep and hide the frequency graphs.
@@ -509,7 +509,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     // Scanning dialog.
     scanning_dialog = new GuiScanningDialog(this, "SCANNING_DIALOG");
 
-    missile_threat_label = new GuiLabel(this, "MISSILE_THREAT_LABEL", tr("scienceThreat", "Missile"), 30.0f);
+    missile_threat_label = new GuiLabel(this, "MISSILE_THREAT_LABEL", tr("scienceThreat", "Missile"));
     missile_threat_label
         ->setAlignment(sp::Alignment::Center)
         ->addBackground()
@@ -520,7 +520,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         ->hide();
     (new GuiTextTooltip(missile_threat_label, "MISSILE_THREAT_TIP", tr("tooltips", "Warning: Incoming missiles detected targeting your ship.")))->setWidth();
 
-    beam_threat_label = new GuiLabel(this, "BEAM_THREAT_LABEL", tr("scienceThreat", "Beam"), 30.0f);
+    beam_threat_label = new GuiLabel(this, "BEAM_THREAT_LABEL", tr("scienceThreat", "Beam"));
     beam_threat_label
         ->setAlignment(sp::Alignment::Center)
         ->addBackground()

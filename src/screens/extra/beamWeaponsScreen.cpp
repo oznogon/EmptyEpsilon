@@ -101,7 +101,7 @@ BeamWeaponsScreen::BeamWeaponsScreen(GuiContainer* owner)
 
     if (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage)
     {
-        (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Beam targeting"), 30.0f))
+        (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Beam targeting")))
             ->addBackground()
             ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
         (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Frequency"), 25.0f))

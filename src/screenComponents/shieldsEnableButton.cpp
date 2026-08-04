@@ -24,7 +24,7 @@ GuiShieldsEnableButton::GuiShieldsEnableButton(GuiContainer* owner, string id)
     button->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     bar = new GuiProgressbar(this, id + "_BAR", 0.0, 25.0f, 0.0f);
     bar->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    (new GuiLabel(bar, id + "_CALIBRATING_LABEL", tr("shields","Calibrating"), 30))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    (new GuiLabel(bar, id + "_CALIBRATING_LABEL", tr("shields","Calibrating")))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     (new GuiPowerDamageIndicator(this, id + "_PDI", ShipSystem::Type::FrontShield, sp::Alignment::CenterLeft))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }

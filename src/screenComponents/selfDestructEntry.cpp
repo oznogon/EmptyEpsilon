@@ -15,15 +15,15 @@ GuiSelfDestructEntry::GuiSelfDestructEntry(GuiContainer* owner, string id)
     box = new GuiPanel(this, id + "_BOX");
     box->setPosition(0, 0, sp::Alignment::Center)->setAttribute("layout", "vertical");;
     (new GuiLabel(box, id + "_LABEL", tr("Self destruct activated!"), 50))->setSize(600, 80)->getLayout().alignment = sp::Alignment::Center;
-    code_label = new GuiLabel(box, id + "_CODE_LABEL", "", 30);
+    code_label = new GuiLabel(box, id + "_CODE_LABEL", "");
     code_label->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->getLayout().alignment = sp::Alignment::Center;
 
     code_entry = new GuiElement(box, id + "_ENTRY_ELEMENT");
     code_entry->setSize(250, 320)->setPosition(0, 0, sp::Alignment::Center);
 
-    code_entry_code_label = new GuiLabel(code_entry, id + "_ENTRY_LABEL", "Enter [A]", 30);
+    code_entry_code_label = new GuiLabel(code_entry, id + "_ENTRY_LABEL", "Enter [A]");
     code_entry_code_label->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
-    code_entry_label = new GuiLabel(code_entry, id + "_ENTRY_LABEL", "", 30);
+    code_entry_label = new GuiLabel(code_entry, id + "_ENTRY_LABEL", "");
     code_entry_label->addBackground()->setPosition(0, 50, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, 50);
     (new GuiButton(code_entry, id + "_BUTTON_7", "7", [this]() {code_entry_label->setText(code_entry_label->getText() + "7");}))->setSize(50, 50)->setPosition(50, 100, sp::Alignment::TopLeft);
     (new GuiButton(code_entry, id + "_BUTTON_8", "8", [this]() {code_entry_label->setText(code_entry_label->getText() + "8");}))->setSize(50, 50)->setPosition(100, 100, sp::Alignment::TopLeft);

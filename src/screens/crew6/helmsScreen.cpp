@@ -151,7 +151,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
         ->setSize(280.0f, 215.0f);
     (new GuiTextTooltip(combat_maneuver, "COMBAT_MANEUVER_TIP", tr("tooltips", "Strafe laterally or boost forward to evade enemies.")))->setWidth();
 
-    heading_hint = new GuiLabel(helms_controls, "HEADING_HINT", "", GuiElement::GuiSizeLabel);
+    heading_hint = new GuiLabel(helms_controls, "HEADING_HINT", "");
     heading_hint
         ->setAlignment(sp::Alignment::Center)
         ->setSize(0.0f, 0.0f);

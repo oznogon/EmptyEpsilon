@@ -52,7 +52,7 @@ ServerBrowserMenu::ServerBrowserMenu(std::optional<GameClient::DisconnectReason>
     (new GuiOverlay(this, "", glm::u8vec4{255, 255, 255, 255}))
         ->setTextureTiledThemed("background.crosses");
 
-    (new GuiLabel(this, "HEADER", tr("title", "Join game"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(this, "HEADER", tr("title", "Join game")))
         ->addBackground()
         ->setPosition(50.0f, 50.0f, sp::Alignment::TopLeft)
         ->setSize(250.0f, GuiElement::GuiSizeRow);
@@ -76,7 +76,7 @@ ServerBrowserMenu::ServerBrowserMenu(std::optional<GameClient::DisconnectReason>
             {"message", disconnectErrorMessage(*last_attempt)}
         });
 
-        auto error_info = new GuiLabel(this, "LAST_ATTEMPT_ERROR_MESSAGE", error_message, GuiElement::GuiSizeLabel);
+        auto error_info = new GuiLabel(this, "LAST_ATTEMPT_ERROR_MESSAGE", error_message);
         error_info->setPosition(0.0f, -80.0f, sp::Alignment::BottomCenter);
     }
 

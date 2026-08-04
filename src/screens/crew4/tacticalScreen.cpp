@@ -157,7 +157,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     if (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage)
     {
         beam_info_box->show();
-        (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Beams"), GuiElement::GuiSizeLabel))
+        (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Beams")))
             ->addBackground()
             ->setPosition(0.0f, 0.0f, sp::Alignment::BottomLeft)
             ->setSize(80.0f, GuiElement::GuiSizeRow);

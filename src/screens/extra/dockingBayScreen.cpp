@@ -75,7 +75,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setAttribute("layout", "vertical");
 
     // Left column: Docking bay berths
-    (new GuiLabel(left_column, "DOCKING_BAY_BERTHS_LABEL", tr("dockingbay", "Berths"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(left_column, "DOCKING_BAY_BERTHS_LABEL", tr("dockingbay", "Berths")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -100,7 +100,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
 
     (new GuiElement(top_row, "SPACER"))->setSize(250.0f, GuiElement::GuiSizeMax);
 
-    (new GuiLabel(docking_bay_info_layout, "DOCKING_BAY_INFO_LABEL", tr("dockingbay", "Selected berth"), GuiElement::GuiSizeLabel))
+    (new GuiLabel(docking_bay_info_layout, "DOCKING_BAY_INFO_LABEL", tr("dockingbay", "Selected berth")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -149,7 +149,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, KV_SIZE);
 
     // Right column, bottom row
-    (new GuiLabel(right_column, "DOCKING_BAY_BERTH_LABEL", tr("dockingbay", "Berth operations"), 30.0f))
+    (new GuiLabel(right_column, "DOCKING_BAY_BERTH_LABEL", tr("dockingbay", "Berth operations")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -272,7 +272,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->hide()
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(hangar_controls, "DOCKING_BAY_HANGAR_LABEL", tr("dockingbay", "Hangar operations"), 30.0f))
+    (new GuiLabel(hangar_controls, "DOCKING_BAY_HANGAR_LABEL", tr("dockingbay", "Hangar operations")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -300,7 +300,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->hide()
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(energy_controls, "DOCKING_BAY_ENERGY_OPERATIONS_LABEL", tr("dockingbay", "Energy operations"), 30.0f))
+    (new GuiLabel(energy_controls, "DOCKING_BAY_ENERGY_OPERATIONS_LABEL", tr("dockingbay", "Energy operations")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -310,7 +310,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("layout", "horizontal");
 
-    (new GuiLabel(energy_transfer_row, "DOCKING_BAY_ENERGY_TRANSFER_LABEL", tr("dockingbay", "Transfer energy:"), 30.0f))
+    (new GuiLabel(energy_transfer_row, "DOCKING_BAY_ENERGY_TRANSFER_LABEL", tr("dockingbay", "Transfer energy:")))
         ->setAlignment(sp::Alignment::CenterRight)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
@@ -366,7 +366,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->hide()
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(thermal_controls, "DOCKING_BAY_THERMAL_LABEL", tr("dockingbay", "Thermal operations"), 30.0f))
+    (new GuiLabel(thermal_controls, "DOCKING_BAY_THERMAL_LABEL", tr("dockingbay", "Thermal operations")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -376,7 +376,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("layout", "horizontal");
 
-    (new GuiLabel(vent_controls_row, "DOCKING_BAY_VENT_LABEL", tr("dockingbay", "Vent heat:"), 30.0f))
+    (new GuiLabel(vent_controls_row, "DOCKING_BAY_VENT_LABEL", tr("dockingbay", "Vent heat:")))
         ->setAlignment(sp::Alignment::CenterRight)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
@@ -498,7 +498,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->hide()
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(repair_controls, "DOCKING_BAY_REPAIR_LABEL", tr("dockingbay", "Repair operations"), 30.0f))
+    (new GuiLabel(repair_controls, "DOCKING_BAY_REPAIR_LABEL", tr("dockingbay", "Repair operations")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -508,7 +508,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("layout", "horizontal");
 
-    (new GuiLabel(repair_controls_row, "DOCKING_BAY_VENT_LABEL", tr("dockingbay", "Prioritize repairs:"), 30.0f))
+    (new GuiLabel(repair_controls_row, "DOCKING_BAY_VENT_LABEL", tr("dockingbay", "Prioritize repairs:")))
         ->setAlignment(sp::Alignment::CenterRight)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
@@ -613,7 +613,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->hide()
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(supply_controls, "DOCKING_BAY_SUPPLY_LABEL", tr("dockingbay", "Supply operations"), 30.0f))
+    (new GuiLabel(supply_controls, "DOCKING_BAY_SUPPLY_LABEL", tr("dockingbay", "Supply operations")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
@@ -812,7 +812,7 @@ DockingBayScreen::DockingBayScreen(GuiContainer* owner)
         ->hide()
         ->setAttribute("layout", "vertical");
 
-    (new GuiLabel(storage_controls, "DOCKING_BAY_STORAGE_LABEL", tr("dockingbay", "Storage operations"), 30.0f))
+    (new GuiLabel(storage_controls, "DOCKING_BAY_STORAGE_LABEL", tr("dockingbay", "Storage operations")))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
         ->setAttribute("margin", "0, 0, 0, 10");
