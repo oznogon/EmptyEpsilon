@@ -19,11 +19,11 @@
 #include "components/faction.h"
 #include "components/gravity.h"
 #include "components/hull.h"
+#include "components/missileWeaponData.h"
 #include "components/name.h"
 #include "components/player.h"
 #include "components/radar.h"
 #include "components/shields.h"
-#include "missileWeaponData.h"
 
 #include "systems/collision.h"
 

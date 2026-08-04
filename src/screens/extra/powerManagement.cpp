@@ -2,7 +2,7 @@
 #include "i18n.h"
 #include "playerInfo.h"
 #include "engine.h"
-#include "missileWeaponData.h"
+#include "components/missileWeaponData.h"
 
 #include "components/reactor.h"
 #include "components/coolant.h"

@@ -163,27 +163,27 @@ msgctxt "crew_screen"
 msgid "Drone operations"
 msgstr "Drone operations"
 
-#: src/missileWeaponData.cpp:110
+#: src/components/missileWeaponData.cpp:110
 msgctxt "missile"
 msgid "Homing"
 msgstr "Homing"
 
-#: src/missileWeaponData.cpp:112
+#: src/components/missileWeaponData.cpp:112
 msgctxt "missile"
 msgid "Nuke"
 msgstr "Nuke"
 
-#: src/missileWeaponData.cpp:114
+#: src/components/missileWeaponData.cpp:114
 msgctxt "missile"
 msgid "Mine"
 msgstr "Mine"
 
-#: src/missileWeaponData.cpp:116
+#: src/components/missileWeaponData.cpp:116
 msgctxt "missile"
 msgid "EMP"
 msgstr "EMP"
 
-#: src/missileWeaponData.cpp:118
+#: src/components/missileWeaponData.cpp:118
 msgctxt "missile"
 msgid "HVLI"
 msgstr "HVLI"

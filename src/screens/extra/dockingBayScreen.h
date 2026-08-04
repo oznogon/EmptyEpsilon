@@ -1,7 +1,7 @@
 #pragma once
 
 #include "gui/gui2_overlay.h"
-#include "missileWeaponData.h"
+#include "components/missileWeaponData.h"
 
 class GuiArrow;
 class GuiButton;

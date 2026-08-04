@@ -1,7 +1,7 @@
 #pragma once
 
 #include "gui/gui2_element.h"
-#include "missileWeaponData.h"
+#include "components/missileWeaponData.h"
 
 class GuiButton;
 class GuiProgressbar;

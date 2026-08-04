@@ -36,7 +36,7 @@
 #include "components/missiletubes.h"
 #include "components/mounts.h"
 #include "components/missileWeaponTarget.h"
-#include "missileWeaponData.h"
+#include "components/missileWeaponData.h"
 #include "components/moveto.h"
 #include "components/name.h"
 #include "components/orbit.h"

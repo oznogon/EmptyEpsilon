@@ -3,7 +3,7 @@
 #include "gui/gui2_overlay.h"
 #include "screenComponents/targetsContainer.h"
 #include "ecs/entity.h"
-#include "missileWeaponData.h"
+#include "components/missileWeaponData.h"
 #include <vector>
 
 class AimLock;

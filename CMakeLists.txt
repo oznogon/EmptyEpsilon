@@ -252,7 +252,7 @@ set(MAIN_SOURCES
     src/crewPosition.cpp
     src/crewPositionRequirements.cpp
     src/playerInfo.cpp
-    src/missileWeaponData.cpp
+    src/components/missileWeaponData.cpp
     src/mesh.cpp
     src/scenarioInfo.cpp
     src/tutorialGame.cpp
@@ -641,7 +641,7 @@ set(MAIN_SOURCES
     src/menus/tutorialMenu.h
     src/menus/luaConsole.h
     src/mesh.h
-    src/missileWeaponData.h
+    src/components/missileWeaponData.h
     src/packResourceProvider.h
     src/particleEffect.h
     src/crewPosition.h

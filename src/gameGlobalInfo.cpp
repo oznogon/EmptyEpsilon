@@ -11,7 +11,7 @@
 #include "systems/collision.h"
 #include "ecs/query.h"
 #include "menus/luaConsole.h"
-#include "missileWeaponData.h"
+#include "components/missileWeaponData.h"
 #include "playerInfo.h"
 #include <SDL3/SDL.h>
 

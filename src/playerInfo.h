@@ -1,7 +1,7 @@
 #pragma once
 
 #include "multiplayer.h"
-#include "missileWeaponData.h"
+#include "components/missileWeaponData.h"
 #include "crewPosition.h"
 
 #include "components/player.h"
