@@ -1999,7 +1999,7 @@ msgstr ""
 #: src/screens/crew4/tacticalScreen.cpp:276
 #: src/screens/crew4/tacticalScreen.cpp:496
 msgctxt "tacticalTab"
-msgid "Utility Beam"
+msgid "Utility beam"
 msgstr ""
 
 #: src/screens/crew6/engineeringScreen.cpp:89
@@ -2202,7 +2202,7 @@ msgstr ""
 #: src/screens/crew6/scienceScreen.cpp:196
 #: src/screens/crew6/scienceScreen.cpp:1198
 msgctxt "scienceTab"
-msgid "Utility Beam"
+msgid "Utility beam"
 msgstr ""
 
 #: src/screens/crew6/scienceScreen.cpp:203
@@ -2671,7 +2671,7 @@ msgstr ""
 
 #: src/screens/crew6/helmsScreen.cpp:200 src/screens/crew6/helmsScreen.cpp:323
 msgctxt "helmsTab"
-msgid "Utility Beam"
+msgid "Utility beam"
 msgstr ""
 
 #: src/screens/crew1/singlePilotScreen.cpp:148
@@ -2687,7 +2687,7 @@ msgstr ""
 #: src/screens/crew1/singlePilotScreen.cpp:195
 #: src/screens/crew1/singlePilotScreen.cpp:398
 msgctxt "singlePilotTab"
-msgid "Utility Beam"
+msgid "Utility beam"
 msgstr ""
 
 #: src/screens/extra/droneOperationsScreen.cpp:255
@@ -3206,7 +3206,7 @@ msgstr ""
 #: src/screens/extra/beamWeaponsScreen.cpp:190
 #: src/screens/extra/beamWeaponsScreen.cpp:385
 msgctxt "weaponsTab"
-msgid "Utility Beam"
+msgid "Utility beam"
 msgstr ""
 
 #: src/screens/extra/radarScreen.cpp:104
@@ -7565,7 +7565,7 @@ msgstr ""
 
 #: src/components/shipsystem.cpp:136
 msgctxt "system"
-msgid "Utility Beam"
+msgid "Utility beam"
 msgstr ""
 
 #: src/components/shipsystem.cpp:137

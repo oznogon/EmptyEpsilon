@@ -134,7 +134,7 @@ static string mountTypeToString(MountType t)
     {
     case MountType::BeamWeapon:   return tr("mount_type", "Beam Weapon");
     case MountType::MissileWeapon: return tr("mount_type", "Missile Weapon");
-    case MountType::UtilityBeam:  return tr("mount_type", "Utility Beam");
+    case MountType::UtilityBeam:  return tr("mount_type", "Utility beam");
     }
 
     return tr("Unknown");

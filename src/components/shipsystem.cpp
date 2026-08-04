@@ -133,7 +133,7 @@ string getLocaleSystemName(ShipSystem::Type system)
     case ShipSystem::Type::JumpDrive: return tr("system", "Jump Drive");
     case ShipSystem::Type::FrontShield: return tr("system", "Front Shield Generator");
     case ShipSystem::Type::RearShield: return tr("system", "Rear Shield Generator");
-    case ShipSystem::Type::UtilityBeam: return tr("system", "Utility Beam");
+    case ShipSystem::Type::UtilityBeam: return tr("system", "Utility beam");
     case ShipSystem::Type::DockingBay: return tr("system", "Docking Bay");
     case ShipSystem::Type::Sensors: return tr("system", "Sensors");
     default:

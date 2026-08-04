@@ -280,7 +280,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
 
     if (ub_mount && ub_mount->crew_positions.has(CrewPosition::tacticalOfficer))
     {
-        sidebar_selector->addEntry(tr("tacticalTab", "Utility Beam"), "util");
+        sidebar_selector->addEntry(tr("tacticalTab", "Utility beam"), "util");
         sidebar_selector->show();
     }
 
@@ -506,7 +506,7 @@ void TacticalScreen::onUpdate()
     bool has_util_tab = sidebar_selector->indexByValue("util") != -1;
     if (should_have_util_tab && !has_util_tab)
     {
-        sidebar_selector->addEntry(tr("tacticalTab", "Utility Beam"), "util");
+        sidebar_selector->addEntry(tr("tacticalTab", "Utility beam"), "util");
         sidebar_selector->show();
         if (sidebar_selector->getSelectionIndex() == -1)
         {

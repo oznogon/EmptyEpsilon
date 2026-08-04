@@ -1500,7 +1500,7 @@ msgstr "Fonctions"
 #: src/screens/crew4/tacticalScreen.cpp:276
 #: src/screens/crew4/tacticalScreen.cpp:487
 msgctxt "tacticalTab"
-msgid "Utility Beam"
+msgid "Utility beam"
 msgstr "Faisceau utilitaire"
 
 #: src/screens/crew6/engineeringScreen.cpp:253
@@ -1653,7 +1653,7 @@ msgstr "Analyse"
 #: src/screens/crew6/scienceScreen.cpp:207
 #: src/screens/crew6/scienceScreen.cpp:1102
 msgctxt "scienceTab"
-msgid "Utility Beam"
+msgid "Utility beam"
 msgstr "Faisceau utilitaire"
 
 #: src/screens/crew6/scienceScreen.cpp:240
@@ -1889,7 +1889,7 @@ msgstr "Fonctions"
 
 #: src/screens/crew6/helmsScreen.cpp:187 src/screens/crew6/helmsScreen.cpp:301
 msgctxt "helmsTab"
-msgid "Utility Beam"
+msgid "Utility beam"
 msgstr "Faisceau utilitaire"
 
 #: src/screens/crew1/singlePilotScreen.cpp:148
@@ -1905,7 +1905,7 @@ msgstr "Fonctions"
 #: src/screens/crew1/singlePilotScreen.cpp:195
 #: src/screens/crew1/singlePilotScreen.cpp:389
 msgctxt "singlePilotTab"
-msgid "Utility Beam"
+msgid "Utility beam"
 msgstr "Faisceau utilitaire"
 
 #: src/screens/extra/droneOperationsScreen.cpp:255
@@ -2424,7 +2424,7 @@ msgstr "Système cible"
 #: src/screens/extra/beamWeaponsScreen.cpp:190
 #: src/screens/extra/beamWeaponsScreen.cpp:376
 msgctxt "weaponsTab"
-msgid "Utility Beam"
+msgid "Utility beam"
 msgstr "Faisceau utilitaire"
 
 #: src/screens/extra/radarScreen.cpp:104
@@ -7171,7 +7171,7 @@ msgstr "Boucliers arrière"
 
 #: src/components/shipsystem.cpp:136
 msgctxt "system"
-msgid "Utility Beam"
+msgid "Utility beam"
 msgstr "Faisceau utilitaire"
 
 #: src/components/shipsystem.cpp:137

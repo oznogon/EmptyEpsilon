@@ -199,7 +199,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     }
     if (ub_mount && ub_mount->crew_positions.has(CrewPosition::singlePilot))
     {
-        sidebar_selector->addEntry(tr("singlePilotTab", "Utility Beam"), "util");
+        sidebar_selector->addEntry(tr("singlePilotTab", "Utility beam"), "util");
         sidebar_selector->show();
     }
 
@@ -408,7 +408,7 @@ void SinglePilotScreen::onUpdate()
     bool has_util_tab = sidebar_selector->indexByValue("util") != -1;
     if (should_have_util_tab && !has_util_tab)
     {
-        sidebar_selector->addEntry(tr("singlePilotTab", "Utility Beam"), "util");
+        sidebar_selector->addEntry(tr("singlePilotTab", "Utility beam"), "util");
         sidebar_selector->show();
         if (sidebar_selector->getSelectionIndex() == -1)
         {

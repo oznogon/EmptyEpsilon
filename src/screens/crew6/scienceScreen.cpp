@@ -207,7 +207,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     if (ub_mount)
     {
         if (ub_mount->crew_positions.has(crew_position))
-            sidebar_selector->addEntry(tr("scienceTab", "Utility Beam"), "util");
+            sidebar_selector->addEntry(tr("scienceTab", "Utility beam"), "util");
     }
 
     sidebar_selector
@@ -1222,7 +1222,7 @@ void ScienceScreen::onUpdate()
     bool should_have_util_tab = ub_mount && ub_mount->crew_positions.has(crew_position);
     bool has_util_tab = sidebar_selector->indexByValue("util") != -1;
     if (should_have_util_tab && !has_util_tab)
-        sidebar_selector->addEntry(tr("scienceTab", "Utility Beam"), "util");
+        sidebar_selector->addEntry(tr("scienceTab", "Utility beam"), "util");
     else if (!should_have_util_tab && has_util_tab)
     {
         bool util_was_selected = sidebar_selector->getSelectionValue() == "util";
