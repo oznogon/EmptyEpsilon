@@ -31,182 +31,204 @@ void DamageSystem::damageArea(glm::vec2 position, float blast_range, float min_d
     {
         auto transform = entity.getComponent<sp::Transform>();
         if (!transform) continue;
+
         auto physics = entity.getComponent<sp::Physics>();
         if (!physics) continue;
 
         float dist = glm::length(position - transform->getPosition()) - physics->getSize().x - min_range;
         if (dist < 0) dist = 0;
         if (dist < blast_range - min_range)
-        {
             applyDamage(entity, max_damage - (max_damage - min_damage) * dist / (blast_range - min_range), info);
-        }
     }
 }
 
 void DamageSystem::applyDamage(sp::ecs::Entity entity, float amount, const DamageInfo& info)
 {
     auto shields = entity.getComponent<Shields>();
-    if (shields && shields->active && !shields->entries.empty()) {
-        auto transform = entity.getComponent<sp::Transform>();
-        float angle = 0;
-        if (transform) {
+    if (shields
+        && shields->active
+        && !shields->entries.empty()
+    ) {
+        float angle = 0.0f;
+
+        // If the entity has a Transform, determine the angle of the incoming
+        // damage.
+        if (auto transform = entity.getComponent<sp::Transform>())
+        {
             angle = angleDifference(transform->getRotation(), vec2ToAngle(info.location - transform->getPosition()));
-            if (angle < 0)
-                angle += 360.0f;
+            if (angle < 0) angle += 360.0f;
         }
-        float arc = 360.0f / float(shields->entries.size());
-        int shield_index = int((angle + arc / 2.0f) / arc);
+
+        // Determine the shield segment that takes damage.
+        float arc = 360.0f / static_cast<float>(shields->entries.size());
+        int shield_index = static_cast<int>((angle + arc * 0.5f) / arc);
         shield_index %= shields->entries.size();
         auto& shield = shields->entries[shield_index];
 
-        float frequency_damage_factor = 1.f;
+        // Apply shield damage reduction curve. Beam-to-shield frequency
+        // alignment affects the damage factor, and overpowering the shield
+        // systems exponentially (but slightly) reduces damage to shields.
+        float frequency_damage_factor = 1.0f;
         if (info.type == DamageType::Energy && gameGlobalInfo->use_beam_shield_frequencies)
-        {
             frequency_damage_factor = frequencyVsFrequencyDamageFactor(info.frequency, shields->frequency);
-        }
 
-        //Shield damage reduction curve. Damage reduction gets slightly exponetial effective with power.
-        // This also greatly reduces the ineffectiveness at low power situations.
         float shield_damage_factor = shields->getDamageFactor(shield_index);
-
         float shield_damage = amount * shield_damage_factor * frequency_damage_factor;
         amount -= shield.level;
         shield.level -= shield_damage;
-        if (shield.level < 0)
+
+        // Either clamp shield level or trigger the visual shield hit effect
+        // (and execute the callback on shield damage, if defined).
+        if (shield.level < 0.0f) shield.level = 0.0f;
+        else
         {
-            shield.level = 0.0;
-        } else {
-            shield.hit_effect = 1.0;
-        }
-        if (amount < 0.0f)
-        {
-            amount = 0.0;
+            shield.hit_effect = 1.0f;
+            if (shields->on_taking_damage)
+            {
+                if (info.instigator)
+                    LuaConsole::checkResult(shields->on_taking_damage.call<void>(entity, info.instigator));
+                else
+                    LuaConsole::checkResult(shields->on_taking_damage.call<void>(entity));
+            }
         }
 
-        if (shields->on_taking_damage)
-        {
-            if (info.instigator)
-                LuaConsole::checkResult(shields->on_taking_damage.call<void>(entity, info.instigator));
-            else
-                LuaConsole::checkResult(shields->on_taking_damage.call<void>(entity));
-        }
+        // Clamp the amount.
+        if (amount < 0.0f) amount = 0.0f;
     }
 
+    // If any amount of damage got through the shields, take hull damage.
     if (amount > 0.0f)
     {
         takeHullDamage(entity, amount, info);
-        if (auto dbad = entity.getComponent<DestroyedByAreaDamage>()) {
-            if (dbad->damaged_by_flags & (1 << int(info.type))) {
+
+        // If an entity has the DestroyedByAreaDamage component, it might not
+        // have a hull but should still trigger the destruction effect if the
+        // damage type is compatible.
+        if (auto dbad = entity.getComponent<DestroyedByAreaDamage>())
+        {
+            if (dbad->damaged_by_flags & (1 << static_cast<int>(info.type)))
                 entity.destroy();
-            }
         }
     }
 }
 
 void DamageSystem::takeHullDamage(sp::ecs::Entity entity, float amount, const DamageInfo& info)
 {
+    // If there's no hull, don't bother.
     auto hull = entity.getComponent<Hull>();
-    if (!hull)
-        return;
-    if (!(hull->damaged_by_flags & (1 << int(info.type))))
-        return;
+    if (!hull) return;
+
+    // If flagged as invulnerable to this damage type, don't bother.
+    if (!(hull->damaged_by_flags & (1 << static_cast<int>(info.type)))) return;
 
     // If taking non-EMP damage, light up the hull damage overlay.
     hull->damage_indicator = 1.5f;
 
-    if (gameGlobalInfo->use_system_damage && hull)
+    // If ship system damage is enabled, deal it.
+    if (gameGlobalInfo->use_system_damage)
     {
+        // Damage the targeted ship system relative to the amount of hull
+        // damage dealt. If the target entity has less hull strength, the
+        // targeted system takes more damage.
         if (auto sys = ShipSystem::get(entity, info.system_target))
         {
-            //Target specific system
             float system_damage = (amount / hull->max) * 2.0f;
-            if (info.type == DamageType::Energy)
-                system_damage *= 3.0f;   //Beam weapons do more system damage, as they penetrate the hull easier.
-            sys->health -= system_damage;
-            if (sys->health < -1.0f)
-                sys->health = -1.0f;
 
-            for(int n=0; n<2; n++)
+            // Beam weapons penetrate the hull easier, so they do more system damage.
+            if (info.type == DamageType::Energy) system_damage *= 3.0f;
+
+            sys->health -= system_damage;
+            if (sys->health < -1.0f) sys->health = -1.0f;
+
+            for (int n = 0; n < 2; n++)
             {
                 auto random_system = ShipSystem::Type(irandom(0, ShipSystem::COUNT - 1));
-                //Damage the system compared to the amount of hull damage you would do. If we have less hull strength you get more system damage.
                 float system_damage = (amount / hull->max) * 1.0f;
                 sys = ShipSystem::get(entity, random_system);
-                if (sys) {
+                if (sys)
+                {
                     sys->health -= system_damage;
-                    if (sys->health < -1.0f)
-                        sys->health = -1.0f;
+                    if (sys->health < -1.0f) sys->health = -1.0f;
                 }
             }
 
-            if (info.type == DamageType::Energy)
-                amount *= 0.02f;
-            else
-                amount *= 0.5f;
-        }else{
-            //Damage the system compared to the amount of hull damage you would do. If we have less hull strength you get more system damage.
+            // Pass damage to the hull, but drop the value. If it's targeted
+            // energy damage, reduce the value by 98%; targeting a system means
+            // explicitly not targeting the hull.
+            if (info.type == DamageType::Energy) amount *= 0.02f;
+            else amount *= 0.5f;
+        }
+        // If no system is targeted, damage a random system. Random system
+        // damage is higher than targeted system damage.
+        else
+        {
             float system_damage = (amount / hull->max) * 3.0f;
-            if (info.type == DamageType::Energy)
-                system_damage *= 2.5f;   //Beam weapons do more system damage, as they penetrate the hull easier.
 
+            // Beam weapons penetrate the hull easier, so they do more system damage.
+            if (info.type == DamageType::Energy) system_damage *= 2.5f;
+
+            // Deal the damage to a random system.
             auto random_system = ShipSystem::Type(irandom(0, ShipSystem::COUNT - 1));
             sys = ShipSystem::get(entity, random_system);
-            if (sys) {
+            if (sys)
+            {
                 sys->health -= system_damage;
-                if (sys->health < -1.0f)
-                    sys->health = -1.0f;
+                if (sys->health < -1.0f) sys->health = -1.0f;
             }
         }
     }
 
+    // Draw damage against the hull from the damage amount.
+    // If flagged as indestructible, clamp hull value to a minimum of 1.
     hull->current -= amount;
-    if (hull->current <= 0.0f && !hull->allow_destruction)
-    {
-        hull->current = 1;
-    }
+    if (hull->current <= 0.0f && !hull->allow_destruction) hull->current = 1;
 
+    // If the hull value has dropped to 0 or less, destroy the entity.
     if (hull->current <= 0.0f)
     {
         destroyedByDamage(entity, info);
         return;
     }
 
+    // Otherwise, if a callback's defined for damage, run it.
     if (hull->on_taking_damage)
     {
         if (info.instigator)
-        {
             LuaConsole::checkResult(hull->on_taking_damage.call<void>(entity, info.instigator));
-        } else {
+        else
             LuaConsole::checkResult(hull->on_taking_damage.call<void>(entity));
-        }
     }
 }
 
 void DamageSystem::destroyedByDamage(sp::ecs::Entity entity, const DamageInfo& info)
 {
-    if (auto transform = entity.getComponent<sp::Transform>()) {
-        if (auto physics = entity.getComponent<sp::Physics>()) {
+    // Generate an ExplosionEffect sized to the destroyed entity.
+    if (auto transform = entity.getComponent<sp::Transform>())
+    {
+        if (auto physics = entity.getComponent<sp::Physics>())
+        {
             auto e = sp::ecs::Entity::create();
             auto& ee = e.addComponent<ExplosionEffect>();
-            ee.size = physics->getSize().x * 1.5f;
+            ee.size = std::max(physics->getSize().x, physics->getSize().y) * 1.25f;
             ee.radar = true;
             e.addComponent<sp::Transform>(*transform);
             e.addComponent<RawRadarSignatureInfo>(0.0f, 0.4f, 0.4f);
         }
     }
 
+    // If the damage was caused by another entity, apply rep score and record
+    // kill.
     if (info.instigator)
     {
-        float points = 0;
+        float points = 0.0f;
 
         auto hull = entity.getComponent<Hull>();
-        if (hull)
-            points += hull->max * 0.1f;
+        if (hull) points += hull->max * 0.1f;
 
         auto shields = entity.getComponent<Shields>();
-        if (shields && !shields->entries.empty()) {
-            for(auto& shield : shields->entries)
-                points += shield.max * 0.1f;
+        if (shields && !shields->entries.empty())
+        {
+            for (auto& shield : shields->entries) points += shield.max * 0.1f;
             points /= shields->entries.size();
         }
 
@@ -219,26 +241,22 @@ void DamageSystem::destroyedByDamage(sp::ecs::Entity entity, const DamageInfo& i
         string instigator_name;
         auto cs = info.instigator.getComponent<CallSign>();
         auto tn = info.instigator.getComponent<TypeName>();
-        if (cs && !cs->callsign.empty())
-            instigator_name = cs->callsign;
-        else if (tn && !tn->type_name.empty())
-            instigator_name = tn->type_name;
-        else
-            instigator_name = "entity_" + info.instigator.toString();
+
+        if (cs && !cs->callsign.empty()) instigator_name = cs->callsign;
+        else if (tn && !tn->type_name.empty()) instigator_name = tn->type_name;
+        else instigator_name = "entity_" + info.instigator.toString();
+
         PrometheusMetricsServer::recordKill(instigator_name);
     }
 
     auto hull = entity.getComponent<Hull>();
-    if (hull->on_destruction)
+    if (hull && hull->on_destruction)
     {
         if (info.instigator)
-        {
             LuaConsole::checkResult(hull->on_destruction.call<void>(entity, info.instigator));
-        } else {
-            LuaConsole::checkResult(hull->on_destruction.call<void>(entity));
-        }
+        else LuaConsole::checkResult(hull->on_destruction.call<void>(entity));
     }
 
-    //Finally, destroy the entity.
+    // Finally, destroy the entity.
     entity.destroy();
 }
