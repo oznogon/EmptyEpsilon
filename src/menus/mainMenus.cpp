@@ -223,13 +223,6 @@ CreditsScreen::CreditsScreen()
         "GinjaNinja32\n" +
         "Chris 'csibbitt' Sibbitt\n" +
         "Pithlit\n\n"
-        "<h2>" + tr("Credits", "Music") + "</>\n\n" +
-        "Matthew Pablo\n" +
-        "Alexandr Zhelanov\n" +
-        "Joe Baxter-Webb\n" +
-        "neocrey\n" +
-        "FoxSynergy\n" +
-        "Rafael Krux, Orchestralis.net (CC-BY)\n\n" +
         "<h2>" + tr("Credits", "Models") + "</>\n\n" +
         "Angryfly (turbosquid.com)\n" +
         "MSGDI (https://www.cgtrader.com/3d-models/msgdi)\n" +
@@ -254,11 +247,18 @@ CreditsScreen::CreditsScreen()
         "Amir Arad\n" +
         "Bridge Command (Natalia Bogdanova)\n" +
         "Clockwork Dog (Tom Bull, Sam Lee)\n" +
+        "Dave Kapell\n" +
         "GinjaNinja32\n" +
         "Oznogon\n" +
         "tdelc\n\n" +
-        "<h2>" + tr("Credits", "Additional icons and graphics") + "</>\n\n" +
-        "Oznogon\n\n";
+        "<h2>" + tr("Credits", "Additional artwork") + "</>\n\n" +
+        "Oznogon (GUI icons)\n" +
+        "<h2>" + tr("Credits", "Additional sound effects") + "</>\n\n" +
+        "The Sound Pack Tree (GameAudioGDC bundle)\n" +
+        "Digital Rain Lab (GameAudioGDC bundle)\n" +
+        "<h2>" + tr("Credits", "Music") + "</>\n\n" +
+        "Rafael Krux, Orchestralis.net (CC-BY)\n" +
+        "LonePeakMusic, lonepeakmusic.itch.io\n\n";
 
     // Draw credits
     (new GuiScrollFormattedText(container, "CREDITS", credits_text))

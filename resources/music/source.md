@@ -497,7 +497,7 @@ Song: 01 Ashes From The Previous World
 
 Music provided and produced by LonePeakMusic
 
-- https://lonepeakmusic.itch.io/no-copyright-dark-ambient-music-pack
+- https://lonepeakmusic.itch.io/no-copyright-dark-ambient-music
 
 ## 02 Now Is All I've Got.ogg
 
@@ -505,7 +505,7 @@ Song: 02 Now Is All I've Got
 
 Music provided and produced by LonePeakMusic
 
-- https://lonepeakmusic.itch.io/no-copyright-dark-ambient-music-pack
+- https://lonepeakmusic.itch.io/no-copyright-dark-ambient-music
 
 ## 03 Memento Mori.ogg
 
@@ -513,7 +513,7 @@ Song: 03 Memento Mori
 
 Music provided and produced by LonePeakMusic
 
-- https://lonepeakmusic.itch.io/no-copyright-dark-ambient-music-pack
+- https://lonepeakmusic.itch.io/no-copyright-dark-ambient-music
 
 ## 04 Dust Over The Dead Horizon.ogg
 
@@ -521,7 +521,7 @@ Song: 04 Dust Over The Dead Horizon
 
 Music provided and produced by LonePeakMusic
 
-- https://lonepeakmusic.itch.io/no-copyright-dark-ambient-music-pack
+- https://lonepeakmusic.itch.io/no-copyright-dark-ambient-music
 
 ## 05 Chamber Of Rust.ogg
 
@@ -529,7 +529,7 @@ Song: 05 Chamber Of Rust
 
 Music provided and produced by LonePeakMusic
 
-- https://lonepeakmusic.itch.io/no-copyright-dark-ambient-music-pack
+- https://lonepeakmusic.itch.io/no-copyright-dark-ambient-music
 
 ## 06 Rituals Of The Void.ogg
 
@@ -537,7 +537,7 @@ Song: 06 Rituals Of The Void
 
 Music provided and produced by LonePeakMusic
 
-- https://lonepeakmusic.itch.io/no-copyright-dark-ambient-music-pack
+- https://lonepeakmusic.itch.io/no-copyright-dark-ambient-music
 
 ## LonePeakMusic - 01 Lost Shores Pt.1.ogg
 
@@ -545,7 +545,7 @@ Song: LonePeakMusic - 01 Lost Shores Pt.1
 
 Music provided and produced by LonePeakMusic
 
-- https://lonepeakmusic.itch.io/free-ambient-music-pack
+- https://lonepeakmusic.itch.io/free-ambient-music
 
 ## LonePeakMusic - 02 Lost Shores Pt.2.ogg
 
@@ -553,7 +553,7 @@ Song: LonePeakMusic - 02 Lost Shores Pt.2
 
 Music provided and produced by LonePeakMusic
 
-- https://lonepeakmusic.itch.io/free-ambient-music-pack
+- https://lonepeakmusic.itch.io/free-ambient-music
 
 ## LonePeakMusic - 03 Skyline.ogg
 
@@ -561,7 +561,7 @@ Song: LonePeakMusic - 03 Skyline
 
 Music provided and produced by LonePeakMusic
 
-- https://lonepeakmusic.itch.io/free-ambient-music-pack
+- https://lonepeakmusic.itch.io/free-ambient-music
 
 ## LonePeakMusic - 04 Vanilla Sky -Ambient Sleep Music Version-.ogg
 
@@ -569,7 +569,7 @@ Song: LonePeakMusic - 04 Vanilla Sky -Ambient Sleep Music Version-
 
 Music provided and produced by LonePeakMusic
 
-- https://lonepeakmusic.itch.io/free-ambient-music-pack
+- https://lonepeakmusic.itch.io/free-ambient-music
 
 ## LonePeakMusic - 06 Distant Memories.ogg
 
@@ -577,7 +577,7 @@ Song: LonePeakMusic - 06 Distant Memories
 
 Music provided and produced by LonePeakMusic
 
-- https://lonepeakmusic.itch.io/free-ambient-music-pack
+- https://lonepeakmusic.itch.io/free-ambient-music
 
 ## LonePeakMusic - 07 Fading Away.ogg
 
@@ -585,4 +585,4 @@ Song: LonePeakMusic - 07 Fading Away
 
 Music provided and produced by LonePeakMusic
 
-- https://lonepeakmusic.itch.io/free-ambient-music-pack
+- https://lonepeakmusic.itch.io/free-ambient-music
