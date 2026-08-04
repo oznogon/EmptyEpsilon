@@ -185,33 +185,48 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     box_selection_overlay->getLayout().fill_width = false;
     box_selection_overlay->hide();
 
-    pause_button = new GuiToggleButton(this, "PAUSE_BUTTON", tr("button", "Pause"), [this](bool value) {
-        if (!value) engine->setGameSpeed(game_speed_values[game_time_scale->getSelectionIndex()]);
-        else engine->setGameSpeed(0.0f);
-    });
-    pause_button->setValue(engine->getGameSpeed() == 0.0f)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(150, 50);
+    pause_button = new GuiToggleButton(this, "PAUSE_BUTTON", tr("button", "Pause"),
+        [this](bool value)
+        {
+            if (!value) engine->setGameSpeed(game_speed_values[game_time_scale->getSelectionIndex()]);
+            else engine->setGameSpeed(0.0f);
+        }
+    );
+    pause_button
+        ->setValue(engine->getGameSpeed() == 0.0f)
+        ->setPosition(20.0f, 20.0f, sp::Alignment::TopLeft)
+        ->setSize(150.0f, GuiElement::GuiSizeRow);
     (new GuiTextTooltip(pause_button, "PAUSE_BUTTON_TIP", tr("gm_tooltip", "Toggle pausing the game simulation.")))->setWidth();
 
-    game_time_scale = new GuiSelector(this, "GAME_TIME_SCALE_SELECTOR", [](int index, string value) {
-        engine->setGameSpeed(game_speed_values[index]);
-    });
+    game_time_scale = new GuiSelector(this, "GAME_TIME_SCALE_SELECTOR",
+        [](int index, string value)
+        { engine->setGameSpeed(game_speed_values[index]); }
+    );
     game_time_scale
         ->setOptions({"0.1x", "0.25x", "0.5x", "1x", "2x", "4x", "8x"})
         ->setSelectionIndex(3)
-        ->setPosition(170, 20, sp::Alignment::TopLeft)
-        ->setSize(100, 50);
+        ->setPosition(170.0f, 20.0f, sp::Alignment::TopLeft)
+        ->setSize(100.0f, GuiElement::GuiSizeRow);
     (new GuiTextTooltip(game_time_scale, "GAME_TIME_SCALE_TIP", tr("gm_tooltip", "Set the game simulation speed multiplier.")))->setWidth();
 
-    intercept_comms_button = new GuiToggleButton(this, "INTERCEPT_COMMS_BUTTON", tr("button", "Intercept all comms"), [](bool value) {
-        gameGlobalInfo->intercept_all_comms_to_gm = value;
-    });
-    intercept_comms_button->setValue(gameGlobalInfo->intercept_all_comms_to_gm)->setTextSize(20)->setPosition(300, 20, sp::Alignment::TopLeft)->setSize(200, 25);
+    intercept_comms_button = new GuiToggleButton(this, "INTERCEPT_COMMS_BUTTON", tr("button", "Intercept all comms"),
+        [](bool value)
+        { gameGlobalInfo->intercept_all_comms_to_gm = value; }
+    );
+    intercept_comms_button
+        ->setValue(gameGlobalInfo->intercept_all_comms_to_gm)
+        ->setTextSize(20.0f)
+        ->setPosition(300.0f, 20.0f, sp::Alignment::TopLeft)
+        ->setSize(200.0f, 25.0f);
     (new GuiTextTooltip(intercept_comms_button, "INTERCEPT_COMMS_TIP", tr("gm_tooltip", "Toggle intercepting all player communications.")))->setWidth();
 
-    faction_selector = new GuiSelector(this, "FACTION_SELECTOR", [this](int index, string value) {
-        for (auto obj : targets.getTargets())
-            obj.getOrAddComponent<Faction>().entity = Faction::find(value);
-    });
+    faction_selector = new GuiSelector(this, "FACTION_SELECTOR",
+        [this](int index, string value)
+        {
+            for (auto obj : targets.getTargets())
+                obj.getOrAddComponent<Faction>().entity = Faction::find(value);
+        }
+    );
     faction_selector->setSortByName(true);
     for (auto [entity, info] : sp::ecs::Query<FactionInfo>())
         faction_selector->addEntry(info.locale_name, info.name);
@@ -221,27 +236,37 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         ->setSize(250.0f, GuiElement::GuiSizeRow);
     (new GuiTextTooltip(faction_selector, "FACTION_SELECTOR_TIP", tr("gm_tooltip", "Change the faction of selected objects.")))->setWidth();
 
-    global_message_button = new GuiButton(this, "GLOBAL_MESSAGE_BUTTON", tr("button", "Global message"), [this]() {
-        global_message_entry->show();
-    });
-    global_message_button->setPosition(20, -20, sp::Alignment::BottomLeft)->setSize(250, 50);
+    global_message_button = new GuiButton(this, "GLOBAL_MESSAGE_BUTTON", tr("button", "Global message"),
+        [this]() { global_message_entry->show(); }
+    );
+    global_message_button
+        ->setPosition(20.0f, -20.0f, sp::Alignment::BottomLeft)
+        ->setSize(250.0f, GuiElement::GuiSizeRow);
     (new GuiTextTooltip(global_message_button, "GLOBAL_MESSAGE_TIP", tr("gm_tooltip", "Broadcast a message to all players.")))->setWidth();
 
-    player_ship_selector = new GuiSelector(this, "PLAYER_SHIP_SELECTOR", [this](int index, string value) {
-        auto ship = sp::ecs::Entity::fromString(value);
-        if (ship)
-            target = ship;
-        if (auto transform = target.getComponent<sp::Transform>())
-            main_radar->setViewPosition(transform->getPosition());
-        targets.set(ship);
-    });
-    player_ship_selector->setPosition(270, -20, sp::Alignment::BottomLeft)->setSize(350, 50);
+    player_ship_selector = new GuiSelector(this, "PLAYER_SHIP_SELECTOR",
+        [this](int index, string value)
+        {
+            auto ship = sp::ecs::Entity::fromString(value);
+            if (ship) target = ship;
+
+            if (auto transform = target.getComponent<sp::Transform>())
+                main_radar->setViewPosition(transform->getPosition());
+
+            targets.set(ship);
+        }
+    );
+    player_ship_selector
+        ->setPosition(270.0f, -20.0f, sp::Alignment::BottomLeft)
+        ->setSize(350.0f, GuiElement::GuiSizeRow);
     (new GuiTextTooltip(player_ship_selector, "PLAYER_SHIP_SELECTOR_TIP", tr("gm_tooltip", "Select a player ship to track on the map.")))->setWidth();
 
-    create_button = new GuiButton(this, "CREATE_OBJECT_BUTTON", tr("button", "Create..."), [this]() {
-        object_creation_view->show();
-    });
-    create_button->setPosition(20, -70, sp::Alignment::BottomLeft)->setSize(250, 50);
+    create_button = new GuiButton(this, "CREATE_OBJECT_BUTTON", tr("button", "Create..."),
+        [this]() { object_creation_view->show(); }
+    );
+    create_button
+        ->setPosition(20.0f, -70.0f, sp::Alignment::BottomLeft)
+        ->setSize(250.0f, GuiElement::GuiSizeRow);
     (new GuiTextTooltip(create_button, "CREATE_OBJECT_TIP", tr("gm_tooltip", "Open the object creation menu to spawn new entities.")))->setWidth();
 
     zoom_slider = new GuiRadarZoomSlider(this, "ZOOM_SLIDER", MIN_ZOOM_DISTANCE, MAX_ZOOM_DISTANCE, LONG_RANGE_DISTANCE, main_radar);
@@ -251,39 +276,51 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         ->setPosition(-20.0f, -20.0f, sp::Alignment::BottomRight)
         ->setSize(250.0f, GuiElement::GuiSizeRow);
 
-    copy_scenario_button = new GuiButton(this, "COPY_SCENARIO_BUTTON", tr("button", "Copy scenario"), [this]() {
-        Clipboard::setClipboard(getScriptExport(false));
-    });
+    copy_scenario_button = new GuiButton(this, "COPY_SCENARIO_BUTTON", tr("button", "Copy scenario"),
+        [this]() { Clipboard::setClipboard(getScriptExport(false)); }
+    );
     copy_scenario_button
         ->setTextSize(20.0f)
         ->setPosition(-20.0f, -70.0f, sp::Alignment::BottomRight)
         ->setSize(125.0f, 25.0f);
     (new GuiTextTooltip(copy_scenario_button, "COPY_SCENARIO_TIP", tr("gm_tooltip", "Copy all entities as a Lua script to the clipboard.")))->setWidth();
 
-    copy_selected_button = new GuiButton(this, "COPY_SELECTED_BUTTON", tr("button", "Copy selected"), [this]() {
-        Clipboard::setClipboard(getScriptExport(true));
-    });
+    copy_selected_button = new GuiButton(this, "COPY_SELECTED_BUTTON", tr("button", "Copy selected"),
+        [this]() { Clipboard::setClipboard(getScriptExport(true)); }
+    );
     copy_selected_button
         ->setTextSize(20.0f)
         ->setPosition(-145.0f, -70.0f, sp::Alignment::BottomRight)
         ->setSize(125.0f, 25.0f);
     (new GuiTextTooltip(copy_selected_button, "COPY_SELECTED_TIP", tr("gm_tooltip", "Copy only selected entities as a Lua script to the clipboard.")))->setWidth();
 
-    cancel_action_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", tr("button", "Cancel"), []() {
-        gameGlobalInfo->on_gm_click = nullptr;
-        gameGlobalInfo->on_gm_preview_trace = std::nullopt;
-    });
-    cancel_action_button->setPosition(20, -70, sp::Alignment::BottomLeft)->setSize(250, 50)->hide();
+    cancel_action_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", tr("button", "Cancel"),
+        []()
+        {
+            gameGlobalInfo->on_gm_click = nullptr;
+            gameGlobalInfo->on_gm_preview_trace = std::nullopt;
+        }
+    );
+    cancel_action_button
+        ->setPosition(20.0f, -70.0f, sp::Alignment::BottomLeft)
+        ->setSize(250.0f, GuiElement::GuiSizeRow)
+        ->hide();
     (new GuiTextTooltip(cancel_action_button, "CANCEL_CREATE_TIP", tr("gm_tooltip", "Cancel the current creation action.")))->setWidth();
 
-    tweak_button = new GuiButton(this, "TWEAK_OBJECT", tr("button", "Tweak"), [this]() {
-        for(auto entity : targets.getTargets())
+    tweak_button = new GuiButton(this, "TWEAK_OBJECT", tr("button", "Tweak"),
+        [this]()
         {
-            tweak_dialog->open(entity);
-            break;
+            for (auto entity : targets.getTargets())
+            {
+                tweak_dialog->open(entity);
+                break;
+            }
         }
-    });
-    tweak_button->setPosition(20, -120, sp::Alignment::BottomLeft)->setSize(250, 50)->hide();
+    );
+    tweak_button
+        ->setPosition(20.0f, -120.0f, sp::Alignment::BottomLeft)
+        ->setSize(250.0f, GuiElement::GuiSizeRow)
+        ->hide();
     (new GuiTextTooltip(tweak_button, "TWEAK_OBJECT_TIP", tr("gm_tooltip", "Edit properties of the selected entity.")))->setWidth();
 
     // Database browser button and panel
