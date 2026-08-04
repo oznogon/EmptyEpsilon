@@ -326,20 +326,33 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     // Database browser button and panel
     auto database_browser_panel = new GuiPanel(this, "DATABASE_BROWSER");
     database_browser_panel
-        ->setPosition(300.0f, 100.0f, sp::Alignment::TopLeft)
+        ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
         ->setSize(500.0f, 600.0f)
         ->hide();
 
-    (new GuiLabel(database_browser_panel, "", tr("Database entries")))
-        ->setPosition(0, 0, sp::Alignment::TopCenter)
+    (new GuiButton(database_browser_panel, "", tr("button", "X"),
+        [database_browser_panel]() { database_browser_panel->hide(); }
+    ))
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopRight)
+        ->setSize(GuiElement::GuiSizeRow, GuiElement::GuiSizeRow);
+
+    GuiElement* database_container = new GuiElement(database_browser_panel, "");
+    database_container
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
+    database_container
+        ->setAttribute("padding", "20");
+
+    (new GuiLabel(database_container, "", tr("Database entries")))
+        ->setAlignment(sp::Alignment::TopCenter)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
-    auto db_listbox = new GuiListbox(database_browser_panel, "",
+    auto db_listbox = new GuiListbox(database_container, "",
         [this, database_browser_panel](int index, string value)
         {
-            // Get all database entities
-            auto db_entities = sp::ecs::Query<Database>();
+            // Get all database entities.
             int current = 0;
+            auto db_entities = sp::ecs::Query<Database>();
             for (auto [entity, db] : db_entities)
             {
                 if (current == index)
@@ -354,17 +367,8 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         }
     );
     db_listbox
-        ->setPosition(10.0f, 60.0f, sp::Alignment::TopLeft)
-        ->setSize(480.0f, 460.0f);
-
-    (new GuiButton(database_browser_panel, "", tr("button", "Close"),
-        [database_browser_panel]()
-        {
-            database_browser_panel->hide();
-        }
-    ))
-        ->setPosition(10.0f, -10.0f, sp::Alignment::BottomLeft)
-        ->setSize(200.0f, GuiElement::GuiSizeRow);
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("padding", "0, 20");
 
     (new GuiButton(this, "DATABASE_BROWSER_BTN", tr("button", "Database"),
         [db_listbox, database_browser_panel]()
@@ -396,15 +400,28 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     // Missile weapon data browser button and panel
     auto mwd_browser_panel = new GuiPanel(this, "MISSILE_WEAPON_DATA_BROWSER");
     mwd_browser_panel
-        ->setPosition(300.0f, 100.0f, sp::Alignment::TopLeft)
+        ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
         ->setSize(500.0f, 600.0f)
         ->hide();
 
-    (new GuiLabel(mwd_browser_panel, "", tr("Missile weapon types")))
-        ->setPosition(0, 0, sp::Alignment::TopCenter)
+    (new GuiButton(mwd_browser_panel, "", tr("button", "X"),
+        [mwd_browser_panel]() { mwd_browser_panel->hide(); }
+    ))
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopRight)
+        ->setSize(GuiElement::GuiSizeRow, GuiElement::GuiSizeRow);
+
+    GuiElement* mwd_container = new GuiElement(mwd_browser_panel, "");
+    mwd_container
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
+    mwd_container
+        ->setAttribute("padding", "20");
+
+    (new GuiLabel(mwd_container, "", tr("Missile weapon types")))
+        ->setAlignment(sp::Alignment::Center)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow);
 
-    auto mwd_listbox = new GuiListbox(mwd_browser_panel, "",
+    auto mwd_listbox = new GuiListbox(mwd_container, "",
         [this, mwd_browser_panel](int index, string value)
         {
             auto& registry = MissileWeaponDataRegistry::instance();
@@ -420,17 +437,8 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         }
     );
     mwd_listbox
-        ->setPosition(10.0f, 60.0f, sp::Alignment::TopLeft)
-        ->setSize(380.0f, 460.0f);
-
-    (new GuiButton(mwd_browser_panel, "", tr("button", "Close"),
-        [mwd_browser_panel]()
-        {
-            mwd_browser_panel->hide();
-        }
-    ))
-        ->setPosition(10.0f, -10.0f, sp::Alignment::BottomLeft)
-        ->setSize(200.0f, GuiElement::GuiSizeRow);
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("padding", "0, 20");
 
     (new GuiButton(this, "MISSILE_WEAPON_DATA_BROWSER_BTN", tr("button", "Missile types"),
         [mwd_listbox, mwd_browser_panel]()
@@ -674,6 +682,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
 
     global_message_entry = new GuiGlobalMessageEntryView(this);
     global_message_entry->hide();
+
     object_creation_view = new GuiObjectCreationView(this);
     object_creation_view->hide();
 
