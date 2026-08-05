@@ -38,6 +38,10 @@ void CollisionDamageSystem::collision(sp::ecs::Entity a, sp::ecs::Entity b, floa
     // fails to exceed a threshold.
     if (force < DAMAGE_THRESHOLD) return;
 
+    // If collision damage is disabled, don't deal damage or trigger collision
+    // events.
+    if (gameGlobalInfo->collision_damage_factor <= 0.0f) return;
+
     // Don't trigger unless both colliding entities have a Hull.
     auto hull_a = a.getComponent<Hull>();
     auto hull_b = b.getComponent<Hull>();
