@@ -10,7 +10,9 @@ namespace sp::io {
     template<typename T> static inline DataBuffer& operator >> (DataBuffer& packet, std::unordered_set<T>& s) {
         uint32_t size = 0;
         packet >> size;
+        size = uint32_t(sp::io::boundReplicatedVectorSize(size, packet.available()));
         s.clear();
+        s.reserve(size);
         for(size_t n=0; n<size; n++) {
             T v;
             packet >> v;

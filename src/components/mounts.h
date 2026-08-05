@@ -6,6 +6,7 @@
 #include "crewPosition.h"
 #include "script/callback.h"
 #include "io/dataBuffer.h"
+#include "multiplayer/basic.h"
 #include "vectorUtils.h"
 #include <glm/vec3.hpp>
 #include <glm/gtc/type_precision.hpp>
@@ -168,7 +169,9 @@ namespace sp::io {
     {
         uint32_t size = 0;
         packet >> size;
+        size = uint32_t(sp::io::boundReplicatedVectorSize(size, packet.available()));
         v.clear();
+        v.reserve(size);
         for (uint32_t n = 0; n < size; n++)
         {
             v.emplace_back();

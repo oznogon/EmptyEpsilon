@@ -9,8 +9,30 @@
 
 
 namespace sp::io {
+    // Upper bound on element counts announced by a replicated vector's size prefix.
+    // Without it, a corrupt or hostile packet can announce a size near UINT32_MAX and
+    // force a multi-gigabyte resize() before a single element is actually read.
+    constexpr size_t max_replicated_vector_size = 1'000'000;
+
+    // Clamp a network-announced element count before allocating for it. The clamp is
+    // bounded both by max_replicated_vector_size and by the number of bytes actually
+    // remaining in the packet (every element encodes as at least one byte), so a
+    // hostile packet cannot force an allocation larger than the data it sent.
+    static inline size_t boundReplicatedVectorSize(size_t announced, size_t available)
+    {
+        size_t max = max_replicated_vector_size;
+        if (available < max)
+            max = available;
+        if (announced > max)
+        {
+            LOG(Warning, "Replicated vector size", announced, "exceeds maximum", max, "- clamping");
+            announced = max;
+        }
+        return announced;
+    }
+
     template<typename T> static inline DataBuffer& operator << (DataBuffer& packet, const std::vector<T>& v) { packet << uint32_t(v.size()); for(size_t n=0; n<v.size(); n++) packet << v[n]; return packet;} \
-    template<typename T> static inline DataBuffer& operator >> (DataBuffer& packet, std::vector<T>& v) { uint32_t size = 0; packet >> size; v.resize(size); for(size_t n=0; n<v.size(); n++) packet >> v[n]; return packet; }
+    template<typename T> static inline DataBuffer& operator >> (DataBuffer& packet, std::vector<T>& v) { uint32_t size = 0; packet >> size; v.resize(boundReplicatedVectorSize(size, packet.available())); for(size_t n=0; n<v.size(); n++) packet >> v[n]; return packet; }
 }
 
 namespace sp::multiplayer
@@ -129,7 +151,7 @@ enum class BasicReplicationRequest {
     switch(BRR) { \
     case BasicReplicationRequest::SendAll: flags |= flag; tmp << target.FIELD.size(); break; \
     case BasicReplicationRequest::Update: if (target.FIELD.size() != backup->FIELD.size()) { flags |= flag; tmp << target.FIELD.size(); backup->FIELD.resize(target.FIELD.size()); } break; \
-    case BasicReplicationRequest::Receive: if (flags & flag) { size_t size; packet >> size; target.FIELD.resize(size); } break; \
+    case BasicReplicationRequest::Receive: if (flags & flag) { size_t size; packet >> size; target.FIELD.resize(sp::io::boundReplicatedVectorSize(size, packet.available())); } break; \
     } \
     flag <<= 1; \
     for(size_t idx=0; (BRR==BasicReplicationRequest::Receive) || idx<target.FIELD.size(); idx++) { \
