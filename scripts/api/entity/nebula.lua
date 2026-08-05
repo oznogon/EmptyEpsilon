@@ -35,7 +35,7 @@ function Nebula()
         skybox_fade_distance = 2000,
         fog_color = {0.08, 0.03, 0.10},
         cloud_density = 1.0,
-        visibility_distance = 1000.0,
+        visibility_distance = 5000.0,
         seed = irandom(1, 2147483647),
     }
     return e

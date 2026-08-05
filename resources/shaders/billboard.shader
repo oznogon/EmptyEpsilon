@@ -24,6 +24,7 @@ uniform sampler2D u_textureMap;
 uniform vec3 u_fogColor;
 uniform float u_fogDistance;
 uniform float u_lightIntensity;
+uniform vec2 u_proximityFade;
 
 varying vec2 v_texcoords;
 varying float v_distance;
@@ -33,7 +34,11 @@ void main()
     vec4 tex = texture2D(u_textureMap, v_texcoords.st);
     if (tex.a < 0.02)
         discard;
-    float near_fade = clamp(v_distance / 400.0, 0.0, 1.0);
+    float near_fade;
+    if (u_proximityFade.y > 0.0)
+        near_fade = clamp((v_distance - u_proximityFade.x) / max(u_proximityFade.y - u_proximityFade.x, 1.0), 0.0, 1.0);
+    else
+        near_fade = clamp(v_distance / 400.0, 0.0, 1.0);
     float alpha = tex.a * u_color.g * near_fade;
     vec3 light_color = u_lightIntensity * vec3(1.0, 1.0, 1.0);
     vec3 final_rgb = tex.rgb * (u_color.r + u_lightIntensity * 0.5) * (tex.a * near_fade);

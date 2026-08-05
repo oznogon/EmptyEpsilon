@@ -20,6 +20,8 @@ class GuiViewport3D : public GuiElement
     float base_fov; // set by main_screen_camera_fov preference on init
     float fov_modifier = 0.0f;
 
+protected:
+
     enum class Uniforms : uint8_t
     {
         Projection = 0,

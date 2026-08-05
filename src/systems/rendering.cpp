@@ -360,6 +360,11 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
 
     ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Billboard);
 
+    // Fade billboards out as the visibility origin approaches them: 0 opacity
+    // within 10% of visibility distance, ramping to full opacity by 33%.
+    if (auto loc = shader.get().get()->getUniformLocation("u_proximityFade"); loc != -1)
+        glUniform2f(loc, nr.visibility_distance * 0.1f, nr.visibility_distance * 0.33f);
+
     // Dynamic lights for nebula cloud illumination.
     // Only lights whose source is inside the nebula radius affect the clouds.
     const auto& lights = DynamicLightManager::getLights();
@@ -704,6 +709,10 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
     }
 
     shader = ShaderRegistry::ScopedShader(ShaderRegistry::Shaders::Billboard);
+    // Don't fade nearby billboard visibility. To change this behavior, set
+    // min/max fade distance range values in u_proximityFade.
+    if (auto loc = shader.get().get()->getUniformLocation("u_proximityFade"); loc != -1)
+        glUniform2f(loc, 0.0f, 0.0f);
     glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
 
     gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
@@ -764,19 +773,23 @@ void BillboardRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
         glm::vec2 texcoords;
     };
     static std::array<VertexAndTexCoords, 4> quad{
-        VertexAndTexCoords{glm::vec3{}, {0.f, 1.f}},
-        VertexAndTexCoords{glm::vec3{}, {1.f, 1.f}},
-        VertexAndTexCoords{glm::vec3{}, {1.f, 0.f}},
-        VertexAndTexCoords{glm::vec3{}, {0.f, 0.f}}
+        VertexAndTexCoords{glm::vec3{}, {0.0f, 1.0f}},
+        VertexAndTexCoords{glm::vec3{}, {1.0f, 1.0f}},
+        VertexAndTexCoords{glm::vec3{}, {1.0f, 0.0f}},
+        VertexAndTexCoords{glm::vec3{}, {0.0f, 0.0f}}
     };
 
     textureManager.getTexture(bbr.texture)->bind();
     ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Billboard);
+    // Don't fade nearby billboard visibility. To change this behavior, set
+    // min/max fade distance range values in u_proximityFade.
+    if (auto loc = shader.get().get()->getUniformLocation("u_proximityFade"); loc != -1)
+        glUniform2f(loc, 0.0f, 0.0f);
 
     auto position = transform.getPosition();
     auto rotation = transform.getRotation();
     auto model_matrix = glm::translate(glm::identity<glm::mat4>(), glm::vec3{ position.x, position.y, 0.f });
-    model_matrix = glm::rotate(model_matrix, glm::radians(rotation), glm::vec3{ 0.f, 0.f, 1.f });
+    model_matrix = glm::rotate(model_matrix, glm::radians(rotation), glm::vec3{0.0f, 0.0f, 1.f });
 
     glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
     glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), 1.f, 1.f, 1.f, bbr.size);

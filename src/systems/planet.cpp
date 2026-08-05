@@ -212,6 +212,10 @@ void PlanetTransparentRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& t
         };
 
         ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Billboard);
+        // Don't fade nearby billboard visibility. To change this behavior, set
+        // min/max fade distance range values in u_proximityFade.
+        if (auto loc = shader.get().get()->getUniformLocation("u_proximityFade"); loc != -1)
+            glUniform2f(loc, 0.0f, 0.0f);
 
         textureManager.getTexture(pr.atmosphere_texture)->bind();
         glm::vec4 color(pr.atmosphere_color, pr.atmosphere_size * 2.0f);

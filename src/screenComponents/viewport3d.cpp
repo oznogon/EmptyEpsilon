@@ -662,6 +662,10 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     if (target_comp && target_comp->entity)
     {
         ShaderRegistry::ScopedShader billboard(ShaderRegistry::Shaders::Billboard);
+        // Don't fade nearby billboard visibility. To change this behavior, set
+        // min/max fade distance range values in u_proximityFade.
+        if (auto loc = billboard.get().get()->getUniformLocation("u_proximityFade"); loc != -1)
+            glUniform2f(loc, 0.0f, 0.0f);
 
         glDisable(GL_DEPTH_TEST);
         glm::mat4 model_matrix = glm::identity<glm::mat4>();
