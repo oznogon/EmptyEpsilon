@@ -5513,9 +5513,9 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
             hide();
         }
     ))
-        ->setTextSize(20.0f)
+        ->setTextSize(30.0f)
         ->setPosition(10.0f, -20.0f, sp::Alignment::TopRight)
-        ->setSize(30.0f, 30.0f);
+        ->setSize(GuiElement::GuiSizeRow, GuiElement::GuiSizeRow);
 }
 
 void GuiEntityTweak::open(sp::ecs::Entity e, string select_component)
