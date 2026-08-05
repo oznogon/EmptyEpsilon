@@ -7,32 +7,46 @@
 #include <cstdint>
 #include <limits>
 
+namespace sp::io
+{
+// Clamp element counts announced by a replicated vector's size prefix, to
+// prevent unintentional or hostile allocations larger than the replicated data.
+constexpr size_t MAX_REPLICATED_VECTOR_SIZE = 1000000;
 
-namespace sp::io {
-    // Upper bound on element counts announced by a replicated vector's size prefix.
-    // Without it, a corrupt or hostile packet can announce a size near UINT32_MAX and
-    // force a multi-gigabyte resize() before a single element is actually read.
-    constexpr size_t max_replicated_vector_size = 1'000'000;
-
-    // Clamp a network-announced element count before allocating for it. The clamp is
-    // bounded both by max_replicated_vector_size and by the number of bytes actually
-    // remaining in the packet (every element encodes as at least one byte), so a
-    // hostile packet cannot force an allocation larger than the data it sent.
-    static inline size_t boundReplicatedVectorSize(size_t announced, size_t available)
+static inline size_t boundReplicatedVectorSize(size_t announced, size_t available)
+{
+    size_t max = MAX_REPLICATED_VECTOR_SIZE;
+    if (available < max) max = available;
+    if (announced > max)
     {
-        size_t max = max_replicated_vector_size;
-        if (available < max)
-            max = available;
-        if (announced > max)
-        {
-            LOG(Warning, "Replicated vector size", announced, "exceeds maximum", max, "- clamping");
-            announced = max;
-        }
-        return announced;
+        LOG(Warning, "Replicated vector size ", announced, " exceeds maximum of ", max, " and was clamped.");
+        announced = max;
     }
 
-    template<typename T> static inline DataBuffer& operator << (DataBuffer& packet, const std::vector<T>& v) { packet << uint32_t(v.size()); for(size_t n=0; n<v.size(); n++) packet << v[n]; return packet;} \
-    template<typename T> static inline DataBuffer& operator >> (DataBuffer& packet, std::vector<T>& v) { uint32_t size = 0; packet >> size; v.resize(boundReplicatedVectorSize(size, packet.available())); for(size_t n=0; n<v.size(); n++) packet >> v[n]; return packet; }
+    return announced;
+}
+
+template<typename T>
+static inline DataBuffer& operator << (DataBuffer& packet, const std::vector<T>& v)
+{
+    packet << static_cast<uint32_t>(v.size());
+
+    for (size_t n = 0; n < v.size(); n++) packet << v[n];
+
+    return packet;
+}
+
+template<typename T>
+static inline DataBuffer& operator >> (DataBuffer& packet, std::vector<T>& v)
+{
+    uint32_t size = 0;
+    packet >> size;
+    v.resize(boundReplicatedVectorSize(size, packet.available()));
+
+    for (size_t n = 0; n < v.size(); n++) packet >> v[n];
+
+    return packet;
+}
 }
 
 namespace sp::multiplayer

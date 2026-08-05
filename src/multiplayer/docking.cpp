@@ -1,27 +1,35 @@
 #include "multiplayer/docking.h"
 #include "multiplayer.h"
 
-namespace sp::io {
-    template<typename T> static inline DataBuffer& operator << (DataBuffer& packet, const std::unordered_set<T>& s) {
-        packet << uint32_t(s.size());
-        for(const auto& v : s) packet << v;
-        return packet;
-    }
-    template<typename T> static inline DataBuffer& operator >> (DataBuffer& packet, std::unordered_set<T>& s) {
-        uint32_t size = 0;
-        packet >> size;
-        size = uint32_t(sp::io::boundReplicatedVectorSize(size, packet.available()));
-        s.clear();
-        s.reserve(size);
-        for(size_t n=0; n<size; n++) {
-            T v;
-            packet >> v;
-            s.insert(v);
-        }
-        return packet;
-    }
+namespace sp::io
+{
+template<typename T> static inline DataBuffer& operator << (DataBuffer& packet, const std::unordered_set<T>& s)
+{
+    packet << static_cast<uint32_t>(s.size());
+
+    for (const auto& v : s) packet << v;
+
+    return packet;
 }
 
+template<typename T> static inline DataBuffer& operator >> (DataBuffer& packet, std::unordered_set<T>& s)
+{
+    uint32_t size = 0;
+    packet >> size;
+    size = static_cast<uint32_t>(sp::io::boundReplicatedVectorSize(size, packet.available()));
+    s.clear();
+    s.reserve(size);
+
+    for (size_t n = 0; n < size; n++)
+    {
+        T v;
+        packet >> v;
+        s.insert(v);
+    }
+
+    return packet;
+}
+}
 
 BASIC_REPLICATION_IMPL(DockingBayReplication, DockingBay)
     REPLICATE_VECTOR_IF_DIRTY(external_dock_classes, external_dock_classes_dirty);
