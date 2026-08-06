@@ -3,7 +3,6 @@
 #include "ecs/system.h"
 #include "systems/collision.h"
 
-
 class PickupSystem : public sp::ecs::System, public sp::CollisionHandler
 {
 public:

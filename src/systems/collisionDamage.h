@@ -1,11 +1,9 @@
 #pragma once
 
-#include <unordered_map>
-
 #include "ecs/entity.h"
 #include "ecs/system.h"
 #include "systems/collision.h"
-
+#include <unordered_map>
 
 class CollisionDamageSystem : public sp::ecs::System, public sp::CollisionHandler
 {

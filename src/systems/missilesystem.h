@@ -1,12 +1,13 @@
 #pragma once
 
 #include "ecs/system.h"
+
 #include "components/missile.h"
 #include "components/missiletubes.h"
 #include "components/mounts.h"
+
 #include "systems/collision.h"
 #include "systems/radar.h"
-
 
 class MissileSystem
 : public sp::ecs::System
@@ -26,7 +27,6 @@ public:
     static void startUnload(sp::ecs::Entity source, Mount& tube);
     static void fire(sp::ecs::Entity source, Mount& tube, float target_angle, sp::ecs::Entity target);
     static float calculateFiringSolution(sp::ecs::Entity source, const Mount& tube, sp::ecs::Entity target);
-
 private:
     static void explode(sp::ecs::Entity source, sp::ecs::Entity target, ExplodeOnTouch& eot);
     static void spawnProjectile(sp::ecs::Entity source, Mount& tube, float angle, sp::ecs::Entity target);
