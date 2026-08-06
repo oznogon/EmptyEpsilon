@@ -1,22 +1,23 @@
 #include "systems/docking.h"
-#include "components/ai.h"
-#include "components/coolant.h"
-#include "components/dockingbaysystem.h"
-#include "components/collision.h"
-#include "components/impulse.h"
-#include "components/maneuveringthrusters.h"
-#include "components/pickup.h"
-#include "components/reactor.h"
-#include "components/hull.h"
-#include "components/warpdrive.h"
-#include "components/jumpdrive.h"
-#include "components/missiletubes.h"
-#include "components/probe.h"
-#include "components/reactor.h"
 #include "ecs/query.h"
 #include "logging.h"
 #include "multiplayer_server.h"
 #include "vectorUtils.h"
+
+#include "components/ai.h"
+#include "components/collision.h"
+#include "components/coolant.h"
+#include "components/dockingbaysystem.h"
+#include "components/hull.h"
+#include "components/impulse.h"
+#include "components/jumpdrive.h"
+#include "components/maneuveringthrusters.h"
+#include "components/missiletubes.h"
+#include "components/pickup.h"
+#include "components/probe.h"
+#include "components/reactor.h"
+#include "components/reactor.h"
+#include "components/warpdrive.h"
 
 // Compute the angle a docking ship should face so that reversing moves it
 // toward the nearest edge of the target station.
@@ -24,8 +25,7 @@ static float dockingApproachAngle(sp::ecs::Entity ship, sp::ecs::Entity station)
 {
     auto ship_transform = ship.getComponent<sp::Transform>();
     auto station_transform = station.getComponent<sp::Transform>();
-    if (!ship_transform || !station_transform)
-        return 0.0f;
+    if (!ship_transform || !station_transform) return 0.0f;
 
     return vec2ToAngle(ship_transform->getPosition() - station_transform->getPosition());
 }
@@ -59,7 +59,7 @@ void DockingSystem::update(float delta)
                 if (auto engine = entity.getComponent<ImpulseEngine>())
                 {
                     // If aligned to dock, full reverse. Otherwise, full stop.
-                    if (thrusters && fabs(angleDifference(thrusters->target, transform->getRotation())) < 25.0f)
+                    if (thrusters && fabs(angleDifference(thrusters->target, transform->getRotation())) < 10.0f)
                         engine->request = -1.0f;
                     else engine->request = 0.0f;
                 }
@@ -701,20 +701,26 @@ bool DockingSystem::canStartDocking(sp::ecs::Entity entity)
 void DockingSystem::collision(sp::ecs::Entity carried, sp::ecs::Entity carrier, float force)
 {
     auto port = carried.getComponent<DockingPort>();
-    if (port && port->state == DockingPort::State::Docking && port->target == carrier)
-    {
+    if (port
+        && port->state == DockingPort::State::Docking
+        && port->target == carrier
+    ) {
         auto position = carried.getComponent<sp::Transform>();
         auto other_position = carrier.getComponent<sp::Transform>();
+        auto thrusters = carried.getComponent<ManeuveringThrusters>();
 
-        if (position && other_position)
-        {
+        if (position
+            && other_position
+            && thrusters
+            && fabs(angleDifference(thrusters->target, position->getRotation())) < 10.0f
+        ) {
             port->state = DockingPort::State::Docked;
             port->docked_offset = rotateVec2(
                 position->getPosition() - other_position->getPosition(),
                 -other_position->getRotation()
             );
-            float length = glm::length(port->docked_offset);
 
+            float length = glm::length(port->docked_offset);
             if (length > 0.0f)
                 port->docked_offset = port->docked_offset / length * (length + 2.0f);
 
