@@ -34,8 +34,8 @@ void CollisionDamageSystem::collision(sp::ecs::Entity a, sp::ecs::Entity b, floa
     // Deal damage only on the server.
     if (!game_server.isAlive()) return;
 
-    // Ignore damage and don't trigger a collision event if collision force
-    // fails to exceed a threshold.
+    // Ignore zero-force collisions (sensor overlaps and sustained contact data).
+    // Only hit events carry non-zero force.
     if (force < DAMAGE_THRESHOLD) return;
 
     // If collision damage is disabled, don't deal damage or trigger collision
@@ -58,9 +58,8 @@ void CollisionDamageSystem::collision(sp::ecs::Entity a, sp::ecs::Entity b, floa
     if (it != last_collision_time.end() && now - it->second < COOLDOWN_TIME) return;
     last_collision_time[key] = now;
 
-    // Apply only the damage that exceeds the damage threshold, scaled by the
-    // collision damage factor setting.
-    float damage = (force - DAMAGE_THRESHOLD) * gameGlobalInfo->collision_damage_factor;
+    // Scale damage by the collision damage factor setting.
+    const float damage = force * gameGlobalInfo->collision_damage_factor;
 
     // Use the entities' transforms to damage the shield segment that covers
     // the collision point.

@@ -14,7 +14,10 @@ public:
     void collision(sp::ecs::Entity a, sp::ecs::Entity b, float force) override;
 
 private:
-    static constexpr float DAMAGE_THRESHOLD = 1000.0f;
+    // Box2D hit events fire when the approach speed exceeds the world's
+    // hitEventThreshold produces a force of at least 1.0 * BOX2D_SCALE = 20.
+    // Sensor overlaps and contact data always report force 0.
+    static constexpr float DAMAGE_THRESHOLD = 1.0f;
     static constexpr float COOLDOWN_TIME = 1.0f;
 
     float last_cleanup = 0.0f;
