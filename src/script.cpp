@@ -2708,12 +2708,12 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// float getScenarioTime()
     /// Returns the elapsed time of the scenario, in seconds.
     /// This timer stops when the game is paused.
-    /// Example: getScenarioTime() -- after two minutes, returns 120.0
+    /// Example: getScenarioTime() -- after 1 minute of the game being paused and 2 minutes of the game running, returns 120.0 (2 minutes)
     env.setGlobal("getScenarioTime", &luaGetScenarioTime);
     /// float getWallTime()
     /// Returns the elapsed wall time since scenario start, in seconds.
     /// This timer does *not* stop when the game is paused.
-    /// Example: getWallTime() -- after one minute of the game being paused and two minutes of the game running, returns 180.0
+    /// Example: getWallTime() -- after 1 minute of the game being paused and 2 minutes of the game running, returns 180.0 (3 minutes)
     env.setGlobal("getWallTime", &luaGetWallTime);
 
     /// std::vector<sp::ecs::Entity> getAllObjects()
