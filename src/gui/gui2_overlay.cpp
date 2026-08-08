@@ -13,7 +13,7 @@ void GuiOverlay::onDraw(sp::RenderTarget& renderer)
 {
     if (color.a > 0)
     {
-        switch(texture_mode)
+        switch (texture_mode)
         {
         case TM_None:
             renderer.fillRect(rect, color);
@@ -33,7 +33,7 @@ GuiOverlay* GuiOverlay::setColor(glm::u8vec4 color)
 
 GuiOverlay* GuiOverlay::setAlpha(int alpha)
 {
-    color.a = std::max(0, std::min(255, alpha));
+    color.a = std::clamp(alpha, 0, 255);
     return this;
 }
 
@@ -46,7 +46,7 @@ GuiOverlay* GuiOverlay::setTextureTiled(string texture)
 
 GuiOverlay* GuiOverlay::setTextureTiledThemed(string theme_element, GuiElement::State state)
 {
-    this->texture = GuiTheme::getCurrentTheme()->getStyle(theme_element)->get(state).texture;
+    this->texture = GuiTheme::getImage(theme_element, state);
     this->texture_mode = TM_Tiled;
     return this;
 }
