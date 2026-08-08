@@ -114,6 +114,7 @@ void AISystem::update(float delta)
             next_heavy_index = (next_heavy_index + 1) % ai_list.size();
         }
     }
+
 #ifdef DEBUG
     float heavy_time = sw.restart();
     total_light_time += light_time;

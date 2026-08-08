@@ -579,17 +579,10 @@ void PathPlanner::planAsync(float my_radius, glm::vec2 start, glm::vec2 end, sp:
         return;
     }
 
-    // If we don't have a route yet, compute one synchronously so the AI
-    // starts with a proper obstacle-avoiding path. Async is only used for
-    // re-planning when an existing route becomes stale.
-    if (route.empty())
-    {
-        pending_async_job = false;
-        plan(my_radius, start, end, exclude_entity);
-        return;
-    }
+    // Compute the initial path on the worker thread.
+    if (route.empty()) pending_async_job = false;
 
-    // Re-planning: submit an async job and keep the existing route.
+    // Submit an async job and keep the existing route.
     PathJob job;
     job.entity_id = exclude_entity ? exclude_entity.getIndex() : 0;
     job.my_radius = my_radius;
@@ -613,10 +606,8 @@ void PathPlanner::planAsync(float my_radius, glm::vec2 start, glm::vec2 end, sp:
 
 bool PathPlanner::tryCollectResult()
 {
-    if (!pending_async_job)
-        return false;
-    if (!PathWorker::instance)
-        return false;
+    if (!pending_async_job) return false;
+    if (!PathWorker::instance) return false;
 
     PathResult result = PathWorker::instance->collect(async_entity_id);
     if (result.entity_id == async_entity_id && !result.route.empty())
@@ -625,5 +616,6 @@ bool PathPlanner::tryCollectResult()
         pending_async_job = false;
         return true;
     }
+
     return false;
 }

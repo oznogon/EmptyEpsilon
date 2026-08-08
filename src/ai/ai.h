@@ -1,10 +1,13 @@
 #pragma once
 
 #include "nonCopyable.h"
+#include "random.h"
 #include "graphics/renderTarget.h"
-#include "systems/pathfinding.h"
+
 #include "components/missiletubes.h"
 #include "components/mounts.h"
+
+#include "systems/pathfinding.h"
 
 // Base for all ship AIs. This base class handles basic AI which just follows
 // orders straight on and attacks head on. ShipAI objects are created only on
@@ -34,8 +37,10 @@ protected:
     EWeaponDirection weapon_direction = EWeaponDirection::Front;
     int best_missile_type = 0;
 
-    float update_target_delay = 0.0f;
-    float pathfind_cooldown = 0.0f;
+    // Stagger delays to avoid thundering-herd issues.
+    float update_target_delay = random(0.0f, 0.5f);
+    float pathfind_cooldown = random(0.0f, 1.0f);
+
     bool had_target_last_frame = false;
 
     // When false, flyTowards/flyFormation skip path re-planning even if
@@ -69,8 +74,10 @@ public:
     // so the AI doesn't continue flying toward a stale destination.
     void clearPath() { pathPlanner.clear(); }
 
-    // Force an immediate target re-evaluation on the next runHeavy call.
-    void resetTargetDelay() { update_target_delay = 0.0f; }
+    // Force a target re-evaluation on the next runHeavy call after a brief
+    // delay. The delay mitigates thundering-herd issues when many entities
+    // re-evaluate at once.
+    void resetTargetDelay() { update_target_delay = random(0.0f, 0.33f); }
 
     // Visualize AI behaviors on the GM screen.
     virtual void drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 draw_position, float scale);
