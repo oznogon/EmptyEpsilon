@@ -291,7 +291,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
             if (insidePolygon(zone.outline, pos))
             {
                 factor = zone.skybox_fade_distance <= 0.0f
-                    ? factor = 1.0f
+                    ? 1.0f
                     : std::clamp(distanceToEdge(zone.outline, pos) / zone.skybox_fade_distance, 0.0f, 1.0f);
             }
 
@@ -315,7 +315,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
             {
                 float factor = info.skybox_fade_distance <= 0.0f
                     ? 1.0f
-                    : factor = std::clamp((info.radius - dist) / info.skybox_fade_distance, 0.0f, 1.0f);
+                    : std::clamp((info.radius - dist) / info.skybox_fade_distance, 0.0f, 1.0f);
 
                 if (factor > best_skybox_depth)
                 {
