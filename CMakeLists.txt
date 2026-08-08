@@ -794,6 +794,14 @@ if(WIN32 AND WITH_SSL)
     endif()
 endif()
 
+# Copy the Steam API dylib next to the built binary so Steam builds run
+# from the build tree without a Steam SDK install.
+if(STEAMSDK AND APPLE)
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different "${STEAMSDK}/redistributable_bin/osx/libsteam_api.dylib" "$<TARGET_FILE_DIR:${PROJECT_NAME}>/"
+    )
+endif()
+
 target_compile_definitions(${PROJECT_NAME}
     PUBLIC
         # Set RESOURCE_BASE_DIR on Unix so the built binary is able to find resources
@@ -843,8 +851,17 @@ include(InstallRequiredSystemLibraries)
 
 set(EE_RESOURCES resources scripts packs)
 if(WIN32 OR STEAMSDK)
-    install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION .)
-    install(DIRECTORY ${EE_RESOURCES} DESTINATION .)
+    # Steam builds on macOS are app bundles. The bundle target itself is
+    # installed by the APPLE block. Resources and the Steam API dylib are
+    # installed into the bundle here.
+    if(APPLE)
+      install(FILES logo.icns DESTINATION "$<TARGET_BUNDLE_CONTENT_DIR:${PROJECT_NAME}>/Resources" RENAME "${PROJECT_NAME}.icns")
+      install(DIRECTORY ${EE_RESOURCES} DESTINATION "$<TARGET_BUNDLE_CONTENT_DIR:${PROJECT_NAME}>/Resources")
+      install(FILES "${STEAMSDK}/redistributable_bin/osx/libsteam_api.dylib" DESTINATION "$<TARGET_BUNDLE_CONTENT_DIR:${PROJECT_NAME}>/MacOS")
+    else()
+      install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION .)
+      install(DIRECTORY ${EE_RESOURCES} DESTINATION .)
+    endif()
 
     if(MSVC)
       # Not all configuration emit a pdb (ie Release), make this optional.

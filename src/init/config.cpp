@@ -9,6 +9,7 @@
 #if STEAMSDK
 #include "steam/steam_api.h"
 #include "steamrichpresence.h"
+#include "engine.h"
 #endif
 
 
@@ -20,6 +21,9 @@ string initConfiguration(int argc, char** argv)
     else if (getenv("HOME"))
         configuration_path = string(getenv("HOME")) + "/.emptyepsilon";
 #ifdef STEAMSDK
+    // The Steam API must be initialized before any Steam interface is used.
+    LOG(Info, "[config] Initializing Steam API.");
+    initSteamAPI();
     {
         char path_buffer[1024];
         if (SteamUser()->GetUserDataFolder(path_buffer, sizeof(path_buffer)))

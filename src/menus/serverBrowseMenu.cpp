@@ -46,6 +46,9 @@ ServerBrowserMenu::ServerBrowserMenu(std::optional<GameClient::DisconnectReason>
     scanner = new ServerScanner(VERSION_NUMBER);
     scanner->scanLocalNetwork();
     scanner->scanMasterServer(PreferencesManager::get("registry_list_url", "http://daid.eu/ee/list.php"));
+#ifdef STEAMSDK
+    scanner->scanSteamFriends();
+#endif
 
     // Draw background elements.
     new GuiOverlay(this, "", GuiTheme::getColor("background"));
@@ -123,7 +126,9 @@ ServerBrowserMenu::ServerBrowserMenu(std::optional<GameClient::DisconnectReason>
             else
             {
                 selected_server = server_list[value.toInt()];
-                manual_ip->setText(selected_server.value().address.getHumanReadable()[0]);
+                if (selected_server.value().type != ServerScanner::ServerType::SteamFriend
+                    && !selected_server.value().address.getHumanReadable().empty())
+                    manual_ip->setText(selected_server.value().address.getHumanReadable()[0]);
             }
         }
     );
@@ -136,25 +141,35 @@ ServerBrowserMenu::ServerBrowserMenu(std::optional<GameClient::DisconnectReason>
             // New server found
             [this](const ServerScanner::ServerInfo& info)
             {
-                if (info.address.getHumanReadable().empty()) return;
+                // Steam friends have no address; only skip servers that lack
+                // both an address and a Steam ID.
+                if (info.type != ServerScanner::ServerType::SteamFriend
+                    && info.address.getHumanReadable().empty())
+                    return;
 
                 server_list.push_back(info);
                 updateServerList();
 
-                if (manual_ip->getText() == "")
+                if (manual_ip->getText() == ""
+                    && !info.address.getHumanReadable().empty())
                     manual_ip->setText(info.address.getHumanReadable()[0]);
             },
             // Server removed from list
             [this](const ServerScanner::ServerInfo& info)
             {
-                if (info.address.getHumanReadable().empty()) return;
+                if (info.type != ServerScanner::ServerType::SteamFriend
+                    && info.address.getHumanReadable().empty())
+                    return;
 
                 server_list.erase(std::remove_if(
                     server_list.begin(),
                     server_list.end(),
                     [&info](const ServerScanner::ServerInfo& entry)
                     {
-                        return info.type == entry.type && info.address == entry.address && info.port == entry.port;
+                        return info.type == entry.type
+                            && info.steam_id == entry.steam_id
+                            && info.address == entry.address
+                            && info.port == entry.port;
                     }
                 ), server_list.end());
             }
@@ -199,7 +214,10 @@ void ServerBrowserMenu::updateServerList()
     for (int idx = 0; idx < static_cast<int>(server_list.size()); idx++)
     {
         const auto& entry = server_list[idx];
-        auto label = entry.name + " (" + entry.address.getHumanReadable()[0] + ")";
+        // Steam friends have no IP address to display.
+        auto label = entry.type == ServerScanner::ServerType::SteamFriend
+            ? std::string(entry.name)
+            : entry.name + " (" + entry.address.getHumanReadable()[0] + ")";
 
         switch (entry.type)
         {

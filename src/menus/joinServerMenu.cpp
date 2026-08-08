@@ -68,7 +68,12 @@ JoinServerScreen::JoinServerScreen(const ServerScanner::ServerInfo& target)
     if (target.type == ServerScanner::ServerType::SteamFriend)
     {
 #ifdef STEAMSDK
-        new GameClient(VERSION_NUMBER, target.port);
+        new GameClient(VERSION_NUMBER, target.steam_id);
+#else
+        status_label->setText(tr("connectserver", "This build doesn't support Steam connections."));
+        LOG(Error, "[joinserver] Attempted to connect to a Steam friend on a build that doesn't support Steam. Find out how this got called and gate it against #ifdef STEAMSDK.")
+        game_client = nullptr;
+        return;
 #endif
     }
     else new GameClient(VERSION_NUMBER, target.address, static_cast<int>(target.port));
@@ -76,7 +81,9 @@ JoinServerScreen::JoinServerScreen(const ServerScanner::ServerInfo& target)
 
 void JoinServerScreen::update(float delta)
 {
-    switch(game_client->getStatus())
+    if (!game_client) return;
+
+    switch (game_client->getStatus())
     {
     case GameClient::Connecting:
     case GameClient::Authenticating:

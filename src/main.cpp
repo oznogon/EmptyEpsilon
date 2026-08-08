@@ -15,6 +15,7 @@
 #include "menus/shipSelectionScreen.h"
 #include "main.h"
 #include "epsilonServer.h"
+#include "multiplayer_client.h"
 #include "httpScriptAccess.h"
 #include "prometheusMetrics.h"
 #include "preferenceManager.h"
@@ -353,11 +354,24 @@ int main(int argc, char** argv)
     ParticleEngine::cleanup();
     gl::shutdown();
     windows.clear();
-    gameGlobalInfo->reset();
+
+    // gameGlobalInfo is null if no server was ever started.Reset it only if it
+    // exists.
+    if (gameGlobalInfo) gameGlobalInfo->reset();
+
+    // Close Steam P2P sockets before the Steam API shuts down. If the server
+    // or client is still alive, its Steam sockets remain open at shutdown and
+    // SteamNetworkingSockets aborts. Destroy and release them here instead.
+    if (game_server.isAlive()) game_server->destroy();
     delete engine;
     gameGlobalInfo = nullptr;
+    game_client = nullptr;
+    game_server = nullptr;
     ShaderManager::cleanup();
     sp::script::Environment::shutdown();
+#ifdef STEAMSDK
+    SteamAPI_Shutdown();
+#endif
 
     return 0;
 }
