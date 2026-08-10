@@ -1110,8 +1110,22 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             sp::ecs::Entity target;
             packet >> target;
 
+            // Don't let the client's target selection overwrite the target of
+            // an active hail or open channel and break comms.
             if (auto ct = ship.getComponent<CommsTransmitter>())
-                ct->target = target;
+            {
+                switch (ct->state)
+                {
+                case CommsTransmitter::State::Inactive:
+                case CommsTransmitter::State::ChannelBroken:
+                case CommsTransmitter::State::ChannelClosed:
+                case CommsTransmitter::State::ChannelFailed:
+                    ct->target = target;
+                    break;
+                default:
+                    break;
+                }
+            }
         }
         break;
     case CMD_SET_HACKING_TARGET:

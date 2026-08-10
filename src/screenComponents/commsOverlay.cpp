@@ -148,7 +148,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
         ->setPosition(0.0f, -250.0f, sp::Alignment::BottomCenter)
         ->hide();
 
-    (new GuiLabel(closed_box, "COMMS_BROKEN_LABEL", tr("Communications channel closed"), 40.0f))
+    (new GuiLabel(closed_box, "COMMS_CLOSED_LABEL", tr("Communications channel closed"), 40.0f))
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft);
 
