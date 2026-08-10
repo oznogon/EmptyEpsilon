@@ -89,6 +89,27 @@ protected:
     virtual void flyTowards(glm::vec2 target, float keep_distance = 0.0f);
     virtual void flyFormation(sp::ecs::Entity target, glm::vec2 offset);
 
+    // Reactive collision-avoidance tuning. Shared by ShipAI route steering and
+    // the FighterAI evade steering.
+    static constexpr float AVOID_LOOKAHEAD = 4.0f;        // Influence radius = max(combined_radius * lookahead, AVOID_MIN_DISTANCE).
+    static constexpr float AVOID_MIN_DISTANCE = 3000.0f;  // Minimum reactive range regardless of ship size.
+    static constexpr float AVOID_STEER_GAIN = 2.2f;       // Lateral deflection gain.
+    static constexpr float AVOID_MAX_DEFLECTION = 1.309f; // Maximum heading deflection from the route (75 degrees, radians).
+    static constexpr float AVOID_BRAKE_STRENGTH = 0.5f;   // Impulse scale at full braking.
+    static constexpr float AVOID_TIME_HORIZON = 14.0f;    // How far ahead (seconds) to consider collisions.
+    static constexpr float AVOID_SAFE_MULTIPLIER = 4.0f;  // Predicted miss within this many combined radii keeps the threat active so the dodge doesn't flicker off.
+
+    // Rotates heading away from nearby obstacles using velocity-aware
+    // collision prediction (dodging perpendicular to relative velocity so
+    // reciprocal ships pick opposite sides), clamped to the maximum deflection
+    // angle. Returns a braking factor in [0,1] (0 = no brake, 1 = hard brake)
+    // for scaling the impulse request.
+    float steerAroundObstacles(glm::vec2& heading, glm::vec2 position, float radius) const;
+
+    // Sets thrusters and impulse to steer directly toward `direction`, dodging
+    // obstacles. For AI paths that bypass route following (e.g. fighter evade).
+    void steerDirect(float direction, float impulse_request);
+
     sp::ecs::Entity findBestTarget(glm::vec2 position, float radius);
     float targetScore(sp::ecs::Entity target);
 

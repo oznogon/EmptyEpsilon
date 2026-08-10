@@ -15,6 +15,11 @@ struct Obstacle
     sp::ecs::Entity entity;
 };
 
+// Returns true if obstacle_entity and pathfinding_entity share a formation
+// relationship (leader-subordinate or subordinate-leader), so the pathfinder
+// can skip obstacles belonging to other entities in formation.
+bool isFormationObstacle(sp::ecs::Entity obstacle_entity, sp::ecs::Entity pathfinding_entity);
+
 class PathFindingSystem : public sp::ecs::System
 {
 public:
@@ -24,6 +29,9 @@ public:
 
     const std::vector<Obstacle>& getObstacles() const { return obstacles; }
     float getMaxObstacleRadius() const { return max_obstacle_radius; }
+
+    // Returns the live PathFindingSystem instance, or nullptr if none exists.
+    static PathFindingSystem* get();
 
     // Queries all obstacles that could intersect the line segment a-b, expanded
     // by max_obstacle_radius + my_radius. Each candidate is presented to the

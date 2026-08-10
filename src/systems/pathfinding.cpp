@@ -21,7 +21,7 @@ static PathFindingSystem* path_finding_system;
 // can skip obstacles belonging to other entities in formation. This prevents
 // collision-avoidance churn, at the cost of making wingmen more prone to
 // ramming each other.
-static bool isFormationObstacle(sp::ecs::Entity obstacle_entity, sp::ecs::Entity pathfinding_entity)
+bool isFormationObstacle(sp::ecs::Entity obstacle_entity, sp::ecs::Entity pathfinding_entity)
 {
     // If we shouldn't be in this functino, leave.
     if (!obstacle_entity || !pathfinding_entity) return false;
@@ -52,6 +52,11 @@ PathFindingSystem::PathFindingSystem()
 {
     path_finding_system = this;
     PathWorker::instance = new PathWorker();
+}
+
+PathFindingSystem* PathFindingSystem::get()
+{
+    return path_finding_system;
 }
 
 PathFindingSystem::~PathFindingSystem()

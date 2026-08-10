@@ -26,6 +26,8 @@
 #include "systems/radarblock.h"
 #include "systems/warpsystem.h"
 
+#include <cmath>
+
 REGISTER_SHIP_AI(ShipAI, "default");
 
 ShipAI::ShipAI(sp::ecs::Entity owner)
@@ -143,6 +145,18 @@ void ShipAI::runLight(float delta)
             auto diff = pathPlanner.route[0] - ot->getPosition();
             float distance = glm::length(diff);
             auto target_rotation = vec2ToAngle(diff);
+
+            // Reactively steer around dynamic obstacles between path re-plans.
+            float avoidance_brake = 0.0f;
+            if (distance > 600.0f)
+            {
+                auto my_radius = 300.0f;
+                if (auto physics = owner.getComponent<sp::Physics>()) my_radius = physics->getSize().x;
+                glm::vec2 heading = diff;
+                avoidance_brake = steerAroundObstacles(heading, ot->getPosition(), my_radius);
+                target_rotation = vec2ToAngle(heading);
+            }
+
             float rotation_diff = fabs(angleDifference(target_rotation, ot->getRotation()));
 
             if (auto thrusters = owner.getComponent<ManeuveringThrusters>())
@@ -194,6 +208,10 @@ void ShipAI::runLight(float delta)
                     impulse->request = -impulse->request;
                 else if (rotation_diff < 45.0f)
                     impulse->request *= 1.0f - ((rotation_diff - 45.0f) / 45.0f);
+
+                // Slow down while hard-deflecting so the ship can turn.
+                if (avoidance_brake > 0.0f)
+                    impulse->request *= 1.0f - avoidance_brake * (1.0f - AVOID_BRAKE_STRENGTH);
             }
         }
     }
@@ -956,6 +974,16 @@ void ShipAI::flyTowards(glm::vec2 target, float keep_distance)
         auto diff = pathPlanner.route[0] - ot->getPosition();
         float distance = glm::length(diff);
         auto target_rotation = vec2ToAngle(diff);
+
+        // Reactively steer around dynamic obstacles between path re-plans.
+        float avoidance_brake = 0.0f;
+        if (distance > 600.0f)
+        {
+            glm::vec2 heading = diff;
+            avoidance_brake = steerAroundObstacles(heading, ot->getPosition(), my_radius);
+            target_rotation = vec2ToAngle(heading);
+        }
+
         float rotation_diff = fabs(angleDifference(target_rotation, ot->getRotation()));
 
         // Rotate toward the target.
@@ -1010,6 +1038,10 @@ void ShipAI::flyTowards(glm::vec2 target, float keep_distance)
             if (rotation_diff > 90.0f) impulse->request = -impulse->request;
             else if (rotation_diff < 45.0f)
                 impulse->request *= 1.0f - ((rotation_diff - 45.0f) / 45.0f);
+
+            // Slow down while hard-deflecting so the ship can turn.
+            if (avoidance_brake > 0.0f)
+                impulse->request *= 1.0f - avoidance_brake * (1.0f - AVOID_BRAKE_STRENGTH);
         }
     }
 }
@@ -1116,6 +1148,132 @@ void ShipAI::flyFormation(sp::ecs::Entity target, glm::vec2 offset)
         if (thrusters) thrusters->target = target_rotation;
     }
     else flyTowards(target_position);
+}
+
+float ShipAI::steerAroundObstacles(glm::vec2& heading, glm::vec2 position, float radius) const
+{
+    auto path_finding = PathFindingSystem::get();
+    if (!path_finding) return 0.0f;
+
+    glm::vec2 dir = glm::length2(heading) > 0.0f ? glm::normalize(heading) : glm::vec2(1.0f, 0.0f);
+    glm::vec2 perp(-dir.y, dir.x);
+
+    glm::vec2 my_vel(0.0f);
+    if (auto physics = owner.getComponent<sp::Physics>()) my_vel = physics->getVelocity();
+
+    // Accumulated dodge direction, each threat contributing a unit direction
+    // scaled by urgency.
+    glm::vec2 dodge(0.0f);
+    float brake = 0.0f;
+
+    for (const auto& obs : path_finding->getObstacles())
+    {
+        if (!obs.entity || obs.entity == owner) continue;
+        if (isFormationObstacle(obs.entity, owner)) continue;
+
+        const float combined = obs.radius + radius;
+        const float lookahead = std::max(combined * AVOID_LOOKAHEAD, AVOID_MIN_DISTANCE);
+        if (lookahead <= 0.0f) continue;
+
+        const glm::vec2 rel_pos = obs.position - position;
+        const float dist2 = glm::length2(rel_pos);
+        if (dist2 <= 0.0f || dist2 >= lookahead * lookahead) continue;
+        const float dist = std::sqrt(dist2);
+
+        glm::vec2 obs_vel(0.0f);
+        if (auto obs_physics = obs.entity.getComponent<sp::Physics>()) obs_vel = obs_physics->getVelocity();
+        const glm::vec2 rel_vel = my_vel - obs_vel;
+        const float rel_speed2 = glm::length2(rel_vel);
+
+        // Predict the closest approach. Negative ttc means the threat is moving
+        // away, so it only matters if it is already very close.
+        float ttc = std::numeric_limits<float>::max();
+        float closest2 = dist2;
+        if (rel_speed2 > 1.0f)
+        {
+            const float approach = glm::dot(rel_pos, rel_vel);
+            if (approach > 0.0f)
+            {
+                ttc = approach / rel_speed2;
+                closest2 = std::max(0.0f, dist2 - approach * approach / rel_speed2);
+            }
+        }
+
+        // A threat if the predicted miss distance is small and the intercept is
+        // within the time horizon, or it is already dangerously close.
+        const float safe = combined * AVOID_SAFE_MULTIPLIER;
+        const bool close_now = dist < combined * 2.0f;
+        if (!close_now && !(closest2 < safe * safe && ttc < AVOID_TIME_HORIZON)) continue;
+
+        // Urgency: 1 for an imminent intercept, fading over the time horizon.
+        // Already-close threats force near-full urgency regardless of the
+        // predicted geometry.
+        float u;
+        if (close_now)
+            u = 1.0f;
+        else if (ttc < AVOID_TIME_HORIZON)
+            u = 1.0f - ttc / AVOID_TIME_HORIZON;
+        else
+            u = 1.0f - dist / lookahead;
+        u = std::clamp(u, 0.0f, 1.0f);
+
+        // Pick the dodge side: perpendicular to the heading, on the side that
+        // carries us away from the threat's predicted intercept point. Two
+        // reciprocal ships approaching the same point therefore pick opposite
+        // sides and separate. When the intercept is directly ahead or behind
+        // (no clear side), both bias to the left of their own heading, which
+        // also separates reciprocal agents.
+        glm::vec2 away = -rel_pos;
+        if (rel_speed2 > 1.0f && ttc < AVOID_TIME_HORIZON)
+            away = -(rel_pos + obs_vel * ttc);
+
+        const float away_len = glm::length(away);
+        glm::vec2 dod = perp;
+        const float away_side = glm::dot(perp, away);
+        if (away_len > 0.0f && away_side < 0.0f && -away_side > away_len * 0.3f)
+            dod = -perp;
+
+        dodge += dod * u;
+        brake = std::max(brake, u);
+    }
+
+    const float dodge_len = glm::length(dodge);
+    if (dodge_len <= 0.0001f) return 0.0f;
+
+    // Blend the dodge into the heading and clamp the total deflection.
+    glm::vec2 steered = dir + dodge * AVOID_STEER_GAIN;
+    glm::vec2 steered_n = glm::normalize(steered);
+    const float dot_dir = std::clamp(glm::dot(dir, steered_n), -1.0f, 1.0f);
+    if (dot_dir < std::cos(AVOID_MAX_DEFLECTION))
+    {
+        const float side = glm::dot(perp, steered_n) < 0.0f ? -1.0f : 1.0f;
+        steered_n = dir * std::cos(AVOID_MAX_DEFLECTION) + perp * side * std::sin(AVOID_MAX_DEFLECTION);
+    }
+    heading = steered_n;
+
+    return std::min(1.0f, brake);
+}
+
+void ShipAI::steerDirect(float direction, float impulse_request)
+{
+    auto ot = owner.getComponent<sp::Transform>();
+    if (!ot) return;
+
+    auto my_radius = 300.0f;
+    if (auto physics = owner.getComponent<sp::Physics>()) my_radius = physics->getSize().x;
+
+    glm::vec2 heading = vec2FromAngle(direction);
+    const float brake = steerAroundObstacles(heading, ot->getPosition(), my_radius);
+
+    if (auto thrusters = owner.getComponent<ManeuveringThrusters>())
+        thrusters->target = vec2ToAngle(heading);
+
+    if (auto impulse = owner.getComponent<ImpulseEngine>())
+    {
+        impulse->request = impulse_request;
+        if (brake > 0.0f)
+            impulse->request *= 1.0f - brake * (1.0f - AVOID_BRAKE_STRENGTH);
+    }
 }
 
 sp::ecs::Entity ShipAI::findBestTarget(glm::vec2 position, float radius)

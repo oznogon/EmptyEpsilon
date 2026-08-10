@@ -51,10 +51,7 @@ void FighterAI::runLight(float delta)
         if (pathfind_cooldown > 0.0f) pathfind_cooldown -= delta;
         if (update_target_delay > 0.0f) update_target_delay -= delta;
 
-        auto thrusters = owner.getComponent<ManeuveringThrusters>();
-        if (thrusters) thrusters->target = evade_direction;
-        auto impulse = owner.getComponent<ImpulseEngine>();
-        if (impulse) impulse->request = 1.0f;
+        steerDirect(evade_direction, 1.0f);
         return;
     }
 
@@ -159,11 +156,7 @@ void FighterAI::runAttack(sp::ecs::Entity target)
         }
         else
         {
-            auto thrusters = owner.getComponent<ManeuveringThrusters>();
-            if (thrusters) thrusters->target = evade_direction;
-            auto impulse = owner.getComponent<ImpulseEngine>();
-            if (impulse)
-                impulse->request = 1.0;
+            steerDirect(evade_direction, 1.0f);
         }
         break;
     case State::Recharge:
