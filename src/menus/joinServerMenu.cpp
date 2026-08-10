@@ -71,7 +71,7 @@ JoinServerScreen::JoinServerScreen(const ServerScanner::ServerInfo& target)
         new GameClient(VERSION_NUMBER, target.steam_id);
 #else
         status_label->setText(tr("connectserver", "This build doesn't support Steam connections."));
-        LOG(Error, "[joinserver] Attempted to connect to a Steam friend on a build that doesn't support Steam. Find out how this got called and gate it against #ifdef STEAMSDK.")
+        LOG(Error, "[joinserver] Attempted to connect to a Steam friend on a build that doesn't support Steam. Find out how this got called and gate it against #ifdef STEAMSDK.");
         game_client = nullptr;
         return;
 #endif
