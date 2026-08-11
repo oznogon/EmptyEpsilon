@@ -9,7 +9,7 @@ What cruisers lose in agility compared to destroyers, they gain in armor and wea
 local template = ShipTemplate()
     :setName("Vindicator")
     :setLocaleName(_("playerShip", "Vindicator"))
-    :setModel("battleship_destroyer_5_upgraded")
+    :setModel("battleship_destroyer_2_upgraded")
     :setClass(_("class", "Cruiser"), _("subclass", "Assault"))
     :setType("playership")
     :setRadarTrace("cruiser.png")

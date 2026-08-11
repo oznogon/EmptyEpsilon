@@ -367,7 +367,7 @@ template = ShipTemplate()
     :setName("Magpie")
     :setLocaleName(_("ship", "Magpie"))
     :setClass(_("class", "Starfighter"), _("subclass", "Gunship"))
-    :setModel("dark_fighter_6")
+    :setModel("space_frigate_6")
     :setRadarTrace("adv_striker.png")
     :setDescription(
         _(

@@ -569,4 +569,3 @@ template = ShipTemplate()
     :setHull(70)
     :setShields(100, 150)
     :setSpeed(60, 15, 25)
-
