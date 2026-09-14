@@ -4,6 +4,7 @@
 
 ### Changed
 
+- Tooltips now use a shared timeout. While a tooltip is open and for a moment after the last one closes, hovering another tooltip opens it instantly without the delay.
 - Raise weapon mount arrays to a first-class component (`Mounts`) and incorporate features across beam weapons, missile weapons, and utility beamss
   - Missile weapon tubes can now be turreted. Turreted tubes' indicators and firing arcs update to reflect turret direction
   - Utility Beam directional control is now managed as a turret within a defined arc

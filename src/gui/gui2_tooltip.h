@@ -8,7 +8,8 @@ class GuiThemeStyle;
 
 // GuiTooltip is a layout container that renders on top of all other elements.
 // It appears after its watched element has been hovered or pressed for 500ms,
-// and hides when the interaction ends.
+// and hides when the interaction ends. For a period after the last open
+// tooltip closes, hovering another element opens its tooltip instantly.
 //
 // Usage is similar to any GuiElement used as a layout container:
 //
@@ -25,7 +26,11 @@ class GuiTooltip : public GuiElement
 {
 public:
     constexpr static float DEFAULT_WIDTH = 280.0f;
-    constexpr static float LONG_INTERACTION_DURATION = 0.5f;
+    // Cooldown delay in seconds before a tooltip initially opens.
+    constexpr static float OPEN_DELAY = 0.5f;
+    // Period in seconds that tooltip display skips delays between tooltip
+    // toggles) after the last tooltip closes.
+    constexpr static float WARM_WINDOW_DURATION = 0.2f;
 
     GuiTooltip(GuiElement* watched, string id);
     virtual ~GuiTooltip();

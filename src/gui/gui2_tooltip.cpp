@@ -5,11 +5,56 @@
 #include "theme.h"
 #include <algorithm>
 
+namespace
+{
+// Track open tooltip state.
+int tooltip_open_count = 0;
+// Timer that ends the warm window after the last tooltip closes.
+sp::SystemTimer tooltip_warm_timer;
+
+// Returns true while a tooltip is open or the cooldown timer is still running.
+// Lapses the warm timer when it expires so the page goes cold again.
+bool isTooltipPageWarm()
+{
+    if (tooltip_open_count > 0) return true;
+
+    if (tooltip_warm_timer.isRunning())
+    {
+        if (tooltip_warm_timer.getTimeLeft() <= 0.0f)
+        {
+            tooltip_warm_timer.stop();
+            return false;
+        }
+
+        return true;
+    }
+
+    return false;
+}
+
+// When a tooltip opens, tick the open counter and pause the tooltip visibility cooldown clock.
+void tooltipOpened()
+{
+    tooltip_open_count++;
+    tooltip_warm_timer.stop();
+}
+
+// When a tooltip closes, decrement the open tooltip counter. If all tooltips
+// are closed, reset the cooldown timer.
+void tooltipClosed()
+{
+    if (tooltip_open_count > 0) tooltip_open_count--;
+    if (tooltip_open_count == 0) tooltip_warm_timer.start(GuiTooltip::WARM_WINDOW_DURATION);
+}
+}
+
 static bool isTreeHoveredOrPressed(GuiElement* element)
 {
     if (element->isHovered() || element->isPressed()) return true;
+
     for (auto& child_ptr : element->getChildren())
         if (isTreeHoveredOrPressed(child_ptr.get())) return true;
+
     return false;
 }
 
@@ -41,6 +86,14 @@ GuiTooltip::~GuiTooltip()
     // Break the back-reference so Anchor::~Anchor() is a no-op if the tooltip
     // is destroyed before the Anchor.
     if (anchor) anchor->tooltip = nullptr;
+
+    // If the tooltip is still open when destroyed, close it so the shared page
+    // warmth state isn't left with a dangling open count.
+    if (showing)
+    {
+        showing = false;
+        tooltipClosed();
+    }
 }
 
 void GuiTooltip::anchorDestroyed()
@@ -71,6 +124,7 @@ void GuiTooltip::onUpdate()
         showing = false;
         setVisible(false);
         timer.stop();
+        tooltipClosed();
         position_captured_on_press = false;
         was_pressed = false;
         return;
@@ -87,21 +141,34 @@ void GuiTooltip::onUpdate()
         {
             showing = false;
             setVisible(false);
+            tooltipClosed();
         }
 
         return;
     }
 
-    // If the tooltip's parent is triggering a hidden tooltip, either tick the
-    // reveal timer or reveal the tooltip if the timer has expired.
+    // If the tooltip's parent is triggering a hidden tooltip, either reveal it
+    // instantly when the page is warm, or tick the reveal timer on a cold page
+    // and reveal the tooltip when the timer expires.
     if (!showing)
     {
-        if (!timer.isRunning()) timer.start(LONG_INTERACTION_DURATION);
+        if (isTooltipPageWarm())
+        {
+            showing = true;
+            setVisible(true);
+            moveToFront();
+            tooltipOpened();
+        }
+        else if (!timer.isRunning())
+        {
+            timer.start(GuiTooltip::OPEN_DELAY);
+        }
         else if (timer.isExpired())
         {
             showing = true;
             setVisible(true);
             moveToFront();
+            tooltipOpened();
         }
     }
 
