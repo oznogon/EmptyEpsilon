@@ -228,7 +228,8 @@ CreditsScreen::CreditsScreen()
         "MSGDI (https://www.cgtrader.com/3d-models/msgdi)\n" +
         "SolCommand (https://www.solcommand.com/)\n\n" +
         "<h2>" + tr("Credits", "Icons and graphics") + "</>\n\n" +
-        "Interesting John\n\n"
+        "Interesting John\n" +
+        "T. Hill-Hand (" + tr("Credits", "radar traces") + ")\n\n" +
         "<h2>" + tr("Credits", "Crew sprites") + "</>\n\n" +
         "Tokka (http://bekeen.de/)\n\n" +
         "<h2>" + tr("Credits", "Special thanks") + "</>\n\n" +
@@ -252,10 +253,10 @@ CreditsScreen::CreditsScreen()
         "Oznogon\n" +
         "tdelc\n\n" +
         "<h2>" + tr("Credits", "Additional artwork") + "</>\n\n" +
-        "Oznogon (GUI icons)\n" +
+        "Oznogon (GUI icons)\n\n" +
         "<h2>" + tr("Credits", "Additional sound effects") + "</>\n\n" +
         "The Sound Pack Tree (GameAudioGDC bundle)\n" +
-        "Digital Rain Lab (GameAudioGDC bundle)\n" +
+        "Digital Rain Lab (GameAudioGDC bundle)\n\n" +
         "<h2>" + tr("Credits", "Music") + "</>\n\n" +
         "Rafael Krux, Orchestralis.net (CC-BY)\n" +
         "LonePeakMusic, lonepeakmusic.itch.io\n\n";
