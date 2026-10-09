@@ -8,6 +8,10 @@
   - Clicking on a point where multiple entities are present cycles the selection through those entities.
   - Shift-clicking on an unselected entity adds it to the current selection, and Shift-clicking on a selected entity removes it from the current selection.
 
+### New features
+
+- New Lua API function `getMeshFilename()` returns `components.mesh_render.mesh`, which contains the filename of the given mesh. This isn't equivalent to the ModelData name.
+
 ## [2026-08]
 
 ### Changed

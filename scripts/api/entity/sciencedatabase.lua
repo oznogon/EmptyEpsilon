@@ -278,6 +278,15 @@ function Entity:setModelDataName(model_data_name)
     end
     return self
 end
+--- Returns this ScienceDatabase entry's model's filename.
+--- Returns an empty string if no model is set.
+--- Example: entry:getMeshFilename()
+function Entity:getMeshFilename()
+    if self.components.science_database then
+        return self.components.mesh_render.mesh
+    end
+    return ""
+end
 
 --- ScienceDatabase queryScienceDatabase(...)
 --- Returns the first ScienceDatabase entry with a matching case-insensitive name within the ScienceDatabase hierarchy.
