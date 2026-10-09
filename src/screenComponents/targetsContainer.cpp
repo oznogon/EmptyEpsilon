@@ -31,6 +31,19 @@ void TargetsContainer::add(sp::ecs::Entity obj)
     entries.push_back(obj);
 }
 
+void TargetsContainer::remove(sp::ecs::Entity obj)
+{
+    if (!obj) return;
+    for (auto it = entries.begin(); it != entries.end(); ++it)
+    {
+        if (*it == obj)
+        {
+            entries.erase(it);
+            break;
+        }
+    }
+}
+
 void TargetsContainer::set(sp::ecs::Entity obj)
 {
     if (obj) entries = {obj};

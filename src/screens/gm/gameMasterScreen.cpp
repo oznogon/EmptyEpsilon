@@ -1398,14 +1398,24 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
                 }
             };
 
-            // Select entities in the bounding box.
+            // Select entities in the click-drag bounding box.
             if (click_and_drag_state == ClickAndDragState::BoxSelect)
+            {
                 findTargets([&](auto entity, auto) { entities.push_back(entity); });
-            // If no box, select the nearest entity by screen distance.
+                // If mod is Shift, add selection box entities to current selection.
+                // Otherwise, select only the entities in the selection box.
+                if (shift_down) for (auto e : entities) targets.add(e);
+                else targets.set(entities);
+            }
+            // If no click-drag box, select one object, cycling through stacked
+            // objects on repeated clicks. Shift+click adds an unselected object
+            // to the selection, or removes the clicked object if it's already
+            // selected.
+            // Adapted from commit bdcef1f on piglit/clean-base by Anthony Cole
+            // (AyCe).
             else
             {
-                sp::ecs::Entity closest_entity;
-                float closest_score = std::numeric_limits<float>::max();
+                std::vector<std::pair<sp::ecs::Entity, float>> scored;
                 glm::vec2 click_screen = main_radar->worldToScreen(position);
 
                 findTargets([&](sp::ecs::Entity entity, sp::Transform& transform)
@@ -1416,23 +1426,81 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
                         if (auto physics = entity.getComponent<sp::Physics>())
                             screen_radius = physics->getSize().x * main_radar->getScale();
 
-                        const float score = std::max(0.0f, screen_dist - screen_radius);
-                        if (score < closest_score)
-                        {
-                            closest_score = score;
-                            closest_entity = entity;
-                        }
+                        scored.emplace_back(entity, std::max(0.0f, screen_dist - screen_radius));
                     }
                 );
 
-                if (closest_score != std::numeric_limits<float>::max())
-                    entities.push_back(closest_entity);
-            }
+                std::sort(scored.begin(), scored.end(),
+                    [](const auto& a, const auto& b) { return a.second < b.second; });
 
-            // If mod is Shift, add selection box entities to current selection.
-            // Otherwise, select only the entities in the selection box.
-            if (shift_down) for (auto e : entities) targets.add(e);
-            else targets.set(entities);
+                std::vector<sp::ecs::Entity> space_objects;
+                space_objects.reserve(scored.size());
+                for (auto& [entity, _score] : scored)
+                    space_objects.push_back(entity);
+
+                // Prefer the first unselected object after a selected
+                // one to cycle repeated clicks.
+                // If everything under the cursor is already selected,
+                // found stays empty and the selection is cleared (deselect).
+                sp::ecs::Entity first_unselected_object;
+                sp::ecs::Entity found_object;
+                auto existing_targets = targets.getTargets();
+
+                bool next_object_would_be_ideal = shift_down || existing_targets.empty();
+
+                for (auto s : space_objects)
+                {
+                    bool already_in_targets = false;
+                    for (auto target : existing_targets)
+                    {
+                        if (target == s)
+                        {
+                            already_in_targets = true;
+                            break;
+                        }
+                    }
+                    if (already_in_targets)
+                        next_object_would_be_ideal = true;
+                    else
+                    {
+                        if (!first_unselected_object)
+                            first_unselected_object = s;
+                        if (next_object_would_be_ideal)
+                        {
+                            found_object = s;
+                            break;
+                        }
+                    }
+                }
+
+                if (!found_object)
+                    found_object = first_unselected_object;
+
+                if (shift_down)
+                {
+                    if (found_object)
+                    {
+                        targets.add(found_object);
+                        entities.push_back(found_object);
+                    }
+                    else if (!space_objects.empty())
+                    {
+                        // Shift-click on an already-selected entity removes it.
+                        // This happens when everything under the cursor is
+                        // already selected, so there's nothing to add.
+                        targets.remove(space_objects[0]);
+                    }
+                }
+                else
+                {
+                    targets.clear();
+                    if (found_object)
+                    {
+                        targets.add(found_object);
+                        entities.push_back(found_object);
+                    }
+                }
+            }
 
             // Set the faction selector to match the first selected entity's faction.
             if (entities.size() > 0)

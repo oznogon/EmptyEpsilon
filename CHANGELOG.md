@@ -1,5 +1,13 @@
 # Changelog
 
+## [2026-10]
+
+### Changed
+
+- GM screen click handling, adapted from commit bdcef1f by Anthony Cole (AyCe) on the piglit/clean-base fork branch.
+  - Clicking on a point where multiple entities are present cycles the selection through those entities.
+  - Shift-clicking on an unselected entity adds it to the current selection, and Shift-clicking on a selected entity removes it from the current selection.
+
 ## [2026-08]
 
 ### Changed
