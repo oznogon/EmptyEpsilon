@@ -12,6 +12,10 @@
 
 - New Lua API function `getMeshFilename()` returns `components.mesh_render.mesh`, which contains the filename of the given mesh. This isn't equivalent to the ModelData name.
 
+### Fixed
+
+- Clients now parse and validate the internet registry server's response. If invalid, it now logs an error and ignores the response instead of crashing.
+
 ## [2026-08]
 
 ### Changed
