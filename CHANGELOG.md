@@ -36,6 +36,7 @@
 ### New features
 
 - Missile weapon data moved from hardcoded C++ enums to Lua-driven ECS components
+  - This is a **BREAKING CHANGE** from upstream, especially since upstream commit b492ea9 (Ramp up HVLI damage over 1U), which combines scan probe and missile lifetimes into a separate LifeTime component
   - `EMissileWeapons` enum replaced with dynamic `MissileWeaponData` ECS component loaded from `scripts/missileWeaponData.lua`
   - `MissileWeaponDataRegistry` singleton maps missile type names to integer indices for efficient storage arrays
   - Missile type data (speed, turnrate, damage, blast, behavior flags) now defined in Lua and replicated over the network
