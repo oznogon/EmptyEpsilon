@@ -184,6 +184,7 @@
   - Hacking now prevented on entities without either ShipSystems or a defined HackingDifficulty
 - Scanning refactored to prevent exploiting low-complexity scan targets to advance scanstate on high-complexity scan targets
 - Multiple repair crews now prevented from spawning in or moving into the same internal room cell
+  - This is a **BREAKING CHANGE** from upstream, especially since upstream commit 1d51d1a, which implements this using AI-generated code in a different manner
 - Radar signature values are now normalized
 - DockingBayScreen regressions fixed
   - Supply drop visibility on berth selection
