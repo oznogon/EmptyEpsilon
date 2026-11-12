@@ -4907,7 +4907,7 @@ function setGlobals()
         },
         ["Deimos"] = { "Dante", "Protector", "Staunch" },
         ["Destroyer III"] = { "Strand", "Isometric" },
-        ["Destroyer IV"] = { "Bent", "Inpenetrable", "Impervious" },
+        ["Destroyer IV"] = { "Bent", "Impenetrable", "Impervious" },
         ["Ender"] = {
             "Mongo",
             "Godzilla",
@@ -5288,11 +5288,11 @@ function setGlobals()
                     name = "Iota Carinae",
                     unscanned = _(
                         "scienceDescription-star",
-                        "Classification A7 lb"
+                        "Classification A7 Ib"
                     ),
                     scanned = _(
                         "scienceDescription-star",
-                        "Classification A7 lb, supergiant, temprature 7,500 K, 7xSol mass"
+                        "Classification A7 Ib, supergiant, temperature 7,500 K, 7xSol mass"
                     ),
                 },
                 {
@@ -5556,7 +5556,7 @@ function setGlobals()
                     ),
                     scanned = _(
                         "scienceDescription-star",
-                        "Classification 5V, K-type main sequence, temperature 4,782 K"
+                        "Classification K5V, K-type main sequence, temperature 4,782 K"
                     ),
                 },
                 {
@@ -5578,7 +5578,7 @@ function setGlobals()
                     ),
                     scanned = _(
                         "scienceDescription-star",
-                        "Classification A1 Van, white hued, A-type main sequence, temperature 9,911 K"
+                        "Classification A1 Vn, white-hued, A-type main sequence, temperature 9,911 K"
                     ),
                 },
                 {
@@ -5589,7 +5589,7 @@ function setGlobals()
                     ),
                     scanned = _(
                         "scienceDescription-star",
-                        "Classification A4 V, white hued, A-type main sequence, temperature 8,296 K"
+                        "Classification A4 V, white-hued, A-type main sequence, temperature 8,296 K"
                     ),
                 },
             },
@@ -5609,7 +5609,7 @@ function setGlobals()
             unscanned = _("scienceDescription-planet", "Class J"),
             scanned = _(
                 "scienceDescription-planet",
-                "Class J, Jovian, source for hydrogen and helium and a large variety of exotic gasses"
+                "Class J, Jovian, source of hydrogen, helium, and a large variety of exotic gases"
             ),
             texture = {
                 surface = "planets/gas-1.png",
@@ -5621,7 +5621,7 @@ function setGlobals()
             unscanned = _("scienceDescription-planet", "Class J"),
             scanned = _(
                 "scienceDescription-planet",
-                "Class J, Neptunian, source for hydrogen helium, ammonia, methane, water"
+                "Class J, Neptunian, source of hydrogen, helium, ammonia, methane, and water"
             ),
             texture = {
                 surface = "planets/gas-2.png",
@@ -8962,7 +8962,7 @@ function getCurrentOrders()
                     setCommsMessage(
                         _(
                             "orders-comms",
-                            "When you enter the lounge, you see a guy sitting at the bar with an eye patch, a peg leg, a cutlass at his belt, a three cornered hat and a green bird on his shoulder."
+                            "When you enter the lounge, you see a guy sitting at the bar with an eye patch, a peg leg, a cutlass at his belt, a three-cornered hat and a green bird on his shoulder."
                         )
                     )
                     addCommsReply(
@@ -8975,7 +8975,7 @@ function getCurrentOrders()
                                 string.format(
                                     _(
                                         "pirate-comms",
-                                        "Why, I'm a pirate, matey! Marcus the pirate! Actually, I'm just playing the part of a pirate in the live production of 'Caribbean Pirates' here on %s. I'm on a ten minute rehearsal break. This stuff I'm wearing is my costume. The peg leg is a hologram and the bird is a robot. I think the bird has better lines than I do.\n\nIf you want to talk to real modern pirates, that couple over there at that table are the real deal. They recently retired from a successful career as pirates, or so I hear. This will probably be the only time you can talk to them."
+                                        "Why, I'm a pirate, matey! Marcus the pirate! Actually, I'm just playing the part of a pirate in the live production of 'Caribbean Pirates' here on %s. I'm on a ten-minute rehearsal break. This stuff I'm wearing is my costume. The peg leg is a hologram and the bird is a robot. I think the bird has better lines than I do.\n\nIf you want to talk to real modern pirates, that couple over there at that table are the real deal. They recently retired from a successful career as pirates, or so I hear. This will probably be the only time you can talk to them."
                                     ),
                                     comms_target:getCallSign()
                                 )
@@ -9029,7 +9029,7 @@ function getCurrentOrders()
                                                             addCommsReply(
                                                                 _(
                                                                     "pirate-comms",
-                                                                    "What about the other ship"
+                                                                    "What about the other ship?"
                                                                 ),
                                                                 function()
                                                                     setCommsMessage(
@@ -9084,7 +9084,7 @@ function getCurrentOrders()
                                                                                                         string.format(
                                                                                                             _(
                                                                                                                 "pirate-comms",
-                                                                                                                "Once you meet all those requirements, your Relay or Operations officer should see buttons to get cargo from the ship.\n\nOnce you go down this path, there's no going back. If you stick to liberating cargo from enemies of the %s, you'll only be called Licensed Privateers. Loot neutrals or friendlies and you'll be labled Pirates."
+                                                                                                                "Once you meet all those requirements, your Relay or Operations officer should see buttons to get cargo from the ship.\n\nOnce you go down this path, there's no going back. If you stick to liberating cargo from enemies of the %s, you'll only be called Licensed Privateers. Loot neutrals or friendlies and you'll be labeled Pirates."
                                                                                                             ),
                                                                                                             player_faction
                                                                                                         )
@@ -9766,7 +9766,7 @@ function scenarioShipEnhancements()
                 setCommsMessage(
                     _(
                         "upgrade-comms",
-                        "Jonathan Rogers, our resident engine systems specialist has three jump drives not being used. He could install one of them on your ship. One is a Repulse Rabbit XR5, one is a Vesta UK41, and the third is a Ketrik Presence D8"
+                        "Jonathan Rogers, our resident engine systems specialist, has three jump drives not being used. He could install one of them on your ship. One is a Repulse Rabbit XR5, one is a Vesta UK41, and the third is a Ketrik Presence D8."
                     )
                 )
                 if comms_target.jump_upgrades == nil then
@@ -9918,7 +9918,7 @@ function scenarioShipEnhancements()
                 addCommsReply(
                     _(
                         "upgrade-comms",
-                        "What do you know of the Ketrik Presence D8"
+                        "What do you know of the Ketrik Presence D8?"
                     ),
                     function()
                         if comms_target.ketrik == nil then
@@ -10997,7 +10997,7 @@ function smee(p)
         local fail_conditions = {}
         if smee_color == nil or #smee_color == 0 then
             smee_color = {
-                _("smee-msgRelay", "Avast, mehearties."),
+                _("smee-msgRelay", "Avast, me hearties."),
                 _(
                     "smee-msgRelay",
                     "The pirate code's more like guidelines than actual rules."
@@ -11067,11 +11067,11 @@ function smee(p)
                 ),
                 _(
                     "smee-msgRelay",
-                    "Revenge may sate your being, but don't misunderstand me, it's an end, not a beginning."
+                    "Revenge may sate your being, but don't misunderstand me. It's an end, not a beginning."
                 ),
                 _(
                     "smee-msgRelay",
-                    "Betrayin's all part of piratin'. If you don't know that you're not even close to being a pirate."
+                    "Betrayin's all part of piratin'. If you don't know that, you're not even close to being a pirate."
                 ),
                 _(
                     "smee-msgRelay",
@@ -11333,7 +11333,7 @@ function smee(p)
                                 msg = string.format(
                                     _(
                                         "smee-msgRelay",
-                                        "We're stopped and another ship has stopped, but %s, the closest cherry to be picked has not stopped."
+                                        "We're stopped and another ship has stopped, but %s, the closest cherry to be picked, has not stopped."
                                     ),
                                     victim:getCallSign()
                                 ),
@@ -11417,7 +11417,7 @@ function smee(p)
                             msg = string.format(
                                 _(
                                     "smee-msgRelay",
-                                    "At least one of %s's shield arcs are down."
+                                    "At least one of %s's shield arcs is down."
                                 ),
                                 victim:getCallSign()
                             ),
@@ -11589,7 +11589,7 @@ function smee(p)
             {
                 msg = _(
                     "smee-msgRelay",
-                    "There are not ships we can loot within three units."
+                    "There are no ships we can loot within three units."
                 ),
                 continue = false,
             }
@@ -11961,7 +11961,7 @@ function getLoot(p, ship, good, ord)
                                     p.cargo_bay_full_rel,
                                     _(
                                         "msgRelay",
-                                        "Cannot get cargo because cargo bay is full."
+                                        "Cannot get cargo because the cargo bay is full."
                                     )
                                 )
                                 p:addCustomMessage(
@@ -11969,7 +11969,7 @@ function getLoot(p, ship, good, ord)
                                     p.cargo_bay_full_ops,
                                     _(
                                         "msgOperations",
-                                        "Cannot get cargo because cargo bay is full."
+                                        "Cannot get cargo because the cargo bay is full."
                                     )
                                 )
                             end

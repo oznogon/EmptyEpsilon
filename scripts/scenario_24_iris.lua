@@ -2617,7 +2617,7 @@ function setGlobals()
             range = 20,
             hull = 150,
             shield = 100,
-            desc = "Travel at warp 1 to destination, then deploy observatory with a sensor range of 20 units, hull strength of 150, shield strength of 100.",
+            desc = "Travel at warp 1 to destination, then deploy an observatory with a sensor range of 20 units, hull strength of 150, shield strength of 100.",
         },
         ["Arcetri"] = {
             cat = "observatory",
@@ -2627,7 +2627,7 @@ function setGlobals()
             range = 5,
             hull = 50,
             shield = 50,
-            desc = "Travel at warp 1 to destination, then deploy observatory with a sensor range of 5 units, hull strength of 50, shield strength of 50.",
+            desc = "Travel at warp 1 to destination, then deploy an observatory with a sensor range of 5 units, hull strength of 50, shield strength of 50.",
         },
         ["Kitt"] = {
             cat = "observatory",
@@ -2637,7 +2637,7 @@ function setGlobals()
             range = 10,
             hull = 100,
             shield = 150,
-            desc = "Travel at warp 1 to destination, then deploy observatory with a sensor range of 10 units, hull strength of 100, shield strength of 150.",
+            desc = "Travel at warp 1 to destination, then deploy an observatory with a sensor range of 10 units, hull strength of 100, shield strength of 150.",
         },
         ["Palomar"] = {
             cat = "observatory",
@@ -2647,7 +2647,7 @@ function setGlobals()
             range = 20,
             hull = 150,
             shield = 300,
-            desc = "Travel at warp 1 to destination, then deploy observatory with a sensor range of 20 units, hull strength of 150, shield strength of 300.",
+            desc = "Travel at warp 1 to destination, then deploy an observatory with a sensor range of 20 units, hull strength of 150, shield strength of 300.",
         },
         ["Tector"] = {
             cat = "scan",
@@ -2656,7 +2656,7 @@ function setGlobals()
             quantity = 3,
             range = 5,
             full = false,
-            desc = "Travel at warp 1 to destination. Automatically simple scan ships within 5 units.",
+            desc = "Travel at warp 1 to destination. Automatically performs a simple scan of ships within 5 units.",
         },
         ["Grat"] = {
             cat = "scan",
@@ -2665,7 +2665,7 @@ function setGlobals()
             quantity = 3,
             range = 5,
             full = false,
-            desc = "Travel at warp 2.5 to destination. Automatically simple scan ships within 5 units.",
+            desc = "Travel at warp 2.5 to destination. Automatically performs a simple scan of ships within 5 units.",
         },
         ["Watcher"] = {
             cat = "scan",
@@ -2674,7 +2674,7 @@ function setGlobals()
             quantity = 3,
             range = 5,
             full = true,
-            desc = "Travel at warp 1 to destination. Automatically fully scan ships within 5 units.",
+            desc = "Travel at warp 1 to destination. Automatically performs a full scan of ships within 5 units.",
         },
         ["007"] = {
             cat = "scan",
@@ -2683,7 +2683,7 @@ function setGlobals()
             quantity = 3,
             range = 5,
             full = true,
-            desc = "Travel at warp 2.5 to destination. Automatically fully scan ships within 5 units.",
+            desc = "Travel at warp 2.5 to destination. Automatically performs a full scan of ships within 5 units.",
         },
         ["LDSM 1.1"] = {
             cat = "mine",
@@ -3218,7 +3218,7 @@ function setGlobals()
             "Dragonfly",
             "Scarab",
             "Mantis",
-            "Yellow          acket",
+            "Yellow Jacket",
             "Jimminy",
             "Flik",
             "Thorny",
@@ -3432,7 +3432,7 @@ function setGlobals()
         ),
         _(
             "scienceDescription-buoy",
-            "Tip: Make lemons an integral part of your diet"
+            "Tip: make lemons an integral part of your diet"
         ),
         _(
             "scienceDescription-buoy",
@@ -3497,11 +3497,11 @@ function setGlobals()
                     name = "Iota Carinae",
                     unscanned = _(
                         "scienceDescription-star",
-                        "Classification A7 lb"
+                        "Classification A7 Ib"
                     ),
                     scanned = _(
                         "scienceDescription-star",
-                        "Classification A7 lb, supergiant, temprature 7,500 K, 7xSol mass"
+                        "Classification A7 Ib, supergiant, temperature 7,500 K, 7xSol mass"
                     ),
                 },
                 {
@@ -3801,7 +3801,7 @@ function setVariations()
     player_respawn_max = respawn_config[getScenarioSetting("Respawn")].max
     reputation_goal = getScenarioSetting("ReputationGoal")
     primary_orders = string.format(
-        "Reach %s reputation before friendly station nebula defense nodes destroyed.",
+        "Reach %s reputation before the friendly station nebula defense nodes are destroyed.",
         reputation_goal
     )
 end
@@ -7636,7 +7636,7 @@ function scenarioShipEnhancements()
                 ),
                 _(
                     "probeShop-comms",
-                    "A guy with a name tag that says 'Calon Proboscis' greets you and says, 'We have got all kinds of scan probe enhancements here in my Proboscis Probe Shop. What are you looking for?'"
+                    "A guy with a name tag that reads 'Calon Proboscis' greets you and says, 'We have all kinds of scan probe enhancements here in my Proboscis Probe Shop. What are you looking for?'"
                 ),
             }
             setCommsMessage(tableSelectRandom(probe_shop_greetings))
@@ -7755,7 +7755,7 @@ function scenarioShipEnhancements()
             addCommsReply(_("probeShop-comms", "Faster probes"), function()
                 local out = _(
                     "probeShop-comms",
-                    "Attach these kits to your probe to make them travel faster to their destination. They typical probe travels at warp 1. They come in batches of 5."
+                    "Attach these kits to your probe to make them travel faster to their destination. The typical probe travels at warp 1. They come in batches of 5."
                 )
                 for name, probe in pairs(probe_types) do
                     if probe.cat == "fast" then
@@ -7866,7 +7866,7 @@ function scenarioShipEnhancements()
             addCommsReply(_("probeShop-comms", "Warp Jammer probes"), function()
                 local out = _(
                     "probeShop-comms",
-                    "Attach these kits to your probe and when they reach their destination, they will drop a warp jammer. They come in batches of 5."
+                    "Attach these kits to your probe and when the probe reaches its destination, it will drop a warp jammer. They come in batches of 5."
                 )
                 for name, probe in pairs(probe_types) do
                     if probe.cat == "warpjam" then
@@ -8106,7 +8106,7 @@ function scenarioShipEnhancements()
                 function()
                     local out = _(
                         "probeShop-comms",
-                        "This kit causes the probe to deploy a friendly self powered observatory at its destination. The kit comes in batches of 3."
+                        "This kit causes the probe to deploy a friendly self-powered observatory at its destination. The kit comes in batches of 3."
                     )
                     for name, probe in pairs(probe_types) do
                         if probe.cat == "observatory" then
@@ -8357,7 +8357,7 @@ function scenarioShipEnhancements()
                 function()
                     local out = _(
                         "probeShop-comms",
-                        "Attach these probe kits to your probe and when the probe reaches its destination it goes into stealth mode after 5 seconds. Once the birth period has passed, it will deploy one or more mines. These probe kits come in batches of 3."
+                        "Attach these probe kits to your probe and when the probe reaches its destination, it goes into stealth mode after 5 seconds. Once the birth period has passed, it will deploy one or more mines. These probe kits come in batches of 3."
                     )
                     for name, probe in pairs(probe_types) do
                         if probe.cat == "mine" then
@@ -8485,7 +8485,7 @@ function scenarioShipEnhancements()
                                             string.format(
                                                 _(
                                                     "probeShop-comms",
-                                                    "Your mine storage capacity of %i is insufficient for this LDSM probe kit which requires %i mines."
+                                                    "Your mine storage capacity of %i is insufficient for this LDSM probe kit, which requires %i mines."
                                                 ),
                                                 comms_source:getWeaponStorageMax(
                                                     "Mine"
@@ -10023,7 +10023,7 @@ function update(delta)
         local player_message = string.format(
             _(
                 "goal-incCall",
-                "Enemies of the %s have deployed destructive nebulae against the region around the planet %s. The deployment mechanism resembles a closing iris door as the nebulae converge on %s. We have created a nebula defense network. We installed the defense nodes on some friendly stations, some neutral stations and some warp jammers. Your mission is to accumulate %s reputation points before the friendly stations with the nebula defense nodes get destroyed."
+                "Enemies of the %s have deployed destructive nebulae against the region around the planet %s. The deployment mechanism resembles a closing iris door as the nebulae converge on %s. We have created a nebula defense network. We installed the defense nodes on some friendly stations, some neutral stations and some warp jammers. Your mission is to accumulate %s reputation points before the friendly stations with the nebula defense nodes are destroyed."
             ),
             player_faction,
             region_planet:getCallSign(),

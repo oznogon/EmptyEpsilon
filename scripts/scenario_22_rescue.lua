@@ -61,7 +61,7 @@ function init()
     setVariations()
     primary_orders = _(
         "orders-comms",
-        "Rescue exotic weapons research scientist, Hans Gestalt"
+        "Rescue the exotic weapons research scientist, Hans Gestalt."
     )
     constructEnvironment()
     onNewPlayerShip(setPlayers)
@@ -3006,11 +3006,11 @@ function setGlobals()
                     name = "Iota Carinae",
                     unscanned = _(
                         "scienceDescription-star",
-                        "Classification A7 lb"
+                        "Classification A7 Ib"
                     ),
                     scanned = _(
                         "scienceDescription-star",
-                        "Classification A7 lb,\nsupergiant,\ntemperature 7,500 K,\n7xSol mass"
+                        "Classification A7 Ib,\nsupergiant,\ntemperature 7,500 K,\n7xSol mass"
                     ),
                 },
                 {
@@ -3142,7 +3142,7 @@ function setGlobals()
                     ),
                     scanned = _(
                         "scienceDescription-star",
-                        "Classification G1V(w),\n1.24xSol mass,n7th magnitude G-type main sequence"
+                        "Classification G1V(w),\n1.24xSol mass,\n7th magnitude G-type main sequence"
                     ),
                 },
                 {
@@ -3274,7 +3274,7 @@ function setGlobals()
                     ),
                     scanned = _(
                         "scienceDescription-star",
-                        "Classification 5V,\nK-type main sequence,\ntemperature 4,782 K"
+                        "Classification K5V,\nK-type main sequence,\ntemperature 4,782 K"
                     ),
                 },
                 {
@@ -3296,7 +3296,7 @@ function setGlobals()
                     ),
                     scanned = _(
                         "scienceDescription-star",
-                        "Classification A1 Van,\nwhite hued,\nA-type main sequence,\ntemperature 9,911 K"
+                        "Classification A1 Vn,\nwhite-hued,\nA-type main sequence,\ntemperature 9,911 K"
                     ),
                 },
                 {
@@ -3307,7 +3307,7 @@ function setGlobals()
                     ),
                     scanned = _(
                         "scienceDescription-star",
-                        "Classification A4 V,\nwhite hued,\nA-type main sequence,\ntemperature 8,296 K"
+                        "Classification A4 V,\nwhite-hued,\nA-type main sequence,\ntemperature 8,296 K"
                     ),
                 },
             },
@@ -3327,7 +3327,7 @@ function setGlobals()
             unscanned = _("scienceDescription-planet", "Class J"),
             scanned = _(
                 "scienceDescription-planet",
-                "Class J, Jovian, source for hydrogen and helium and a large variety of exotic gasses"
+                "Class J, Jovian, source of hydrogen, helium, and a large variety of exotic gases"
             ),
             texture = {
                 surface = "planets/gas-1.png",
@@ -3339,7 +3339,7 @@ function setGlobals()
             unscanned = _("scienceDescription-planet", "Class J"),
             scanned = _(
                 "scienceDescription-planet",
-                "Class J, Neptunian, source for hydrogen helium, ammonia, methane, water"
+                "Class J, Neptunian, source of hydrogen, helium, ammonia, methane, and water"
             ),
             texture = {
                 surface = "planets/gas-2.png",
@@ -6705,7 +6705,7 @@ function dockWithTargetStation()
                                             p:addToShipLog(
                                                 _(
                                                     "goal-shipLog",
-                                                    "Hack activation was not simulataneous. Variance exceeded one second. The component needs to be reprogrammed for another attempt to activate the hack simulataneously."
+                                                    "Hack activation was not simultaneous. Variance exceeded one second. The component needs to be reprogrammed for another attempt to activate the hack simultaneously."
                                                 ),
                                                 "Yellow"
                                             )
@@ -6859,7 +6859,7 @@ function informRelay(p)
         string.format(
             _(
                 "msgRelay",
-                "Science just sent you the details on what is required to interface with station %s to switch the systems back to Independent control. You will need to program the component to hack the systems when it interfaces to the station through the docking clamp."
+                "Science just sent you the details on what is required to interface with station %s to switch the systems back to Independent control. You will need to program the component to hack the systems when it interfaces with the station through the docking clamp."
             ),
             target_station:getCallSign()
         )
@@ -6870,7 +6870,7 @@ function informRelay(p)
         string.format(
             _(
                 "msgRelay",
-                "Science just sent you the details on what is required to interface with station %s to switch the systems back to Independent control. You will need to program the component to hack the systems when it interfaces to the station through the docking clamp."
+                "Science just sent you the details on what is required to interface with station %s to switch the systems back to Independent control. You will need to program the component to hack the systems when it interfaces with the station through the docking clamp."
             ),
             target_station:getCallSign()
         )
@@ -7293,7 +7293,7 @@ function scenarioShipEnhancements()
                     string.format(
                         _(
                             "upgrade-comms",
-                            "Our quartermaster, Sylvia Trondheim, has several spare long range sensor upgrade packages. They were scheduled to be installed on exploration vessels coming into the region, but those exploration missions were cancelled or repurposed. She's willing to install one on %s"
+                            "Our quartermaster, Sylvia Trondheim, has several spare long range sensor upgrade packages. They were scheduled to be installed on exploration vessels coming into the region, but those exploration missions were cancelled or repurposed. She's willing to install one on %s."
                         ),
                         comms_source:getCallSign()
                     )
@@ -7349,7 +7349,7 @@ function scenarioShipEnhancements()
                                     setCommsMessage(
                                         _(
                                             "upgrade-comms",
-                                            "Sylvia has installed the Richter version 7 sensor upgrade"
+                                            "Sylvia has installed the Richter version 7 sensor upgrade."
                                         )
                                     )
                                     addCommsReply(_("Back"), commsStation)
@@ -7410,7 +7410,7 @@ function scenarioShipEnhancements()
                                     setCommsMessage(
                                         _(
                                             "upgrade-comms",
-                                            "Sylvia has installed the Omniscient Mark 4 sensor upgrade"
+                                            "Sylvia has installed the Omniscient Mark 4 sensor upgrade."
                                         )
                                     )
                                     addCommsReply(_("Back"), commsStation)
@@ -7471,7 +7471,7 @@ function scenarioShipEnhancements()
                                     setCommsMessage(
                                         _(
                                             "upgrade-comms",
-                                            "Sylvia has installed the Voriax II sensor upgrade"
+                                            "Sylvia has installed the Voriax II sensor upgrade."
                                         )
                                     )
                                     addCommsReply(_("Back"), commsStation)
