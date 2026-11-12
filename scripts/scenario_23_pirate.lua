@@ -5,7 +5,7 @@
 ---
 --- Version 1
 ---
---- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's usually one every weekend. All experience levels are welcome. 
+--- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's usually one every weekend. All experience levels are welcome.
 -- Type: Replayable Mission
 -- Author: Xansta
 -- Setting[Playership]: Configure what player ship to start with. Default is random
@@ -1182,7 +1182,7 @@ function setGlobals()
 		["Mehklar"] =		{id = "M", count = 0},
 	}
 	star_list = {
-		{radius = random(600,1400), distance = random(-2500,-1400), 
+		{radius = random(600,1400), distance = random(-2500,-1400),
 			info = {
 				{
 					name = "Gamma Piscium",
@@ -1379,13 +1379,13 @@ function setGlobals()
 		{
 			name = {"Alderaan","Dagobah","Dantooine","Rigel"},
 			color = {
-				red = random(0,0.2), 
-				green = random(0,0.2), 
+				red = random(0,0.2),
+				green = random(0,0.2),
 				blue = random(0.8,1)
 			},
 			texture = {
-				surface = "planets/planet-1.png", 
-				cloud = "planets/clouds-1.png", 
+				surface = "planets/planet-1.png",
+				cloud = "planets/clouds-1.png",
 				atmosphere = "planets/atmosphere.png"
 			},
 			radius = random(3000,5000),
@@ -1393,13 +1393,13 @@ function setGlobals()
 		{
 			name = {"Pahvo","Penthara","Scalos"},
 			color = {
-				red = random(0,0.2), 
-				green = random(0,0.2), 
+				red = random(0,0.2),
+				green = random(0,0.2),
 				blue = random(0.8,1)
 			},
 			texture = {
-				surface = "planets/planet-4.png", 
-				cloud = "planets/clouds-3.png", 
+				surface = "planets/planet-4.png",
+				cloud = "planets/clouds-3.png",
 				atmosphere = "planets/atmosphere.png"
 			},
 			radius = random(3000,5000),
@@ -1407,13 +1407,13 @@ function setGlobals()
 		{
 			name = {"Tanuga","Vacca","Terlina","Timor"},
 			color = {
-				red = random(0,0.2), 
-				green = random(0,0.2), 
+				red = random(0,0.2),
+				green = random(0,0.2),
 				blue = random(0.8,1)
 			},
 			texture = {
-				surface = "planets/planet-5.png", 
-				cloud = "planets/clouds-2.png", 
+				surface = "planets/planet-5.png",
+				cloud = "planets/clouds-2.png",
 				atmosphere = "planets/atmosphere.png"
 			},
 			radius = random(3000,5000),
@@ -1972,8 +1972,8 @@ function constructEnvironment()
 		end
 		if station.comms_data.trade == nil then
 			station.comms_data.trade = {
-				food =		random(1,100) <= 18, 
-				medicine =	random(1,100) <= 23, 
+				food =		random(1,100) <= 18,
+				medicine =	random(1,100) <= 23,
 				luxury =	random(1,100) <= 35,
 			}
 		end
@@ -2116,42 +2116,42 @@ function constructEnvironment()
 	placement_areas = {
 		["Inner Torus"] = {
 			stations = inner_stations,
-			transports = transports, 
+			transports = transports,
 			space = inner_space,
 			shape = "torus",
-			center_x = center_x, 
-			center_y = center_y, 
-			inner_radius = radius + 4000, 
+			center_x = center_x,
+			center_y = center_y,
+			inner_radius = radius + 4000,
 			outer_radius = 50000,
 		},
 		["Region 2 Torus"] = {
 			stations = region_two_stations,
-			transports = transports, 
+			transports = transports,
 			space = region_two_space,
 			shape = "torus",
-			center_x = center_region_two_x, 
-			center_y = center_region_two_y, 
-			inner_radius = region_two_planet_radius + 4000, 
+			center_x = center_region_two_x,
+			center_y = center_region_two_y,
+			inner_radius = region_two_planet_radius + 4000,
 			outer_radius = 50000,
 		},
 		["Region 3 Torus"] = {
 			stations = region_three_stations,
-			transports = transports, 
+			transports = transports,
 			space = region_three_space,
 			shape = "torus",
-			center_x = center_region_three_x, 
-			center_y = center_region_three_y, 
-			inner_radius = region_three_moon_radius + 4000, 
+			center_x = center_region_three_x,
+			center_y = center_region_three_y,
+			inner_radius = region_three_moon_radius + 4000,
 			outer_radius = 50000,
 		},
 		["Region 4 Torus"] = {
 			stations = region_four_stations,
-			transports = transports, 
+			transports = transports,
 			space = region_four_space,
 			shape = "torus",
-			center_x = center_region_four_x, 
-			center_y = center_region_four_y, 
-			inner_radius = region_four_planet_radius + 4000, 
+			center_x = center_region_four_x,
+			center_y = center_region_four_y,
+			inner_radius = region_four_planet_radius + 4000,
 			outer_radius = 50000,
 		},
 	}
@@ -2634,7 +2634,7 @@ function placeTerrain(placement_area,terrain)
 		radius = radius + (field_size * 1500)
 	elseif terrain.desc == "Field" then
 		field_size = radius
-		radius = radius + 500 
+		radius = radius + 500
 	end
 	if placement_area == "Inner Torus" or placement_area == "Region 2 Torus" or placement_area == "Region 3 Torus" or placement_area == "Region 4 Torus" then
 		eo_x, eo_y = findClearSpot(area.space,area.shape,area.center_x,area.center_y,area.inner_radius,area.outer_radius,nil,radius)
@@ -2685,7 +2685,7 @@ function placeTerrain(placement_area,terrain)
 			local impact_increment = (hi_impact - lo_impact)/4
 		--	local mix = math.random(2,10 - (4 - (2*math.floor(difficulty))))	--	2-6, 2-8, 2-10
 			local mix = math.random(2,10 - (4 - (2)))	--	2-8
-			sensor_jammer_scan_complexity = 1 
+			sensor_jammer_scan_complexity = 1
 			sensor_jammer_scan_depth = 1
 			if mix > 5 then
 				sensor_jammer_scan_depth = math.min(math.random(mix-4,mix),8)
