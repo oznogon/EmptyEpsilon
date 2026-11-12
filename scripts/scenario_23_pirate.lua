@@ -11021,7 +11021,7 @@ function smee(p)
                 ),
                 _(
                     "smee-msgRelay",
-                    "Always remember, laughter is the best medicine, especially when you’re sailing through tough times."
+                    "Always remember, laughter is the best medicine, especially when you're sailing through tough times."
                 ),
                 _("smee-msgRelay", "Not all treasure is silver and gold."),
                 _("smee-msgRelay", "Why join the navy if you can be a pirate?"),
@@ -11067,11 +11067,11 @@ function smee(p)
                 ),
                 _(
                     "smee-msgRelay",
-                    "Revenge may sate your being, but don’t misunderstand me, it's an end, not a beginning."
+                    "Revenge may sate your being, but don't misunderstand me, it's an end, not a beginning."
                 ),
                 _(
                     "smee-msgRelay",
-                    "Betrayin’s all part of piratin’. If you don’t know that you’re not even close to being a pirate."
+                    "Betrayin's all part of piratin'. If you don't know that you're not even close to being a pirate."
                 ),
                 _(
                     "smee-msgRelay",
