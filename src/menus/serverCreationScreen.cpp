@@ -133,8 +133,7 @@ ServerSetupScreen::ServerSetupScreen()
         ->setAttribute("margin", "0, 10, 0, 0");
 
     server_port = new GuiTextEntry(row, "SERVER_PORT", string(DEFAULT_SERVER_PORT));
-    server_port
-        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    server_port->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     (new GuiTextTooltip(server_port, "SERVER_PORT_TIP", tr("tooltips", "Set the network port for the server. Default is 35666.")))->setWidth();
 
     // Server info section.
@@ -210,20 +209,24 @@ ServerSetupScreen::ServerSetupScreen()
     cancel_server->setSize(250.0f, GuiElement::GuiSizeMax);
     (new GuiTextTooltip(cancel_server, "CANCEL_SERVER_TIP", tr("tooltips", "Cancel and return to the main menu without starting a server.")))->setWidth();
 
-    (new GuiElement(row, "SPACER"))
+    auto* error_info = new GuiLabel(row, "ERROR_MESSAGE", "");
+    error_info
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Start server button.
     auto* start_server = new GuiButton(row, "START_SERVER", tr("Start server"),
-        [this]()
+        [this, error_info]()
         {
             int port = server_port->getText().toInt();
             if (port < 1024 || port > 65535) port = DEFAULT_SERVER_PORT;
             new EpsilonServer(port);
 
-            if (!game_server.isAlive())
+            if (game_server.isAlive())
+                error_info->setText("");
+            else
             {
-                LOG(Error, "[servercreation] Failed to start server on port " + string(port) + " (port may be in use).");
+                error_info->setText(tr("Failed to start server, port " + string(port) + " might be in use"));
+                LOG(Error, "[servercreation] Failed to start server, port " + string(port) + " might be in use.");
                 return;
             }
 
@@ -237,6 +240,7 @@ ServerSetupScreen::ServerSetupScreen()
                 new ServerSetupMasterServerRegistrationScreen();
             }
             else new ServerScenarioSelectionScreen();
+
             destroy();
         }
     );

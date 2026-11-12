@@ -75,11 +75,11 @@ ServerBrowserMenu::ServerBrowserMenu(std::optional<GameClient::DisconnectReason>
 
     if (last_attempt)
     {
-        auto error_message = tr("Connection error: {message}").format({
-            {"message", disconnectErrorMessage(*last_attempt)}
-        });
-
-        auto error_info = new GuiLabel(this, "LAST_ATTEMPT_ERROR_MESSAGE", error_message);
+        auto error_info = new GuiLabel(this, "LAST_ATTEMPT_ERROR_MESSAGE",
+            tr("Connection error: {message}").format({
+                {"message", disconnectErrorMessage(*last_attempt)}
+            })
+        );
         error_info->setPosition(0.0f, -80.0f, sp::Alignment::BottomCenter);
     }
 
