@@ -2928,12 +2928,12 @@ msgctxt "homeStationHealth-tabRelay&Operations"
 msgid "%s %s:%i%% H:%i%%"
 msgstr ""
 
-#: scripts/scenario_40_defender_hunter.lua:11079
+#: scripts/scenario_40_defender_hunter.lua:11077
 msgctxt "coolant-buttonEngineer"
 msgid "Get Coolant"
 msgstr ""
 
-#: scripts/scenario_40_defender_hunter.lua:11093
+#: scripts/scenario_40_defender_hunter.lua:11091
 msgctxt "coolant-buttonEngineer+"
 msgid "Get Coolant"
 msgstr ""

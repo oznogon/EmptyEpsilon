@@ -664,31 +664,31 @@ msgctxt "database"
 msgid "%.1f dmg. / %.1f sec."
 msgstr "%.1f dmg. / %.1f sec."
 
-#: scripts/science_db.lua:599
+#: scripts/science_db.lua:600
 #, lua-format
 msgctxt "database"
 msgid "%s tube"
 msgstr "%s tube"
 
-#: scripts/science_db.lua:601
+#: scripts/science_db.lua:602
 #, lua-format
 msgctxt "database"
 msgid "%s small tube"
 msgstr "%s small tube"
 
-#: scripts/science_db.lua:604
+#: scripts/science_db.lua:605
 #, lua-format
 msgctxt "database"
 msgid "%s large tube"
 msgstr "%s large tube"
 
-#: scripts/science_db.lua:609
+#: scripts/science_db.lua:610
 #, lua-format
 msgctxt "database"
 msgid "%.1f sec."
 msgstr "%.1f sec."
 
-#: scripts/science_db.lua:628
+#: scripts/science_db.lua:632
 #, lua-format
 msgctxt "database"
 msgid "%s capacity"

@@ -1383,34 +1383,34 @@ msgstr ""
 #: scripts/scenario_38_allies_and_enemies.lua:8414
 #: scripts/scenario_38_allies_and_enemies.lua:8422
 #: scripts/scenario_38_allies_and_enemies.lua:8433
-#: scripts/scenario_38_allies_and_enemies.lua:8475
-#: scripts/scenario_38_allies_and_enemies.lua:8545
-#: scripts/scenario_38_allies_and_enemies.lua:8550
-#: scripts/scenario_38_allies_and_enemies.lua:8623
-#: scripts/scenario_38_allies_and_enemies.lua:8628
-#: scripts/scenario_38_allies_and_enemies.lua:8701
-#: scripts/scenario_38_allies_and_enemies.lua:8706
-#: scripts/scenario_38_allies_and_enemies.lua:8779
-#: scripts/scenario_38_allies_and_enemies.lua:8784
-#: scripts/scenario_38_allies_and_enemies.lua:8917
-#: scripts/scenario_38_allies_and_enemies.lua:8939
-#: scripts/scenario_38_allies_and_enemies.lua:8951
-#: scripts/scenario_38_allies_and_enemies.lua:9020
-#: scripts/scenario_38_allies_and_enemies.lua:9039
-#: scripts/scenario_38_allies_and_enemies.lua:9087
-#: scripts/scenario_38_allies_and_enemies.lua:9141
-#: scripts/scenario_38_allies_and_enemies.lua:9202
-#: scripts/scenario_38_allies_and_enemies.lua:9255
-#: scripts/scenario_38_allies_and_enemies.lua:9316
-#: scripts/scenario_38_allies_and_enemies.lua:9440
-#: scripts/scenario_38_allies_and_enemies.lua:9451
-#: scripts/scenario_38_allies_and_enemies.lua:9493
-#: scripts/scenario_38_allies_and_enemies.lua:9503
-#: scripts/scenario_38_allies_and_enemies.lua:9552
-#: scripts/scenario_38_allies_and_enemies.lua:9579
-#: scripts/scenario_38_allies_and_enemies.lua:9635
-#: scripts/scenario_38_allies_and_enemies.lua:9688
-#: scripts/scenario_38_allies_and_enemies.lua:9750
+#: scripts/scenario_38_allies_and_enemies.lua:8473
+#: scripts/scenario_38_allies_and_enemies.lua:8543
+#: scripts/scenario_38_allies_and_enemies.lua:8548
+#: scripts/scenario_38_allies_and_enemies.lua:8621
+#: scripts/scenario_38_allies_and_enemies.lua:8626
+#: scripts/scenario_38_allies_and_enemies.lua:8699
+#: scripts/scenario_38_allies_and_enemies.lua:8704
+#: scripts/scenario_38_allies_and_enemies.lua:8777
+#: scripts/scenario_38_allies_and_enemies.lua:8782
+#: scripts/scenario_38_allies_and_enemies.lua:8915
+#: scripts/scenario_38_allies_and_enemies.lua:8937
+#: scripts/scenario_38_allies_and_enemies.lua:8949
+#: scripts/scenario_38_allies_and_enemies.lua:9018
+#: scripts/scenario_38_allies_and_enemies.lua:9037
+#: scripts/scenario_38_allies_and_enemies.lua:9085
+#: scripts/scenario_38_allies_and_enemies.lua:9139
+#: scripts/scenario_38_allies_and_enemies.lua:9200
+#: scripts/scenario_38_allies_and_enemies.lua:9253
+#: scripts/scenario_38_allies_and_enemies.lua:9314
+#: scripts/scenario_38_allies_and_enemies.lua:9438
+#: scripts/scenario_38_allies_and_enemies.lua:9449
+#: scripts/scenario_38_allies_and_enemies.lua:9491
+#: scripts/scenario_38_allies_and_enemies.lua:9501
+#: scripts/scenario_38_allies_and_enemies.lua:9550
+#: scripts/scenario_38_allies_and_enemies.lua:9577
+#: scripts/scenario_38_allies_and_enemies.lua:9633
+#: scripts/scenario_38_allies_and_enemies.lua:9686
+#: scripts/scenario_38_allies_and_enemies.lua:9748
 msgid "Back"
 msgstr ""
 
@@ -1961,7 +1961,7 @@ msgstr ""
 
 #: scripts/scenario_38_allies_and_enemies.lua:7321
 #: scripts/scenario_38_allies_and_enemies.lua:7352
-#: scripts/scenario_38_allies_and_enemies.lua:9574
+#: scripts/scenario_38_allies_and_enemies.lua:9572
 msgctxt "needRep-comms"
 msgid "Insufficient reputation"
 msgstr ""
@@ -1974,7 +1974,7 @@ msgstr ""
 
 #: scripts/scenario_38_allies_and_enemies.lua:7368
 #: scripts/scenario_38_allies_and_enemies.lua:8100
-#: scripts/scenario_38_allies_and_enemies.lua:9433
+#: scripts/scenario_38_allies_and_enemies.lua:9431
 msgctxt "path-comms"
 msgid "Where is Bespin?"
 msgstr ""
@@ -1987,7 +1987,7 @@ msgstr ""
 
 #: scripts/scenario_38_allies_and_enemies.lua:7386
 #: scripts/scenario_38_allies_and_enemies.lua:8103
-#: scripts/scenario_38_allies_and_enemies.lua:9436
+#: scripts/scenario_38_allies_and_enemies.lua:9434
 #, lua-format
 msgctxt "path-comms"
 msgid "Bespin is in %s"
@@ -2084,14 +2084,14 @@ msgid "Available Space: %i, Available Reputation: %i\n"
 msgstr ""
 
 #: scripts/scenario_38_allies_and_enemies.lua:7499
-#: scripts/scenario_38_allies_and_enemies.lua:9101
-#: scripts/scenario_38_allies_and_enemies.lua:9162
-#: scripts/scenario_38_allies_and_enemies.lua:9215
-#: scripts/scenario_38_allies_and_enemies.lua:9276
-#: scripts/scenario_38_allies_and_enemies.lua:9512
-#: scripts/scenario_38_allies_and_enemies.lua:9595
-#: scripts/scenario_38_allies_and_enemies.lua:9648
-#: scripts/scenario_38_allies_and_enemies.lua:9710
+#: scripts/scenario_38_allies_and_enemies.lua:9099
+#: scripts/scenario_38_allies_and_enemies.lua:9160
+#: scripts/scenario_38_allies_and_enemies.lua:9213
+#: scripts/scenario_38_allies_and_enemies.lua:9274
+#: scripts/scenario_38_allies_and_enemies.lua:9510
+#: scripts/scenario_38_allies_and_enemies.lua:9593
+#: scripts/scenario_38_allies_and_enemies.lua:9646
+#: scripts/scenario_38_allies_and_enemies.lua:9708
 #, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
@@ -2159,8 +2159,8 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_38_allies_and_enemies.lua:7611
-#: scripts/scenario_38_allies_and_enemies.lua:9068
-#: scripts/scenario_38_allies_and_enemies.lua:9474
+#: scripts/scenario_38_allies_and_enemies.lua:9066
+#: scripts/scenario_38_allies_and_enemies.lua:9472
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade luxury for %s"
@@ -2699,358 +2699,358 @@ msgctxt "stationAssist-comms"
 msgid "Hull: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8453
+#: scripts/scenario_38_allies_and_enemies.lua:8451
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Shield: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8464
+#: scripts/scenario_38_allies_and_enemies.lua:8462
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Shield %s: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8481
+#: scripts/scenario_38_allies_and_enemies.lua:8479
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%i rep)"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8489
+#: scripts/scenario_38_allies_and_enemies.lua:8487
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request supplies."
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8496
+#: scripts/scenario_38_allies_and_enemies.lua:8494
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we deliver your supplies?"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8502
-#: scripts/scenario_38_allies_and_enemies.lua:8581
-#: scripts/scenario_38_allies_and_enemies.lua:8657
-#: scripts/scenario_38_allies_and_enemies.lua:8735
+#: scripts/scenario_38_allies_and_enemies.lua:8500
+#: scripts/scenario_38_allies_and_enemies.lua:8579
+#: scripts/scenario_38_allies_and_enemies.lua:8655
+#: scripts/scenario_38_allies_and_enemies.lua:8733
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Waypoint %d"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8532
+#: scripts/scenario_38_allies_and_enemies.lua:8530
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched a supply ship toward waypoint %d"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8541
-#: scripts/scenario_38_allies_and_enemies.lua:8619
-#: scripts/scenario_38_allies_and_enemies.lua:8697
-#: scripts/scenario_38_allies_and_enemies.lua:8775
+#: scripts/scenario_38_allies_and_enemies.lua:8539
+#: scripts/scenario_38_allies_and_enemies.lua:8617
+#: scripts/scenario_38_allies_and_enemies.lua:8695
+#: scripts/scenario_38_allies_and_enemies.lua:8773
 msgctxt "needRep-comms"
 msgid "Not enough reputation!"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8559
+#: scripts/scenario_38_allies_and_enemies.lua:8557
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send Adder MK5 reinforcements! (%i rep)"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8568
-#: scripts/scenario_38_allies_and_enemies.lua:8644
-#: scripts/scenario_38_allies_and_enemies.lua:8722
+#: scripts/scenario_38_allies_and_enemies.lua:8566
+#: scripts/scenario_38_allies_and_enemies.lua:8642
+#: scripts/scenario_38_allies_and_enemies.lua:8720
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request reinforcements."
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8575
-#: scripts/scenario_38_allies_and_enemies.lua:8651
-#: scripts/scenario_38_allies_and_enemies.lua:8729
+#: scripts/scenario_38_allies_and_enemies.lua:8573
+#: scripts/scenario_38_allies_and_enemies.lua:8649
+#: scripts/scenario_38_allies_and_enemies.lua:8727
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we dispatch the reinforcements?"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8609
-#: scripts/scenario_38_allies_and_enemies.lua:8687
-#: scripts/scenario_38_allies_and_enemies.lua:8765
+#: scripts/scenario_38_allies_and_enemies.lua:8607
+#: scripts/scenario_38_allies_and_enemies.lua:8685
+#: scripts/scenario_38_allies_and_enemies.lua:8763
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched %s to assist at waypoint %d"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8635
+#: scripts/scenario_38_allies_and_enemies.lua:8633
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send Phobos T3 reinforcements! (%i rep)"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8713
+#: scripts/scenario_38_allies_and_enemies.lua:8711
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send Stalker Q7 reinforcements! (%i rep)"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8826
+#: scripts/scenario_38_allies_and_enemies.lua:8824
 msgctxt "trade-comms"
 msgid " and will trade it for medicine"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8832
+#: scripts/scenario_38_allies_and_enemies.lua:8830
 msgctxt "trade-comms"
 msgid " or food"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8837
+#: scripts/scenario_38_allies_and_enemies.lua:8835
 msgctxt "trade-comms"
 msgid " and will trade it for food"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8845
+#: scripts/scenario_38_allies_and_enemies.lua:8843
 msgctxt "trade-comms"
 msgid " or luxury"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8850
+#: scripts/scenario_38_allies_and_enemies.lua:8848
 msgctxt "trade-comms"
 msgid " and will trade it for luxury"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8905
-#: scripts/scenario_38_allies_and_enemies.lua:9560
+#: scripts/scenario_38_allies_and_enemies.lua:8903
+#: scripts/scenario_38_allies_and_enemies.lua:9558
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8907
+#: scripts/scenario_38_allies_and_enemies.lua:8905
 msgctxt "shipAssist-comms"
 msgid "Sir, how can we assist?"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8909
+#: scripts/scenario_38_allies_and_enemies.lua:8907
 msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8914
+#: scripts/scenario_38_allies_and_enemies.lua:8912
 msgctxt "shipAssist-comms"
 msgid "No waypoints set. Please set a waypoint first."
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8920
+#: scripts/scenario_38_allies_and_enemies.lua:8918
 msgctxt "shipAssist-comms"
 msgid "Which waypoint should we defend?"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8925
+#: scripts/scenario_38_allies_and_enemies.lua:8923
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend waypoint %d"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8934
+#: scripts/scenario_38_allies_and_enemies.lua:8932
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at waypoint %d."
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8946
+#: scripts/scenario_38_allies_and_enemies.lua:8944
 msgctxt "shipAssist-comms"
 msgid "Assist me"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8948
+#: scripts/scenario_38_allies_and_enemies.lua:8946
 msgctxt "shipAssist-comms"
 msgid "Heading toward you to assist."
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8954
+#: scripts/scenario_38_allies_and_enemies.lua:8952
 msgctxt "shipAssist-comms"
 msgid "Report status"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8956
+#: scripts/scenario_38_allies_and_enemies.lua:8954
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Hull: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8963
+#: scripts/scenario_38_allies_and_enemies.lua:8961
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8973
+#: scripts/scenario_38_allies_and_enemies.lua:8971
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Front Shield: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8982
+#: scripts/scenario_38_allies_and_enemies.lua:8980
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Rear Shield: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:8993
+#: scripts/scenario_38_allies_and_enemies.lua:8991
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield %s: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9009
+#: scripts/scenario_38_allies_and_enemies.lua:9007
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s Missiles: %d/%d\n"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9028
+#: scripts/scenario_38_allies_and_enemies.lua:9026
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9034
+#: scripts/scenario_38_allies_and_enemies.lua:9032
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Docking at %s."
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9076
-#: scripts/scenario_38_allies_and_enemies.lua:9482
+#: scripts/scenario_38_allies_and_enemies.lua:9074
+#: scripts/scenario_38_allies_and_enemies.lua:9480
 msgctxt "trade-comms"
 msgid "Insufficient inventory on freighter for trade"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9084
-#: scripts/scenario_38_allies_and_enemies.lua:9490
+#: scripts/scenario_38_allies_and_enemies.lua:9082
+#: scripts/scenario_38_allies_and_enemies.lua:9488
 msgctxt "trade-comms"
 msgid "Traded"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9110
-#: scripts/scenario_38_allies_and_enemies.lua:9171
-#: scripts/scenario_38_allies_and_enemies.lua:9224
-#: scripts/scenario_38_allies_and_enemies.lua:9285
-#: scripts/scenario_38_allies_and_enemies.lua:9521
-#: scripts/scenario_38_allies_and_enemies.lua:9604
-#: scripts/scenario_38_allies_and_enemies.lua:9657
-#: scripts/scenario_38_allies_and_enemies.lua:9719
+#: scripts/scenario_38_allies_and_enemies.lua:9108
+#: scripts/scenario_38_allies_and_enemies.lua:9169
+#: scripts/scenario_38_allies_and_enemies.lua:9222
+#: scripts/scenario_38_allies_and_enemies.lua:9283
+#: scripts/scenario_38_allies_and_enemies.lua:9519
+#: scripts/scenario_38_allies_and_enemies.lua:9602
+#: scripts/scenario_38_allies_and_enemies.lua:9655
+#: scripts/scenario_38_allies_and_enemies.lua:9717
 msgctxt "trade-comms"
 msgid "Insufficient cargo space for purchase"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9117
-#: scripts/scenario_38_allies_and_enemies.lua:9178
-#: scripts/scenario_38_allies_and_enemies.lua:9231
-#: scripts/scenario_38_allies_and_enemies.lua:9292
-#: scripts/scenario_38_allies_and_enemies.lua:9528
-#: scripts/scenario_38_allies_and_enemies.lua:9611
-#: scripts/scenario_38_allies_and_enemies.lua:9664
-#: scripts/scenario_38_allies_and_enemies.lua:9726
+#: scripts/scenario_38_allies_and_enemies.lua:9115
+#: scripts/scenario_38_allies_and_enemies.lua:9176
+#: scripts/scenario_38_allies_and_enemies.lua:9229
+#: scripts/scenario_38_allies_and_enemies.lua:9290
+#: scripts/scenario_38_allies_and_enemies.lua:9526
+#: scripts/scenario_38_allies_and_enemies.lua:9609
+#: scripts/scenario_38_allies_and_enemies.lua:9662
+#: scripts/scenario_38_allies_and_enemies.lua:9724
 msgctxt "trade-comms"
 msgid "Insufficient inventory on freighter"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9129
-#: scripts/scenario_38_allies_and_enemies.lua:9190
-#: scripts/scenario_38_allies_and_enemies.lua:9243
-#: scripts/scenario_38_allies_and_enemies.lua:9304
-#: scripts/scenario_38_allies_and_enemies.lua:9540
-#: scripts/scenario_38_allies_and_enemies.lua:9623
-#: scripts/scenario_38_allies_and_enemies.lua:9676
-#: scripts/scenario_38_allies_and_enemies.lua:9738
+#: scripts/scenario_38_allies_and_enemies.lua:9127
+#: scripts/scenario_38_allies_and_enemies.lua:9188
+#: scripts/scenario_38_allies_and_enemies.lua:9241
+#: scripts/scenario_38_allies_and_enemies.lua:9302
+#: scripts/scenario_38_allies_and_enemies.lua:9538
+#: scripts/scenario_38_allies_and_enemies.lua:9621
+#: scripts/scenario_38_allies_and_enemies.lua:9674
+#: scripts/scenario_38_allies_and_enemies.lua:9736
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9137
-#: scripts/scenario_38_allies_and_enemies.lua:9198
-#: scripts/scenario_38_allies_and_enemies.lua:9251
-#: scripts/scenario_38_allies_and_enemies.lua:9312
-#: scripts/scenario_38_allies_and_enemies.lua:9548
-#: scripts/scenario_38_allies_and_enemies.lua:9631
-#: scripts/scenario_38_allies_and_enemies.lua:9684
-#: scripts/scenario_38_allies_and_enemies.lua:9746
+#: scripts/scenario_38_allies_and_enemies.lua:9135
+#: scripts/scenario_38_allies_and_enemies.lua:9196
+#: scripts/scenario_38_allies_and_enemies.lua:9249
+#: scripts/scenario_38_allies_and_enemies.lua:9310
+#: scripts/scenario_38_allies_and_enemies.lua:9546
+#: scripts/scenario_38_allies_and_enemies.lua:9629
+#: scripts/scenario_38_allies_and_enemies.lua:9682
+#: scripts/scenario_38_allies_and_enemies.lua:9744
 msgctxt "trade-comms"
 msgid "Purchased"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9331
+#: scripts/scenario_38_allies_and_enemies.lua:9329
 msgctxt "shipEnemy-comms"
 msgid "We will see to your destruction!"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9333
+#: scripts/scenario_38_allies_and_enemies.lua:9331
 msgctxt "shipEnemy-comms"
 msgid "Your bloodline will end here!"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9335
+#: scripts/scenario_38_allies_and_enemies.lua:9333
 msgctxt "shipEnemy-comms"
 msgid "Your feeble threats are meaningless."
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9338
+#: scripts/scenario_38_allies_and_enemies.lua:9336
 msgctxt "shipEnemy-comms"
 msgid ""
 "Ktzzzsss.\n"
 "You will DIEEee weaklingsss!"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9342
+#: scripts/scenario_38_allies_and_enemies.lua:9340
 msgctxt "shipEnemy-comms"
 msgid "We will destroy you"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9345
+#: scripts/scenario_38_allies_and_enemies.lua:9343
 msgctxt "shipEnemy-comms"
 msgid "We think not. It is you who will experience destruction!"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9348
+#: scripts/scenario_38_allies_and_enemies.lua:9346
 msgctxt "shipEnemy-comms"
 msgid "You have no honor"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9351
+#: scripts/scenario_38_allies_and_enemies.lua:9349
 msgctxt "shipEnemy-comms"
 msgid "Your insult has brought our wrath upon you. Prepare to die."
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9355
+#: scripts/scenario_38_allies_and_enemies.lua:9353
 msgctxt "shipEnemy-comms"
 msgid "Your comments about honor have no meaning to us"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9359
+#: scripts/scenario_38_allies_and_enemies.lua:9357
 msgctxt "shipEnemy-comms"
 msgid "We pity your pathetic race"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9362
+#: scripts/scenario_38_allies_and_enemies.lua:9360
 msgctxt "shipEnemy-comms"
 msgid "Pathetic? You will regret your disparagement!"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9365
+#: scripts/scenario_38_allies_and_enemies.lua:9363
 msgctxt "shipEnemy-comms"
 msgid "We don't care what you think of us"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9371
+#: scripts/scenario_38_allies_and_enemies.lua:9369
 msgctxt "shipEnemy-comms"
 msgid ""
 "We wish you no harm, but will harm you if we must.\n"
 "End of transmission."
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9378
+#: scripts/scenario_38_allies_and_enemies.lua:9376
 msgctxt "shipEnemy-comms"
 msgid "Stay out of our way, or your death will amuse us extremely!"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9385
+#: scripts/scenario_38_allies_and_enemies.lua:9383
 msgctxt "shipEnemy-comms"
 msgid ""
 "One zero one.\n"
@@ -3061,22 +3061,22 @@ msgid ""
 "Communication halted."
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9388
+#: scripts/scenario_38_allies_and_enemies.lua:9386
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9391
+#: scripts/scenario_38_allies_and_enemies.lua:9389
 msgctxt "shipEnemy-comms"
 msgid "Rogue command received. Targeting source."
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9394
+#: scripts/scenario_38_allies_and_enemies.lua:9392
 msgctxt "shipEnemy-comms"
 msgid "External command ignored."
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9399
+#: scripts/scenario_38_allies_and_enemies.lua:9397
 msgctxt "shipEnemy-comms"
 msgid ""
 "The hive suffers no threats. Opposition to any of us is opposition to us "
@@ -3084,165 +3084,165 @@ msgid ""
 "Stand down or prepare to donate your corpses toward our nutrition."
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9404
+#: scripts/scenario_38_allies_and_enemies.lua:9402
 msgctxt "shipEnemy-comms"
 msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9408
+#: scripts/scenario_38_allies_and_enemies.lua:9406
 msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9412
+#: scripts/scenario_38_allies_and_enemies.lua:9410
 msgctxt "shipEnemy-comms"
 msgid "The hive has greater priorities than exterminating pests."
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9415
+#: scripts/scenario_38_allies_and_enemies.lua:9413
 msgctxt "shipEnemy-comms"
 msgid "Mind your own business!"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9447
+#: scripts/scenario_38_allies_and_enemies.lua:9445
 msgctxt "trade-comms"
 msgid "Yes?"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9449
+#: scripts/scenario_38_allies_and_enemies.lua:9447
 msgctxt "trade-comms"
 msgid "Where are you headed?"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9500
+#: scripts/scenario_38_allies_and_enemies.lua:9498
 msgctxt "trade-comms"
 msgid "Insufficient luxury to trade"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9567
+#: scripts/scenario_38_allies_and_enemies.lua:9565
 #, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %.1f reputation)"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9696
+#: scripts/scenario_38_allies_and_enemies.lua:9694
 msgctxt "trade-comms"
 msgid "Why are you bothering me?"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9763
+#: scripts/scenario_38_allies_and_enemies.lua:9761
 msgctxt "ship-comms"
 msgid ""
 "Sorry, we have no time to chat with you.\n"
 "We are on an important mission."
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:9768
+#: scripts/scenario_38_allies_and_enemies.lua:9766
 msgctxt "ship-comms"
 msgid ""
 "We have nothing for you.\n"
 "Good day."
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:10047
+#: scripts/scenario_38_allies_and_enemies.lua:10045
 msgctxt "inventory-buttonRelay"
 msgid "Inventory"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:10059
+#: scripts/scenario_38_allies_and_enemies.lua:10057
 msgctxt "inventory-buttonOperations"
 msgid "Inventory"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:10073
-#: scripts/scenario_38_allies_and_enemies.lua:10108
-#: scripts/scenario_38_allies_and_enemies.lua:10143
-#: scripts/scenario_38_allies_and_enemies.lua:10178
-#: scripts/scenario_38_allies_and_enemies.lua:10213
-#: scripts/scenario_38_allies_and_enemies.lua:10248
-#: scripts/scenario_38_allies_and_enemies.lua:10283
-#: scripts/scenario_38_allies_and_enemies.lua:10318
+#: scripts/scenario_38_allies_and_enemies.lua:10071
+#: scripts/scenario_38_allies_and_enemies.lua:10106
+#: scripts/scenario_38_allies_and_enemies.lua:10141
+#: scripts/scenario_38_allies_and_enemies.lua:10176
+#: scripts/scenario_38_allies_and_enemies.lua:10211
+#: scripts/scenario_38_allies_and_enemies.lua:10246
+#: scripts/scenario_38_allies_and_enemies.lua:10281
+#: scripts/scenario_38_allies_and_enemies.lua:10316
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "%s Current cargo:"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:10086
-#: scripts/scenario_38_allies_and_enemies.lua:10121
-#: scripts/scenario_38_allies_and_enemies.lua:10156
-#: scripts/scenario_38_allies_and_enemies.lua:10191
-#: scripts/scenario_38_allies_and_enemies.lua:10226
-#: scripts/scenario_38_allies_and_enemies.lua:10261
-#: scripts/scenario_38_allies_and_enemies.lua:10296
-#: scripts/scenario_38_allies_and_enemies.lua:10331
+#: scripts/scenario_38_allies_and_enemies.lua:10084
+#: scripts/scenario_38_allies_and_enemies.lua:10119
+#: scripts/scenario_38_allies_and_enemies.lua:10154
+#: scripts/scenario_38_allies_and_enemies.lua:10189
+#: scripts/scenario_38_allies_and_enemies.lua:10224
+#: scripts/scenario_38_allies_and_enemies.lua:10259
+#: scripts/scenario_38_allies_and_enemies.lua:10294
+#: scripts/scenario_38_allies_and_enemies.lua:10329
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "     %s: %i"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:10097
-#: scripts/scenario_38_allies_and_enemies.lua:10132
-#: scripts/scenario_38_allies_and_enemies.lua:10167
-#: scripts/scenario_38_allies_and_enemies.lua:10202
-#: scripts/scenario_38_allies_and_enemies.lua:10237
-#: scripts/scenario_38_allies_and_enemies.lua:10272
-#: scripts/scenario_38_allies_and_enemies.lua:10307
-#: scripts/scenario_38_allies_and_enemies.lua:10342
+#: scripts/scenario_38_allies_and_enemies.lua:10095
+#: scripts/scenario_38_allies_and_enemies.lua:10130
+#: scripts/scenario_38_allies_and_enemies.lua:10165
+#: scripts/scenario_38_allies_and_enemies.lua:10200
+#: scripts/scenario_38_allies_and_enemies.lua:10235
+#: scripts/scenario_38_allies_and_enemies.lua:10270
+#: scripts/scenario_38_allies_and_enemies.lua:10305
+#: scripts/scenario_38_allies_and_enemies.lua:10340
 msgctxt "inventory-shipLog"
 msgid "     Empty\n"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:10100
-#: scripts/scenario_38_allies_and_enemies.lua:10135
-#: scripts/scenario_38_allies_and_enemies.lua:10170
-#: scripts/scenario_38_allies_and_enemies.lua:10205
-#: scripts/scenario_38_allies_and_enemies.lua:10240
-#: scripts/scenario_38_allies_and_enemies.lua:10275
-#: scripts/scenario_38_allies_and_enemies.lua:10310
-#: scripts/scenario_38_allies_and_enemies.lua:10345
+#: scripts/scenario_38_allies_and_enemies.lua:10098
+#: scripts/scenario_38_allies_and_enemies.lua:10133
+#: scripts/scenario_38_allies_and_enemies.lua:10168
+#: scripts/scenario_38_allies_and_enemies.lua:10203
+#: scripts/scenario_38_allies_and_enemies.lua:10238
+#: scripts/scenario_38_allies_and_enemies.lua:10273
+#: scripts/scenario_38_allies_and_enemies.lua:10308
+#: scripts/scenario_38_allies_and_enemies.lua:10343
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "Available space: %i"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:10377
+#: scripts/scenario_38_allies_and_enemies.lua:10375
 msgctxt "coolant-buttonEngineer"
 msgid "Get Coolant"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:10387
+#: scripts/scenario_38_allies_and_enemies.lua:10385
 msgctxt "coolant-buttonEngineer+"
 msgid "Get Coolant"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:10431
+#: scripts/scenario_38_allies_and_enemies.lua:10429
 msgctxt "coolant-tabEngineer"
 msgid "Gathering Coolant"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:10435
+#: scripts/scenario_38_allies_and_enemies.lua:10433
 #, lua-format
 msgctxt "coolant-tabEngineer"
 msgid "Deploying Collectors %i"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:10441
+#: scripts/scenario_38_allies_and_enemies.lua:10439
 #, lua-format
 msgctxt "coolant-tabEngineer"
 msgid "Configuring Collectors %i"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:10481
+#: scripts/scenario_38_allies_and_enemies.lua:10479
 msgctxt "msgMainscreen"
 msgid "Single selected mission completed"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:10493
+#: scripts/scenario_38_allies_and_enemies.lua:10491
 msgctxt "msgMainscreen"
 msgid "All missions completed"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:10531
+#: scripts/scenario_38_allies_and_enemies.lua:10529
 msgctxt "doomsdayGoal-shipLog"
 msgid ""
 "Intelligence tells us the Exuari have nearly completed a 'doomsday' device. "
@@ -3251,18 +3251,18 @@ msgid ""
 "mechanism. Find professor Unruh and get the plans for his defense mechanism"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:10539
+#: scripts/scenario_38_allies_and_enemies.lua:10537
 msgctxt "doomsdayOrders-comms"
 msgid "Find professor Unruh for doomsday defense mechanism plans"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:10580
+#: scripts/scenario_38_allies_and_enemies.lua:10578
 #, lua-format
 msgctxt "doomsday-comms"
 msgid "Gregory Unruh resides on station %s"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:10673
+#: scripts/scenario_38_allies_and_enemies.lua:10671
 #, lua-format
 msgctxt "doomsday-shipLog"
 msgid ""
@@ -3270,19 +3270,19 @@ msgid ""
 "doomsday device. Exuari and Kraylors both seem to be on a pillaging rampage"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:10688
+#: scripts/scenario_38_allies_and_enemies.lua:10686
 #, lua-format
 msgctxt "doomsdayOrders-comms"
 msgid "Get %s, %s and %s to build doomsday defense mechanism"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:10703
+#: scripts/scenario_38_allies_and_enemies.lua:10701
 #, lua-format
 msgctxt "doomsday-shipLog"
 msgid "The instructions list %s, %s and %s as necessary components"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:10724
+#: scripts/scenario_38_allies_and_enemies.lua:10722
 #, lua-format
 msgctxt "doomsday-shipLog"
 msgid ""
@@ -3290,42 +3290,42 @@ msgid ""
 "on %s, %s on %s, %s on %s"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:10772
+#: scripts/scenario_38_allies_and_enemies.lua:10770
 msgctxt "doomsday-shipLog"
 msgid ""
 "With all three components obtained, Engineering and Science quickly complete "
 "and deploy the doomsday device defense mechanism"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:10836
-#: scripts/scenario_38_allies_and_enemies.lua:10844
+#: scripts/scenario_38_allies_and_enemies.lua:10834
+#: scripts/scenario_38_allies_and_enemies.lua:10842
 msgctxt "doomsday-tabEngineer&Engineer+"
 msgid "Doomsday Device:"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:10839
+#: scripts/scenario_38_allies_and_enemies.lua:10837
 msgctxt "doomsday-tabEngineer&Engineer+"
 msgid "Doomsday Device Built"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:10847
+#: scripts/scenario_38_allies_and_enemies.lua:10845
 #, lua-format
 msgctxt "doomsday-tabEngineer&Engineer+"
 msgid "%s %i"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:10853
+#: scripts/scenario_38_allies_and_enemies.lua:10851
 #, lua-format
 msgctxt "doomsday-tabEngineer&Engineer+"
 msgid "%s %i:%.2i"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:10898
+#: scripts/scenario_38_allies_and_enemies.lua:10896
 msgctxt "doomsday-msgMainscreen"
 msgid "All human stations destroyed"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:11024
+#: scripts/scenario_38_allies_and_enemies.lua:11022
 msgctxt "doctorGoal-shipLog"
 msgid ""
 "Our allies, the Arlenians tell us that Admiral Koshenz has contracted a "
@@ -3341,23 +3341,23 @@ msgid ""
 "long to live"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:11032
+#: scripts/scenario_38_allies_and_enemies.lua:11030
 msgctxt "doctorOrders-comms"
 msgid "Find Dr. Thultris for help with Arlenian Admiral Koshenz"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:11071
+#: scripts/scenario_38_allies_and_enemies.lua:11069
 #, lua-format
 msgctxt "doctor-comms"
 msgid "Dr. Thultris resides on station %s"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:11092
+#: scripts/scenario_38_allies_and_enemies.lua:11090
 msgctxt "doctor-msgMainscreen"
 msgid "Arlenian Admiral Koshenz dies"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:11100
+#: scripts/scenario_38_allies_and_enemies.lua:11098
 #, lua-format
 msgctxt "doctor-msgMainscreen"
 msgid ""
@@ -3365,14 +3365,14 @@ msgid ""
 "station %s"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:11116
+#: scripts/scenario_38_allies_and_enemies.lua:11114
 msgctxt "doctor-shipLog"
 msgid ""
 "The Arlenians say that they think the admiral has less than three minutes to "
 "live"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:11145
+#: scripts/scenario_38_allies_and_enemies.lua:11143
 #, lua-format
 msgctxt "doctor-shipLog"
 msgid ""
@@ -3380,41 +3380,41 @@ msgid ""
 "detect Kraylor ships en route to %s"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:11172
+#: scripts/scenario_38_allies_and_enemies.lua:11170
 #, lua-format
 msgctxt "doctor-shipLog"
 msgid "Admiral Koshenz is on %s in %s"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:11182
+#: scripts/scenario_38_allies_and_enemies.lua:11180
 #, lua-format
 msgctxt "doctorOrders-comms"
 msgid "Take Dr. Thultris to %s in %s"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:11195
+#: scripts/scenario_38_allies_and_enemies.lua:11193
 msgctxt "doctor-shipLog"
 msgid "Dr. Thultris applied her knowledge and Admiral Koshenz is improving"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:11216
+#: scripts/scenario_38_allies_and_enemies.lua:11214
 msgctxt "doctor-tabScience&Operations"
 msgid "Koshenz Death:"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:11219
+#: scripts/scenario_38_allies_and_enemies.lua:11217
 #, lua-format
 msgctxt "doctor-tabScience&Operations"
 msgid "%s %i"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:11225
+#: scripts/scenario_38_allies_and_enemies.lua:11223
 #, lua-format
 msgctxt "doctor-tabScience&Operations"
 msgid "%s %i:%.2i"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:11261
+#: scripts/scenario_38_allies_and_enemies.lua:11259
 msgctxt "BespinGoal-shipLog"
 msgid ""
 "Our allies, the Arlenians tell us that the Kraylors are attacking the mining "
@@ -3423,164 +3423,164 @@ msgid ""
 "assistance"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:11269
+#: scripts/scenario_38_allies_and_enemies.lua:11267
 msgctxt "BespinOrders-comms"
 msgid "Contact Arlenians and render assistance with Kraylor attack"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:11284
+#: scripts/scenario_38_allies_and_enemies.lua:11282
 msgctxt "scienceDescription-planet"
 msgid "Gas giant suitable for mining"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:11294
+#: scripts/scenario_38_allies_and_enemies.lua:11292
 msgctxt "scienceDescription-station"
 msgid "Bespin Gas Mining"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:11396
+#: scripts/scenario_38_allies_and_enemies.lua:11394
 msgctxt "Bespin-shipLog"
 msgid ""
 "Looks like the Exuari are taking advantage of the Kraylor mining incident by "
 "sending forces against us and the Arlenians"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:11418
+#: scripts/scenario_38_allies_and_enemies.lua:11416
 msgctxt "Bespin-shipLog"
 msgid ""
 "The Arlenians thanked us for the help with the Kraylors around Cloud City"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:11430
+#: scripts/scenario_38_allies_and_enemies.lua:11428
 msgctxt "Bespin-msgMainscreen"
 msgid "Mining station Cloud City destroyed"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:11588
+#: scripts/scenario_38_allies_and_enemies.lua:11586
 msgctxt "repairCrew-msgEngineer"
 msgid "One of your repair crew has perished"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:11599
+#: scripts/scenario_38_allies_and_enemies.lua:11597
 msgctxt "repairCrew-msgEngineer+"
 msgid "One of your repair crew has perished"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:12016
+#: scripts/scenario_38_allies_and_enemies.lua:12014
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Human stations: survived:%.1f%%"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:12023
-#: scripts/scenario_38_allies_and_enemies.lua:12044
-#: scripts/scenario_38_allies_and_enemies.lua:12065
-#: scripts/scenario_38_allies_and_enemies.lua:12086
-#: scripts/scenario_38_allies_and_enemies.lua:12107
+#: scripts/scenario_38_allies_and_enemies.lua:12021
+#: scripts/scenario_38_allies_and_enemies.lua:12042
+#: scripts/scenario_38_allies_and_enemies.lua:12063
+#: scripts/scenario_38_allies_and_enemies.lua:12084
+#: scripts/scenario_38_allies_and_enemies.lua:12105
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s, strength:%.1f%%"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:12029
+#: scripts/scenario_38_allies_and_enemies.lua:12027
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Human stations: strength:%.1f%%"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:12037
+#: scripts/scenario_38_allies_and_enemies.lua:12035
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Arlenian stations: survived:%.1f%%"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:12050
+#: scripts/scenario_38_allies_and_enemies.lua:12048
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Arlenian stations: strength:%.1f%%"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:12058
+#: scripts/scenario_38_allies_and_enemies.lua:12056
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Kraylor stations: survived:%.1f%%"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:12071
+#: scripts/scenario_38_allies_and_enemies.lua:12069
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Kraylor stations: strength:%.1f%%"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:12079
+#: scripts/scenario_38_allies_and_enemies.lua:12077
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Exuari stations: survived:%.1f%%"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:12092
+#: scripts/scenario_38_allies_and_enemies.lua:12090
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Exuari stations: strength:%.1f%%"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:12100
+#: scripts/scenario_38_allies_and_enemies.lua:12098
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Neutral stations: survived:%.1f%%"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:12113
+#: scripts/scenario_38_allies_and_enemies.lua:12111
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Neutral stations: strength:%.1f%%"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:12121
+#: scripts/scenario_38_allies_and_enemies.lua:12119
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Human ships: strength:%.1f%%"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:12128
+#: scripts/scenario_38_allies_and_enemies.lua:12126
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Arlenian ships: strength:%.1f%%"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:12144
+#: scripts/scenario_38_allies_and_enemies.lua:12142
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Mission ended because %s"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:12149
+#: scripts/scenario_38_allies_and_enemies.lua:12147
 msgctxt "msgMainscreen"
 msgid "Ensign"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:12151
+#: scripts/scenario_38_allies_and_enemies.lua:12149
 msgctxt "msgMainscreen"
 msgid "Lieutenant"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:12156
+#: scripts/scenario_38_allies_and_enemies.lua:12154
 msgctxt "msgMainscreen"
 msgid "Commander"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:12161
+#: scripts/scenario_38_allies_and_enemies.lua:12159
 msgctxt "msgMainscreen"
 msgid "Captain"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:12165
+#: scripts/scenario_38_allies_and_enemies.lua:12163
 msgctxt "msgMainscreen"
 msgid "Admiral"
 msgstr ""
 
-#: scripts/scenario_38_allies_and_enemies.lua:12172
-#: scripts/scenario_38_allies_and_enemies.lua:12180
+#: scripts/scenario_38_allies_and_enemies.lua:12170
+#: scripts/scenario_38_allies_and_enemies.lua:12178
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Earned rank: %s"

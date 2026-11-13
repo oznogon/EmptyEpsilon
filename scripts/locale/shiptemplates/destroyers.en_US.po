@@ -4,9 +4,9 @@ msgid "Atlantis X23"
 msgstr ""
 
 #: scripts/shiptemplates/destroyers.lua:16
-#: scripts/shiptemplates/destroyers.lua:99
-#: scripts/shiptemplates/destroyers.lua:125
-#: scripts/shiptemplates/destroyers.lua:187
+#: scripts/shiptemplates/destroyers.lua:103
+#: scripts/shiptemplates/destroyers.lua:129
+#: scripts/shiptemplates/destroyers.lua:191
 msgctxt "class"
 msgid "Destroyer"
 msgstr ""
@@ -41,17 +41,17 @@ msgid ""
 "EMP missiles, and a dedicated mine-laying tube."
 msgstr ""
 
-#: scripts/shiptemplates/destroyers.lua:98
+#: scripts/shiptemplates/destroyers.lua:102
 msgctxt "ship"
 msgid "Starhammer II"
 msgstr ""
 
-#: scripts/shiptemplates/destroyers.lua:99
+#: scripts/shiptemplates/destroyers.lua:103
 msgctxt "subclass"
 msgid "Assault"
 msgstr ""
 
-#: scripts/shiptemplates/destroyers.lua:103
+#: scripts/shiptemplates/destroyers.lua:107
 msgid ""
 "Contrary to its predecessor, the Starhammer II lives up to its name. By "
 "resolving the original Starhammer's power and heat management issues, the "
@@ -61,34 +61,34 @@ msgid ""
 "long."
 msgstr ""
 
-#: scripts/shiptemplates/destroyers.lua:124
+#: scripts/shiptemplates/destroyers.lua:128
 msgctxt "playerShip"
 msgid "Crucible"
 msgstr ""
 
-#: scripts/shiptemplates/destroyers.lua:125
+#: scripts/shiptemplates/destroyers.lua:129
 msgctxt "subclass"
 msgid "Missile"
 msgstr ""
 
-#: scripts/shiptemplates/destroyers.lua:130
+#: scripts/shiptemplates/destroyers.lua:134
 msgid ""
 "The Crucible has several missile tubes positioned around its hull. Beams "
 "were deemed lower priority, though they are still present. It has stronger "
 "defenses than a frigate, but not as strong as the Atlantis."
 msgstr ""
 
-#: scripts/shiptemplates/destroyers.lua:186
+#: scripts/shiptemplates/destroyers.lua:190
 msgctxt "playerShip"
 msgid "Maverick"
 msgstr ""
 
-#: scripts/shiptemplates/destroyers.lua:187
+#: scripts/shiptemplates/destroyers.lua:191
 msgctxt "subclass"
 msgid "Gunner"
 msgstr ""
 
-#: scripts/shiptemplates/destroyers.lua:192
+#: scripts/shiptemplates/destroyers.lua:196
 msgid ""
 "The Maverick has several beam weapons positioned around its hull, including "
 "a rear-facing turret to deter pursuers. Weapon tubes were deemed lower "

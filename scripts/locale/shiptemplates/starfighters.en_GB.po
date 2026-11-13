@@ -8,8 +8,8 @@ msgstr "MT52 Hornet"
 #: scripts/shiptemplates/starfighters.lua:214
 #: scripts/shiptemplates/starfighters.lua:330
 #: scripts/shiptemplates/starfighters.lua:347
-#: scripts/shiptemplates/starfighters.lua:368
-#: scripts/shiptemplates/starfighters.lua:390
+#: scripts/shiptemplates/starfighters.lua:369
+#: scripts/shiptemplates/starfighters.lua:392
 msgctxt "class"
 msgid "Starfighter"
 msgstr "Starfighter"
@@ -59,8 +59,8 @@ msgid "Adder MK5"
 msgstr "Adder MK5"
 
 #: scripts/shiptemplates/starfighters.lua:93
-#: scripts/shiptemplates/starfighters.lua:368
-#: scripts/shiptemplates/starfighters.lua:390
+#: scripts/shiptemplates/starfighters.lua:369
+#: scripts/shiptemplates/starfighters.lua:392
 msgctxt "subclass"
 msgid "Gunship"
 msgstr "Gunship"
@@ -226,7 +226,7 @@ msgid "The Strix is a warp-equipped interceptor built for ambush tactics."
 msgstr "The Strix is a warp-equipped interceptor built for ambush tactics."
 
 #: scripts/shiptemplates/starfighters.lua:353
-#: scripts/shiptemplates/starfighters.lua:375
+#: scripts/shiptemplates/starfighters.lua:376
 msgid ""
 "For a starfighter it's slow at sublight flight and lacks manueverability, "
 "and most of its shielding is focused forward. However, thanks to its paired "
@@ -240,27 +240,27 @@ msgid ""
 "capabilities but use a jump drive for FTL travel."
 msgstr "Strixes are often accompanied or complemented by Magpies, which have similar capabilities but use a jump drive for FTL travel."
 
-#: scripts/shiptemplates/starfighters.lua:367
+#: scripts/shiptemplates/starfighters.lua:368
 msgctxt "ship"
 msgid "Magpie"
 msgstr "Magpie"
 
-#: scripts/shiptemplates/starfighters.lua:373
+#: scripts/shiptemplates/starfighters.lua:374
 msgid "The Magpie is a jump-equipped gunship built for ambush tactics."
 msgstr "The Magpie is a jump-equipped gunship built for ambush tactics."
 
-#: scripts/shiptemplates/starfighters.lua:377
+#: scripts/shiptemplates/starfighters.lua:378
 msgid ""
 "Magpies are often accompanied or complemented by Strixes, which have similar "
 "capabilities but use a warp drive for FTL travel."
 msgstr "Magpies are often accompanied or complemented by Strixes, which have similar capabilities but use a warp drive for FTL travel."
 
-#: scripts/shiptemplates/starfighters.lua:389
+#: scripts/shiptemplates/starfighters.lua:391
 msgctxt "playerShip"
 msgid "Crow"
 msgstr "Crow"
 
-#: scripts/shiptemplates/starfighters.lua:394
+#: scripts/shiptemplates/starfighters.lua:396
 msgid ""
 "The Crow gunship is the predecessor to the Magpie starfighter. Slow, weakly "
 "armed, and lacking in shields, it's at least relatively agile."

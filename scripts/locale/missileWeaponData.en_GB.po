@@ -1,0 +1,24 @@
+#: scripts/missileWeaponData.lua:5
+msgctxt "missile"
+msgid "Homing"
+msgstr "Homing"
+
+#: scripts/missileWeaponData.lua:23
+msgctxt "missile"
+msgid "Nuke"
+msgstr "Nuke"
+
+#: scripts/missileWeaponData.lua:43
+msgctxt "missile"
+msgid "Mine"
+msgstr "Mine"
+
+#: scripts/missileWeaponData.lua:66
+msgctxt "missile"
+msgid "EMP"
+msgstr "EMP"
+
+#: scripts/missileWeaponData.lua:86
+msgctxt "missile"
+msgid "HVLI"
+msgstr "HVLI"

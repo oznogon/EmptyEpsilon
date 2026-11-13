@@ -2421,12 +2421,6 @@ msgstr "Fréquence"
 msgid "Target system"
 msgstr "Système cible"
 
-#: src/screens/extra/beamWeaponsScreen.cpp:190
-#: src/screens/extra/beamWeaponsScreen.cpp:376
-msgctxt "weaponsTab"
-msgid "Utility beam"
-msgstr "Faisceau utilitaire"
-
 #: src/screens/extra/radarScreen.cpp:104
 msgctxt "radar"
 msgid "Short range"

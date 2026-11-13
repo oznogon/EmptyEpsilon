@@ -320,7 +320,7 @@ msgstr "P3 add tube"
 #: scripts/scenario_17_carrier_and_fighters.lua:265
 #: scripts/scenario_17_carrier_and_fighters.lua:4152
 #: scripts/scenario_17_carrier_and_fighters.lua:4197
-#: scripts/scenario_17_carrier_and_fighters.lua:10265
+#: scripts/scenario_17_carrier_and_fighters.lua:10263
 msgctxt "buttonTactical"
 msgid "Shield"
 msgstr "Shield"
@@ -594,7 +594,7 @@ msgstr "A replacement fighter has been provided"
 #: scripts/scenario_17_carrier_and_fighters.lua:4356
 #: scripts/scenario_17_carrier_and_fighters.lua:4402
 #: scripts/scenario_17_carrier_and_fighters.lua:4435
-#: scripts/scenario_17_carrier_and_fighters.lua:6979
+#: scripts/scenario_17_carrier_and_fighters.lua:6977
 msgctxt "needRep-comms"
 msgid "Insufficient reputation"
 msgstr "Insufficient reputation"
@@ -665,19 +665,19 @@ msgstr "\n   %i Minutes remain in game"
 #: scripts/scenario_17_carrier_and_fighters.lua:6535
 #: scripts/scenario_17_carrier_and_fighters.lua:6559
 #: scripts/scenario_17_carrier_and_fighters.lua:6571
-#: scripts/scenario_17_carrier_and_fighters.lua:6640
-#: scripts/scenario_17_carrier_and_fighters.lua:6671
-#: scripts/scenario_17_carrier_and_fighters.lua:6702
-#: scripts/scenario_17_carrier_and_fighters.lua:6719
-#: scripts/scenario_17_carrier_and_fighters.lua:6814
-#: scripts/scenario_17_carrier_and_fighters.lua:6857
-#: scripts/scenario_17_carrier_and_fighters.lua:6924
-#: scripts/scenario_17_carrier_and_fighters.lua:6961
-#: scripts/scenario_17_carrier_and_fighters.lua:6984
-#: scripts/scenario_17_carrier_and_fighters.lua:7045
-#: scripts/scenario_17_carrier_and_fighters.lua:7139
-#: scripts/scenario_17_carrier_and_fighters.lua:7239
-#: scripts/scenario_17_carrier_and_fighters.lua:7351
+#: scripts/scenario_17_carrier_and_fighters.lua:6638
+#: scripts/scenario_17_carrier_and_fighters.lua:6669
+#: scripts/scenario_17_carrier_and_fighters.lua:6700
+#: scripts/scenario_17_carrier_and_fighters.lua:6717
+#: scripts/scenario_17_carrier_and_fighters.lua:6812
+#: scripts/scenario_17_carrier_and_fighters.lua:6855
+#: scripts/scenario_17_carrier_and_fighters.lua:6922
+#: scripts/scenario_17_carrier_and_fighters.lua:6959
+#: scripts/scenario_17_carrier_and_fighters.lua:6982
+#: scripts/scenario_17_carrier_and_fighters.lua:7043
+#: scripts/scenario_17_carrier_and_fighters.lua:7137
+#: scripts/scenario_17_carrier_and_fighters.lua:7237
+#: scripts/scenario_17_carrier_and_fighters.lua:7349
 msgid "Back"
 msgstr "Back"
 
@@ -774,7 +774,7 @@ msgid ""
 msgstr "%s\nAvailable Space: %i, Available Reputation: %i\n"
 
 #: scripts/scenario_17_carrier_and_fighters.lua:4555
-#: scripts/scenario_17_carrier_and_fighters.lua:6873
+#: scripts/scenario_17_carrier_and_fighters.lua:6871
 #, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
@@ -1438,7 +1438,7 @@ msgid ""
 msgstr "Ktlitans are harassing us. Destroy their primary station, %s. Respond to other requests if desired. Protect carrier to reduce mission duration. Home station is %s."
 
 #: scripts/scenario_17_carrier_and_fighters.lua:6243
-#: scripts/scenario_17_carrier_and_fighters.lua:8434
+#: scripts/scenario_17_carrier_and_fighters.lua:8432
 #, lua-format
 msgctxt "goal-incCall"
 msgid ""
@@ -1450,7 +1450,7 @@ msgid ""
 msgstr "Paulina Lindquist, a noted research engineer recently published her latest theories on engine design. We believe her theories have practical applications to our ship manoeuvring systems. You may want to talk to her about putting her theories into practice on our naval vessels. She's currently stationed on %s in %s."
 
 #: scripts/scenario_17_carrier_and_fighters.lua:6251
-#: scripts/scenario_17_carrier_and_fighters.lua:8442
+#: scripts/scenario_17_carrier_and_fighters.lua:8440
 #, lua-format
 msgctxt "msgRelay"
 msgid ""
@@ -1459,7 +1459,7 @@ msgid ""
 msgstr "Visit Paulina Lindquist on station %s in sector %s regarding ship spin upgrade."
 
 #: scripts/scenario_17_carrier_and_fighters.lua:6267
-#: scripts/scenario_17_carrier_and_fighters.lua:8618
+#: scripts/scenario_17_carrier_and_fighters.lua:8616
 #, lua-format
 msgctxt "goal-incCall"
 msgid ""
@@ -1468,15 +1468,15 @@ msgid ""
 msgstr "Herbert Long believes he has a lead on some information about the enemy base that has been the source of the harassing ships. He's stationed on %s in %s."
 
 #: scripts/scenario_17_carrier_and_fighters.lua:6275
-#: scripts/scenario_17_carrier_and_fighters.lua:8626
+#: scripts/scenario_17_carrier_and_fighters.lua:8624
 #, lua-format
 msgctxt "msgRelay"
 msgid "Talk to Herbert Long on %s in %s regarding enemy base."
 msgstr "Talk to Herbert Long on %s in %s regarding enemy base."
 
 #: scripts/scenario_17_carrier_and_fighters.lua:6291
-#: scripts/scenario_17_carrier_and_fighters.lua:8784
-#: scripts/scenario_17_carrier_and_fighters.lua:8822
+#: scripts/scenario_17_carrier_and_fighters.lua:8782
+#: scripts/scenario_17_carrier_and_fighters.lua:8820
 #, lua-format
 msgctxt "goal-incCall"
 msgid ""
@@ -1489,8 +1489,8 @@ msgid ""
 msgstr "[%s in %s] Medical emergency: Engineering research scientist Terrence Forsythe has contracted a rare medical condition. After contacting nearly every station in the area, we found that doctor Geraldine Polaski on %s has the expertise and facilities to help. However, we don't have the necessary transport to get Terrence there in time - he has only a few minutes left to live. Can you take Terrence to %s?"
 
 #: scripts/scenario_17_carrier_and_fighters.lua:6301
-#: scripts/scenario_17_carrier_and_fighters.lua:8794
-#: scripts/scenario_17_carrier_and_fighters.lua:8832
+#: scripts/scenario_17_carrier_and_fighters.lua:8792
+#: scripts/scenario_17_carrier_and_fighters.lua:8830
 #, lua-format
 msgctxt "msgRelay"
 msgid "Transport Terrence Forsythe from %s in %s to %s before he dies"
@@ -1506,7 +1506,7 @@ msgid ""
 msgstr "Retired naval officer, Boris Eggleston has taken his expertise in miniaturization and come up with a way to add a missile tube to naval vessels. He's vacationing on %s in %s"
 
 #: scripts/scenario_17_carrier_and_fighters.lua:6326
-#: scripts/scenario_17_carrier_and_fighters.lua:9441
+#: scripts/scenario_17_carrier_and_fighters.lua:9439
 #, lua-format
 msgctxt "msgRelay"
 msgid "Get extra weapons tube from Boris Eggleston on %s in %s"
@@ -1522,7 +1522,7 @@ msgid ""
 msgstr "There's a physicist turned maintenance technician named Frederico Booker that has developed some innovative beam weapon technology that could increase the damage produced by our beam weapons. He's based on %s in %s"
 
 #: scripts/scenario_17_carrier_and_fighters.lua:6350
-#: scripts/scenario_17_carrier_and_fighters.lua:9612
+#: scripts/scenario_17_carrier_and_fighters.lua:9610
 #, lua-format
 msgctxt "msgRelay"
 msgid "Talk to Frederico Booker on %s in %s about a beam upgrade"
@@ -1535,14 +1535,14 @@ msgid "%s (%s until intersection)"
 msgstr "%s (%s until intersection)"
 
 #: scripts/scenario_17_carrier_and_fighters.lua:6523
-#: scripts/scenario_17_carrier_and_fighters.lua:6968
-#: scripts/scenario_17_carrier_and_fighters.lua:7285
+#: scripts/scenario_17_carrier_and_fighters.lua:6966
+#: scripts/scenario_17_carrier_and_fighters.lua:7283
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
 msgstr "What do you want?"
 
 #: scripts/scenario_17_carrier_and_fighters.lua:6525
-#: scripts/scenario_17_carrier_and_fighters.lua:7287
+#: scripts/scenario_17_carrier_and_fighters.lua:7285
 msgctxt "shipAssist-comms"
 msgid "Sir, how can we assist?"
 msgstr "Sir, how can we assist?"
@@ -1585,127 +1585,127 @@ msgid "Heading toward you to assist."
 msgstr "Heading toward you to assist."
 
 #: scripts/scenario_17_carrier_and_fighters.lua:6574
-#: scripts/scenario_17_carrier_and_fighters.lua:7289
+#: scripts/scenario_17_carrier_and_fighters.lua:7287
 msgctxt "shipAssist-comms"
 msgid "Report status"
 msgstr "Report status"
 
 #: scripts/scenario_17_carrier_and_fighters.lua:6576
-#: scripts/scenario_17_carrier_and_fighters.lua:7291
+#: scripts/scenario_17_carrier_and_fighters.lua:7289
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Hull: %d%%\n"
 msgstr "Hull: %d%%\n"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6584
-#: scripts/scenario_17_carrier_and_fighters.lua:7297
+#: scripts/scenario_17_carrier_and_fighters.lua:6582
+#: scripts/scenario_17_carrier_and_fighters.lua:7295
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%sShield: %d%%\n"
 msgstr "%sShield: %d%%\n"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6594
-#: scripts/scenario_17_carrier_and_fighters.lua:7307
+#: scripts/scenario_17_carrier_and_fighters.lua:6592
+#: scripts/scenario_17_carrier_and_fighters.lua:7305
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%sFront Shield: %d%%\n"
 msgstr "%sFront Shield: %d%%\n"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6603
-#: scripts/scenario_17_carrier_and_fighters.lua:7316
+#: scripts/scenario_17_carrier_and_fighters.lua:6601
+#: scripts/scenario_17_carrier_and_fighters.lua:7314
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%sRear Shield: %d%%\n"
 msgstr "%sRear Shield: %d%%\n"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6614
+#: scripts/scenario_17_carrier_and_fighters.lua:6612
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%sShield %s: %d%%\n"
 msgstr "%sShield %s: %d%%\n"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6629
-#: scripts/scenario_17_carrier_and_fighters.lua:7342
+#: scripts/scenario_17_carrier_and_fighters.lua:6627
+#: scripts/scenario_17_carrier_and_fighters.lua:7340
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s%s Missiles: %d/%d\n"
 msgstr "%s%s Missiles: %d/%d\n"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6660
+#: scripts/scenario_17_carrier_and_fighters.lua:6658
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
 msgstr "Dock at %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6666
+#: scripts/scenario_17_carrier_and_fighters.lua:6664
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Docking at %s."
 msgstr "Docking at %s."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6685
+#: scripts/scenario_17_carrier_and_fighters.lua:6683
 msgctxt "shipAssist-comms"
 msgid "Attack nearby enemy target"
 msgstr "Attack nearby enemy target"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6697
+#: scripts/scenario_17_carrier_and_fighters.lua:6695
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Attacking %s"
 msgstr "Attacking %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6712
+#: scripts/scenario_17_carrier_and_fighters.lua:6710
 msgctxt "shipAssist-comms"
 msgid "No enemy targets nearby"
 msgstr "No enemy targets nearby"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6716
+#: scripts/scenario_17_carrier_and_fighters.lua:6714
 msgctxt "shipAssist-comms"
 msgid "Which enemy target?"
 msgstr "Which enemy target?"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6729
-#: scripts/scenario_17_carrier_and_fighters.lua:7359
+#: scripts/scenario_17_carrier_and_fighters.lua:6727
+#: scripts/scenario_17_carrier_and_fighters.lua:7357
 msgctxt "shipEnemy-comms"
 msgid "We will see to your destruction!"
 msgstr "We will see to your destruction!"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6731
-#: scripts/scenario_17_carrier_and_fighters.lua:7361
+#: scripts/scenario_17_carrier_and_fighters.lua:6729
+#: scripts/scenario_17_carrier_and_fighters.lua:7359
 msgctxt "shipEnemy-comms"
 msgid "Your bloodline will end here!"
 msgstr "Your bloodline will end here!"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6733
-#: scripts/scenario_17_carrier_and_fighters.lua:7363
+#: scripts/scenario_17_carrier_and_fighters.lua:6731
+#: scripts/scenario_17_carrier_and_fighters.lua:7361
 msgctxt "shipEnemy-comms"
 msgid "Your feeble threats are meaningless."
 msgstr "Your feeble threats are meaningless."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6736
-#: scripts/scenario_17_carrier_and_fighters.lua:7366
+#: scripts/scenario_17_carrier_and_fighters.lua:6734
+#: scripts/scenario_17_carrier_and_fighters.lua:7364
 msgctxt "shipEnemy-comms"
 msgid ""
 "Ktzzzsss.\n"
 "You will DIEEee weaklingsss!"
 msgstr "Ktzzzsss.\nYou will DIEEee weaklingsss!"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6742
-#: scripts/scenario_17_carrier_and_fighters.lua:7372
+#: scripts/scenario_17_carrier_and_fighters.lua:6740
+#: scripts/scenario_17_carrier_and_fighters.lua:7370
 msgctxt "shipEnemy-comms"
 msgid ""
 "We wish you no harm, but will harm you if we must.\n"
 "End of transmission."
 msgstr "We wish you no harm, but will harm you if we must.\nEnd of transmission."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6749
-#: scripts/scenario_17_carrier_and_fighters.lua:7379
+#: scripts/scenario_17_carrier_and_fighters.lua:6747
+#: scripts/scenario_17_carrier_and_fighters.lua:7377
 msgctxt "shipEnemy-comms"
 msgid "Stay out of our way, or your death will amuse us extremely!"
 msgstr "Stay out of our way, or your death will amuse us extremely!"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6756
-#: scripts/scenario_17_carrier_and_fighters.lua:7386
+#: scripts/scenario_17_carrier_and_fighters.lua:6754
+#: scripts/scenario_17_carrier_and_fighters.lua:7384
 msgctxt "shipEnemy-comms"
 msgid ""
 "One zero one.\n"
@@ -1716,26 +1716,26 @@ msgid ""
 "Communication halted."
 msgstr "One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6759
-#: scripts/scenario_17_carrier_and_fighters.lua:7389
+#: scripts/scenario_17_carrier_and_fighters.lua:6757
+#: scripts/scenario_17_carrier_and_fighters.lua:7387
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
 msgstr "EXECUTE: SELFDESTRUCT"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6762
-#: scripts/scenario_17_carrier_and_fighters.lua:7392
+#: scripts/scenario_17_carrier_and_fighters.lua:6760
+#: scripts/scenario_17_carrier_and_fighters.lua:7390
 msgctxt "shipEnemy-comms"
 msgid "Rogue command received. Targeting source."
 msgstr "Rogue command received. Targeting source."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6765
-#: scripts/scenario_17_carrier_and_fighters.lua:7395
+#: scripts/scenario_17_carrier_and_fighters.lua:6763
+#: scripts/scenario_17_carrier_and_fighters.lua:7393
 msgctxt "shipEnemy-comms"
 msgid "External command ignored."
 msgstr "External command ignored."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6770
-#: scripts/scenario_17_carrier_and_fighters.lua:7400
+#: scripts/scenario_17_carrier_and_fighters.lua:6768
+#: scripts/scenario_17_carrier_and_fighters.lua:7398
 msgctxt "shipEnemy-comms"
 msgid ""
 "The hive suffers no threats. Opposition to any of us is opposition to us "
@@ -1743,79 +1743,79 @@ msgid ""
 "Stand down or prepare to donate your corpses toward our nutrition."
 msgstr "The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6775
-#: scripts/scenario_17_carrier_and_fighters.lua:7405
+#: scripts/scenario_17_carrier_and_fighters.lua:6773
+#: scripts/scenario_17_carrier_and_fighters.lua:7403
 msgctxt "shipEnemy-comms"
 msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
 msgstr "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6779
-#: scripts/scenario_17_carrier_and_fighters.lua:7409
+#: scripts/scenario_17_carrier_and_fighters.lua:6777
+#: scripts/scenario_17_carrier_and_fighters.lua:7407
 msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
 msgstr "We do not need permission to pluck apart such an insignificant threat."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6783
-#: scripts/scenario_17_carrier_and_fighters.lua:7413
+#: scripts/scenario_17_carrier_and_fighters.lua:6781
+#: scripts/scenario_17_carrier_and_fighters.lua:7411
 msgctxt "shipEnemy-comms"
 msgid "The hive has greater priorities than exterminating pests."
 msgstr "The hive has greater priorities than exterminating pests."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6786
-#: scripts/scenario_17_carrier_and_fighters.lua:7416
+#: scripts/scenario_17_carrier_and_fighters.lua:6784
+#: scripts/scenario_17_carrier_and_fighters.lua:7414
 msgctxt "shipEnemy-comms"
 msgid "Mind your own business!"
 msgstr "Mind your own business!"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6810
+#: scripts/scenario_17_carrier_and_fighters.lua:6808
 msgctxt "trade-comms"
 msgid "Yes?"
 msgstr "Yes?"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6812
+#: scripts/scenario_17_carrier_and_fighters.lua:6810
 msgctxt "trade-comms"
 msgid "Where are you headed?"
 msgstr "Where are you headed?"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6883
-#: scripts/scenario_17_carrier_and_fighters.lua:7007
-#: scripts/scenario_17_carrier_and_fighters.lua:7067
-#: scripts/scenario_17_carrier_and_fighters.lua:7167
+#: scripts/scenario_17_carrier_and_fighters.lua:6881
+#: scripts/scenario_17_carrier_and_fighters.lua:7005
+#: scripts/scenario_17_carrier_and_fighters.lua:7065
+#: scripts/scenario_17_carrier_and_fighters.lua:7165
 msgctxt "trade-comms"
 msgid "Insufficient cargo space for purchase"
 msgstr "Insufficient cargo space for purchase"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6910
+#: scripts/scenario_17_carrier_and_fighters.lua:6908
 #, lua-format
 msgctxt "trade-comms"
 msgid "One %s purchased"
 msgstr "One %s purchased"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6919
-#: scripts/scenario_17_carrier_and_fighters.lua:7040
-#: scripts/scenario_17_carrier_and_fighters.lua:7100
-#: scripts/scenario_17_carrier_and_fighters.lua:7200
+#: scripts/scenario_17_carrier_and_fighters.lua:6917
+#: scripts/scenario_17_carrier_and_fighters.lua:7038
+#: scripts/scenario_17_carrier_and_fighters.lua:7098
+#: scripts/scenario_17_carrier_and_fighters.lua:7198
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
 msgstr "Insufficient reputation for purchase"
+
+#: scripts/scenario_17_carrier_and_fighters.lua:6944
+#: scripts/scenario_17_carrier_and_fighters.lua:7122
+#: scripts/scenario_17_carrier_and_fighters.lua:7222
+msgctxt "trade-comms"
+msgid "What kind of cargo are you carrying?"
+msgstr "What kind of cargo are you carrying?"
 
 #: scripts/scenario_17_carrier_and_fighters.lua:6946
 #: scripts/scenario_17_carrier_and_fighters.lua:7124
 #: scripts/scenario_17_carrier_and_fighters.lua:7224
 msgctxt "trade-comms"
-msgid "What kind of cargo are you carrying?"
-msgstr "What kind of cargo are you carrying?"
-
-#: scripts/scenario_17_carrier_and_fighters.lua:6948
-#: scripts/scenario_17_carrier_and_fighters.lua:7126
-#: scripts/scenario_17_carrier_and_fighters.lua:7226
-msgctxt "trade-comms"
 msgid "Goods aboard:"
 msgstr "Goods aboard:"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6954
-#: scripts/scenario_17_carrier_and_fighters.lua:7132
-#: scripts/scenario_17_carrier_and_fighters.lua:7232
+#: scripts/scenario_17_carrier_and_fighters.lua:6952
+#: scripts/scenario_17_carrier_and_fighters.lua:7130
+#: scripts/scenario_17_carrier_and_fighters.lua:7230
 #, lua-format
 msgctxt "trade-comms"
 msgid ""
@@ -1823,101 +1823,101 @@ msgid ""
 "%s"
 msgstr "%s\n%s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:6973
+#: scripts/scenario_17_carrier_and_fighters.lua:6971
 #, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %i reputation)"
 msgstr "Where are you headed? (cost: %i reputation)"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:7146
+#: scripts/scenario_17_carrier_and_fighters.lua:7144
 msgctxt "trade-comms"
 msgid "Why are you bothering me?"
 msgstr "Why are you bothering me?"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:7256
-#: scripts/scenario_17_carrier_and_fighters.lua:7437
+#: scripts/scenario_17_carrier_and_fighters.lua:7254
+#: scripts/scenario_17_carrier_and_fighters.lua:7435
 msgctxt "ship-comms"
 msgid ""
 "Sorry, we have no time to chat with you.\n"
 "We are on an important mission."
 msgstr "Sorry, we have no time to chat with you.\nWe are on an important mission."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:7261
-#: scripts/scenario_17_carrier_and_fighters.lua:7441
+#: scripts/scenario_17_carrier_and_fighters.lua:7259
+#: scripts/scenario_17_carrier_and_fighters.lua:7439
 msgctxt "ship-comms"
 msgid ""
 "We have nothing for you.\n"
 "Good day."
 msgstr "We have nothing for you.\nGood day."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:7327
+#: scripts/scenario_17_carrier_and_fighters.lua:7325
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield %s: %d%%\n"
 msgstr "Shield %s: %d%%\n"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:7459
-#: scripts/scenario_17_carrier_and_fighters.lua:7492
+#: scripts/scenario_17_carrier_and_fighters.lua:7457
+#: scripts/scenario_17_carrier_and_fighters.lua:7490
 msgctxt "-buttonRelay"
 msgid "Transfer Cargo"
 msgstr "Transfer Cargo"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:7466
-#: scripts/scenario_17_carrier_and_fighters.lua:7499
+#: scripts/scenario_17_carrier_and_fighters.lua:7464
+#: scripts/scenario_17_carrier_and_fighters.lua:7497
 msgctxt "-buttonOperations"
 msgid "Transfer Cargo"
 msgstr "Transfer Cargo"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:7894
-#: scripts/scenario_17_carrier_and_fighters.lua:7980
+#: scripts/scenario_17_carrier_and_fighters.lua:7892
+#: scripts/scenario_17_carrier_and_fighters.lua:7978
 #, lua-format
 msgctxt "-msgRelay"
 msgid "Cargo aboard %s transferred to %s"
 msgstr "Cargo aboard %s transferred to %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:7906
-#: scripts/scenario_17_carrier_and_fighters.lua:7992
+#: scripts/scenario_17_carrier_and_fighters.lua:7904
+#: scripts/scenario_17_carrier_and_fighters.lua:7990
 #, lua-format
 msgctxt "-msgOperations"
 msgid "Cargo aboard %s transferred to %s"
 msgstr "Cargo aboard %s transferred to %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:7929
-#: scripts/scenario_17_carrier_and_fighters.lua:8015
+#: scripts/scenario_17_carrier_and_fighters.lua:7927
+#: scripts/scenario_17_carrier_and_fighters.lua:8013
 #, lua-format
 msgctxt "-msgRelay"
 msgid "Insufficient space on %s to accept your cargo transfer"
 msgstr "Insufficient space on %s to accept your cargo transfer"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:7944
-#: scripts/scenario_17_carrier_and_fighters.lua:8030
+#: scripts/scenario_17_carrier_and_fighters.lua:7942
+#: scripts/scenario_17_carrier_and_fighters.lua:8028
 #, lua-format
 msgctxt "-msgOperations"
 msgid "Insufficient space on %s to accept your cargo transfer"
 msgstr "Insufficient space on %s to accept your cargo transfer"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8049
+#: scripts/scenario_17_carrier_and_fighters.lua:8047
 msgctxt "inventory-buttonRelay"
 msgid "Inventory"
 msgstr "Inventory"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8060
+#: scripts/scenario_17_carrier_and_fighters.lua:8058
 msgctxt "inventory-buttonOperations"
 msgid "Inventory"
 msgstr "Inventory"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8071
+#: scripts/scenario_17_carrier_and_fighters.lua:8069
 msgctxt "inventory-buttonPilot"
 msgid "Inventory"
 msgstr "Inventory"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8083
+#: scripts/scenario_17_carrier_and_fighters.lua:8081
 #, lua-format
 msgctxt "inventory-msgRelay"
 msgid "%s Current cargo:"
 msgstr "%s Current cargo:"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8091
+#: scripts/scenario_17_carrier_and_fighters.lua:8089
 #, lua-format
 msgctxt "inventory-msgRelay"
 msgid ""
@@ -1925,7 +1925,7 @@ msgid ""
 "     %s: %i"
 msgstr "%s\n     %s: %i"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8099
+#: scripts/scenario_17_carrier_and_fighters.lua:8097
 #, lua-format
 msgctxt "inventory-msgRelay"
 msgid ""
@@ -1933,7 +1933,7 @@ msgid ""
 "     Empty"
 msgstr "%s\n     Empty"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8102
+#: scripts/scenario_17_carrier_and_fighters.lua:8100
 #, lua-format
 msgctxt "inventory-msgRelay"
 msgid ""
@@ -1941,7 +1941,7 @@ msgid ""
 "Available space: %i"
 msgstr "%s\nAvailable space: %i"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8119
+#: scripts/scenario_17_carrier_and_fighters.lua:8117
 #, lua-format
 msgctxt "goal-shipLog"
 msgid ""
@@ -1954,13 +1954,13 @@ msgid ""
 "designated your home station."
 msgstr "The Ktlitans keep sending harassing ships. We've decrypted some of their communications - enough to identify their primary base by name if not by location. Find and destroy Ktlitan station %s. Respond to other requests from stations in the area if you wish, but your primary goal is do destroy %s. It is in your best interest to protect your carrier since it will significantly shorten the duration of your mission. Station %s has been designated your home station."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8129
+#: scripts/scenario_17_carrier_and_fighters.lua:8127
 #, lua-format
 msgctxt "orders-comms"
 msgid "Destroy %s"
 msgstr "Destroy %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8457
+#: scripts/scenario_17_carrier_and_fighters.lua:8455
 #, lua-format
 msgctxt "goal-shipLog"
 msgid ""
@@ -1971,32 +1971,32 @@ msgid ""
 "currently stationed on %s in %s."
 msgstr "Paulina Lindquist, a noted research engineer recently published her latest theories on engine design. We believe her theories have practical applications to our ship manoeuvring systems. You may want to talk to her about putting her theories into practice on our naval vessels. She's currently stationed on %s in %s."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8469
-#: scripts/scenario_17_carrier_and_fighters.lua:8563
+#: scripts/scenario_17_carrier_and_fighters.lua:8467
+#: scripts/scenario_17_carrier_and_fighters.lua:8561
 #, lua-format
 msgctxt "orders-comms"
 msgid "Visit Paulina Lindquist on %s in %s regarding ship spin upgrade."
 msgstr "Visit Paulina Lindquist on %s in %s regarding ship spin upgrade."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8552
+#: scripts/scenario_17_carrier_and_fighters.lua:8550
 #, lua-format
 msgctxt "goal-shipLog"
 msgid "Paulina Lindquist, has been reassigned to station %s in %s."
 msgstr "Paulina Lindquist, has been reassigned to station %s in %s."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8573
+#: scripts/scenario_17_carrier_and_fighters.lua:8571
 #, lua-format
 msgctxt "goal-incCall"
 msgid "Paulina Lindquist, has been reassigned to station %s in %s"
 msgstr "Paulina Lindquist, has been reassigned to station %s in %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8581
+#: scripts/scenario_17_carrier_and_fighters.lua:8579
 #, lua-format
 msgctxt "msgRelay"
 msgid "Visit Paulina Lindquist on %s in %s regarding ship spin upgrade."
 msgstr "Visit Paulina Lindquist on %s in %s regarding ship spin upgrade."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8640
+#: scripts/scenario_17_carrier_and_fighters.lua:8638
 #, lua-format
 msgctxt "goal-shipLog"
 msgid ""
@@ -2004,47 +2004,47 @@ msgid ""
 "that has been the source of the harassing ships. He's stationed on %s in %s"
 msgstr "Herbert Long believes he has a lead on some information about the enemy base that has been the source of the harassing ships. He's stationed on %s in %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8651
+#: scripts/scenario_17_carrier_and_fighters.lua:8649
 #, lua-format
 msgctxt "orders-comms"
 msgid "Talk to Herbert Long on %s in %s regarding enemy base"
 msgstr "Talk to Herbert Long on %s in %s regarding enemy base"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8705
+#: scripts/scenario_17_carrier_and_fighters.lua:8703
 #, lua-format
 msgctxt "goal-shipLog"
 msgid "Herbert Long has been reassigned to station %s in %s."
 msgstr "Herbert Long has been reassigned to station %s in %s."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8716
+#: scripts/scenario_17_carrier_and_fighters.lua:8714
 #, lua-format
 msgctxt "orders-comms"
 msgid "Visit Herbert Long on %s in %s regarding enemy base."
 msgstr "Visit Herbert Long on %s in %s regarding enemy base."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8726
+#: scripts/scenario_17_carrier_and_fighters.lua:8724
 #, lua-format
 msgctxt "goal-incCall"
 msgid "Herbert Long has been reassigned to station %s in %s"
 msgstr "Herbert Long has been reassigned to station %s in %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8734
+#: scripts/scenario_17_carrier_and_fighters.lua:8732
 #, lua-format
 msgctxt "msgRelay"
 msgid "Visit Herbert Long on %s in %s regarding enemy base."
 msgstr "Visit Herbert Long on %s in %s regarding enemy base."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8853
+#: scripts/scenario_17_carrier_and_fighters.lua:8851
 msgctxt "scienceDescription-artifact"
 msgid "Artificially manufactured object of unknown purpose"
 msgstr "Artificially manufactured object of unknown purpose"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8857
+#: scripts/scenario_17_carrier_and_fighters.lua:8855
 msgctxt "scienceDescription-artifact"
 msgid "Prototype device intended for ship system integration"
 msgstr "Prototype device intended for ship system integration"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8866
+#: scripts/scenario_17_carrier_and_fighters.lua:8864
 #, lua-format
 msgctxt "goal-shipLog"
 msgid ""
@@ -2056,13 +2056,13 @@ msgid ""
 "live. Can you take Terrence to %s?"
 msgstr "[%s in %s] Medical emergency: Engineering research scientist Terrence Forsythe has contracted a rare medical condition. After contacting nearly every station in the area, we found that doctor Geraldine Polaski on %s has the expertise and facilities to help. However, we don't have the necessary transport to get Terrence there in time - he has only a few minutes left to live. Can you take Terrence to %s?"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8879
+#: scripts/scenario_17_carrier_and_fighters.lua:8877
 #, lua-format
 msgctxt "orders-comms"
 msgid "Transport Terrence Forsythe from %s in %s to %s before he dies"
 msgstr "Transport Terrence Forsythe from %s in %s to %s before he dies"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8918
+#: scripts/scenario_17_carrier_and_fighters.lua:8916
 #, lua-format
 msgctxt "goal-shipLog"
 msgid ""
@@ -2070,25 +2070,25 @@ msgid ""
 "him to Dr. Polaski on %s. "
 msgstr "[%s] Terrence Forsythe has been transported aboard your ship. Please take him to Dr. Polaski on %s. "
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8930
+#: scripts/scenario_17_carrier_and_fighters.lua:8928
 #, lua-format
 msgctxt "goal-shipLog"
 msgid "%sWe believe he has less than a minute to live."
 msgstr "%sWe believe he has less than a minute to live."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8938
+#: scripts/scenario_17_carrier_and_fighters.lua:8936
 #, lua-format
 msgctxt "goal-shipLog"
 msgid "%sWe think he has about a minute before he dies"
 msgstr "%sWe think he has about a minute before he dies"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8946
+#: scripts/scenario_17_carrier_and_fighters.lua:8944
 #, lua-format
 msgctxt "goal-shipLog"
 msgid "%sHe probably has about %i minutes to live"
 msgstr "%sHe probably has about %i minutes to live"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8958
+#: scripts/scenario_17_carrier_and_fighters.lua:8956
 #, lua-format
 msgctxt "goal-incCall"
 msgid ""
@@ -2096,24 +2096,24 @@ msgid ""
 "quickly to Dr. Polaski on station %s."
 msgstr "Terrence Forsythe transported aboard %s from station %s to be transported quickly to Dr. Polaski on station %s."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8967
+#: scripts/scenario_17_carrier_and_fighters.lua:8965
 #, lua-format
 msgctxt "msgRelay"
 msgid "%s should take dying scientist to Dr. Polaski on station %s in %s"
 msgstr "%s should take dying scientist to Dr. Polaski on station %s in %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:8994
+#: scripts/scenario_17_carrier_and_fighters.lua:8992
 #, lua-format
 msgctxt "goal-shipLog"
 msgid "Terrence Forsyth aboard %s"
 msgstr "Terrence Forsyth aboard %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9010
+#: scripts/scenario_17_carrier_and_fighters.lua:9008
 msgctxt "goal-shipLog"
 msgid "The station with Dr. Polaski aboard has been destroyed."
 msgstr "The station with Dr. Polaski aboard has been destroyed."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9032
+#: scripts/scenario_17_carrier_and_fighters.lua:9030
 #, lua-format
 msgctxt "goal-shipLog"
 msgid ""
@@ -2121,7 +2121,7 @@ msgid ""
 "Terrence Forsythe. Doctor Geraldine Polaski has stabalized his condition."
 msgstr "[%s] We have received your emergency medical transport of research scientist Terrence Forsythe. Doctor Geraldine Polaski has stabalized his condition."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9049
+#: scripts/scenario_17_carrier_and_fighters.lua:9047
 #, lua-format
 msgctxt "goal-incCall"
 msgid ""
@@ -2129,19 +2129,19 @@ msgid ""
 "Terrence Forsythe. Doctor Geraldine Polaski has stabalized his condition."
 msgstr "[%s] We have received your emergency medical transport of research scientist Terrence Forsythe. Doctor Geraldine Polaski has stabalized his condition."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9056
+#: scripts/scenario_17_carrier_and_fighters.lua:9054
 #, lua-format
 msgctxt "msgRelay"
 msgid "Terrence Forsythe delivered to Dr. Polaski on station %s"
 msgstr "Terrence Forsythe delivered to Dr. Polaski on station %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9074
+#: scripts/scenario_17_carrier_and_fighters.lua:9072
 #, lua-format
 msgctxt "goal-shipLog"
 msgid "%s has been destroyed"
 msgstr "%s has been destroyed"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9090
+#: scripts/scenario_17_carrier_and_fighters.lua:9088
 #, lua-format
 msgctxt "goal-shipLog"
 msgid ""
@@ -2152,13 +2152,13 @@ msgid ""
 "your Engineer. I have transmitted the key to allow you to use this prototype."
 msgstr "[Terrence Forsythe] I can never repay you for saving my life. However, you might be able to use the practical results of my latest research. Near %s in %s you'll find a prototype for ship system integration. This prototype allows for the rapid and semi-automated repair of hull damage as directed by your Engineer. I have transmitted the key to allow you to use this prototype."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9102
+#: scripts/scenario_17_carrier_and_fighters.lua:9100
 #, lua-format
 msgctxt "orders-comms"
 msgid "Recover hull repair prototype near %s in %s."
 msgstr "Recover hull repair prototype near %s in %s."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9112
+#: scripts/scenario_17_carrier_and_fighters.lua:9110
 #, lua-format
 msgctxt "goal-incCall"
 msgid ""
@@ -2169,44 +2169,44 @@ msgid ""
 "your Engineer. I have transmitted the key to allow you to use this prototype."
 msgstr "[Terrence Forsythe] I can never repay you for saving my life. However, you might be able to use the practical results of my latest research. Near %s in %s you'll find a prototype for ship system integration. This prototype allows for the rapid and semi-automated repair of hull damage as directed by your Engineer. I have transmitted the key to allow you to use this prototype."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9118
+#: scripts/scenario_17_carrier_and_fighters.lua:9116
 #, lua-format
 msgctxt "msgRelay"
 msgid "Recover hull repair prototype near %s in %s."
 msgstr "Recover hull repair prototype near %s in %s."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9174
+#: scripts/scenario_17_carrier_and_fighters.lua:9172
 #, lua-format
 msgctxt "-msgEngineer"
 msgid "Hull repair prototype installed. Limited to %i uses"
 msgstr "Hull repair prototype installed. Limited to %i uses"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9186
+#: scripts/scenario_17_carrier_and_fighters.lua:9184
 #, lua-format
 msgctxt "-msgEngineer+"
 msgid "Hull repair prototype installed. Limited to %i uses"
 msgstr "Hull repair prototype installed. Limited to %i uses"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9195
-#: scripts/scenario_17_carrier_and_fighters.lua:9225
+#: scripts/scenario_17_carrier_and_fighters.lua:9193
+#: scripts/scenario_17_carrier_and_fighters.lua:9223
 #, lua-format
 msgctxt "-buttonEngineer"
 msgid "Repair Hull (%i)"
 msgstr "Repair Hull (%i)"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9203
-#: scripts/scenario_17_carrier_and_fighters.lua:9236
+#: scripts/scenario_17_carrier_and_fighters.lua:9201
+#: scripts/scenario_17_carrier_and_fighters.lua:9234
 #, lua-format
 msgctxt "-buttonEngineer+"
 msgid "Repair Hull (%i)"
 msgstr "Repair Hull (%i)"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9247
+#: scripts/scenario_17_carrier_and_fighters.lua:9245
 msgctxt "goal-shipLog"
 msgid "Terrence Forsythe has perished"
 msgstr "Terrence Forsythe has perished"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9358
+#: scripts/scenario_17_carrier_and_fighters.lua:9356
 #, lua-format
 msgctxt "goal-shipLog"
 msgid ""
@@ -2215,26 +2215,26 @@ msgid ""
 "vessels. He's vacationing on %s in %s"
 msgstr "Retired naval officer, Boris Eggleston has taken his expertise in miniaturization and come up with a way to add a missile tube to naval vessels. He's vacationing on %s in %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9369
-#: scripts/scenario_17_carrier_and_fighters.lua:9423
+#: scripts/scenario_17_carrier_and_fighters.lua:9367
+#: scripts/scenario_17_carrier_and_fighters.lua:9421
 #, lua-format
 msgctxt "orders-comms"
 msgid "Get extra weapons tube from Boris Eggleston on %s in %s"
 msgstr "Get extra weapons tube from Boris Eggleston on %s in %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9412
+#: scripts/scenario_17_carrier_and_fighters.lua:9410
 #, lua-format
 msgctxt "goal-shipLog"
 msgid "Boris Eggleston changed his vacation spot to %s in %s"
 msgstr "Boris Eggleston changed his vacation spot to %s in %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9433
+#: scripts/scenario_17_carrier_and_fighters.lua:9431
 #, lua-format
 msgctxt "goal-incCall"
 msgid "Boris Eggleston changed his vacation spot to %s in %s"
 msgstr "Boris Eggleston changed his vacation spot to %s in %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9529
+#: scripts/scenario_17_carrier_and_fighters.lua:9527
 #, lua-format
 msgctxt "goal-shipLog"
 msgid ""
@@ -2243,26 +2243,26 @@ msgid ""
 "increase the damage produced by our beam weapons. He's based on %s in %s"
 msgstr "There's a physicist turned maintenance technician named Frederico Booker that has developed some innovative beam weapon technology that could increase the damage produced by our beam weapons. He's based on %s in %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9540
-#: scripts/scenario_17_carrier_and_fighters.lua:9594
+#: scripts/scenario_17_carrier_and_fighters.lua:9538
+#: scripts/scenario_17_carrier_and_fighters.lua:9592
 #, lua-format
 msgctxt "orders-comms"
 msgid "Talk to Frederico Booker on %s in %s about a beam upgrade"
 msgstr "Talk to Frederico Booker on %s in %s about a beam upgrade"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9583
+#: scripts/scenario_17_carrier_and_fighters.lua:9581
 #, lua-format
 msgctxt "goal-shipLog"
 msgid "Frederico Booker has moved to station %s in %s"
 msgstr "Frederico Booker has moved to station %s in %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9604
+#: scripts/scenario_17_carrier_and_fighters.lua:9602
 #, lua-format
 msgctxt "goal-incCall"
 msgid "Frederico Booker has moved to station %s in %s"
 msgstr "Frederico Booker has moved to station %s in %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9678
+#: scripts/scenario_17_carrier_and_fighters.lua:9676
 #, lua-format
 msgctxt "goal-shipLog"
 msgid ""
@@ -2270,7 +2270,7 @@ msgid ""
 "We are located in %s."
 msgstr "[%s] Help requested: Our engines are damaged beyond our ability to repair. We are located in %s."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9694
+#: scripts/scenario_17_carrier_and_fighters.lua:9692
 #, lua-format
 msgctxt "goal-incCall"
 msgid ""
@@ -2278,13 +2278,13 @@ msgid ""
 "repair. We are located in sector %s."
 msgstr "%s requests help stating: Our engines are damaged beyond our ability to repair. We are located in sector %s."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9702
+#: scripts/scenario_17_carrier_and_fighters.lua:9700
 #, lua-format
 msgctxt "msgRelay"
 msgid "Help %s in sector %s with their damaged engines"
 msgstr "Help %s in sector %s with their damaged engines"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9725
+#: scripts/scenario_17_carrier_and_fighters.lua:9723
 #, lua-format
 msgctxt "goal-shipLog"
 msgid ""
@@ -2292,13 +2292,13 @@ msgid ""
 "repairs"
 msgstr "Station %s in %s has tractor equipment you can use to tractor %s in for repairs"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9736
+#: scripts/scenario_17_carrier_and_fighters.lua:9734
 #, lua-format
 msgctxt "orders-comms"
 msgid "Install tractor equipment in %s from station %s in %s"
 msgstr "Install tractor equipment in %s from station %s in %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9749
+#: scripts/scenario_17_carrier_and_fighters.lua:9747
 #, lua-format
 msgctxt "goal-incCall"
 msgid ""
@@ -2306,49 +2306,49 @@ msgid ""
 "repairs"
 msgstr "Station %s in %s has tractor equipment you can use to tractor %s in for repairs"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9758
+#: scripts/scenario_17_carrier_and_fighters.lua:9756
 #, lua-format
 msgctxt "msgRelay"
 msgid "Install tractor equipment in %s from station %s in %s"
 msgstr "Install tractor equipment in %s from station %s in %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9800
+#: scripts/scenario_17_carrier_and_fighters.lua:9798
 #, lua-format
 msgctxt "-msgWeapons"
 msgid "%s has been tractored to %s and is now docked"
 msgstr "%s has been tractored to %s and is now docked"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9814
+#: scripts/scenario_17_carrier_and_fighters.lua:9812
 #, lua-format
 msgctxt "-msgTactical"
 msgid "%s has been tractored to %s and is now docked"
 msgstr "%s has been tractored to %s and is now docked"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9845
+#: scripts/scenario_17_carrier_and_fighters.lua:9843
 #, lua-format
 msgctxt "goal-shipLog"
 msgid "Tractor %s to %s to be repaired"
 msgstr "Tractor %s to %s to be repaired"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9853
+#: scripts/scenario_17_carrier_and_fighters.lua:9851
 #, lua-format
 msgctxt "orders-comms"
 msgid "Tractor %s to %s"
 msgstr "Tractor %s to %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9862
+#: scripts/scenario_17_carrier_and_fighters.lua:9860
 #, lua-format
 msgctxt "goal-incCall"
 msgid "Tractor %s to %s to be repaired"
 msgstr "Tractor %s to %s to be repaired"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9868
+#: scripts/scenario_17_carrier_and_fighters.lua:9866
 #, lua-format
 msgctxt "msgRelay"
 msgid "Tractor %s to %s"
 msgstr "Tractor %s to %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9896
+#: scripts/scenario_17_carrier_and_fighters.lua:9894
 #, lua-format
 msgctxt "goal-shipLog"
 msgid ""
@@ -2356,7 +2356,7 @@ msgid ""
 "from here"
 msgstr "Station %s says: Thanks for bringing %s in for repairs, %s. We'll take it from here"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9919
+#: scripts/scenario_17_carrier_and_fighters.lua:9917
 #, lua-format
 msgctxt "goal-incCall"
 msgid ""
@@ -2364,13 +2364,13 @@ msgid ""
 "from here"
 msgstr "Station %s says: Thanks for bringing %s in for repairs, %s. We'll take it from here"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9928
+#: scripts/scenario_17_carrier_and_fighters.lua:9926
 #, lua-format
 msgctxt "msgRelay"
 msgid "%s turned over to %s for repairs."
 msgstr "%s turned over to %s for repairs."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9950
+#: scripts/scenario_17_carrier_and_fighters.lua:9948
 #, lua-format
 msgctxt "goal-shipLog"
 msgid ""
@@ -2378,41 +2378,41 @@ msgid ""
 "start repairs"
 msgstr "[%s] Greetings, %s. You'll need to tractor %s to within 1.5U before we can start repairs"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:9993
+#: scripts/scenario_17_carrier_and_fighters.lua:9991
 msgctxt "-buttonWeapons"
 msgid "Tractor On"
 msgstr "Tractor On"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10000
+#: scripts/scenario_17_carrier_and_fighters.lua:9998
 msgctxt "-buttonTactical"
 msgid "Tractor On"
 msgstr "Tractor On"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10024
+#: scripts/scenario_17_carrier_and_fighters.lua:10022
 msgctxt "-buttonWeapons"
 msgid "Tractor Off"
 msgstr "Tractor Off"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10031
+#: scripts/scenario_17_carrier_and_fighters.lua:10029
 msgctxt "-buttonTactical"
 msgid "Tractor Off"
 msgstr "Tractor Off"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10059
+#: scripts/scenario_17_carrier_and_fighters.lua:10057
 msgctxt "-msgEngineer"
 msgid ""
 "The tractor equipment has been fully integrated with ship systems. It is "
 "ready for the weapons officer to activate at the appropriate time"
 msgstr "The tractor equipment has been fully integrated with ship systems. It is ready for the weapons officer to activate at the appropriate time"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10070
+#: scripts/scenario_17_carrier_and_fighters.lua:10068
 msgctxt "-msgEngineer+"
 msgid ""
 "The tractor equipment has been fully integrated with ship systems. It is "
 "ready for the weapons officer to activate at the appropriate time"
 msgstr "The tractor equipment has been fully integrated with ship systems. It is ready for the weapons officer to activate at the appropriate time"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10082
+#: scripts/scenario_17_carrier_and_fighters.lua:10080
 #, lua-format
 msgctxt "-msgWeapons"
 msgid ""
@@ -2422,7 +2422,7 @@ msgid ""
 "systems to draw and maneuver %s to %s until it is docked"
 msgstr "Tractor equipment installed.\nWhen %s is in range of the disabled ship, %s, You can engage the tractor system via the (Tractor On) button. This system works with %s's on board systems to draw and manoeuvre %s to %s until it is docked"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10100
+#: scripts/scenario_17_carrier_and_fighters.lua:10098
 #, lua-format
 msgctxt "-msgTactical"
 msgid ""
@@ -2432,65 +2432,65 @@ msgid ""
 "systems to draw and maneuver %s to %s until it is docked"
 msgstr "Tractor equipment installed.\nWhen %s is in range of the disabled ship, %s, You can engage the tractor system via the (Tractor On) button. This system works with %s's on board systems to draw and manoeuvre %s to %s until it is docked"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10120
+#: scripts/scenario_17_carrier_and_fighters.lua:10118
 #, lua-format
 msgctxt "goal-shipLog"
 msgid "[%s] Our engines have been repaired and we stand ready to assist"
 msgstr "[%s] Our engines have been repaired and we stand ready to assist"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10133
+#: scripts/scenario_17_carrier_and_fighters.lua:10131
 #, lua-format
 msgctxt "goal-incCall"
 msgid "[From %s] Our engines have been repaired and we stand ready to assist"
 msgstr "[From %s] Our engines have been repaired and we stand ready to assist"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10138
+#: scripts/scenario_17_carrier_and_fighters.lua:10136
 #, lua-format
 msgctxt "msgRelay"
 msgid "%s is ready to help us in our mission."
 msgstr "%s is ready to help us in our mission."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10173
+#: scripts/scenario_17_carrier_and_fighters.lua:10171
 msgctxt "-buttonWeapons"
 msgid "Do Not Push"
 msgstr "Do Not Push"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10180
+#: scripts/scenario_17_carrier_and_fighters.lua:10178
 msgctxt "-buttonTactical"
 msgid "Do Not Push"
 msgstr "Do Not Push"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10190
+#: scripts/scenario_17_carrier_and_fighters.lua:10188
 msgctxt "-msgScience"
 msgid ""
 "Internal security sensors indicate ship systems hacked by unknown source. "
 "For a moment I thought I heard evil laughter"
 msgstr "Internal security sensors indicate ship systems hacked by unknown source. For a moment I thought I heard evil laughter"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10201
+#: scripts/scenario_17_carrier_and_fighters.lua:10199
 msgctxt "-msgOperations"
 msgid ""
 "Internal security sensors indicate ship systems hacked by unknown source. "
 "For a moment I thought I heard evil laughter"
 msgstr "Internal security sensors indicate ship systems hacked by unknown source. For a moment I thought I heard evil laughter"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10575
+#: scripts/scenario_17_carrier_and_fighters.lua:10573
 msgctxt "repairCrew-msgEngineer"
 msgid "One of your repair crew has perished"
 msgstr "One of your repair crew has perished"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10586
+#: scripts/scenario_17_carrier_and_fighters.lua:10584
 msgctxt "repairCrew-msgEngineer+"
 msgid "One of your repair crew has perished"
 msgstr "One of your repair crew has perished"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10613
+#: scripts/scenario_17_carrier_and_fighters.lua:10611
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%i out of %i friendly stations survived."
 msgstr "%i out of %i friendly stations survived."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10618
+#: scripts/scenario_17_carrier_and_fighters.lua:10616
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -2498,7 +2498,7 @@ msgid ""
 "%i out of %i neutral stations survived."
 msgstr "%s\n%i out of %i neutral stations survived."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10624
+#: scripts/scenario_17_carrier_and_fighters.lua:10622
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -2506,7 +2506,7 @@ msgid ""
 "%i out of %i enemy stations survived."
 msgstr "%s\n%i out of %i enemy stations survived."
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10630
+#: scripts/scenario_17_carrier_and_fighters.lua:10628
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -2514,37 +2514,37 @@ msgid ""
 "Mission milestones completed:%i"
 msgstr "%s\nMission milestones completed:%i"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10639
+#: scripts/scenario_17_carrier_and_fighters.lua:10637
 msgctxt "msgMainscreen"
 msgid "Cadet"
 msgstr "Cadet"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10641
+#: scripts/scenario_17_carrier_and_fighters.lua:10639
 msgctxt "msgMainscreen"
 msgid "Ensign"
 msgstr "Ensign"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10643
+#: scripts/scenario_17_carrier_and_fighters.lua:10641
 msgctxt "msgMainscreen"
 msgid "Lieutenant"
 msgstr "Lieutenant"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10645
+#: scripts/scenario_17_carrier_and_fighters.lua:10643
 msgctxt "msgMainscreen"
 msgid "Commander"
 msgstr "Commander"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10647
+#: scripts/scenario_17_carrier_and_fighters.lua:10645
 msgctxt "msgMainscreen"
 msgid "Captain"
 msgstr "Captain"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10649
+#: scripts/scenario_17_carrier_and_fighters.lua:10647
 msgctxt "msgMainscreen"
 msgid "Admiral"
 msgstr "Admiral"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10652
+#: scripts/scenario_17_carrier_and_fighters.lua:10650
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -2552,7 +2552,7 @@ msgid ""
 "Earned rank: %s"
 msgstr "%s\nEarned rank: %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10670
+#: scripts/scenario_17_carrier_and_fighters.lua:10668
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -2560,7 +2560,7 @@ msgid ""
 "Rank after several military leaders disappeared: %s"
 msgstr "%s\nRank after several military leaders disappeared: %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10682
+#: scripts/scenario_17_carrier_and_fighters.lua:10680
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -2568,7 +2568,7 @@ msgid ""
 "Game duration: %s"
 msgstr "%s\nGame duration: %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10689
+#: scripts/scenario_17_carrier_and_fighters.lua:10687
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -2576,7 +2576,7 @@ msgid ""
 "Selected difficulty options: Enemy power: %s, Murphy: %s"
 msgstr "%s\nSelected difficulty options: Enemy power: %s, Murphy: %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10696
+#: scripts/scenario_17_carrier_and_fighters.lua:10694
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -2584,15 +2584,15 @@ msgid ""
 "Carrier type: %s"
 msgstr "%s\nCarrier type: %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10702
-#: scripts/scenario_17_carrier_and_fighters.lua:10711
-#: scripts/scenario_17_carrier_and_fighters.lua:10720
+#: scripts/scenario_17_carrier_and_fighters.lua:10700
+#: scripts/scenario_17_carrier_and_fighters.lua:10709
+#: scripts/scenario_17_carrier_and_fighters.lua:10718
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10705
+#: scripts/scenario_17_carrier_and_fighters.lua:10703
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -2600,7 +2600,7 @@ msgid ""
 "Fighter type 1: %s"
 msgstr "%s\nFighter type 1: %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10714
+#: scripts/scenario_17_carrier_and_fighters.lua:10712
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -2608,31 +2608,31 @@ msgid ""
 "Fighter type 2: %s"
 msgstr "%s\nFighter type 2: %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10746
+#: scripts/scenario_17_carrier_and_fighters.lua:10744
 #, lua-format
 msgctxt "tabWeaponsTacticalSingle"
 msgid "%s tubes: %s"
 msgstr "%s tubes: %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10752
+#: scripts/scenario_17_carrier_and_fighters.lua:10750
 #, lua-format
 msgctxt "tabWeaponsTacticalSingle"
 msgid "%s tube: %s"
 msgstr "%s tube: %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10765
+#: scripts/scenario_17_carrier_and_fighters.lua:10763
 #, lua-format
 msgctxt "tabHelm"
 msgid "%s in %s"
 msgstr "%s in %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10775
+#: scripts/scenario_17_carrier_and_fighters.lua:10773
 #, lua-format
 msgctxt "tabTactical"
 msgid "%s in %s"
 msgstr "%s in %s"
 
-#: scripts/scenario_17_carrier_and_fighters.lua:10785
+#: scripts/scenario_17_carrier_and_fighters.lua:10783
 #, lua-format
 msgctxt "tabSingle"
 msgid "%s in %s"

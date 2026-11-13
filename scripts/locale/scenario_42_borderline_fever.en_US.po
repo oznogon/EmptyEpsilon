@@ -3062,7 +3062,7 @@ msgstr ""
 #: scripts/scenario_42_borderline_fever.lua:12134
 #: scripts/scenario_42_borderline_fever.lua:12164
 #: scripts/scenario_42_borderline_fever.lua:12194
-#: scripts/scenario_42_borderline_fever.lua:24566
+#: scripts/scenario_42_borderline_fever.lua:24564
 msgctxt "scienceDescription-artifact"
 msgid "Scan to gather intelligence"
 msgstr ""
@@ -3078,7 +3078,7 @@ msgid "Enemy fleet detected in sector %s"
 msgstr ""
 
 #: scripts/scenario_42_borderline_fever.lua:12376
-#: scripts/scenario_42_borderline_fever.lua:22138
+#: scripts/scenario_42_borderline_fever.lua:22136
 msgctxt "msgGM"
 msgid "Empty Template pool: fix excludes or other criteria"
 msgstr ""
@@ -3408,59 +3408,59 @@ msgstr ""
 #: scripts/scenario_42_borderline_fever.lua:18133
 #: scripts/scenario_42_borderline_fever.lua:18142
 #: scripts/scenario_42_borderline_fever.lua:18153
-#: scripts/scenario_42_borderline_fever.lua:18271
-#: scripts/scenario_42_borderline_fever.lua:18341
-#: scripts/scenario_42_borderline_fever.lua:18346
-#: scripts/scenario_42_borderline_fever.lua:18505
-#: scripts/scenario_42_borderline_fever.lua:18510
-#: scripts/scenario_42_borderline_fever.lua:18566
-#: scripts/scenario_42_borderline_fever.lua:18618
-#: scripts/scenario_42_borderline_fever.lua:18666
-#: scripts/scenario_42_borderline_fever.lua:18712
-#: scripts/scenario_42_borderline_fever.lua:18758
-#: scripts/scenario_42_borderline_fever.lua:18804
-#: scripts/scenario_42_borderline_fever.lua:18839
-#: scripts/scenario_42_borderline_fever.lua:18879
-#: scripts/scenario_42_borderline_fever.lua:18933
-#: scripts/scenario_42_borderline_fever.lua:18963
-#: scripts/scenario_42_borderline_fever.lua:18995
-#: scripts/scenario_42_borderline_fever.lua:19028
+#: scripts/scenario_42_borderline_fever.lua:18269
+#: scripts/scenario_42_borderline_fever.lua:18339
+#: scripts/scenario_42_borderline_fever.lua:18344
+#: scripts/scenario_42_borderline_fever.lua:18503
+#: scripts/scenario_42_borderline_fever.lua:18508
+#: scripts/scenario_42_borderline_fever.lua:18564
+#: scripts/scenario_42_borderline_fever.lua:18616
+#: scripts/scenario_42_borderline_fever.lua:18664
+#: scripts/scenario_42_borderline_fever.lua:18710
+#: scripts/scenario_42_borderline_fever.lua:18756
+#: scripts/scenario_42_borderline_fever.lua:18802
+#: scripts/scenario_42_borderline_fever.lua:18837
+#: scripts/scenario_42_borderline_fever.lua:18877
+#: scripts/scenario_42_borderline_fever.lua:18931
+#: scripts/scenario_42_borderline_fever.lua:18961
+#: scripts/scenario_42_borderline_fever.lua:18993
+#: scripts/scenario_42_borderline_fever.lua:19026
+#: scripts/scenario_42_borderline_fever.lua:19059
 #: scripts/scenario_42_borderline_fever.lua:19061
-#: scripts/scenario_42_borderline_fever.lua:19063
-#: scripts/scenario_42_borderline_fever.lua:19092
-#: scripts/scenario_42_borderline_fever.lua:19147
-#: scripts/scenario_42_borderline_fever.lua:19168
-#: scripts/scenario_42_borderline_fever.lua:19198
-#: scripts/scenario_42_borderline_fever.lua:19228
+#: scripts/scenario_42_borderline_fever.lua:19090
+#: scripts/scenario_42_borderline_fever.lua:19145
+#: scripts/scenario_42_borderline_fever.lua:19166
+#: scripts/scenario_42_borderline_fever.lua:19196
+#: scripts/scenario_42_borderline_fever.lua:19226
+#: scripts/scenario_42_borderline_fever.lua:19268
 #: scripts/scenario_42_borderline_fever.lua:19270
-#: scripts/scenario_42_borderline_fever.lua:19272
-#: scripts/scenario_42_borderline_fever.lua:19713
-#: scripts/scenario_42_borderline_fever.lua:19861
-#: scripts/scenario_42_borderline_fever.lua:19925
-#: scripts/scenario_42_borderline_fever.lua:19937
-#: scripts/scenario_42_borderline_fever.lua:20004
-#: scripts/scenario_42_borderline_fever.lua:20023
-#: scripts/scenario_42_borderline_fever.lua:20139
-#: scripts/scenario_42_borderline_fever.lua:20194
-#: scripts/scenario_42_borderline_fever.lua:20213
-#: scripts/scenario_42_borderline_fever.lua:20225
-#: scripts/scenario_42_borderline_fever.lua:20340
-#: scripts/scenario_42_borderline_fever.lua:20372
-#: scripts/scenario_42_borderline_fever.lua:20426
-#: scripts/scenario_42_borderline_fever.lua:20430
-#: scripts/scenario_42_borderline_fever.lua:20488
-#: scripts/scenario_42_borderline_fever.lua:20552
-#: scripts/scenario_42_borderline_fever.lua:20628
-#: scripts/scenario_42_borderline_fever.lua:20692
-#: scripts/scenario_42_borderline_fever.lua:20769
-#: scripts/scenario_42_borderline_fever.lua:20799
-#: scripts/scenario_42_borderline_fever.lua:21546
-#: scripts/scenario_42_borderline_fever.lua:21550
-#: scripts/scenario_42_borderline_fever.lua:21608
-#: scripts/scenario_42_borderline_fever.lua:21663
-#: scripts/scenario_42_borderline_fever.lua:21723
-#: scripts/scenario_42_borderline_fever.lua:21778
-#: scripts/scenario_42_borderline_fever.lua:21838
+#: scripts/scenario_42_borderline_fever.lua:19711
+#: scripts/scenario_42_borderline_fever.lua:19859
+#: scripts/scenario_42_borderline_fever.lua:19923
+#: scripts/scenario_42_borderline_fever.lua:19935
+#: scripts/scenario_42_borderline_fever.lua:20002
+#: scripts/scenario_42_borderline_fever.lua:20021
+#: scripts/scenario_42_borderline_fever.lua:20137
+#: scripts/scenario_42_borderline_fever.lua:20192
+#: scripts/scenario_42_borderline_fever.lua:20211
+#: scripts/scenario_42_borderline_fever.lua:20223
+#: scripts/scenario_42_borderline_fever.lua:20338
+#: scripts/scenario_42_borderline_fever.lua:20370
+#: scripts/scenario_42_borderline_fever.lua:20424
+#: scripts/scenario_42_borderline_fever.lua:20428
+#: scripts/scenario_42_borderline_fever.lua:20486
+#: scripts/scenario_42_borderline_fever.lua:20550
+#: scripts/scenario_42_borderline_fever.lua:20626
+#: scripts/scenario_42_borderline_fever.lua:20690
+#: scripts/scenario_42_borderline_fever.lua:20767
+#: scripts/scenario_42_borderline_fever.lua:20797
+#: scripts/scenario_42_borderline_fever.lua:21544
+#: scripts/scenario_42_borderline_fever.lua:21548
+#: scripts/scenario_42_borderline_fever.lua:21606
+#: scripts/scenario_42_borderline_fever.lua:21661
+#: scripts/scenario_42_borderline_fever.lua:21721
+#: scripts/scenario_42_borderline_fever.lua:21776
+#: scripts/scenario_42_borderline_fever.lua:21836
 msgid "Back"
 msgstr ""
 
@@ -4065,15 +4065,15 @@ msgstr ""
 #: scripts/scenario_42_borderline_fever.lua:16111
 #: scripts/scenario_42_borderline_fever.lua:16121
 #: scripts/scenario_42_borderline_fever.lua:16586
-#: scripts/scenario_42_borderline_fever.lua:18563
-#: scripts/scenario_42_borderline_fever.lua:18614
-#: scripts/scenario_42_borderline_fever.lua:18662
-#: scripts/scenario_42_borderline_fever.lua:18708
-#: scripts/scenario_42_borderline_fever.lua:18754
-#: scripts/scenario_42_borderline_fever.lua:18800
-#: scripts/scenario_42_borderline_fever.lua:18829
-#: scripts/scenario_42_borderline_fever.lua:18873
-#: scripts/scenario_42_borderline_fever.lua:19160
+#: scripts/scenario_42_borderline_fever.lua:18561
+#: scripts/scenario_42_borderline_fever.lua:18612
+#: scripts/scenario_42_borderline_fever.lua:18660
+#: scripts/scenario_42_borderline_fever.lua:18706
+#: scripts/scenario_42_borderline_fever.lua:18752
+#: scripts/scenario_42_borderline_fever.lua:18798
+#: scripts/scenario_42_borderline_fever.lua:18827
+#: scripts/scenario_42_borderline_fever.lua:18871
+#: scripts/scenario_42_borderline_fever.lua:19158
 msgctxt "needRep-comms"
 msgid "Insufficient reputation"
 msgstr ""
@@ -4272,7 +4272,7 @@ msgstr ""
 
 #: scripts/scenario_42_borderline_fever.lua:15698
 #: scripts/scenario_42_borderline_fever.lua:15764
-#: scripts/scenario_42_borderline_fever.lua:18822
+#: scripts/scenario_42_borderline_fever.lua:18820
 #, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
@@ -4640,15 +4640,15 @@ msgid "Available Space: %i, Available Reputation: %i\n"
 msgstr ""
 
 #: scripts/scenario_42_borderline_fever.lua:16702
-#: scripts/scenario_42_borderline_fever.lua:20511
-#: scripts/scenario_42_borderline_fever.lua:20585
-#: scripts/scenario_42_borderline_fever.lua:20649
-#: scripts/scenario_42_borderline_fever.lua:20726
-#: scripts/scenario_42_borderline_fever.lua:21565
-#: scripts/scenario_42_borderline_fever.lua:21620
-#: scripts/scenario_42_borderline_fever.lua:21680
-#: scripts/scenario_42_borderline_fever.lua:21735
-#: scripts/scenario_42_borderline_fever.lua:21795
+#: scripts/scenario_42_borderline_fever.lua:20509
+#: scripts/scenario_42_borderline_fever.lua:20583
+#: scripts/scenario_42_borderline_fever.lua:20647
+#: scripts/scenario_42_borderline_fever.lua:20724
+#: scripts/scenario_42_borderline_fever.lua:21563
+#: scripts/scenario_42_borderline_fever.lua:21618
+#: scripts/scenario_42_borderline_fever.lua:21678
+#: scripts/scenario_42_borderline_fever.lua:21733
+#: scripts/scenario_42_borderline_fever.lua:21793
 #, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
@@ -4741,22 +4741,22 @@ msgid "Trade medicine for %s"
 msgstr ""
 
 #: scripts/scenario_42_borderline_fever.lua:16918
-#: scripts/scenario_42_borderline_fever.lua:20462
+#: scripts/scenario_42_borderline_fever.lua:20460
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade luxury for %s"
 msgstr ""
 
 #: scripts/scenario_42_borderline_fever.lua:16973
-#: scripts/scenario_42_borderline_fever.lua:20404
-#: scripts/scenario_42_borderline_fever.lua:21524
+#: scripts/scenario_42_borderline_fever.lua:20402
+#: scripts/scenario_42_borderline_fever.lua:21522
 msgctxt "trade-comms"
 msgid "Jettison cargo"
 msgstr ""
 
 #: scripts/scenario_42_borderline_fever.lua:16978
-#: scripts/scenario_42_borderline_fever.lua:20409
-#: scripts/scenario_42_borderline_fever.lua:21529
+#: scripts/scenario_42_borderline_fever.lua:20407
+#: scripts/scenario_42_borderline_fever.lua:21527
 #, lua-format
 msgctxt "trade-comms"
 msgid ""
@@ -4765,8 +4765,8 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_42_borderline_fever.lua:16991
-#: scripts/scenario_42_borderline_fever.lua:20422
-#: scripts/scenario_42_borderline_fever.lua:21542
+#: scripts/scenario_42_borderline_fever.lua:20420
+#: scripts/scenario_42_borderline_fever.lua:21540
 #, lua-format
 msgctxt "trade-comms"
 msgid "One %s jettisoned"
@@ -5089,102 +5089,102 @@ msgctxt "stationAssist-comms"
 msgid "Hull: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:18249
+#: scripts/scenario_42_borderline_fever.lua:18247
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Shield: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:18260
+#: scripts/scenario_42_borderline_fever.lua:18258
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Shield %s: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:18277
+#: scripts/scenario_42_borderline_fever.lua:18275
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%d rep)"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:18285
+#: scripts/scenario_42_borderline_fever.lua:18283
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request backup."
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:18292
+#: scripts/scenario_42_borderline_fever.lua:18290
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we deliver your supplies?"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:18298
-#: scripts/scenario_42_borderline_fever.lua:18374
+#: scripts/scenario_42_borderline_fever.lua:18296
+#: scripts/scenario_42_borderline_fever.lua:18372
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "WP %d"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:18328
+#: scripts/scenario_42_borderline_fever.lua:18326
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched a supply ship toward WP %d"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:18337
-#: scripts/scenario_42_borderline_fever.lua:18453
-#: scripts/scenario_42_borderline_fever.lua:18500
+#: scripts/scenario_42_borderline_fever.lua:18335
+#: scripts/scenario_42_borderline_fever.lua:18451
+#: scripts/scenario_42_borderline_fever.lua:18498
 msgctxt "needRep-comms"
 msgid "Not enough reputation!"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:18353
+#: scripts/scenario_42_borderline_fever.lua:18351
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send reinforcements! (%d rep)"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:18361
+#: scripts/scenario_42_borderline_fever.lua:18359
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request reinforcements."
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:18368
+#: scripts/scenario_42_borderline_fever.lua:18366
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we dispatch the reinforcements?"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:18441
-#: scripts/scenario_42_borderline_fever.lua:18490
+#: scripts/scenario_42_borderline_fever.lua:18439
+#: scripts/scenario_42_borderline_fever.lua:18488
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched %s to assist at WP %d"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19278
+#: scripts/scenario_42_borderline_fever.lua:19276
 msgctxt "scienceDB"
 msgid "Stations"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19288
+#: scripts/scenario_42_borderline_fever.lua:19286
 msgctxt "scienceDB"
 msgid "Friendly"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19296
+#: scripts/scenario_42_borderline_fever.lua:19294
 msgctxt "scienceDB"
 msgid ""
 "Friendly stations share their short range telemetry with your ship on the "
 "Relay and Strategic Map consoles. These are the known friendly stations."
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19317
+#: scripts/scenario_42_borderline_fever.lua:19315
 msgctxt "scienceDB"
 msgid ""
 "Neutral stations don't share their short range telemetry with your ship, but "
 "they do allow for docking. These are the known neutral stations."
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19341
+#: scripts/scenario_42_borderline_fever.lua:19339
 #, lua-format
 msgctxt "scienceDB"
 msgid ""
@@ -5193,7 +5193,7 @@ msgid ""
 "General Information: %s"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19351
+#: scripts/scenario_42_borderline_fever.lua:19349
 #, lua-format
 msgctxt "scienceDB"
 msgid ""
@@ -5202,357 +5202,357 @@ msgid ""
 "History: %s"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19362
+#: scripts/scenario_42_borderline_fever.lua:19360
 msgctxt "scienceDB"
 msgid "Small Station"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19363
+#: scripts/scenario_42_borderline_fever.lua:19361
 msgctxt "scienceDB"
 msgid "Medium Station"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19364
+#: scripts/scenario_42_borderline_fever.lua:19362
 msgctxt "scienceDB"
 msgid "Large Station"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19365
+#: scripts/scenario_42_borderline_fever.lua:19363
 msgctxt "scienceDB"
 msgid "Huge Station"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19367
+#: scripts/scenario_42_borderline_fever.lua:19365
 msgctxt "scienceDB"
 msgid "Small"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19375
+#: scripts/scenario_42_borderline_fever.lua:19373
 msgctxt "scienceDB"
 msgid "Medium"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19383
+#: scripts/scenario_42_borderline_fever.lua:19381
 msgctxt "scienceDB"
 msgid "Large"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19391
+#: scripts/scenario_42_borderline_fever.lua:19389
 msgctxt "scienceDB"
 msgid "Huge"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19399
+#: scripts/scenario_42_borderline_fever.lua:19397
 msgctxt "scienceDB"
 msgid "Size"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19402
+#: scripts/scenario_42_borderline_fever.lua:19400
 msgctxt "scienceDB"
 msgid "Location, Faction"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19415
+#: scripts/scenario_42_borderline_fever.lua:19413
 msgctxt "scienceDB"
 msgid "share energy"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19420
+#: scripts/scenario_42_borderline_fever.lua:19418
 msgctxt "scienceDB"
 msgid "repair hull"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19423
+#: scripts/scenario_42_borderline_fever.lua:19421
 #, lua-format
 msgctxt "scienceDB"
 msgid "%s, repair hull"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19429
+#: scripts/scenario_42_borderline_fever.lua:19427
 msgctxt "scienceDB"
 msgid "replenish probes"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19432
+#: scripts/scenario_42_borderline_fever.lua:19430
 #, lua-format
 msgctxt "scienceDB"
 msgid "%s, replenish probes"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19439
+#: scripts/scenario_42_borderline_fever.lua:19437
 msgctxt "scienceDB"
 msgid "Docking Services"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19441
+#: scripts/scenario_42_borderline_fever.lua:19439
 msgctxt "scienceDB"
 msgid "Docking Service"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19463
+#: scripts/scenario_42_borderline_fever.lua:19461
 msgctxt "scienceDB"
 msgid "Restock Homing"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19464
+#: scripts/scenario_42_borderline_fever.lua:19462
 msgctxt "scienceDB"
 msgid "Restock HVLI"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19465
+#: scripts/scenario_42_borderline_fever.lua:19463
 msgctxt "scienceDB"
 msgid "Restock Mine"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19466
+#: scripts/scenario_42_borderline_fever.lua:19464
 msgctxt "scienceDB"
 msgid "Restock Nuke"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19467
+#: scripts/scenario_42_borderline_fever.lua:19465
 msgctxt "scienceDB"
 msgid "Restock EMP"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19473
+#: scripts/scenario_42_borderline_fever.lua:19471
 #, lua-format
 msgctxt "scienceDB"
 msgid "%i reputation each"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19485
-#: scripts/scenario_42_borderline_fever.lua:19501
+#: scripts/scenario_42_borderline_fever.lua:19483
+#: scripts/scenario_42_borderline_fever.lua:19499
 msgctxt "scienceDB"
 msgid "Repair scanners"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19488
+#: scripts/scenario_42_borderline_fever.lua:19486
 msgctxt "scienceDB"
 msgid "Repair combat maneuver"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19490
+#: scripts/scenario_42_borderline_fever.lua:19488
 msgctxt "scienceDB"
 msgid "Repair hacking"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19493
+#: scripts/scenario_42_borderline_fever.lua:19491
 msgctxt "scienceDB"
 msgid "Repair probe launch"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19497
+#: scripts/scenario_42_borderline_fever.lua:19495
 msgctxt "scienceDB"
 msgid "Repair slow tube"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19508
-#: scripts/scenario_42_borderline_fever.lua:19593
+#: scripts/scenario_42_borderline_fever.lua:19506
+#: scripts/scenario_42_borderline_fever.lua:19591
 #, lua-format
 msgctxt "scienceDB"
 msgid "%s reputation"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19517
+#: scripts/scenario_42_borderline_fever.lua:19515
 msgctxt "scienceDB"
 msgid "Repair reactor"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19520
+#: scripts/scenario_42_borderline_fever.lua:19518
 msgctxt "scienceDB"
 msgid "Repair beam weapons"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19524
+#: scripts/scenario_42_borderline_fever.lua:19522
 msgctxt "scienceDB"
 msgid "Repair missile weapons"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19528
+#: scripts/scenario_42_borderline_fever.lua:19526
 msgctxt "scienceDB"
 msgid "Repair maneuvering"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19530
+#: scripts/scenario_42_borderline_fever.lua:19528
 msgctxt "scienceDB"
 msgid "Repair impulse"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19531
+#: scripts/scenario_42_borderline_fever.lua:19529
 msgctxt "scienceDB"
 msgid "Repair warp drive"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19534
+#: scripts/scenario_42_borderline_fever.lua:19532
 msgctxt "scienceDB"
 msgid "Repair jump drive"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19538
+#: scripts/scenario_42_borderline_fever.lua:19536
 msgctxt "scienceDB"
 msgid "Repair front shield"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19542
+#: scripts/scenario_42_borderline_fever.lua:19540
 msgctxt "scienceDB"
 msgid "Repair rear shield"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19549
+#: scripts/scenario_42_borderline_fever.lua:19547
 #, lua-format
 msgctxt "scienceDB"
 msgid "%s reputation, up to %.1f%% max"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19562
+#: scripts/scenario_42_borderline_fever.lua:19560
 msgctxt "scienceDB"
 msgid "Drop supplies"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19566
+#: scripts/scenario_42_borderline_fever.lua:19564
 msgctxt "scienceDB"
 msgid "Standard reinforcements"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19570
+#: scripts/scenario_42_borderline_fever.lua:19568
 msgctxt "scienceDB"
 msgid "Hornet reinforcements"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19574
+#: scripts/scenario_42_borderline_fever.lua:19572
 msgctxt "scienceDB"
 msgid "Phobos reinforcements"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19578
+#: scripts/scenario_42_borderline_fever.lua:19576
 msgctxt "scienceDB"
 msgid "Adder3 reinforcements"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19582
+#: scripts/scenario_42_borderline_fever.lua:19580
 msgctxt "scienceDB"
 msgid "Adder8 reinforcements"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19586
+#: scripts/scenario_42_borderline_fever.lua:19584
 msgctxt "scienceDB"
 msgid "Shield overcharge"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19611
+#: scripts/scenario_42_borderline_fever.lua:19609
 #, lua-format
 msgctxt "scienceDB"
 msgid "Sells %s"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19613
+#: scripts/scenario_42_borderline_fever.lua:19611
 #, lua-format
 msgctxt "scienceDB"
 msgid "for %s reputation each"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19645
-#: scripts/scenario_42_borderline_fever.lua:19849
+#: scripts/scenario_42_borderline_fever.lua:19643
+#: scripts/scenario_42_borderline_fever.lua:19847
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19647
-#: scripts/scenario_42_borderline_fever.lua:19851
+#: scripts/scenario_42_borderline_fever.lua:19645
+#: scripts/scenario_42_borderline_fever.lua:19849
 msgctxt "shipAssist-comms"
 msgid "Sir, how can we assist?"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19649
-#: scripts/scenario_42_borderline_fever.lua:19940
+#: scripts/scenario_42_borderline_fever.lua:19647
+#: scripts/scenario_42_borderline_fever.lua:19938
 msgctxt "shipAssist-comms"
 msgid "Report status"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19651
-#: scripts/scenario_42_borderline_fever.lua:19942
+#: scripts/scenario_42_borderline_fever.lua:19649
+#: scripts/scenario_42_borderline_fever.lua:19940
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Hull: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19658
-#: scripts/scenario_42_borderline_fever.lua:19949
+#: scripts/scenario_42_borderline_fever.lua:19656
+#: scripts/scenario_42_borderline_fever.lua:19947
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19668
-#: scripts/scenario_42_borderline_fever.lua:19959
+#: scripts/scenario_42_borderline_fever.lua:19666
+#: scripts/scenario_42_borderline_fever.lua:19957
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Front Shield: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19677
-#: scripts/scenario_42_borderline_fever.lua:19968
+#: scripts/scenario_42_borderline_fever.lua:19675
+#: scripts/scenario_42_borderline_fever.lua:19966
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Rear Shield: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19688
-#: scripts/scenario_42_borderline_fever.lua:19979
+#: scripts/scenario_42_borderline_fever.lua:19686
+#: scripts/scenario_42_borderline_fever.lua:19977
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield %s: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19703
-#: scripts/scenario_42_borderline_fever.lua:19994
+#: scripts/scenario_42_borderline_fever.lua:19701
+#: scripts/scenario_42_borderline_fever.lua:19992
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s Missiles: %d/%d\n"
 msgstr ""
 
+#: scripts/scenario_42_borderline_fever.lua:19719
+#: scripts/scenario_42_borderline_fever.lua:20811
+msgctxt "shipEnemy-comms"
+msgid "We will see to your destruction!"
+msgstr ""
+
 #: scripts/scenario_42_borderline_fever.lua:19721
 #: scripts/scenario_42_borderline_fever.lua:20813
 msgctxt "shipEnemy-comms"
-msgid "We will see to your destruction!"
+msgid "Your bloodline will end here!"
 msgstr ""
 
 #: scripts/scenario_42_borderline_fever.lua:19723
 #: scripts/scenario_42_borderline_fever.lua:20815
 msgctxt "shipEnemy-comms"
-msgid "Your bloodline will end here!"
-msgstr ""
-
-#: scripts/scenario_42_borderline_fever.lua:19725
-#: scripts/scenario_42_borderline_fever.lua:20817
-msgctxt "shipEnemy-comms"
 msgid "Your feeble threats are meaningless."
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19728
-#: scripts/scenario_42_borderline_fever.lua:20824
+#: scripts/scenario_42_borderline_fever.lua:19726
+#: scripts/scenario_42_borderline_fever.lua:20822
 msgctxt "shipEnemy-comms"
 msgid ""
 "Ktzzzsss.\n"
 "You will DIEEee weaklingsss!"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19734
-#: scripts/scenario_42_borderline_fever.lua:20859
+#: scripts/scenario_42_borderline_fever.lua:19732
+#: scripts/scenario_42_borderline_fever.lua:20857
 msgctxt "shipEnemy-comms"
 msgid ""
 "We wish you no harm, but will harm you if we must.\n"
 "End of transmission."
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19741
-#: scripts/scenario_42_borderline_fever.lua:20868
+#: scripts/scenario_42_borderline_fever.lua:19739
+#: scripts/scenario_42_borderline_fever.lua:20866
 msgctxt "shipEnemy-comms"
 msgid "Stay out of our way, or your death will amuse us extremely!"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19748
-#: scripts/scenario_42_borderline_fever.lua:20877
+#: scripts/scenario_42_borderline_fever.lua:19746
+#: scripts/scenario_42_borderline_fever.lua:20875
 msgctxt "shipEnemy-comms"
 msgid ""
 "One zero one.\n"
@@ -5563,26 +5563,26 @@ msgid ""
 "Communication halted."
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19751
-#: scripts/scenario_42_borderline_fever.lua:20880
+#: scripts/scenario_42_borderline_fever.lua:19749
+#: scripts/scenario_42_borderline_fever.lua:20878
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19754
-#: scripts/scenario_42_borderline_fever.lua:20883
+#: scripts/scenario_42_borderline_fever.lua:19752
+#: scripts/scenario_42_borderline_fever.lua:20881
 msgctxt "shipEnemy-comms"
 msgid "Rogue command received. Targeting source."
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19757
-#: scripts/scenario_42_borderline_fever.lua:20886
+#: scripts/scenario_42_borderline_fever.lua:19755
+#: scripts/scenario_42_borderline_fever.lua:20884
 msgctxt "shipEnemy-comms"
 msgid "External command ignored."
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19762
-#: scripts/scenario_42_borderline_fever.lua:20891
+#: scripts/scenario_42_borderline_fever.lua:19760
+#: scripts/scenario_42_borderline_fever.lua:20889
 msgctxt "shipEnemy-comms"
 msgid ""
 "The hive suffers no threats. Opposition to any of us is opposition to us "
@@ -5590,126 +5590,126 @@ msgid ""
 "Stand down or prepare to donate your corpses toward our nutrition."
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19767
-#: scripts/scenario_42_borderline_fever.lua:20896
+#: scripts/scenario_42_borderline_fever.lua:19765
+#: scripts/scenario_42_borderline_fever.lua:20894
 msgctxt "shipEnemy-comms"
 msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19771
-#: scripts/scenario_42_borderline_fever.lua:20900
+#: scripts/scenario_42_borderline_fever.lua:19769
+#: scripts/scenario_42_borderline_fever.lua:20898
 msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19775
-#: scripts/scenario_42_borderline_fever.lua:20904
+#: scripts/scenario_42_borderline_fever.lua:19773
+#: scripts/scenario_42_borderline_fever.lua:20902
 msgctxt "shipEnemy-comms"
 msgid "The hive has greater priorities than exterminating pests."
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19778
-#: scripts/scenario_42_borderline_fever.lua:20921
+#: scripts/scenario_42_borderline_fever.lua:19776
+#: scripts/scenario_42_borderline_fever.lua:20919
 msgctxt "shipEnemy-comms"
 msgid "Mind your own business!"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19798
-#: scripts/scenario_42_borderline_fever.lua:21852
+#: scripts/scenario_42_borderline_fever.lua:19796
+#: scripts/scenario_42_borderline_fever.lua:21850
 msgctxt "ship-comms"
 msgid ""
 "Sorry, we have no time to chat with you.\n"
 "We are on an important mission."
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19802
-#: scripts/scenario_42_borderline_fever.lua:21857
+#: scripts/scenario_42_borderline_fever.lua:19800
+#: scripts/scenario_42_borderline_fever.lua:21855
 msgctxt "ship-comms"
 msgid ""
 "We have nothing for you.\n"
 "Good day."
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19853
-#: scripts/scenario_42_borderline_fever.lua:20216
+#: scripts/scenario_42_borderline_fever.lua:19851
+#: scripts/scenario_42_borderline_fever.lua:20214
 msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19858
-#: scripts/scenario_42_borderline_fever.lua:20222
+#: scripts/scenario_42_borderline_fever.lua:19856
+#: scripts/scenario_42_borderline_fever.lua:20220
 msgctxt "shipAssist-comms"
 msgid "No waypoints set. Please set a waypoint first."
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19864
-#: scripts/scenario_42_borderline_fever.lua:20230
+#: scripts/scenario_42_borderline_fever.lua:19862
+#: scripts/scenario_42_borderline_fever.lua:20228
 msgctxt "shipAssist-comms"
 msgid "Which waypoint should we defend?"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19869
+#: scripts/scenario_42_borderline_fever.lua:19867
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend WP %d"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19904
-#: scripts/scenario_42_borderline_fever.lua:19919
-#: scripts/scenario_42_borderline_fever.lua:20306
-#: scripts/scenario_42_borderline_fever.lua:20334
+#: scripts/scenario_42_borderline_fever.lua:19902
+#: scripts/scenario_42_borderline_fever.lua:19917
+#: scripts/scenario_42_borderline_fever.lua:20304
+#: scripts/scenario_42_borderline_fever.lua:20332
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at WP %d."
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19932
-#: scripts/scenario_42_borderline_fever.lua:20196
+#: scripts/scenario_42_borderline_fever.lua:19930
+#: scripts/scenario_42_borderline_fever.lua:20194
 msgctxt "shipAssist-comms"
 msgid "Assist me"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:19934
+#: scripts/scenario_42_borderline_fever.lua:19932
 msgctxt "shipAssist-comms"
 msgid "Heading toward you to assist."
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20012
+#: scripts/scenario_42_borderline_fever.lua:20010
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20018
+#: scripts/scenario_42_borderline_fever.lua:20016
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Docking at %s."
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20032
+#: scripts/scenario_42_borderline_fever.lua:20030
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Direct %s"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20040
+#: scripts/scenario_42_borderline_fever.lua:20038
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "What command should be given to %s?"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20046
+#: scripts/scenario_42_borderline_fever.lua:20044
 msgctxt "shipAssist-comms"
 msgid "Report hull and shield status"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20048
+#: scripts/scenario_42_borderline_fever.lua:20046
 msgctxt "shipAssist-comms"
 msgid "Fleet status:"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20057
-#: scripts/scenario_42_borderline_fever.lua:20150
+#: scripts/scenario_42_borderline_fever.lua:20055
+#: scripts/scenario_42_borderline_fever.lua:20148
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
@@ -5717,7 +5717,7 @@ msgid ""
 " %s:"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20064
+#: scripts/scenario_42_borderline_fever.lua:20062
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
@@ -5725,7 +5725,7 @@ msgid ""
 "    Hull: %d%%"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20078
+#: scripts/scenario_42_borderline_fever.lua:20076
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
@@ -5733,26 +5733,26 @@ msgid ""
 "    Shield: %d%%"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20090
+#: scripts/scenario_42_borderline_fever.lua:20088
 msgctxt "shipAssist-comms"
 msgid ""
 "\n"
 "    Shields: "
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20097
+#: scripts/scenario_42_borderline_fever.lua:20095
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Front: %d%% Rear: %d%%"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20120
+#: scripts/scenario_42_borderline_fever.lua:20118
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid " %d:%d%%"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20165
+#: scripts/scenario_42_borderline_fever.lua:20163
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
@@ -5760,7 +5760,7 @@ msgid ""
 "      %s: %d/%d"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20186
+#: scripts/scenario_42_borderline_fever.lua:20184
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
@@ -5768,488 +5768,488 @@ msgid ""
 "    Missiles: %s"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20208
+#: scripts/scenario_42_borderline_fever.lua:20206
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s heading toward you to assist"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20238
+#: scripts/scenario_42_borderline_fever.lua:20236
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend waypoint %d"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20264
+#: scripts/scenario_42_borderline_fever.lua:20262
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
 "We cannot break the treaty by defending WP %d in the neutral border zone"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20278
+#: scripts/scenario_42_borderline_fever.lua:20276
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
 "We cannot break the treaty by defending WP %d across the neutral border zones"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20351
+#: scripts/scenario_42_borderline_fever.lua:20349
 msgctxt "shipAssist-comms"
 msgid "Go offensive, attack all enemy targets"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20367
+#: scripts/scenario_42_borderline_fever.lua:20365
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s is on an offensive rampage"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20482
+#: scripts/scenario_42_borderline_fever.lua:20480
 #, lua-format
 msgctxt "trade-comms"
 msgid "Traded your luxury for %s from %s"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20538
-#: scripts/scenario_42_borderline_fever.lua:20614
-#: scripts/scenario_42_borderline_fever.lua:20678
-#: scripts/scenario_42_borderline_fever.lua:20755
-#: scripts/scenario_42_borderline_fever.lua:21594
-#: scripts/scenario_42_borderline_fever.lua:21649
-#: scripts/scenario_42_borderline_fever.lua:21709
-#: scripts/scenario_42_borderline_fever.lua:21764
-#: scripts/scenario_42_borderline_fever.lua:21824
+#: scripts/scenario_42_borderline_fever.lua:20536
+#: scripts/scenario_42_borderline_fever.lua:20612
+#: scripts/scenario_42_borderline_fever.lua:20676
+#: scripts/scenario_42_borderline_fever.lua:20753
+#: scripts/scenario_42_borderline_fever.lua:21592
+#: scripts/scenario_42_borderline_fever.lua:21647
+#: scripts/scenario_42_borderline_fever.lua:21707
+#: scripts/scenario_42_borderline_fever.lua:21762
+#: scripts/scenario_42_borderline_fever.lua:21822
 #, lua-format
 msgctxt "trade-comms"
 msgid "Purchased %s from %s"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20548
-#: scripts/scenario_42_borderline_fever.lua:20624
-#: scripts/scenario_42_borderline_fever.lua:20688
-#: scripts/scenario_42_borderline_fever.lua:20765
-#: scripts/scenario_42_borderline_fever.lua:21604
-#: scripts/scenario_42_borderline_fever.lua:21659
-#: scripts/scenario_42_borderline_fever.lua:21719
-#: scripts/scenario_42_borderline_fever.lua:21774
-#: scripts/scenario_42_borderline_fever.lua:21834
+#: scripts/scenario_42_borderline_fever.lua:20546
+#: scripts/scenario_42_borderline_fever.lua:20622
+#: scripts/scenario_42_borderline_fever.lua:20686
+#: scripts/scenario_42_borderline_fever.lua:20763
+#: scripts/scenario_42_borderline_fever.lua:21602
+#: scripts/scenario_42_borderline_fever.lua:21657
+#: scripts/scenario_42_borderline_fever.lua:21717
+#: scripts/scenario_42_borderline_fever.lua:21772
+#: scripts/scenario_42_borderline_fever.lua:21832
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20779
-#: scripts/scenario_42_borderline_fever.lua:21491
+#: scripts/scenario_42_borderline_fever.lua:20777
+#: scripts/scenario_42_borderline_fever.lua:21489
 msgctxt "trade-comms"
 msgid "Do you have cargo you might sell?"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20782
-#: scripts/scenario_42_borderline_fever.lua:21494
+#: scripts/scenario_42_borderline_fever.lua:20780
+#: scripts/scenario_42_borderline_fever.lua:21492
 msgctxt "trade-comms"
 msgid "We've got "
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20787
-#: scripts/scenario_42_borderline_fever.lua:21499
+#: scripts/scenario_42_borderline_fever.lua:20785
+#: scripts/scenario_42_borderline_fever.lua:21497
 msgctxt "trade-comms"
 msgid ", "
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20796
-#: scripts/scenario_42_borderline_fever.lua:21508
+#: scripts/scenario_42_borderline_fever.lua:20794
+#: scripts/scenario_42_borderline_fever.lua:21506
 msgctxt "trade-comms"
 msgid "nothing"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20828
+#: scripts/scenario_42_borderline_fever.lua:20826
 msgctxt "shipEnemy-comms"
 msgid "We will destroy you"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20831
+#: scripts/scenario_42_borderline_fever.lua:20829
 msgctxt "shipEnemy-comms"
 msgid "We think not. It is you who will experience destruction!"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20834
+#: scripts/scenario_42_borderline_fever.lua:20832
 msgctxt "shipEnemy-comms"
 msgid "You have no honor"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20837
+#: scripts/scenario_42_borderline_fever.lua:20835
 msgctxt "shipEnemy-comms"
 msgid "Your insult has brought our wrath upon you. Prepare to die."
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20841
+#: scripts/scenario_42_borderline_fever.lua:20839
 msgctxt "shipEnemy-comms"
 msgid "Your comments about honor have no meaning to us"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20845
+#: scripts/scenario_42_borderline_fever.lua:20843
 msgctxt "shipEnemy-comms"
 msgid "We pity your pathetic race"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20848
+#: scripts/scenario_42_borderline_fever.lua:20846
 msgctxt "shipEnemy-comms"
 msgid "Pathetic? You will regret your disparagement!"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20851
+#: scripts/scenario_42_borderline_fever.lua:20849
 msgctxt "shipEnemy-comms"
 msgid "We don't care what you think of us"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20909
+#: scripts/scenario_42_borderline_fever.lua:20907
 msgctxt "shipEnemy-comms"
 msgid "State your business"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20914
+#: scripts/scenario_42_borderline_fever.lua:20912
 msgctxt "shipEnemy-comms"
 msgid "What do you want? (not that we care)"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:20919
+#: scripts/scenario_42_borderline_fever.lua:20917
 msgctxt "shipEnemy-comms"
 msgid "Don't waste our time"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:21446
+#: scripts/scenario_42_borderline_fever.lua:21444
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "Disruption %i"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:21489
+#: scripts/scenario_42_borderline_fever.lua:21487
 msgctxt "trade-comms"
 msgid "Yes?"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:22569
+#: scripts/scenario_42_borderline_fever.lua:22567
 msgctxt "-tabRelay"
 msgid "Fast Dock Expired"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:22578
+#: scripts/scenario_42_borderline_fever.lua:22576
 msgctxt "-tabOperations"
 msgid "Fast Dock Expired"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:22584
+#: scripts/scenario_42_borderline_fever.lua:22582
 msgctxt "-tabRelay&Operations"
 msgid "Fast Dock"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:22591
+#: scripts/scenario_42_borderline_fever.lua:22589
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s %i"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:22597
+#: scripts/scenario_42_borderline_fever.lua:22595
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s %i:%.2i"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:22842
+#: scripts/scenario_42_borderline_fever.lua:22840
 msgctxt "repairCrew-msgEngineer"
 msgid "Medical team has revived one of your repair crew"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:22853
+#: scripts/scenario_42_borderline_fever.lua:22851
 msgctxt "repairCrew-msgEngineer+"
 msgid "Medical team has revived one of your repair crew"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:22864
+#: scripts/scenario_42_borderline_fever.lua:22862
 msgctxt "repairCrew-msgDamageControl"
 msgid "Medical team has revived one of your repair crew"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:22897
+#: scripts/scenario_42_borderline_fever.lua:22895
 msgctxt "coolant-msgEngineer"
 msgid "Automated systems have recovered some coolant"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:22907
+#: scripts/scenario_42_borderline_fever.lua:22905
 msgctxt "coolant-msgEngineer+"
 msgid "Automated systems have recovered some coolant"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:22917
+#: scripts/scenario_42_borderline_fever.lua:22915
 msgctxt "coolant-msgDamageControl"
 msgid "Automated systems have recovered some coolant"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:22930
+#: scripts/scenario_42_borderline_fever.lua:22928
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "F:%.1f%% E:%.1f%% D:%.1f%%"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:22989
-#: scripts/scenario_42_borderline_fever.lua:23064
+#: scripts/scenario_42_borderline_fever.lua:22987
+#: scripts/scenario_42_borderline_fever.lua:23062
 msgctxt "repairCrew-msgEngineer"
 msgid "One of your repair crew has perished"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23000
-#: scripts/scenario_42_borderline_fever.lua:23075
+#: scripts/scenario_42_borderline_fever.lua:22998
+#: scripts/scenario_42_borderline_fever.lua:23073
 msgctxt "repairCrew-msgEngineer+"
 msgid "One of your repair crew has perished"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23011
-#: scripts/scenario_42_borderline_fever.lua:23086
+#: scripts/scenario_42_borderline_fever.lua:23009
+#: scripts/scenario_42_borderline_fever.lua:23084
 msgctxt "repairCrew-msgDamageControl"
 msgid "One of your repair crew has perished"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23113
+#: scripts/scenario_42_borderline_fever.lua:23111
 msgctxt "damage-msgEngineer"
 msgid "Damage has caused a loss of coolant"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23124
+#: scripts/scenario_42_borderline_fever.lua:23122
 msgctxt "damage-msgEngineer+"
 msgid "Damage has caused a loss of coolant"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23135
+#: scripts/scenario_42_borderline_fever.lua:23133
 msgctxt "damage-msgDamageControl"
 msgid "Damage has caused a loss of coolant"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23149
+#: scripts/scenario_42_borderline_fever.lua:23147
 msgctxt "damage-msgEngineer"
 msgid "The probe launch system has been damaged"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23159
+#: scripts/scenario_42_borderline_fever.lua:23157
 msgctxt "damage-msgEngineer+"
 msgid "The probe launch system has been damaged"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23169
+#: scripts/scenario_42_borderline_fever.lua:23167
 msgctxt "damage-msgDamageControl"
 msgid "The probe launch system has been damaged"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23181
+#: scripts/scenario_42_borderline_fever.lua:23179
 msgctxt "damage-msgEngineer"
 msgid "The hacking system has been damaged"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23191
+#: scripts/scenario_42_borderline_fever.lua:23189
 msgctxt "damage-msgEngineer+"
 msgid "The hacking system has been damaged"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23201
+#: scripts/scenario_42_borderline_fever.lua:23199
 msgctxt "damage-msgDamageControl"
 msgid "The hacking system has been damaged"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23213
+#: scripts/scenario_42_borderline_fever.lua:23211
 msgctxt "damage-msgEngineer"
 msgid "The scanners have been damaged"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23223
+#: scripts/scenario_42_borderline_fever.lua:23221
 msgctxt "damage-msgEngineer+"
 msgid "The scanners have been damaged"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23233
+#: scripts/scenario_42_borderline_fever.lua:23231
 msgctxt "damage-msgDamageControl"
 msgid "The scanners have been damaged"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23245
+#: scripts/scenario_42_borderline_fever.lua:23243
 msgctxt "damage-msgEngineer"
 msgid "Combat maneuver has been damaged"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23255
+#: scripts/scenario_42_borderline_fever.lua:23253
 msgctxt "damage-msgEngineer+"
 msgid "Combat maneuver has been damaged"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23265
+#: scripts/scenario_42_borderline_fever.lua:23263
 msgctxt "damage-msgDamageControl"
 msgid "Combat maneuver has been damaged"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23277
+#: scripts/scenario_42_borderline_fever.lua:23275
 msgctxt "damage-msgEngineer"
 msgid "Self destruct system has been damaged"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23287
+#: scripts/scenario_42_borderline_fever.lua:23285
 msgctxt "damage-msgEngineer+"
 msgid "Self destruct system has been damaged"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23297
+#: scripts/scenario_42_borderline_fever.lua:23295
 msgctxt "damage-msgDamageControl"
 msgid "Self destruct system has been damaged"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23313
+#: scripts/scenario_42_borderline_fever.lua:23311
 msgctxt "damage-msgEngineer"
 msgid "Reactor coolant pump has been damaged"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23323
+#: scripts/scenario_42_borderline_fever.lua:23321
 msgctxt "damage-msgEngineer+"
 msgid "Reactor coolant pump has been damaged"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23333
+#: scripts/scenario_42_borderline_fever.lua:23331
 msgctxt "damage-msgDamageControl"
 msgid "Reactor coolant pump has been damaged"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23360
+#: scripts/scenario_42_borderline_fever.lua:23358
 msgctxt "inventory-buttonRelay"
 msgid "Inventory"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23374
+#: scripts/scenario_42_borderline_fever.lua:23372
 msgctxt "inventory-buttonOperations"
 msgid "Inventory"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23387
+#: scripts/scenario_42_borderline_fever.lua:23385
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "%s Current cargo:"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23398
+#: scripts/scenario_42_borderline_fever.lua:23396
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "     %s: %i"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23407
+#: scripts/scenario_42_borderline_fever.lua:23405
 msgctxt "inventory-shipLog"
 msgid "     Empty"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23410
+#: scripts/scenario_42_borderline_fever.lua:23408
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "Available space: %i"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23423
+#: scripts/scenario_42_borderline_fever.lua:23421
 msgctxt "coolant-buttonEngineer"
 msgid "Auto cool"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23435
+#: scripts/scenario_42_borderline_fever.lua:23433
 msgctxt "coolant-buttonEngineer"
 msgid "Manual cool"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23452
+#: scripts/scenario_42_borderline_fever.lua:23450
 msgctxt "coolant-buttonEngineer+"
 msgid "Auto cool"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23464
+#: scripts/scenario_42_borderline_fever.lua:23462
 msgctxt "coolant-buttonEngineer+"
 msgid "Manual cool"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23481
+#: scripts/scenario_42_borderline_fever.lua:23479
 msgctxt "coolant-buttonDamageControl"
 msgid "Auto cool"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23493
+#: scripts/scenario_42_borderline_fever.lua:23491
 msgctxt "coolant-buttonDamageControl"
 msgid "Manual cool"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23554
+#: scripts/scenario_42_borderline_fever.lua:23552
 msgctxt "coolant-buttonEngineer"
 msgid "Get Coolant"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23566
+#: scripts/scenario_42_borderline_fever.lua:23564
 msgctxt "coolant-buttonEngineer+"
 msgid "Get Coolant"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23578
+#: scripts/scenario_42_borderline_fever.lua:23576
 msgctxt "coolant-buttonDamageControl"
 msgid "Get Coolant"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23635
+#: scripts/scenario_42_borderline_fever.lua:23633
 msgctxt "coolant-tabEngineer"
 msgid "Gathering Coolant"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23662
+#: scripts/scenario_42_borderline_fever.lua:23660
 #, lua-format
 msgctxt "coolant-tabEngineer&Engineer+"
 msgid "Deploying Collectors %i"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:23668
+#: scripts/scenario_42_borderline_fever.lua:23666
 #, lua-format
 msgctxt "coolant-tabEngineer&Engineer+"
 msgid "Configuring Collectors %i"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:24570
+#: scripts/scenario_42_borderline_fever.lua:24568
 #, lua-format
 msgctxt "scienceDescription-artifact"
 msgid "Enemy fleet in sector %s is on the move"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:25899
+#: scripts/scenario_42_borderline_fever.lua:25897
 #, lua-format
 msgctxt "mining-msgScience"
 msgid "Mining obtained %s which has been stored in the cargo hold"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:25914
+#: scripts/scenario_42_borderline_fever.lua:25912
 msgctxt "mining-msgScience"
 msgid "mining failed to extract any minerals"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:25949
+#: scripts/scenario_42_borderline_fever.lua:25947
 #, lua-format
 msgctxt "mining-tabWeapons"
 msgid "Mining %i"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:25963
+#: scripts/scenario_42_borderline_fever.lua:25961
 msgctxt "mining-buttonWeapons"
 msgid "Start Mining"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:26064
+#: scripts/scenario_42_borderline_fever.lua:26062
 msgctxt "mining-buttonScience"
 msgid "Lock for Mining"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:26080
+#: scripts/scenario_42_borderline_fever.lua:26078
 msgctxt "mining-msgScience"
 msgid ""
 "Mining target locked\n"
 "Weapons may trigger the mining beam"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:26092
+#: scripts/scenario_42_borderline_fever.lua:26090
 #, lua-format
 msgctxt "mining-msgEngineer"
 msgid ""
@@ -6258,7 +6258,7 @@ msgid ""
 "Maximum range for mining is 1U"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:26103
+#: scripts/scenario_42_borderline_fever.lua:26101
 #, lua-format
 msgctxt "mining-msgEngineer+"
 msgid ""
@@ -6267,7 +6267,7 @@ msgid ""
 "Maximum range for mining is 1U"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:26114
+#: scripts/scenario_42_borderline_fever.lua:26112
 #, lua-format
 msgctxt "mining-msgDamageControl"
 msgid ""
@@ -6276,12 +6276,12 @@ msgid ""
 "Maximum range for mining is 1U"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:26132
+#: scripts/scenario_42_borderline_fever.lua:26130
 msgctxt "mining-buttonScience"
 msgid "Target Asteroid"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:26181
+#: scripts/scenario_42_borderline_fever.lua:26179
 #, lua-format
 msgctxt "mining-msgScience"
 msgid ""
@@ -6290,24 +6290,24 @@ msgid ""
 "Mineral traces detected: %s"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:26199
+#: scripts/scenario_42_borderline_fever.lua:26197
 msgctxt "mining-buttonScience"
 msgid "Other mining target"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:26377
+#: scripts/scenario_42_borderline_fever.lua:26375
 #, lua-format
 msgctxt "helpfullWarning-shipLog"
 msgid "[%s in %s] We detect one or more enemies nearby"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:26386
+#: scripts/scenario_42_borderline_fever.lua:26384
 #, lua-format
 msgctxt "helpfullWarning-shipLog"
 msgid "%s. At least one is of type %s"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27112
+#: scripts/scenario_42_borderline_fever.lua:27110
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -6315,7 +6315,7 @@ msgid ""
 "(%.1f%%)\n"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27130
+#: scripts/scenario_42_borderline_fever.lua:27128
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -6323,7 +6323,7 @@ msgid ""
 "(%.1f%%)\n"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27148
+#: scripts/scenario_42_borderline_fever.lua:27146
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -6331,25 +6331,25 @@ msgid ""
 "(%.1f%%)\n"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27167
+#: scripts/scenario_42_borderline_fever.lua:27165
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Friendly ships: strength: %i out of %i (%.1f%%)\n"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27178
+#: scripts/scenario_42_borderline_fever.lua:27176
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Enemy ships: strength: %i out of %i (%.1f%%)\n"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27203
+#: scripts/scenario_42_borderline_fever.lua:27201
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Friendly evaluation strength: %.1f%%\n"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27210
+#: scripts/scenario_42_borderline_fever.lua:27208
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -6357,175 +6357,175 @@ msgid ""
 "%.2f\n"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27218
+#: scripts/scenario_42_borderline_fever.lua:27216
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Enemy evaluation strength: %.1f%%\n"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27225
+#: scripts/scenario_42_borderline_fever.lua:27223
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "   Weights: enemy station: %.2f, enemy ship: %.2f\n"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27243
+#: scripts/scenario_42_borderline_fever.lua:27241
 msgctxt "msgMainscreen"
 msgid "Mission ended because "
+msgstr ""
+
+#: scripts/scenario_42_borderline_fever.lua:27256
+#: scripts/scenario_42_borderline_fever.lua:27275
+msgctxt "msgMainscreen"
+msgid "Ensign"
 msgstr ""
 
 #: scripts/scenario_42_borderline_fever.lua:27258
 #: scripts/scenario_42_borderline_fever.lua:27277
 msgctxt "msgMainscreen"
-msgid "Ensign"
+msgid "Lieutenant"
 msgstr ""
 
 #: scripts/scenario_42_borderline_fever.lua:27260
 #: scripts/scenario_42_borderline_fever.lua:27279
 msgctxt "msgMainscreen"
-msgid "Lieutenant"
+msgid "Commander"
 msgstr ""
 
 #: scripts/scenario_42_borderline_fever.lua:27262
 #: scripts/scenario_42_borderline_fever.lua:27281
 msgctxt "msgMainscreen"
-msgid "Commander"
+msgid "Captain"
 msgstr ""
 
 #: scripts/scenario_42_borderline_fever.lua:27264
 #: scripts/scenario_42_borderline_fever.lua:27283
 msgctxt "msgMainscreen"
-msgid "Captain"
-msgstr ""
-
-#: scripts/scenario_42_borderline_fever.lua:27266
-#: scripts/scenario_42_borderline_fever.lua:27285
-msgctxt "msgMainscreen"
 msgid "Admiral"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27268
+#: scripts/scenario_42_borderline_fever.lua:27266
 msgctxt "msgMainscreen"
 msgid "Earned rank: "
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27291
+#: scripts/scenario_42_borderline_fever.lua:27289
 msgctxt "msgMainscreen"
 msgid "Player violated treaty terms by crossing neutral border zone"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27297
+#: scripts/scenario_42_borderline_fever.lua:27295
 msgctxt "msgMainscreen"
 msgid "Rank after court martial and imprisonment: "
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27307
+#: scripts/scenario_42_borderline_fever.lua:27305
 msgctxt "msgMainscreen"
 msgid ""
 "Player committed war crimes by destroying civilians aboard Kraylor station"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27313
+#: scripts/scenario_42_borderline_fever.lua:27311
 msgctxt "msgMainscreen"
 msgid "Rank after being stripped of ship responsibilities: "
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27323
+#: scripts/scenario_42_borderline_fever.lua:27321
 msgctxt "msgMainscreen"
 msgid "Rank after military reductions due to ignominious defeat: "
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27407
-#: scripts/scenario_42_borderline_fever.lua:27471
+#: scripts/scenario_42_borderline_fever.lua:27405
+#: scripts/scenario_42_borderline_fever.lua:27469
 msgctxt "-tabHelms&Tactical"
 msgid "C.M. Boost"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27412
-#: scripts/scenario_42_borderline_fever.lua:27476
-#: scripts/scenario_42_borderline_fever.lua:27684
-#: scripts/scenario_42_borderline_fever.lua:27743
-#: scripts/scenario_42_borderline_fever.lua:27800
-#: scripts/scenario_42_borderline_fever.lua:27927
+#: scripts/scenario_42_borderline_fever.lua:27410
+#: scripts/scenario_42_borderline_fever.lua:27474
+#: scripts/scenario_42_borderline_fever.lua:27682
+#: scripts/scenario_42_borderline_fever.lua:27741
+#: scripts/scenario_42_borderline_fever.lua:27798
+#: scripts/scenario_42_borderline_fever.lua:27925
 #, lua-format
 msgctxt "-tabHelms&Tactical"
 msgid "%s %i"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27418
-#: scripts/scenario_42_borderline_fever.lua:27482
-#: scripts/scenario_42_borderline_fever.lua:27690
-#: scripts/scenario_42_borderline_fever.lua:27749
-#: scripts/scenario_42_borderline_fever.lua:27806
-#: scripts/scenario_42_borderline_fever.lua:27933
+#: scripts/scenario_42_borderline_fever.lua:27416
+#: scripts/scenario_42_borderline_fever.lua:27480
+#: scripts/scenario_42_borderline_fever.lua:27688
+#: scripts/scenario_42_borderline_fever.lua:27747
+#: scripts/scenario_42_borderline_fever.lua:27804
+#: scripts/scenario_42_borderline_fever.lua:27931
 #, lua-format
 msgctxt "-tabHelms&Tactical"
 msgid "%s %i:%.2i"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27535
+#: scripts/scenario_42_borderline_fever.lua:27533
 msgctxt "-tabWeapons&Tactical"
 msgid "Beam Damage"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27540
-#: scripts/scenario_42_borderline_fever.lua:27612
-#: scripts/scenario_42_borderline_fever.lua:27858
+#: scripts/scenario_42_borderline_fever.lua:27538
+#: scripts/scenario_42_borderline_fever.lua:27610
+#: scripts/scenario_42_borderline_fever.lua:27856
 #, lua-format
 msgctxt "-tabWeapons&Tactical"
 msgid "%s %i"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27546
-#: scripts/scenario_42_borderline_fever.lua:27618
-#: scripts/scenario_42_borderline_fever.lua:27864
+#: scripts/scenario_42_borderline_fever.lua:27544
+#: scripts/scenario_42_borderline_fever.lua:27616
+#: scripts/scenario_42_borderline_fever.lua:27862
 #, lua-format
 msgctxt "-tabWeapons&Tactical"
 msgid "%s %i:%.2i"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27607
+#: scripts/scenario_42_borderline_fever.lua:27605
 msgctxt "-tabWeapons&Tactical"
 msgid "Beam Cycle"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27679
+#: scripts/scenario_42_borderline_fever.lua:27677
 msgctxt "-tabHelms&Tactical"
 msgid "Impulse Speed"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27738
+#: scripts/scenario_42_borderline_fever.lua:27736
 msgctxt "-tabHelms&Tactical"
 msgid "Warp Speed"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27795
+#: scripts/scenario_42_borderline_fever.lua:27793
 msgctxt "-tabHelms&Tactical"
 msgid "Jump Range"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27853
+#: scripts/scenario_42_borderline_fever.lua:27851
 msgctxt "-tabWeapons&Tactical"
 msgid "Shield Capacity"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27922
+#: scripts/scenario_42_borderline_fever.lua:27920
 msgctxt "-tabHelms&Tactical"
 msgid "Spin Speed"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27985
+#: scripts/scenario_42_borderline_fever.lua:27983
 msgctxt "-tabEngineer&Engineer+"
 msgid "Battery Capacity"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27990
+#: scripts/scenario_42_borderline_fever.lua:27988
 #, lua-format
 msgctxt "-tabEngineer&Engineer+"
 msgid "%s %i"
 msgstr ""
 
-#: scripts/scenario_42_borderline_fever.lua:27996
+#: scripts/scenario_42_borderline_fever.lua:27994
 #, lua-format
 msgctxt "-tabEngineer&Engineer+"
 msgid "%s %i:%.2i"

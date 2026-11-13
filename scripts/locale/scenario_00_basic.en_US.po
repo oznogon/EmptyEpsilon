@@ -290,3 +290,9 @@ msgstr ""
 msgctxt "msgSpectbanner"
 msgid "Mission in progress - Time left: %d:%02d - Enemies: %d"
 msgstr ""
+
+#: scripts/scenario_00_basic.lua:1087
+#, lua-format
+msgctxt "msgSpectbanner"
+msgid "Mission in progress - Enemies: %d"
+msgstr ""
