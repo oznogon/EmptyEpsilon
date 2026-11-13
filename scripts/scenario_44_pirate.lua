@@ -6,7 +6,7 @@
 --- Version 1
 ---
 --- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's usually one every weekend. All experience levels are welcome.
--- Type: Replayable Mission
+-- Type: Replayable
 -- Author: Xansta
 -- Setting[Playership]: Configure what player ship to start with. Default is random
 -- Playership[Random|Default]: Select a player ship at random from the list of available starting player ships
@@ -7361,7 +7361,8 @@ function findClearSpot(
                 )
                 if item.shape == "circle" then
                     assert(
-                        type(item.obj) == "table",
+                        type(item.obj) == "table"
+                            or type(item.obj) == "userdata",
                         string.format(
                             "function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",
                             i,
@@ -7404,7 +7405,8 @@ function findClearSpot(
                 end
                 if item.shape == "zone" then
                     assert(
-                        type(item.obj) == "table",
+                        type(item.obj) == "table"
+                            or type(item.obj) == "userdata",
                         string.format(
                             "function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",
                             i,
@@ -7462,7 +7464,8 @@ function findClearSpot(
                 )
                 if item.shape == "circle" then
                     assert(
-                        type(item.obj) == "table",
+                        type(item.obj) == "table"
+                            or type(item.obj) == "userdata",
                         string.format(
                             "function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",
                             i,
@@ -7546,7 +7549,8 @@ function findClearSpot(
                 )
                 if item.shape == "circle" then
                     assert(
-                        type(item.obj) == "table",
+                        type(item.obj) == "table"
+                            or type(item.obj) == "userdata",
                         string.format(
                             "function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",
                             i,
@@ -7644,7 +7648,8 @@ function findClearSpot(
                 )
                 if item.shape == "circle" then
                     assert(
-                        type(item.obj) == "table",
+                        type(item.obj) == "table"
+                            or type(item.obj) == "userdata",
                         string.format(
                             "function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",
                             i,
@@ -7738,7 +7743,8 @@ function findClearSpot(
                 )
                 if item.shape == "circle" then
                     assert(
-                        type(item.obj) == "table",
+                        type(item.obj) == "table"
+                            or type(item.obj) == "userdata",
                         string.format(
                             "function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",
                             i,
@@ -10078,7 +10084,7 @@ function updatePlayerLongRangeSensors(delta, p)
     if p.station_sensor_boost ~= nil then
         base_range = base_range + p.station_sensor_boost
     end
-    if p:getDockedWith() == nil then
+    if not p:getDockedWith() then
         base_range = p.normal_long_range_radar
         p.station_sensor_boost = nil
     end
@@ -10494,7 +10500,7 @@ function transportCommerceMaintenance()
             local temp_faction = transport:getFaction()
             local transport_target = nil
             local docked_with = transport:getDockedWith()
-            if docked_with ~= nil then
+            if docked_with then
                 if transport.undock_timer == nil then
                     transport.undock_timer = getScenarioTime() + random(10, 25)
                 elseif getScenarioTime() > transport.undock_timer then
@@ -11079,7 +11085,7 @@ function smee(p)
                 ),
                 _(
                     "smee-msgRelay",
-                    "Ye have the heart of a sea serpent—cold and deep as the abyss itself."
+                    "Ye have the heart of a sea serpent - cold and deep as the abyss itself."
                 ),
                 _(
                     "smee-msgRelay",
@@ -11091,11 +11097,11 @@ function smee(p)
                 ),
                 _(
                     "smee-msgRelay",
-                    "Marooned by fate, saved by wit and will—such is the pirate's plight."
+                    "Marooned by fate, saved by wit and will - such is the pirate's plight."
                 ),
                 _(
                     "smee-msgRelay",
-                    "A chest of gold, a bottle of rum, and a sky alight with stars—pirate's paradise."
+                    "A chest of gold, a bottle of rum, and a sky alight with stars - pirate's paradise."
                 ),
                 _(
                     "smee-msgRelay",

@@ -6,7 +6,7 @@
 --- Version 1
 ---
 --- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's usually one every weekend. All experience levels are welcome.
--- Type: Replayable Mission
+-- Type: Replayable
 -- Author: Xansta
 -- Setting[Enemies]: Configures strength and/or number of enemies in this scenario
 -- Enemies[Easy]: Fewer or weaker enemies
@@ -4625,6 +4625,7 @@ function constructEnvironment()
                 vectorFromAngle(straw_neb.iris_angle, block_dist, true)
             block_warp_jammer
                 :setPosition(bwj_x + center_x, bwj_y + center_y)
+                :setFaction(player_faction)
                 :setRange(random(7000, 15000))
             block_warp_jammer.range = block_warp_jammer:getRange()
             block_warp_jammer.nebula_push = 11300
@@ -5442,7 +5443,8 @@ function findClearSpot(
                 )
                 if item.shape == "circle" then
                     assert(
-                        type(item.obj) == "table",
+                        type(item.obj) == "table"
+                            or type(item.obj) == "userdata",
                         string.format(
                             "function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",
                             i,
@@ -5485,7 +5487,8 @@ function findClearSpot(
                 end
                 if item.shape == "zone" then
                     assert(
-                        type(item.obj) == "table",
+                        type(item.obj) == "table"
+                            or type(item.obj) == "userdata",
                         string.format(
                             "function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",
                             i,
@@ -5543,7 +5546,8 @@ function findClearSpot(
                 )
                 if item.shape == "circle" then
                     assert(
-                        type(item.obj) == "table",
+                        type(item.obj) == "table"
+                            or type(item.obj) == "userdata",
                         string.format(
                             "function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",
                             i,
@@ -5627,7 +5631,8 @@ function findClearSpot(
                 )
                 if item.shape == "circle" then
                     assert(
-                        type(item.obj) == "table",
+                        type(item.obj) == "table"
+                            or type(item.obj) == "userdata",
                         string.format(
                             "function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",
                             i,
@@ -5725,7 +5730,8 @@ function findClearSpot(
                 )
                 if item.shape == "circle" then
                     assert(
-                        type(item.obj) == "table",
+                        type(item.obj) == "table"
+                            or type(item.obj) == "userdata",
                         string.format(
                             "function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",
                             i,
@@ -5819,7 +5825,8 @@ function findClearSpot(
                 )
                 if item.shape == "circle" then
                     assert(
-                        type(item.obj) == "table",
+                        type(item.obj) == "table"
+                            or type(item.obj) == "userdata",
                         string.format(
                             "function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",
                             i,
@@ -7130,7 +7137,7 @@ function updatePlayerLongRangeSensors(delta, p)
     if p.station_sensor_boost ~= nil then
         base_range = base_range + p.station_sensor_boost
     end
-    if p:getDockedWith() == nil then
+    if not p:getDockedWith() then
         base_range = p.normal_long_range_radar
         p.station_sensor_boost = nil
     end
@@ -8951,7 +8958,7 @@ function transportCommerceMaintenance()
             local temp_faction = transport:getFaction()
             local transport_target = nil
             local docked_with = transport:getDockedWith()
-            if docked_with ~= nil then
+            if docked_with then
                 if transport.undock_timer == nil then
                     transport.undock_timer = getScenarioTime() + random(10, 25)
                 elseif getScenarioTime() > transport.undock_timer then
@@ -9767,12 +9774,27 @@ function updateNebulaEncroachment()
 end
 function finalStats()
     local a_player = getPlayerShip(-1)
-    local final_message = string.format(
-        _("msgMainscreen", "%s ended with %s reputation points (goal: %s)."),
-        player_faction,
-        a_player:getReputationPoints(),
-        reputation_goal
-    )
+    local final_message = nil
+    if a_player ~= nil and a_player:isValid() then
+        final_message = string.format(
+            _(
+                "msgMainscreen",
+                "%s ended with %s reputation points (goal: %s)."
+            ),
+            player_faction,
+            a_player:getReputationPoints(),
+            reputation_goal
+        )
+    else
+        final_message = string.format(
+            _(
+                "msgMainscreen",
+                "%s ended without a final reputation score (goal: %s)."
+            ),
+            player_faction,
+            reputation_goal
+        )
+    end
     local cleared_message =
         string.format(_("msgMainscreen", "%i waves cleared."), wave_number - 1)
     if wave_number - 1 == 0 then
