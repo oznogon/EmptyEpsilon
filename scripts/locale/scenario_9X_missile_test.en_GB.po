@@ -1,9 +1,0 @@
-# Scenario name
-msgid "Missile Weapon Data Test"
-msgstr "Missile Weapon Data Test"
-
-# Scenario description
-msgid ""
-"Tests Lua-driven MissileWeaponData loading, registry, tube masks, and ship "
-"storage"
-msgstr "Tests Lua-driven MissileWeaponData loading, registry, tube masks, and ship storage"

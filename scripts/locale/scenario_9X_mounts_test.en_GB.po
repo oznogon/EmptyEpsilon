@@ -1,9 +1,0 @@
-# Scenario name
-msgid "Mounts Test"
-msgstr "Mounts Test"
-
-# Scenario description
-msgid ""
-"Test scenario for the unified Mounts component. Verifies beam weapon, "
-"missile weapon, and utility beam mounts."
-msgstr "Test scenario for the unified Mounts component. Verifies beam weapon, missile weapon, and utility beam mounts."

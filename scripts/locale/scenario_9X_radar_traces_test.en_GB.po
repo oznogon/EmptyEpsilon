@@ -1,7 +1,0 @@
-# Scenario name
-msgid "Radar Traces Test"
-msgstr "Radar Traces Test"
-
-# Scenario description
-msgid "Test scenario for radar trace behaviors"
-msgstr "Test scenario for radar trace behaviours"
