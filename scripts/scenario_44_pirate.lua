@@ -1351,7 +1351,7 @@ function setConstants()
             hop_range = 980,
             create = stockTemplate,
         },
-        ["Adv. Striker"] = {
+        ["Magpie"] = {
             strength = 27,
             adder = false,
             missiler = false,
@@ -1399,7 +1399,7 @@ function setConstants()
             hop_range = 2500,
             create = tempest,
         },
-        ["Strikeship"] = {
+        ["Strix"] = {
             strength = 30,
             adder = false,
             missiler = false,
@@ -3113,9 +3113,9 @@ function setGlobals()
                 { typ = "Mine", qty = 0 }, --original: 6
             },
         },
-        ["Cruiser"] = { base = "Player Cruiser", del = false },
+        ["Cruiser"] = { base = "Vindicator", del = false },
         ["Raven"] = {
-            base = "Player Cruiser",
+            base = "Vindicator",
             del = false,
             warp = { speed = 400 },
             jump = { s = 0, l = 0 }, --original: s:5 l:50
@@ -3170,7 +3170,7 @@ function setGlobals()
             },
         },
         ["Peacock"] = {
-            base = "Player Cruiser",
+            base = "Vindicator",
             del = false,
             rcrew = 4, --original: 3
             impulse = { f = 75, b = 65 }, --original: f:90 b:90
@@ -3250,9 +3250,9 @@ function setGlobals()
                 { typ = "Nuke", qty = 3 }, --original: 4
             },
         },
-        ["Missile Cruiser"] = { base = "Player Missile Cr.", del = false },
+        ["Missile Cruiser"] = { base = "Avalanche", del = false },
         ["Mantis"] = {
-            base = "Player Missile Cr.",
+            base = "Avalanche",
             del = false,
             beam = {
                 {
@@ -3302,7 +3302,7 @@ function setGlobals()
             },
         },
         ["Midian"] = {
-            base = "Player Missile Cr.",
+            base = "Avalanche",
             del = false,
             warp = { speed = 350 }, --original:800
             beam = {
@@ -3377,7 +3377,7 @@ function setGlobals()
             },
         },
         ["Mortar"] = {
-            base = "Player Missile Cr.",
+            base = "Avalanche",
             del = false,
             hull = 160, --original: 200
             shields = { f = 160, b = 160 }, --original: f:110 b:70
@@ -4540,7 +4540,7 @@ function setGlobals()
             tractor = false,
             mining = false,
         },
-        ["Player Cruiser"] = {
+        ["Vindicator"] = {
             strength = 40,
             cargo = 6,
             distance = 400,
@@ -4550,7 +4550,7 @@ function setGlobals()
             tractor = false,
             mining = false,
         },
-        ["Player Missile Cr."] = {
+        ["Avalanche"] = {
             strength = 45,
             cargo = 8,
             distance = 200,
@@ -4560,7 +4560,7 @@ function setGlobals()
             tractor = false,
             mining = false,
         },
-        ["Player Fighter"] = {
+        ["Stingray"] = {
             strength = 7,
             cargo = 3,
             distance = 100,
@@ -4670,7 +4670,7 @@ function setGlobals()
             tractor = false,
             mining = false,
         },
-        ["Striker"] = {
+        ["Crow"] = {
             strength = 8,
             cargo = 4,
             distance = 200,
@@ -5058,7 +5058,7 @@ function setGlobals()
             "Vulture",
             "Predator",
         },
-        ["Player Cruiser"] = {
+        ["Vindicator"] = {
             "Excelsior",
             "Velociraptor",
             "Thunder",
@@ -5068,7 +5068,7 @@ function setGlobals()
             "Aspern",
             "Panther",
         },
-        ["Player Fighter"] = {
+        ["Stingray"] = {
             "Buzzer",
             "Flitter",
             "Zippiticus",
@@ -5077,7 +5077,7 @@ function setGlobals()
             "Stinger",
             "Stripe",
         },
-        ["Player Missile Cr."] = {
+        ["Avalanche"] = {
             "Projectus",
             "Hurlmeister",
             "Flinger",
@@ -5121,7 +5121,7 @@ function setGlobals()
         ["Scatter"] = { "Frisky", "Fraught", "Nimble" },
         ["Squid"] = { "Insidious", "Trampler", "Livid" },
         ["Stricken"] = { "Blazon", "Streaker", "Pinto", "Spear", "Javelin" },
-        ["Striker"] = {
+        ["Crow"] = {
             "Sparrow",
             "Sizzle",
             "Squawk",

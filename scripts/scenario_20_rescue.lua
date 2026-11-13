@@ -1188,7 +1188,7 @@ function setConstants()
             hop_range = 980,
             create = stockTemplate,
         },
-        ["Adv. Striker"] = {
+        ["Magpie"] = {
             strength = 27,
             adder = false,
             missiler = false,
@@ -1236,7 +1236,7 @@ function setConstants()
             hop_range = 2500,
             create = tempest,
         },
-        ["Strikeship"] = {
+        ["Strix"] = {
             strength = 30,
             adder = false,
             missiler = false,
@@ -2413,7 +2413,7 @@ function setGlobals()
             tractor = true,
             mining = true,
         },
-        ["Player Cruiser"] = {
+        ["Vindicator"] = {
             strength = 40,
             cargo = 6,
             distance = 400,
@@ -2423,7 +2423,7 @@ function setGlobals()
             tractor = false,
             mining = false,
         },
-        ["Player Missile Cr."] = {
+        ["Avalanche"] = {
             strength = 45,
             cargo = 8,
             distance = 200,
@@ -2433,7 +2433,7 @@ function setGlobals()
             tractor = false,
             mining = false,
         },
-        ["Player Fighter"] = {
+        ["Stingray"] = {
             strength = 7,
             cargo = 3,
             distance = 100,
@@ -2463,7 +2463,7 @@ function setGlobals()
             tractor = true,
             mining = true,
         },
-        ["Striker"] = {
+        ["Crow"] = {
             strength = 8,
             cargo = 4,
             distance = 200,
@@ -2871,7 +2871,7 @@ function setGlobals()
             "Vulture",
             "Predator",
         },
-        ["Player Cruiser"] = {
+        ["Vindicator"] = {
             "Excelsior",
             "Velociraptor",
             "Thunder",
@@ -2881,7 +2881,7 @@ function setGlobals()
             "Aspern",
             "Panther",
         },
-        ["Player Fighter"] = {
+        ["Stingray"] = {
             "Buzzer",
             "Flitter",
             "Zippiticus",
@@ -2890,7 +2890,7 @@ function setGlobals()
             "Stinger",
             "Stripe",
         },
-        ["Player Missile Cr."] = {
+        ["Avalanche"] = {
             "Projectus",
             "Hurlmeister",
             "Flinger",
@@ -2929,7 +2929,7 @@ function setGlobals()
             "Pegasus",
         },
         ["Stricken"] = { "Blazon", "Streaker", "Pinto", "Spear", "Javelin" },
-        ["Striker"] = {
+        ["Crow"] = {
             "Sparrow",
             "Sizzle",
             "Squawk",
@@ -5683,14 +5683,14 @@ function updatePlayerSoftTemplate(p)
             elseif temp_type_name == "ZX-Lindworm" then
                 p:setWarpDrive(true)
                 p:setWarpSpeed(850)
-            elseif temp_type_name == "Striker" then
+            elseif temp_type_name == "Crow" then
                 p:setJumpDrive(true)
                 p:setJumpDriveRange(3000, 40000)
                 p:setImpulseMaxSpeed(90)
             elseif temp_type_name == "Phobos M3P" then
                 p:setWarpDrive(true)
                 p:setWarpSpeed(800)
-            elseif temp_type_name == "Player Fighter" then
+            elseif temp_type_name == "Stingray" then
                 p:setJumpDrive(true)
                 p:setJumpDriveRange(3000, 40000)
             end
