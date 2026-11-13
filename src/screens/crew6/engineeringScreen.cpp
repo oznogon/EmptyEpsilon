@@ -145,11 +145,15 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
         ->setAttribute("layout", "vertical");
 
     (new GuiCustomShipFunctions(top_right_column, crew_position, "CSF"))
+        ->setPosition(0.0f, 100.0f, sp::Alignment::TopRight)
+        ->setSize(GuiElement::GuiSizeMax, 4 * GuiElement::GuiSizeRow);
+
+    (new GuiElement(top_right_column, "SPACER"))
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     system_effects_container = new GuiElement(top_right_column, "");
     system_effects_container
-        ->setPosition(0.0f, 0.0f, sp::Alignment::BottomRight)
+        ->setPosition(0.0f, -(2 * GuiElement::GuiSizeRow), sp::Alignment::BottomRight)
         ->setSize(GuiElement::GuiSizeMax, 400.0f)
         ->setAttribute("layout", "verticalbottom");
 
