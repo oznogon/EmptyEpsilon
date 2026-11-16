@@ -77,8 +77,12 @@ bool createDisplayWindows()
     if (n != 0)
     {
         int num_displays = 0;
-        SDL_GetDisplays(&num_displays);
-        if (n < 2) n = num_displays;
+        SDL_free(SDL_GetDisplays(&num_displays));
+
+        // Cap fullscreen multimonitor displays to the number of displays.
+        if (n < 2 || (fullscreen != Window::Mode::Window && n > num_displays))
+            n = num_displays;
+
         SDL_SetHint(SDL_HINT_MOUSE_AUTO_CAPTURE, "0");
 
         while (static_cast<int>(windows.size()) < n)
