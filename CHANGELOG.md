@@ -1,5 +1,36 @@
 # Changelog
 
+## [2026-11]
+
+### New features
+
+- New scenarios
+  - "Rescue" (#2597): rescue a research scientist from the Kraylor with any number of player ships; terrain and difficulty are configurable
+  - "Defenders or Pirates" (#2485): replayable scenario about amassing reputation by destroying enemies or trading cargo, featuring many non-standard player ships
+  - "Iris Siege" (#2355): replayable scenario about stopping saboteurs from overwhelming a system's defensive apparatus
+- Comms scenario utility additions, adapted from upstream #2931
+  - `commsEnemyStation` hook defines comms responses for enemy stations, which otherwise do not respond
+  - `scenarioStationTalk` hook adds scenario-specific station knowledge and returns the number of replies added
+  - `transport_mission_restricted` flag on a station prevents it from generating transport missions
+  - Transport mission offers warn when the destination station's faction is an enemy
+  - Goods can now be traded with stations via `tradeGoodsWithStation()`, fixing a reference from `goodsCommerce()` to a function that did not exist
+
+### Changed
+
+- Server creation screen displays an error when the server fails to start, such as when the port is in use, instead of only logging it
+- New scenarios use current ship template names, renamed from their previous names
+- New scenarios cleaned up and reformatted with StyLua: line endings normalized, tabs converted to spaces, typos fixed, and typographic characters replaced
+- New scenarios renumbered per the README scenario conventions: "Rescue" 22 to 20, "Defenders or Pirates" 23 to 44, "Iris Siege" 24 to 45
+- Planet entity API documentation includes an `onCollision` callback example
+- Translation data updated for main, comms scenario utility, missile weapon data, and scenarios; locale files for development test scenarios removed
+
+### Fixed
+
+- Engineering screen custom ship functions no longer overlap the system effects panel
+- Fullscreen multimonitor mode no longer attempts to create more windows than there are connected displays
+- Crash bugs in "Defenders or Pirates" and "Iris Siege", including entity type checks in `findClearSpot()` that rejected userdata, the Iris warp jammer's missing faction, and `nil` comparisons on `getDockedWith()` results
+- `waypointDistanceUtility()` no longer references an undefined variable and reports correct waypoint IDs
+
 ## [2026-10]
 
 ### Changed
