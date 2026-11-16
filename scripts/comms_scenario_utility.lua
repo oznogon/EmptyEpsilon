@@ -58,6 +58,13 @@
 --                  return true
 --              end
 --          end
+--      commsEnemyStation - if your scenario needs the players to actually communicate
+--          with an enemy station, this function defines how that communication occurs.
+--          Normally, there is no response when attempting to contact an enemy faction
+--          station.
+--      scenarioStationTalk - returns a number representing how many addCommsReply
+--          options were given to the user. This allows the scenario writer to add
+--          situational talk options for the scenario.
 --  Booleans to set outside of this utility to control this utility. Default is false
 --      fixed_ordnance_cost - sets the price for ordnance to fixed values. Default (false)
 --          is to set ordnance to range appropriate random values.
@@ -205,7 +212,12 @@ function commsStation()
         setPlayers()
     end
     if comms_source:isEnemy(comms_target) then
-        return false
+        if commsEnemyStation ~= nil then
+            commsEnemyStation()
+            return true
+        else
+            return false
+        end
     end
     local no_relay_panic_responses = {
         _(
@@ -10696,6 +10708,9 @@ end
 --      station_gossip - set true if stations gossip about stuff
 --      station_general_information - set true if stations talk about themselves
 --      station_history - set true if stations provide history about themselves
+--      scenarioStationTalk - returns a number representing how many addCommsReply
+--          options were given to the user. This allows the scenario writer to add
+--          situational talk options for the scenario.
 function stationTalk()
     addCommsReply(
         _("station-comms", "I'm not sure. What do you know?"),
@@ -10730,6 +10745,12 @@ function stationTalk()
                     knowledge_count = knowledge_count + 1
                     stationHistory()
                 end
+            end
+            if
+                scenarioStationTalk ~= nil
+                and type(scenarioStationTalk) == "function"
+            then
+                knowledge_count = knowledge_count + scenarioStationTalk()
             end
             if knowledge_count == 0 then
                 local lack_of_knowledge_response = {
@@ -10886,6 +10907,9 @@ end
 --      stations_support_transport_missions - set true if stations handle transport missions
 --      stations_support_cargo_missions - set true if stations handle cargo missions
 --          Note: cargo missions usually require transport missions
+--  Values to set on a station to control this utility. Default is nil/false
+--      comms_target.transport_mission_restricted - set true on a station to
+--          prevent it from generating new transport missions
 --  If your scenario supports transport and cargo missions, this function assumes:
 --      array table exist for the following:
 --          inner_stations contains stations close to the player's starting position
@@ -11083,57 +11107,68 @@ function transportAndCargoMissions()
             comms_source.transport_mission = nil
         end
     else --player ship transport mission is nil
-        if comms_target.transport_mission == nil then
-            mission_character = tableRemoveRandom(characters) --character_names
-            local mission_target = nil
-            local reward = 0
-            if mission_character ~= nil then
-                mission_type = random(1, 100)
-                local destination_pool = {}
-                local clean_list = true
-                repeat
-                    clean_list = true
-                    for i, station in ipairs(inner_stations) do
-                        if station ~= nil then
-                            if not station:isValid() then
+        if not comms_target.transport_mission_restricted then
+            if comms_target.transport_mission == nil then
+                mission_character = tableRemoveRandom(characters) --character_names
+                local mission_target = nil
+                local reward = 0
+                if mission_character ~= nil then
+                    mission_type = random(1, 100)
+                    local destination_pool = {}
+                    local clean_list = true
+                    repeat
+                        clean_list = true
+                        for i, station in ipairs(inner_stations) do
+                            if station ~= nil then
+                                if not station:isValid() then
+                                    inner_stations[i] =
+                                        inner_stations[#inner_stations]
+                                    inner_stations[#inner_stations] = nil
+                                    clean_list = false
+                                    break
+                                end
+                            else
                                 inner_stations[i] =
                                     inner_stations[#inner_stations]
                                 inner_stations[#inner_stations] = nil
                                 clean_list = false
                                 break
                             end
-                        else
-                            inner_stations[i] = inner_stations[#inner_stations]
-                            inner_stations[#inner_stations] = nil
-                            clean_list = false
-                            break
                         end
-                    end
-                until clean_list
-                repeat
-                    clean_list = true
-                    for i, station in ipairs(outer_stations) do
-                        if station ~= nil then
-                            if not station:isValid() then
+                    until clean_list
+                    repeat
+                        clean_list = true
+                        for i, station in ipairs(outer_stations) do
+                            if station ~= nil then
+                                if not station:isValid() then
+                                    outer_stations[i] =
+                                        outer_stations[#outer_stations]
+                                    outer_stations[#outer_stations] = nil
+                                    clean_list = false
+                                    break
+                                end
+                            else
                                 outer_stations[i] =
                                     outer_stations[#outer_stations]
                                 outer_stations[#outer_stations] = nil
                                 clean_list = false
                                 break
                             end
-                        else
-                            outer_stations[i] = outer_stations[#outer_stations]
-                            outer_stations[#outer_stations] = nil
-                            clean_list = false
-                            break
                         end
-                    end
-                until clean_list
-                repeat
-                    clean_list = true
-                    for i, station in ipairs(friendly_spike_stations) do
-                        if station ~= nil then
-                            if not station:isValid() then
+                    until clean_list
+                    repeat
+                        clean_list = true
+                        for i, station in ipairs(friendly_spike_stations) do
+                            if station ~= nil then
+                                if not station:isValid() then
+                                    friendly_spike_stations[i] =
+                                        friendly_spike_stations[#friendly_spike_stations]
+                                    friendly_spike_stations[#friendly_spike_stations] =
+                                        nil
+                                    clean_list = false
+                                    break
+                                end
+                            else
                                 friendly_spike_stations[i] =
                                     friendly_spike_stations[#friendly_spike_stations]
                                 friendly_spike_stations[#friendly_spike_stations] =
@@ -11141,64 +11176,78 @@ function transportAndCargoMissions()
                                 clean_list = false
                                 break
                             end
-                        else
-                            friendly_spike_stations[i] =
-                                friendly_spike_stations[#friendly_spike_stations]
-                            friendly_spike_stations[#friendly_spike_stations] =
-                                nil
-                            clean_list = false
-                            break
                         end
-                    end
-                until clean_list
-                if mission_type < 20 then
-                    for _, station in ipairs(inner_stations) do
-                        if
-                            station ~= nil
-                            and station:isValid()
-                            and station ~= comms_target
-                        then
-                            table.insert(destination_pool, station)
+                    until clean_list
+                    if mission_type < 20 then
+                        for _, station in ipairs(inner_stations) do
+                            if
+                                station ~= nil
+                                and station:isValid()
+                                and station ~= comms_target
+                            then
+                                table.insert(destination_pool, station)
+                            end
                         end
-                    end
-                    mission_target = tableRemoveRandom(destination_pool)
-                    if mission_target ~= nil then
-                        reward = 40
-                        if mission_target:isFriendly(comms_source) then
-                            reward = 30
+                        mission_target = tableRemoveRandom(destination_pool)
+                        if mission_target ~= nil then
+                            reward = 40
+                            if mission_target:isFriendly(comms_source) then
+                                reward = 30
+                            end
+                            comms_target.transport_mission = {
+                                ["destination"] = mission_target,
+                                ["destination_name"] = mission_target:getCallSign(),
+                                ["reward"] = reward,
+                                ["character"] = mission_character,
+                            }
                         end
-                        comms_target.transport_mission = {
-                            ["destination"] = mission_target,
-                            ["destination_name"] = mission_target:getCallSign(),
-                            ["reward"] = reward,
-                            ["character"] = mission_character,
-                        }
-                    end
-                elseif mission_type < 50 then
-                    for _, station in ipairs(outer_stations) do
-                        if
-                            station ~= nil
-                            and station:isValid()
-                            and station ~= comms_target
-                            and comms_source:isFriendly(station)
-                        then
-                            table.insert(destination_pool, station)
-                        end
-                    end
-                    mission_target = tableRemoveRandom(destination_pool)
-                    if mission_target ~= nil then
-                        comms_target.transport_mission = {
-                            ["destination"] = mission_target,
-                            ["destination_name"] = mission_target:getCallSign(),
-                            ["reward"] = 40,
-                            ["character"] = mission_character,
-                        }
-                    else
+                    elseif mission_type < 50 then
                         for _, station in ipairs(outer_stations) do
                             if
                                 station ~= nil
                                 and station:isValid()
                                 and station ~= comms_target
+                                and comms_source:isFriendly(station)
+                            then
+                                table.insert(destination_pool, station)
+                            end
+                        end
+                        mission_target = tableRemoveRandom(destination_pool)
+                        if mission_target ~= nil then
+                            comms_target.transport_mission = {
+                                ["destination"] = mission_target,
+                                ["destination_name"] = mission_target:getCallSign(),
+                                ["reward"] = 40,
+                                ["character"] = mission_character,
+                            }
+                        else
+                            for _, station in ipairs(outer_stations) do
+                                if
+                                    station ~= nil
+                                    and station:isValid()
+                                    and station ~= comms_target
+                                    and not comms_source:isEnemy(station)
+                                then
+                                    table.insert(destination_pool, station)
+                                end
+                            end
+                            mission_target = tableRemoveRandom(destination_pool)
+                            if mission_target ~= nil then
+                                comms_target.transport_mission = {
+                                    ["destination"] = mission_target,
+                                    ["destination_name"] = mission_target:getCallSign(),
+                                    ["reward"] = 50,
+                                    ["character"] = mission_character,
+                                }
+                            end
+                        end
+                    elseif mission_type < 75 then
+                        for _, station in ipairs(outer_stations) do
+                            if
+                                station ~= nil
+                                and station:isValid()
+                                and station ~= comms_target
+                                and not comms_source:isFriendly(station)
                                 and not comms_source:isEnemy(station)
                             then
                                 table.insert(destination_pool, station)
@@ -11213,83 +11262,62 @@ function transportAndCargoMissions()
                                 ["character"] = mission_character,
                             }
                         end
-                    end
-                elseif mission_type < 75 then
-                    for _, station in ipairs(outer_stations) do
-                        if
-                            station ~= nil
-                            and station:isValid()
-                            and station ~= comms_target
-                            and not comms_source:isFriendly(station)
-                            and not comms_source:isEnemy(station)
-                        then
-                            table.insert(destination_pool, station)
-                        end
-                    end
-                    mission_target = tableRemoveRandom(destination_pool)
-                    if mission_target ~= nil then
-                        comms_target.transport_mission = {
-                            ["destination"] = mission_target,
-                            ["destination_name"] = mission_target:getCallSign(),
-                            ["reward"] = 50,
-                            ["character"] = mission_character,
-                        }
-                    end
-                else
-                    for _, station in ipairs(friendly_spike_stations) do
-                        if
-                            station ~= nil
-                            and station:isValid()
-                            and station ~= comms_target
-                        then
-                            table.insert(destination_pool, station)
-                        end
-                    end
-                    mission_target = tableRemoveRandom(destination_pool)
-                    if mission_target ~= nil then
-                        comms_target.transport_mission = {
-                            ["destination"] = mission_target,
-                            ["destination_name"] = mission_target:getCallSign(),
-                            ["reward"] = 60,
-                            ["character"] = mission_character,
-                        }
                     else
-                        for _, station in ipairs(outer_stations) do
+                        for _, station in ipairs(friendly_spike_stations) do
                             if
                                 station ~= nil
                                 and station:isValid()
                                 and station ~= comms_target
-                                and not comms_source:isEnemy(station)
                             then
                                 table.insert(destination_pool, station)
                             end
                         end
                         mission_target = tableRemoveRandom(destination_pool)
                         if mission_target ~= nil then
-                            reward = 50
-                            if mission_target:isFriendly(comms_source) then
-                                reward = 40
-                            end
                             comms_target.transport_mission = {
                                 ["destination"] = mission_target,
                                 ["destination_name"] = mission_target:getCallSign(),
-                                ["reward"] = reward,
+                                ["reward"] = 60,
                                 ["character"] = mission_character,
                             }
+                        else
+                            for _, station in ipairs(outer_stations) do
+                                if
+                                    station ~= nil
+                                    and station:isValid()
+                                    and station ~= comms_target
+                                    and not comms_source:isEnemy(station)
+                                then
+                                    table.insert(destination_pool, station)
+                                end
+                            end
+                            mission_target = tableRemoveRandom(destination_pool)
+                            if mission_target ~= nil then
+                                reward = 50
+                                if mission_target:isFriendly(comms_source) then
+                                    reward = 40
+                                end
+                                comms_target.transport_mission = {
+                                    ["destination"] = mission_target,
+                                    ["destination_name"] = mission_target:getCallSign(),
+                                    ["reward"] = reward,
+                                    ["character"] = mission_character,
+                                }
+                            end
                         end
                     end
                 end
-            end
-        else --station transport mission not nil
-            if not comms_target.transport_mission.destination:isValid() then
-                if comms_target.residents == nil then
-                    comms_target.residents = {}
+            else --station transport mission not nil
+                if not comms_target.transport_mission.destination:isValid() then
+                    if comms_target.residents == nil then
+                        comms_target.residents = {}
+                    end
+                    table.insert(
+                        comms_target.residents,
+                        comms_target.transport_mission.character
+                    )
+                    comms_target.transport_mission = nil
                 end
-                table.insert(
-                    comms_target.residents,
-                    comms_target.transport_mission.character
-                )
-                comms_target.transport_mission = nil
             end
         end
         if comms_target.transport_mission ~= nil then
@@ -11388,6 +11416,20 @@ function transportAndCargoMissions()
                         tableSelectRandom(transport_info),
                         tableSelectRandom(transport_reputation_info)
                     )
+                    if
+                        comms_source:isEnemy(
+                            comms_target.transport_mission.destination
+                        )
+                    then
+                        out = string.format(
+                            _(
+                                "station-comms",
+                                "%s This mission may be hard to complete since the %s are enemies."
+                            ),
+                            out,
+                            comms_target.transport_mission.destination:getFaction()
+                        )
+                    end
                     setCommsMessage(out)
                     local transport_agree_prompts = {
                         string.format(
@@ -19950,6 +19992,224 @@ function sellGoodsToStation()
     end
     addCommsReply(_("Back"), commsStation)
 end
+--  Trade one of the player ship's goods for one of the station's goods.
+--  A station only trades goods set true in comms_target.comms_data.trade, and
+--  only when it has that good in stock.
+function tradeGoodsWithStation()
+    if good_desc == nil then
+        initializeGoodDescription()
+    end
+    local trade_goods_prompt = {
+        _("trade-comms", "Which one of these goods would you like to trade?"),
+        _("trade-comms", "Which one would you like to trade?"),
+        _("trade-comms", "Make an offer."),
+        _("trade-comms", "What do you want to trade?"),
+    }
+    setCommsMessage(tableSelectRandom(trade_goods_prompt))
+    local trade_options_available = false
+    if
+        comms_target.comms_data.trade ~= nil
+        and comms_target.comms_data.goods ~= nil
+        and comms_source.goods ~= nil
+    then
+        for trade_good, trade_bool in pairs(comms_target.comms_data.trade) do
+            if
+                trade_bool
+                and comms_source.goods[trade_good] ~= nil
+                and comms_source.goods[trade_good] > 0
+            then
+                for good, good_data in pairs(comms_target.comms_data.goods) do
+                    if
+                        good ~= trade_good
+                        and good_data.quantity ~= nil
+                        and good_data.quantity > 0
+                    then
+                        trade_options_available = true
+                        local trade_prompts = {
+                            string.format(
+                                _("trade-comms", "Trade one %s for one %s"),
+                                good_desc[trade_good],
+                                good_desc[good]
+                            ),
+                            string.format(
+                                _("trade-comms", "Exchange a %s for a %s"),
+                                good_desc[trade_good],
+                                good_desc[good]
+                            ),
+                            string.format(
+                                _("trade-comms", "Trade %s for %s"),
+                                good_desc[trade_good],
+                                good_desc[good]
+                            ),
+                            string.format(
+                                _("trade-comms", "Barter a %s for a %s"),
+                                good_desc[trade_good],
+                                good_desc[good]
+                            ),
+                        }
+                        addCommsReply(
+                            tableSelectRandom(trade_prompts),
+                            function()
+                                if not comms_source:isDocked(comms_target) then
+                                    local stay_docked_to_trade = {
+                                        _(
+                                            "trade-comms",
+                                            "You need to stay docked for that action."
+                                        ),
+                                        _(
+                                            "trade-comms",
+                                            "You need to stay docked to trade."
+                                        ),
+                                        string.format(
+                                            _(
+                                                "trade-comms",
+                                                "You must stay docked long enough for a trade between %s and %s to be completed."
+                                            ),
+                                            comms_source:getCallSign(),
+                                            comms_target:getCallSign()
+                                        ),
+                                        string.format(
+                                            _(
+                                                "trade-comms",
+                                                "You undocked before %s could complete the trade you wanted."
+                                            ),
+                                            comms_target:getCallSign()
+                                        ),
+                                    }
+                                    setCommsMessage(
+                                        tableSelectRandom(stay_docked_to_trade)
+                                    )
+                                    return
+                                end
+                                if good_data.quantity < 1 then
+                                    local insufficient_station_inventory = {
+                                        _(
+                                            "trade-comms",
+                                            "Insufficient station inventory"
+                                        ),
+                                        _(
+                                            "trade-comms",
+                                            "Not enough inventory on the station"
+                                        ),
+                                        string.format(
+                                            _(
+                                                "trade-comms",
+                                                "%s does not have enough inventory"
+                                            ),
+                                            comms_target:getCallSign()
+                                        ),
+                                        string.format(
+                                            _(
+                                                "trade-comms",
+                                                "Not enough inventory on %s"
+                                            ),
+                                            comms_target:getCallSign()
+                                        ),
+                                    }
+                                    setCommsMessage(
+                                        tableSelectRandom(
+                                            insufficient_station_inventory
+                                        )
+                                    )
+                                else
+                                    good_data.quantity = good_data.quantity - 1
+                                    if comms_source.goods[good] == nil then
+                                        comms_source.goods[good] = 0
+                                    end
+                                    comms_source.goods[good] = comms_source.goods[good]
+                                        + 1
+                                    comms_source.goods[trade_good] = comms_source.goods[trade_good]
+                                        - 1
+                                    local trade_confirmation = {
+                                        string.format(
+                                            _(
+                                                "trade-comms",
+                                                "Traded a %s for a %s"
+                                            ),
+                                            good_desc[trade_good],
+                                            good_desc[good]
+                                        ),
+                                        string.format(
+                                            _(
+                                                "trade-comms",
+                                                "You traded one %s for one %s"
+                                            ),
+                                            good_desc[trade_good],
+                                            good_desc[good]
+                                        ),
+                                        string.format(
+                                            _(
+                                                "trade-comms",
+                                                "%s agreed to trade a %s for a %s"
+                                            ),
+                                            comms_target:getCallSign(),
+                                            good_desc[trade_good],
+                                            good_desc[good]
+                                        ),
+                                        string.format(
+                                            _(
+                                                "trade-comms",
+                                                "You successfully traded a %s for a %s"
+                                            ),
+                                            good_desc[trade_good],
+                                            good_desc[good]
+                                        ),
+                                    }
+                                    setCommsMessage(
+                                        tableSelectRandom(trade_confirmation)
+                                    )
+                                    comms_target.comms_data.friendlyness =
+                                        math.min(
+                                            100,
+                                            comms_target.comms_data.friendlyness
+                                                + random(2, 5)
+                                        )
+                                end
+                                addCommsReply(
+                                    _("trade-comms", "Back to trade options"),
+                                    tradeGoodsWithStation
+                                )
+                                addCommsReply(
+                                    _(
+                                        "trade-comms",
+                                        "Back to commercial options"
+                                    ),
+                                    goodsCommerce
+                                )
+                                addCommsReply(
+                                    _(
+                                        "station-comms",
+                                        "Back to interactive relay officer"
+                                    ),
+                                    interactiveDockedStationComms
+                                )
+                                addCommsReply(
+                                    _(
+                                        "trade-comms",
+                                        "Back to station communication"
+                                    ),
+                                    commsStation
+                                )
+                            end
+                        )
+                    end
+                end
+            end
+        end
+    end
+    if not trade_options_available then
+        local no_trade_options = {
+            _("trade-comms", "There is nothing to trade."),
+            _("trade-comms", "You have nothing to trade with us."),
+            string.format(
+                _("trade-comms", "%s has nothing to trade with you."),
+                comms_target:getCallSign()
+            ),
+        }
+        setCommsMessage(tableSelectRandom(no_trade_options))
+    end
+    addCommsReply(_("Back"), commsStation)
+end
 function jettisonGoodsFromShip()
     local jettison_prompt = {
         _("trade-comms", "What should be jettisoned?"),
@@ -28077,7 +28337,7 @@ function waypointDistanceUtility(p, console)
                         "%s\n    From current to waypoint %i: %.1f Units"
                     ),
                     seq,
-                    p:getWaypointID(n),
+                    p:getWaypointID(i),
                     distance(px, py, wx, wy) / 1000
                 )
             else
@@ -28087,8 +28347,8 @@ function waypointDistanceUtility(p, console)
                         "%s\n    From waypoint %i to waypoint %i: %.1f Units"
                     ),
                     seq,
-                    p:getWaypointID(n) - 1,
-                    p:getWaypointID(n),
+                    p:getWaypointID(i - 1),
+                    p:getWaypointID(i),
                     distance(prev_x, prev_y, wx, wy) / 1000
                 )
             end
