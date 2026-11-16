@@ -130,7 +130,7 @@ variation = template
     :setWeaponStorage("HVLI", 2)
 
 -- Adder MK3
-var2 = variation
+local var2 = variation
     :copy("Adder MK3")
     :setLocaleName(_("ship", "Adder MK3"))
     :setDescription(
@@ -160,7 +160,7 @@ variation = template
     :setWeaponStorage("HVLI", 8)
 
 -- Adder MK7
-local var2 = variation
+var2 = variation
     :copy("Adder MK7")
     :setLocaleName(_("ship", "Adder MK7"))
     :setModel("AdlerLongRangeScoutGreen")

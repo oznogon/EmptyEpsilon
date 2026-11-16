@@ -445,7 +445,7 @@ variation
     :setJumpDrive(true)
 
 -- Stalker R5
-var2 = variation
+local var2 = variation
     :copy("Stalker R5")
     :setLocaleName(_("ship", "Stalker R5"))
 var2
