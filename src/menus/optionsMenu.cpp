@@ -266,7 +266,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
                 // Reinit keyboard shortcut labels to new language.
                 keys.init();
                 // Clear cached scenario metadata.
-                ScenarioInfo::clearCache();
+                ScenarioInfo::clearScenarioCache();
                 // Reset options tabs to the new language.
                 setTabOptions();
             }
