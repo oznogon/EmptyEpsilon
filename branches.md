@@ -145,8 +145,8 @@ nebula-rendering 20260622 -- dynamic lighting
 
 sdl3 20260719 -- breaking-change migration to SDL3
 
-GinjaNinja32/multicast-ip 20260720 -- allow setting sACN multicast behavior
-GinjaNinja32/get-wall-clock 20260720 -- add getWallTime() Lua function
+GinjaNinja32:multicast-ip 20260720 -- allow setting sACN multicast behavior
+GinjaNinja32:get-wall-clock 20260720 -- add getWallTime() Lua function
 
 sdl-fake-gestures 20260722 -- add rudimentary fingerDown/Up gestures
 
@@ -162,3 +162,19 @@ hue-v2 20260729 -- Fix Hue V2 error states, add logging
 ai-fix 20260731 -- Fix instant undocking, excessive collisions among AI ships
 
 turret-anything 20260801 -- Move weapon mounts to first-class component and implement across beam weapon, missile, and utility beam functions
+
+Jadael:add-radar-credits XXXXXXXX -- previously addressed in credits refactoring
+dj803:pr/scenario-pre-ecs-calls XXXXXXXX -- previously addressed
+dj803:pr/comms-utility-isobjecttype XXXXXXXX -- previously addressed, with incompatible changes
+dj803:pr/entity-isfriendly-invalid-target XXXXXXXX -- previously addressed
+dj803:pr/2901-crew-stacking XXXXXXXX -- previously addressed in 2901-repair-crew-overload, but with incompatible API changes
+dj803:pr/2578-listen-failure XXXXXXXX -- previously addressed, with incompatible changes
+dj803:drowa/ee1903-dock-abort XXXXXXXX -- previously addressed, with incompatible API changes
+dj803:pr/2672-faction-order -- previously addressed, with incompatible changes
+Xansta:Iris 20261112 -- added Iris Siege scenario
+Xansta:Pirate 20261112 -- added Defenders or Pirates scenario
+Xansta:Rescue 20261112 -- added Rescue scenario
+xansta-2x-typos 20261112 -- also renumbered, StyLua reformatted, updated to fork's ShipTemplate changes
+dj803:drowa/ee2702-multimonitor-clamp 20261115 -- refactored and applied to SDL3 changes
+Xansta:planet 20261115 -- docstring-only change
+
