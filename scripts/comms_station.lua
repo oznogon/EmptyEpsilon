@@ -341,7 +341,7 @@ function commsStationSupplyDrop(comms_source, comms_target)
                                 "stationAssist-comms",
                                 "We have dispatched a supply ship toward %s."
                             ),
-                            formatWaypoint(n)
+                            formatWaypoint(comms_source:getWaypointID(n))
                         )
                     else
                         message = _("needRep-comms", "Not enough reputation!")

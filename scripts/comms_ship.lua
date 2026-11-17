@@ -62,7 +62,9 @@ function commsShipFriendly(comms_source, comms_target)
                     addCommsReply(
                         string.format(
                             _("shipAssist-comms", "Defend %s"),
-                            formatWaypoint(comms_source:getWaypointID(n))
+                            formatWaypoint(
+                                comms_source:getWaypointID(n)
+                            )
                         ),
                         function(comms_source, comms_target)
                             x, y = comms_source:getWaypoint(n)
