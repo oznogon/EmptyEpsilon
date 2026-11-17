@@ -6254,7 +6254,7 @@ function formalWar()
                                     if ship:getWeaponStorage(missile) < 1 then
                                         ship:setWeaponStorage(
                                             missile,
-                                            getWeaponStorageMax(missile)
+                                            ship:getWeaponStorageMax(missile)
                                         )
                                     end
                                 end
