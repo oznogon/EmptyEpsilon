@@ -9064,7 +9064,7 @@ function visitShieldExpertStation(delta)
                         "Magenta"
                     )
                     plot4 = meetShieldExportTransport
-                    plot4reminder = stringFormat(
+                    plot4reminder = string.format(
                         _(
                             "MariaOrders-comms",
                             "Meet transport %s last reported in %s to find Maria Shrivner"
@@ -9535,7 +9535,7 @@ function setWormArt()
 end
 function moveWormArt(delta)
     plotWname = "moveWormArt"
-    if wormart ~= nil and wormart:isValid() then
+    if wormArt ~= nil and wormArt:isValid() then
         if wormArt:isScannedByFaction("Human Navy") then
             wormDelayTimer = 5
             plotW = wormBirth

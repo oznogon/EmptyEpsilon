@@ -116,6 +116,7 @@ function init()
 
     mainGMButtons()
 end
+
 function setGlobals()
     game_state = "paused"
     -- Make the createPlayerShip... functions accessible from other scripts (including exec.lua)
@@ -186,6 +187,7 @@ function setGlobals()
     info_choice_max = 5
     wreck_debris_label_count = 1
 end
+
 function setVariations()
     --default or initial end of game victory/defeat values
     enemyDestructionVictoryCondition = 70 --final: 70
@@ -339,6 +341,7 @@ function setVariations()
         end
     end
 end
+
 function setConstants()
     -- various testing diagnostics
     initDiagnostic = false
@@ -2033,6 +2036,7 @@ function setConstants()
         -- {func=wreckModPowerRegulator,    desc="Primary ship system component",    scan_desc="Power Regulator component"},                --33
     }
 end
+
 -- Terrain and environment creation functions
 function constructEnvironment()
     local rpt_counter = 0
@@ -2078,6 +2082,7 @@ function constructEnvironment()
     setOptionalMissions() --scatter upgrade missions around the stations
     setCharacterNames() --add decoy character names to stations
 end
+
 function setGossipSnippets()
     gossipSnippets = {}
     table.insert(
@@ -2125,6 +2130,7 @@ function setGossipSnippets()
         "Rumor has it that the two Lichten brothers are on the verge of a new discovery. And it's not another wine flavor either"
     ) --11
 end
+
 function setCharacterNames()
     for i = 1, #humanStationList do
         curStation = humanStationList[i]
@@ -2137,6 +2143,7 @@ function setCharacterNames()
         end
     end
 end
+
 function setBorderZones()
     local borderStartAngle = random(0, 360) --gross orientation of default spawn point to neutral border zone
     local borderStartX, borderStartY =
@@ -2813,6 +2820,7 @@ function setBorderZones()
         outerZone:setColor(255, 165, 0)
     end
 end
+
 function resetStationsPlus()
     for i = 1, #stationList do
         stationList[i]:destroy()
@@ -2832,6 +2840,7 @@ function resetStationsPlus()
         end
     end
 end
+
 function buildStationsPlus()
     stationFaction = ""
     stationList = {}
@@ -3044,6 +3053,7 @@ function buildStationsPlus()
         end
     end
 end
+
 function insertPlanet1()
     local tSize = 15
     grid[gx][gy] = gp
@@ -3079,6 +3089,7 @@ function insertPlanet1()
     gx = adjList[rn][1]
     gy = adjList[rn][2]
 end
+
 function insertPlanet2()
     local tSize = 15
     grid[gx][gy] = gp
@@ -3119,6 +3130,7 @@ function insertPlanet2()
     gx = adjList[rn][1]
     gy = adjList[rn][2]
 end
+
 function insertBlackHole()
     local tSize = 22
     grid[gx][gy] = gp
@@ -3150,6 +3162,7 @@ function insertBlackHole()
     gx = adjList[rn][1]
     gy = adjList[rn][2]
 end
+
 function placeInner()
     if stationFaction ~= "Human Navy" then
         fb = gp --set faction boundary
@@ -3175,6 +3188,7 @@ function placeInner()
         table.insert(humanStationList, pStation) --save station in friendly station list
     end
 end
+
 function placeOuter()
     if stationFaction ~= "Kraylor" then
         fb = gp --set faction boundary
@@ -3200,6 +3214,7 @@ function placeOuter()
         table.insert(kraylorStationList, pStation) --save station in enemy station list
     end
 end
+
 function placeBorder()
     if stationFaction ~= "Independent" then
         fb = gp --set faction boundary
@@ -3225,6 +3240,7 @@ function placeBorder()
         table.insert(neutralStationList, pStation) --save station in neutral station list
     end
 end
+
 function getFactionAdjacentGridLocations(lx, ly)
     --adjacent empty grid locations around the grid locations of the currently building faction
     tempGrid = {}
@@ -3283,6 +3299,7 @@ function getFactionAdjacentGridLocations(lx, ly)
     end
     return ol
 end
+
 function getFactionAdjacentGridLocationsSkip(dSkip, lx, ly)
     --adjacent empty grid locations around the grid locations of the currently building faction, skip check as requested
     tempGrid[lx][ly] = 1
@@ -3343,6 +3360,7 @@ function getFactionAdjacentGridLocationsSkip(dSkip, lx, ly)
         end
     end
 end
+
 function getAllAdjacentGridLocations(lx, ly)
     --adjacent empty grid locations around all occupied locations
     tempGrid = {}
@@ -3401,6 +3419,7 @@ function getAllAdjacentGridLocations(lx, ly)
     end
     return ol
 end
+
 function getAllAdjacentGridLocationsSkip(dSkip, lx, ly)
     --adjacent empty grid locations around all occupied locations, skip as requested
     tempGrid[lx][ly] = 1
@@ -3461,6 +3480,7 @@ function getAllAdjacentGridLocationsSkip(dSkip, lx, ly)
         end
     end
 end
+
 function getAdjacentGridLocations(lx, ly)
     --adjacent empty grid locations around the most recently placed item
     tempGrid = {}
@@ -3519,6 +3539,7 @@ function getAdjacentGridLocations(lx, ly)
     end
     return ol
 end
+
 function getAdjacentGridLocationsSkip(dSkip, lx, ly)
     --adjacent empty grid locations around the most recently placed item, skip as requested
     tempGrid[lx][ly] = 1
@@ -3579,6 +3600,7 @@ function getAdjacentGridLocationsSkip(dSkip, lx, ly)
         end
     end
 end
+
 -- Modifications from wreck artifact functions
 function wreckModCommonArtifact(wma)
     wma:setScanningParameters(math.random(1, 2), math.random(1, 3))
@@ -3594,6 +3616,7 @@ function wreckModCommonArtifact(wma)
         wma:setModel("artifact2")
     end
 end
+
 function wreckModHealthBeam(x, y)
     local full_desc = wreck_mod_type[1].scan_desc
     local wma = Artifact()
@@ -3866,6 +3889,7 @@ function wreckModHealthBeam(x, y)
     end)
     return wma
 end
+
 function wreckModHealthMissile(x, y)
     local full_desc = wreck_mod_type[2].scan_desc
     local wma = Artifact()
@@ -4138,6 +4162,7 @@ function wreckModHealthMissile(x, y)
     end)
     return wma
 end
+
 function wreckModHealthImpulse(x, y)
     local full_desc = wreck_mod_type[3].scan_desc
     local wma = Artifact()
@@ -4404,6 +4429,7 @@ function wreckModHealthImpulse(x, y)
     end)
     return wma
 end
+
 function wreckModHealthWarp(x, y)
     local full_desc = wreck_mod_type[4].scan_desc
     local wma = Artifact()
@@ -4675,6 +4701,7 @@ function wreckModHealthWarp(x, y)
     end)
     return wma
 end
+
 function wreckModHealthJump(x, y)
     local full_desc = wreck_mod_type[5].scan_desc
     local wma = Artifact()
@@ -4949,6 +4976,7 @@ function wreckModHealthJump(x, y)
     end)
     return wma
 end
+
 function wreckModHealthShield(x, y)
     local full_desc = wreck_mod_type[6].scan_desc
     local wma = Artifact()
@@ -4975,7 +5003,7 @@ function wreckModHealthShield(x, y)
                 if max_health_front < 1 then
                     p:setSystemHealthMax(
                         "frontshield",
-                        math.min(1, max_health + 0.05)
+                        math.min(1, max_health_front + 0.05)
                     )
                     if p:hasPlayerAtPosition("Engineering") then
                         p.artifact_improved_max_front_shield_health_message =
@@ -5025,7 +5053,7 @@ function wreckModHealthShield(x, y)
                 elseif max_health_rear < 1 then
                     p:setSystemHealthMax(
                         "rearshield",
-                        math.min(1, max_health + 0.05)
+                        math.min(1, max_health_rear + 0.05)
                     )
                     if p:hasPlayerAtPosition("Engineering") then
                         p.artifact_improved_max_rear_shield_health_message =
@@ -5073,7 +5101,7 @@ function wreckModHealthShield(x, y)
                         )
                     end
                 elseif health_front < 1 then
-                    p:setSystemHealth("frontshield", math.min(1, health + 0.05))
+                    p:setSystemHealth("frontshield", math.min(1, health_front + 0.05))
                     if p:hasPlayerAtPosition("Engineering") then
                         p.artifact_improved_front_shield_health_message =
                             "artifact_improved_front_shield_health_message"
@@ -5120,7 +5148,7 @@ function wreckModHealthShield(x, y)
                         )
                     end
                 elseif health_rear < 1 then
-                    p:setSystemHealth("rearshield", math.min(1, health + 0.05))
+                    p:setSystemHealth("rearshield", math.min(1, health_rear + 0.05))
                     if p:hasPlayerAtPosition("Engineering") then
                         p.artifact_improved_rear_shield_health_message =
                             "artifact_improved_rear_shield_health_message"
@@ -5690,6 +5718,7 @@ function wreckModHealthShield(x, y)
     end)
     return wma
 end
+
 function wreckModHealthSpin(x, y)
     local full_desc = wreck_mod_type[7].scan_desc
     local wma = Artifact()
@@ -5959,6 +5988,7 @@ function wreckModHealthSpin(x, y)
     end)
     return wma
 end
+
 function wreckModHealthReactor(x, y)
     local full_desc = wreck_mod_type[8].scan_desc
     local wma = Artifact()
@@ -6225,6 +6255,7 @@ function wreckModHealthReactor(x, y)
     end)
     return wma
 end
+
 function wreckModBoolScan(x, y)
     local full_desc = wreck_mod_type[9].scan_desc
     local wma = Artifact()
@@ -6373,6 +6404,7 @@ function wreckModBoolScan(x, y)
     end)
     return wma
 end
+
 function wreckModBoolCombat(x, y)
     local full_desc = wreck_mod_type[10].scan_desc
     local wma = Artifact()
@@ -6521,6 +6553,7 @@ function wreckModBoolCombat(x, y)
     end)
     return wma
 end
+
 function wreckModBoolProbe(x, y)
     local full_desc = wreck_mod_type[11].scan_desc
     local wma = Artifact()
@@ -28197,8 +28230,9 @@ function updateInner(delta)
         print("end of update loop")
     end
 end
+
 function onError(error)
-    err = "script error : - \n" .. error .. "\n\ntraceback :-\n" .. traceback()
+    err = "script error : - \n" .. error
     print(err)
     if popupGMDebug == "once" or popupGMDebug == "always" then
         if popupGMDebug == "once" then
@@ -28207,6 +28241,7 @@ function onError(error)
         addGMMessage(err)
     end
 end
+
 function update(delta)
     xpcall(updateInner, onError, delta)
 end

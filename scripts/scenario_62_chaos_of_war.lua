@@ -8295,7 +8295,7 @@ function getTemplatePool(max_strength)
     -- print("fleet composition:",fleetComposition,"fleet group sub fleet composition:",fleet_group[fleetComposition])
     if pool_selectivity == "less/heavy" then
         for idx, current_ship_template in ipairs(ship_template_by_strength) do
-            -- print("currrent ship template:",current_ship_template,"strength:",ship_template[current_ship_template].strength,"max strength:",max_strength)
+            -- print("current ship template:",current_ship_template,"strength:",ship_template[current_ship_template].strength,"max strength:",max_strength)
             if
                 ship_template[current_ship_template].strength <= max_strength
             then
@@ -8323,7 +8323,7 @@ function getTemplatePool(max_strength)
     elseif pool_selectivity == "more/light" then
         for i = #ship_template_by_strength, 1, -1 do
             local current_ship_template = ship_template_by_strength[i]
-            -- print("currrent ship template:",current_ship_template,"strength:",ship_template[current_ship_template].strength,"max strength:",max_strength)
+            -- print("current ship template:",current_ship_template,"strength:",ship_template[current_ship_template].strength,"max strength:",max_strength)
             if
                 ship_template[current_ship_template].strength <= max_strength
             then

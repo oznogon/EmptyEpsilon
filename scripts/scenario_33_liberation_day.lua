@@ -8988,7 +8988,7 @@ function jasmineExuariConversationTopics()
                         )
                     )
                 else
-                    setCommsmessage(
+                    setCommsMessage(
                         string.format(
                             _(
                                 "ship-comms",

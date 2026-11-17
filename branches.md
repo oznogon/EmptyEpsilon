@@ -170,11 +170,20 @@ dj803:pr/entity-isfriendly-invalid-target XXXXXXXX -- previously addressed
 dj803:pr/2901-crew-stacking XXXXXXXX -- previously addressed in 2901-repair-crew-overload, but with incompatible API changes
 dj803:pr/2578-listen-failure XXXXXXXX -- previously addressed, with incompatible changes
 dj803:drowa/ee1903-dock-abort XXXXXXXX -- previously addressed, with incompatible API changes
-dj803:pr/2672-faction-order -- previously addressed, with incompatible changes
+dj803:pr/2672-faction-order XXXXXXXX -- previously addressed, with incompatible changes
+
 Xansta:Iris 20261112 -- added Iris Siege scenario
 Xansta:Pirate 20261112 -- added Defenders or Pirates scenario
 Xansta:Rescue 20261112 -- added Rescue scenario
 xansta-2x-typos 20261112 -- also renumbered, StyLua reformatted, updated to fork's ShipTemplate changes
+
 dj803:drowa/ee2702-multimonitor-clamp 20261115 -- refactored and applied to SDL3 changes
 Xansta:planet 20261115 -- docstring-only change
 
+dj803:drowa/ee1903-dock-abort 20261116 -- modified API aligned to upstream
+dj803:drowa/ee-waypoint-comms 20261116 -- applied to modified comms scripts
+
+dj803:post/ee2932 XXXXXXXX -- previously addressed in guiscrollcontainer-guiselector-popup, with incompatible API changes
+dj803:post/ee2646 XXXXXXXX -- previously addressed in scrolling-guicontainer PRs, with incompatible API changes
+dj803:post/ee2497 XXXXXXXX -- previously addressed in GuiSelector refactors
+dj803:drowa/scen-undefined-names XXXXXXXX -- applied to reformatted and modified scenario scripts
