@@ -15859,17 +15859,18 @@ function waveNear(enemyWaveList)
                                 end
                             end
                         end
-                        local lMsg = string.format(
-                            _(
-                                "helpfullWarning-shipLog",
-                                "[%s, Sector %s] There are enemies nearby"
-                            ),
-                            closestStation:getCallSign(),
-                            closestStation:getSectorName()
-                        )
-                        closestPlayer:addToShipLog(lMsg, "Red")
-                        closestStation.warn_count = closestStation.warn_count
-                            + 1
+                        if closestPlayer ~= nil then
+                            local lMsg = string.format(
+                                _(
+                                    "helpfullWarning-shipLog",
+                                    "[%s, Sector %s] There are enemies nearby"
+                                ),
+                                closestStation:getCallSign(),
+                                closestStation:getSectorName()
+                            )
+                            closestPlayer:addToShipLog(lMsg, "Red")
+                        end
+                        closestStation.warn_count = closestStation.warn_count + 1
                         return
                     end
                 end
