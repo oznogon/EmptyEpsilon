@@ -12179,7 +12179,7 @@ function manageHuntPhaseMechanics()
                                                 flagScanComplexity,
                                                 flagScanDepth
                                             )
-                                        if flag_revel then
+                                        if flag_reveal then
                                             if flag_drop < 2 then
                                                 for i, cp in
                                                     ipairs(
