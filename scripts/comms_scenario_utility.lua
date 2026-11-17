@@ -27188,8 +27188,7 @@ function commonServiceOptions()
                                                                 * 2
                                                         then
                                                             local max_afford = 0
-                                                            local missile_count =
-                                                                0
+                                                            local missile_count = 0
                                                             repeat
                                                                 max_afford = max_afford
                                                                     + getWeaponCost(
