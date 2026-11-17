@@ -8302,7 +8302,7 @@ function pickHullGood(delta)
         plot4 = cleanUpHullers
         hullReveal = 0
         hullUpgradeAvailable = true
-        pickhullGoodBase = "done"
+        pickHullGoodBase = "done"
     end
 end
 function cleanUpHullers(delta)
