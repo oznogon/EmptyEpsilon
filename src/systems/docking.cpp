@@ -49,7 +49,11 @@ void DockingSystem::update(float delta)
             break;
         case DockingPort::State::Docking:
             if (!docking_port.target || !(target_transform = docking_port.target.getComponent<sp::Transform>()))
-                docking_port.state = DockingPort::State::NotDocking;
+            {
+                // Since 185665d, upstream stops propulsion if the docking target
+                // is no longer.
+                abortDock(entity);
+            }
             else
             {
                 auto thrusters = entity.getComponent<ManeuveringThrusters>();
@@ -738,7 +742,7 @@ void DockingSystem::collision(sp::ecs::Entity carried, sp::ecs::Entity carrier, 
 
 void DockingSystem::requestDock(sp::ecs::Entity entity, sp::ecs::Entity target)
 {
-    if (!target) return;
+    if (!target || target == entity) return;
 
     if (!canStartDocking(entity)) return;
 
