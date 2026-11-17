@@ -5703,7 +5703,7 @@ function handleDockedState()
                                 good_desc[good],
                                 goodData["quantity"]
                             )
-                            if goodData[quantity] < 1 then
+                            if goodData["quantity"] < 1 then
                                 goodTransactionMessage = string.format(
                                     _(
                                         "trade-comms",
