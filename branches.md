@@ -182,8 +182,11 @@ Xansta:planet 20261115 -- docstring-only change
 
 dj803:drowa/ee1903-dock-abort 20261116 -- modified API aligned to upstream
 dj803:drowa/ee-waypoint-comms 20261116 -- applied to modified comms scripts
+dj803:drowa/scen-57 20261116 -- only closestPlayer nil check applied
+dj803:drowa/scen-scope-keys 20261116 -- some typo fixes already addressed, others applied to renumbered, reformatted, refactored scenarios
+dj803:drowa/scen-undefined-names 20261116 -- applied to reformatted and modified scenario scripts
+dj803:drowa/scen-54 20261116 -- applied selectively, with many additional changes
 
-dj803:post/ee2932 XXXXXXXX -- previously addressed in guiscrollcontainer-guiselector-popup, with incompatible API changes
+dj803:post/ee2932 XXXXXXXX -- previously addressed in radar rendering refactor
 dj803:post/ee2646 XXXXXXXX -- previously addressed in scrolling-guicontainer PRs, with incompatible API changes
 dj803:post/ee2497 XXXXXXXX -- previously addressed in GuiSelector refactors
-dj803:drowa/scen-undefined-names XXXXXXXX -- applied to reformatted and modified scenario scripts
