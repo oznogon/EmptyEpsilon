@@ -11644,148 +11644,148 @@ function createPlayerShipSpyder()
     playerSpyder:setWeaponTubeExclusiveFor(5, "Mine")
 end
 function createPlayerShipSpinstar()
-    playerSpinStar = PlayerSpaceship()
+    playerSpinstar = PlayerSpaceship()
         :setTemplate("Atlantis")
         :setFaction("Human Navy")
         :setCallSign("Spinstar")
-    playerSpinStar:setTypeName("Proto-Atlantis")
-    playerSpinStar.spine_request = false
-    playerSpinStar.spine_charge = true
-    playerSpinStar:setRepairCrewCount(4) --more repair crew (vs 3)
-    playerSpinStar:setImpulseMaxSpeed(70) --slower impulse max (vs 90)
-    playerSpinStar:setRotationMaxSpeed(14) --faster spin (vs 10)
-    playerSpinStar:setJumpDrive(false) --no Jump
-    playerSpinStar:setWarpDrive(true) --add warp
-    playerSpinStar:setHullMax(200) --weaker hull (vs 250)
-    playerSpinStar:setHull(200)
-    playerSpinStar:setShieldsMax(150, 150) --weaker shields (vs 200)
-    playerSpinStar:setShields(150, 150)
-    playerSpinStar:setWeaponTubeCount(3) --fewer tubes
-    playerSpinStar:setWeaponTubeDirection(0, -90) --one left
-    playerSpinStar:weaponTubeDisallowMissle(0, "Mine") --no broadside mine
-    playerSpinStar:setWeaponTubeDirection(1, 90) --one right
-    playerSpinStar:weaponTubeDisallowMissle(1, "Mine") --no broadside mine
-    playerSpinStar:setWeaponTubeDirection(2, 180) --one back
-    playerSpinStar:setWeaponTubeExclusiveFor(2, "Mine") --Mine only
+    playerSpinstar:setTypeName("Proto-Atlantis")
+    playerSpinstar.spine_request = false
+    playerSpinstar.spine_charge = true
+    playerSpinstar:setRepairCrewCount(4) --more repair crew (vs 3)
+    playerSpinstar:setImpulseMaxSpeed(70) --slower impulse max (vs 90)
+    playerSpinstar:setRotationMaxSpeed(14) --faster spin (vs 10)
+    playerSpinstar:setJumpDrive(false) --no Jump
+    playerSpinstar:setWarpDrive(true) --add warp
+    playerSpinstar:setHullMax(200) --weaker hull (vs 250)
+    playerSpinstar:setHull(200)
+    playerSpinstar:setShieldsMax(150, 150) --weaker shields (vs 200)
+    playerSpinstar:setShields(150, 150)
+    playerSpinstar:setWeaponTubeCount(3) --fewer tubes
+    playerSpinstar:setWeaponTubeDirection(0, -90) --one left
+    playerSpinstar:weaponTubeDisallowMissle(0, "Mine") --no broadside mine
+    playerSpinstar:setWeaponTubeDirection(1, 90) --one right
+    playerSpinstar:weaponTubeDisallowMissle(1, "Mine") --no broadside mine
+    playerSpinstar:setWeaponTubeDirection(2, 180) --one back
+    playerSpinstar:setWeaponTubeExclusiveFor(2, "Mine") --Mine only
 end
 function spinalAddBeamNow()
-    playerSpinStar.spine_request = true
-    playerSpinStar:setBeamWeapon(4, 5, 0, 2500.0, 0.1, 8)
+    playerSpinstar.spine_request = true
+    playerSpinstar:setBeamWeapon(4, 5, 0, 2500.0, 0.1, 8)
 end
 function spinalShip(delta)
     local spine_status_info = "Spine"
-    if playerSpinStar ~= nil and playerSpinStar:isValid() then
-        if playerSpinStar.spine_request then --the button has been clicked
-            if playerSpinStar.spinal_countdown == nil then
-                playerSpinStar.spinal_countdown = delta + 5 --set firing time limit
+    if playerSpinstar ~= nil and playerSpinstar:isValid() then
+        if playerSpinstar.spine_request then --the button has been clicked
+            if playerSpinstar.spinal_countdown == nil then
+                playerSpinstar.spinal_countdown = delta + 5 --set firing time limit
             end
-            if playerSpinStar.spine_button ~= nil then --remove button while firing
-                playerSpinStar:removeCustom(playerSpinStar.spine_button)
-                playerSpinStar.spine_button = nil
+            if playerSpinstar.spine_button ~= nil then --remove button while firing
+                playerSpinstar:removeCustom(playerSpinstar.spine_button)
+                playerSpinstar.spine_button = nil
             end
-            if playerSpinStar.spine_button_tactical ~= nil then
-                playerSpinStar:removeCustom(
-                    playerSpinStar.spine_button_tactical
+            if playerSpinstar.spine_button_tactical ~= nil then
+                playerSpinstar:removeCustom(
+                    playerSpinstar.spine_button_tactical
                 )
-                playerSpinStar.spine_button_tactical = nil
+                playerSpinstar.spine_button_tactical = nil
             end
-            playerSpinStar.spinal_countdown = playerSpinStar.spinal_countdown
+            playerSpinstar.spinal_countdown = playerSpinstar.spinal_countdown
                 - delta
-            if playerSpinStar.spinal_countdown < 0 then --firing time limit expired
-                playerSpinStar:setBeamWeapon(4, 5, 0, 0.0, 0.1, 8)
-                playerSpinStar.spine_request = false
-                playerSpinStar.spine_charge = false
-                playerSpinStar.spinal_countdown = nil
+            if playerSpinstar.spinal_countdown < 0 then --firing time limit expired
+                playerSpinstar:setBeamWeapon(4, 5, 0, 0.0, 0.1, 8)
+                playerSpinstar.spine_request = false
+                playerSpinstar.spine_charge = false
+                playerSpinstar.spinal_countdown = nil
             else --show firing time limit on weapons or tactical consoles
                 spine_status_info = string.format(
                     _("-tabWeapons&Tactical", "%s: %i"),
                     spine_status_info,
-                    math.ceil(playerSpinStar.spinal_countdown)
+                    math.ceil(playerSpinstar.spinal_countdown)
                 )
-                if playerSpinStar:hasPlayerAtPosition("Weapons") then
-                    playerSpinStar.spine_status_info = "spine_status_info"
-                    playerSpinStar:addCustomInfo(
+                if playerSpinstar:hasPlayerAtPosition("Weapons") then
+                    playerSpinstar.spine_status_info = "spine_status_info"
+                    playerSpinstar:addCustomInfo(
                         "Weapons",
-                        playerSpinStar.spine_status_info,
+                        playerSpinstar.spine_status_info,
                         spine_status_info
                     )
                 end
-                if playerSpinStar:hasPlayerAtPosition("Tactical") then
-                    playerSpinStar.spine_status_info_tactical =
+                if playerSpinstar:hasPlayerAtPosition("Tactical") then
+                    playerSpinstar.spine_status_info_tactical =
                         "spine_status_info_tactical"
-                    playerSpinStar:addCustomInfo(
+                    playerSpinstar:addCustomInfo(
                         "Weapons",
-                        playerSpinStar.spine_status_info_tactical,
+                        playerSpinstar.spine_status_info_tactical,
                         spine_status_info
                     )
                 end
             end
         else --the button has not been clicked
-            if playerSpinStar.spine_charge then --weapon is charged up
-                if playerSpinStar.spine_status_info ~= nil then --remove charge status
-                    playerSpinStar:removeCustom(
-                        playerSpinStar.spine_status_info
+            if playerSpinstar.spine_charge then --weapon is charged up
+                if playerSpinstar.spine_status_info ~= nil then --remove charge status
+                    playerSpinstar:removeCustom(
+                        playerSpinstar.spine_status_info
                     )
-                    playerSpinStar.spine_status_info = nil
+                    playerSpinstar.spine_status_info = nil
                 end
-                if playerSpinStar.spine_status_info_tactical ~= nil then
-                    playerSpinStar:removeCustom(
-                        playerSpinStar.spine_status_info_tactical
+                if playerSpinstar.spine_status_info_tactical ~= nil then
+                    playerSpinstar:removeCustom(
+                        playerSpinstar.spine_status_info_tactical
                     )
-                    playerSpinStar.spine_status_info_tactical = nil
+                    playerSpinstar.spine_status_info_tactical = nil
                 end
-                if playerSpinStar.spine_button == nil then --add fire button to weapons and/or tactical consoles
-                    if playerSpinStar:hasPlayerAtPosition("Weapons") then
-                        playerSpinStar.spine_button = "spine_button"
-                        playerSpinStar:addCustomButton(
+                if playerSpinstar.spine_button == nil then --add fire button to weapons and/or tactical consoles
+                    if playerSpinstar:hasPlayerAtPosition("Weapons") then
+                        playerSpinstar.spine_button = "spine_button"
+                        playerSpinstar:addCustomButton(
                             "Weapons",
-                            playerSpinStar.spine_button,
+                            playerSpinstar.spine_button,
                             _("-buttonWeapons", "Spinal Beam"),
                             spinalAddBeamNow
                         )
                     end
                 end
-                if playerSpinStar.spine_button_tactical == nil then
-                    if playerSpinStar:hasPlayerAtPosition("Tactical") then
-                        playerSpinStar.spine_button_tactical =
+                if playerSpinstar.spine_button_tactical == nil then
+                    if playerSpinstar:hasPlayerAtPosition("Tactical") then
+                        playerSpinstar.spine_button_tactical =
                             "spine_button_tactical"
-                        playerSpinStar:addCustomButton(
+                        playerSpinstar:addCustomButton(
                             "Tactical",
-                            playerSpinStar.spine_button_tactical,
+                            playerSpinstar.spine_button_tactical,
                             _("-buttonTactical", "Spinal Beam"),
                             spinalAddBeamNow
                         )
                     end
                 end
             else --weapon is not charged
-                if playerSpinStar.charge_countdown == nil then
-                    playerSpinStar.charge_countdown = delta + 30 --set charge time
+                if playerSpinstar.charge_countdown == nil then
+                    playerSpinstar.charge_countdown = delta + 30 --set charge time
                 end
-                playerSpinStar.charge_countdown = playerSpinStar.charge_countdown
+                playerSpinstar.charge_countdown = playerSpinstar.charge_countdown
                     - delta
-                if playerSpinStar.charge_countdown < 0 then --charge time completed
-                    playerSpinStar.spine_charge = true
-                    playerSpinStar.charge_countdown = nil
+                if playerSpinstar.charge_countdown < 0 then --charge time completed
+                    playerSpinstar.spine_charge = true
+                    playerSpinstar.charge_countdown = nil
                 else --show charge time on weapons or tactical consoles
                     spine_status_info = string.format(
                         _("-tabWeapons", "%s Charging: %i"),
                         spine_status_info,
-                        math.ceil(playerSpinStar.charge_countdown)
+                        math.ceil(playerSpinstar.charge_countdown)
                     )
-                    if playerSpinStar:hasPlayerAtPosition("Weapons") then
-                        playerSpinStar.spine_status_info = "spine_status_info"
-                        playerSpinStar:addCustomInfo(
+                    if playerSpinstar:hasPlayerAtPosition("Weapons") then
+                        playerSpinstar.spine_status_info = "spine_status_info"
+                        playerSpinstar:addCustomInfo(
                             "Weapons",
-                            playerSpinStar.spine_status_info,
+                            playerSpinstar.spine_status_info,
                             spine_status_info
                         )
                     end
-                    if playerSpinStar:hasPlayerAtPosition("Tactical") then
-                        playerSpinStar.spine_status_info_tactical =
+                    if playerSpinstar:hasPlayerAtPosition("Tactical") then
+                        playerSpinstar.spine_status_info_tactical =
                             "spine_status_info_tactical"
-                        playerSpinStar:addCustomInfo(
+                        playerSpinstar:addCustomInfo(
                             "Weapons",
-                            playerSpinStar.spine_status_info_tactical,
+                            playerSpinstar.spine_status_info_tactical,
                             spine_status_info
                         )
                     end
