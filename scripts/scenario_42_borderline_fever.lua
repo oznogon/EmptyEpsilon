@@ -5456,6 +5456,12 @@ function wreckModHealthShield(x, y)
         else --only one shield
             local max_health = p:getSystemHealthMax("frontshield")
             local health = p:getSystemHealth("frontshield")
+            local scan_bonus = 0
+            if
+                self:isScannedByFaction(p:getFaction())
+            then
+                scan_bonus = difficulty * 5
+            end
             if
                 random(1, 100)
                 < base_wreck_mod_positive
