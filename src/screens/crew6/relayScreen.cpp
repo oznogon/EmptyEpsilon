@@ -38,24 +38,31 @@
 //TODO: This function does not belong here.
 static bool canHack(sp::ecs::Entity entity)
 {
+    // Allow hacking if hackable systems are present.
+    bool has_hackable_systems = false;
+    for (int n = 0; n < static_cast<int>(ShipSystem::Type::COUNT); n++)
     {
-        bool hasSystems = false;
-        for(int n=0; n<int(ShipSystem::Type::COUNT); n++) {
-            if (ShipSystem::get(entity, ShipSystem::Type(n))) {
-                hasSystems = true;
-                break;
-            }
-        }
-        if (!hasSystems) {
-            auto ht = entity.getComponent<HackingTarget>();
-            if (!ht || ht->difficulty < 0)
-                return false;
+        if (auto sys = ShipSystem::get(entity, ShipSystem::Type(n)))
+        {
+            if (sys && sys->can_be_hacked) has_hackable_systems = true;
+            break;
         }
     }
 
+    // If no hackable systems are present, but the target has the HackingTarget
+    // component, potentially allow hacking anyway.
+    if (!has_hackable_systems)
+    {
+        auto ht = entity.getComponent<HackingTarget>();
+        if (!ht || ht->difficulty < 0) return false;
+    }
+
+    // Allow hacking of friendly entities if the target is unscanned.
     auto scanstate = entity.getComponent<ScanState>();
     if (scanstate && scanstate->getStateFor(my_spaceship) == ScanState::State::NotScanned)
         return true;
+
+    // Otherwise, allow hacking of only non-friendly entities.
     return Faction::getRelation(entity, my_spaceship) != FactionRelation::Friendly;
 }
 
