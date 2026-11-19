@@ -30,6 +30,11 @@
 - Fullscreen multimonitor mode no longer attempts to create more windows than there are connected displays
 - Crash bugs in "Defenders or Pirates" and "Iris Siege", including entity type checks in `findClearSpot()` that rejected userdata, the Iris warp jammer's missing faction, and `nil` comparisons on `getDockedWith()` results
 - `waypointDistanceUtility()` no longer references an undefined variable and reports correct waypoint IDs
+- Space dust renderer refactored to use a static, camera-relative field. This fixes several dust-rendering issues:
+  - Dust field can't be outran at high speeds, such as going warp 2.3+ in an Atlantis (upstream #2946)
+  - Dust won't disappear at certain headings, especially after the dust field position is compromised by high-speed movement
+  - First-person perspectives on very large ships are no longer positioned outside of the dust field
+  - Dust field no longer renders around the player ship when the main screen uses a camera entity's viewpoint instead of the player's
 
 ## [2026-10]
 

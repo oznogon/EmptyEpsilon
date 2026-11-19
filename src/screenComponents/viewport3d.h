@@ -6,7 +6,10 @@
 #include "systems/rendering.h"
 
 #include <glm/mat4x4.hpp>
+#include <glm/vec3.hpp>
 #include <glm/vec4.hpp>
+
+#include <array>
 
 class GuiViewport3D : public GuiElement
 {
@@ -30,11 +33,26 @@ protected:
         LocalBox,
         BoxLerp,
 
-        StarboxCount,
+        StarboxCount
+    };
 
-        Rotation = StarboxCount,
+    enum class SpacedustUniforms : uint8_t
+    {
+        Projection = 0,
+        Rotation,
+        RotationPrevious,
+        CameraPosition,
+        BoxSize,
+        CameraDelta,
+        PixelSize,
+        MinStreak,
+        MaxStreak,
+        NearFade,
+        FarFade,
+        FogColor,
+        FogDistance,
 
-        SpacedustCount
+        Count
     };
 
     enum class Buffers : uint8_t
@@ -63,11 +81,15 @@ protected:
     sp::Shader* starbox_shader = nullptr;
 
     // Spacedust
-    static constexpr size_t spacedust_particle_count = 1024;
-    std::array<uint32_t, static_cast<size_t>(Uniforms::SpacedustCount)> spacedust_uniforms;
+    static constexpr size_t spacedust_particle_count = 2048;
+    std::array<uint32_t, static_cast<size_t>(SpacedustUniforms::Count)> spacedust_uniforms;
     std::array<uint32_t, static_cast<size_t>(VertexAttributes::SpacedustCount)> spacedust_vertex_attributes;
     gl::Buffers<static_cast<size_t>(Buffers::SpacedustCount)> spacedust_buffer;
     sp::Shader* spacedust_shader = nullptr;
+    glm::vec3 spacedust_last_camera_position{0.0f};
+    float spacedust_last_camera_time = 0.0f;
+    glm::mat4 spacedust_last_rotation{1.0f};
+    bool spacedust_camera_history_valid = false;
 
 public:
     GuiViewport3D(GuiContainer* owner, string id);

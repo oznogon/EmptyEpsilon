@@ -33,9 +33,45 @@
 #include <glm/ext/matrix_clip_space.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <algorithm>
-
+#include <vector>
 
 static std::unordered_map<string, std::unique_ptr<gl::CubemapTexture>> skybox_textures;
+
+// Spacedust constants
+// Dimensions of the box containing the dust field. The shader wraps dust within
+// this box around the camera to appear infinite.
+static const glm::vec3 SPACEDUST_BOX_SIZE{2000.0f, 2000.0f, 1600.0f};
+// Fade ranges to prevent dust from suddenly popping in/out of view.
+static constexpr float SPACEDUST_NEAR_FADE_START = 100.0f;
+static constexpr float SPACEDUST_NEAR_FADE_END = 220.0f;
+static constexpr float SPACEDUST_FAR_FADE_START = 500.0f;
+static constexpr float SPACEDUST_FAR_FADE_END = 800.0f;
+// A fake "exposure" time for dust to prevent frame-rate jumps from changing
+// dust streak appearances.
+static constexpr float SPACEDUST_EXPOSURE = 0.02f;
+// Minimum and maximum rendered dust streak size in pixels. The minimum size
+// prevents head-on dust particles from disappearing, the maximum size prevents
+// streaks from overwhelming the viewport at high rates of speed.
+static constexpr float SPACEDUST_MIN_STREAK_PIXELS = 2.0f;
+static constexpr float SPACEDUST_MAX_STREAK_PIXELS = 64.0f;
+// Thresholds to detect when the camera position or rotation has suddenly
+// changed, typically in a camera transition.
+static constexpr float SPACEDUST_MAX_CAMERA_JUMP = 1500.0f;
+static const float SPACEDUST_MAX_ROTATION_JUMP = glm::radians(30.0f);
+
+static float viewRotationAngle(const glm::mat4& a, const glm::mat4& b)
+{
+    const glm::mat3 relative = glm::transpose(glm::mat3(a)) * glm::mat3(b);
+    const float trace = relative[0][0] + relative[1][1] + relative[2][2];
+    return glm::acos(glm::clamp((trace - 1.0f) * 0.5f, -1.0f, 1.0f));
+}
+
+static glm::vec3 wrapCameraPosition(const glm::vec3& position)
+{
+    const glm::dvec3 box(SPACEDUST_BOX_SIZE);
+    const glm::dvec3 value(position);
+    return glm::vec3(value - glm::floor(value / box) * box);
+}
 
 
 GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
@@ -105,43 +141,57 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
     spacedust_shader = ShaderManager::getShader("shaders/spacedust");
     spacedust_shader->bind();
 
-    spacedust_uniforms[static_cast<size_t>(Uniforms::Projection)] = spacedust_shader->getUniformLocation("u_projection");
-    spacedust_uniforms[static_cast<size_t>(Uniforms::View)] = spacedust_shader->getUniformLocation("u_view");
-    spacedust_uniforms[static_cast<size_t>(Uniforms::Rotation)] = spacedust_shader->getUniformLocation("u_rotation");
+    spacedust_uniforms[static_cast<size_t>(SpacedustUniforms::Projection)] = spacedust_shader->getUniformLocation("u_projection");
+    spacedust_uniforms[static_cast<size_t>(SpacedustUniforms::Rotation)] = spacedust_shader->getUniformLocation("u_rotation");
+    spacedust_uniforms[static_cast<size_t>(SpacedustUniforms::RotationPrevious)] = spacedust_shader->getUniformLocation("u_rotation_previous");
+    spacedust_uniforms[static_cast<size_t>(SpacedustUniforms::CameraPosition)] = spacedust_shader->getUniformLocation("u_camera_position");
+    spacedust_uniforms[static_cast<size_t>(SpacedustUniforms::BoxSize)] = spacedust_shader->getUniformLocation("u_box_size");
+    spacedust_uniforms[static_cast<size_t>(SpacedustUniforms::CameraDelta)] = spacedust_shader->getUniformLocation("u_camera_delta");
+    spacedust_uniforms[static_cast<size_t>(SpacedustUniforms::PixelSize)] = spacedust_shader->getUniformLocation("u_pixel_size");
+    spacedust_uniforms[static_cast<size_t>(SpacedustUniforms::MinStreak)] = spacedust_shader->getUniformLocation("u_min_streak");
+    spacedust_uniforms[static_cast<size_t>(SpacedustUniforms::MaxStreak)] = spacedust_shader->getUniformLocation("u_max_streak");
+    spacedust_uniforms[static_cast<size_t>(SpacedustUniforms::NearFade)] = spacedust_shader->getUniformLocation("u_near_fade");
+    spacedust_uniforms[static_cast<size_t>(SpacedustUniforms::FarFade)] = spacedust_shader->getUniformLocation("u_far_fade");
+    spacedust_uniforms[static_cast<size_t>(SpacedustUniforms::FogColor)] = spacedust_shader->getUniformLocation("u_fogColor");
+    spacedust_uniforms[static_cast<size_t>(SpacedustUniforms::FogDistance)] = spacedust_shader->getUniformLocation("u_fogDistance");
 
     spacedust_vertex_attributes[static_cast<size_t>(VertexAttributes::Position)] = spacedust_shader->getAttributeLocation("a_position");
     spacedust_vertex_attributes[static_cast<size_t>(VertexAttributes::Sign)] = spacedust_shader->getAttributeLocation("a_sign_value");
 
-    // Reserve our GPU buffer.
-    //
-    // Each dust particle consists of:
-    // - a worldspace position (Vector3f)
+    // Upload a static dust field. Each dust particle consists of:
+    // - a position (Vector3f)
     // - a sign value (single byte, passed as float)
+    //
+    // The particle position is a seed within the dust field. The shader wraps
+    // it around the camera, so the positions never change.
     //
     // Both "arrays" are maintained separately:
     // - The signs are stable (which "end" of the line we're on)
-    // - The positions will get updated more frequently.
+    // - Positions are static
     //
     // Each particle occupies 2 * 16B, assuming tight packing.
     glBindBuffer(GL_ARRAY_BUFFER, spacedust_buffer[0]);
-    glBufferData(GL_ARRAY_BUFFER, 2 * spacedust_particle_count * (sizeof(glm::vec3) + sizeof(float)), nullptr, GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, 2 * spacedust_particle_count * (sizeof(glm::vec3) + sizeof(float)), nullptr, GL_STATIC_DRAW);
 
-    // Generate and update the alternating vertices signs.
+    std::vector<glm::vec3> dust_positions(2 * spacedust_particle_count);
     std::array<float, 2 * spacedust_particle_count> signs;
 
-    for (auto n = 0U; n < signs.size(); n += 2)
+    for (auto n = 0U; n < spacedust_particle_count; ++n)
     {
-        signs[n] = -1.0f;
-        signs[n + 1] = 1.0f;
+        glm::vec3 dust_position(
+            random(0.0f, SPACEDUST_BOX_SIZE.x),
+            random(0.0f, SPACEDUST_BOX_SIZE.y),
+            random(0.0f, SPACEDUST_BOX_SIZE.z)
+        );
+        dust_positions[2 * n] = dust_position;
+        dust_positions[2 * n + 1] = dust_position;
+
+        signs[2 * n] = -1.0f;
+        signs[2 * n + 1] = 1.0f;
     }
 
-    // Update sign parts.
+    glBufferSubData(GL_ARRAY_BUFFER, 0, dust_positions.size() * sizeof(glm::vec3), dust_positions.data());
     glBufferSubData(GL_ARRAY_BUFFER, 2 * spacedust_particle_count * sizeof(glm::vec3), signs.size() * sizeof(float), signs.data());
-    {
-        // Zero out positions.
-        const std::vector<glm::vec3> zeroed_positions(2 * spacedust_particle_count);
-        glBufferSubData(GL_ARRAY_BUFFER, 0, 2 * spacedust_particle_count * sizeof(glm::vec3), zeroed_positions.data());
-    }
     glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
 }
 
@@ -167,10 +217,12 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
 
     float camera_fov = std::clamp(base_fov + fov_modifier, 30.0f, 140.0f);
 
+    glm::vec2 viewport_pixel_size;
     {
         auto p0 = renderer.virtualToPixelPosition(rect.position);
         auto p1 = renderer.virtualToPixelPosition(rect.position + rect.size);
-        glViewport(p0.x, renderer.getPhysicalSize().y - p1.y, p1.x - p0.x, p1.y - p0.y);
+        viewport_pixel_size = glm::vec2(p1.x - p0.x, p1.y - p0.y);
+        glViewport(p0.x, renderer.getPhysicalSize().y - p1.y, viewport_pixel_size.x, viewport_pixel_size.y);
     }
 
     if (GLAD_GL_ES_VERSION_2_0) glClearDepthf(1.0f);
@@ -601,54 +653,66 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
 
     if (show_spacedust && my_spaceship)
     {
-        auto transform = my_spaceship.getComponent<sp::Transform>();
-        auto physics = my_spaceship.getComponent<sp::Physics>();
-        static std::vector<glm::vec3> space_dust(2 * spacedust_particle_count);
+        // Derive the streak length from how far and how much the camera turned
+        // over a fake fixed exposure.
+        const float now = engine->getElapsedTime();
+        const glm::mat4 dust_rotation = glm::mat4(glm::mat3(view_matrix));
+        glm::vec3 camera_delta{0.0f};
+        glm::mat4 previous_rotation = dust_rotation;
 
-        glm::vec2 dust_vector = physics
-            ? physics->getVelocity() * 0.01f
-            : glm::vec2{0.0f, 0.0f};
-        glm::vec3 dust_center = transform
-            ? glm::vec3(transform->getPosition().x, transform->getPosition().y, 0.0f)
-            : camera_position;
-
-        constexpr float MIN_DUST_DISTANCE = 100.0f;
-        constexpr float MAX_DUST_DISTANCE = 500.0f;
-        // Do we need to update the GPU buffer?
-        bool update_required = false;
-
-        for (auto n = 0U; n < space_dust.size(); n += 2)
+        if (spacedust_camera_history_valid)
         {
-            auto delta = space_dust[n] - dust_center;
-            if (glm::length2(delta) > MAX_DUST_DISTANCE * MAX_DUST_DISTANCE
-                || glm::length2(delta) < MIN_DUST_DISTANCE * MIN_DUST_DISTANCE
-            ) {
-                update_required = true;
-                space_dust[n] = dust_center + glm::vec3(
-                    random(-MAX_DUST_DISTANCE, MAX_DUST_DISTANCE),
-                    random(-MAX_DUST_DISTANCE, MAX_DUST_DISTANCE),
-                    random(-MAX_DUST_DISTANCE, MAX_DUST_DISTANCE)
-                );
-                space_dust[n + 1] = space_dust[n];
+            const glm::vec3 camera_movement = camera_position - spacedust_last_camera_position;
+            const bool camera_teleported = glm::length2(camera_movement) >= SPACEDUST_MAX_CAMERA_JUMP * SPACEDUST_MAX_CAMERA_JUMP;
+            const bool camera_snapped = viewRotationAngle(spacedust_last_rotation, dust_rotation) >= SPACEDUST_MAX_ROTATION_JUMP;
+
+            // Cap delta if the camera suddenly moved, or else we'll have weird
+            // behavior.
+            if (!camera_teleported && !camera_snapped)
+            {
+                const float delta_time = std::max(now - spacedust_last_camera_time, 1.0f / 240.0f);
+                camera_delta = camera_movement * (SPACEDUST_EXPOSURE / delta_time);
+                previous_rotation = spacedust_last_rotation;
             }
         }
 
+        spacedust_last_camera_position = camera_position;
+        spacedust_last_camera_time = now;
+        spacedust_last_rotation = dust_rotation;
+        spacedust_camera_history_valid = true;
+
+        const glm::vec3 camera_mod = wrapCameraPosition(camera_position);
+        const glm::vec3 fog_color = ShaderRegistry::getFogColor();
+
         spacedust_shader->bind();
 
-        // Upload matrices (only float 4x4 supported in es2).
-        glUniformMatrix4fv(spacedust_uniforms[static_cast<size_t>(Uniforms::Projection)], 1, GL_FALSE, glm::value_ptr(projection_matrix));
-        glUniformMatrix4fv(spacedust_uniforms[static_cast<size_t>(Uniforms::View)], 1, GL_FALSE, glm::value_ptr(view_matrix));
+        glUniformMatrix4fv(spacedust_uniforms[static_cast<size_t>(SpacedustUniforms::Projection)], 1, GL_FALSE, glm::value_ptr(projection_matrix));
+        glUniformMatrix4fv(spacedust_uniforms[static_cast<size_t>(SpacedustUniforms::Rotation)], 1, GL_FALSE, glm::value_ptr(dust_rotation));
+        glUniformMatrix4fv(spacedust_uniforms[static_cast<size_t>(SpacedustUniforms::RotationPrevious)], 1, GL_FALSE, glm::value_ptr(previous_rotation));
+        glUniform3fv(spacedust_uniforms[static_cast<size_t>(SpacedustUniforms::CameraPosition)], 1, glm::value_ptr(camera_mod));
+        glUniform3fv(spacedust_uniforms[static_cast<size_t>(SpacedustUniforms::BoxSize)], 1, glm::value_ptr(SPACEDUST_BOX_SIZE));
+        glUniform3fv(spacedust_uniforms[static_cast<size_t>(SpacedustUniforms::CameraDelta)], 1, glm::value_ptr(camera_delta));
+        glUniform2f(
+            spacedust_uniforms[static_cast<size_t>(SpacedustUniforms::PixelSize)],
+            2.0f / std::max(viewport_pixel_size.x, 1.0f),
+            2.0f / std::max(viewport_pixel_size.y, 1.0f)
+        );
+        glUniform1f(spacedust_uniforms[static_cast<size_t>(SpacedustUniforms::MinStreak)], SPACEDUST_MIN_STREAK_PIXELS);
+        glUniform1f(spacedust_uniforms[static_cast<size_t>(SpacedustUniforms::MaxStreak)], SPACEDUST_MAX_STREAK_PIXELS);
+        glUniform2f(spacedust_uniforms[static_cast<size_t>(SpacedustUniforms::NearFade)], SPACEDUST_NEAR_FADE_START, SPACEDUST_NEAR_FADE_END);
+        glUniform2f(spacedust_uniforms[static_cast<size_t>(SpacedustUniforms::FarFade)], SPACEDUST_FAR_FADE_START, SPACEDUST_FAR_FADE_END);
+        glUniform3fv(spacedust_uniforms[static_cast<size_t>(SpacedustUniforms::FogColor)], 1, glm::value_ptr(fog_color));
+        glUniform1f(spacedust_uniforms[static_cast<size_t>(SpacedustUniforms::FogDistance)], ShaderRegistry::getFogDistance());
 
-        // Ship information for flying particles.
-        glUniform2f(spacedust_shader->getUniformLocation("u_velocity"), dust_vector.x, dust_vector.y);
+        glEnable(GL_BLEND);
+        // Use additive blending for dust.
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+        glDepthMask(GL_FALSE);
 
         {
             gl::ScopedVertexAttribArray positions(spacedust_vertex_attributes[static_cast<size_t>(VertexAttributes::Position)]);
             gl::ScopedVertexAttribArray signs(spacedust_vertex_attributes[static_cast<size_t>(VertexAttributes::Sign)]);
             glBindBuffer(GL_ARRAY_BUFFER, spacedust_buffer[0]);
-
-            if (update_required)
-                glBufferSubData(GL_ARRAY_BUFFER, 0, space_dust.size() * sizeof(glm::vec3), space_dust.data());
 
             glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (GLvoid*)0);
             glVertexAttribPointer(signs.get(), 1, GL_FLOAT, GL_FALSE, 0, (GLvoid*)(2 * spacedust_particle_count * sizeof(glm::vec3)));
@@ -656,6 +720,8 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
             glDrawArrays(GL_LINES, 0, 2 * spacedust_particle_count);
             glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
         }
+
+        glDepthMask(GL_TRUE);
     }
 
     auto target_comp = my_spaceship.getComponent<Target>();
@@ -679,6 +745,9 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
             radius = physics->getSize().x;
 
         glUniform4f(billboard.get().uniform(ShaderRegistry::Uniforms::Color), 0.5f, 0.5f, 0.5f, radius * 2.5f);
+        // The reticle texture is additive, don't inherit the blend state from
+        // the previous pass.
+        glBlendFunc(GL_ONE, GL_ONE);
         {
             gl::ScopedVertexAttribArray positions(billboard.get().attribute(ShaderRegistry::Attributes::Position));
             gl::ScopedVertexAttribArray texcoords(billboard.get().attribute(ShaderRegistry::Attributes::Texcoords));
