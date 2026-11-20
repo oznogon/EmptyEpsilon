@@ -190,3 +190,5 @@ dj803:drowa/scen-54 20261116 -- applied selectively, with many additional change
 dj803:post/ee2932 XXXXXXXX -- previously addressed in radar rendering refactor
 dj803:post/ee2646 XXXXXXXX -- previously addressed in scrolling-guicontainer PRs, with incompatible API changes
 dj803:post/ee2497 XXXXXXXX -- previously addressed in GuiSelector refactors
+
+1695-shield-gminfo-tr 20261119 -- also adapt to limited GM screen
