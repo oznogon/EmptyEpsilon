@@ -1873,7 +1873,7 @@ msgstr ""
 
 #: src/screens/spectatorScreen.cpp:113
 #: src/screens/crew4/operationsScreen.cpp:161
-#: src/screens/crew6/relayScreen.cpp:344
+#: src/screens/crew6/relayScreen.cpp:351
 #: src/screens/gm/gameMasterScreen.cpp:476
 #: src/screens/gm/limitedGameMasterScreen.cpp:1141
 msgid "Clock"
@@ -1934,56 +1934,56 @@ msgid "gm_info"
 msgstr ""
 
 #: src/screens/crew4/operationsScreen.cpp:114
-#: src/screens/crew6/relayScreen.cpp:297
+#: src/screens/crew6/relayScreen.cpp:304
 #: src/screens/gm/gameMasterScreen.cpp:651
 #: src/screens/gm/limitedGameMasterScreen.cpp:1324
 msgid "Waypoint set 1"
 msgstr ""
 
 #: src/screens/crew4/operationsScreen.cpp:114
-#: src/screens/crew6/relayScreen.cpp:297
+#: src/screens/crew6/relayScreen.cpp:304
 #: src/screens/gm/gameMasterScreen.cpp:652
 #: src/screens/gm/limitedGameMasterScreen.cpp:1324
 msgid "Waypoint set 2"
 msgstr ""
 
 #: src/screens/crew4/operationsScreen.cpp:114
-#: src/screens/crew6/relayScreen.cpp:297
+#: src/screens/crew6/relayScreen.cpp:304
 #: src/screens/gm/gameMasterScreen.cpp:653
 #: src/screens/gm/limitedGameMasterScreen.cpp:1324
 msgid "Waypoint set 3"
 msgstr ""
 
 #: src/screens/crew4/operationsScreen.cpp:114
-#: src/screens/crew6/relayScreen.cpp:297
+#: src/screens/crew6/relayScreen.cpp:304
 #: src/screens/gm/gameMasterScreen.cpp:654
 #: src/screens/gm/limitedGameMasterScreen.cpp:1324
 msgid "Waypoint set 4"
 msgstr ""
 
 #: src/screens/crew4/operationsScreen.cpp:119
-#: src/screens/crew6/relayScreen.cpp:303
+#: src/screens/crew6/relayScreen.cpp:310
 msgid "Show as route"
 msgstr ""
 
 #: src/screens/crew4/operationsScreen.cpp:135
-#: src/screens/crew6/relayScreen.cpp:235
+#: src/screens/crew6/relayScreen.cpp:242
 #: src/screenComponents/openCommsButton.cpp:31
 msgid "Open comms"
 msgstr ""
 
 #: src/screens/crew4/operationsScreen.cpp:139
-#: src/screens/crew6/relayScreen.cpp:266
+#: src/screens/crew6/relayScreen.cpp:273
 msgid "Place waypoint"
 msgstr ""
 
 #: src/screens/crew4/operationsScreen.cpp:144
-#: src/screens/crew6/relayScreen.cpp:279
+#: src/screens/crew6/relayScreen.cpp:286
 msgid "Delete waypoint"
 msgstr ""
 
 #: src/screens/crew4/operationsScreen.cpp:157
-#: src/screens/crew6/relayScreen.cpp:340
+#: src/screens/crew6/relayScreen.cpp:347
 msgid "Reputation"
 msgstr ""
 
@@ -2017,189 +2017,189 @@ msgctxt "tooltips"
 msgid "Activate the ship's self-destruct sequence. Requires confirmation."
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:243
+#: src/screens/crew6/engineeringScreen.cpp:247
 msgctxt "tooltips"
 msgid ""
 "Drag to adjust how much coolant is reserved for distribution across all "
 "systems."
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:319
+#: src/screens/crew6/engineeringScreen.cpp:323
 msgctxt "tooltips"
 msgid "Select this system for detailed power and coolant adjustment."
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:322
+#: src/screens/crew6/engineeringScreen.cpp:326
 msgctxt "tooltips"
 msgid ""
 "Current damage level of this system. Lower values mean reduced performance."
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:326
+#: src/screens/crew6/engineeringScreen.cpp:330
 msgctxt "tooltips"
 msgid ""
 "Current heat level of this system. High heat reduces performance and may "
 "cause damage."
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:327
+#: src/screens/crew6/engineeringScreen.cpp:331
 msgctxt "tooltips"
 msgid "Drag to allocate coolant to this system. Coolant reduces heat buildup."
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:330
+#: src/screens/crew6/engineeringScreen.cpp:334
 msgctxt "tooltips"
 msgid "Drag to allocate power to this system. More power improves performance."
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:363
+#: src/screens/crew6/engineeringScreen.cpp:367
 msgctxt "slider"
 msgid "Power"
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:389
+#: src/screens/crew6/engineeringScreen.cpp:393
 msgctxt "tooltips"
 msgid "Set the power level for the selected system. Select a system first."
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:393
+#: src/screens/crew6/engineeringScreen.cpp:397
 msgctxt "slider"
 msgid "Coolant"
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:423
+#: src/screens/crew6/engineeringScreen.cpp:427
 msgctxt "tooltips"
 msgid "Set the coolant level for the selected system. Select a system first."
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:525
+#: src/screens/crew6/engineeringScreen.cpp:529
 msgctxt "slider"
 msgid "Power: {current_level}% / {requested}%"
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:547
+#: src/screens/crew6/engineeringScreen.cpp:551
 msgctxt "slider"
 msgid "Coolant: {current_level}% / {requested}%"
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:562
+#: src/screens/crew6/engineeringScreen.cpp:566
 msgctxt "Engineer"
 msgid "Maximal health"
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:568
+#: src/screens/crew6/engineeringScreen.cpp:572
 msgid "Energy production"
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:568
+#: src/screens/crew6/engineeringScreen.cpp:572
 #: src/screenComponents/infoDisplay.cpp:49
 msgid "{energy}/min"
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:573
+#: src/screens/crew6/engineeringScreen.cpp:577
 msgid "Firing rate"
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:582
+#: src/screens/crew6/engineeringScreen.cpp:586
 msgctxt "Engineer"
 msgid "Turret rotation rate"
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:589
+#: src/screens/crew6/engineeringScreen.cpp:593
 msgid "Force"
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:592
+#: src/screens/crew6/engineeringScreen.cpp:596
 msgctxt "missile"
 msgid "Reload rate"
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:596
+#: src/screens/crew6/engineeringScreen.cpp:600
 msgid "Turning speed"
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:602
-#: src/screens/crew6/engineeringScreen.cpp:614
+#: src/screens/crew6/engineeringScreen.cpp:606
+#: src/screens/crew6/engineeringScreen.cpp:618
 msgid "Combat recharge rate"
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:608
+#: src/screens/crew6/engineeringScreen.cpp:612
 msgid "Impulse speed"
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:619
+#: src/screens/crew6/engineeringScreen.cpp:623
 msgid "Warp drive speed"
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:627
+#: src/screens/crew6/engineeringScreen.cpp:631
 msgid "Time to jump activation"
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:627
+#: src/screens/crew6/engineeringScreen.cpp:631
 #: src/screens/extra/droneOperationsScreen.cpp:1305
 #: src/screenComponents/jumpControls.cpp:76
 msgctxt "jumpcontrol"
 msgid "{delay} sec."
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:631
+#: src/screens/crew6/engineeringScreen.cpp:635
 msgid "Jump drive recharge rate"
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:647
+#: src/screens/crew6/engineeringScreen.cpp:651
 msgctxt "shields"
 msgid "Calibration speed"
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:650
+#: src/screens/crew6/engineeringScreen.cpp:654
 msgctxt "shields"
 msgid "Charge rate"
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:655
+#: src/screens/crew6/engineeringScreen.cpp:659
 msgid "Extra damage taken"
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:657
+#: src/screens/crew6/engineeringScreen.cpp:661
 msgid "Damage negated"
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:662
+#: src/screens/crew6/engineeringScreen.cpp:666
 msgctxt "docking"
 msgid "Docking bay effectiveness"
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:671
+#: src/screens/crew6/engineeringScreen.cpp:675
 msgctxt "sensors"
 msgid "Drone control range"
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:676
+#: src/screens/crew6/engineeringScreen.cpp:680
 msgctxt "sensors"
 msgid "Short-range radar range"
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:677
+#: src/screens/crew6/engineeringScreen.cpp:681
 msgctxt "sensors"
 msgid "Long-range radar range"
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:681
+#: src/screens/crew6/engineeringScreen.cpp:685
 msgctxt "sensors"
 msgid "Probe radar range"
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:683
+#: src/screens/crew6/engineeringScreen.cpp:687
 msgctxt "sensors"
 msgid "Scan lock sensitivity"
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:686
+#: src/screens/crew6/engineeringScreen.cpp:690
 msgctxt "sensors"
 msgid "Scan lock delay"
 msgstr ""
 
-#: src/screens/crew6/engineeringScreen.cpp:686
+#: src/screens/crew6/engineeringScreen.cpp:690
 msgctxt "sensors"
 msgid "{delay} sec."
 msgstr ""
@@ -2426,114 +2426,114 @@ msgctxt "scienceTab"
 msgid "Functions"
 msgstr ""
 
-#: src/screens/crew6/relayScreen.cpp:200
+#: src/screens/crew6/relayScreen.cpp:207
 #: src/screens/extra/droneOperationsScreen.cpp:455
 #: src/screens/extra/droneOperationsScreen.cpp:545
 msgid "Callsign"
 msgstr ""
 
-#: src/screens/crew6/relayScreen.cpp:203
+#: src/screens/crew6/relayScreen.cpp:210
 msgid "Faction"
 msgstr ""
 
-#: src/screens/crew6/relayScreen.cpp:210
+#: src/screens/crew6/relayScreen.cpp:217
 msgctxt "tooltips"
 msgid "Adjust the radar zoom level to view more or less of the map."
 msgstr ""
 
-#: src/screens/crew6/relayScreen.cpp:220
+#: src/screens/crew6/relayScreen.cpp:227
 #: src/screenComponents/dockingButton.cpp:148
 #: src/screenComponents/droneDockingButton.cpp:112
 msgid "Cancel"
 msgstr ""
 
-#: src/screens/crew6/relayScreen.cpp:232
+#: src/screens/crew6/relayScreen.cpp:239
 msgctxt "tooltips"
 msgid "Cancel the current action (waypoint placement or probe launch)."
 msgstr ""
 
-#: src/screens/crew6/relayScreen.cpp:235
+#: src/screens/crew6/relayScreen.cpp:242
 #: src/screenComponents/openCommsButton.cpp:31
 msgid "Link to comms"
 msgstr ""
 
-#: src/screens/crew6/relayScreen.cpp:237
+#: src/screens/crew6/relayScreen.cpp:244
 msgctxt "tooltips"
 msgid "Open a communications channel with the selected target."
 msgstr ""
 
-#: src/screens/crew6/relayScreen.cpp:240
+#: src/screens/crew6/relayScreen.cpp:247
 msgid "Start hacking"
 msgstr ""
 
-#: src/screens/crew6/relayScreen.cpp:248
+#: src/screens/crew6/relayScreen.cpp:255
 msgctxt "tooltips"
 msgid "Start hacking the selected target's systems to disrupt or disable them."
 msgstr ""
 
-#: src/screens/crew6/relayScreen.cpp:251
+#: src/screens/crew6/relayScreen.cpp:258
 msgid "Link to science"
 msgstr ""
 
-#: src/screens/crew6/relayScreen.cpp:263
+#: src/screens/crew6/relayScreen.cpp:270
 msgctxt "tooltips"
 msgid ""
 "Link the selected probe to the science station to share its sensor data."
 msgstr ""
 
-#: src/screens/crew6/relayScreen.cpp:272 src/screens/crew6/relayScreen.cpp:703
+#: src/screens/crew6/relayScreen.cpp:279 src/screens/crew6/relayScreen.cpp:710
 msgid "Cancel waypoint"
 msgstr ""
 
-#: src/screens/crew6/relayScreen.cpp:277
+#: src/screens/crew6/relayScreen.cpp:284
 msgctxt "tooltips"
 msgid "Place a new waypoint on the map. Click the map to set its position."
 msgstr ""
 
-#: src/screens/crew6/relayScreen.cpp:287
+#: src/screens/crew6/relayScreen.cpp:294
 msgctxt "tooltips"
 msgid "Remove the currently selected waypoint from the map."
 msgstr ""
 
-#: src/screens/crew6/relayScreen.cpp:300
+#: src/screens/crew6/relayScreen.cpp:307
 msgctxt "tooltips"
 msgid "Switch between different waypoint sets for organizing multiple routes."
 msgstr ""
 
-#: src/screens/crew6/relayScreen.cpp:310
+#: src/screens/crew6/relayScreen.cpp:317
 msgctxt "tooltips"
 msgid "Show waypoints as a connected flight route or as individual points."
 msgstr ""
 
-#: src/screens/crew6/relayScreen.cpp:313
+#: src/screens/crew6/relayScreen.cpp:320
 msgid "Launch probe"
 msgstr ""
 
-#: src/screens/crew6/relayScreen.cpp:319 src/screens/crew6/relayScreen.cpp:738
+#: src/screens/crew6/relayScreen.cpp:326 src/screens/crew6/relayScreen.cpp:745
 msgid "Cancel probe"
 msgstr ""
 
-#: src/screens/crew6/relayScreen.cpp:326
+#: src/screens/crew6/relayScreen.cpp:333
 msgctxt "tooltips"
 msgid "Launch a scanning probe. Click the map to set the launch destination."
 msgstr ""
 
-#: src/screens/crew6/relayScreen.cpp:329
+#: src/screens/crew6/relayScreen.cpp:336
 msgid "Center on ship"
 msgstr ""
 
-#: src/screens/crew6/relayScreen.cpp:337
+#: src/screens/crew6/relayScreen.cpp:344
 msgctxt "tooltips"
 msgid "Toggle radar view centered on your ship or allow free panning."
 msgstr ""
 
-#: src/screens/crew6/relayScreen.cpp:352
+#: src/screens/crew6/relayScreen.cpp:359
 msgctxt "tooltips"
 msgid ""
 "Set the ship's alert level, which is displayed on all player crew screens."
 msgstr ""
 
-#: src/screens/crew6/relayScreen.cpp:502
+#: src/screens/crew6/relayScreen.cpp:509
 msgid "Launch probe ({stock})"
 msgstr ""
 
@@ -7215,6 +7215,7 @@ msgstr ""
 
 #: src/screenComponents/frequencyCurve.cpp:74
 #: src/screenComponents/frequencyCurve.cpp:81
+#, c-format
 msgid "{freq} {percent}% dmg"
 msgstr ""
 
