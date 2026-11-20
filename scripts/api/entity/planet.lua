@@ -20,6 +20,7 @@ function Planet()
             cloud_size = 5200,
         },
         physics = { type = "static", size = 5000 },
+        avoid_object = { range = 6000 },
         never_radar_blocked = {},
     }
     return e
@@ -73,6 +74,38 @@ function Entity:getPlanetRadius()
     end
     return 1000.0
 end
+--- Updates this Planet's collision and AI avoidance radii based on its size
+--- and distance from the movement plane. A planet entirely outside the
+--- movement plane has no collision or avoidance radius.
+--- Example: planet:updatePlanetCollision()
+function Entity:updatePlanetCollision()
+    local pr = self.components.planet_render
+    if not pr then
+        return self
+    end
+
+    if (pr.size * pr.size)
+        > (pr.distance_from_movement_plane * pr.distance_from_movement_plane)
+    then
+        local collision_size = math.sqrt(
+            (pr.size * pr.size)
+                - (
+                    pr.distance_from_movement_plane
+                    * pr.distance_from_movement_plane
+                )
+        ) * 1.2
+        self.components.physics = {
+            type = "static",
+            size = collision_size
+        }
+        self.components.avoid_object = { range = collision_size }
+    else
+        self.components.physics = nil
+        self.components.avoid_object = nil
+    end
+
+    return self
+end
 --- Sets this Planet's radius, which also sets:
 --- - its cloud radius to 1.05x this value
 --- - its atmosphere radius to 1.2x this value
@@ -85,23 +118,7 @@ function Entity:setPlanetRadius(size)
         pr.size = size
         pr.cloud_size = size * 1.05
         pr.atmosphere_size = size * 1.2
-        if
-            (pr.size * pr.size)
-            > (
-                pr.distance_from_movement_plane * pr.distance_from_movement_plane
-            )
-        then
-            local collision_size = math.sqrt(
-                (pr.size * pr.size)
-                    - (
-                        pr.distance_from_movement_plane
-                        * pr.distance_from_movement_plane
-                    )
-            ) * 1.1
-            self.components.physics = { type = "static", size = collision_size }
-        else
-            self.components.physics = nil
-        end
+        self:updatePlanetCollision()
     end
     return self
 end
@@ -133,23 +150,7 @@ function Entity:setDistanceFromMovementPlane(z)
     local pr = self.components.planet_render
     if pr then
         pr.distance_from_movement_plane = z
-        if
-            (pr.size * pr.size)
-            > (
-                pr.distance_from_movement_plane * pr.distance_from_movement_plane
-            )
-        then
-            local collision_size = math.sqrt(
-                (pr.size * pr.size)
-                    - (
-                        pr.distance_from_movement_plane
-                        * pr.distance_from_movement_plane
-                    )
-            ) * 1.1
-            self.components.physics = { type = "static", size = collision_size }
-        else
-            self.components.physics = nil
-        end
+        self:updatePlanetCollision()
     end
     return self
 end
