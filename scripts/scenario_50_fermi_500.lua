@@ -4527,17 +4527,23 @@ function handleUndockedState()
                 out = string.format(
                     _("station-comms", "%s\nRestock scan probes: %s"),
                     out,
-                    comms_target:getRestocksScanProbes()
+                    (
+                        comms_target:getRestocksScanProbes() and _("station-comms", "Available") _("station-comms", "Unavailable")
+                    )
                 )
                 out = string.format(
                     _("station-comms", "%s\nRecharge energy: %s"),
                     out,
-                    comms_target:getSharesEnergyWithDocked()
+                    (
+                        comms_target:getSharesEnergyWithDocked() and _("station-comms", "Available") _("station-comms", "Unavailable")
+                    )
                 )
                 out = string.format(
                     _("station-comms", "%s\nRepair hull: %s"),
                     out,
-                    comms_target:getRepairDocked()
+                    (
+                        comms_target:getRepairDocked() and _("station-comms", "Available") _("station-comms", "Unavailable")
+                    )
                 )
                 setCommsMessage(out)
                 addCommsReply(_("Back"), commsStation)
