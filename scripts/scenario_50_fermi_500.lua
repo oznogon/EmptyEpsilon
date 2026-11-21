@@ -2829,6 +2829,7 @@ function commsStation()
             neutral = 0.5,
         },
     })
+    comms_data = comms_target.comms_data -- global comms_data cache for getWeaponCost() and handleWeaponRestock()
     if comms_source:isEnemy(comms_target) then
         return false
     end
