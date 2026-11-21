@@ -6121,7 +6121,7 @@ function update(delta)
         primaryOrders = string.format(
             _(
                 "raceOrders-comms",
-                "Start race on time at waypoint 1\nRace Length: %f units"
+                "Start race on time at waypoint 1\nRace length: %.1f units"
             ),
             raceLength
         )
