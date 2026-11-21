@@ -2869,23 +2869,26 @@ function handleDockedState()
             + comms_source:getWeaponStorageMax(missile_type)
     end
     if missilePresence > 0 then
-        addCommsReply(_("ammo-comms", "I need ordnance restocked"), function()
-            setCommsMessage(_("ammo-comms", "What type of ordnance?"))
-            for i, missile_type in ipairs(missile_types) do
-                if comms_source:getWeaponStorageMax(missile_type) > 0 then
-                    addCommsReply(
-                        string.format(
-                            _("ammo-comms", "%s (%d rep each)"),
-                            missile_type,
-                            getWeaponCost(missile_type)
-                        ),
-                        function()
-                            handleWeaponRestock(missile_type)
-                        end
-                    )
+        addCommsReply(
+            _("ammo-comms", "I need ordnance restocked"), function()
+                setCommsMessage(_("ammo-comms", "What type of ordnance?"))
+                for i, missile_type in ipairs(missile_types) do
+                    if comms_source:getWeaponStorageMax(missile_type) > 0 then
+                        addCommsReply(
+                            string.format(
+                                _("ammo-comms", "%s (%d rep each)"),
+                                missile_type,
+                                getWeaponCost(missile_type)
+                            ),
+                            function()
+                                handleWeaponRestock(missile_type)
+                            end
+                        )
+                    end
                 end
+                addCommsReplay(_("Back"), commsStation)
             end
-        end)
+        )
     end
     if comms_source:isFriendly(comms_target) then
         addCommsReply(
@@ -2897,9 +2900,9 @@ function handleDockedState()
                         .. string.format(
                             _(
                                 "orders-comms",
-                                "\n%i Seconds remain until start of race"
+                                "\n%i seconds remain until start of race"
                             ),
-                            raceStartDelay
+                            math.floor(raceStartDelay)
                         )
                 else
                     if comms_source.goal ~= nil then
@@ -4550,7 +4553,7 @@ function handleUndockedState()
                         .. string.format(
                             _(
                                 "orders-comms",
-                                "\n%i Seconds remain until start of race"
+                                "\n%i seconds remain until start of race"
                             ),
                             math.floor(raceStartDelay)
                         )
