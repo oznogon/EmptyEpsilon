@@ -2367,6 +2367,9 @@ function GMSpawnsEnemies()
     if gmPlayer == nil then
         gmPlayer = closestPlayerTo(targetEnemyStation)
     end
+    if gmPlayer == nil then
+        return
+    end
     px, py = gmPlayer:getPosition()
     sx, sy = vectorFromAngle(random(0, 360), random(20000, 30000))
     ntf = spawnEnemies(
@@ -5459,6 +5462,8 @@ function handleUndockedState()
         for i, p in ipairs(getActivePlayerShips()) do
             if
                 p == comms_target
+                and p:getPosition() ~= nil
+                and comms_source:getPosition() ~= nil
                 and distance(p, comms_source) < 1500
                 and p.cargo > 0
             then
@@ -8178,6 +8183,9 @@ end
 function threadedPursuit(delta)
     plot1name = "threadedPursuit"
     local p = closestPlayerTo(targetEnemyStation)
+    if p == nil then
+        return
+    end
     local scx, scy = p:getPosition()
     local cpx, cpy = vectorFromAngle(random(0, 360), random(20000, 30000))
     if ef2 == nil then
@@ -8247,8 +8255,10 @@ function pressureWaves(delta)
                     )
                     if random(1, 5) <= 3 then
                         local p = closestPlayerTo(enemyStationList[i])
-                        for idx, enemy in ipairs(ntf) do
-                            enemy:orderAttack(p)
+                        if p ~= nil then
+                            for idx, enemy in ipairs(ntf) do
+                                enemy:orderAttack(p)
+                            end
                         end
                     else
                         for idx, enemy in ipairs(ntf) do
@@ -8275,17 +8285,19 @@ function pressureWaves(delta)
         end
         if random(1, 5) <= 3 then
             local p = closestPlayerTo(targetEnemyStation)
-            local esx, esy = targetEnemyStation:getPosition()
-            local px, py = p:getPosition()
-            ntf = spawnEnemies(
-                (esx + px) / 2,
-                (esy + py) / 2,
-                dangerValue,
-                targetEnemyStation:getFaction()
-            )
-            if random(1, 5) <= 2 then
-                for idx, enemy in ipairs(ntf) do
-                    enemy:orderAttack(p)
+            if p ~= nil then
+                local esx, esy = targetEnemyStation:getPosition()
+                local px, py = p:getPosition()
+                ntf = spawnEnemies(
+                    (esx + px) / 2,
+                    (esy + py) / 2,
+                    dangerValue,
+                    targetEnemyStation:getFaction()
+                )
+                if random(1, 5) <= 2 then
+                    for idx, enemy in ipairs(ntf) do
+                        enemy:orderAttack(p)
+                    end
                 end
             end
         end
@@ -8391,16 +8403,20 @@ function betweenPlot2fleet()
         )
     end
     local p = closestPlayerTo(targetEnemyStation)
-    p:addReputationPoints(rep_bump)
-    mission_milestones = mission_milestones + 1
-    local scx, scy = p:getPosition()
-    local cpx, cpy = vectorFromAngle(random(0, 360), random(30000, 35000))
-    ef2 = spawnEnemies(scx + cpx, scy + cpy, dangerValue)
-    for idx, enemy in ipairs(ef2) do
-        if fleet_id_diagnostic then
-            enemy:setCallSign(enemy:getCallSign() .. "ef2")
+    if p ~= nil and p:isValid() then
+        p:addReputationPoints(rep_bump)
+        mission_milestones = mission_milestones + 1
+        local scx, scy = p:getPosition()
+        local cpx, cpy = vectorFromAngle(random(0, 360), random(30000, 35000))
+        ef2 = spawnEnemies(scx + cpx, scy + cpy, dangerValue)
+        for idx, enemy in ipairs(ef2) do
+            if fleet_id_diagnostic then
+                enemy:setCallSign(enemy:getCallSign() .. "ef2")
+            end
+            enemy:orderAttack(p)
         end
-        enemy:orderAttack(p)
+    else
+        ef2 = {}
     end
     plot2reminder = nil
     plot2 = destroyef2
@@ -8932,7 +8948,10 @@ function getSickScientist(delta)
         end
         if scientistStation:isValid() then
             for i, p in ipairs(getActivePlayerShips()) do
-                if distance(p, scientistStation) < 1500 then
+                if
+                    p:getPosition() ~= nil
+                    and distance(p, scientistStation) < 1500
+                then
                     playerWithScientist = p
                     pickupMsg = string.format(
                         _(
@@ -9048,7 +9067,10 @@ function deliverSickScientist(delta)
         end
         if doctorStation:isValid() then
             if playerWithScientist ~= nil and playerWithScientist:isValid() then
-                if distance(playerWithScientist, doctorStation) < 1500 then
+                if
+                    playerWithScientist:getPosition() ~= nil
+                    and distance(playerWithScientist, doctorStation) < 1500
+                then
                     playerWithScientist:addToShipLog(
                         string.format(
                             _(
@@ -9165,7 +9187,10 @@ function recoverHullArtifact(delta)
             or tempPlayerType == "Kiriya"
             or tempPlayerType == "Saipan"
         then
-            if distance(p, hullArtifact) < 1500 then
+            if
+                p:getPosition() ~= nil
+                and distance(p, hullArtifact) < 1500
+            then
                 playerWithAutoHullRepair = p
                 installAutoHullRepair()
                 hullArtifact:destroy()
@@ -9174,7 +9199,10 @@ function recoverHullArtifact(delta)
                 break
             end
         else
-            if distance(p, hullArtifact) < 500 then
+            if
+                p:getPosition() ~= nil
+                and distance(p, hullArtifact) < 500
+            then
                 playerWithAutoHullRepair = p
                 installAutoHullRepair()
                 hullArtifact:destroy()
@@ -9327,6 +9355,8 @@ function betweenPlot3fleet()
             end
             enemy:orderAttack(p)
         end
+    else
+        ef3 = {}
     end
     plot3reminder = nil
     plot3 = destroyef3
@@ -9679,6 +9709,9 @@ function tractorDisabledShip(delta)
                 tractorStation = tableSelectRandom(candidate_pool)
             end
             local p = farthestPlayerFrom(homeStation)
+            if p == nil then
+                return
+            end
             local ppx, ppy = p:getPosition()
             local tpx, tpy =
                 vectorFromAngle(random(0, 360), random(40000, 45000))
@@ -9813,6 +9846,8 @@ function awaitingTractor(delta)
                 :setSystemHealth("jumpdrive", -0.5)
             if
                 tractorInstalled
+                and playerCarrier:getPosition() ~= nil
+                and tractorShip:getPosition() ~= nil
                 and distance(playerCarrier, tractorShip) < 5000
             then
                 enableTractorOn()
@@ -9913,9 +9948,14 @@ function awaitingTractor(delta)
                     else
                         if repairStation:isValid() then
                             if tractorShip:isValid() then
-                                if
-                                    distance(repairStation, tractorShip)
+                                local tractorShipPosition =
+                                    tractorShip:getPosition()
+                                local tractorShipWithinRange =
+                                    tractorShipPosition ~= nil
+                                    and distance(repairStation, tractorShip)
                                         < 1500
+                                if
+                                    tractorShipWithinRange
                                     or playerCarrier:getDockedWith()
                                         == repairStation
                                 then
@@ -9969,6 +10009,7 @@ function awaitingTractor(delta)
                                 else
                                     if
                                         bringCloser == nil
+                                        and tractorShip:getPosition() ~= nil
                                         and distance(
                                                 tractorShip,
                                                 repairStation

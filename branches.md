@@ -194,3 +194,4 @@ dj803:post/ee2497 XXXXXXXX -- previously addressed in GuiSelector refactors
 1695-shield-gminfo-tr 20261119 -- also adapt to limited GM screen
 
 dj803:fix/2294-race-text 20261120 -- adapt to reformatted and refactored Fermi 500, with different strings
+dj803:pr/carrier-fighters-hangar -- add additional Transform guards for player fighters
