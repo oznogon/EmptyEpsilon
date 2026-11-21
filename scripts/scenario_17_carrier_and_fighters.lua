@@ -6861,8 +6861,10 @@ function freighterComms()
                 end
             else
                 -- Offer to sell goods
-                if comms_target.goods ~= nil then
-                    for good, good_data in pairs(comms_target.goods) do
+                if comms_target.comms_data.goods ~= nil then
+                    for good, good_data in
+                        pairs(comms_target.comms_data.goods)
+                    do
                         if good_data.quantity > 0 then
                             addCommsReply(
                                 string.format(
@@ -6933,7 +6935,9 @@ function freighterComms()
             then
                 goodsQuantity = 0
                 if comms_target.comms_data.goods ~= nil then
-                    for good, good_data in pairs(comms_target.goods) do
+                    for good, good_data in
+                        pairs(comms_target.comms_data.goods)
+                    do
                         if good_data.quantity > 0 then
                             goodsQuantity = goodsQuantity + good_data.quantity
                         end
@@ -7540,21 +7544,27 @@ function cargoTransfer()
             carrier2bladeTransfer()
         end
     else
-        if carrier2bladeTransferButton ~= nil then
-            playerCarrier:removeCustom(carrier2bladeTransferButton)
-            playerCarrier:removeCustom(carrier2bladeTransferButtonOps)
-            carrier2bladeTransferButton = nil
-        end
-        if carrier2bladeTransferButtonList ~= nil then
-            for i, good in ipairs(carrier2bladeTransferButtonList) do
-                playerCarrier:removeCustom(string.format("blade_good%s", good))
-                playerCarrier:removeCustom(
-                    string.format("blade_good%sops", good)
-                )
+        if playerCarrier:isValid() then
+            if carrier2bladeTransferButton ~= nil then
+                playerCarrier:removeCustom(carrier2bladeTransferButton)
+                playerCarrier:removeCustom(carrier2bladeTransferButtonOps)
             end
+            if carrier2bladeTransferButtonList ~= nil then
+                for i, good in ipairs(carrier2bladeTransferButtonList) do
+                    playerCarrier:removeCustom(
+                        string.format("blade_good%s", good)
+                    )
+                    playerCarrier:removeCustom(
+                        string.format("blade_good%sops", good)
+                    )
+                end
+            end
+            playerCarrier:removeCustom("exitBladeCargoTransfer")
+            playerCarrier:removeCustom("exitBladeCargoTransferOps")
         end
-        playerCarrier:removeCustom("exitBladeCargoTransfer")
-        playerCarrier:removeCustom("exitBladeCargoTransferOps")
+        carrier2bladeTransferButton = nil
+        carrier2bladeTransferButtonOps = nil
+        carrier2bladeTransferButtonList = nil
     end
     if
         playerPoint:isValid()
@@ -7588,21 +7598,27 @@ function cargoTransfer()
             carrier2pointTransfer()
         end
     else
-        if carrier2pointTransferButton ~= nil then
-            playerCarrier:removeCustom(carrier2pointTransferButton)
-            playerCarrier:removeCustom(carrier2pointTransferButtonOps)
-            carrier2pointTransferButton = nil
-        end
-        if carrier2pointTransferButtonList ~= nil then
-            for i, good in ipairs(carrier2pointTransferButtonList) do
-                playerCarrier:removeCustom(string.format("point_good%s", good))
-                playerCarrier:removeCustom(
-                    string.format("point_good%sops", good)
-                )
+        if playerCarrier:isValid() then
+            if carrier2pointTransferButton ~= nil then
+                playerCarrier:removeCustom(carrier2pointTransferButton)
+                playerCarrier:removeCustom(carrier2pointTransferButtonOps)
             end
+            if carrier2pointTransferButtonList ~= nil then
+                for i, good in ipairs(carrier2pointTransferButtonList) do
+                    playerCarrier:removeCustom(
+                        string.format("point_good%s", good)
+                    )
+                    playerCarrier:removeCustom(
+                        string.format("point_good%sops", good)
+                    )
+                end
+            end
+            playerCarrier:removeCustom("exitPointCargoTransfer")
+            playerCarrier:removeCustom("exitPointCargoTransferOps")
         end
-        playerCarrier:removeCustom("exitPointCargoTransfer")
-        playerCarrier:removeCustom("exitPointCargoTransferOps")
+        carrier2pointTransferButton = nil
+        carrier2pointTransferButtonOps = nil
+        carrier2pointTransferButtonList = nil
     end
 end
 function carrier2bladeTransfer()
@@ -8308,7 +8324,9 @@ function destroyef2(delta)
     end
     if #ef2 < 1 then
         mission_milestones = mission_milestones + 1
-        getPlayerShip(-1):addReputationPoints(rep_bump)
+        if getPlayerShip(-1):isValid() then
+            getPlayerShip(-1):addReputationPoints(rep_bump)
+        end
         plot2 = chooseNextPlot2line
     end
     if mission_diagnostic then
@@ -8471,7 +8489,9 @@ function upgradeShipSpin(delta)
         )
         plot2name = "spinScientist"
         plot2 = spinScientist
-        getPlayerShip(-1):addReputationPoints(rep_bump)
+        if getPlayerShip(-1):isValid() then
+            getPlayerShip(-1):addReputationPoints(rep_bump)
+        end
         spinUpgradeAvailable = false
         if mission_diagnostic then
             print(
@@ -8521,7 +8541,9 @@ function spinScientist(delta)
             or not spinScientistStation:isValid()
         then
             betweenPlot2fleet()
-            getPlayerShip(-1):addReputationPoints(rep_bump)
+            if getPlayerShip(-1):isValid() then
+                getPlayerShip(-1):addReputationPoints(rep_bump)
+            end
         end
     else
         if not spinScientistStation:isValid() then
@@ -8653,7 +8675,9 @@ function locateTargetEnemyBase(delta)
         )
         plot2name = "friendlyClue"
         plot2 = friendlyClue
-        getPlayerShip(-1):addReputationPoints(rep_bump)
+        if getPlayerShip(-1):isValid() then
+            getPlayerShip(-1):addReputationPoints(rep_bump)
+        end
         if mission_diagnostic then
             print("locate target enemy base - plot 2 delay timer expired")
         end
@@ -8976,7 +9000,9 @@ function getSickScientist(delta)
                     })
                     plot2name = "deliverSickScientist"
                     plot2 = deliverSickScientist
-                    getPlayerShip(-1):addReputationPoints(rep_bump)
+                    if getPlayerShip(-1):isValid() then
+                        getPlayerShip(-1):addReputationPoints(rep_bump)
+                    end
                     mission_milestones = mission_milestones + 1
                     if mission_diagnostic then
                         print("player ship close enough to get doctor")
@@ -9037,7 +9063,9 @@ function deliverSickScientist(delta)
                     plot2reminder = nil
                     scientistRecoveryTimer = getScenarioTime() + 90
                     plot2 = keyToArtifact
-                    getPlayerShip(-1):addReputationPoints(rep_bump)
+                    if getPlayerShip(-1):isValid() then
+                        getPlayerShip(-1):addReputationPoints(rep_bump)
+                    end
                     mission_milestones = mission_milestones + 1
                     table.insert(command_log, {
                         name = "delivered scientist",
@@ -9260,7 +9288,9 @@ function destroyef3(delta)
     end
     if #ef3 < 1 then
         mission_milestones = mission_milestones + 1
-        getPlayerShip(-1):addReputationPoints(rep_bump)
+        if getPlayerShip(-1):isValid() then
+            getPlayerShip(-1):addReputationPoints(rep_bump)
+        end
         plot3 = chooseNextPlot3line
     end
 end
@@ -9557,7 +9587,9 @@ function beamPhysicist(delta)
             end
         end
         if beamPlayers == beam_upgrade_players then
-            getPlayerShip(-1):addReputationPoints(rep_bump)
+            if getPlayerShip(-1):isValid() then
+                getPlayerShip(-1):addReputationPoints(rep_bump)
+            end
             betweenPlot3fleet()
         end
     else
@@ -9906,9 +9938,11 @@ function awaitingTractor(delta)
                                     plot3name = "awaitRepairs"
                                     plot3reminder = nil
                                     plot3 = awaitRepairs
-                                    getPlayerShip(-1):addReputationPoints(
-                                        rep_bump
-                                    )
+                                    if getPlayerShip(-1):isValid() then
+                                        getPlayerShip(-1):addReputationPoints(
+                                            rep_bump
+                                        )
+                                    end
                                     table.insert(command_log, {
                                         name = "awaiting repairs",
                                         long = string.format(
@@ -10163,6 +10197,9 @@ function destroyef4(delta)
     end
 end
 function doNotPush(delta)
+    if not playerCarrier:isValid() then
+        return
+    end
     alienHack = false
     doNotPushButton = "doNotPushButton"
     playerCarrier:addCustomButton(
