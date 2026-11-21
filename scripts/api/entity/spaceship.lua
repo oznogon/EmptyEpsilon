@@ -963,6 +963,17 @@ function Entity:getWeaponTubeLoadType(index)
     end
     return missile_type
 end
+--- Returns the state of the WeaponTube with the given index on this ship, and the weapon type involved.
+--- The state is one of "empty", "loading", "loaded", "unloading", or "firing".
+--- The second return value is the weapon type being loaded, held, unloaded, or fired, or "none" if the tube is empty.
+--- Returns no value if the index is out of range or the ship has no tubes.
+--- Example: local state, weapon_type = ship:getWeaponTubeStatus(0)
+function Entity:getWeaponTubeStatus(index)
+    local m = __findNthMountOfType(self, 1, index)
+    if m then
+        return m.state, m.type_loaded
+    end
+end
 --- Sets which weapon types the WeaponTube with the given index on this ship can load.
 --- Note the spelling of "missle".
 --- Example: ship:weaponTubeAllowMissle(0,"Homing") -- allows Homing missiles to be loaded in WeaponTube 0
