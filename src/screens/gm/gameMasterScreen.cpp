@@ -102,6 +102,18 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
                 float bar_height = is_short_range ? 5.0f : 2.0f;
                 float bar_offset = bar_width * 0.5f;
 
+                // Draw a dot for entities without a radar trace, and fade it
+                // out as the radar zooms out past 1x.
+                float zoom = LONG_RANGE_DISTANCE / main_radar->getDistance();
+                uint8_t dot_alpha = static_cast<uint8_t>(std::max(128.0f, std::min(255.0f, zoom * 255.0f)));
+
+                for (auto [entity, transform, trace] : sp::ecs::Query<sp::Transform, sp::ecs::optional<RadarTrace>>())
+                {
+                    if (trace) continue;
+
+                    renderer.fillCircle(main_radar->worldToScreen(transform.getPosition()), 2.0f, glm::u8vec4(128, 128, 128, dot_alpha));
+                }
+
                 // Draw hull health bars
                 if (show_health_bars)
                 {

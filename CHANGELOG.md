@@ -19,6 +19,7 @@
   - `transport_mission_restricted` flag on a station prevents it from generating transport missions
   - Transport mission offers warn when the destination station's faction is an enemy
   - Goods can now be traded with stations via `tradeGoodsWithStation()`, fixing a reference from `goodsCommerce()` to a function that did not exist
+- GM screens now display a 2-pixel gray dot for entities without a radar trace
 
 ### Changed
 
