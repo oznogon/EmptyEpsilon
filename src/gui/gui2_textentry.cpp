@@ -7,6 +7,8 @@ GuiTextEntry::GuiTextEntry(GuiContainer* owner, string id, string text)
 {
     intercepts_pointer = true;
     blink_timer.repeat(blink_rate);
+
+    // Define textentry theme styles.
     front_style = theme->getStyle("textentry.front");
     back_style = theme->getStyle("textentry.back");
 }
@@ -16,7 +18,8 @@ GuiTextEntry::~GuiTextEntry()
     if (focus) SDL_StopTextInput(SDL_GetKeyboardFocus());
 }
 
-float GuiTextEntry::getLineSpacing() const {
+float GuiTextEntry::getLineSpacing() const
+{
     const auto& front = front_style->get(getState());
     return front.font->getLineSpacing(32) * text_size / 32.0f;
 }
@@ -35,13 +38,19 @@ void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
             back.color
         );
     }
+
     if (blink_timer.isExpired()) typing_indicator = !typing_indicator;
 
     std::string shown_text = text;
     if (hide_password) shown_text = std::string(text.size(), '*');
     if (shown_text.empty()) shown_text = " ";
 
-    sp::Rect text_rect(rect.position.x + 16, rect.position.y, rect.size.x - 32, rect.size.y);
+    sp::Rect text_rect(
+        rect.position.x + 16.0f,
+        rect.position.y,
+        rect.size.x - 32.0f,
+        rect.size.y
+    );
 
     auto flags = sp::Font::FlagClip;
     if (wrap) flags |= sp::Font::FlagLineWrap;
@@ -86,7 +95,7 @@ void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
 
         // The text goes off the top of the box but doesn't reach the bottom.
         // Scroll until it either stops going off the top or reaches the bottom.
-        if (space_at_bottom > 0 && clipped_from_top > 0)
+        if (space_at_bottom > 0.0f && clipped_from_top > 0.0f)
             render_offset.y += std::min(space_at_bottom, clipped_from_top);
     }
 
@@ -140,6 +149,7 @@ void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
                 ? -1.0f
                 : 0.0f;
         }
+
         if (focus && d.string_offset == selection_end && typing_indicator)
         {
             float start_y = d.position.y - text_size;
@@ -183,7 +193,10 @@ void GuiTextEntry::onTextInput(const string& text)
         blink_timer.repeat(blink_rate);
     }
 
-    this->text = this->text.substr(0, std::min(selection_start, selection_end)) + text + this->text.substr(std::max(selection_start, selection_end));
+    this->text = this->text.substr(
+        0,
+        std::min(selection_start, selection_end)) + text + this->text.substr(std::max(selection_start, selection_end)
+    );
     selection_end = selection_start = static_cast<int>(std::min(selection_start, selection_end) + text.length());
     runChangeCallback();
 }
@@ -346,14 +359,12 @@ void GuiTextEntry::onTextInput(sp::TextInputEvent e)
             int extra_length = static_cast<int>(data.length()) - (std::max(selection_start, selection_end) - start_of_line) - 4;
             text = text.substr(0, start_of_line) + data + text.substr(std::max(selection_start, selection_end));
 
-            if (start_of_line != selection_start)
-                selection_start += 4;
-            if (start_of_line != selection_end)
-                selection_end += 4;
-            if (selection_start > selection_end)
-                selection_start += extra_length;
-            else
-                selection_end += extra_length;
+            if (start_of_line != selection_start) selection_start += 4;
+            if (start_of_line != selection_end) selection_end += 4;
+
+            if (selection_start > selection_end) selection_start += extra_length;
+            else selection_end += extra_length;
+
             runChangeCallback();
         }
         break;
@@ -442,7 +453,7 @@ bool GuiTextEntry::setAttribute(const string& key, const string& value)
         readonly = value.toBool();
         return true;
     }
-    else  return GuiElement::setAttribute(key, value);
+    else return GuiElement::setAttribute(key, value);
 }
 
 string GuiTextEntry::getText() const
