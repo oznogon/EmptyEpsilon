@@ -5431,7 +5431,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     addPageToGroup(combat_group);
 
     ADD_PAGE(tr("tweak-tab", "Scan state"), ScanState);
-    new_page->description = tr("tweak-scan-state", "Configures scanning behavior for this entity. Sets whether the first scan goes directly to a full scan, and the complexity and depth of the scanning minigame.\n\nCallback members on_scan_initiated, on_scan_completed, and on_scan_cancelled can't be tweaked via this dialog.");
+    new_page->description = tr("tweak-scan-state", "Configures scanning behavior for this entity. Sets whether the first scan goes directly to a full scan by default, and the complexity and depth of the scanning minigame.\n\nCallback members on_scan_initiated, on_scan_completed, and on_scan_cancelled can't be tweaked via this dialog.");
     ADD_BOOL_TWEAK(tr("tweak-text", "Use both simple and full scan stages"), ScanState, allow_simple_scan);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Complexity (sliders):"), ScanState, complexity);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Depth (wins required):"), ScanState, depth);

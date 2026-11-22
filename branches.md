@@ -196,3 +196,5 @@ dj803:post/ee2497 XXXXXXXX -- previously addressed in GuiSelector refactors
 dj803:fix/2294-race-text 20261120 -- adapt to reformatted and refactored Fermi 500, with different strings
 dj803:pr/carrier-fighters-hangar 20261120 -- add additional Transform guards for player fighters
 dj803:fix/1975-tube-status 20261120 -- adapt to fork's mount-based weapons, now just a wrapper of mount.state
+
+aBlueShadow:aBlueShadow-patch-9 XXXXXXXX -- previously addressed in GM tweaks refactor
