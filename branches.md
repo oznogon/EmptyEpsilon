@@ -198,3 +198,5 @@ dj803:pr/carrier-fighters-hangar 20261120 -- add additional Transform guards for
 dj803:fix/1975-tube-status 20261120 -- adapt to fork's mount-based weapons, now just a wrapper of mount.state
 
 aBlueShadow:aBlueShadow-patch-9 XXXXXXXX -- previously addressed in GM tweaks refactor
+
+GinjaNinja32:selection-improvements 20261122 -- abc2706 and 97778cc only; adapt to refactored GM screen's cycling behavior and new limited GM screen
