@@ -5,7 +5,6 @@
 #include "Updatable.h"
 #include "timer.h"
 
-
 class ConsoleHistory
 {
 public:
@@ -21,13 +20,16 @@ private:
 
 class GuiTextEntry;
 class GuiScrollContainer;
+
 class LuaConsole : public GuiCanvas, public Updatable
 {
 public:
     LuaConsole();
 
-    template<typename T> static void checkResult(const sp::Result<T>& r) {
-        if (r.isErr()) {
+    template<typename T> static void checkResult(const sp::Result<T>& r)
+    {
+        if (r.isErr())
+        {
             LOG(Error, "[lua] ", r.error());
             addLog(r.error());
         }
