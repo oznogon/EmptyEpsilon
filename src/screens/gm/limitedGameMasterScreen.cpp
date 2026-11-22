@@ -1949,11 +1949,11 @@ void LimitedGameMasterScreen::onMouseUp(glm::vec2 position)
     case ClickAndDragState::BoxSelect:
         {
             std::vector<sp::ecs::Entity> entities;
-            auto findTargets = [&](std::function<void(sp::ecs::Entity, sp::Transform&)> found)
+            auto findTargets = [&](float add_radius, std::function<void(sp::ecs::Entity, sp::Transform&)> found)
             {
                 for (auto [entity, transform, physics] : sp::ecs::Query<sp::Transform, sp::ecs::optional<sp::Physics>>())
                 {
-                    auto size = physics ? std::max(physics->getSize().x, physics->getSize().y) : 0.0f;
+                    auto size = (physics ? std::max(physics->getSize().x, physics->getSize().y) : 0.0f) + add_radius;
                     if (transform.getPosition().x + size < std::min(drag_start_position.x, position.x)) continue;
                     if (transform.getPosition().x - size > std::max(drag_start_position.x, position.x)) continue;
                     if (transform.getPosition().y + size < std::min(drag_start_position.y, position.y)) continue;
@@ -1975,25 +1975,34 @@ void LimitedGameMasterScreen::onMouseUp(glm::vec2 position)
             };
 
             if (click_and_drag_state == ClickAndDragState::BoxSelect)
-                findTargets([&](auto entity, auto) { entities.push_back(entity); });
+                findTargets(0.0f, [&](auto entity, auto) { entities.push_back(entity); });
             else
             {
                 sp::ecs::Entity closest_entity;
                 float closest_dist2 = std::numeric_limits<float>::max();
 
-                findTargets([&](sp::ecs::Entity entity, sp::Transform& transform)
-                    {
-                        const float dist2 = glm::length2(transform.getPosition() - position);
-
-                        if (dist2 < closest_dist2)
+                auto findClosest = [&](float add_radius)
+                {
+                    findTargets(add_radius, [&](sp::ecs::Entity entity, sp::Transform& transform)
                         {
-                            closest_dist2 = dist2;
-                            closest_entity = entity;
-                        }
-                    }
-                );
+                            const float dist2 = glm::length2(transform.getPosition() - position);
 
-                if (closest_dist2 != std::numeric_limits<float>::max())
+                            if (dist2 < closest_dist2)
+                            {
+                                closest_dist2 = dist2;
+                                closest_entity = entity;
+                            }
+                        }
+                    );
+                };
+
+                // Prefer objects under the cursor. If the click missed them,
+                // retry with a small screen-space click tolerance.
+                findClosest(0.0f);
+                if (!closest_entity)
+                    findClosest(10.0f / main_radar->getScale());
+
+                if (closest_entity)
                     entities.push_back(closest_entity);
             }
 

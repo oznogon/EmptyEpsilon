@@ -29,6 +29,7 @@
 - Planet entity API documentation includes an `onCollision` callback example
 - Translation data updated for main, comms scenario utility, missile weapon data, and scenarios; locale files for development test scenarios removed
 - GM screen single-click selection reverted to select the closest center instead of the closest by collision shape
+- GM screen single-click selection falls back to a 10-pixel click tolerance when no entity is under the cursor, so small entities can be selected while the radar is zoomed out
 
 ### Fixed
 

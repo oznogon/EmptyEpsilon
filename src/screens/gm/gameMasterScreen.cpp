@@ -1366,13 +1366,13 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
         {
             std::vector<sp::ecs::Entity> entities;
 
-            auto findTargets = [&](std::function<void(sp::ecs::Entity, sp::Transform&)> found)
+            auto findTargets = [&](float add_radius, std::function<void(sp::ecs::Entity, sp::Transform&)> found)
             {
                 for (auto [entity, transform, physics] : sp::ecs::Query<sp::Transform, sp::ecs::optional<sp::Physics>>())
                 {
-                    auto size = physics
+                    auto size = (physics
                         ? std::max(physics->getSize().x, physics->getSize().y)
-                        : 0.0f;
+                        : 0.0f) + add_radius;
 
                     if (transform.getPosition().x + size < std::min(drag_start_position.x, position.x)) continue;
                     if (transform.getPosition().x - size > std::max(drag_start_position.x, position.x)) continue;
@@ -1401,7 +1401,7 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
             // Select entities in the click-drag bounding box.
             if (click_and_drag_state == ClickAndDragState::BoxSelect)
             {
-                findTargets([&](auto entity, auto) { entities.push_back(entity); });
+                findTargets(0.0f, [&](auto entity, auto) { entities.push_back(entity); });
                 // If mod is Shift, add selection box entities to current selection.
                 // Otherwise, select only the entities in the selection box.
                 if (shift_down) for (auto e : entities) targets.add(e);
@@ -1417,11 +1417,20 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
             {
                 std::vector<std::pair<sp::ecs::Entity, float>> scored;
 
-                findTargets([&](sp::ecs::Entity entity, sp::Transform& transform)
-                    {
-                        scored.emplace_back(entity, glm::length2(transform.getPosition() - position));
-                    }
-                );
+                auto scoreTargets = [&](float add_radius)
+                {
+                    findTargets(add_radius, [&](sp::ecs::Entity entity, sp::Transform& transform)
+                        {
+                            scored.emplace_back(entity, glm::length2(transform.getPosition() - position));
+                        }
+                    );
+                };
+
+                // Prefer objects under the cursor. If the click missed them,
+                // retry with a small screen-space click tolerance.
+                scoreTargets(0.0f);
+                if (scored.empty())
+                    scoreTargets(10.0f / main_radar->getScale());
 
                 std::sort(scored.begin(), scored.end(),
                     [](const auto& a, const auto& b) { return a.second < b.second; });
