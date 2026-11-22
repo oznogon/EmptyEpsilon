@@ -28,6 +28,7 @@
 - New scenarios renumbered per the README scenario conventions: "Rescue" 22 to 20, "Defenders or Pirates" 23 to 44, "Iris Siege" 24 to 45
 - Planet entity API documentation includes an `onCollision` callback example
 - Translation data updated for main, comms scenario utility, missile weapon data, and scenarios; locale files for development test scenarios removed
+- GM screen single-click selection reverted to select the closest center instead of the closest by collision shape
 
 ### Fixed
 

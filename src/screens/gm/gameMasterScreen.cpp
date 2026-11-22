@@ -1416,17 +1416,10 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
             else
             {
                 std::vector<std::pair<sp::ecs::Entity, float>> scored;
-                glm::vec2 click_screen = main_radar->worldToScreen(position);
 
                 findTargets([&](sp::ecs::Entity entity, sp::Transform& transform)
                     {
-                        const float screen_dist = glm::length(main_radar->worldToScreen(transform.getPosition()) - click_screen);
-                        float screen_radius = 0.0f;
-
-                        if (auto physics = entity.getComponent<sp::Physics>())
-                            screen_radius = physics->getSize().x * main_radar->getScale();
-
-                        scored.emplace_back(entity, std::max(0.0f, screen_dist - screen_radius));
+                        scored.emplace_back(entity, glm::length2(transform.getPosition() - position));
                     }
                 );
 
@@ -1435,7 +1428,7 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
 
                 std::vector<sp::ecs::Entity> space_objects;
                 space_objects.reserve(scored.size());
-                for (auto& [entity, _score] : scored)
+                for (auto& [entity, _dist2] : scored)
                     space_objects.push_back(entity);
 
                 // Prefer the first unselected object after a selected
