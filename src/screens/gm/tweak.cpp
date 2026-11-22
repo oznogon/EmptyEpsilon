@@ -1022,7 +1022,7 @@ public:
         GuiElement::onDraw(target);
 
         // Draw color preview rect in the space reserved by the preview row.
-        float preview_y = rect.position.y + (a_slider ? 120.0f : 90.0f);
+        const float preview_y = rect.position.y + (a_slider ? 120.0f : 90.0f);
         target.drawTriangleStrip({
             {rect.position.x, preview_y},
             {rect.position.x + rect.size.x, preview_y},
@@ -1039,22 +1039,28 @@ public:
     GuiSliderTweak* a_slider = nullptr;
 };
 
-// GuiScrollFormattedText to display multiline text properties.
-// TODO: Make an editable multiline GuiTextEntry to use here.
-class GuiMultilineTextTweak : public GuiScrollFormattedText
+// A multiline GuiTextEntry that tweaks a multiline string property. The
+// entry grows with its text, like the Lua console's entry, and scrolls to keep
+// the cursor visible.
+class GuiMultilineTextTweak : public GuiTextEntry
 {
 public:
-    GuiMultilineTextTweak(GuiContainer* owner, int lines = 5)
-    : GuiScrollFormattedText(owner, "", "")
+    GuiMultilineTextTweak(GuiContainer* owner)
+    : GuiTextEntry(owner, "", "")
     {
-        setSize(GuiElement::GuiSizeMax, lines * 30.0f);
+        getLayout().fill_width = true;
+        getLayout().match_content_x = false;
         setTextSize(18.0f);
+        setMultiline(true);
+        setWrap(true);
+        // Start at a comfortable editing height, then grow with the text.
+        setMinHeight(getLineSpacing() * 5.0f);
     }
 
-    virtual void onUpdate() override
+    virtual void onDraw(sp::RenderTarget& target) override
     {
-        if (update_func)
-            setText(update_func());
+        if (!focus) setText(update_func());
+        GuiTextEntry::onDraw(target);
     }
 
     std::function<string()> update_func;
@@ -2822,17 +2828,24 @@ private:
             if (auto v = entity.getComponent<COMPONENT>()) v->VALUE = glm::vec3(ui->r_slider->getValue() / 255.0f, ui->g_slider->getValue() / 255.0f, ui->b_slider->getValue() / 255.0f); \
         }); \
     } while(0)
-// Add a scrolling text area to review the contents of a multiline text field.
-// TODO: Implement a multiline text editing GUI subclass to make this editable.
+// Add a multiline text field to tweak a multiline string value for the given
+// component.
 #define ADD_TEXT_MULTILINE_TWEAK(LABEL, COMPONENT, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
-        row->setSize(GuiElement::GuiSizeMax, 150.0f)->setAttribute("layout", "horizontal"); \
-        (new GuiLabel(row, "", LABEL, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
-        auto ui = new GuiMultilineTextTweak(row, 5); \
+        row->getLayout().fill_width = true; \
+        row->getLayout().match_content_x = false; \
+        row->setAttribute("layout", "horizontal"); \
+        (new GuiLabel(row, "", LABEL, 20.0f))->setAlignment(sp::Alignment::TopRight)->setSize(GuiElement::GuiSizeMax, 30.0f); \
+        auto ui = new GuiMultilineTextTweak(row); \
         ui->update_func = [this, ui]() -> string { \
             if (auto v = entity.getComponent<COMPONENT>()) return v->VALUE; \
             return ui->getText(); \
         }; \
+        ui->callback([this](string text) { if (auto v = entity.getComponent<COMPONENT>()) v->VALUE = text; }); \
+        new_page->apply_functions.push_back([this, ui]() { \
+            string text = ui->getText(); \
+            if (!text.empty()) { if (auto v = entity.getComponent<COMPONENT>()) v->VALUE = text; } \
+        }); \
     } while(0)
 // Add a selector to tweak a faction-related value for a component.
 #define ADD_FACTION_SELECTOR_TWEAK(LABEL, COMPONENT, VALUE) do { \
@@ -3041,6 +3054,25 @@ private:
         row->setSize(GuiElement::GuiSizeMax, 30.0f)->setAttribute("layout", "horizontal"); \
         (new GuiLabel(row, "", LABEL, 20.0f))->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
         auto ui = new GuiTextTweak(row); \
+        ui->update_func = [this, vector_selector, ui]() -> string { auto v = entity.getComponent<COMPONENT>(); \
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) \
+                return v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE; \
+            return ui->getText(); \
+        }; \
+        ui->callback([this, vector_selector](string text) { auto v = entity.getComponent<COMPONENT>(); \
+            if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) \
+                v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE = text; \
+        }); \
+    } while(0)
+// Add a multiline text field to tweak a multiline string value in a vector of
+// the given component.
+#define ADD_VECTOR_TEXT_MULTILINE_TWEAK(LABEL, COMPONENT, VECTOR, VALUE) do { \
+        auto row = new GuiElement(new_page->tweaks, ""); \
+        row->getLayout().fill_width = true; \
+        row->getLayout().match_content_x = false; \
+        row->setAttribute("layout", "horizontal"); \
+        (new GuiLabel(row, "", LABEL, 20.0f))->setAlignment(sp::Alignment::TopRight)->setSize(GuiElement::GuiSizeMax, 30.0f); \
+        auto ui = new GuiMultilineTextTweak(row); \
         ui->update_func = [this, vector_selector, ui]() -> string { auto v = entity.getComponent<COMPONENT>(); \
             if (v && vector_selector->getSelectedVectorIndex() >= 0 && vector_selector->getSelectedVectorIndex() < static_cast<int>(v->VECTOR.size())) \
                 return v->VECTOR[vector_selector->getSelectedVectorIndex()].VALUE; \
@@ -4451,8 +4483,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_DATABASE_PARENT_TWEAK(tr("tweak-text", "Parent entry:"), Database, parent);
     ADD_TEXT_TWEAK(tr("tweak-text", "Name:"), Database, name);
     ADD_DATABASE_KEYVALUE_TWEAK(tr("tweak-text", "Key-value pairs:"), Database, key_values);
-    // TODO: Replace with multiline text editor widget - single-line field can't handle linebreaks properly
-    ADD_TEXT_TWEAK(tr("tweak-text", "Description:"), Database, description);
+    ADD_TEXT_MULTILINE_TWEAK(tr("tweak-text", "Description:"), Database, description);
     ADD_TEXT_TWEAK(tr("tweak-text", "Image:"), Database, image);
     addPageToGroup(world_group);
 
@@ -5439,16 +5470,16 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 
     ADD_PAGE(tr("tweak-tab", "Science description"), ScienceDescription);
     new_page->description = tr("tweak-science-description", "Science descriptions shown at different scan levels.");
-    ADD_TEXT_TWEAK(tr("tweak-text", "Not scanned:"), ScienceDescription, not_scanned);
-    ADD_TEXT_TWEAK(tr("tweak-text", "Friend or foe identified:"), ScienceDescription, friend_or_foe_identified);
-    ADD_TEXT_TWEAK(tr("tweak-text", "Simple scan:"), ScienceDescription, simple_scan);
-    ADD_TEXT_TWEAK(tr("tweak-text", "Full scan:"), ScienceDescription, full_scan);
+    ADD_TEXT_MULTILINE_TWEAK(tr("tweak-text", "Not scanned:"), ScienceDescription, not_scanned);
+    ADD_TEXT_MULTILINE_TWEAK(tr("tweak-text", "Friend or foe identified:"), ScienceDescription, friend_or_foe_identified);
+    ADD_TEXT_MULTILINE_TWEAK(tr("tweak-text", "Simple scan:"), ScienceDescription, simple_scan);
+    ADD_TEXT_MULTILINE_TWEAK(tr("tweak-text", "Full scan:"), ScienceDescription, full_scan);
     addPageToGroup(sensors_group);
 
     ADD_PAGE(tr("tweak-tab", "Briefing"), Briefing);
     new_page->description = tr("tweak-briefing", "A sequence of pages displayed on the BriefingScreen. Each page can show a caption and image, and optionally play audio and auto-advance after a duration.");
     ADD_VECTOR(tr("tweak-text", "Page:"), Briefing, pages);
-    ADD_VECTOR_TEXT_TWEAK(tr("tweak-text", "Caption:"), Briefing, pages, caption);
+    ADD_VECTOR_TEXT_MULTILINE_TWEAK(tr("tweak-text", "Caption:"), Briefing, pages, caption);
     ADD_VECTOR_TEXT_TWEAK(tr("tweak-text", "Image:"), Briefing, pages, image);
     ADD_VECTOR_TEXT_TWEAK(tr("tweak-text", "Audio:"), Briefing, pages, audio);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Duration (sec):"), Briefing, pages, duration);

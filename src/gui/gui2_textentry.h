@@ -16,6 +16,7 @@ protected:
     int selection_end = 0;
 
     float text_size = 30.0f;
+    float min_height = 0.0f;
     bool multiline = false;
     bool wrap = false;
     bool select_on_focus = false;
@@ -52,6 +53,7 @@ public:
     GuiTextEntry* setTextSize(float size);
     GuiTextEntry* setMultiline(bool enabled=true);
     GuiTextEntry* setWrap(bool enabled=true);
+    GuiTextEntry* setMinHeight(float height);
     GuiTextEntry* setSelectOnFocus(bool enabled=true);
     GuiTextEntry* setHidePassword(bool enabled=true);
     GuiTextEntry* callback(func_t func);

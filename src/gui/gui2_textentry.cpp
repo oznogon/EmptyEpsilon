@@ -85,6 +85,8 @@ void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
         if (wrap && !layout.fill_height)
         {
             auto required_height = std::max(linespacing, content_height);
+            if (min_height > 0.0f)
+                required_height = std::max(required_height, min_height);
             rect.size.y = required_height;
             layout.size.y = required_height;
             text_rect.size.y = rect.size.y;
@@ -484,6 +486,12 @@ GuiTextEntry* GuiTextEntry::setMultiline(bool enabled)
 GuiTextEntry* GuiTextEntry::setWrap(bool enabled)
 {
     wrap = enabled;
+    return this;
+}
+
+GuiTextEntry* GuiTextEntry::setMinHeight(float height)
+{
+    this->min_height = height;
     return this;
 }
 

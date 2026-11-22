@@ -8,6 +8,11 @@
   - "Rescue" (#2597): rescue a research scientist from the Kraylor with any number of player ships; terrain and difficulty are configurable
   - "Defenders or Pirates" (#2485): replayable scenario about amassing reputation by destroying enemies or trading cargo, featuring many non-standard player ships
   - "Iris Siege" (#2355): replayable scenario about stopping saboteurs from overwhelming a system's defensive apparatus
+- GM tweak dialog text properties that can contain multiple lines are now editable with a growing multiline text field. Multiline fields include:
+  - Briefing captions
+  - CommsTransmitter incoming message
+  - Database descriptions
+  - ScienceDescription descriptions per scan level
 - Comms scenario utility additions, adapted from upstream #2931
   - `commsEnemyStation` hook defines comms responses for enemy stations, which otherwise do not respond
   - `scenarioStationTalk` hook adds scenario-specific station knowledge and returns the number of replies added
