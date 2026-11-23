@@ -444,6 +444,15 @@ function isObjectType(obj, typ)
         return false
     end
 
+    -- Entities spawned from a prefab can be identified by their prefab, which
+    -- is authoritative for object type checks.
+    if obj.getPrefabName then
+        local prefab_name = obj:getPrefabName()
+        if prefab_name ~= nil then
+            return obj:isPrefab(typ)
+        end
+    end
+
     local result = false
     --- ShipTemplateBasedObject-derived types
     -- STBOs typically require a ship template applied with setTemplate().

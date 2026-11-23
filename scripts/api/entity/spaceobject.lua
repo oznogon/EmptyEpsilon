@@ -1,5 +1,12 @@
 local Entity = getLuaEntityFunctionTable()
 
+-- Base prefab for entities that exist in the world with a position and
+-- rotation. Not spawned directly.
+SpaceObjectPrefab = Prefab("SpaceObject", nil, {
+    abstract = true,
+    components = { transform = {} },
+})
+
 ----- Entity base functions -----
 
 --- Sets this entity's position on the map, in game units from the origin.

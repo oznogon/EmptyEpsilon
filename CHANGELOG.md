@@ -21,6 +21,9 @@
   - Goods can now be traded with stations via `tradeGoodsWithStation()`, fixing a reference from `goodsCommerce()` to a function that did not exist
 - GM screens now display a 2-pixel gray dot for entities without a radar trace
 - `MissileWeaponData` now has a Lua-settable trigger range factor (`setTriggerRangeFactor()`), which sets the trigger radius for mines as a multiple of the blast range
+- Lua entity definitions can now be composed with prefabs, a server-only component that inherits components from a parent prefab and merges overrides at spawn time. For example, `Asteroid` and `VisualAsteroid` now share a `SpaceObject` base prefab, and new helpers `spawnPrefab()`, `entity:getPrefabName()`, and `entity:isPrefab()` expose prefab identity to scripts
+  - Existing entity APIs are unchanged. For example, `Asteroid()` and `VisualAsteroid()` still work as expected and can take chained functions that modify it further
+  - `isObjectType()` and GM entity export now use the prefab's identity to determine type, instead of identifying entity type by arbitrary component properties, such as asteroids' mesh filename and unique component combinations
 
 ### Changed
 
@@ -35,6 +38,7 @@
   - Selection now adds a 10-pixel click tolerance to make selecting small/zoomed-out entities easier
   - Entities without physics radii now use their mesh scale as a fallback, allowing single-click selection of non-colliding entities
 - Science database missile and mine stats are now derived from the Lua `MissileWeaponData` definitions instead of being duplicated as hardcoded values
+- Redundant `isObjectType()` implementations in scenarios and `comms_scenario_utility.lua` have been removed in favor of the `utils.lua` version
 
 ### Fixed
 

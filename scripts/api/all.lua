@@ -1,3 +1,4 @@
+require("api/prefab.lua")
 require("api/modelData.lua")
 require("api/shipTemplate.lua")
 require("api/entity/spaceobject.lua")

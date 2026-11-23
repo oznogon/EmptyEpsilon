@@ -259,6 +259,14 @@ function getEntityExportString(entity)
             end
         end
     end
+    -- Prefab identity is authoritative when the entity has one.
+    local prefab_name = entity:getPrefabName()
+    if prefab_name == "Asteroid" then
+        return "Asteroid()" .. __exportBasics(entity)
+    end
+    if prefab_name == "VisualAsteroid" then
+        return "VisualAsteroid()" .. __exportBasics(entity)
+    end
     -- Terrain: Asteroid has spin, avoid_object, and explode_on_touch
     if
         entity.components.spin
