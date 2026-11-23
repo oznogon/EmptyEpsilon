@@ -1016,7 +1016,7 @@ function setConstants()
             probes = 8,
             pods = 5,
         },
-        ["Striker"] = {
+        ["Crow"] = {
             strength = 8,
             cargo = 4,
             distance = 200,
@@ -1363,7 +1363,7 @@ function setConstants()
             long_range_radar = 35000,
             short_range_radar = 5000,
         },
-        ["Striker"] = {
+        ["Crow"] = {
             strength = 8,
             cargo = 4,
             distance = 200,

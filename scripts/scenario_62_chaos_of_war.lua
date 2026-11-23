@@ -1435,7 +1435,7 @@ function setConstants()
             "Komatsu",
             "Eitan",
         },
-        ["Striker"] = {
+        ["Crow"] = {
             "Sparrow",
             "Sizzle",
             "Squawk",
@@ -1837,7 +1837,7 @@ function setConstants()
             warp = 0,
             stock = true,
         },
-        ["Striker"] = {
+        ["Crow"] = {
             strength = 8,
             cargo = 4,
             distance = 200,
@@ -3867,9 +3867,9 @@ function setStaticScienceDatabase()
     player_fighter_db:setKeyValue("Storage HVLI", "4")
     player_fighter_db:setImage("radar/fighter.png")
     -- Striker
-    fighter_stock_db:addEntry("Striker")
+    fighter_stock_db:addEntry("Crow")
     local striker_db =
-        queryScienceDatabase("Ships", "Mainstream", "Starfighter", "Striker")
+        queryScienceDatabase("Ships", "Mainstream", "Starfighter", "Crow")
     striker_db:setLongDescription(
         "The Striker is the predecessor to the advanced striker, slow but agile, but does not do an extreme amount of damage, and lacks in shields"
     )
@@ -8856,7 +8856,7 @@ function customPlayerShip(custom_template, p)
         p = PlayerSpaceship()
     end
     if custom_template == "Striker LX" then
-        p:setTemplate("Striker")
+        p:setTemplate("Crow")
         p:setTypeName("Striker LX")
         p:setRepairCrewCount(3) --more (vs 2)
         p:setShieldsMax(100, 100) --stronger shields (vs 50, 30)

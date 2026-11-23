@@ -697,7 +697,7 @@ function setConstants()
         "Vinson",
         "Old Salt",
     }
-    playerShipNamesFor["Striker"] =
+    playerShipNamesFor["Crow"] =
         { "Sparrow", "Sizzle", "Squawk", "Crow", "Phoenix", "Snowbird", "Hawk" }
     playerShipNamesFor["Lindworm"] = {
         "Seagull",
@@ -906,10 +906,10 @@ function setPlayers()
                     end
                     pobj.ship_score = 10
                     pobj.max_cargo = 9
-                elseif tempPlayerType == "Striker" then
-                    if #playerShipNamesFor["Striker"] > 0 then
+                elseif tempPlayerType == "Crow" then
+                    if #playerShipNamesFor["Crow"] > 0 then
                         pobj:setCallSign(
-                            tableRemoveRandom(playerShipNamesFor["Striker"])
+                            tableRemoveRandom(playerShipNamesFor["Crow"])
                         )
                     end
                     if pobj:getImpulseMaxSpeed() == 45 then

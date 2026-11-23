@@ -452,7 +452,7 @@ function setGlobals()
             "Saratoga",
             "Pegasus",
         },
-        ["Striker"] = {
+        ["Crow"] = {
             "Sparrow",
             "Sizzle",
             "Squawk",
@@ -639,7 +639,7 @@ function setConstants()
             long_range_radar = 38000,
             short_range_radar = 5000,
         },
-        ["Striker"] = {
+        ["Crow"] = {
             strength = 8,
             cargo = 4,
             distance = 200,
@@ -10074,7 +10074,7 @@ function setPlayers()
                         :setBeamWeaponDamageType(0, "emp")
                         :setBeamWeaponArcColor(0, 0, 0, 0.5, 0, 0, 1.0)
                     pobj:setBeamWeapon(1, 30, 0, 1000, 6, 8)
-                elseif tempPlayerType == "Striker" then
+                elseif tempPlayerType == "Crow" then
                     pobj:setJumpDrive(true)
                     pobj:setJumpDriveRange(3000, 40000)
                     pobj:setImpulseMaxSpeed(90)

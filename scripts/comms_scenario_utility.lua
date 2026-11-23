@@ -17466,7 +17466,7 @@ function minorUpgrades()
                                 tspd = 6,
                             },
                         },
-                        ["Striker"] = {
+                        ["Crow"] = {
                             {
                                 index = 2,
                                 arc = 10,

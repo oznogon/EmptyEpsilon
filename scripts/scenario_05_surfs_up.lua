@@ -519,7 +519,7 @@ function setGlobals()
             long_range_radar = 38000,
             short_range_radar = 5000,
         },
-        ["Striker"] = {
+        ["Crow"] = {
             strength = 8,
             cargo = 4,
             long_range_radar = 35000,
@@ -694,7 +694,7 @@ function setGlobals()
             "Komatsu",
             "Eitan",
         },
-        ["Striker"] = {
+        ["Crow"] = {
             "Sparrow",
             "Sizzle",
             "Squawk",

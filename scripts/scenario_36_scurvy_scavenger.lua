@@ -47,7 +47,7 @@ function init()
     setConstants() --missle type names, template names and scores, deployment directions, player ship names, etc.
     player = PlayerSpaceship()
         :setFaction("Independent")
-        :setTemplate("Striker")
+        :setTemplate("Crow")
         :setJumpDrive(false)
         :setWarpDrive(false)
         :setLongRangeRadarRange(25000)
@@ -1710,7 +1710,7 @@ end
 function setPlayer()
     player = getPlayerShip(-1)
     if not player.name_assigned then
-        if player:getTypeName() == "Striker" then
+        if player:getTypeName() == "Crow" then
             if #playerShipNamesForStriker > 0 then
                 local name_index = math.random(1, #playerShipNamesForStriker)
                 player:setCallSign(playerShipNamesForStriker[name_index])

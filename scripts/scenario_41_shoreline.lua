@@ -1530,7 +1530,7 @@ function setPlayers()
                     end
                     pobj.shipScore = 10
                     pobj.maxCargo = 9
-                elseif tempPlayerType == "Striker" then
+                elseif tempPlayerType == "Crow" then
                     if #playerShipNamesForStriker > 0 then
                         ni = math.random(1, #playerShipNamesForStriker)
                         pobj:setCallSign(playerShipNamesForStriker[ni])

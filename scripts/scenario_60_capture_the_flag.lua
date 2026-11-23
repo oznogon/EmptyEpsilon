@@ -611,7 +611,7 @@ function setConstants()
             short_range_radar = 5000,
             probes = 20,
         },
-        ["Striker"] = {
+        ["Crow"] = {
             strength = 8,
             cargo = 4,
             distance = 200,
@@ -3890,7 +3890,7 @@ function setPlayer(pobj, playerIndex)
         pobj.min_jump_range = 3000
         pobj:setJumpDriveRange(pobj.min_jump_range, pobj.max_jump_range)
         pobj:setJumpDriveCharge(pobj.max_jump_range)
-    elseif tempPlayerType == "Striker" then
+    elseif tempPlayerType == "Crow" then
         pobj:setJumpDrive(true)
         pobj.max_jump_range = 40000
         pobj.min_jump_range = 3000
@@ -7786,7 +7786,7 @@ function setupTailoredShipAttributes()
         "Vinson",
         "Old Salt",
     }
-    playerShipNamesFor["Striker"] =
+    playerShipNamesFor["Crow"] =
         { "Sparrow", "Sizzle", "Squawk", "Crow", "Snowbird", "Hawk" }
     playerShipNamesFor["ZX-Lindworm"] = {
         "Seagull",

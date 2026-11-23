@@ -212,7 +212,7 @@ function createPlayerShipHeadhunter()
 end
 function createPlayerShipBlazon()
     playerBlazon = PlayerSpaceship()
-        :setTemplate("Striker")
+        :setTemplate("Crow")
         :setFaction("Human Navy")
         :setCallSign("Blazon")
     playerBlazon:setTypeName("Stricken")
@@ -2012,7 +2012,7 @@ function setConstants()
             "Eitan",
         },
         ["Stricken"] = { "Blazon", "Streaker", "Pinto", "Spear", "Javelin" },
-        ["Striker"] = {
+        ["Crow"] = {
             "Sparrow",
             "Sizzle",
             "Squawk",
@@ -2144,7 +2144,7 @@ function setConstants()
             cm_boost = 400,
             cm_strafe = 250,
         },
-        ["Striker"] = {
+        ["Crow"] = {
             strength = 8,
             cargo = 4,
             distance = 200,
@@ -15546,7 +15546,7 @@ function setPlayers()
                 pobj.autoCoolant = false
                 pobj:setJumpDrive(true)
                 pobj:setJumpDriveRange(3000, 40000)
-            elseif tempPlayerType == "Striker" then
+            elseif tempPlayerType == "Crow" then
                 if pobj:getImpulseMaxSpeed() == 45 then
                     pobj:setImpulseMaxSpeed(90)
                 end

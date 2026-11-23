@@ -2875,7 +2875,7 @@ function setGlobals()
             "Pegasus",
         },
         ["Stricken"] = { "Blazon", "Streaker", "Pinto", "Spear", "Javelin" },
-        ["Striker"] = {
+        ["Crow"] = {
             "Sparrow",
             "Sizzle",
             "Squawk",

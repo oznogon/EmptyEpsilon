@@ -2852,7 +2852,7 @@ function setConstants() --variables that don't change
             tractor = true,
             mining = true,
         },
-        ["Striker"] = {
+        ["Crow"] = {
             strength = 8,
             cargo = 4,
             distance = 200,
@@ -3449,7 +3449,7 @@ function setGlobals() --variables that might change
             "Pegasus",
         },
         ["Stricken"] = { "Blazon", "Streaker", "Pinto", "Spear", "Javelin" },
-        ["Striker"] = {
+        ["Crow"] = {
             "Sparrow",
             "Sizzle",
             "Squawk",

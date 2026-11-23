@@ -210,7 +210,7 @@ function init()
             short_range_radar = 5000,
             probes = 20,
         },
-        ["Striker"] = {
+        ["Crow"] = {
             strength = 8,
             cargo = 4,
             distance = 200,
@@ -379,7 +379,7 @@ function init()
         "Vinson",
         "Old Salt",
     }
-    playerShipNamesFor["Striker"] =
+    playerShipNamesFor["Crow"] =
         { "Sparrow", "Sizzle", "Squawk", "Crow", "Snowbird", "Hawk" }
     playerShipNamesFor["ZX-Lindworm"] = {
         "Seagull",

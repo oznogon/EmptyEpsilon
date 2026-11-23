@@ -142,7 +142,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
                     "Small mine laying vessel with minimal armament, shields and hull."
                 ),
             },
-            ["Striker"] = {
+            ["Crow"] = {
                 image = "radar/adv_striker.png",
                 model = "dark_fighter_6",
                 desc = _(
@@ -20647,7 +20647,7 @@ function playerShipUpgradeDowngradeData()
             ["providers"] = false,
             ["score"] = 28,
         },
-        ["Striker"] = { --6 + beam(8) + missile(11) + shield(8) + hull(5) + impulse(8) + ftl(6) + sensors(5) = 57
+        ["Crow"] = { --6 + beam(8) + missile(11) + shield(8) + hull(5) + impulse(8) + ftl(6) + sensors(5) = 57
             ["beam"] = {
                 { --1
                     {

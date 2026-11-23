@@ -1251,7 +1251,7 @@ function setConstants()
             cm_boost = 400,
             cm_strafe = 250,
         },
-        ["Striker"] = {
+        ["Crow"] = {
             strength = 8,
             cargo = 4,
             distance = 200,
@@ -1642,7 +1642,7 @@ function setConstants()
         "Vinson",
         "Old Salt",
     }
-    playerShipNamesFor["Striker"] =
+    playerShipNamesFor["Crow"] =
         { "Sparrow", "Sizzle", "Squawk", "Crow", "Phoenix", "Snowbird", "Hawk" }
     playerShipNamesFor["ZX-Lindworm"] = {
         "Seagull",
@@ -11351,7 +11351,7 @@ function describeStockPlayerShips()
         addGMMessage(
             _(
                 "msgGM",
-                "Player Fighter:   Hull:60   Shield:40   Size:100   Repair Crew:3   Cargo:3   R.Strength:7\nDefault advanced engine:None   Speeds: Impulse:110   Spin:20   Accelerate:40   C.Maneuver: Boost:600   Energy:400\nBeams:2\n   Arc:40   Direction:-10   Range:1   Cycle:6   Damage:8\n   Arc:40   Direction: 10   Range:1   Cycle:6   Damage:8\nTube:1   Load Speed:10   Front:1\n   Direction:0   Type:HVLI Only\n   Ordnance stock and type:\n      4 HVLI"
+                "Stingray:   Hull:60   Shield:40   Size:100   Repair Crew:3   Cargo:3   R.Strength:7\nDefault advanced engine:None   Speeds: Impulse:110   Spin:20   Accelerate:40   C.Maneuver: Boost:600   Energy:400\nBeams:2\n   Arc:40   Direction:-10   Range:1   Cycle:6   Damage:8\n   Arc:40   Direction: 10   Range:1   Cycle:6   Damage:8\nTube:1   Load Speed:10   Front:1\n   Direction:0   Type:HVLI Only\n   Ordnance stock and type:\n      4 HVLI"
             )
         )
     end)
@@ -11371,7 +11371,7 @@ function describeStockPlayerShips()
             )
         )
     end)
-    addGMFunction(_("buttonGM", "Striker"), function()
+    addGMFunction(_("buttonGM", "Crow"), function()
         addGMMessage(
             _(
                 "msgGM",
@@ -11540,7 +11540,7 @@ function createPlayerShipHeadhunter()
 end
 function createPlayerShipBlazon()
     playerBlazon = PlayerSpaceship()
-        :setTemplate("Striker")
+        :setTemplate("Crow")
         :setFaction("Human Navy")
         :setCallSign("Blazon")
     playerBlazon:setTypeName("Stricken")
@@ -22387,7 +22387,7 @@ function setPlayer(pobj)
             pobj.min_jump_range = 3000
             pobj:setJumpDriveRange(pobj.min_jump_range, pobj.max_jump_range)
             pobj:setJumpDriveCharge(pobj.max_jump_range)
-        elseif tempPlayerType == "Striker" then
+        elseif tempPlayerType == "Crow" then
             if pobj:getImpulseMaxSpeed() == 45 then
                 pobj:setImpulseMaxSpeed(90)
             end

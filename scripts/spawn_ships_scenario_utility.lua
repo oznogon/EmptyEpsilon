@@ -4945,7 +4945,7 @@ function playerPower()
                 ["Phobos M3P"] = 19,
                 ["Piranha"] = 16,
                 ["Repulse"] = 14,
-                ["Striker"] = 8,
+                ["Crow"] = 8,
                 ["ZX-Lindworm"] = 8,
                 ["Vindicator"] = 40,
                 ["Avalanche"] = 45,

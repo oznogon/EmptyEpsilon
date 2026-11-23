@@ -596,7 +596,7 @@ function setConstants()
             "Saratoga",
             "Pegasus",
         },
-        ["Striker"] = {
+        ["Crow"] = {
             "Sparrow",
             "Sizzle",
             "Squawk",
@@ -919,7 +919,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["Striker"] = {
+            ["Crow"] = {
                 strength = 8,
                 cargo = 4,
                 distance = 200,
@@ -11634,7 +11634,7 @@ function setPlayers()
                 p.autoCoolant = false
                 p.setJumpDrive(true)
                 p:setJumpDriveRange(3000, 40000)
-            elseif temp_player_type == "Striker" then
+            elseif temp_player_type == "Crow" then
                 if p:getImpulseMaxSpeed() == 45 then
                     p:setImpulseMaxSpeed(90)
                 end

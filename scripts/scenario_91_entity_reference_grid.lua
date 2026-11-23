@@ -1242,7 +1242,7 @@ function init()
         :setScanned(true)
     s_idx = s_idx + 1
     PlayerSpaceship()
-        :setTemplate("Striker")
+        :setTemplate("Crow")
         :setPosition(ship_grid(s_idx))
         :setFaction("Human Navy")
         :setCallSign("Ref")

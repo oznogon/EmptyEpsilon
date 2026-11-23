@@ -148,13 +148,13 @@ function init()
     end
     fighter_template = getScenarioSetting("Fighter1")
     if fighter_template == "Random" then
-        local fighters = { "Striker", "Formax", "Foil" }
+        local fighters = { "Crow", "Formax", "Foil" }
         fighter_template = tableSelectRandom(fighters)
     end
     if fighter_template == "Formax" then
         playerBlade = PlayerSpaceship()
             :setFaction("Human Navy")
-            :setTemplate("Striker")
+            :setTemplate("Crow")
             :setJumpDrive(false)
             :setWarpDrive(false)
         playerBlade:setTypeName("Formax")
@@ -176,7 +176,7 @@ function init()
     elseif fighter_template == "Foil" then
         playerBlade = PlayerSpaceship()
             :setFaction("Human Navy")
-            :setTemplate("Striker")
+            :setTemplate("Crow")
             :setJumpDrive(false)
             :setWarpDrive(false)
         playerBlade:setTypeName("Foil")
@@ -220,7 +220,7 @@ function init()
             end
         end
     )
-    if fighter_template == "Striker" then
+    if fighter_template == "Crow" then
         playerBlade:setImpulseMaxSpeed(90)
     end
     fighter_template_2 = getScenarioSetting("Fighter2")
@@ -828,7 +828,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["Striker"] = {
+            ["Crow"] = {
                 strength = 8,
                 cargo = 4,
                 distance = 200,
@@ -2066,7 +2066,7 @@ function setGlobals()
             "Pegasus",
         },
         ["Stricken"] = { "Blazon", "Streaker", "Pinto", "Spear", "Javelin" },
-        ["Striker"] = {
+        ["Crow"] = {
             "Sparrow",
             "Sizzle",
             "Squawk",
@@ -4098,7 +4098,7 @@ function respawnFighter1()
     if fighter_template == "Formax" then
         playerBlade = PlayerSpaceship()
             :setFaction("Human Navy")
-            :setTemplate("Striker")
+            :setTemplate("Crow")
             :setJumpDrive(false)
             :setWarpDrive(false)
         playerBlade:setTypeName("Formax")
@@ -4120,7 +4120,7 @@ function respawnFighter1()
     elseif fighter_template == "Foil" then
         playerBlade = PlayerSpaceship()
             :setFaction("Human Navy")
-            :setTemplate("Striker")
+            :setTemplate("Crow")
             :setJumpDrive(false)
             :setWarpDrive(false)
         playerBlade:setTypeName("Foil")
@@ -4161,7 +4161,7 @@ function respawnFighter1()
             end
         end
     )
-    if fighter_template == "Striker" then
+    if fighter_template == "Crow" then
         playerBlade:setImpulseMaxSpeed(90)
     end
 end
@@ -10331,7 +10331,7 @@ function setPlayers()
             pobj.nameAssigned = true
             tempPlayerType = pobj:getTypeName()
             if
-                tempPlayerType == "Striker"
+                tempPlayerType == "Crow"
                 or tempPlayerType == "MP52 Hornet"
                 or tempPlayerType == "ZX-Lindworm"
             then

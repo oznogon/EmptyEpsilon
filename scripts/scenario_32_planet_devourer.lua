@@ -365,7 +365,7 @@ function setConstants()
         { "Ink", "Tentacle", "Pierce", "Writhe", "Bogey" }
     player_ship_names_for["Stricken"] =
         { "Blazon", "Streaker", "Pinto", "Spear", "Javelin" }
-    player_ship_names_for["Striker"] =
+    player_ship_names_for["Crow"] =
         { "Sparrow", "Sizzle", "Squawk", "Crow", "Phoenix", "Snowbird", "Hawk" }
     player_ship_names_for["Surkov"] =
         { "Sting", "Sneak", "Bingo", "Thrill", "Vivisect" }
@@ -1586,7 +1586,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["Striker"] = {
+            ["Crow"] = {
                 strength = 8,
                 cargo = 4,
                 distance = 200,
