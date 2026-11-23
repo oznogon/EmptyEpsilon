@@ -39,8 +39,6 @@ thumbs.db
 
 options.ini
 keybindings.json
-
-
 .vscode
 logs
 *.log
@@ -52,3 +50,4 @@ script_docs/__pycache__/
 packs/__pycache__/
 # clangd cache
 .cache/
+scripts/tests
