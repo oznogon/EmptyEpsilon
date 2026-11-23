@@ -1,3 +1,19 @@
+local planetPrefab = Prefab("Planet", SpaceObjectPrefab, {
+    components = {
+        radar_signature = { gravitational = 0.5, thermal = 0.3 },
+        planet_render = {
+            size = 5000,
+            cloud_size = 5200,
+        },
+        physics = { type = "static", size = 5000 },
+        avoid_object = { range = 6000 },
+        never_radar_blocked = {},
+    },
+    generate = function(ctx)
+        return { transform = { rotation = random(0, 360) } }
+    end,
+})
+
 --- A Planet is a spherical piece of space terrain that can orbit other entities.
 --- Each Planet has separate textures for its surface, atmosphere, and cloud layers.
 --- Several planetary textures are included in the resources/planets/ directory.
@@ -11,19 +27,7 @@
 --- moon = Planet():setPosition(5000, 0):setPlanetRadius(1000):setPlanetSurfaceTexture("planets/moon-1.png"):setAxialRotationTime(20.0):setOrbit(planet,20)
 --- @type creation
 function Planet()
-    local e = createEntity()
-    e.components = {
-        transform = { rotation = random(0, 360) },
-        radar_signature = { gravitational = 0.5, thermal = 0.3 },
-        planet_render = {
-            size = 5000,
-            cloud_size = 5200,
-        },
-        physics = { type = "static", size = 5000 },
-        avoid_object = { range = 6000 },
-        never_radar_blocked = {},
-    }
-    return e
+    return planetPrefab:spawn()
 end
 
 local Entity = getLuaEntityFunctionTable()

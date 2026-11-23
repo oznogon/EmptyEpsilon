@@ -1,17 +1,28 @@
 require("utils.lua")
 
---- A HomingMissile is a missile that pursues a target and deals kinetic damage on impact.
---- Homing missiles can be fired via weapon tubes or created directly by scripts.
---- Example: missile = HomingMissile():setHomingTarget(getPlayerShip(-1)):setPosition(1000, 1000):setRotation(90)
---- @type creation
-function HomingMissile()
-    local e = createEntity()
-    e.components = {
-        transform = {},
+local missilePrefab = Prefab("Missile", SpaceObjectPrefab, {
+    abstract = true,
+    components = {
         physics = {
             type = "sensor",
             size = { 10, 30 },
         },
+        constant_particle_emitter = {},
+        radar_trace = {
+            icon = "radar/missile.png",
+            min_size = 16,
+            max_size = 16,
+            rotate = true,
+        },
+        hull = {
+            current = 1,
+            max = 1,
+        },
+    },
+})
+
+local homingMissilePrefab = Prefab("HomingMissile", missilePrefab, {
+    components = {
         missile_flight = { speed = 200.0 },
         missile_homing = {
             turn_rate = 10.0,
@@ -25,38 +36,18 @@ function HomingMissile()
             explosion_sfx = "sfx/explosion.wav",
         },
         lifetime = { lifetime = 27.0 },
-        constant_particle_emitter = {},
         radar_trace = {
-            icon = "radar/missile.png",
-            min_size = 16,
-            max_size = 16,
-            rotate = true,
             color = { 255, 200, 0, 255 },
         },
         radar_signature = {
             electrical = 0.1,
             thermal = 0.2,
         },
-        hull = {
-            current = 1,
-            max = 1,
-        },
-    }
-    return e
-end
+    },
+})
 
---- An HVLI (High-Velocity Lead Impactor) is an unguided kinetic missile.
---- HVLIs can be fired via weapon tubes or created directly by scripts.
---- Example: hvli = HVLI():setPosition(1000, 1000):setRotation(90)
---- @type creation
-function HVLI()
-    local e = createEntity()
-    e.components = {
-        transform = {},
-        physics = {
-            type = "sensor",
-            size = { 10, 30 },
-        },
+local hvliPrefab = Prefab("HVLI", missilePrefab, {
+    components = {
         missile_flight = { speed = 500.0 },
         explode_on_touch = {
             damage_at_center = 10.0,
@@ -65,36 +56,15 @@ function HVLI()
             explosion_sfx = "sfx/explosion.wav",
         },
         lifetime = { lifetime = 13.5 },
-        constant_particle_emitter = {},
         radar_trace = {
-            icon = "radar/missile.png",
-            min_size = 16,
-            max_size = 16,
-            rotate = true,
             color = { 200, 200, 200, 255 },
         },
         radar_signature = { gravitational = 0.1 },
-        hull = {
-            current = 1,
-            max = 1,
-        },
-    }
-    return e
-end
+    },
+})
 
---- An EMPMissile is a homing missile with a large blast range that deals significant EMP area damage on impact or timeout.
---- AI behaviors attempt to avoid EMPMissiles.
---- EMPMissiles can be fired via weapon tubes or created directly by scripts.
---- Example: emp = EMPMissile():setPosition(1000, 1000):setRotation(90)
---- @type creation
-function EMPMissile()
-    local e = createEntity()
-    e.components = {
-        transform = {},
-        physics = {
-            type = "sensor",
-            size = { 10, 30 },
-        },
+local empMissilePrefab = Prefab("EMPMissile", missilePrefab, {
+    components = {
         missile_flight = { speed = 200.0 },
         missile_homing = {
             turn_rate = 10.0,
@@ -110,36 +80,15 @@ function EMPMissile()
         },
         explode_on_timeout = {},
         lifetime = { lifetime = 27.0 },
-        constant_particle_emitter = {},
         radar_trace = {
-            icon = "radar/missile.png",
-            min_size = 16,
-            max_size = 16,
-            rotate = true,
             color = { 100, 32, 255, 255 },
         },
         radar_signature = { electrical = 1.0 },
-        hull = {
-            current = 1,
-            max = 1,
-        },
-    }
-    return e
-end
+    },
+})
 
---- A Nuke is a homing missile with a large blast range that deals significant kinetic area damage on impact or timeout.
---- AI behaviors attempt to avoid Nukes.
---- Nukes can be fired via weapon tubes or created directly by scripts.
---- Example: nuke = Nuke():setPosition(1000, 1000):setRotation(90)
---- @type creation
-function Nuke()
-    local e = createEntity()
-    e.components = {
-        transform = {},
-        physics = {
-            type = "sensor",
-            size = { 10, 30 },
-        },
+local nukePrefab = Prefab("Nuke", missilePrefab, {
+    components = {
         missile_flight = { speed = 200.0 },
         missile_homing = {
             turn_rate = 10.0,
@@ -158,24 +107,48 @@ function Nuke()
             range = 1000.0,
         },
         lifetime = { lifetime = 27.0 },
-        constant_particle_emitter = {},
         radar_trace = {
-            icon = "radar/missile.png",
-            min_size = 16,
-            max_size = 16,
-            rotate = true,
             color = { 255, 100, 32, 255 },
         },
         radar_signature = {
             electrical = 0.7,
             thermal = 0.1,
         },
-        hull = {
-            current = 1,
-            max = 1,
-        },
-    }
-    return e
+    },
+})
+
+--- A HomingMissile is a missile that pursues a target and deals kinetic damage on impact.
+--- Homing missiles can be fired via weapon tubes or created directly by scripts.
+--- Example: missile = HomingMissile():setHomingTarget(getPlayerShip(-1)):setPosition(1000, 1000):setRotation(90)
+--- @type creation
+function HomingMissile()
+    return homingMissilePrefab:spawn()
+end
+
+--- An HVLI (High-Velocity Lead Impactor) is an unguided kinetic missile.
+--- HVLIs can be fired via weapon tubes or created directly by scripts.
+--- Example: hvli = HVLI():setPosition(1000, 1000):setRotation(90)
+--- @type creation
+function HVLI()
+    return hvliPrefab:spawn()
+end
+
+--- An EMPMissile is a homing missile with a large blast range that deals significant EMP area damage on impact or timeout.
+--- AI behaviors attempt to avoid EMPMissiles.
+--- EMPMissiles can be fired via weapon tubes or created directly by scripts.
+--- Example: emp = EMPMissile():setPosition(1000, 1000):setRotation(90)
+--- @type creation
+function EMPMissile()
+    return empMissilePrefab:spawn()
+end
+
+--- A Nuke is a homing missile with a large blast range that deals significant kinetic area damage on impact or timeout.
+--- AI behaviors attempt to avoid Nukes.
+--- Nukes can be fired via weapon tubes or created directly by scripts.
+--- Example: nuke = Nuke():setPosition(1000, 1000):setRotation(90)
+--- @type creation
+function Nuke()
+    return nukePrefab:spawn()
 end
 
 local Entity = getLuaEntityFunctionTable()

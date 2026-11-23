@@ -1,13 +1,14 @@
+local beamEffectPrefab = Prefab("BeamEffect", SpaceObjectPrefab, {
+    components = {
+        beam_effect = { beam_texture = "texture/beam_orange.png" },
+    },
+})
+
 --- A BeamEffect is a beam weapon firing audio/visual effect that fades after its duration expires.
 --- This is a cosmetic effect and does not deal damage on its own.
 --- Example: beamfx = BeamEffect():setSource(player,0,0,0):setTarget(enemy,0,0,0)
 function BeamEffect()
-    local e = createEntity()
-    e.components = {
-        transform = {},
-        beam_effect = { beam_texture = "texture/beam_orange.png" },
-    }
-    return e
+    return beamEffectPrefab:spawn()
 end
 
 local Entity = getLuaEntityFunctionTable()

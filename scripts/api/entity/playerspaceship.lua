@@ -6,6 +6,28 @@ playerspaceship.lua - Functions that were associated with the legacy PlayerSpace
 local Entity = getLuaEntityFunctionTable()
 __default_player_ship_faction = "Human Navy"
 
+local playerSpaceshipPrefab = Prefab("PlayerSpaceship", SpaceObjectPrefab, {
+    components = {
+        player_control = {},
+        ship_log = {},
+        custom_ship_functions = {},
+        dynamic_radar_signature = {},
+    },
+    generate = function(ctx)
+        -- Player ships default to fully scanned
+        local scan_state = { allow_simple_scan = true }
+        for _, faction in ipairs(getEntitiesWithComponent("faction_info")) do
+            table.insert(scan_state, { faction = faction, state = "fullscan" })
+        end
+
+        return {
+            transform = { rotation = random(0, 360) },
+            callsign = { callsign = generateRandomCallSign() },
+            scan_state = scan_state,
+        }
+    end,
+})
+
 --- A PlayerSpaceship is a player-controlled ship entity. It has all the components of a ship (weapons, drives, systems) plus player-specific components (crew controls, waypoints, custom buttons).
 --- If a function name begins with "command", the function is equivalent to the crew taking a corresponding action.
 --- Such commands can be limited by the ship's capabilities, including systems damage, lack of power, or insufficient weapons stocks.
@@ -14,23 +36,7 @@ __default_player_ship_faction = "Human Navy"
 --- player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
 --- @type creation
 function PlayerSpaceship()
-    local e = createEntity()
-
-    -- Player ships default to fully scanned
-    local scan_state = { allow_simple_scan = true }
-    for idx, faction in ipairs(getEntitiesWithComponent("faction_info")) do
-        table.insert(scan_state, { faction = faction, state = "fullscan" })
-    end
-
-    e.components = {
-        player_control = {},
-        ship_log = {},
-        custom_ship_functions = {},
-        transform = { rotation = random(0, 360) },
-        callsign = { callsign = generateRandomCallSign() },
-        scan_state = scan_state,
-        dynamic_radar_signature = {},
-    }
+    local e = playerSpaceshipPrefab:spawn()
     e:setFaction(__default_player_ship_faction)
     return e
 end

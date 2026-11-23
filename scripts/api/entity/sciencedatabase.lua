@@ -1,4 +1,9 @@
 local Entity = getLuaEntityFunctionTable()
+local scienceDatabasePrefab = Prefab("ScienceDatabase", nil, {
+    components = {
+        science_database = {},
+    },
+})
 --- A ScienceDatabase entry stores information displayed to all players in the Science database tab or Database standalone screen.
 --- Each ScienceDatabase entry can contain key/value pairs, an image, and a 3D ModelData.
 ---
@@ -31,9 +36,7 @@ local Entity = getLuaEntityFunctionTable()
 --- species = entry:getEntries()[1] -- species = "Canines"
 --- legs = species:getKeyValue("Legs") -- legs = "4"
 function ScienceDatabase()
-    local e = createEntity()
-    e.components.science_database = {}
-    return e
+    return scienceDatabasePrefab:spawn()
 end
 
 --- table getScienceDatabases()

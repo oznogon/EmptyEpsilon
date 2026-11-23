@@ -1,14 +1,5 @@
-
---- A ScanProbe deploys a short-range radar with a limited lifetime at a high speed to a specific point.
---- ScanProbes can be targeted and destroyed by hostiles.
---- It's typically launched by the relay officer and can be linked to the science radar, but can also be created by scripts.
---- Player ships have a limited stock of ScanProbes typically replenished automatically when docked to a station or ship with the ScanProbe restocking feature enabled.
---- Example: probe = ScanProbe():setLifetime(60 * 30):setTarget(10000,10000):setSpeed(1500):onArrival(function() print("Probe arrived!") end)
---- @type creation
-function ScanProbe()
-    local e = createEntity()
-    e.components = {
-        transform = {},
+local scanProbePrefab = Prefab("ScanProbe", SpaceObjectPrefab, {
+    components = {
         lifetime = { lifetime = 60 * 10 },
         radar_trace = {
             icon = "radar/probe.png",
@@ -20,24 +11,36 @@ function ScanProbe()
         hull = { max = 1, current = 1 },
         share_short_range_radar = {},
         allow_radar_link = {},
-        radar_signature = { gravitational = 0.0, electrical = 0.2, thermal = 0.0 },
+        radar_signature = {
+            gravitational = 0.0,
+            electrical = 0.2,
+            thermal = 0.0,
+        },
         maneuvering_thrusters = {},
-    }
-    local model = "SensorBuoyMKI"
-    local idx = irandom(1, 3)
-    if idx == 2 then
-        model = "SensorBuoyMKII"
-    end
-    if idx == 3 then
-        model = "SensorBuoyMKIII"
-    end
-    for k, v in pairs(__model_data[model]) do
-        if string.sub(k, 1, 2) ~= "__" then
-            e.components[k] = table.deepcopy(v)
+    },
+    generate = function(ctx)
+        local model = "SensorBuoyMKI"
+        local idx = irandom(1, 3)
+        if idx == 2 then
+            model = "SensorBuoyMKII"
+        elseif idx == 3 then
+            model = "SensorBuoyMKIII"
         end
-    end
-    e.components.physics.type = "sensor"
-    return e
+
+        local components = prefabModelComponents(model)
+        components.physics.type = "sensor"
+        return components
+    end,
+})
+
+--- A ScanProbe deploys a short-range radar with a limited lifetime at a high speed to a specific point.
+--- ScanProbes can be targeted and destroyed by hostiles.
+--- It's typically launched by the relay officer and can be linked to the science radar, but can also be created by scripts.
+--- Player ships have a limited stock of ScanProbes typically replenished automatically when docked to a station or ship with the ScanProbe restocking feature enabled.
+--- Example: probe = ScanProbe():setLifetime(60 * 30):setTarget(10000,10000):setSpeed(1500):onArrival(function() print("Probe arrived!") end)
+--- @type creation
+function ScanProbe()
+    return scanProbePrefab:spawn()
 end
 
 local Entity = getLuaEntityFunctionTable()

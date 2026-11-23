@@ -1,4 +1,46 @@
 
+local minePrefab = Prefab("Mine", SpaceObjectPrefab, {
+    generate = function(ctx)
+        local blast_range = 1000.0
+        local trigger_range_factor = 0.6
+        if getMissileWeaponData then
+            local mine_data = getMissileWeaponData("Mine")
+            if mine_data and mine_data.components.missile_weapon_data then
+                trigger_range_factor =
+                    mine_data.components.missile_weapon_data.trigger_range_factor
+            end
+        end
+
+        return {
+            radar_trace = {
+                icon = "radar/mine.png",
+                min_size = 10,
+                max_size = 10,
+            },
+            constant_particle_emitter = {
+                interval = 0.4,
+                start_color = { 1, 1, 1 },
+                end_color = { 0, 0, 1 },
+                start_size = 30.0,
+                end_size = 0.0,
+                life_time = 10.0,
+            },
+            radar_signature = { electrical = 0.05 },
+            avoid_object = { range = blast_range * 1.2 },
+            physics = {
+                type = "sensor",
+                size = blast_range * trigger_range_factor,
+            },
+            delayed_explode_on_touch = {
+                delay = 1.0,
+                damage_at_center = 160.0,
+                damage_at_edge = 30.0,
+                blast_range = blast_range,
+            },
+        }
+    end,
+})
+
 --- A Mine is an explosive weapon that detonates and deals kinetic damage when an entity collides with its trigger range.
 --- Mines can be owned by factions but entities of any faction can trigger them.
 --- Mines can be launched from a ship's weapon tube or added by a GM or scenario script.
@@ -8,45 +50,7 @@
 --- Example: mine = Mine():setPosition(1000,1000):onDestruction(function(this_mine, instigator) print("Tripped a mine!") end)
 --- @type creation
 function Mine()
-    local blast_range = 1000.0
-    local trigger_range_factor = 0.6
-    if getMissileWeaponData then
-        local mine_data = getMissileWeaponData("Mine")
-        if mine_data and mine_data.components.missile_weapon_data then
-            trigger_range_factor =
-                mine_data.components.missile_weapon_data.trigger_range_factor
-        end
-    end
-    local e = createEntity()
-    e.components = {
-        transform = {},
-        radar_trace = {
-            icon = "radar/mine.png",
-            min_size = 10,
-            max_size = 10,
-        },
-        constant_particle_emitter = {
-            interval = 0.4,
-            start_color = { 1, 1, 1 },
-            end_color = { 0, 0, 1 },
-            start_size = 30.0,
-            end_size = 0.0,
-            life_time = 10.0,
-        },
-        radar_signature = { electrical = 0.05 },
-        avoid_object = { range = blast_range * 1.2 },
-        physics = {
-            type = "sensor",
-            size = blast_range * trigger_range_factor,
-        },
-        delayed_explode_on_touch = {
-            delay = 1.0,
-            damage_at_center = 160.0,
-            damage_at_edge = 30.0,
-            blast_range = blast_range,
-        },
-    }
-    return e
+    return minePrefab:spawn()
 end
 
 local Entity = getLuaEntityFunctionTable()

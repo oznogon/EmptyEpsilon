@@ -152,6 +152,21 @@ function Prefab:spawn(overrides)
     return entity
 end
 
+--- Returns the component data defined by a ModelData entry.
+--- Use this from a prefab's generate() function to apply a 3D model and its
+--- collider details at spawn time.
+--- @tparam string model_name ModelData name.
+--- @treturn table Component data.
+function prefabModelComponents(model_name)
+    local components = {}
+    for key, value in pairs(__model_data[model_name]) do
+        if string.sub(key, 1, 2) ~= "__" then
+            components[key] = table.deepcopy(value)
+        end
+    end
+    return components
+end
+
 --- Spawns a registered prefab by name.
 --- Example: entity = spawnPrefab("Asteroid")
 --- @type global

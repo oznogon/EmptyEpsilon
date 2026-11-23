@@ -1,14 +1,5 @@
---- A BlackHole is a piece of space terrain that pulls all nearby entities within a 5U radius, including otherwise immobile entities like stations, toward its center.
---- An entity capable of taking damage is dealt an increasing amount of damage as it approaches the BlackHole's center.
---- Upon reaching the center, any entity is instantly destroyed even if it's otherwise incapable of taking damage.
---- AI behaviors avoid BlackHoles by a 2U margin.
---- In 3D space, a BlackHole resembles a black sphere with blue horizon.
---- Example: black_hole = BlackHole():setPosition(1000,2000)
---- @type creation
-function BlackHole()
-    local e = createEntity()
-    e.components = {
-        transform = {},
+local blackHolePrefab = Prefab("BlackHole", SpaceObjectPrefab, {
+    components = {
         never_radar_blocked = {},
         gravity = { range = 5000, damage = true },
         avoid_object = { range = 7000 },
@@ -20,8 +11,34 @@ function BlackHole()
             radius = 5000,
         },
         billboard_render = { texture = "blackHole3d.png", size = 5000 },
-    }
-    return e
+    },
+})
+
+local wormHolePrefab = Prefab("WormHole", SpaceObjectPrefab, {
+    components = {
+        never_radar_blocked = {},
+        gravity = { range = 2500, damage = false },
+        avoid_object = { range = 2500 * 1.2 },
+        radar_signature = { gravitational = 0.9 },
+        radar_trace = {
+            icon = "radar/wormHole.png",
+            min_size = 0,
+            max_size = 2048,
+            radius = 2500,
+        },
+        billboard_render = { texture = "wormHole3d.png", size = 5000 },
+    },
+})
+
+--- A BlackHole is a piece of space terrain that pulls all nearby entities within a 5U radius, including otherwise immobile entities like stations, toward its center.
+--- An entity capable of taking damage is dealt an increasing amount of damage as it approaches the BlackHole's center.
+--- Upon reaching the center, any entity is instantly destroyed even if it's otherwise incapable of taking damage.
+--- AI behaviors avoid BlackHoles by a 2U margin.
+--- In 3D space, a BlackHole resembles a black sphere with blue horizon.
+--- Example: black_hole = BlackHole():setPosition(1000,2000)
+--- @type creation
+function BlackHole()
+    return blackHolePrefab:spawn()
 end
 
 --- A WormHole is a piece of space terrain that pulls all nearby entities within a 2.5U radius, including otherwise immobile entities like stations, toward its center.
@@ -30,23 +47,7 @@ end
 --- Example: wormhole = WormHole():setPosition(1000,1000):setTargetPosition(10000,10000)
 --- @type creation
 function WormHole()
-    local e = createEntity()
-    local radius = 2500
-    e.components = {
-        transform = {},
-        never_radar_blocked = {},
-        gravity = { range = radius, damage = false },
-        avoid_object = { range = radius * 1.2 },
-        radar_signature = { gravitational = 0.9 },
-        radar_trace = {
-            icon = "radar/wormHole.png",
-            min_size = 0,
-            max_size = 2048,
-            radius = radius,
-        },
-        billboard_render = { texture = "wormHole3d.png", size = 5000 },
-    }
-    return e
+    return wormHolePrefab:spawn()
 end
 
 local Entity = getLuaEntityFunctionTable()

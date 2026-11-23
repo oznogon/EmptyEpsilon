@@ -3,21 +3,8 @@ artifact.lua - Functions that were associated with the legacy Artifact class. Th
 ]]
 --
 
---- An Artifact is a configurable entity that can interact with other entities via collisions or scripting.
---- Use this to define arbitrary objects or collectible pickups in scenario scripts.
---- Example: artifact = Artifact():setModel("artifact6"):setSpin(0.5)
---- @type creation
-function Artifact()
-    local e = createEntity()
-    e.components.transform = { rotation = random(0, 360) }
-
-    local model_number = irandom(1, 8)
-    e.components = {
-        mesh_render = {
-            mesh = "mesh/Artifact" .. model_number .. ".obj",
-            texture = "texture/electric_sphere_texture.png",
-            scale = 3.0,
-        },
+local artifactPrefab = Prefab("Artifact", SpaceObjectPrefab, {
+    components = {
         radar_trace = {
             icon = "radar/blip.png",
             radius = 120.0,
@@ -27,8 +14,26 @@ function Artifact()
             type = "sensor",
             size = 100,
         },
-    }
-    return e
+    },
+    generate = function(ctx)
+        local model_number = irandom(1, 8)
+        return {
+            transform = { rotation = random(0, 360) },
+            mesh_render = {
+                mesh = "mesh/Artifact" .. model_number .. ".obj",
+                texture = "texture/electric_sphere_texture.png",
+                scale = 3.0,
+            },
+        }
+    end,
+})
+
+--- An Artifact is a configurable entity that can interact with other entities via collisions or scripting.
+--- Use this to define arbitrary objects or collectible pickups in scenario scripts.
+--- Example: artifact = Artifact():setModel("artifact6"):setSpin(0.5)
+--- @type creation
+function Artifact()
+    return artifactPrefab:spawn()
 end
 
 local Entity = getLuaEntityFunctionTable()

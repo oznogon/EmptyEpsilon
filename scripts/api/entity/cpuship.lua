@@ -1,6 +1,20 @@
 local Entity = getLuaEntityFunctionTable()
 __default_cpu_ship_faction = "Kraylor"
 
+local cpuShipPrefab = Prefab("CpuShip", SpaceObjectPrefab, {
+    components = {
+        ai_controller = { new_name = "default", orders = "roaming" },
+        scan_state = { allow_simple_scan = true },
+        dynamic_radar_signature = {},
+    },
+    generate = function(ctx)
+        return {
+            transform = { rotation = random(0, 360) },
+            callsign = { callsign = generateRandomCallSign() },
+        }
+    end,
+})
+
 --- A CpuShip is an AI-controlled ship entity.
 --- The AI can be assigned an order (be idle, roam freely, defend location, etc.) and a combat behavior state (attack at close or long range, be evasive).
 --- AI behaviors are defined in the AIController component and its related systems.
@@ -12,14 +26,7 @@ __default_cpu_ship_faction = "Kraylor"
 --- ship = CpuShip():setTemplate("Riposte"):setPosition(10000,3000):setFaction("Human Navy"):orderRoaming():setAI("evasive"):setScanned(true)
 --- @type creation
 function CpuShip()
-    local e = createEntity()
-    e.components = {
-        transform = { rotation = random(0, 360) },
-        ai_controller = { new_name = "default", orders = "roaming" },
-        scan_state = { allow_simple_scan = true },
-        callsign = { callsign = generateRandomCallSign() },
-        dynamic_radar_signature = {},
-    }
+    local e = cpuShipPrefab:spawn()
     e:setFaction(__default_cpu_ship_faction)
     return e
 end

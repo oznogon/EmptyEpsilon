@@ -1,12 +1,6 @@
 
---- A WarpJammer restricts the ability of any ships to use warp or jump drives within its radius.
---- WarpJammers can be targeted, damaged, and destroyed.
---- Example: jammer = WarpJammer():setPosition(1000,1000):setRange(10000):setHull(20)
---- @type creation
-function WarpJammer()
-    local e = createEntity()
-    e.components = {
-        transform = { rotation = random(0, 360) },
+local warpJammerPrefab = Prefab("WarpJammer", SpaceObjectPrefab, {
+    components = {
         hull = { max = 50, current = 50 },
         warp_jammer = { range = 7000 },
         radar_trace = {
@@ -16,13 +10,20 @@ function WarpJammer()
             color_by_faction = true,
         },
         physics = { type = "static", size = 300 },
-    }
-    for k, v in pairs(__model_data["shield_generator"]) do
-        if string.sub(k, 1, 2) ~= "__" then
-            e.components[k] = table.deepcopy(v)
-        end
-    end
-    return e
+    },
+    generate = function(ctx)
+        local components = prefabModelComponents("shield_generator")
+        components.transform = { rotation = random(0, 360) }
+        return components
+    end,
+})
+
+--- A WarpJammer restricts the ability of any ships to use warp or jump drives within its radius.
+--- WarpJammers can be targeted, damaged, and destroyed.
+--- Example: jammer = WarpJammer():setPosition(1000,1000):setRange(10000):setHull(20)
+--- @type creation
+function WarpJammer()
+    return warpJammerPrefab:spawn()
 end
 
 local Entity = getLuaEntityFunctionTable()

@@ -1,5 +1,17 @@
 __default_station_faction = "Independent"
 
+local spaceStationPrefab = Prefab("SpaceStation", SpaceObjectPrefab, {
+    components = {
+        dynamic_radar_signature = {},
+    },
+    generate = function(ctx)
+        return {
+            transform = { rotation = random(0, 360) },
+            callsign = { callsign = generateRandomCallSign("DS") },
+        }
+    end,
+})
+
 --- A SpaceStation is an immobile entity that repairs, resupplies, and recharges ships that dock with it.
 --- It sets several properties upon creation:
 --- - Its default callsign begins with "DS".
@@ -9,12 +21,7 @@ __default_station_faction = "Independent"
 --- - Any non-hostile ship can dock with it by default.
 --- @type creation
 function SpaceStation()
-    local e = createEntity()
-    e.components = {
-        transform = { rotation = random(0, 360) },
-        callsign = { callsign = generateRandomCallSign("DS") },
-        dynamic_radar_signature = {},
-    }
+    local e = spaceStationPrefab:spawn()
     e:setFaction(__default_station_faction)
     return e
 end

@@ -1,3 +1,10 @@
+local zonePrefab = Prefab("Zone", SpaceObjectPrefab, {
+    components = {
+        zone = {},
+        never_radar_blocked = {},
+    },
+})
+
 --- A Zone is a polygonal area of space defined by a series of coordinates.
 --- Although a Zone is an entity, it isn't affected by physics and isn't rendered in 3D.
 --- Zones are drawn on GM, comms, and long-range radar screens, can have a text label, and can return whether an entity is within their bounds.
@@ -7,13 +14,7 @@
 --- zone = Zone():setColor(0,0,255):setPoints(-100000,100000, -100000,-100000, 100000,-100000, 100000,100000):setLabel("Home")
 --- @type creation
 function Zone()
-    local e = createEntity()
-    e.components = {
-        transform = {},
-        zone = {},
-        never_radar_blocked = {},
-    }
-    return e
+    return zonePrefab:spawn()
 end
 
 local Entity = getLuaEntityFunctionTable()

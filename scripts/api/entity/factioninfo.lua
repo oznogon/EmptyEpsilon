@@ -24,9 +24,13 @@ local Entity = getLuaEntityFunctionTable()
 --- faction:setFriendly(human_navy):setEnemy(exuari) -- sets this faction's friendly and hostile relationships
 --- faction:setDescription(_("The United Stellar Navy, or USN...")) -- sets a translatable description for this faction
 __faction_info = {}
+local factionInfoPrefab = Prefab("FactionInfo", nil, {
+    components = {
+        faction_info = {},
+    },
+})
 function FactionInfo()
-    local fi = createEntity()
-    fi.components.faction_info = {}
+    local fi = factionInfoPrefab:spawn()
     fi:__setFactionRelation(fi, "friendly")
     return fi
 end
