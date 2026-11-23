@@ -1080,7 +1080,7 @@ function setConstants()
             short_range_radar = 6000,
             create = tempest,
         },
-        ["Strikeship"] = {
+        ["Strix"] = {
             strength = 30,
             short_range_radar = 5000,
             create = stockTemplate,

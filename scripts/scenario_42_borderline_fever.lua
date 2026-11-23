@@ -456,7 +456,7 @@ function setConstants()
         ["Whirlwind"] = { strength = 26, create = whirlwind },
         ["Magpie"] = { strength = 27, create = stockTemplate },
         ["Tempest"] = { strength = 30, create = tempest },
-        ["Strikeship"] = { strength = 30, create = stockTemplate },
+        ["Strix"] = { strength = 30, create = stockTemplate },
         ["Maniapak"] = { strength = 34, create = maniapak },
         ["Cucaracha"] = { strength = 36, create = cucaracha },
         ["Predator"] = { strength = 42, create = predator },

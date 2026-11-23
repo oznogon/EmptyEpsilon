@@ -2259,7 +2259,7 @@ function setConstants() --variables that don't change
             hop_range = 2500,
             create = tempest,
         },
-        ["Strikeship"] = {
+        ["Strix"] = {
             strength = 30,
             adder = false,
             missiler = false,

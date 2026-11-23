@@ -558,7 +558,7 @@ end
 --- Shows "Named waves" GM submenu (that allows spawning more waves).
 function namedWaves()
     local wave_names = {
-        [0] = _("buttonGM", "Strikeship"),
+        [0] = _("buttonGM", "Strix"),
         [1] = _("buttonGM", "Fighter"),
         [2] = _("buttonGM", "Gunship"),
         [4] = _("buttonGM", "Dreadnought"),

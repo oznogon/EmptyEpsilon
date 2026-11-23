@@ -1550,7 +1550,7 @@ function setConstants()
             hop_range = 2500,
             create = tempest,
         },
-        ["Strikeship"] = {
+        ["Strix"] = {
             strength = 30,
             adder = false,
             missiler = false,

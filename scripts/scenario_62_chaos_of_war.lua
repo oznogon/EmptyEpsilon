@@ -3277,7 +3277,7 @@ function setConstants()
             base = false,
             create = tempest,
         },
-        ["Strikeship"] = {
+        ["Strix"] = {
             strength = 30,
             adder = false,
             missiler = false,

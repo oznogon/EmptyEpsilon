@@ -90,7 +90,7 @@ function setConstants()
         "Fighter",
         "Cruiser",
         "Missile Cruiser",
-        "Strikeship",
+        "Strix",
         "Magpie",
         "Dreadnought",
         "Battlestation",

@@ -2007,7 +2007,7 @@ function setSpawnShipGlobals()
                 dist = 200,
                 create = tempest,
             },
-            ["Strikeship"] = {
+            ["Strix"] = {
                 strength = 30,
                 adder = false,
                 missiler = false,

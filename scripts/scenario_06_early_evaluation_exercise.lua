@@ -1216,7 +1216,7 @@ function setConstants()
         ["Starhammer V"] = 400,
         ["Storm"] = 200,
         ["Strike"] = 200,
-        ["Strikeship"] = 200,
+        ["Strix"] = 200,
         ["Strongarm"] = 400,
         ["Supervisor"] = 400,
         ["Sweeper"] = 100,
@@ -1744,7 +1744,7 @@ function setConstants()
             base = false,
             create = stockTemplate,
         },
-        ["Strikeship"] = {
+        ["Strix"] = {
             strength = 30,
             adder = false,
             missiler = false,
@@ -2684,7 +2684,7 @@ end
 function triggerWaves()
     clearGMFunctions()
     addGMFunction("-Main", mainGMButtons)
-    addGMFunction(_("buttonGM", "Strikeship wave"), function()
+    addGMFunction(_("buttonGM", "Strix wave"), function()
         addWave(
             enemyList,
             0,

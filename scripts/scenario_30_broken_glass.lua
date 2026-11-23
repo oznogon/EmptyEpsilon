@@ -1911,7 +1911,7 @@ function SpawnEnemies(xOrigin, yOrigin, danger, enemyFaction)
         "Fighter",
         "Cruiser",
         "Missile Cruiser",
-        "Strikeship",
+        "Strix",
         "Magpie",
         "Dreadnought",
         "Battlestation",

@@ -698,7 +698,7 @@ function setConstants()
         ["Magpie"] = { strength = 27, create = stockTemplate },
         ["Elara P2"] = { strength = 28, create = stockTemplate },
         ["Tempest"] = { strength = 30, create = tempest },
-        ["Strikeship"] = { strength = 30, create = stockTemplate },
+        ["Strix"] = { strength = 30, create = stockTemplate },
         ["Fiend G3"] = { strength = 33, create = stockTemplate },
         ["Fiend G4"] = { strength = 35, create = stockTemplate },
         ["Fiend G5"] = { strength = 37, create = stockTemplate },

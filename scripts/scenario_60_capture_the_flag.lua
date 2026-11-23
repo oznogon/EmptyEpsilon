@@ -713,7 +713,7 @@ function setConstants()
         ["Stalker R7"] = { strength = 25, create = stockTemplate },
         ["Magpie"] = { strength = 27, create = stockTemplate },
         ["Elara P2"] = { strength = 28, create = stockTemplate },
-        ["Strikeship"] = { strength = 30, create = stockTemplate },
+        ["Strix"] = { strength = 30, create = stockTemplate },
         ["Fiend G3"] = { strength = 33, create = stockTemplate },
         ["Fiend G4"] = { strength = 35, create = stockTemplate },
         ["Fiend G5"] = { strength = 37, create = stockTemplate },
