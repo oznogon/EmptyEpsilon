@@ -53,6 +53,7 @@ function init()
 
     local md = mine.components.missile_weapon_data
     assert(md.is_delayed_explode == true) assert(md.circle_collision == true)
+    assert(math.abs(md.trigger_range_factor - 0.6) < 0.001)
     assert(md.no_lifetime_on_missile == true) assert(md.turnrate == 0)
     assert(md.speed == 100) assert(md.lifetime == 10)
     assert(md.icon == "gui/icons/weapon-mine.png", "Mine icon should be weapon-mine.png")

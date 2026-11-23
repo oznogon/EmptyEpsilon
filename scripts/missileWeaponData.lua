@@ -58,6 +58,7 @@ MissileWeaponData()
     :setIsDelayedExplode(true)
     :setAvoidObjectDelay(0)
     :setCircleCollision(true)
+    :setTriggerRangeFactor(0.6)
     :setNoLifetimeOnMissile(true)
     :setFireCount(1)
 

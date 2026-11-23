@@ -5518,6 +5518,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_BOOL_TWEAK(tr("tweak-text", "Explodes on timeout"), MissileWeaponData, explodes_on_timeout);
     ADD_BOOL_TWEAK(tr("tweak-text", "Delayed explosion"), MissileWeaponData, is_delayed_explode);
     ADD_BOOL_TWEAK(tr("tweak-text", "Circle collision"), MissileWeaponData, circle_collision);
+    ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Trigger range factor:"), MissileWeaponData, 0.0f, 5.0f, trigger_range_factor);
     ADD_INT_SLIDER_TWEAK(tr("tweak-text", "Avoid object delay"), MissileWeaponData, 0, 60, avoid_object_delay);
 
     addPageToGroup(projectiles_group);

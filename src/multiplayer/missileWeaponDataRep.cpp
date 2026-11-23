@@ -27,6 +27,7 @@ BASIC_REPLICATION_IMPL(MissileWeaponDataReplication, MissileWeaponData)
     BASIC_REPLICATION_FIELD(damage_type);
     BASIC_REPLICATION_FIELD(avoid_object_delay);
     BASIC_REPLICATION_FIELD(circle_collision);
+    BASIC_REPLICATION_FIELD(trigger_range_factor);
     BASIC_REPLICATION_FIELD(no_lifetime_on_missile);
     BASIC_REPLICATION_FIELD(player);
 

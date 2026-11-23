@@ -273,6 +273,13 @@ bool MissileWeaponDataRegistry::hasCircleCollision(int index) const
     return false;
 }
 
+float MissileWeaponDataRegistry::getTriggerRangeFactor(int index) const
+{
+    if (auto* c = getComponent(getEntityForIndex(index)))
+        return c->trigger_range_factor;
+    return 0.6f;
+}
+
 bool MissileWeaponDataRegistry::hasNoLifetime(int index) const
 {
     if (auto* c = getComponent(getEntityForIndex(index)))

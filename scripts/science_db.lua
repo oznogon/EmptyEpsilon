@@ -195,7 +195,8 @@ Smaller missile variations are also common. Fighter pilots praise their speed an
     )
 )
 
--- Better: Get these directly from MissileWeaponData, MissileSystem, and ExplodeOnTouch instead of copying and pasting them
+-- Missile and mine statistics are derived from the Lua-defined MissileWeaponData
+-- (scripts/missileWeaponData.lua) instead of being duplicated here.
 local missile_stat_keys = {
     _("Damage type"),
     _("Damage at center"),
@@ -217,26 +218,69 @@ local mine_stat_keys = {
     _("Trigger distance (u)"),
 }
 
--- For medium size: damage type, damage at center, damage at edge, blast radius, speed, turn rate, lifetime, homing range
-local homing_stats =
-    { _("Kinetic"), 35, 5, 30 / 1000, 200 / 1000, 10, 27.0, 1200 / 1000 }
-local nuke_stats =
-    { _("Kinetic"), 160, 30, 1000 / 1000, 200 / 1000, 10, 27.0, 500 / 1000 }
-local emp_stats =
-    { _("EMP"), 160, 30, 1000 / 1000, 200 / 1000, 10, 27.0, 500 / 1000 }
-local hvli_stats = { _("Kinetic"), 10, 10, 20 / 1000, 500 / 1000, 0, 13.5, 0 }
-local mine_stats =
-    { _("Kinetic"), 160, 30, 1000 / 1000, 100 / 1000, 0, 10.0, 1000 / 1000 }
--- Mine speed is upon ejection, lifetime is duration from launch to activation, homing range is detection radius
+-- These modifiers mirror MissileWeaponData::convertSizeToCategoryModifier in C++.
+local missile_modifier_sizes = {
+    _("size_abbreviation", "S"),
+    _("size_abbreviation", "M"),
+    _("size_abbreviation", "L"),
+}
+local missile_modifier_values = { 0.5, 1.0, 2.0 }
+
+local function getMissileData(__name)
+    local missile = getMissileWeaponData(__name)
+    if missile and missile.components.missile_weapon_data then
+        return missile.components.missile_weapon_data
+    end
+    error("MissileWeaponData '" .. __name .. "' is not defined")
+end
+
+local function damageTypeLabel(__damage_type)
+    if __damage_type == "emp" then
+        return _("EMP")
+    end
+    return _("Kinetic")
+end
+
+-- MissileWeaponData stores distances in millimeters; the database displays units.
+-- Round to avoid floating point artifacts from values stored as C++ floats.
+local function toUnits(__value)
+    return tonumber(string.format("%.4f", __value / 1000))
+end
+
+-- Stats are for medium size: damage type, damage at center, damage at edge,
+-- blast radius, speed, turn rate, lifetime, homing range.
+local function getMissileStats(__name)
+    local data = getMissileData(__name)
+    return {
+        damageTypeLabel(data.damage_type),
+        data.damage_at_center,
+        data.damage_at_edge,
+        toUnits(data.blast_range),
+        toUnits(data.speed),
+        data.turnrate,
+        data.lifetime,
+        toUnits(data.homing_range),
+    }
+end
+
+-- Mine stats are for medium size: damage type, damage at center, damage at edge,
+-- blast radius, launch speed, turn rate, arming delay, trigger distance.
+-- Mine speed is upon ejection, and lifetime is the duration from launch to activation.
+local function getMineStats()
+    local data = getMissileData("Mine")
+    return {
+        damageTypeLabel(data.damage_type),
+        data.damage_at_center,
+        data.damage_at_edge,
+        toUnits(data.blast_range),
+        toUnits(data.speed),
+        data.turnrate,
+        data.lifetime,
+        toUnits(data.blast_range * data.trigger_range_factor),
+    }
+end
 
 local function populateMissileStats(__item, __keys, __stats)
-    local missile_modifier_sizes = {
-        _("size_abbreviation", "S"),
-        _("size_abbreviation", "M"),
-        _("size_abbreviation", "L"),
-    }
-    local missile_modifier_values = { 0.5, 1.0, 2.0 }
-
     for idx, key in ipairs(__keys) do
         local size_value = ""
 
@@ -247,6 +291,7 @@ local function populateMissileStats(__item, __keys, __stats)
                 or key == _("Damage at edge")
                 or key == _("Blast radius (u)")
                 or key == _("Lifetime (sec.)")
+                or key == _("Trigger distance (u)")
             )
         then
             for size_idx, size in ipairs(missile_modifier_sizes) do
@@ -287,7 +332,7 @@ end
 
 local item = weapons:addEntry(_("Homing missile"))
 item:addKeyValue(_("Sizes"), _("Small (S) / Medium (M) / Large (L)"))
-populateMissileStats(item, missile_stat_keys, homing_stats)
+populateMissileStats(item, missile_stat_keys, getMissileStats("Homing"))
 item:setLongDescription(
     _(
         [[This target-seeking missile is the workhorse of many space combat arsenals. It's compact enough to be fitted on frigates, and packs enough punch to be used on larger ships, though usually in more than a single missile tube.]]
@@ -296,7 +341,7 @@ item:setLongDescription(
 
 local item = weapons:addEntry(_("Nuke"))
 item:addKeyValue(_("Sizes"), _("Small (S) / Medium (M) / Large (L)"))
-populateMissileStats(item, missile_stat_keys, nuke_stats)
+populateMissileStats(item, missile_stat_keys, getMissileStats("Nuke"))
 item:setLongDescription(
     _(
         [[A nuclear missile is similar to a homing missile in that it can seek a target, but it moves and turns more slowly and explodes a greatly increased payload. Its nuclear explosion spans 1U of space and can take out multiple ships in a single shot.
@@ -307,7 +352,7 @@ Some captains oppose the use of nuclear weapons because their large explosions c
 
 local item = weapons:addEntry(_("Mine"))
 item:addKeyValue(_("Sizes"), _("Small (S) / Medium (M) / Large (L)"))
-populateMissileStats(item, mine_stat_keys, mine_stats)
+populateMissileStats(item, mine_stat_keys, getMineStats())
 item:setLongDescription(
     _(
         [[Mines are often placed in defensive perimeters around stations. There are also old minefields scattered around the galaxy from older wars.
@@ -318,7 +363,7 @@ Some fearless captains use mines as offensive weapons, but their delayed detonat
 
 local item = weapons:addEntry(_("EMP"))
 item:addKeyValue(_("Sizes"), _("Small (S) / Medium (M) / Large (L)"))
-populateMissileStats(item, missile_stat_keys, emp_stats)
+populateMissileStats(item, missile_stat_keys, getMissileStats("EMP"))
 item:setLongDescription(
     _(
         [[The electromagnetic pulse missile (EMP) reproduces the disruptive effects of a nuclear explosion, but without the destructive properties. This causes it to only affect shields within its blast radius, leaving their hulls intact. The EMP missile is also smaller and easier to store than heavy nukes. Many captains (and pirates) prefer EMPs over nukes for these reasons, and use them to knock out targets' shields before closing to disable them with focused beam fire.]]
@@ -327,7 +372,7 @@ item:setLongDescription(
 
 local item = weapons:addEntry(_("HVLI"))
 item:addKeyValue(_("Sizes"), _("Small (S) / Medium (M) / Large (L)"))
-populateMissileStats(item, missile_stat_keys, hvli_stats)
+populateMissileStats(item, missile_stat_keys, getMissileStats("HVLI"))
 item:setLongDescription(
     _(
         [[A high-velocity lead impactor (HVLI) fires a simple slug of lead at a high velocity. This weapon is usually found in simpler ships since it does not require guidance computers. This also means its projectiles fly in a straight line from its tube and can't pursue a target.

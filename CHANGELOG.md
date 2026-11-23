@@ -20,6 +20,7 @@
   - Transport mission offers warn when the destination station's faction is an enemy
   - Goods can now be traded with stations via `tradeGoodsWithStation()`, fixing a reference from `goodsCommerce()` to a function that did not exist
 - GM screens now display a 2-pixel gray dot for entities without a radar trace
+- `MissileWeaponData` now has a Lua-settable trigger range factor (`setTriggerRangeFactor()`), which sets the trigger radius for mines as a multiple of the blast range
 
 ### Changed
 
@@ -33,6 +34,7 @@
   - Selection reverted to the closest entity center instead of the closest by collision shape edge
   - Selection now adds a 10-pixel click tolerance to make selecting small/zoomed-out entities easier
   - Entities without physics radii now use their mesh scale as a fallback, allowing single-click selection of non-colliding entities
+- Science database missile and mine stats are now derived from the Lua `MissileWeaponData` definitions instead of being duplicated as hardcoded values
 
 ### Fixed
 

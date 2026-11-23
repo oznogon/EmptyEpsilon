@@ -390,6 +390,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, Mount& tube, float t
     DamageType dmg_type = registry.getDamageType(type_index);
     int avoid_object_delay = registry.getAvoidObjectDelay(type_index);
     bool circle_collision = registry.hasCircleCollision(type_index);
+    float trigger_range_factor = registry.getTriggerRangeFactor(type_index);
     bool no_lifetime_on_missile = registry.hasNoLifetime(type_index);
 
     sp::ecs::Entity missile = sp::ecs::Entity::create();
@@ -427,7 +428,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, Mount& tube, float t
 
     auto& physics = missile.addComponent<sp::Physics>();
     if (circle_collision)
-        physics.setCircle(sp::Physics::Type::Sensor, blast_range * 0.6f);
+        physics.setCircle(sp::Physics::Type::Sensor, blast_range * trigger_range_factor);
     else
         physics.setRectangle(sp::Physics::Type::Sensor, {10, 30});
 

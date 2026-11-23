@@ -9,6 +9,14 @@
 --- @type creation
 function Mine()
     local blast_range = 1000.0
+    local trigger_range_factor = 0.6
+    if getMissileWeaponData then
+        local mine_data = getMissileWeaponData("Mine")
+        if mine_data and mine_data.components.missile_weapon_data then
+            trigger_range_factor =
+                mine_data.components.missile_weapon_data.trigger_range_factor
+        end
+    end
     local e = createEntity()
     e.components = {
         transform = {},
@@ -29,7 +37,7 @@ function Mine()
         avoid_object = { range = blast_range * 1.2 },
         physics = {
             type = "sensor",
-            size = blast_range * 0.6,
+            size = blast_range * trigger_range_factor,
         },
         delayed_explode_on_touch = {
             delay = 1.0,

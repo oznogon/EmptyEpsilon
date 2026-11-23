@@ -52,6 +52,7 @@ public:
     DamageType getDamageType(int index) const;
     int getAvoidObjectDelay(int index) const;
     bool hasCircleCollision(int index) const;
+    float getTriggerRangeFactor(int index) const;
     bool hasNoLifetime(int index) const;
     bool isPlayerWeapon(int index) const;
 
@@ -114,6 +115,7 @@ public:
     DamageType damage_type = DamageType::Kinetic;
     int avoid_object_delay = 0;
     bool circle_collision = false;
+    float trigger_range_factor = 0.6f;
     bool no_lifetime_on_missile = false;
     float radar_electrical = 0.2f;
     float radar_thermal = 0.1f;

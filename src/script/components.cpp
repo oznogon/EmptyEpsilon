@@ -727,6 +727,7 @@ void initComponentScriptBindings()
     BIND_MEMBER(MissileWeaponData, damage_type);
     BIND_MEMBER(MissileWeaponData, avoid_object_delay);
     BIND_MEMBER(MissileWeaponData, circle_collision);
+    BIND_MEMBER(MissileWeaponData, trigger_range_factor);
     BIND_MEMBER(MissileWeaponData, no_lifetime_on_missile);
     BIND_MEMBER(MissileWeaponData, player);
     BIND_MEMBER(MissileWeaponData, on_spawn);

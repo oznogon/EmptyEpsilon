@@ -158,6 +158,14 @@ function Entity:setCircleCollision(bool)
     end
     return self
 end
+--- Sets the factor applied to the blast range to determine the trigger range for circle-collision missiles, such as mines.
+--- Example: mwd:setTriggerRangeFactor(0.6)
+function Entity:setTriggerRangeFactor(v)
+    if self.components.missile_weapon_data then
+        self.components.missile_weapon_data.trigger_range_factor = v
+    end
+    return self
+end
 --- Sets whether the missile has no lifetime limit on spawned missiles.
 --- Example: mwd:setNoLifetimeOnMissile(true)
 function Entity:setNoLifetimeOnMissile(bool)
