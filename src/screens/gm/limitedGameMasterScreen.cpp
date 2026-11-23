@@ -6,10 +6,10 @@
 #include "gameGlobalInfo.h"
 #include "globalMessageEntryView.h"
 #include "chatDialog.h"
-
 #include "GMActions.h"
 #include "playerInfo.h"
 #include "ecs/query.h"
+
 #include "components/ai.h"
 #include "components/radar.h"
 #include "components/faction.h"
@@ -30,11 +30,13 @@
 #include "components/warpdrive.h"
 #include "components/jumpdrive.h"
 #include "components/lifetime.h"
+#include "components/prefab.h"
 #include "components/scanning.h"
 #include "components/selfdestruct.h"
 #include "components/spin.h"
 #include "components/target.h"
 #include "components/rendering.h"
+
 #include "systems/collision.h"
 
 #include "screenComponents/radarView.h"
@@ -65,6 +67,8 @@ static std::vector<std::pair<string, string>> getGMInfo(sp::ecs::Entity entity)
         result.emplace_back(trMark("gm_info", "Callsign"), cs->callsign);
     if (entity.hasComponent<Faction>())
         result.emplace_back(trMark("gm_info", "Faction"), Faction::getInfo(entity).locale_name);
+    if (auto prefab = entity.getComponent<Prefab>())
+        result.emplace_back(trMark("gm_info", "Prefab"), prefab->name);
     if (auto tn = entity.getComponent<TypeName>())
         result.emplace_back(trMark("gm_info", "Type"), tn->localized);
     if (auto shields = entity.getComponent<Shields>())

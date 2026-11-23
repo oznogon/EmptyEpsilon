@@ -22,6 +22,7 @@
 #include "components/missileWeaponData.h"
 #include "components/name.h"
 #include "components/player.h"
+#include "components/prefab.h"
 #include "components/radar.h"
 #include "components/rendering.h"
 #include "components/shields.h"
@@ -54,6 +55,8 @@ static std::vector<std::pair<string, string>> getGMInfo(sp::ecs::Entity entity)
         result.emplace_back(trMark("gm_info", "Callsign"), cs->callsign);
     if (entity.hasComponent<Faction>())
         result.emplace_back(trMark("gm_info", "Faction"), Faction::getInfo(entity).locale_name);
+    if (auto prefab = entity.getComponent<Prefab>())
+        result.emplace_back(trMark("gm_info", "Prefab"), prefab->name);
     if (auto tn = entity.getComponent<TypeName>())
         result.emplace_back(trMark("gm_info", "Type"), tn->localized);
     if (auto shields = entity.getComponent<Shields>())
