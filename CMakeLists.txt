@@ -392,6 +392,7 @@ set(MAIN_SOURCES
     src/components/spin.h
     src/components/rendering.h
     src/components/name.h
+    src/components/prefab.h
     src/components/customshipfunction.h
     src/components/shiplog.h
     src/components/shiplog.cpp

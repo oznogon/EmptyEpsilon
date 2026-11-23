@@ -42,6 +42,7 @@
 #include "components/orbit.h"
 #include "components/pickup.h"
 #include "components/player.h"
+#include "components/prefab.h"
 #include "components/probe.h"
 #include "components/radar.h"
 #include "components/radarblock.h"
@@ -378,6 +379,8 @@ void initComponentScriptBindings()
     sp::script::ComponentHandler<TypeName>::name("typename");
     BIND_MEMBER(TypeName, type_name);
     BIND_MEMBER(TypeName, localized);
+    sp::script::ComponentHandler<Prefab>::name("prefab");
+    BIND_MEMBER(Prefab, name);
 
     sp::script::ComponentHandler<LongRangeRadar>::name("long_range_radar");
     BIND_MEMBER(LongRangeRadar, short_range);
