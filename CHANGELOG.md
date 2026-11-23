@@ -29,8 +29,10 @@
 - New scenarios renumbered per the README scenario conventions: "Rescue" 22 to 20, "Defenders or Pirates" 23 to 44, "Iris Siege" 24 to 45
 - Planet entity API documentation includes an `onCollision` callback example
 - Translation data updated for main, comms scenario utility, missile weapon data, and scenarios; locale files for development test scenarios removed
-- GM screen single-click selection reverted to select the closest center instead of the closest by collision shape
-- GM screen single-click selection falls back to a 10-pixel click tolerance when no entity is under the cursor, so small entities can be selected while the radar is zoomed out
+- GM screen single-click selection refactored
+  - Selection reverted to the closest entity center instead of the closest by collision shape edge
+  - Selection now adds a 10-pixel click tolerance to make selecting small/zoomed-out entities easier
+  - Entities without physics radii now use their mesh scale as a fallback, allowing single-click selection of non-colliding entities
 
 ### Fixed
 

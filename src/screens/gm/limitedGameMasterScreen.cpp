@@ -1963,9 +1963,14 @@ void LimitedGameMasterScreen::onMouseUp(glm::vec2 position)
             std::vector<sp::ecs::Entity> entities;
             auto findTargets = [&](float add_radius, std::function<void(sp::ecs::Entity, sp::Transform&)> found)
             {
-                for (auto [entity, transform, physics] : sp::ecs::Query<sp::Transform, sp::ecs::optional<sp::Physics>>())
+                for (auto [entity, transform, physics, mesh] : sp::ecs::Query<sp::Transform, sp::ecs::optional<sp::Physics>, sp::ecs::optional<MeshRenderComponent>>())
                 {
-                    auto size = (physics ? std::max(physics->getSize().x, physics->getSize().y) : 0.0f) + add_radius;
+                    // Entities without a physics radius, such as visual
+                    // asteroids, are as big as their rendered mesh.
+                    auto size = physics
+                        ? std::max(physics->getSize().x, physics->getSize().y)
+                        : mesh ? mesh->scale : 0.0f;
+                    size += add_radius;
                     if (transform.getPosition().x + size < std::min(drag_start_position.x, position.x)) continue;
                     if (transform.getPosition().x - size > std::max(drag_start_position.x, position.x)) continue;
                     if (transform.getPosition().y + size < std::min(drag_start_position.y, position.y)) continue;
