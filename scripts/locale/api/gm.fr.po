@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
+"PO-Revision-Date: 2026-11-20 18:50+0100\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr\n"
@@ -73,7 +73,7 @@ msgstr "Caisse d'approvisionnement"
 #: scripts/api/gm.lua:84
 msgctxt "create"
 msgid "Scan probe"
-msgstr ""
+msgstr "Sonde"
 
 #: scripts/api/gm.lua:93
 msgctxt "create"

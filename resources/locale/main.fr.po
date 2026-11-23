@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-02-02 19:37+0100\n"
-"Last-Translator: Oznogon\n"
+"PO-Revision-Date: 2026-11-20 18:50+0100\n"
+"Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
@@ -112,7 +112,7 @@ msgstr "Pilotage-armement"
 #: src/playerInfo.cpp:2172
 msgctxt "crew_screen"
 msgid "Damage control"
-msgstr "Réparation systèmes"
+msgstr "Réparations"
 
 #: src/playerInfo.cpp:2173
 msgctxt "crew_screen"
@@ -241,7 +241,7 @@ msgstr "OK"
 
 #: src/menus/joinServerMenu.cpp:84
 msgid "Please enter the server password:"
-msgstr "Veuillez saisir le mot de passe du serveur :"
+msgstr "Veuillez saisir le mot de passe d'accès au serveur :"
 
 #: src/menus/serverBrowseMenu.cpp:24
 msgctxt "game_client_disconnect_reason"
@@ -805,12 +805,12 @@ msgstr "Vues et options supplémentaires"
 
 #: src/menus/shipSelectionScreen.cpp:233
 msgid "Game master"
-msgstr "Maître de jeu"
+msgstr "Maître de jeu (MJ)"
 
 #: src/menus/shipSelectionScreen.cpp:240 src/menus/shipSelectionScreen.cpp:286
 #: src/menus/shipSelectionScreen.cpp:329 src/menus/shipSelectionScreen.cpp:371
 msgid "Enter the GM control code:"
-msgstr "Entrer le code de contrôle MJ :"
+msgstr "Veuillez saisir le code de contrôle MJ :"
 
 #: src/menus/shipSelectionScreen.cpp:272
 msgctxt "shipSelect"
@@ -1062,7 +1062,7 @@ msgstr "Équipage 5/6 joueurs"
 
 #: src/menus/shipSelectionScreen.cpp:1126
 msgid "3D screens"
-msgstr "Vues de l'espace en 3D"
+msgstr "Écrans 3D"
 
 #: src/menus/shipSelectionScreen.cpp:1133
 #: src/menus/shipSelectionScreen.cpp:1287 src/menus/autoConnectScreen.cpp:314
@@ -1097,7 +1097,7 @@ msgstr "Affectations d'équipage"
 #: src/menus/shipSelectionScreen.cpp:1240
 msgctxt "button"
 msgid "Ready"
-msgstr "Démarrer la partie"
+msgstr "Prêt"
 
 #: src/menus/shipSelectionScreen.cpp:1286
 msgid "No crew members assigned"
@@ -1368,7 +1368,7 @@ msgstr "Secteur"
 #: src/screens/gm/gameMasterScreen.cpp:336
 #: src/screens/gm/limitedGameMasterScreen.cpp:1160
 msgid "Clock"
-msgstr "Temps écoulé "
+msgstr "Horloge "
 
 #: src/screens/spectatorScreen.cpp:116
 msgctxt "gmTweak"
@@ -1476,7 +1476,7 @@ msgstr "Supprimer le marqueur"
 #: src/screens/crew4/operationsScreen.cpp:157
 #: src/screens/crew6/relayScreen.cpp:295
 msgid "Reputation"
-msgstr "Rép. actuelle "
+msgstr "Réputation "
 
 #: src/screens/crew4/tacticalScreen.cpp:159
 #: src/screens/crew6/weaponsScreen.cpp:126
@@ -7421,12 +7421,12 @@ msgstr "Activer/Désactiver les contrôles manuels"
 #: src/gui/hotkeyConfig.cpp:84
 msgctxt "hotkey_Cinematic"
 msgid "Camera lock"
-msgstr "Afficher/activer Verrouillage caméra"
+msgstr "Verrouillage caméra vaisseaux joueur"
 
 #: src/gui/hotkeyConfig.cpp:86
 msgctxt "hotkey_Cinematic"
 msgid "Camera cycle"
-msgstr "Activer switch auto 30s caméra"
+msgstr "Basculement caméra auto (30s)"
 
 #: src/gui/hotkeyConfig.cpp:88
 msgctxt "hotkey_Cinematic"
@@ -7471,52 +7471,52 @@ msgstr "Option de caméra"
 #: src/gui/hotkeyConfig.cpp:124
 msgctxt "hotkey_Cinematic"
 msgid "Move forward"
-msgstr "Avancer"
+msgstr "Travelling caméra avant"
 
 #: src/gui/hotkeyConfig.cpp:133
 msgctxt "hotkey_Cinematic"
 msgid "Move backward"
-msgstr "Reculer"
+msgstr "Travelling caméra arrière"
 
 #: src/gui/hotkeyConfig.cpp:142
 msgctxt "hotkey_Cinematic"
 msgid "Strafe left"
-msgstr "Straffer à gauche"
+msgstr "Travelling caméra latéral gauche"
 
 #: src/gui/hotkeyConfig.cpp:151
 msgctxt "hotkey_Cinematic"
 msgid "Strafe right"
-msgstr "Straffer à droite"
+msgstr "Travelling caméra latéral droite"
 
 #: src/gui/hotkeyConfig.cpp:160
 msgctxt "hotkey_Cinematic"
 msgid "Move up"
-msgstr "Monter"
+msgstr "Travelling caméra vertical haut"
 
 #: src/gui/hotkeyConfig.cpp:169
 msgctxt "hotkey_Cinematic"
 msgid "Move down"
-msgstr "Descendre"
+msgstr "Travelling caméra vertical bas"
 
 #: src/gui/hotkeyConfig.cpp:178
 msgctxt "hotkey_Cinematic"
 msgid "Rotate left"
-msgstr "Pivoter à gauche"
+msgstr "Pivoter caméra vers la gauche"
 
 #: src/gui/hotkeyConfig.cpp:187
 msgctxt "hotkey_Cinematic"
 msgid "Rotate right"
-msgstr "Pivoter à droite"
+msgstr "Pivoter caméra vers la droite"
 
 #: src/gui/hotkeyConfig.cpp:196
 msgctxt "hotkey_Cinematic"
 msgid "Tilt down"
-msgstr "Incliner vers le bas"
+msgstr "Incliner caméra vers le bas"
 
 #: src/gui/hotkeyConfig.cpp:205
 msgctxt "hotkey_Cinematic"
 msgid "Tilt up"
-msgstr "Incliner vers le haut"
+msgstr "Incliner caméra vers le haut"
 
 #: src/gui/hotkeyConfig.cpp:214
 msgctxt "hotkey_Cinematic"
@@ -7541,7 +7541,7 @@ msgstr "Afficher/Masquer les indicatifs"
 #: src/gui/hotkeyConfig.cpp:240
 msgctxt "hotkey_Topdown"
 msgid "Camera lock"
-msgstr "Verrouillage caméra"
+msgstr "Verrouillage caméra vaisseaux joueur"
 
 #: src/gui/hotkeyConfig.cpp:242
 msgctxt "hotkey_Topdown"
@@ -7556,22 +7556,22 @@ msgstr "Basculer vaisseau joueur suivant"
 #: src/gui/hotkeyConfig.cpp:254
 msgctxt "hotkey_Topdown"
 msgid "Pan up"
-msgstr "Défiler vers le haut"
+msgstr "Déplacer carte vers le haut"
 
 #: src/gui/hotkeyConfig.cpp:263
 msgctxt "hotkey_Topdown"
 msgid "Pan down"
-msgstr "Défiler vers le bas"
+msgstr "Déplacer carte vers le bas"
 
 #: src/gui/hotkeyConfig.cpp:272
 msgctxt "hotkey_Topdown"
 msgid "Pan left"
-msgstr "Défiler vers la gauche"
+msgstr "Déplacer carte vers la gauche"
 
 #: src/gui/hotkeyConfig.cpp:281
 msgctxt "hotkey_Topdown"
 msgid "Pan right"
-msgstr "Défiler vers la droite"
+msgstr "Déplacer carte vers la droite"
 
 #: src/gui/hotkeyConfig.cpp:642
 msgctxt "hotkey_General"
@@ -7736,17 +7736,17 @@ msgstr "Vue arrière"
 #: src/gui/hotkeyConfig.cpp:730
 msgctxt "hotkey_MainScreen"
 msgid "Lock view on weapons target"
-msgstr "Vue verrouillée sur cible Armement"
+msgstr "Vue sur cible verrouillée Armement"
 
 #: src/gui/hotkeyConfig.cpp:732
 msgctxt "hotkey_MainScreen"
 msgid "View tactical radar"
-msgstr "Vue radar tactique"
+msgstr "Afficher radar courte portée"
 
 #: src/gui/hotkeyConfig.cpp:734
 msgctxt "hotkey_MainScreen"
 msgid "View long-range radar"
-msgstr "Vue radar longue portée"
+msgstr "Afficher radar longue portée"
 
 #: src/gui/hotkeyConfig.cpp:736
 msgctxt "hotkey_MainScreen"
@@ -7756,7 +7756,7 @@ msgstr "Voir la carte stratégique"
 #: src/gui/hotkeyConfig.cpp:738
 msgctxt "hotkey_MainScreen"
 msgid "Toggle first-person view"
-msgstr "Vue à la 1ère personne"
+msgstr "Activer/désactiver vue 1ère personne"
 
 #: src/gui/hotkeyConfig.cpp:742 src/gui/hotkeyConfig.cpp:753
 #: src/gui/hotkeyConfig.cpp:765 src/gui/hotkeyConfig.cpp:770
@@ -7810,52 +7810,52 @@ msgstr "Manœuvre de combat avant"
 #: src/gui/hotkeyConfig.cpp:781
 msgctxt "hotkey_Helms"
 msgid "Increase impulse"
-msgstr "Accélérer (moteurs principaux)"
+msgstr "Accélérer"
 
 #: src/gui/hotkeyConfig.cpp:792
 msgctxt "hotkey_Helms"
 msgid "Increase impulse 1%"
-msgstr "Accélérer (moteurs principaux) 1%"
+msgstr "Accélérer de 1%"
 
 #: src/gui/hotkeyConfig.cpp:798
 msgctxt "hotkey_Helms"
 msgid "Increase impulse 10%"
-msgstr "Accélérer (moteurs principaux) 10%"
+msgstr "Accélérer de 10%"
 
 #: src/gui/hotkeyConfig.cpp:804
 msgctxt "hotkey_Helms"
 msgid "Decrease impulse"
-msgstr "Décélérer (moteurs principaux)"
+msgstr "Décélérer"
 
 #: src/gui/hotkeyConfig.cpp:815
 msgctxt "hotkey_Helms"
 msgid "Decrease impulse 1%"
-msgstr "Décélérer (moteurs principaux) 1%"
+msgstr "Décélérer de 1%"
 
 #: src/gui/hotkeyConfig.cpp:821
 msgctxt "hotkey_Helms"
 msgid "Decrease impulse 10%"
-msgstr "Décélérer (moteurs principaux) 10%"
+msgstr "Décélérer de 10%"
 
 #: src/gui/hotkeyConfig.cpp:827
 msgctxt "hotkey_Helms"
 msgid "Set impulse (joystick)"
-msgstr "Activer les moteurs (joystick)"
+msgstr "Régler vitesse moteurs (joystick)"
 
 #: src/gui/hotkeyConfig.cpp:829
 msgctxt "hotkey_Helms"
 msgid "Zero impulse"
-msgstr "Eteindre les moteurs"
+msgstr "Moteurs à l'arrêt"
 
 #: src/gui/hotkeyConfig.cpp:831
 msgctxt "hotkey_Helms"
 msgid "Max impulse"
-msgstr "Vitesse max des moteurs avant :"
+msgstr "Vitesse max moteurs avant"
 
 #: src/gui/hotkeyConfig.cpp:833
 msgctxt "hotkey_Helms"
 msgid "Max reverse impulse"
-msgstr "Vitesse max des moteurs arrière :"
+msgstr "Vitesse max moteurs arrière"
 
 #: src/gui/hotkeyConfig.cpp:836
 msgctxt "hotkey_Helms"
@@ -7905,12 +7905,12 @@ msgstr "Définir la demande lumière (joystick)"
 #: src/gui/hotkeyConfig.cpp:865
 msgctxt "hotkey_Helms"
 msgid "Dock request/abort/undock"
-msgstr "Amarrer/désamarrer"
+msgstr "S'amarrer/annuler/se désamarrer"
 
 #: src/gui/hotkeyConfig.cpp:867
 msgctxt "hotkey_Helms"
 msgid "Initiate docking"
-msgstr "Amarrer"
+msgstr "S'amarrer"
 
 #: src/gui/hotkeyConfig.cpp:869
 msgctxt "hotkey_Helms"
@@ -7920,17 +7920,17 @@ msgstr "Annuler amarrage"
 #: src/gui/hotkeyConfig.cpp:871
 msgctxt "hotkey_Helms"
 msgid "Undock"
-msgstr "Désamarrer"
+msgstr "Se désamarrer"
 
 #: src/gui/hotkeyConfig.cpp:874
 msgctxt "hotkey_Helms"
 msgid "Increase jump distance"
-msgstr "Augmenter la distance de saut"
+msgstr "Augmenter distance de saut"
 
 #: src/gui/hotkeyConfig.cpp:884
 msgctxt "hotkey_Helms"
 msgid "Decrease jump distance"
-msgstr "Diminuer la distance de saut"
+msgstr "Réduire distance de saut"
 
 #: src/gui/hotkeyConfig.cpp:894
 msgctxt "hotkey_Helms"
@@ -7970,7 +7970,7 @@ msgstr "Minimiser la distance de saut"
 #: src/gui/hotkeyConfig.cpp:924
 msgctxt "hotkey_Helms"
 msgid "Initiate jump"
-msgstr "Activer le saut (téléportation)"
+msgstr "Activer saut"
 
 #: src/gui/hotkeyConfig.cpp:926
 msgctxt "hotkey_Helms"

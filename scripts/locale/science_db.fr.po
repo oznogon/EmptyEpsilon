@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-01-30 21:13+0100\n"
+"PO-Revision-Date: 2026-11-15 19:51+0100\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -492,6 +492,8 @@ msgid ""
 "This database covers only the basic versions of weapons used throughout the "
 "galaxy."
 msgstr ""
+"Cette base de données ne couvre que les versions les plus courantes des "
+"armes utilisées à travers la galaxie."
 
 #: scripts/science_db.lua:170
 #, fuzzy
@@ -505,7 +507,7 @@ msgstr "Portée"
 #: scripts/science_db.lua:171 scripts/science_db.lua:172
 #: scripts/science_db.lua:186 scripts/science_db.lua:187
 msgid "Varies"
-msgstr ""
+msgstr "Variable"
 
 #: scripts/science_db.lua:172 scripts/science_db.lua:187
 msgid "Damage"
@@ -599,16 +601,16 @@ msgstr "Rayon d'explosion (u)"
 
 #: scripts/science_db.lua:204 scripts/science_db.lua:266
 msgid "Speed (u/sec.)"
-msgstr ""
+msgstr "Vitesse (u/s)"
 
 #: scripts/science_db.lua:205 scripts/science_db.lua:215
 #: scripts/science_db.lua:268
 msgid "Turn rate (deg./sec.)"
-msgstr ""
+msgstr "Vit. de rotation (°/s)"
 
 #: scripts/science_db.lua:206 scripts/science_db.lua:249
 msgid "Lifetime (sec.)"
-msgstr ""
+msgstr "Durée de vie (s)"
 
 #: scripts/science_db.lua:207
 msgid "Homing range (u)"
@@ -616,11 +618,11 @@ msgstr ""
 
 #: scripts/science_db.lua:214 scripts/science_db.lua:267
 msgid "Launch speed (u/sec.)"
-msgstr ""
+msgstr "Vit. de largage (u/s)"
 
 #: scripts/science_db.lua:216
 msgid "Arming delay (sec.)"
-msgstr ""
+msgstr "Délai avant activat. (s)"
 
 #: scripts/science_db.lua:217
 #, fuzzy
@@ -639,18 +641,18 @@ msgstr "EMP"
 #: scripts/science_db.lua:234
 msgctxt "size_abbreviation"
 msgid "S"
-msgstr ""
+msgstr "S"
 
 #: scripts/science_db.lua:235
 msgctxt "size_abbreviation"
 msgid "M"
-msgstr ""
+msgstr "M"
 
 #: scripts/science_db.lua:236 scripts/science_db.lua:258
 #: scripts/science_db.lua:277
 msgctxt "size_abbreviation"
 msgid "L"
-msgstr ""
+msgstr "L"
 
 #: scripts/science_db.lua:288
 msgid "Homing missile"
@@ -666,7 +668,7 @@ msgstr ""
 #: scripts/science_db.lua:309 scripts/science_db.lua:320
 #: scripts/science_db.lua:329
 msgid "Small (S) / Medium (M) / Large (L)"
-msgstr ""
+msgstr "Léger (S) / Moyen (M) / Large (L)"
 
 #: scripts/science_db.lua:293
 msgid ""

@@ -40,6 +40,7 @@
   - Entities without physics radii now use their mesh scale as a fallback, allowing single-click selection of non-colliding entities
 - Science database missile and mine stats are now derived from the Lua `MissileWeaponData` definitions instead of being duplicated as hardcoded values
 - Redundant `isObjectType()` implementations in scenarios and `comms_scenario_utility.lua` have been removed in favor of the `utils.lua` version
+- French translations updated from upstream 2935
 
 ### Fixed
 
