@@ -203,3 +203,4 @@ GinjaNinja32:selection-improvements 20261122 -- abc2706 and 97778cc only; adapt 
 aBlueShadow:patch-12 20261122 -- address differently by pulling missileWeaponData from missile/mine Lua definitions
 
 dkapell:hvli_delay 20261123 -- overloaded LifeTimeSystem from upstream split from this branch
+dkapell:lifetimeOnExpire 20261123 -- adapt to fork API
