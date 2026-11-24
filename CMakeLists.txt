@@ -434,6 +434,8 @@ set(MAIN_SOURCES
     src/systems/beamweapon.cpp
     src/systems/utilityBeam.h
     src/systems/utilityBeam.cpp
+    src/systems/lifetimesystem.h
+    src/systems/lifetimesystem.cpp
     src/systems/missilesystem.h
     src/systems/missilesystem.cpp
     src/systems/warpsystem.h

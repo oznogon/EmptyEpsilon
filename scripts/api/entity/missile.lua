@@ -35,7 +35,7 @@ local homingMissilePrefab = Prefab("HomingMissile", missilePrefab, {
             blast_range = 30.0,
             explosion_sfx = "sfx/explosion.wav",
         },
-        lifetime = { lifetime = 27.0 },
+        lifetime = { maximum = 27.0 },
         radar_trace = {
             color = { 255, 200, 0, 255 },
         },
@@ -55,7 +55,7 @@ local hvliPrefab = Prefab("HVLI", missilePrefab, {
             blast_range = 20.0,
             explosion_sfx = "sfx/explosion.wav",
         },
-        lifetime = { lifetime = 13.5 },
+        lifetime = { maximum = 13.5 },
         radar_trace = {
             color = { 200, 200, 200, 255 },
         },
@@ -79,7 +79,7 @@ local empMissilePrefab = Prefab("EMPMissile", missilePrefab, {
             explosion_sfx = "sfx/emp_explosion.wav",
         },
         explode_on_timeout = {},
-        lifetime = { lifetime = 27.0 },
+        lifetime = { maximum = 27.0 },
         radar_trace = {
             color = { 100, 32, 255, 255 },
         },
@@ -106,7 +106,7 @@ local nukePrefab = Prefab("Nuke", missilePrefab, {
             delay = 10.0,
             range = 1000.0,
         },
-        lifetime = { lifetime = 27.0 },
+        lifetime = { maximum = 27.0 },
         radar_trace = {
             color = { 255, 100, 32, 255 },
         },

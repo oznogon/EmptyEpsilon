@@ -1,6 +1,6 @@
 local scanProbePrefab = Prefab("ScanProbe", SpaceObjectPrefab, {
     components = {
-        lifetime = { lifetime = 60 * 10 },
+        lifetime = { maximum = 60 * 10 },
         radar_trace = {
             icon = "radar/probe.png",
             min_size = 10.0,
@@ -56,7 +56,8 @@ end
 --- Example: probe:getLifetime()
 function Entity:getLifetime()
     if self.components.lifetime then
-        return self.components.lifetime.lifetime
+        return self.components.lifetime.maximum
+            - self.components.lifetime.alive_for
     end
     return 0.0
 end

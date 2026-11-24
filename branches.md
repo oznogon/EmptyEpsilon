@@ -201,3 +201,5 @@ aBlueShadow:aBlueShadow-patch-9 XXXXXXXX -- previously addressed in GM tweaks re
 
 GinjaNinja32:selection-improvements 20261122 -- abc2706 and 97778cc only; adapt to refactored GM screen's cycling behavior and new limited GM screen
 aBlueShadow:patch-12 20261122 -- address differently by pulling missileWeaponData from missile/mine Lua definitions
+
+dkapell:hvli_delay 20261123 -- overloaded LifeTimeSystem from upstream split from this branch

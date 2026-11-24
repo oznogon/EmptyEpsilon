@@ -69,6 +69,7 @@
 #include "systems/impulse.h"
 #include "systems/internalcrew.h"
 #include "systems/jumpsystem.h"
+#include "systems/lifetimesystem.h"
 #include "systems/maneuvering.h"
 #include "systems/missilesystem.h"
 #include "systems/pathfinding.h"
@@ -179,6 +180,7 @@ void initSystemsAndComponents()
     engine->registerSystem<WarpSystem>();
     engine->registerSystem<BeamWeaponSystem>();
     engine->registerSystem<UtilityBeamSystem>();
+    engine->registerSystem<LifeTimeSystem>();
     engine->registerSystem<MissileSystem>();
     engine->registerSystem<ShieldSystem>();
     engine->registerSystem<CoolantSystem>();

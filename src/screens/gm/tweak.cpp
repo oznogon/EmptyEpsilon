@@ -4336,8 +4336,9 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     addPageToGroup(position_movement_group);
 
     ADD_PAGE(tr("tweak-tab", "Life time"), LifeTime);
-    new_page->description = tr("tweak-lifetime", "Defines a time-limited existence for this entity, and automatically destroys this entity when the remaining lifetime in seconds expires. Typically used to expire probes.\n\nBE CAREFUL WHEN ADDING THIS COMPONENT TO AN ENTITY. If added to an entity while the game is running, the countdown begins immediately. Once destroyed, the entity can't be restored.\n\nCallback member on_expire can't be tweaked via this dialog.");
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Remaining lifetime (seconds):"), LifeTime, lifetime);
+    new_page->description = tr("tweak-lifetime", "Defines a time-limited existence for this entity, and automatically destroys this entity when the elapsed lifetime in seconds reaches the maximum lifetime. Typically used to expire probes.\n\nBE CAREFUL WHEN ADDING THIS COMPONENT TO AN ENTITY. If added to an entity while the game is running, the countdown begins immediately. Once destroyed, the entity can't be restored.\n\nCallback member on_expire can't be tweaked via this dialog.");
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Maximum lifetime (seconds):"), LifeTime, maximum);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Elapsed lifetime (seconds):"), LifeTime, alive_for);
     addPageToGroup(scripting_group);
 
     ADD_PAGE(tr("tweak-tab", "Warp jammer"), WarpJammer);

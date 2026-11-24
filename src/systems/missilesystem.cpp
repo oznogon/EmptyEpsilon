@@ -195,26 +195,6 @@ void MissileSystem::update(float delta)
             explode(entity, {}, deot);
         }
     }
-
-    if (game_server.isAlive())
-    {
-        // TODO: Not really part of missile
-        for (auto [entity, lifetime] : sp::ecs::Query<LifeTime>())
-        {
-            lifetime.lifetime -= delta;
-
-            if (lifetime.lifetime <= 0.0f)
-            {
-                if (entity.hasComponent<ExplodeOnTimeout>())
-                {
-                    if (auto eot = entity.getComponent<ExplodeOnTouch>())
-                        explode(entity, {}, *eot);
-                }
-
-                entity.destroy();
-            }
-        }
-    }
 }
 
 void MissileSystem::collision(sp::ecs::Entity a, sp::ecs::Entity b, float force)
@@ -466,7 +446,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, Mount& tube, float t
     }
 
     if (!no_lifetime_on_missile)
-        missile.addComponent<LifeTime>().lifetime = lifetime * category_modifier;
+        missile.addComponent<LifeTime>().maximum = lifetime * category_modifier;
 
     if (!no_lifetime_on_missile)
     {

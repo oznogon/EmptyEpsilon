@@ -144,7 +144,8 @@ end
 ---   mwd:setLifetime(27)
 function Entity:setLifetime(lifetime)
     if self.components.lifetime then
-        self.components.lifetime.lifetime = lifetime
+        self.components.lifetime.maximum = self.components.lifetime.alive_for
+            + lifetime
     end
     if self.components.missile_weapon_data then
         self.components.missile_weapon_data.lifetime = lifetime

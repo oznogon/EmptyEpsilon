@@ -852,11 +852,19 @@ private:
     {
         auto& page = addPage(tr("tweak-tab", "Lifetime"),
             [](sp::ecs::Entity e) { return e.hasComponent<LifeTime>(); });
-        page.description = tr("tweak-lifetime", "Defines a time-limited existence for this entity. The entity is automatically destroyed when the remaining lifetime expires.");
-        addFloatTweak(page.page, tr("tweak-text", "Lifetime:"), ".components.lifetime.lifetime",
+        page.description = tr("tweak-lifetime", "Defines a time-limited existence for this entity. The entity is automatically destroyed when the elapsed lifetime reaches the maximum lifetime.");
+        addFloatTweak(page.page, tr("tweak-text", "Maximum lifetime:"), ".components.lifetime.maximum",
             [this]()
             {
-                if (auto v = entity.getComponent<LifeTime>()) return v->lifetime;
+                if (auto v = entity.getComponent<LifeTime>()) return v->maximum;
+                return 0.0f;
+            },
+            page.update_funcs
+        );
+        addFloatTweak(page.page, tr("tweak-text", "Elapsed lifetime:"), ".components.lifetime.alive_for",
+            [this]()
+            {
+                if (auto v = entity.getComponent<LifeTime>()) return v->alive_for;
                 return 0.0f;
             },
             page.update_funcs

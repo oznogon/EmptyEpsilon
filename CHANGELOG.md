@@ -40,6 +40,7 @@
   - Entities without physics radii now use their mesh scale as a fallback, allowing single-click selection of non-colliding entities
 - Science database missile and mine stats are now derived from the Lua `MissileWeaponData` definitions instead of being duplicated as hardcoded values
 - Redundant `isObjectType()` implementations in scenarios and `comms_scenario_utility.lua` have been removed in favor of the `utils.lua` version
+- Entity lifetime countdowns are now handled by a dedicated `LifeTimeSystem` instead of the missile system. The `LifeTime` component now tracks `maximum` and `alive_for` instead of a decrementing `lifetime` field, so scripts that define `lifetime` components directly must use `maximum` instead. Upstream 2855
 - French translations updated from upstream 2935
 
 ### Fixed
@@ -53,6 +54,7 @@
   - Dust won't disappear at certain headings, especially after the dust field position is compromised by high-speed movement
   - First-person perspectives on very large ships are no longer positioned outside of the dust field
   - Dust field no longer renders around the player ship when the main screen uses a camera entity's viewpoint instead of the player's
+- Entity lifetime expiration callbacks, such as `ScanProbe:onExpiration()` and `MissileWeaponData`'s `on_lifetime_expire`, now fire when an entity's lifetime expires
 
 ## [2026-10]
 
