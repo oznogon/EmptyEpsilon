@@ -205,6 +205,9 @@ void MissileSystem::update(float delta)
 
             if (lifetime.lifetime <= 0.0f)
             {
+                if (lifetime.on_expire)
+                    LuaConsole::checkResult(lifetime.on_expire.call<void>(entity));
+
                 if (entity.hasComponent<ExplodeOnTimeout>())
                 {
                     if (auto eot = entity.getComponent<ExplodeOnTouch>())
