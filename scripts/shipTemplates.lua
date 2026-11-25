@@ -44,3 +44,5 @@ require("shiptemplates/ktlitan/corvettes.lua")
 require("shiptemplates/ktlitan/frigates.lua")
 require("shiptemplates/ktlitan/destroyers.lua")
 require("shiptemplates/ktlitan/battleships.lua")
+
+require("shiptemplates/ship_template_constants.lua")
