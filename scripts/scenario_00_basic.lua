@@ -23,8 +23,17 @@
 ---
 --- Other player ships can be spawned, but the strength of enemy ships is independent of the number and types of player ships.
 
---- Scenario
+--- Basic Battle scenario 00 for EmptyEpsilon
 -- @script scenario_00_basic
+-- @author daid (primary)
+-- @author capt-t
+-- @author hemmond
+-- @author muerteFR
+-- @author aBlueShadow
+-- @author GinjaNinja32
+-- @author oznogon
+-- @license GPLv2
+-- @release fork-dev-20261125
 
 require("utils.lua")
 -- For this scenario, utils.lua provides:
@@ -47,6 +56,7 @@ local add_waves_to_GM_position -- If set to true, add wave will require GM to cl
 local game_time_remaining = nil -- Maximum game time in seconds.
 local time_warning = nil -- Used for checking when to give a warning, and to update it so the warning happens once.
 
+--- List of generic player ship names, selected from at random for new player ships
 local ship_names = {
     "SS Epsilon",
     "Ironic Gentleman",
@@ -116,16 +126,16 @@ local ship_names = {
     "Jenny",
 }
 
---- Wrapper to adding an enemy wave
+--- Wrapper function to spawn an enemy wave.
 --
--- This wrapper either calls addWaveInner directly (when on random wave positioning)
--- or after onGMClick (when set to GM wave positioning).
+-- This wrapper calls either @{addWaveInner} directly (when using random wave positioning)
+-- or after @{onGMClick} (when using GM wave positioning).
 --
 -- @tparam table list A table containing enemy ship objects.
--- @tparam integer kind A number; at each integer, determines a different wave of ships to add
+-- @tparam integer kind A number; at each integer, determines which wave of ships to add
 --  to the list. Any number is valid, but only 0.99-9.0 are meaningful.
--- @tparam number a The spawned wave's heading relative to the players' spawn point (ignored when on GM positioning).
--- @tparam number d The spawned wave's distance from the players' spawn point (ignored when on GM positioning).
+-- @tparam number a The spawned wave's heading relative to the players' spawn point (ignored when using GM positioning).
+-- @tparam number d The spawned wave's distance from the players' spawn point (ignored when using GM positioning).
 function addWave(list, kind, a, d)
     if add_waves_to_GM_position then
         onGMClick(function(x, y)
@@ -142,12 +152,12 @@ function addWave(list, kind, a, d)
     end
 end
 
---- Add an enemy wave.
+--- Spawns an enemy wave.
 --
--- Create an enemy wave and add all its ships to `list`.
+-- Creates an enemy wave and adds all of its ships to `list`.
 --
 -- @tparam table list A table containing enemy ship objects.
--- @tparam integer kind A number; at each integer, determines a different wave of ships to add
+-- @tparam integer kind A number; at each integer, determines which wave of ships to add
 --  to the list. Any number is valid, but only 0.99-9.0 are meaningful.
 -- @tparam number a The spawned wave's heading relative to the players' spawn point.
 -- @tparam number d The spawned wave's distance from the players' spawn point.
@@ -434,26 +444,26 @@ function addWaveInner(list, kind, a, d)
     end
 end
 
---- Returns a semi-random heading.
+--- Returns a semi-random heading for a wave of ships.
 --
 -- @tparam number cnt A counter, generally between 1 and the number of enemy groups.
 -- @tparam number enemy_group_count A number of enemy groups, generally set by the scenario variation.
--- @treturn number a random angle (between 0-60 and 360+60)
+-- @treturn number A random angle between 0-60 and 360+60
 function randomWaveAngle(cnt, enemy_group_count)
     return cnt * 360 / enemy_group_count + random(-60, 60)
 end
 
---- Returns a semi-random distance.
+--- Returns a semi-random distance for a wave of ships.
 --
--- `enemy_group_count` is multiplied by 3 u and increases the distance.
+-- `enemy_group_count` is multiplied by 3u and increases the distance.
 --
 -- @tparam number enemy_group_count A number of enemy groups, generally set by the scenario variation.
--- @treturn number a distance
+-- @treturn number The random distance.
 function randomWaveDistance(enemy_group_count)
     return random(35000, 40000 + enemy_group_count * 3000)
 end
 
---- Initializes main GM Menu
+--- Initializes the main GM Menu.
 function gmButtons()
     clearGMFunctions()
     addGMFunction(_("buttonGM", "+Named waves"), namedWaves)
@@ -524,7 +534,7 @@ function gmButtons()
     addGMFunction(_("buttonGM", "Win"), gmVictoryYesNo)
 end
 
---- Shows Yes/No question dialog GM submenu with question if Human Navy should win.
+--- Shows a Yes/No question dialog GM submenu to ask if the Human Navy faction should win.
 function gmVictoryYesNo()
     clearGMFunctions()
     addGMFunction(_("buttonGM", "Victory?"), function()
@@ -542,7 +552,7 @@ Scenario ended.]]
     addGMFunction(_("buttonGM", "No"), gmButtons)
 end
 
---- Generate GM Toggle button for changing wave positioning variant.
+--- Generates a GM toggle button to change how waves are positioned.
 function addGMPositionToggle()
     local name = _("buttonGM", "Position: ")
 
@@ -559,7 +569,7 @@ function addGMPositionToggle()
     end)
 end
 
---- Shows "Named waves" GM submenu (that allows spawning more waves).
+--- Shows the "Named waves" GM submenu, which contains tools to spawn more waves.
 function namedWaves()
     local wave_names = {
         [0] = _("buttonGM", "Strix"),
@@ -585,7 +595,7 @@ function namedWaves()
     end
 end
 
---- Initialize scenario.
+--- Initializes the scenario (invoked at scenario start).
 function init()
     -- Spawn a player Atlantis.
     player = PlayerSpaceship()
@@ -927,9 +937,12 @@ Good luck.]]
     end
 end
 
-function countValid(objectList)
+--- Counts all valid entities in a list of entities.
+-- @tparam table object_list A list of entities.
+-- @treturn number The number of valid entities in the list.
+function countValid(object_list)
     local object_count = 0
-    for i_, object in ipairs(objectList) do
+    for i_, object in ipairs(object_list) do
         if object:isValid() then
             object_count = object_count + 1
         end
@@ -937,9 +950,12 @@ function countValid(objectList)
     return object_count
 end
 
---- Update.
+--- Updates the scenario (invoked every frame).
 --
--- @tparam number delta the time delta (in seconds)
+-- Checks victory/defeat conditions, ticks the game clock, and updates the spectator banner.
+-- Victory/defeat conditions depend on the scenario variant in play.
+--
+-- @tparam number delta The time delta from the last update, in seconds.
 function update(delta)
     -- Count all surviving enemies and allies.
     local enemy_count = countValid(enemy_list)
@@ -1069,7 +1085,7 @@ function update(delta)
         return
     end
 
-    -- Set banner for cinematic and top down views.
+    -- Set banner for cinematic view.
     if game_time_remaining ~= nil then
         setBanner(
             string.format(
