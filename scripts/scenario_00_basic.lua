@@ -38,14 +38,14 @@ require("utils.lua")
 --      Returns the bearing between first object/coordinate and second object/coordinate.
 
 -- Global variables for this scenario
-local enemyList
-local friendlyList
-local stationList
-local playerList
-local addWavesToGMPosition -- If set to true, add wave will require GM to click on the map to position, where the wave should be spawned.
+local enemy_list
+local friendly_list
+local station_list
+local player_list
+local add_waves_to_GM_position -- If set to true, add wave will require GM to click on the map to position, where the wave should be spawned.
 
-local gametimeleft = nil -- Maximum game time in seconds.
-local timewarning = nil -- Used for checking when to give a warning, and to update it so the warning happens once.
+local game_time_remaining = nil -- Maximum game time in seconds.
+local time_warning = nil -- Used for checking when to give a warning, and to update it so the warning happens once.
 
 local ship_names = {
     "SS Epsilon",
@@ -127,7 +127,7 @@ local ship_names = {
 -- @tparam number a The spawned wave's heading relative to the players' spawn point (ignored when on GM positioning).
 -- @tparam number d The spawned wave's distance from the players' spawn point (ignored when on GM positioning).
 function addWave(list, kind, a, d)
-    if addWavesToGMPosition then
+    if add_waves_to_GM_position then
         onGMClick(function(x, y)
             onGMClick(nil)
             addWaveInner(
@@ -144,7 +144,7 @@ end
 
 --- Add an enemy wave.
 --
--- That is, create enemy wave and add all its ships to `list`.
+-- Create an enemy wave and add all its ships to `list`.
 --
 -- @tparam table list A table containing enemy ship objects.
 -- @tparam integer kind A number; at each integer, determines a different wave of ships to add
@@ -459,7 +459,7 @@ function gmButtons()
     addGMFunction(_("buttonGM", "+Named waves"), namedWaves)
     addGMFunction(_("buttonGM", "Random wave"), function()
         addWave(
-            enemyList,
+            enemy_list,
             random(0, 10),
             randomWaveAngle(math.random(20), math.random(20)),
             randomWaveDistance(math.random(20))
@@ -469,19 +469,23 @@ function gmButtons()
     -- Let the GM spawn random reinforcements. Their distance from the
     -- players' spawn point is about half that of enemy waves.
     addGMFunction(_("buttonGM", "Random friendly"), function()
-        local friendlyShip = { "Phobos T3", "MU52 Hornet", "Piranha F12" }
-        local friendlyShipIndex = math.random(#friendlyShip)
+        local friendly_ship = {
+            "Phobos T3",
+            "MU52 Hornet",
+            "Piranha F12"
+        }
+        local friendly_ship_index = math.random(#friendly_ship)
 
-        if addWavesToGMPosition then
+        if add_waves_to_GM_position then
             onGMClick(function(x, y)
                 onGMClick(nil)
                 local a = angleRotation(0, 0, x, y)
                 local d = distance(0, 0, x, y)
                 table.insert(
-                    friendlyList,
+                    friendly_list,
                     setCirclePos(
                         CpuShip()
-                            :setTemplate(friendlyShip[friendlyShipIndex])
+                            :setTemplate(friendly_ship[friendly_ship_index])
                             :setRotation(a)
                             :setFaction("Human Navy")
                             :orderRoaming()
@@ -497,10 +501,10 @@ function gmButtons()
             local a = randomWaveAngle(math.random(20), math.random(20))
             local d = random(15000, 20000 + math.random(20) * 1500)
             table.insert(
-                friendlyList,
+                friendly_list,
                 setCirclePos(
                     CpuShip()
-                        :setTemplate(friendlyShip[friendlyShipIndex])
+                        :setTemplate(friendly_ship[friendly_ship_index])
                         :setRotation(a)
                         :setFaction("Human Navy")
                         :orderRoaming()
@@ -542,7 +546,7 @@ end
 function addGMPositionToggle()
     local name = _("buttonGM", "Position: ")
 
-    if addWavesToGMPosition then
+    if add_waves_to_GM_position then
         name = name .. _("buttonGM", "GM")
     else
         name = name .. _("buttonGM", "Random")
@@ -550,7 +554,7 @@ function addGMPositionToggle()
 
     addGMFunction(name, function()
         string.format("") -- Provides global context for SeriousProton
-        addWavesToGMPosition = not addWavesToGMPosition
+        add_waves_to_GM_position = not add_waves_to_GM_position
         gmButtons()
     end)
 end
@@ -572,7 +576,7 @@ function namedWaves()
         addGMFunction(name, function()
             string.format("")
             addWave(
-                enemyList,
+                enemy_list,
                 index,
                 randomWaveAngle(math.random(20), math.random(20)),
                 randomWaveDistance(math.random(5))
@@ -587,25 +591,24 @@ function init()
     player = PlayerSpaceship()
         :setFaction("Human Navy")
         :setTemplate(getScenarioSetting("PlayerShip"))
-    player:setCallSign(ship_names[irandom(1, #ship_names)])
+        :setCallSign(ship_names[irandom(1, #ship_names)])
     if not player:hasWarpDrive() and not player:hasJumpDrive() then
         player:setWarpDrive(true)
     end
 
-    enemyList = {}
-    friendlyList = {}
-    stationList = {}
-    playerList = { player }
+    enemy_list = {}
+    friendly_list = {}
+    station_list = {}
+    player_list = { player }
 
     onNewPlayerShip(function(ship)
-        table.insert(playerList, ship)
+        table.insert(player_list, ship)
     end)
 
-    addWavesToGMPosition = false
+    add_waves_to_GM_position = false
 
     -- Randomly distribute 3 allied stations throughout the region.
-    local n
-    n = 0
+    local n = 0
     -- station_X.comms_data are not yet used, it is here for time when Defense Fleet functionality is implemented to comms_station.lua
     station_1 = SpaceStation()
         :setTemplate("Small Station")
@@ -625,8 +628,8 @@ function init()
             DF3 = "MT52 Hornet",
         },
     }
-    table.insert(stationList, station_1)
-    table.insert(friendlyList, station_1)
+    table.insert(station_list, station_1)
+    table.insert(friendly_list, station_1)
     n = 1
     station_2 = SpaceStation()
         :setTemplate("Medium Station")
@@ -646,8 +649,8 @@ function init()
             DF3 = "Adder MK5",
         },
     }
-    table.insert(stationList, station_2)
-    table.insert(friendlyList, station_2)
+    table.insert(station_list, station_2)
+    table.insert(friendly_list, station_2)
     n = 2
     station_3 = SpaceStation()
         :setTemplate("Large Station")
@@ -667,11 +670,11 @@ function init()
             DF3 = "Phobos T3",
         },
     }
-    table.insert(stationList, station_3)
-    table.insert(friendlyList, station_3)
+    table.insert(station_list, station_3)
+    table.insert(friendly_list, station_3)
 
     -- Start the players with 300 reputation.
-    friendlyList[1]:addReputationPoints(300.0)
+    friendly_list[1]:addReputationPoints(300.0)
 
     -- Spawn a random black hole, avoiding the player's starting position and stations.
     local bh_x, bh_y
@@ -688,7 +691,7 @@ function init()
             spawn_hole = false
         end
         if spawn_hole then
-            for _, station in ipairs(stationList) do
+            for _, station in ipairs(station_list) do
                 if distance(station, bh_x, bh_y) < 5000 then
                     spawn_hole = false
                     break
@@ -702,7 +705,7 @@ function init()
     end
 
     -- Randomly scatter nebulae near the players' spawn point.
-    local cx, cy = friendlyList[1]:getPosition()
+    local cx, cy = friendly_list[1]:getPosition()
     local ndx, ndy = vectorFromAngle(random(0, 360), 6000)
     if
         not (
@@ -744,15 +747,15 @@ function init()
             .. " could not set enemy_group_count"
     )
 
-    local timesetting = {
+    local time_setting = {
         ["Unlimited"] = nil,
         ["20min"] = 20 * 60,
         ["30min"] = 30 * 60,
         ["60min"] = 60 * 60,
     }
-    gametimeleft = timesetting[getScenarioSetting("Time")]
-    if gametimeleft ~= nil then
-        timewarning = gametimeleft - 5 * 60
+    game_time_remaining = time_setting[getScenarioSetting("Time")]
+    if game_time_remaining ~= nil then
+        time_warning = game_time_remaining - 5 * 60
     end
 
     -- If not in the Empty variation, spawn the corresponding number of random
@@ -762,12 +765,12 @@ function init()
         local a = randomWaveAngle(cnt, enemy_group_count)
         local d = randomWaveDistance(enemy_group_count)
         local kind = random(0, 10)
-        addWaveInner(enemyList, kind, a, d)
+        addWaveInner(enemy_list, kind, a, d)
     end
 
     -- Reposition any enemies that spawned within 5U of the black hole.
     if black_hole and black_hole:isValid() then
-        for _, enemy in ipairs(enemyList) do
+        for _, enemy in ipairs(enemy_list) do
             if enemy:isValid() then
                 local ex, ey = enemy:getPosition()
                 if distance(bh_x, bh_y, ex, ey) < 5000 then
@@ -798,7 +801,7 @@ function init()
             local posy = y + dy1 + dy2
             if math.abs(posx) > 1000 and math.abs(posy) > 1000 then
                 local allow_spawn = true
-                for _, station in ipairs(stationList) do
+                for _, station in ipairs(station_list) do
                     if distance(station, posx, posy) < 2000 then
                         allow_spawn = false
                         break
@@ -889,8 +892,8 @@ function init()
     -- Spawn random neutral transports.
     Script():run("util_random_transports.lua")
 
-    local station = friendlyList[1]
-    if gametimeleft ~= nil then
+    local station = friendly_list[1]
+    if game_time_remaining ~= nil then
         station:sendCommsMessage(
             player,
             string.format(
@@ -905,7 +908,7 @@ The mission started at the arrival of this message.
 Good luck.]]
                 ),
                 player:getCallSign(),
-                gametimeleft / 60
+                game_time_remaining / 60
             )
         )
     else
@@ -939,9 +942,9 @@ end
 -- @tparam number delta the time delta (in seconds)
 function update(delta)
     -- Count all surviving enemies and allies.
-    local enemy_count = countValid(enemyList)
-    local friendly_count = countValid(friendlyList)
-    local player_count = countValid(playerList)
+    local enemy_count = countValid(enemy_list)
+    local friendly_count = countValid(friendly_list)
+    local player_count = countValid(player_list)
 
     -- If not playing the Empty variation, declare victory for the
     -- Humans (players) once all enemies are destroyed. Note that players can win
@@ -951,13 +954,13 @@ function update(delta)
     -- a Human victory.
     if enemy_count == 0 and getScenarioSetting("Enemies") ~= "Empty" then
         victory("Human Navy")
-        if gametimeleft ~= nil then
+        if game_time_remaining ~= nil then
             local text = string.format(
                 _(
                     "msgMainscreen&Spectbanner",
                     "Mission: SUCCESS (%d seconds left)"
                 ),
-                math.floor(gametimeleft)
+                math.floor(game_time_remaining)
             )
             globalMessage(text)
             setBanner(text)
@@ -965,9 +968,9 @@ function update(delta)
         end
     end
 
-    if gametimeleft ~= nil then
-        gametimeleft = gametimeleft - delta
-        if gametimeleft < 0 then
+    if game_time_remaining ~= nil then
+        game_time_remaining = game_time_remaining - delta
+        if game_time_remaining < 0 then
             victory("Kraylor")
             local text = _(
                 "msgMainscreen&Spectbanner",
@@ -977,11 +980,11 @@ function update(delta)
             setBanner(text)
             return
         end
-        if gametimeleft < timewarning then
-            local minutes = timewarning / 60
-            if timewarning <= 1 * 60 then -- Less then 1 minutes left.
-                for idx, player in ipairs(playerList) do
-                    friendlyList[1]:sendCommsMessage(
+        if game_time_remaining < time_warning then
+            local minutes = time_warning / 60
+            if time_warning <= 1 * 60 then -- Less then 1 minutes left.
+                for idx, player in ipairs(player_list) do
+                    friendly_list[1]:sendCommsMessage(
                         player,
                         string.format(
                             _(
@@ -995,10 +998,10 @@ function update(delta)
                         )
                     )
                 end
-                timewarning = timewarning - 2 * 60
-            elseif timewarning <= 5 * 60 then -- Less then 5 minutes left. Warn ever 2 minutes instead of every 5.
-                for idx, player in ipairs(playerList) do
-                    friendlyList[1]:sendCommsMessage(
+                time_warning = time_warning - 2 * 60
+            elseif time_warning <= 5 * 60 then -- Less then 5 minutes left. Warn ever 2 minutes instead of every 5.
+                for idx, player in ipairs(player_list) do
+                    friendly_list[1]:sendCommsMessage(
                         player,
                         string.format(
                             _(
@@ -1012,10 +1015,10 @@ function update(delta)
                         )
                     )
                 end
-                timewarning = timewarning - 2 * 60
+                time_warning = time_warning - 2 * 60
             else
-                for idx, player in ipairs(playerList) do
-                    friendlyList[1]:sendCommsMessage(
+                for idx, player in ipairs(player_list) do
+                    friendly_list[1]:sendCommsMessage(
                         player,
                         string.format(
                             _(
@@ -1029,7 +1032,7 @@ function update(delta)
                         )
                     )
                 end
-                timewarning = timewarning - 5 * 60
+                time_warning = time_warning - 5 * 60
             end
         end
     end
@@ -1047,7 +1050,7 @@ function update(delta)
     else
         -- As the battle continues, award reputation based on
         -- the players' progress and number of surviving allies.
-        for i_, friendly in ipairs(friendlyList) do
+        for i_, friendly in ipairs(friendly_list) do
             if friendly:isValid() then
                 friendly:addReputationPoints(delta * friendly_count * 0.1)
             end
@@ -1067,15 +1070,15 @@ function update(delta)
     end
 
     -- Set banner for cinematic and top down views.
-    if gametimeleft ~= nil then
+    if game_time_remaining ~= nil then
         setBanner(
             string.format(
                 _(
                     "msgSpectbanner",
                     "Mission in progress - Time left: %d:%02d - Enemies: %d"
                 ),
-                math.floor(gametimeleft / 60),
-                math.floor(gametimeleft % 60),
+                math.floor(game_time_remaining / 60),
+                math.floor(game_time_remaining % 60),
                 enemy_count
             )
         )
