@@ -321,7 +321,7 @@ template = ShipTemplate()
     :addDoor(5, 1, false)
     :addDoor(5, 2, false)
 
--- Riposte
+-- Riposte (fka Fighter)
 template = ShipTemplate()
     :setName("Riposte")
     :setLocaleName(_("ship", "Fighter"))
@@ -362,7 +362,7 @@ template = ShipTemplate()
     :setSpeed(70, 12, 12)
     :setWarpSpeed(1000)
 
--- Magpie (fka Advanced Striker)
+-- Magpie (fka Adv. Striker)
 template = ShipTemplate()
     :setName("Magpie")
     :setLocaleName(_("ship", "Magpie"))

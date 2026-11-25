@@ -75,7 +75,7 @@ Due to the design's age, most factions procure stripped-down versions, a practic
     :setShields(40, 40)
     :setSpeed(60, 6, 10)
 
--- Karnack MK2
+-- Karnack MK2 (fka Cruiser)
 variation = template
     :copy("Karnack MK2")
     :setLocaleName(_("ship", "Karnack MK2"))
@@ -88,7 +88,7 @@ variation = template
     :setBeam(1, 90,  15, 1000.0, 6.0, 6)
     :setHull(70)
 
--- Polaris
+-- Polaris (fka Missile Cruiser)
 template = ShipTemplate()
     :setName("Polaris")
     :setLocaleName(_("ship", "Polaris"))
