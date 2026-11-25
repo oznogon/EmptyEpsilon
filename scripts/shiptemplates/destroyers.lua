@@ -41,7 +41,6 @@ local variation = template
     :copy("Atlantis")
     :setLocaleName(_("playerShip", "Atlantis"))
     :setType("playership")
-variation
     :setDescription(
         _(
             [[The Atlantis is the smallest model of destroyer, and its combination of frigate-like size and destroyer-like power makes it an excellent escort for larger ships facing multiple smaller enemies. Because the Atlantis is fitted with a jump drive, it can also serve as an intersystem patrol craft.

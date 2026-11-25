@@ -28,7 +28,6 @@ for cnt = 1, 5 do
         local variation = template
             :copy("Personnel Jump Freighter " .. cnt)
             :setLocaleName(string.format(_("ship", "Personnel Jump Freighter %d"), cnt))
-        variation
             :setJumpDrive(true)
     end
 
@@ -53,7 +52,6 @@ for cnt = 1, 5 do
         local variation = template
             :copy("Goods Jump Freighter " .. cnt)
             :setLocaleName(string.format(_("ship", "Goods Jump Freighter %d"), cnt))
-        variation
             :setJumpDrive(true)
     end
 
@@ -78,7 +76,6 @@ for cnt = 1, 5 do
         local variation = template
             :copy("Garbage Jump Freighter " .. cnt)
             :setLocaleName(string.format(_("ship", "Garbage Jump Freighter %d"), cnt))
-        variation
             :setJumpDrive(true)
     end
 
@@ -103,7 +100,6 @@ for cnt = 1, 5 do
         local variation = template
             :copy("Equipment Jump Freighter " .. cnt)
             :setLocaleName(string.format(_("ship", "Equipment Jump Freighter %d"), cnt))
-        variation
             :setJumpDrive(true)
     end
 
@@ -128,7 +124,6 @@ for cnt = 1, 5 do
         local variation = template
             :copy("Fuel Jump Freighter " .. cnt)
             :setLocaleName(string.format(_("ship", "Fuel Jump Freighter %d"), cnt))
-        variation
             :setJumpDrive(true)
     end
 end
@@ -176,7 +171,6 @@ template = ShipTemplate()
 variation = template
     :copy("Flavia Falcon")
     :setLocaleName(_("ship", "Flavia Falcon"))
-variation
     :setDescription(
         _(
             [[The Flavia Falcon is a variant of the Flavia small transport modified for faster flight, and adds rear-mounted beam weapons to keep enemies off its back.]]
@@ -191,7 +185,6 @@ variation = variation
     :copy("Flavia P.Falcon")
     :setLocaleName(_("playerShip", "Flavia P.Falcon"))
     :setType("playership")
-variation
     :setDescription(
         _(
             [[The Flavia P.Falcon is a variant of the Flavia Falcon, and adds a nuclear-capable rear-facing weapon tube and warp drive to its improved impulse engine and rear-facing beam weapons.]]

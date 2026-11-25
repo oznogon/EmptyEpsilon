@@ -79,13 +79,13 @@ Due to the design's age, most factions procure stripped-down versions, a practic
 variation = template
     :copy("Karnack MK2")
     :setLocaleName(_("ship", "Karnack MK2"))
-variation:setDescription(
+    :setDescription(
         _(
             [[The successor to the widely successful Karnack corvette, the mark 2 has several notable improvements over the original ship, including better armor, slightly improved weaponry, and customization by the shipyards. The latter improvement was the most requested feature by several factions once they realized that their old surplus mark I ships were used for less savory purposes.]]
         )
     )
     :setBeam(0, 90, -15, 1000.0, 6.0, 6)
-    :setBeam(1, 90, 15, 1000.0, 6.0, 6)
+    :setBeam(1, 90,  15, 1000.0, 6.0, 6)
     :setHull(70)
 
 -- Polaris
@@ -118,20 +118,19 @@ template = ShipTemplate()
             [[The plainly named Gunship corvette is equipped with a homing missile tube damage a target at range, and dual front-firing beams to finish the target off. It's designed to quickly take out enemies weaker then itself.]]
         )
     )
-    --                  Arc, Dir, Range, CycleTime, Dmg
-template:setBeam(0, 50, -15, 1000.0, 6.0, 8)
-template:setBeam(1, 50, 15, 1000.0, 6.0, 8)
-template:setTubes(1, 8.0)
-template:setHull(100)
-template:setShields(100, 80, 80)
-template:setSpeed(60, 5, 10)
-template:setWeaponStorage("Homing", 4)
+    :setBeam(0, 50, -15, 1000.0, 6.0, 8)
+    :setBeam(1, 50,  15, 1000.0, 6.0, 8)
+    :setTubes(1, 8.0)
+    :setHull(100)
+    :setShields(100, 80, 80)
+    :setSpeed(60, 5, 10)
+    :setWeaponStorage("Homing", 4)
 
 -- Adv. Gunship
 variation = template
     :copy("Adv. Gunship")
     :setLocaleName(_("ship", "Adv. Gunship"))
-variation:setDescription(
+    :setDescription(
         _(
             [[The Advanced Gunship corvette adds a second homing missile tube to damage targets at range, and dual front-firing beams to finish its foes off. It's designed to quickly take out enemies weaker then itself.]]
         )

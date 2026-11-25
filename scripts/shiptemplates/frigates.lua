@@ -44,7 +44,6 @@ local template = ShipTemplate()
 local variation = template
     :copy("Elara P2")
     :setLocaleName(_("ship", "Elara P2"))
-variation
     :setDescription(
         _(
             [[Inspired by the Phobos T3's design, the Elara P2 adds a warp drive and stronger front shields.]]
@@ -58,7 +57,6 @@ variation = template
     :copy("Phobos M3")
     :setLocaleName(_("ship", "Phobos M3"))
     :setModel("AtlasHeavyFighterRed")
-variation
     :setDescription(
         _(
             [[The Phobos M3 is one of the most common variants of the Phobos T3. It adds a mine-laying tube, but the extra storage required for the mines slows this ship down slightly.]]
@@ -79,7 +77,6 @@ variation = variation
     :copy("Phobos M3P")
     :setLocaleName(_("playerShip", "Phobos M3P"))
     :setType("playership")
-variation
     :setDescription(
         _(
             [[This variant of the Phobos M3 has front-firing weapon tubes, making it an easier-to-use ship in some scenarios.]]
@@ -150,7 +147,6 @@ template = ShipTemplate()
 variation = template
     :copy("Nirvana R5A")
     :setLocaleName(_("ship", "Nirvana R5A"))
-variation
     :setDescription(
         _(
             [[The Nirvana series of anti-fighter frigates have several rapid-firing, low-damage point-defense weapons to quickly take out starfighters.]]
@@ -168,7 +164,6 @@ variation
 variation = template
     :copy("Nirvana R3")
     :setLocaleName(_("ship", "Nirvana R3"))
-variation
     :setDescription(
         _(
             [[The Nirvana series of anti-fighter frigates have several rapid-firing, low-damage point-defense weapons to quickly take out starfighters.]]
@@ -192,9 +187,9 @@ template = ShipTemplate()
     :setModel("HeavyCorvetteYellow")
     :setRadarTrace("piranha.png")
     :setDescription(
-    _(
-        [[A heavy artillery frigate, the Storm fires volleys of missiles from forward-facing tubes.]]
-    )
+        _(
+            [[A heavy artillery frigate, the Storm fires volleys of missiles from forward-facing tubes.]]
+        )
     )
     :setBeamWeapon(0, 60, 0, 1200, 3, 2)
     :setHull(50)
@@ -297,7 +292,6 @@ template = ShipTemplate()
 variation = template
     :copy("Piranha F12.M")
     :setLocaleName(_("ship", "Piranha F12.M"))
-variation
     :setDescription(
         _(
             [[This Piranha F12 variant has specially modified weapon tubes that allow it to fire nukes in addition to its normal loadout. However, these changes reduce its overall missile storage capacity.]]
@@ -313,7 +307,6 @@ variation = template
     :setLocaleName(_("playerShip", "Piranha"))
     :setType("playership")
     :setClass(_("class", "Frigate"), _("subclass", "Assault"))
-variation
     :setDescription(
         _(
             [[This combat-specialized Piranha F12 adds mine-laying tubes, combat maneuvering systems, and a jump drive.]]
@@ -371,7 +364,6 @@ variation
 variation = template
     :copy("Piranha F8")
     :setLocaleName(_("ship", "Piranha F8"))
-variation
     :setDescription(
         _(
             [[The first version of the Piranha wasn't popular due to its meager firepower and odd tube configuration. The result was a huge financial failure.]]
@@ -391,7 +383,6 @@ template = ShipTemplate()
     :setLocaleName(_("ship", "Stalker Q7"))
     :setClass(_("class", "Frigate"), _("subclass", "Strike"))
     :setModel("small_frigate_3")
-template
     :setRadarTrace("cruiser.png")
     :setDescription(
         _(
@@ -413,7 +404,6 @@ template
 variation = template
     :copy("Stalker Q5")
     :setLocaleName(_("ship", "Stalker Q5"))
-variation
     :setDescription(
         _(
             [[Ships of the Stalker line are designed to swoop into battle, deal damage quickly, and get out fast.]]
@@ -431,7 +421,6 @@ variation
 variation = template
     :copy("Stalker R7")
     :setLocaleName(_("ship", "Stalker R7"))
-variation
     :setDescription(
         _(
             [[Ships of the Stalker line are designed to swoop into battle, deal damage quickly, and get out fast.]]
@@ -448,7 +437,6 @@ variation
 local var2 = variation
     :copy("Stalker R5")
     :setLocaleName(_("ship", "Stalker R5"))
-var2
     :setDescription(
         _(
             [[Ships of the Stalker line are designed to swoop into battle, deal damage quickly, and get out fast.]]
@@ -511,7 +499,6 @@ template = ShipTemplate()
 variation = template
     :copy("Fiend G4")
     :setLocaleName(_("ship", "Fiend G4"))
-variation
     :setDescription(
         _(
             [[The second model produced by Conversions R Us, the Fiend G4 is simply a decommissioned gunship hull with a cheap FTL drive installed. It has the same homing missile tube and beams as a gunship to take down weaker ships, but its FTL drive makes it a more dangerous foe.]]
@@ -526,7 +513,6 @@ variation
 variation = variation
     :copy("Fiend G6")
     :setLocaleName(_("ship", "Fiend G6"))
-variation
     :setDescription(
         _(
             [[Following the success of the Fiend G3 and G4, the Fiend G5 and G6 are simply decommissioned advanced gunship hulls with a cheap FTL drive installed. It has the same two homing missile tubes and beams as an advanced gunship to take down weaker ships, but its FTL drive makes it a more dangerous foe.]]
@@ -540,7 +526,6 @@ variation
 variation = template
     :copy("Fiend G5")
     :setLocaleName(_("ship", "Fiend G5"))
-variation
     :setDescription(
         _(
             [[Following the success of the Fiend G3 and G4, the Fiend G5 and G6 are simply decommissioned advanced gunship hulls with a cheap FTL drive installed. It has the same two homing missile tubes and beams as an advanced gunship to take down weaker ships, but its FTL drive makes it a more dangerous foe.]]
@@ -563,7 +548,7 @@ template = ShipTemplate()
         )
     )
     :setBeam(0, 60, -15, 1000.0, 6.0, 8)
-    :setBeam(1, 60, 15, 1000.0, 6.0, 8)
+    :setBeam(1, 60,  15, 1000.0, 6.0, 8)
     :setBeam(2, 25, 170, 1000.0, 6.0, 8)
     :setBeam(3, 25, 190, 1000.0, 6.0, 8)
     :setHull(70)
