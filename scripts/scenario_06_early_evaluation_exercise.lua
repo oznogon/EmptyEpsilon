@@ -10795,9 +10795,51 @@ function sendCrutch(p, task)
         )
     end
 end
+function validHomeStation(p)
+    if p.home_station ~= nil and p.home_station:isValid() then
+        return p.home_station
+    end
+    local station_candidates = {}
+    if allied_stations ~= nil then
+        for i, station in ipairs(allied_stations) do
+            table.insert(station_candidates, station)
+        end
+    end
+    if stationList ~= nil then
+        for i, station in ipairs(stationList) do
+            table.insert(station_candidates, station)
+        end
+    end
+    for i, station in ipairs(station_candidates) do
+        if station:isValid() then
+            if station.heading_angle == nil then
+                station.heading_angle = station:getRotation()
+            end
+            if station.neb_x == nil or station.neb_y == nil then
+                local station_x, station_y = station:getPosition()
+                local vx, vy =
+                    vectorFromAngleNorth(station.heading_angle, 25000)
+                station.neb_x = station_x + vx
+                station.neb_y = station_y + vy
+            end
+            if station.home_player_name == nil then
+                station.home_player_name = p:getCallSign()
+            end
+            p.home_station = station
+            return station
+        end
+    end
+    p.home_station = nil
+    return nil
+end
 function playerTask(p)
     if func_diagnostic then
         print("player task")
+    end
+    if p.home_station == nil or not p.home_station:isValid() then
+        if validHomeStation(p) == nil then
+            return
+        end
     end
     if p.task == nil then
         local power_systems = {
