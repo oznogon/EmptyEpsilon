@@ -111,6 +111,8 @@ void MissileVolleyAI::runAttack(sp::ecs::Entity target)
                 float target_angle = calculateFiringSolution(target, tube);
                 if (target_angle != std::numeric_limits<float>::infinity())
                 {
+                    if (!canFireMissile(tube, *mounts))
+                        continue;
                     can_fire_count--;
                     if (can_fire_count == 0)
                         MissileSystem::fire(owner, tube, target_angle, target);

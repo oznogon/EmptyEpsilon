@@ -98,7 +98,7 @@ void FighterAI::runAttack(sp::ecs::Entity target)
                 for(auto& tube : mounts->mounts)
                 {
                     if (tube.type != MountType::MissileWeapon) continue;
-                    if (tube.state == MountState::Loaded && missile_fire_delay <= 0.0f)
+                    if (tube.state == MountState::Loaded && missile_fire_delay <= 0.0f && canFireMissile(tube, *mounts))
                     {
                         float target_angle = calculateFiringSolution(target, tube);
                         if (target_angle != std::numeric_limits<float>::infinity())

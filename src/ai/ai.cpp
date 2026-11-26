@@ -220,7 +220,7 @@ void ShipAI::runLight(float delta)
                         {
                             if (mount.type != MountType::MissileWeapon)
                                 continue;
-                            if (mount.state == MountState::Loaded && missile_fire_delay <= 0.0f)
+                            if (mount.state == MountState::Loaded && missile_fire_delay <= 0.0f && canFireMissile(mount, *mounts))
                             {
                                 const float target_angle = calculateFiringSolution(target_component->entity, mount);
                                 if (target_angle != std::numeric_limits<float>::infinity())
@@ -810,7 +810,7 @@ void ShipAI::runAttack(sp::ecs::Entity target)
             {
                 if (mount.type != MountType::MissileWeapon) continue;
 
-                if (mount.state == MountState::Loaded && missile_fire_delay <= 0.0f)
+                if (mount.state == MountState::Loaded && missile_fire_delay <= 0.0f && canFireMissile(mount, *mounts))
                 {
                     const float target_angle = calculateFiringSolution(target, mount);
                     if (target_angle != std::numeric_limits<float>::infinity())
@@ -1216,6 +1216,24 @@ bool ShipAI::betterTarget(sp::ecs::Entity new_target, sp::ecs::Entity current_ta
     if (new_score > current_score * 1.5f) return true;
     if (new_score > current_score + 5000.0f) return true;
     return false;
+}
+
+bool ShipAI::canFireMissile(const Mount& mount, const Mounts& mounts) const
+{
+    auto& registry = MissileWeaponDataRegistry::instance();
+    if (mount.type_loaded < 0 || registry.getNameForIndex(mount.type_loaded) != "HVLI")
+        return true;
+
+    for (const auto& other : mounts.mounts)
+    {
+        if (&other == &mount) continue;
+        if (other.type != MountType::MissileWeapon) continue;
+        if (other.state != MountState::Firing) continue;
+        if (other.type_loaded < 0) continue;
+        if (registry.getNameForIndex(other.type_loaded) != "HVLI") continue;
+        if (fabs(angleDifference(other.direction, mount.direction)) <= 2.0f) return false;
+    }
+    return true;
 }
 
 float ShipAI::calculateFiringSolution(sp::ecs::Entity target, const Mount& mount)

@@ -102,6 +102,7 @@ protected:
 
     // Used for missiles, which require some planning to fire.
     float calculateFiringSolution(sp::ecs::Entity target, const Mount& mount);
+    bool canFireMissile(const Mount& mount, const Mounts& mounts) const;
     sp::ecs::Entity findBestMissileRestockTarget(glm::vec2 position, float radius);
 
     // Return scoring estimates for missile types.
