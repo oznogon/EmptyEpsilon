@@ -1240,10 +1240,10 @@ function addStationToDatabase(station)
         end
         local station_type = station:getTypeName()
         local size_value = ""
-        local small_station_key = _("scienceDB", ST.SMALL STATION)
-        local medium_station_key = _("scienceDB", ST.MEDIUM STATION)
-        local large_station_key = _("scienceDB", ST.LARGE STATION)
-        local huge_station_key = _("scienceDB", ST.HUGE STATION)
+        local small_station_key = _("scienceDB", "Small Station")
+        local medium_station_key = _("scienceDB", "Medium Station")
+        local large_station_key = _("scienceDB", "Large Station")
+        local huge_station_key = _("scienceDB", "Huge Station")
         if station_type == small_station_key then
             size_value = _("scienceDB", "Small")
             local small_db =
@@ -3667,7 +3667,7 @@ function commsStationReinforcements()
     end
     local reinforcement_info = {
         {
-            desc = _("stationAssist-comms", ST.ADDER MK3),
+            desc = _("stationAssist-comms", "Adder MK3"),
             template = ST.ADDER_MK3,
             threshold = 20,
             cost = math.ceil(
@@ -3676,7 +3676,7 @@ function commsStationReinforcements()
             avail = comms_target.comms_data.service_available.amk3_reinforcements,
         },
         {
-            desc = _("stationAssist-comms", ST.MU52 HORNET),
+            desc = _("stationAssist-comms", "MU52 Hornet"),
             template = ST.MU52_HORNET,
             threshold = 50,
             cost = math.ceil(
@@ -3694,7 +3694,7 @@ function commsStationReinforcements()
             avail = comms_target.comms_data.service_available.reinforcements,
         },
         {
-            desc = _("stationAssist-comms", ST.ADDER MK8),
+            desc = _("stationAssist-comms", "Adder MK8"),
             template = ST.ADDER_MK8,
             threshold = 33,
             cost = math.ceil(
@@ -3703,7 +3703,7 @@ function commsStationReinforcements()
             avail = comms_target.comms_data.service_available.amk8_reinforcements,
         },
         {
-            desc = _("stationAssist-comms", ST.PHOBOS T3),
+            desc = _("stationAssist-comms", "Phobos T3"),
             template = ST.PHOBOS_T3,
             threshold = 66,
             cost = math.ceil(
@@ -3712,7 +3712,7 @@ function commsStationReinforcements()
             avail = comms_target.comms_data.service_available.phobos_reinforcements,
         },
         {
-            desc = _("stationAssist-comms", ST.STALKER R7),
+            desc = _("stationAssist-comms", "Stalker R7"),
             template = ST.STALKER_R7,
             threshold = 70,
             cost = math.ceil(
