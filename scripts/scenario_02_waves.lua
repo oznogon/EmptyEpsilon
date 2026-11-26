@@ -21,15 +21,15 @@ require("utils.lua")
 function randomStationTemplate()
     local rnd = random(0, 100)
     if rnd < 10 then
-        return "Huge Station"
+        return ST.HUGE_STATION
     end
     if rnd < 20 then
-        return "Large Station"
+        return ST.LARGE_STATION
     end
     if rnd < 50 then
-        return "Medium Station"
+        return ST.MEDIUM_STATION
     end
-    return "Small Station"
+    return ST.SMALL_STATION
 end
 
 function init()
@@ -39,7 +39,9 @@ function init()
     enemyList = {}
     friendlyList = {}
 
-    PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
+    PlayerSpaceship()
+        :setFaction("Human Navy")
+        :setTemplate(ST.ATLANTIS)
 
     -- Give the mission to the (first) player ship
     local text = _(
@@ -175,40 +177,40 @@ function spawnWave()
         local score
         if typeRoll < 2 then
             if irandom(1, 100) < 80 then
-                ship:setTemplate("MT52 Hornet")
+                ship:setTemplate(ST.MT52_HORNET)
             else
-                ship:setTemplate("MU52 Hornet")
+                ship:setTemplate(ST.MU52_HORNET)
             end
             score = 5
         elseif typeRoll < 3 then
             if irandom(1, 100) < 80 then
-                ship:setTemplate("Adder MK5")
+                ship:setTemplate(ST.ADDER_MK5)
             else
-                ship:setTemplate("WX-Lindworm")
+                ship:setTemplate(ST.WX_LINDWORM)
             end
             score = 7
         elseif typeRoll < 6 then
             if irandom(1, 100) < 80 then
-                ship:setTemplate("Phobos T3")
+                ship:setTemplate(ST.PHOBOS_T3)
             else
-                ship:setTemplate("Piranha F12")
+                ship:setTemplate(ST.PIRANHA_F12)
             end
             score = 15
         elseif typeRoll < 7 then
-            ship:setTemplate("Ranus U")
+            ship:setTemplate(ST.RANUS_U)
             score = 25
         elseif typeRoll < 8 then
             if irandom(1, 100) < 50 then
-                ship:setTemplate("Stalker Q7")
+                ship:setTemplate(ST.STALKER_Q7)
             else
-                ship:setTemplate("Stalker R7")
+                ship:setTemplate(ST.STALKER_R7)
             end
             score = 25
         elseif typeRoll < 9 then
-            ship:setTemplate("Atlantis X23")
+            ship:setTemplate(ST.ATLANTIS_X23)
             score = 50
         else
-            ship:setTemplate("Odin")
+            ship:setTemplate(ST.ODIN)
             score = 250
         end
         assert(score ~= nil)

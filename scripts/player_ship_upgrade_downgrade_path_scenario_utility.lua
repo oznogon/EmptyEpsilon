@@ -14,7 +14,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
     local template_db = queryScienceDatabase(ship_yard_key, template)
     if template_db == nil and upgrade_path[template] ~= nil then
         local template_descriptions = {
-            ["MP52 Hornet"] = {
+            [ST.MP52_HORNET] = {
                 image = "radar/fighter.png",
                 model = "WespeScoutYellow",
                 desc = _(
@@ -22,7 +22,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
                     "The MP52 Hornet is a significantly upgraded version of MU52 Hornet, with nearly twice the hull strength, nearly three times the shielding, better acceleration, impulse boosters, and a second laser cannon."
                 ),
             },
-            ["ZX-Lindworm"] = {
+            [ST.ZX_LINDWORM] = {
                 image = "radar/fighter.png",
                 model = "LindwurmFighterBlue",
                 desc = _(
@@ -30,7 +30,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
                     "The ZX model is an improvement on the WX-Lindworm with stronger hull and shields, faster impulse and tubes, more missiles and a single weak, turreted beam. The 'Worm' as it's often called, is a bomber-class starfighter. While one of the least-shielded starfighters in active duty, the Worm's launchers can pack quite a punch. Its goal is to fly in, destroy its target, and fly out or be destroyed."
                 ),
             },
-            ["Phobos M3P"] = {
+            [ST.PHOBOS_M3P] = {
                 image = "radar/cruiser.png",
                 model = "AtlasHeavyFighterYellow",
                 desc = _(
@@ -38,7 +38,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
                     "Player variant of the Phobos M3. Not as strong as the Atlantis, but has front firing tubes, making it an easier to use ship in some scenarios."
                 ),
             },
-            ["Hathcock"] = {
+            [ST.HATHCOCK] = {
                 image = "radar/piranha.png",
                 model = "HeavyCorvetteGreen",
                 desc = _(
@@ -46,7 +46,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
                     "Long range narrow beam and some point defense beams, broadside missiles. Agile for a frigate"
                 ),
             },
-            ["Piranha"] = {
+            [ST.PIRANHA] = {
                 image = "radar/piranha.png",
                 model = "HeavyCorvetteRed",
                 desc = _(
@@ -54,7 +54,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
                     "This combat-specialized Piranha F12 adds mine-laying tubes, combat maneuvering systems, and a jump drive."
                 ),
             },
-            ["Flavia P.Falcon"] = {
+            [ST.FLAVIA_PFALCON] = {
                 image = "radar/tug.png",
                 model = "LightCorvetteGrey",
                 desc = _(
@@ -62,7 +62,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
                     "Popular among traders and smugglers, the Flavia is a small cargo and passenger transport. It's cheaper than a freighter for small loads and short distances, and is often used to carry high-value cargo discreetly.\n\nThe Flavia Falcon is a Flavia transport modified for faster flight, and adds rear-mounted lasers to keep enemies off its back.\n\nThe Flavia P.Falcon has a nuclear-capable rear-facing weapon tube and a warp drive."
                 ),
             },
-            ["Repulse"] = {
+            [ST.REPULSE] = {
                 image = "radar/tug.png",
                 model = "LightCorvetteRed",
                 desc = _(
@@ -70,7 +70,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
                     "A Flavia P. Falcon with better hull and shields, a jump drive, two turreted beams covering both sides and a forward and rear tube. The nukes and mines are gone"
                 ),
             },
-            ["Atlantis"] = {
+            [ST.ATLANTIS] = {
                 image = "radar/dread.png",
                 model = "battleship_destroyer_1_upgraded",
                 desc = _(
@@ -78,7 +78,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
                     "A refitted Atlantis X23 for more general tasks. The large shield system has been replaced with an advanced combat maneuvering system and improved impulse engines. Its missile loadout is also more diverse. Mistaking the modified Atlantis for an Atlantis X23 would be a deadly mistake."
                 ),
             },
-            ["Crucible"] = {
+            [ST.CRUCIBLE] = {
                 image = "radar/laser.png",
                 model = "LaserCorvetteRed",
                 desc = _(
@@ -86,7 +86,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
                     "A number of missile tubes range around this ship. Beams were deemed lower priority, though they are still present. Stronger defenses than a frigate, but not as strong as the Atlantis"
                 ),
             },
-            ["Maverick"] = {
+            [ST.MAVERICK] = {
                 image = "radar/laser.png",
                 model = "LaserCorvetteGreen",
                 desc = _(
@@ -94,7 +94,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
                     "A number of beams bristle from various points on this gunner. Missiles were deemed lower priority, though they are still present. Stronger defenses than a frigate, but not as strong as the Atlantis"
                 ),
             },
-            ["Benedict"] = {
+            [ST.BENEDICT] = {
                 image = "radar/transport.png",
                 model = "transport_4_2",
                 desc = _(
@@ -102,7 +102,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
                     "Benedict is an improved version of the Jump Carrier"
                 ),
             },
-            ["Kiriya"] = {
+            [ST.KIRIYA] = {
                 image = "radar/transport.png",
                 model = "transport_4_2",
                 desc = _(
@@ -110,7 +110,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
                     "Kiriya is Warp Carrier based on the jump carrier with stronger shields and hull and with minimal armament"
                 ),
             },
-            ["Vindicator"] = {
+            [ST.VINDICATOR] = {
                 image = "radar/cruiser.png",
                 model = "battleship_destroyer_5_upgraded",
                 desc = _(
@@ -118,7 +118,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
                     "A fairly standard cruiser. Stronger than average beams, weaker than average shields, farther than average jump drive range"
                 ),
             },
-            ["Avalanche"] = {
+            [ST.AVALANCHE] = {
                 image = "radar/missile_cruiser.png",
                 model = "space_cruiser_4",
                 desc = _(
@@ -126,7 +126,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
                     "It's all about the missiles for this model. Broadside tubes shoot homing missiles (30!), front, homing, EMP and nuke. Comparatively weak shields, especially in the rear. Sluggish impulse drive."
                 ),
             },
-            ["Ender"] = {
+            [ST.ENDER] = {
                 image = "radar/battleship.png",
                 model = "Ender Battlecruiser",
                 desc = _(
@@ -134,7 +134,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
                     "The Ender battle station is a huge ship with many defensive features. It can be docked by smaller ships."
                 ),
             },
-            ["Nautilus"] = {
+            [ST.NAUTILUS] = {
                 image = "radar/tug.png",
                 model = "space_tug",
                 desc = _(
@@ -142,15 +142,15 @@ function addShipUpgradeInfoToScienceDatabase(template)
                     "Small mine laying vessel with minimal armament, shields and hull."
                 ),
             },
-            ["Crow"] = {
+            [ST.CROW] = {
                 image = "radar/adv_striker.png",
                 model = "dark_fighter_6",
                 desc = _(
                     "scienceDB",
-                    "The Striker is the predecessor to the advanced striker, slow but agile, but does not do an extreme amount of damage, and lacks in shields."
+                    "The Crow is the predecessor to the advanced striker, slow but agile, but does not do an extreme amount of damage, and lacks in shields."
                 ),
             },
-            ["Stingray"] = {
+            [ST.STINGRAY] = {
                 image = "radar/fighter.png",
                 model = "small_fighter_1",
                 desc = _(
@@ -741,7 +741,7 @@ function playerShipUpgradeDowngradeData()
         base_upgrade_cost = 5
     end
     upgrade_path = { --one path per player ship
-        ["Atlantis"] = { --10 + beam(7) + missile(10) + shield(9) + hull(8) + impulse(16) + ftl(10) + sensors(10) = 80
+        [ST.ATLANTIS] = { --10 + beam(7) + missile(10) + shield(9) + hull(8) + impulse(16) + ftl(10) + sensors(10) = 80
             ["beam"] = {
                 { --1
                     {
@@ -2174,7 +2174,7 @@ function playerShipUpgradeDowngradeData()
             ["providers"] = false,
             ["score"] = 33,
         },
-        ["Crucible"] = { --9 + beam(7) + missile(10) + shield(9) + hull(6) + impulse(17) + ftl(10) + sensors(11) = 79
+        [ST.CRUCIBLE] = { --9 + beam(7) + missile(10) + shield(9) + hull(6) + impulse(17) + ftl(10) + sensors(11) = 79
             ["beam"] = {
                 { --1
                     {
@@ -3667,7 +3667,7 @@ function playerShipUpgradeDowngradeData()
             ["providers"] = false,
             ["score"] = 32,
         },
-        ["Maverick"] = { --9 + beam(11) + missile(12) + shield(9) + hull(6) + impulse(17) + ftl(10) + sensors(11) = 85
+        [ST.MAVERICK] = { --9 + beam(11) + missile(12) + shield(9) + hull(6) + impulse(17) + ftl(10) + sensors(11) = 85
             ["beam"] = {
                 { --1
                     {
@@ -5366,7 +5366,7 @@ function playerShipUpgradeDowngradeData()
             ["providers"] = false,
             ["score"] = 30,
         },
-        ["Benedict"] = { --7 + beam(9) + missile(13) + shield(9) + hull(6) + impulse(17) + ftl(10) + sensors(9) = 81
+        [ST.BENEDICT] = { --7 + beam(9) + missile(13) + shield(9) + hull(6) + impulse(17) + ftl(10) + sensors(9) = 81
             ["beam"] = {
                 { --1
                     {
@@ -6885,7 +6885,7 @@ function playerShipUpgradeDowngradeData()
             ["providers"] = false,
             ["score"] = 25,
         },
-        ["Kiriya"] = { --7 + beam(9) + missile(13) + shield(9) + hull(6) + impulse(17) + ftl(10) + sensors(9) = 81
+        [ST.KIRIYA] = { --7 + beam(9) + missile(13) + shield(9) + hull(6) + impulse(17) + ftl(10) + sensors(9) = 81
             ["beam"] = {
                 { --1
                     {
@@ -8410,7 +8410,7 @@ function playerShipUpgradeDowngradeData()
             ["providers"] = false,
             ["score"] = 25,
         },
-        ["Phobos M3P"] = { --8 + beam(9) + missile(12) + shield(9) + hull(6) + impulse(13) + ftl(9) + sensors(12) = 78
+        [ST.PHOBOS_M3P] = { --8 + beam(9) + missile(12) + shield(9) + hull(6) + impulse(13) + ftl(9) + sensors(12) = 78
             ["beam"] = {
                 { --1
                     {
@@ -9729,7 +9729,7 @@ function playerShipUpgradeDowngradeData()
             ["providers"] = false,
             ["score"] = 27,
         },
-        ["Hathcock"] = { --8 + beam(9) + missile(13) + shield(9) + hull(6) + impulse(14) + ftl(8) + sensors(11) = 78
+        [ST.HATHCOCK] = { --8 + beam(9) + missile(13) + shield(9) + hull(6) + impulse(14) + ftl(8) + sensors(11) = 78
             ["beam"] = {
                 { --1
                     {
@@ -11081,7 +11081,7 @@ function playerShipUpgradeDowngradeData()
             ["providers"] = false,
             ["score"] = 32,
         },
-        ["Piranha"] = { --9 + beam(8) + missile(15) + shield(8) + hull(6) + impulse(9) + ftl(8) + sensors(11) = 74
+        [ST.PIRANHA] = { --9 + beam(8) + missile(15) + shield(8) + hull(6) + impulse(9) + ftl(8) + sensors(11) = 74
             ["beam"] = {
                 { --1
                     {
@@ -12834,7 +12834,7 @@ function playerShipUpgradeDowngradeData()
             ["providers"] = false,
             ["score"] = 26,
         },
-        ["Flavia P.Falcon"] = { --7 + beam(9) + missile(14) + shield(9) + hull(6) + impulse(10) + ftl(9) + sensors(11) = 77
+        [ST. FLAVIA_PFALCON] = { --7 + beam(9) + missile(14) + shield(9) + hull(6) + impulse(10) + ftl(9) + sensors(11) = 77
             ["beam"] = {
                 { --1
                     {
@@ -14036,7 +14036,7 @@ function playerShipUpgradeDowngradeData()
             ["providers"] = false,
             ["score"] = 26,
         },
-        ["Repulse"] = { --8 + beam(10) + missile(13) + shield(9) + hull(6) + impulse(10) + ftl(9) + sensors(10) = 75
+        [ST.REPULSE] = { --8 + beam(10) + missile(13) + shield(9) + hull(6) + impulse(10) + ftl(9) + sensors(10) = 75
             ["beam"] = {
                 { --1
                     {
@@ -15309,7 +15309,7 @@ function playerShipUpgradeDowngradeData()
             ["providers"] = false,
             ["score"] = 30,
         },
-        ["Vindicator"] = { --10 + beam(8) + missile(12) + shield(8) + hull(6) + impulse(10) + ftl(10) + sensors(10) = 74
+        [ST.VINDICATOR] = { --10 + beam(8) + missile(12) + shield(8) + hull(6) + impulse(10) + ftl(10) + sensors(10) = 74
             ["beam"] = {
                 { --1
                     {
@@ -16489,7 +16489,7 @@ function playerShipUpgradeDowngradeData()
             ["providers"] = false,
             ["score"] = 29,
         },
-        ["Avalanche"] = { --10 + beam(9) + missile(17) + shield(8) + hull(6) + impulse(10) + ftl(9) + sensors(10) = 79
+        [ST.AVALANCHE] = { --10 + beam(9) + missile(17) + shield(8) + hull(6) + impulse(10) + ftl(9) + sensors(10) = 79
             ["beam"] = {
                 { --1
                     { idx = -1 },
@@ -18305,7 +18305,7 @@ function playerShipUpgradeDowngradeData()
             ["providers"] = false,
             ["score"] = 30,
         },
-        ["Stingray"] = { --5 + beam(11) + missile(10) + shield(7) + hull(5) + impulse(8) + ftl(9) + sensors(7) = 62
+        [ST.STINGRAY] = { --5 + beam(11) + missile(10) + shield(7) + hull(5) + impulse(8) + ftl(9) + sensors(7) = 62
             ["beam"] = {
                 { --1
                     {
@@ -19323,7 +19323,7 @@ function playerShipUpgradeDowngradeData()
             ["providers"] = false,
             ["score"] = 22,
         },
-        ["Nautilus"] = { --8 + beam(11) + missile(13) + shield(7) + hull(5) + impulse(9) + ftl(10) + sensors(9) = 72
+        [ST.NAUTILUS] = { --8 + beam(11) + missile(13) + shield(7) + hull(5) + impulse(9) + ftl(10) + sensors(9) = 72
             ["beam"] = {
                 { --1
                     {
@@ -20647,7 +20647,7 @@ function playerShipUpgradeDowngradeData()
             ["providers"] = false,
             ["score"] = 28,
         },
-        ["Crow"] = { --6 + beam(8) + missile(11) + shield(8) + hull(5) + impulse(8) + ftl(6) + sensors(5) = 57
+        [ST.CROW] = { --6 + beam(8) + missile(11) + shield(8) + hull(5) + impulse(8) + ftl(6) + sensors(5) = 57
             ["beam"] = {
                 { --1
                     {
@@ -21623,7 +21623,7 @@ function playerShipUpgradeDowngradeData()
             ["providers"] = false,
             ["score"] = 21,
         },
-        ["Ender"] = { --25 + beam(11) + missile(11) + shield(8) + hull(5) + impulse(14) + ftl(8) + sensors(11) = 93
+        [ST.ENDER] = { --25 + beam(11) + missile(11) + shield(8) + hull(5) + impulse(14) + ftl(8) + sensors(11) = 93
             ["beam"] = {
                 { --1
                     {
@@ -24291,7 +24291,7 @@ function playerShipUpgradeDowngradeData()
             ["providers"] = false,
             ["score"] = 36,
         },
-        ["MP52 Hornet"] = { --5 + beam(11) + missile(12) + shield(7) + hull(5) + impulse(6) + ftl(9) + sensors(4) = 59
+        [ST.MP52_HORNET] = { --5 + beam(11) + missile(12) + shield(7) + hull(5) + impulse(6) + ftl(9) + sensors(4) = 59
             ["beam"] = {
                 { --1
                     {
@@ -25319,7 +25319,7 @@ function playerShipUpgradeDowngradeData()
             ["providers"] = false,
             ["score"] = 16,
         },
-        ["ZX-Lindworm"] = { --5 + beam(8) + missile(16) + shield(5) + hull(5) + impulse(9) + ftl(9) + sensors(5) = 62
+        [ST.ZX_LINDWORM] = { --5 + beam(8) + missile(16) + shield(5) + hull(5) + impulse(9) + ftl(9) + sensors(5) = 62
             ["beam"] = {
                 { --1
                     {

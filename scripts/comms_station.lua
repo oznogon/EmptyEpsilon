@@ -472,11 +472,11 @@ function commsStationSpecificReinforcement(
                         )
                     then
                         local reinforcement_template = {
-                            ["amk3_reinforcement"] = "Adder MK3",
-                            ["hornet_reinforcement"] = "MU52 Hornet",
-                            ["reinforcements"] = "Adder MK5",
-                            ["amk8_reinforcement"] = "Adder MK8",
-                            ["phobos_reinforcement"] = "Phobos T3",
+                            ["amk3_reinforcement"] = ST.ADDER_MK3,
+                            ["hornet_reinforcement"] = ST.MU52_HORNET,
+                            ["reinforcements"] = ST.ADDER_MK5,
+                            ["amk8_reinforcement"] = ST.ADDER_MK8,
+                            ["phobos_reinforcement"] = ST.PHOBOS_T3,
                         }
                         local ship = CpuShip()
                             :setFactionId(comms_target:getFactionId())

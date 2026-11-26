@@ -309,7 +309,7 @@ function cucaracha(enemyFaction)
     --Relative strength reference number: 36
     local ship = CpuShip()
         :setFaction(enemyFaction)
-        :setTemplate("Apis")
+        :setTemplate(ST.APIS)
         :onTakingDamage(function(self, instigator)
             string.format("") --serious proton needs a global context
             if instigator ~= nil then
@@ -358,7 +358,7 @@ function dreadnought2(enemyFaction)
     local dreadnought2_key = _("scienceDB", "Dreadnought II")
     local ship = CpuShip()
         :setFaction(enemyFaction)
-        :setTemplate("Dreadnought")
+        :setTemplate(ST.DREADNOUGHT)
         :onTakingDamage(function(self, instigator)
             string.format("") --serious proton needs a global context
             if instigator ~= nil then
@@ -941,7 +941,7 @@ function gnat(enemyFaction)
     --Relative strength reference number: 2
     local ship = CpuShip()
         :setFaction(enemyFaction)
-        :setTemplate("Ktlitan Drone")
+        :setTemplate(ST.KTLITAN_DRONE)
         :setTypeName("Gnat")
         :setHullMax(15) --weaker hull (vs 30)
         :setHull(15)
@@ -1301,7 +1301,7 @@ function k2breaker(enemyFaction)
     --Relative strength reference number: 55
     local ship = CpuShip()
         :setFaction(enemyFaction)
-        :setTemplate("Ktlitan Breaker")
+        :setTemplate(ST.KTLITAN_BREAKER)
         :onTakingDamage(function(self, instigator)
             string.format("") --serious proton needs a global context
             if instigator ~= nil then
@@ -1726,7 +1726,7 @@ function shepherd(enemyFaction)
     --Relative strength reference number: 6
     local ship = CpuShip()
         :setFaction(enemyFaction)
-        :setTemplate("Riposte")
+        :setTemplate(ST.RIPOSTE)
         :onTakingDamage(function(self, instigator)
             string.format("") -- SeriousProton needs a global context
             if instigator ~= nil then
@@ -2527,7 +2527,7 @@ function addFreighter(freighter_type, ship)
                     queryScienceDatabase(
                         ships_key,
                         corvette_key,
-                        "Equipment Jump Freighter 4"
+                        ST.EQUIPMENT_JUMP_FREIGHTER_4
                     ),
                     ship
                 )

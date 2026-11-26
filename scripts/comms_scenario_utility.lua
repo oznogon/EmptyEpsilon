@@ -560,10 +560,10 @@ function initializeImprovementMissions()
             if not station:isEnemy(tpa) then
                 local station_type = station:getTypeName()
                 if
-                    station_type == "Small Station"
-                    or station_type == "Medium Station"
-                    or station_type == "Large Station"
-                    or station_type == "Huge Station"
+                    station_type == ST.SMALL_STATION
+                    or station_type == ST.MEDIUM_STATION
+                    or station_type == ST.LARGE_STATION
+                    or station_type == ST.HUGE_STATION
                 then
                     table.insert(mission_stations, station)
                 end
@@ -1240,10 +1240,10 @@ function addStationToDatabase(station)
         end
         local station_type = station:getTypeName()
         local size_value = ""
-        local small_station_key = _("scienceDB", "Small Station")
-        local medium_station_key = _("scienceDB", "Medium Station")
-        local large_station_key = _("scienceDB", "Large Station")
-        local huge_station_key = _("scienceDB", "Huge Station")
+        local small_station_key = _("scienceDB", ST.SMALL STATION)
+        local medium_station_key = _("scienceDB", ST.MEDIUM STATION)
+        local large_station_key = _("scienceDB", ST.LARGE STATION)
+        local huge_station_key = _("scienceDB", ST.HUGE STATION)
         if station_type == small_station_key then
             size_value = _("scienceDB", "Small")
             local small_db =
@@ -2194,64 +2194,64 @@ function stationDefenseFleet()
         if generate_defense_fleet then
             local station_type = comms_target:getTypeName()
             local size_matters = {
-                ["Small Station"] = -5,
-                ["Medium Station"] = 0,
-                ["Large Station"] = 5,
-                ["Huge Station"] = 10,
+                [ST.SMALL_STATION] = -5,
+                [ST.MEDIUM_STATION] = 0,
+                [ST.LARGE_STATION] = 5,
+                [ST.HUGE_STATION] = 10,
             }
             local adjustment = size_matters[station_type]
             comms_target.comms_data.idle_defense_fleet =
-                { ["DF1"] = "MT52 Hornet" }
+                { ["DF1"] = ST.MT52_HORNET }
             if random(1, 100) < (95 + adjustment) then
                 comms_target.comms_data.idle_defense_fleet["DF2"] =
-                    "MU52 Hornet"
+                    ST.MU52_HORNET
                 if random(1, 100) < (90 + adjustment) then
                     comms_target.comms_data.idle_defense_fleet["DF3"] =
-                        "Adder MK5"
+                        ST.ADDER_MK5
                     if random(1, 100) < (85 + adjustment) then
                         comms_target.comms_data.idle_defense_fleet["DF4"] =
-                            "Phobos T3"
+                            ST.PHOBOS_T3
                         if random(1, 100) < (80 + adjustment) then
                             comms_target.comms_data.idle_defense_fleet["DF5"] =
-                                "Adder MK8"
+                                ST.ADDER_MK8
                             if random(1, 100) < (75 + adjustment) then
                                 comms_target.comms_data.idle_defense_fleet["DF6"] =
-                                    "Elara P2"
+                                    ST.ELARA_P2
                                 if random(1, 100) < (70 + adjustment) then
                                     comms_target.comms_data.idle_defense_fleet["DF7"] =
-                                        "Nirvana R5"
+                                        ST.NIRVANA_R5
                                     if random(1, 100) < (65 + adjustment) then
                                         comms_target.comms_data.idle_defense_fleet["DF8"] =
-                                            "WX-Lindworm"
+                                            ST.WX_LINDWORM
                                         if
                                             random(1, 100) < (60 + adjustment)
                                         then
                                             comms_target.comms_data.idle_defense_fleet["DF9"] =
-                                                "Adder MK6"
+                                                ST.ADDER_MK6
                                             if
                                                 random(1, 100)
                                                 < (55 + adjustment)
                                             then
                                                 comms_target.comms_data.idle_defense_fleet["DF10"] =
-                                                    "Stalker Q7"
+                                                    ST.STALKER_Q7
                                                 if
                                                     random(1, 100)
                                                     < (50 + adjustment)
                                                 then
                                                     comms_target.comms_data.idle_defense_fleet["DF11"] =
-                                                        "Ktlitan Drone"
+                                                        ST.KTLITAN_DRONE
                                                     if
                                                         random(1, 100)
                                                         < (45 + adjustment)
                                                     then
                                                         comms_target.comms_data.idle_defense_fleet["DF12"] =
-                                                            "Nirvana R5A"
+                                                            ST.NIRVANA_R5A
                                                         if
                                                             random(1, 100)
                                                             < (40 + adjustment)
                                                         then
                                                             comms_target.comms_data.idle_defense_fleet["DF13"] =
-                                                                "Piranha F8"
+                                                                ST.PIRANHA_F8
                                                             if
                                                                 random(1, 100)
                                                                 < (
@@ -2260,7 +2260,7 @@ function stationDefenseFleet()
                                                                 )
                                                             then
                                                                 comms_target.comms_data.idle_defense_fleet["DF14"] =
-                                                                    "Stalker R7"
+                                                                    ST.STALKER_R7
                                                                 if
                                                                     random(
                                                                         1,
@@ -2272,7 +2272,7 @@ function stationDefenseFleet()
                                                                     )
                                                                 then
                                                                     comms_target.comms_data.idle_defense_fleet["DF15"] =
-                                                                        "Atlantis X23"
+                                                                        ST.ATLANTIS_X23
                                                                     if
                                                                         random(
                                                                             1,
@@ -2284,7 +2284,7 @@ function stationDefenseFleet()
                                                                         )
                                                                     then
                                                                         comms_target.comms_data.idle_defense_fleet["DF16"] =
-                                                                            "Piranha F12"
+                                                                            ST.PIRANHA_F12
                                                                         if
                                                                             random(
                                                                                 1,
@@ -2296,7 +2296,7 @@ function stationDefenseFleet()
                                                                             )
                                                                         then
                                                                             comms_target.comms_data.idle_defense_fleet["DF17"] =
-                                                                                "Fiend G5"
+                                                                                ST.FIEND_G5
                                                                         end
                                                                     end
                                                                 end
@@ -3667,8 +3667,8 @@ function commsStationReinforcements()
     end
     local reinforcement_info = {
         {
-            desc = _("stationAssist-comms", "Adder MK3"),
-            template = "Adder MK3",
+            desc = _("stationAssist-comms", ST.ADDER MK3),
+            template = ST.ADDER_MK3,
             threshold = 20,
             cost = math.ceil(
                 comms_target.comms_data.service_cost.amk3_reinforcements
@@ -3676,8 +3676,8 @@ function commsStationReinforcements()
             avail = comms_target.comms_data.service_available.amk3_reinforcements,
         },
         {
-            desc = _("stationAssist-comms", "MU52 Hornet"),
-            template = "MU52 Hornet",
+            desc = _("stationAssist-comms", ST.MU52 HORNET),
+            template = ST.MU52_HORNET,
             threshold = 50,
             cost = math.ceil(
                 comms_target.comms_data.service_cost.hornet_reinforcements
@@ -3686,7 +3686,7 @@ function commsStationReinforcements()
         },
         {
             desc = _("stationAssist-comms", "Standard Adder MK5"),
-            template = "Adder MK5",
+            template = ST.ADDER_MK5,
             threshold = 0,
             cost = math.ceil(
                 comms_target.comms_data.service_cost.reinforcements
@@ -3694,8 +3694,8 @@ function commsStationReinforcements()
             avail = comms_target.comms_data.service_available.reinforcements,
         },
         {
-            desc = _("stationAssist-comms", "Adder MK8"),
-            template = "Adder MK8",
+            desc = _("stationAssist-comms", ST.ADDER MK8),
+            template = ST.ADDER_MK8,
             threshold = 33,
             cost = math.ceil(
                 comms_target.comms_data.service_cost.amk8_reinforcements
@@ -3703,8 +3703,8 @@ function commsStationReinforcements()
             avail = comms_target.comms_data.service_available.amk8_reinforcements,
         },
         {
-            desc = _("stationAssist-comms", "Phobos T3"),
-            template = "Phobos T3",
+            desc = _("stationAssist-comms", ST.PHOBOS T3),
+            template = ST.PHOBOS_T3,
             threshold = 66,
             cost = math.ceil(
                 comms_target.comms_data.service_cost.phobos_reinforcements
@@ -3712,8 +3712,8 @@ function commsStationReinforcements()
             avail = comms_target.comms_data.service_available.phobos_reinforcements,
         },
         {
-            desc = _("stationAssist-comms", "Stalker R7"),
-            template = "Stalker R7",
+            desc = _("stationAssist-comms", ST.STALKER R7),
+            template = ST.STALKER_R7,
             threshold = 70,
             cost = math.ceil(
                 comms_target.comms_data.service_cost.stalker_reinforcements
@@ -17178,7 +17178,7 @@ function minorUpgrades()
             if random(1, 100) - 28 then
                 if beams_for_shields_templates == nil then
                     beams_for_shields_templates = {
-                        ["Atlantis"] = {
+                        [ST.ATLANTIS] = {
                             {
                                 index = 2,
                                 arc = 50,
@@ -17196,7 +17196,7 @@ function minorUpgrades()
                                 dmg = 4,
                             },
                         },
-                        ["Crucible"] = {
+                        [ST.CRUCIBLE] = {
                             {
                                 index = 2,
                                 arc = 35,
@@ -17214,7 +17214,7 @@ function minorUpgrades()
                                 dmg = 2.5,
                             },
                         },
-                        ["Maverick"] = {
+                        [ST.MAVERICK] = {
                             {
                                 index = 6,
                                 arc = 45,
@@ -17232,7 +17232,7 @@ function minorUpgrades()
                                 dmg = 4,
                             },
                         },
-                        ["Benedict"] = {
+                        [ST.BENEDICT] = {
                             {
                                 index = 2,
                                 arc = 10,
@@ -17254,7 +17254,7 @@ function minorUpgrades()
                                 tspd = 6,
                             },
                         },
-                        ["Kiriya"] = {
+                        [ST.KIRIYA] = {
                             {
                                 index = 2,
                                 arc = 10,
@@ -17276,7 +17276,7 @@ function minorUpgrades()
                                 tspd = 6,
                             },
                         },
-                        ["Saipan"] = {
+                        [ST.SAIPAN] = {
                             {
                                 index = 3,
                                 arc = 60,
@@ -17304,7 +17304,7 @@ function minorUpgrades()
                                 tspd = 0.5,
                             },
                         },
-                        ["Phobos M3P"] = {
+                        [ST.PHOBOS_M3P] = {
                             {
                                 index = 2,
                                 arc = 45,
@@ -17322,7 +17322,7 @@ function minorUpgrades()
                                 dmg = 3,
                             },
                         },
-                        ["Hathcock"] = {
+                        [ST.HATHCOCK] = {
                             {
                                 index = 4,
                                 arc = 2,
@@ -17356,7 +17356,7 @@ function minorUpgrades()
                                 dmg = 2,
                             },
                         },
-                        ["Flavia P.Falcon"] = {
+                        [ST.FLAVIA_PFALCON] = {
                             {
                                 index = 2,
                                 arc = 20,
@@ -17374,7 +17374,7 @@ function minorUpgrades()
                                 dmg = 3,
                             },
                         },
-                        ["Repulse"] = {
+                        [ST.REPULSE] = {
                             {
                                 index = 2,
                                 arc = 10,
@@ -17396,7 +17396,7 @@ function minorUpgrades()
                                 tspd = 5,
                             },
                         },
-                        ["MP52 Hornet"] = {
+                        [ST.MP52_HORNET] = {
                             {
                                 index = 2,
                                 arc = 15,
@@ -17414,7 +17414,7 @@ function minorUpgrades()
                                 dmg = 2,
                             },
                         },
-                        ["ZX-Lindworm"] = {
+                        [ST.ZX_LINDWORM] = {
                             {
                                 index = 1,
                                 arc = 10,
@@ -17426,7 +17426,7 @@ function minorUpgrades()
                                 tspd = 5,
                             },
                         },
-                        ["Vindicator"] = {
+                        [ST.VINDICATOR] = {
                             {
                                 index = 2,
                                 arc = 45,
@@ -17444,7 +17444,7 @@ function minorUpgrades()
                                 dmg = 5,
                             },
                         },
-                        ["Nautilus"] = {
+                        [ST.NAUTILUS] = {
                             {
                                 index = 2,
                                 arc = 10,
@@ -17466,7 +17466,7 @@ function minorUpgrades()
                                 tspd = 6,
                             },
                         },
-                        ["Crow"] = {
+                        [ST.CROW] = {
                             {
                                 index = 2,
                                 arc = 10,
@@ -17488,7 +17488,7 @@ function minorUpgrades()
                                 tspd = 6,
                             },
                         },
-                        ["Ender"] = {
+                        [ST.ENDER] = {
                             {
                                 index = 12,
                                 arc = 10,

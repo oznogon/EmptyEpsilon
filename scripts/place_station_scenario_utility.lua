@@ -337,10 +337,10 @@ function pickStation(name, diagnostic, size)
 
     if station_template_chance == nil then
         station_template_chance = {
-            ["Small Station"] = 0,
-            ["Medium Station"] = 20,
-            ["Large Station"] = 30,
-            ["Huge Station"] = 40,
+            [ST.SMALL_STATION] = 0,
+            [ST.MEDIUM_STATION] = 20,
+            [ST.LARGE_STATION] = 30,
+            [ST.HUGE_STATION] = 40,
         }
     end
 
@@ -462,13 +462,13 @@ function szt()
     local stationSizeRandom = random(1, 100)
 
     if stationSizeRandom <= 8 then
-        sizeTemplate = "Huge Station" -- 8% huge
+        sizeTemplate = ST.HUGE_STATION -- 8% huge
     elseif stationSizeRandom <= 24 then
-        sizeTemplate = "Large Station" -- 16% large
+        sizeTemplate = ST.LARGE_STATION -- 16% large
     elseif stationSizeRandom <= 50 then
-        sizeTemplate = "Medium Station" -- 26% medium
+        sizeTemplate = ST.MEDIUM_STATION -- 26% medium
     else
-        sizeTemplate = "Small Station" -- 50% small
+        sizeTemplate = ST.SMALL_STATION -- 50% small
     end
 
     return sizeTemplate
