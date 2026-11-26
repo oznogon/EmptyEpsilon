@@ -51,3 +51,4 @@ packs/__pycache__/
 # clangd cache
 .cache/
 scripts/tests
+scripts/locale/tests
