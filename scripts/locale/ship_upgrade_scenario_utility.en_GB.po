@@ -1,0 +1,24 @@
+#: scripts/ship_upgrade_scenario_utility.lua:232
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s requires %s for the upgrade"
+msgstr ""
+
+#: scripts/ship_upgrade_scenario_utility.lua:239
+msgctxt "upgrade-comms"
+msgid "Your ship type does not support this upgrade."
+msgstr ""
+
+#: scripts/ship_upgrade_scenario_utility.lua:243
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "%s completed the %s upgrade."
+msgstr ""
+
+#: scripts/ship_upgrade_scenario_utility.lua:259
+msgid "upgrade-comms"
+msgstr ""
+
+#: scripts/ship_upgrade_scenario_utility.lua:326
+msgid "Back"
+msgstr ""

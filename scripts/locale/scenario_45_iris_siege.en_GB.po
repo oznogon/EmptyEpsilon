@@ -15,7 +15,18 @@ msgid ""
 "\n"
 "USN Discord: https://discord.gg/PntGG3a where you can join a game online. "
 "There's usually one every weekend. All experience levels are welcome."
-msgstr "The system holds destructive nebulae at bay but enemies sabotage our defensive apparatus. Stop them before the system is overwhelmed.\n\nDesigned for one or more player ships. Terrain changes each time the scenario is run. Scenario inspired by aspects of a scenario written by srps.\n\nVersion 1\n\nUSN Discord: https://discord.gg/PntGG3a where you can join a game online. There's usually one every weekend. All experience levels are welcome."
+msgstr ""
+"The system holds destructive nebulae at bay but enemies sabotage our "
+"defensive apparatus. Stop them before the system is overwhelmed.\n"
+"\n"
+"Designed for one or more player ships. Terrain changes each time the "
+"scenario is run. Scenario inspired by aspects of a scenario written by "
+"srps.\n"
+"\n"
+"Version 1\n"
+"\n"
+"USN Discord: https://discord.gg/PntGG3a where you can join a game online. "
+"There's usually one every weekend. All experience levels are welcome."
 
 # Scenario setting
 msgctxt "setting"
@@ -124,7 +135,9 @@ msgctxt "setting"
 msgid ""
 "Configures whether the player ship or ships automatically respawn in game or "
 "not and how often if they do automatically respawn"
-msgstr "Configures whether the player ship or ships automatically respawn in game or not and how often if they do automatically respawn"
+msgstr ""
+"Configures whether the player ship or ships automatically respawn in game or "
+"not and how often if they do automatically respawn"
 
 msgctxt "Respawn"
 msgid "None"
@@ -174,7 +187,8 @@ msgstr "ReputationGoal"
 msgctxt "setting"
 msgid ""
 "Sets the reputation goal to win the game. Default 500 runs about an hour"
-msgstr "Sets the reputation goal to win the game. Default 500 runs about an hour"
+msgstr ""
+"Sets the reputation goal to win the game. Default 500 runs about an hour"
 
 msgctxt "ReputationGoal"
 msgid "300"
@@ -256,1497 +270,1044 @@ msgctxt "ReputationGoal"
 msgid "Accumulate 1200 reputation points to win"
 msgstr "Accumulate 1200 reputation points to win"
 
-#: scripts/scenario_45_iris_siege.lua:74 scripts/scenario_45_iris_siege.lua:85
-msgctxt "stationServices-comms"
-msgid "reactor"
-msgstr "reactor"
-
-#: scripts/scenario_45_iris_siege.lua:75
-msgctxt "stationServices-comms"
-msgid "beam weapons"
-msgstr "beam weapons"
-
-#: scripts/scenario_45_iris_siege.lua:76
-msgctxt "stationServices-comms"
-msgid "missile system"
-msgstr "missile system"
-
-#: scripts/scenario_45_iris_siege.lua:77 scripts/scenario_45_iris_siege.lua:88
-msgctxt "stationServices-comms"
-msgid "maneuver"
-msgstr "manoeuvre"
-
-#: scripts/scenario_45_iris_siege.lua:78
-msgctxt "stationServices-comms"
-msgid "impulse engines"
-msgstr "impulse engines"
-
-#: scripts/scenario_45_iris_siege.lua:79
-msgctxt "stationServices-comms"
-msgid "warp drive"
-msgstr "warp drive"
-
-#: scripts/scenario_45_iris_siege.lua:80
-msgctxt "stationServices-comms"
-msgid "jump drive"
-msgstr "jump drive"
-
-#: scripts/scenario_45_iris_siege.lua:81 scripts/scenario_45_iris_siege.lua:92
-msgctxt "stationServices-comms"
-msgid "front shield"
-msgstr "front shield"
-
-#: scripts/scenario_45_iris_siege.lua:82 scripts/scenario_45_iris_siege.lua:93
-msgctxt "stationServices-comms"
-msgid "rear shield"
-msgstr "rear shield"
-
-#: scripts/scenario_45_iris_siege.lua:86
-msgctxt "stationServices-comms"
-msgid "beams"
-msgstr "beams"
-
-#: scripts/scenario_45_iris_siege.lua:87
-msgctxt "stationServices-comms"
-msgid "missiles"
-msgstr "missiles"
-
-#: scripts/scenario_45_iris_siege.lua:89
-msgctxt "stationServices-comms"
-msgid "impulse"
-msgstr "impulse"
-
-#: scripts/scenario_45_iris_siege.lua:90
-msgctxt "stationServices-comms"
-msgid "warp"
-msgstr "warp"
-
-#: scripts/scenario_45_iris_siege.lua:91
-msgctxt "stationServices-comms"
-msgid "jump"
-msgstr "jump"
-
-#: scripts/scenario_45_iris_siege.lua:172
-msgctxt "trade-comms"
-msgid "food"
-msgstr "food"
-
-#: scripts/scenario_45_iris_siege.lua:173
-msgctxt "trade-comms"
-msgid "medicine"
-msgstr "medicine"
-
-#: scripts/scenario_45_iris_siege.lua:174
-msgctxt "trade-comms"
-msgid "luxury"
-msgstr "luxury"
-
-#: scripts/scenario_45_iris_siege.lua:175
-msgctxt "trade-comms"
-msgid "cobalt"
-msgstr "cobalt"
-
-#: scripts/scenario_45_iris_siege.lua:176
-msgctxt "trade-comms"
-msgid "dilithium"
-msgstr "dilithium"
-
-#: scripts/scenario_45_iris_siege.lua:177
-msgctxt "trade-comms"
-msgid "gold"
-msgstr "gold"
-
-#: scripts/scenario_45_iris_siege.lua:178
-msgctxt "trade-comms"
-msgid "nickel"
-msgstr "nickel"
-
-#: scripts/scenario_45_iris_siege.lua:179
-msgctxt "trade-comms"
-msgid "platinum"
-msgstr "platinum"
-
-#: scripts/scenario_45_iris_siege.lua:180
-msgctxt "trade-comms"
-msgid "tritanium"
-msgstr "tritanium"
-
-#: scripts/scenario_45_iris_siege.lua:181
-msgctxt "trade-comms"
-msgid "autodoc"
-msgstr "autodoc"
-
-#: scripts/scenario_45_iris_siege.lua:182
-msgctxt "trade-comms"
-msgid "android"
-msgstr "android"
-
-#: scripts/scenario_45_iris_siege.lua:183
-msgctxt "trade-comms"
-msgid "battery"
-msgstr "battery"
-
-#: scripts/scenario_45_iris_siege.lua:184
-msgctxt "trade-comms"
-msgid "beam"
-msgstr "beam"
-
-#: scripts/scenario_45_iris_siege.lua:185
-msgctxt "trade-comms"
-msgid "circuit"
-msgstr "circuit"
-
-#: scripts/scenario_45_iris_siege.lua:186
-msgctxt "trade-comms"
-msgid "communication"
-msgstr "communication"
-
-#: scripts/scenario_45_iris_siege.lua:187
-msgctxt "trade-comms"
-msgid "filament"
-msgstr "filament"
-
-#: scripts/scenario_45_iris_siege.lua:188
-msgctxt "trade-comms"
-msgid "impulse"
-msgstr "impulse"
-
-#: scripts/scenario_45_iris_siege.lua:189
-msgctxt "trade-comms"
-msgid "lifter"
-msgstr "lifter"
-
-#: scripts/scenario_45_iris_siege.lua:190
-msgctxt "trade-comms"
-msgid "nanites"
-msgstr "nanites"
-
-#: scripts/scenario_45_iris_siege.lua:191
-msgctxt "trade-comms"
-msgid "optic"
-msgstr "optic"
-
-#: scripts/scenario_45_iris_siege.lua:192
-msgctxt "trade-comms"
-msgid "repulsor"
-msgstr "repulsor"
-
-#: scripts/scenario_45_iris_siege.lua:193
-msgctxt "trade-comms"
-msgid "robotic"
-msgstr "robotic"
-
-#: scripts/scenario_45_iris_siege.lua:194
-msgctxt "trade-comms"
-msgid "sensor"
-msgstr "sensor"
-
-#: scripts/scenario_45_iris_siege.lua:195
-msgctxt "trade-comms"
-msgid "shield"
-msgstr "shield"
-
-#: scripts/scenario_45_iris_siege.lua:196
-msgctxt "trade-comms"
-msgid "software"
-msgstr "software"
-
-#: scripts/scenario_45_iris_siege.lua:197
-msgctxt "trade-comms"
-msgid "tractor"
-msgstr "tractor"
-
-#: scripts/scenario_45_iris_siege.lua:198
-msgctxt "trade-comms"
-msgid "transporter"
-msgstr "transporter"
-
-#: scripts/scenario_45_iris_siege.lua:199
-msgctxt "trade-comms"
-msgid "warp"
-msgstr "warp"
-
-#: scripts/scenario_45_iris_siege.lua:3372
+#: scripts/scenario_45_iris_siege.lua:3326
 msgctxt "buttonGM"
 msgid "Random"
 msgstr "Random"
 
-#: scripts/scenario_45_iris_siege.lua:3373
+#: scripts/scenario_45_iris_siege.lua:3327
 msgctxt "buttonGM"
 msgid "Fighters"
 msgstr "Fighters"
 
-#: scripts/scenario_45_iris_siege.lua:3374
+#: scripts/scenario_45_iris_siege.lua:3328
 msgctxt "buttonGM"
 msgid "Chasers"
 msgstr "Chasers"
 
-#: scripts/scenario_45_iris_siege.lua:3375
+#: scripts/scenario_45_iris_siege.lua:3329
 msgctxt "buttonGM"
 msgid "Frigates"
 msgstr "Frigates"
 
-#: scripts/scenario_45_iris_siege.lua:3376
+#: scripts/scenario_45_iris_siege.lua:3330
 msgctxt "buttonGM"
 msgid "Beamers"
 msgstr "Beamers"
 
-#: scripts/scenario_45_iris_siege.lua:3377
+#: scripts/scenario_45_iris_siege.lua:3331
 msgctxt "buttonGM"
 msgid "Missilers"
 msgstr "Missilers"
 
-#: scripts/scenario_45_iris_siege.lua:3378
+#: scripts/scenario_45_iris_siege.lua:3332
 msgctxt "buttonGM"
 msgid "Adders"
 msgstr "Adders"
 
-#: scripts/scenario_45_iris_siege.lua:3379
+#: scripts/scenario_45_iris_siege.lua:3333
 msgctxt "buttonGM"
 msgid "Non-DB"
 msgstr "Non-DB"
 
-#: scripts/scenario_45_iris_siege.lua:3380
+#: scripts/scenario_45_iris_siege.lua:3334
 msgctxt "buttonGM"
 msgid "Drones"
 msgstr "Drones"
 
-#: scripts/scenario_45_iris_siege.lua:3386
+#: scripts/scenario_45_iris_siege.lua:3340
 msgctxt "scienceDescription-buoy"
 msgid "Come to Billy Bob's for the best food in the sector"
 msgstr "Come to Billy Bob's for the best food in the sector"
 
-#: scripts/scenario_45_iris_siege.lua:3390
+#: scripts/scenario_45_iris_siege.lua:3344
 msgctxt "scienceDescription-buoy"
 msgid "It's never too late to buy life insurance"
 msgstr "It's never too late to buy life insurance"
 
-#: scripts/scenario_45_iris_siege.lua:3392
+#: scripts/scenario_45_iris_siege.lua:3346
 msgctxt "scienceDescription-buoy"
 msgid "You'll feel better in an Adder Mark 9"
 msgstr "You'll feel better in an Adder Mark 9"
 
-#: scripts/scenario_45_iris_siege.lua:3395
+#: scripts/scenario_45_iris_siege.lua:3349
 msgctxt "scienceDescription-buoy"
 msgid ""
 "Melinda's Mynock Management service: excellent rates, satisfaction guaranteed"
-msgstr "Melinda's Mynock Management service: excellent rates, satisfaction guaranteed"
+msgstr ""
+"Melinda's Mynock Management service: excellent rates, satisfaction guaranteed"
 
-#: scripts/scenario_45_iris_siege.lua:3399
+#: scripts/scenario_45_iris_siege.lua:3353
 msgctxt "scienceDescription-buoy"
 msgid "Visit Repulse shipyards for the best deals"
 msgstr "Visit Repulse shipyards for the best deals"
 
-#: scripts/scenario_45_iris_siege.lua:3401
+#: scripts/scenario_45_iris_siege.lua:3355
 msgctxt "scienceDescription-buoy"
 msgid "Fresh fish! We catch, you buy!"
 msgstr "Fresh fish! We catch, you buy!"
 
-#: scripts/scenario_45_iris_siege.lua:3402
+#: scripts/scenario_45_iris_siege.lua:3356
 msgctxt "scienceDescription-buoy"
 msgid "Get your fuel cells at Mariana's Market"
 msgstr "Get your fuel cells at Mariana's Market"
 
-#: scripts/scenario_45_iris_siege.lua:3405
+#: scripts/scenario_45_iris_siege.lua:3359
 msgctxt "scienceDescription-buoy"
 msgid "Find a special companion. All species available"
 msgstr "Find a special companion. All species available"
 
-#: scripts/scenario_45_iris_siege.lua:3409
+#: scripts/scenario_45_iris_siege.lua:3363
 msgctxt "scienceDescription-buoy"
 msgid "Feeling down? Robotherapist is there for you"
 msgstr "Feeling down? Robotherapist is there for you"
 
-#: scripts/scenario_45_iris_siege.lua:3411
+#: scripts/scenario_45_iris_siege.lua:3365
 msgctxt "scienceDescription-buoy"
 msgid "30 days, 30 kilograms, guaranteed"
 msgstr "30 days, 30 kilograms, guaranteed"
 
-#: scripts/scenario_45_iris_siege.lua:3412
+#: scripts/scenario_45_iris_siege.lua:3366
 msgctxt "scienceDescription-buoy"
 msgid "Be sure to drink your Ovaltine"
 msgstr "Be sure to drink your Ovaltine"
 
-#: scripts/scenario_45_iris_siege.lua:3415
+#: scripts/scenario_45_iris_siege.lua:3369
 msgctxt "scienceDescription-buoy"
 msgid "Need a personal upgrade? Contact Celine's Cybernetic Implants"
 msgstr "Need a personal upgrade? Contact Celine's Cybernetic Implants"
 
-#: scripts/scenario_45_iris_siege.lua:3419
+#: scripts/scenario_45_iris_siege.lua:3373
 msgctxt "scienceDescription-buoy"
 msgid "Try our asteroid dust diet weight loss program"
 msgstr "Try our asteroid dust diet weight loss program"
 
-#: scripts/scenario_45_iris_siege.lua:3423
+#: scripts/scenario_45_iris_siege.lua:3377
 msgctxt "scienceDescription-buoy"
 msgid "Best tasting water in the quadrant at Willy's Waterway"
 msgstr "Best tasting water in the quadrant at Willy's Waterway"
 
-#: scripts/scenario_45_iris_siege.lua:3427
+#: scripts/scenario_45_iris_siege.lua:3381
 msgctxt "scienceDescription-buoy"
 msgid "Amazing shows every night at Lenny's Lounge"
 msgstr "Amazing shows every night at Lenny's Lounge"
 
-#: scripts/scenario_45_iris_siege.lua:3431
+#: scripts/scenario_45_iris_siege.lua:3385
 msgctxt "scienceDescription-buoy"
 msgid "Get all your vaccinations at Fred's Pharmacy. Pick up some snacks, too"
 msgstr "Get all your vaccinations at Fred's Pharmacy. Pick up some snacks, too"
 
-#: scripts/scenario_45_iris_siege.lua:3435
+#: scripts/scenario_45_iris_siege.lua:3389
 msgctxt "scienceDescription-buoy"
 msgid "Tip: make lemons an integral part of your diet"
 msgstr "Tip: make lemons an integral part of your diet"
 
-#: scripts/scenario_45_iris_siege.lua:3439
+#: scripts/scenario_45_iris_siege.lua:3393
 msgctxt "scienceDescription-buoy"
 msgid "Visit the Proboscis shop for all your specialty probe needs"
 msgstr "Visit the Proboscis shop for all your specialty probe needs"
 
-#: scripts/scenario_45_iris_siege.lua:3467
+#: scripts/scenario_45_iris_siege.lua:3421
 msgctxt "scienceDescription-star"
 msgid "Yellow, spectral type G8 III"
 msgstr "Yellow, spectral type G8 III"
 
-#: scripts/scenario_45_iris_siege.lua:3471
+#: scripts/scenario_45_iris_siege.lua:3425
 msgctxt "scienceDescription-star"
 msgid ""
 "Yellow, spectral type G8 III, giant, surface temperature 4,833 K, 11 solar "
 "radii"
-msgstr "Yellow, spectral type G8 III, giant, surface temperature 4,833 K, 11 solar radii"
+msgstr ""
+"Yellow, spectral type G8 III, giant, surface temperature 4,833 K, 11 solar "
+"radii"
 
-#: scripts/scenario_45_iris_siege.lua:3478
+#: scripts/scenario_45_iris_siege.lua:3432
 msgctxt "scienceDescription-star"
 msgid "Classification G5 II"
 msgstr "Classification G5 II"
 
-#: scripts/scenario_45_iris_siege.lua:3482
+#: scripts/scenario_45_iris_siege.lua:3436
 msgctxt "scienceDescription-star"
 msgid "Classification G5 II, bright giant, possible binary"
 msgstr "Classification G5 II, bright giant, possible binary"
 
-#: scripts/scenario_45_iris_siege.lua:3489
+#: scripts/scenario_45_iris_siege.lua:3443
 msgctxt "scienceDescription-star"
 msgid "Classification K0 V or G9 V"
 msgstr "Classification K0 V or G9 V"
 
-#: scripts/scenario_45_iris_siege.lua:3493
+#: scripts/scenario_45_iris_siege.lua:3447
 msgctxt "scienceDescription-star"
 msgid "Classification K0 V or G9 V, main sequence dwarf, 84% of Sol mass"
 msgstr "Classification K0 V or G9 V, main sequence dwarf, 84% of Sol mass"
 
-#: scripts/scenario_45_iris_siege.lua:3500
+#: scripts/scenario_45_iris_siege.lua:3454
 msgctxt "scienceDescription-star"
 msgid "Classification A7 Ib"
 msgstr "Classification A7 Ib"
 
-#: scripts/scenario_45_iris_siege.lua:3504
+#: scripts/scenario_45_iris_siege.lua:3458
 msgctxt "scienceDescription-star"
 msgid "Classification A7 Ib, supergiant, temperature 7,500 K, 7xSol mass"
 msgstr "Classification A7 Ib, supergiant, temperature 7,500 K, 7xSol mass"
 
-#: scripts/scenario_45_iris_siege.lua:3511
+#: scripts/scenario_45_iris_siege.lua:3465
 msgctxt "scienceDescription-star"
 msgid "Classification A1 Vn"
 msgstr "Classification A1 Vn"
 
-#: scripts/scenario_45_iris_siege.lua:3515
+#: scripts/scenario_45_iris_siege.lua:3469
 msgctxt "scienceDescription-star"
 msgid "Classification A1 Vn, type A main sequence, binary, nebulous"
 msgstr "Classification A1 Vn, type A main sequence, binary, nebulous"
 
-#: scripts/scenario_45_iris_siege.lua:3522
+#: scripts/scenario_45_iris_siege.lua:3476
 msgctxt "scienceDescription-star"
 msgid "Classification K5V"
 msgstr "Classification K5V"
 
-#: scripts/scenario_45_iris_siege.lua:3526
+#: scripts/scenario_45_iris_siege.lua:3480
 msgctxt "scienceDescription-star"
 msgid "Classification K5V, orange, temperature 4,649 K"
 msgstr "Classification K5V, orange, temperature 4,649 K"
 
-#: scripts/scenario_45_iris_siege.lua:3533
+#: scripts/scenario_45_iris_siege.lua:3487
 msgctxt "scienceDescription-star"
 msgid "Classification G2 IV"
 msgstr "Classification G2 IV"
 
-#: scripts/scenario_45_iris_siege.lua:3537
+#: scripts/scenario_45_iris_siege.lua:3491
 msgctxt "scienceDescription-star"
 msgid "Classification G2 IV, 113% of Sol mass, 185% Sol radius"
 msgstr "Classification G2 IV, 113% of Sol mass, 185% Sol radius"
 
-#: scripts/scenario_45_iris_siege.lua:3544
+#: scripts/scenario_45_iris_siege.lua:3498
 msgctxt "scienceDescription-star"
 msgid "Classification A3 IV-V"
 msgstr "Classification A3 IV-V"
 
-#: scripts/scenario_45_iris_siege.lua:3548
+#: scripts/scenario_45_iris_siege.lua:3502
 msgctxt "scienceDescription-star"
 msgid "Classification A3 IV-V, binary, 2.6xSol mass"
 msgstr "Classification A3 IV-V, binary, 2.6xSol mass"
 
-#: scripts/scenario_45_iris_siege.lua:3555
+#: scripts/scenario_45_iris_siege.lua:3509
 msgctxt "scienceDescription-star"
 msgid "Classification B2 III or B2 V"
 msgstr "Classification B2 III or B2 V"
 
-#: scripts/scenario_45_iris_siege.lua:3559
+#: scripts/scenario_45_iris_siege.lua:3513
 msgctxt "scienceDescription-star"
 msgid "Classification B2 III or B2 V, 8.6xSol mass, temperature 22,000 K"
 msgstr "Classification B2 III or B2 V, 8.6xSol mass, temperature 22,000 K"
 
-#: scripts/scenario_45_iris_siege.lua:3566
+#: scripts/scenario_45_iris_siege.lua:3520
 msgctxt "scienceDescription-star"
 msgid "Classification G8 IIIb Fe-0.5"
 msgstr "Classification G8 IIIb Fe-0.5"
 
-#: scripts/scenario_45_iris_siege.lua:3570
+#: scripts/scenario_45_iris_siege.lua:3524
 msgctxt "scienceDescription-star"
 msgid "Classification G8 IIIb Fe-0.5, yellow, red clump giant"
 msgstr "Classification G8 IIIb Fe-0.5, yellow, red clump giant"
 
-#: scripts/scenario_45_iris_siege.lua:3577
+#: scripts/scenario_45_iris_siege.lua:3531
 msgctxt "scienceDescription-star"
 msgid "Classification F5 IV-V"
 msgstr "Classification F5 IV-V"
 
-#: scripts/scenario_45_iris_siege.lua:3581
+#: scripts/scenario_45_iris_siege.lua:3535
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification F5 IV-V, binary, F-type subgiant and F-type main sequence"
-msgstr "Classification F5 IV-V, binary, F-type subgiant and F-type main sequence"
+msgstr ""
+"Classification F5 IV-V, binary, F-type subgiant and F-type main sequence"
 
-#: scripts/scenario_45_iris_siege.lua:3588
+#: scripts/scenario_45_iris_siege.lua:3542
 msgctxt "scienceDescription-star"
 msgid "Classification B7 III"
 msgstr "Classification B7 III"
 
-#: scripts/scenario_45_iris_siege.lua:3592
+#: scripts/scenario_45_iris_siege.lua:3546
 msgctxt "scienceDescription-star"
 msgid "Classification B7 III, B-class giant, double star, 5xSol mass"
 msgstr "Classification B7 III, B-class giant, double star, 5xSol mass"
 
-#: scripts/scenario_45_iris_siege.lua:3599
+#: scripts/scenario_45_iris_siege.lua:3553
 msgctxt "scienceDescription-star"
 msgid "Classification K0"
 msgstr "Classification K0"
 
-#: scripts/scenario_45_iris_siege.lua:3603
+#: scripts/scenario_45_iris_siege.lua:3557
 msgctxt "scienceDescription-star"
 msgid "Classification K0, orange-red, temperature ~4,000 K"
 msgstr "Classification K0, orange-red, temperature ~4,000 K"
 
-#: scripts/scenario_45_iris_siege.lua:3610
+#: scripts/scenario_45_iris_siege.lua:3564
 msgctxt "scienceDescription-star"
 msgid "Pulsar or Neutron star"
 msgstr "Pulsar or Neutron star"
 
-#: scripts/scenario_45_iris_siege.lua:3614
+#: scripts/scenario_45_iris_siege.lua:3568
 msgctxt "scienceDescription-star"
 msgid "Pulsar or Neutron star, gamma ray source"
 msgstr "Pulsar or Neutron star, gamma ray source"
 
-#: scripts/scenario_45_iris_siege.lua:3621
+#: scripts/scenario_45_iris_siege.lua:3575
 msgctxt "scienceDescription-star"
 msgid "Classification G2V"
 msgstr "Classification G2V"
 
-#: scripts/scenario_45_iris_siege.lua:3625
+#: scripts/scenario_45_iris_siege.lua:3579
 msgctxt "scienceDescription-star"
 msgid "Classification G2V, yellow, temperature 5,571 K"
 msgstr "Classification G2V, yellow, temperature 5,571 K"
 
-#: scripts/scenario_45_iris_siege.lua:3632
+#: scripts/scenario_45_iris_siege.lua:3586
 msgctxt "scienceDescription-star"
 msgid "Classification G1V(w)"
 msgstr "Classification G1V(w)"
 
-#: scripts/scenario_45_iris_siege.lua:3636
+#: scripts/scenario_45_iris_siege.lua:3590
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification G1V(w), 1.24xSol mass, 7th magnitude G-type main sequence"
-msgstr "Classification G1V(w), 1.24xSol mass, 7th magnitude G-type main sequence"
+msgstr ""
+"Classification G1V(w), 1.24xSol mass, 7th magnitude G-type main sequence"
 
-#: scripts/scenario_45_iris_siege.lua:3643
+#: scripts/scenario_45_iris_siege.lua:3597
 msgctxt "scienceDescription-star"
 msgid "Classification F3 III"
 msgstr "Classification F3 III"
 
-#: scripts/scenario_45_iris_siege.lua:3647
+#: scripts/scenario_45_iris_siege.lua:3601
 msgctxt "scienceDescription-star"
 msgid "Classification F3 III, F-type giant, temperature 6,309 K"
 msgstr "Classification F3 III, F-type giant, temperature 6,309 K"
 
-#: scripts/scenario_45_iris_siege.lua:3654
+#: scripts/scenario_45_iris_siege.lua:3608
 msgctxt "scienceDescription-star"
 msgid "Classification K1 IIIb"
 msgstr "Classification K1 IIIb"
 
-#: scripts/scenario_45_iris_siege.lua:3658
+#: scripts/scenario_45_iris_siege.lua:3612
 msgctxt "scienceDescription-star"
 msgid "Classification K1 IIIb, giant, temperature 4,768 K"
 msgstr "Classification K1 IIIb, giant, temperature 4,768 K"
 
-#: scripts/scenario_45_iris_siege.lua:3665
+#: scripts/scenario_45_iris_siege.lua:3619
 msgctxt "scienceDescription-star"
 msgid "Classification G0V"
 msgstr "Classification G0V"
 
-#: scripts/scenario_45_iris_siege.lua:3669
+#: scripts/scenario_45_iris_siege.lua:3623
 msgctxt "scienceDescription-star"
 msgid "Classification G0V, G-type giant, temperature 5,741 K"
 msgstr "Classification G0V, G-type giant, temperature 5,741 K"
 
-#: scripts/scenario_45_iris_siege.lua:3676
+#: scripts/scenario_45_iris_siege.lua:3630
 msgctxt "scienceDescription-star"
 msgid "Classification K2IV-V or K3V"
 msgstr "Classification K2IV-V or K3V"
 
-#: scripts/scenario_45_iris_siege.lua:3680
+#: scripts/scenario_45_iris_siege.lua:3634
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification K2IV-V or K3V, orange, K-type main sequence, temperature "
 "5,030 K"
-msgstr "Classification K2IV-V or K3V, orange, K-type main sequence, temperature 5,030 K"
+msgstr ""
+"Classification K2IV-V or K3V, orange, K-type main sequence, temperature "
+"5,030 K"
 
-#: scripts/scenario_45_iris_siege.lua:3810
-msgctxt "buttonGM"
-msgid "+Spawn Ship(s)"
-msgstr "+Spawn Ship(s)"
-
-#: scripts/scenario_45_iris_siege.lua:3973
+#: scripts/scenario_45_iris_siege.lua:3838
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s has been destroyed."
 msgstr "%s has been destroyed."
 
-#: scripts/scenario_45_iris_siege.lua:3992
+#: scripts/scenario_45_iris_siege.lua:3857
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "The %s has respawned %s to replace %s."
 msgstr "The %s has respawned %s to replace %s."
 
-#: scripts/scenario_45_iris_siege.lua:4172
-#: scripts/scenario_45_iris_siege.lua:4371
+#: scripts/scenario_45_iris_siege.lua:4037
+#: scripts/scenario_45_iris_siege.lua:4236
 #, lua-format
 msgctxt "scienceDescription-station"
 msgid "%s. Provides nebula defense."
 msgstr "%s. Provides nebula defence."
 
-#: scripts/scenario_45_iris_siege.lua:4219
-#: scripts/scenario_45_iris_siege.lua:4419
-#: scripts/scenario_45_iris_siege.lua:4643
-#: scripts/scenario_45_iris_siege.lua:6705
+#: scripts/scenario_45_iris_siege.lua:4084
+#: scripts/scenario_45_iris_siege.lua:4284
+#: scripts/scenario_45_iris_siege.lua:4508
+#: scripts/scenario_45_iris_siege.lua:6043
 msgctxt "scienceDescription-warpJammer"
 msgid "Warp jammer"
 msgstr "Warp jammer"
 
-#: scripts/scenario_45_iris_siege.lua:4223
-#: scripts/scenario_45_iris_siege.lua:4423
-#: scripts/scenario_45_iris_siege.lua:4647
+#: scripts/scenario_45_iris_siege.lua:4088
+#: scripts/scenario_45_iris_siege.lua:4288
+#: scripts/scenario_45_iris_siege.lua:4512
 #, lua-format
 msgctxt "scienceDescription-warpJammer"
 msgid "Warp jammer. Provides nebula defense. Identifier: %s"
 msgstr "Warp jammer. Provides nebula defence. Identifier: %s"
 
-#: scripts/scenario_45_iris_siege.lua:4533
+#: scripts/scenario_45_iris_siege.lua:4398
 msgctxt "scienceDescription-nebula"
 msgid "reactor"
 msgstr "reactor"
 
-#: scripts/scenario_45_iris_siege.lua:4534
+#: scripts/scenario_45_iris_siege.lua:4399
 msgctxt "scienceDescription-nebula"
 msgid "beamweapons"
 msgstr "beamweapons"
 
-#: scripts/scenario_45_iris_siege.lua:4535
+#: scripts/scenario_45_iris_siege.lua:4400
 msgctxt "scienceDescription-nebula"
 msgid "missilesystem"
 msgstr "missilesystem"
 
-#: scripts/scenario_45_iris_siege.lua:4536
+#: scripts/scenario_45_iris_siege.lua:4401
 msgctxt "scienceDescription-nebula"
 msgid "maneuver"
 msgstr "manoeuvre"
 
-#: scripts/scenario_45_iris_siege.lua:4537
+#: scripts/scenario_45_iris_siege.lua:4402
 msgctxt "scienceDescription-nebula"
 msgid "impulse"
 msgstr "impulse"
 
-#: scripts/scenario_45_iris_siege.lua:4538
+#: scripts/scenario_45_iris_siege.lua:4403
 msgctxt "scienceDescription-nebula"
 msgid "warp"
 msgstr "warp"
 
-#: scripts/scenario_45_iris_siege.lua:4539
+#: scripts/scenario_45_iris_siege.lua:4404
 msgctxt "scienceDescription-nebula"
 msgid "jumpdrive"
 msgstr "jumpdrive"
 
-#: scripts/scenario_45_iris_siege.lua:4540
+#: scripts/scenario_45_iris_siege.lua:4405
 msgctxt "scienceDescription-nebula"
 msgid "frontshield"
 msgstr "frontshield"
 
-#: scripts/scenario_45_iris_siege.lua:4541
+#: scripts/scenario_45_iris_siege.lua:4406
 msgctxt "scienceDescription-nebula"
 msgid "rearshield"
 msgstr "rearshield"
 
-#: scripts/scenario_45_iris_siege.lua:4542
+#: scripts/scenario_45_iris_siege.lua:4407
 msgctxt "scienceDescription-nebula"
 msgid "coolant"
 msgstr "coolant"
 
-#: scripts/scenario_45_iris_siege.lua:4543
+#: scripts/scenario_45_iris_siege.lua:4408
 msgctxt "scienceDescription-nebula"
 msgid "hull"
 msgstr "hull"
 
-#: scripts/scenario_45_iris_siege.lua:4562
+#: scripts/scenario_45_iris_siege.lua:4427
 msgctxt "scienceDescription-nebula"
 msgid "Nebula impacts these systems:"
 msgstr "Nebula impacts these systems:"
 
-#: scripts/scenario_45_iris_siege.lua:4571
-#: scripts/scenario_45_iris_siege.lua:6127
-#: scripts/scenario_45_iris_siege.lua:6128
-#: scripts/scenario_45_iris_siege.lua:6885
-#: scripts/scenario_45_iris_siege.lua:6886
-#: scripts/scenario_45_iris_siege.lua:6897
-#: scripts/scenario_45_iris_siege.lua:6898
-#: scripts/scenario_45_iris_siege.lua:6911
-#: scripts/scenario_45_iris_siege.lua:6912
+#: scripts/scenario_45_iris_siege.lua:4436
+#: scripts/scenario_45_iris_siege.lua:5465
+#: scripts/scenario_45_iris_siege.lua:5466
+#: scripts/scenario_45_iris_siege.lua:6223
+#: scripts/scenario_45_iris_siege.lua:6224
+#: scripts/scenario_45_iris_siege.lua:6235
+#: scripts/scenario_45_iris_siege.lua:6236
+#: scripts/scenario_45_iris_siege.lua:6249
+#: scripts/scenario_45_iris_siege.lua:6250
 msgctxt "scienceDescription-nebula"
 msgid "Nebula"
 msgstr "Nebula"
 
-#: scripts/scenario_45_iris_siege.lua:4572
+#: scripts/scenario_45_iris_siege.lua:4437
 msgid "scienceDescription-nebula"
 msgstr "scienceDescription-nebula"
 
-#: scripts/scenario_45_iris_siege.lua:6543
-#: scripts/scenario_45_iris_siege.lua:6569
-#: scripts/scenario_45_iris_siege.lua:6586
-#: scripts/scenario_45_iris_siege.lua:6601
-#: scripts/scenario_45_iris_siege.lua:6613
-#: scripts/scenario_45_iris_siege.lua:6628
-#: scripts/scenario_45_iris_siege.lua:6643
+#: scripts/scenario_45_iris_siege.lua:5881
+#: scripts/scenario_45_iris_siege.lua:5907
+#: scripts/scenario_45_iris_siege.lua:5924
+#: scripts/scenario_45_iris_siege.lua:5939
+#: scripts/scenario_45_iris_siege.lua:5951
+#: scripts/scenario_45_iris_siege.lua:5966
+#: scripts/scenario_45_iris_siege.lua:5981
 msgctxt "scienceDescription-supplyDrop"
 msgid "Supply Drop"
 msgstr "Supply Drop"
 
-#: scripts/scenario_45_iris_siege.lua:6547
+#: scripts/scenario_45_iris_siege.lua:5885
 #, lua-format
 msgctxt "scienceDescription-supplyDrop"
 msgid "%i energy boost supply drop."
 msgstr "%i energy boost supply drop."
 
-#: scripts/scenario_45_iris_siege.lua:6573
+#: scripts/scenario_45_iris_siege.lua:5911
 #, lua-format
 msgctxt "scienceDescription-supplyDrop"
 msgid "%i %s supply drop."
 msgstr "%i %s supply drop."
 
-#: scripts/scenario_45_iris_siege.lua:6591
+#: scripts/scenario_45_iris_siege.lua:5929
 #, lua-format
 msgctxt "scienceDescription-supplyDrop"
 msgid "%.1f%% coolant supply drop."
 msgstr "%.1f%% coolant supply drop."
 
-#: scripts/scenario_45_iris_siege.lua:6605
+#: scripts/scenario_45_iris_siege.lua:5943
 msgctxt "scienceDescription-supplyDrop"
 msgid "Robotic repair crew supply drop."
 msgstr "Robotic repair crew supply drop."
 
-#: scripts/scenario_45_iris_siege.lua:6618
+#: scripts/scenario_45_iris_siege.lua:5956
 #, lua-format
 msgctxt "scienceDescription-supplyDrop"
 msgid "%i probes supply drop."
 msgstr "%i probes supply drop."
 
-#: scripts/scenario_45_iris_siege.lua:6633
+#: scripts/scenario_45_iris_siege.lua:5971
 #, lua-format
 msgctxt "scienceDescription-supplyDrop"
 msgid "%.1f hull repair points supply drop."
 msgstr "%.1f hull repair points supply drop."
 
-#: scripts/scenario_45_iris_siege.lua:6648
+#: scripts/scenario_45_iris_siege.lua:5986
 #, lua-format
 msgctxt "scienceDescription-supplyDrop"
 msgid "%.1fK jump drive charge supply drop."
 msgstr "%.1fK jump drive charge supply drop."
 
-#: scripts/scenario_45_iris_siege.lua:6709
+#: scripts/scenario_45_iris_siege.lua:6047
 #, lua-format
 msgctxt "scienceDescription-warpJammer"
 msgid "Warp jammer. Operated by %s. Placed by station %s. Identifier: %s"
 msgstr "Warp jammer. Operated by %s. Placed by station %s. Identifier: %s"
 
-#: scripts/scenario_45_iris_siege.lua:6755
+#: scripts/scenario_45_iris_siege.lua:6093
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "Sensor Record: %s station %s in %s"
 msgstr "Sensor Record: %s station %s in %s"
 
-#: scripts/scenario_45_iris_siege.lua:6765
+#: scripts/scenario_45_iris_siege.lua:6103
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "%s, %s station %s in %s"
 msgstr "%s, %s station %s in %s"
 
-#: scripts/scenario_45_iris_siege.lua:6816
+#: scripts/scenario_45_iris_siege.lua:6154
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "Sensor Record: %s %s %s in %s carrying %s"
 msgstr "Sensor Record: %s %s %s in %s carrying %s"
 
-#: scripts/scenario_45_iris_siege.lua:6828
+#: scripts/scenario_45_iris_siege.lua:6166
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "%s; %s %s %s in %s carrying %s"
 msgstr "%s; %s %s %s in %s carrying %s"
 
-#: scripts/scenario_45_iris_siege.lua:6844
+#: scripts/scenario_45_iris_siege.lua:6182
 msgctxt "scienceDescription-buoy"
 msgid "No data recorded"
 msgstr "No data recorded"
 
-#: scripts/scenario_45_iris_siege.lua:6849
-#: scripts/scenario_45_iris_siege.lua:6873
+#: scripts/scenario_45_iris_siege.lua:6187
+#: scripts/scenario_45_iris_siege.lua:6211
 msgctxt "scienceDescription-buoy"
 msgid "Automated data gathering device"
 msgstr "Automated data gathering device"
 
-#: scripts/scenario_45_iris_siege.lua:7061
-msgctxt "msgScience"
-msgid "The unscanned artifact we just picked up has fried our scanners"
-msgstr "The unscanned artifact we just picked up has fried our scanners"
-
-#: scripts/scenario_45_iris_siege.lua:7070
-msgctxt "msgOperations"
-msgid "The unscanned artifact we just picked up has fried our scanners"
-msgstr "The unscanned artifact we just picked up has fried our scanners"
-
-#: scripts/scenario_45_iris_siege.lua:7084
-#, lua-format
-msgctxt "scienceDescription-artifact"
-msgid ""
-"Source of emanations interfering with long range sensors. Range:%.1fu Impact:"
-"%.1fu"
-msgstr "Source of emanations interfering with long range sensors. Range:%.1fu Impact:%.1fu"
-
-#: scripts/scenario_45_iris_siege.lua:7098
-msgctxt "scienceDescription-artifact"
-msgid "Source of unusual emanations"
-msgstr "Source of unusual emanations"
-
-#: scripts/scenario_45_iris_siege.lua:7259
+#: scripts/scenario_45_iris_siege.lua:6284
 #, lua-format
 msgctxt "observatory-comms"
 msgid ""
 "%s is operational.\n"
 "Range: %su"
-msgstr "%s is operational.\nRange: %su"
+msgstr ""
+"%s is operational.\n"
+"Range: %su"
 
-#: scripts/scenario_45_iris_siege.lua:7307
-msgctxt "station-comms"
-msgid "Connect to warp jammer"
-msgstr "Connect to warp jammer"
-
-#: scripts/scenario_45_iris_siege.lua:7309
-msgctxt "station-comms"
-msgid "Which one would you like to connect to?"
-msgstr "Which one would you like to connect to?"
-
-#: scripts/scenario_45_iris_siege.lua:7356
-#, lua-format
-msgctxt "station-comms"
-msgid "(%i reputation)"
-msgstr "(%i reputation)"
-
-#: scripts/scenario_45_iris_siege.lua:7368
-#, lua-format
-msgctxt "station-comms"
-msgid "%s Automated warp jammer access menu"
-msgstr "%s Automated warp jammer access menu"
-
-#: scripts/scenario_45_iris_siege.lua:7376
-msgctxt "station-comms"
-msgid "Reduce range to 1 unit for 1 minute"
-msgstr "Reduce range to 1 unit for 1 minute"
-
-#: scripts/scenario_45_iris_siege.lua:7384
-#: scripts/scenario_45_iris_siege.lua:7401
-#: scripts/scenario_45_iris_siege.lua:7418
-msgctxt "station-comms"
-msgid "Acknowledged. Range adjusted. Reset timer engaged."
-msgstr "Acknowledged. Range adjusted. Reset timer engaged."
-
-#: scripts/scenario_45_iris_siege.lua:7387
-#: scripts/scenario_45_iris_siege.lua:7404
-#: scripts/scenario_45_iris_siege.lua:7421
-#: scripts/scenario_45_iris_siege.lua:7541
-#: scripts/scenario_45_iris_siege.lua:7544
-#: scripts/scenario_45_iris_siege.lua:7548
-#: scripts/scenario_45_iris_siege.lua:7618
-#: scripts/scenario_45_iris_siege.lua:7755
-#: scripts/scenario_45_iris_siege.lua:7760
-#: scripts/scenario_45_iris_siege.lua:7866
-#: scripts/scenario_45_iris_siege.lua:7871
-#: scripts/scenario_45_iris_siege.lua:7982
-#: scripts/scenario_45_iris_siege.lua:7987
-#: scripts/scenario_45_iris_siege.lua:8103
-#: scripts/scenario_45_iris_siege.lua:8108
-#: scripts/scenario_45_iris_siege.lua:8227
-#: scripts/scenario_45_iris_siege.lua:8232
-#: scripts/scenario_45_iris_siege.lua:8354
-#: scripts/scenario_45_iris_siege.lua:8359
-#: scripts/scenario_45_iris_siege.lua:8504
-#: scripts/scenario_45_iris_siege.lua:8509
-#: scripts/scenario_45_iris_siege.lua:8512
-#: scripts/scenario_45_iris_siege.lua:8558
-#: scripts/scenario_45_iris_siege.lua:8576
-msgid "Back"
-msgstr "Back"
-
-#: scripts/scenario_45_iris_siege.lua:7393
-msgctxt "station-comms"
-msgid "Reduce range by 50% for 2 minutes"
-msgstr "Reduce range by 50% for 2 minutes"
-
-#: scripts/scenario_45_iris_siege.lua:7410
-msgctxt "station-comms"
-msgid "Reduce range by 25% for 3 minutes"
-msgstr "Reduce range by 25% for 3 minutes"
-
-#: scripts/scenario_45_iris_siege.lua:7426
-#: scripts/scenario_45_iris_siege.lua:7615
-#: scripts/scenario_45_iris_siege.lua:7751
-#: scripts/scenario_45_iris_siege.lua:7862
-#: scripts/scenario_45_iris_siege.lua:7978
-#: scripts/scenario_45_iris_siege.lua:8099
-#: scripts/scenario_45_iris_siege.lua:8223
-#: scripts/scenario_45_iris_siege.lua:8350
-#: scripts/scenario_45_iris_siege.lua:8486
-msgctxt "needRep-comms"
-msgid "Insufficient reputation"
-msgstr "Insufficient reputation"
-
-#: scripts/scenario_45_iris_siege.lua:7436
-msgctxt "station-comms"
-msgid ""
-"Why do I have to pay reputation to log in to some of these warp jammers?"
-msgstr "Why do I have to pay reputation to log in to some of these warp jammers?"
-
-#: scripts/scenario_45_iris_siege.lua:7443
-#, lua-format
-msgctxt "station-comms"
-msgid ""
-"It's complicated. It depends on the relationships between the warp jammer "
-"owner, us, station %s and you, %s. The farther apart the relationship, the "
-"more reputation it costs to gain access. Do you want more details?"
-msgstr "It's complicated. It depends on the relationships between the warp jammer owner, us, station %s and you, %s. The farther apart the relationship, the more reputation it costs to gain access. Do you want more details?"
-
-#: scripts/scenario_45_iris_siege.lua:7452
-msgctxt "station-comms"
-msgid "Yes, please provide more details"
-msgstr "Yes, please provide more details"
-
-#: scripts/scenario_45_iris_siege.lua:7457
-msgctxt "station-comms"
-msgid "These are the cases and their reputation costs:"
-msgstr "These are the cases and their reputation costs:"
-
-#: scripts/scenario_45_iris_siege.lua:7462
-#, lua-format
-msgctxt "station-comms"
-msgid ""
-"%s\n"
-"    WJ friendly to %s and WJ is friendly to %s = no reputation."
-msgstr "%s\n    WJ friendly to %s and WJ is friendly to %s = no reputation."
-
-#: scripts/scenario_45_iris_siege.lua:7471
-#, lua-format
-msgctxt "station-comms"
-msgid ""
-"%s\n"
-"    WJ friendly to %s and WJ is neutral to %s = 5 reputation."
-msgstr "%s\n    WJ friendly to %s and WJ is neutral to %s = 5 reputation."
-
-#: scripts/scenario_45_iris_siege.lua:7480
-#, lua-format
-msgctxt "station-comms"
-msgid ""
-"%s\n"
-"    WJ friendly to %s and WJ is enemy to %s = 10 reputation."
-msgstr "%s\n    WJ friendly to %s and WJ is enemy to %s = 10 reputation."
-
-#: scripts/scenario_45_iris_siege.lua:7489
-#, lua-format
-msgctxt "station-comms"
-msgid ""
-"%s\n"
-"    WJ neutral to %s and WJ is friendly to %s = 10 reputation."
-msgstr "%s\n    WJ neutral to %s and WJ is friendly to %s = 10 reputation."
-
-#: scripts/scenario_45_iris_siege.lua:7498
-#, lua-format
-msgctxt "station-comms"
-msgid ""
-"%s\n"
-"    WJ enemy to %s and WJ is friendly to %s = 15 reputation."
-msgstr "%s\n    WJ enemy to %s and WJ is friendly to %s = 15 reputation."
-
-#: scripts/scenario_45_iris_siege.lua:7507
-#, lua-format
-msgctxt "station-comms"
-msgid ""
-"%s\n"
-"    WJ neutral to %s and WJ is neutral to %s = 20 reputation."
-msgstr "%s\n    WJ neutral to %s and WJ is neutral to %s = 20 reputation."
-
-#: scripts/scenario_45_iris_siege.lua:7516
-#, lua-format
-msgctxt "station-comms"
-msgid ""
-"%s\n"
-"    WJ enemy to %s and WJ is neutral to %s = 20 reputation."
-msgstr "%s\n    WJ enemy to %s and WJ is neutral to %s = 20 reputation."
-
-#: scripts/scenario_45_iris_siege.lua:7525
-#, lua-format
-msgctxt "station-comms"
-msgid ""
-"%s\n"
-"    WJ neutral to %s and WJ is enemy to %s = 25 reputation."
-msgstr "%s\n    WJ neutral to %s and WJ is enemy to %s = 25 reputation."
-
-#: scripts/scenario_45_iris_siege.lua:7534
-#, lua-format
-msgctxt "station-comms"
-msgid ""
-"%s\n"
-"    WJ enemy to %s and WJ is enemy to %s = 100 reputation."
-msgstr "%s\n    WJ enemy to %s and WJ is enemy to %s = 100 reputation."
-
-#: scripts/scenario_45_iris_siege.lua:7560
-#: scripts/scenario_45_iris_siege.lua:9199
+#: scripts/scenario_45_iris_siege.lua:6298
+#: scripts/scenario_45_iris_siege.lua:7601
 #, lua-format
 msgctxt "probeTypes-buttonRelay"
 msgid "Probes: %s"
 msgstr "Probes: %s"
 
-#: scripts/scenario_45_iris_siege.lua:7590
+#: scripts/scenario_45_iris_siege.lua:6328
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Increase long range sensors by 5 units (%i rep)"
 msgstr "Increase long range sensors by 5 units (%i rep)"
 
-#: scripts/scenario_45_iris_siege.lua:7610
+#: scripts/scenario_45_iris_siege.lua:6348
 msgctxt "upgrade-comms"
 msgid "Sensor range improved by five units"
 msgstr "Sensor range improved by five units"
 
-#: scripts/scenario_45_iris_siege.lua:7625
+#: scripts/scenario_45_iris_siege.lua:6353
+#: scripts/scenario_45_iris_siege.lua:6489
+#: scripts/scenario_45_iris_siege.lua:6600
+#: scripts/scenario_45_iris_siege.lua:6716
+#: scripts/scenario_45_iris_siege.lua:6837
+#: scripts/scenario_45_iris_siege.lua:6961
+#: scripts/scenario_45_iris_siege.lua:7088
+#: scripts/scenario_45_iris_siege.lua:7224
+msgctxt "needRep-comms"
+msgid "Insufficient reputation"
+msgstr "Insufficient reputation"
+
+#: scripts/scenario_45_iris_siege.lua:6356
+#: scripts/scenario_45_iris_siege.lua:6493
+#: scripts/scenario_45_iris_siege.lua:6498
+#: scripts/scenario_45_iris_siege.lua:6604
+#: scripts/scenario_45_iris_siege.lua:6609
+#: scripts/scenario_45_iris_siege.lua:6720
+#: scripts/scenario_45_iris_siege.lua:6725
+#: scripts/scenario_45_iris_siege.lua:6841
+#: scripts/scenario_45_iris_siege.lua:6846
+#: scripts/scenario_45_iris_siege.lua:6965
+#: scripts/scenario_45_iris_siege.lua:6970
+#: scripts/scenario_45_iris_siege.lua:7092
+#: scripts/scenario_45_iris_siege.lua:7097
+#: scripts/scenario_45_iris_siege.lua:7242
+#: scripts/scenario_45_iris_siege.lua:7247
+#: scripts/scenario_45_iris_siege.lua:7250
+#: scripts/scenario_45_iris_siege.lua:7296
+#: scripts/scenario_45_iris_siege.lua:7314
+msgid "Back"
+msgstr "Back"
+
+#: scripts/scenario_45_iris_siege.lua:6363
 msgctxt "probeShop-comms"
 msgid "Visit the specialty probe shop"
 msgstr "Visit the specialty probe shop"
 
-#: scripts/scenario_45_iris_siege.lua:7626
+#: scripts/scenario_45_iris_siege.lua:6364
 msgctxt "probeShop-comms"
 msgid "Visit the Proboscis Probe Shop"
 msgstr "Visit the Proboscis Probe Shop"
 
-#: scripts/scenario_45_iris_siege.lua:7627
+#: scripts/scenario_45_iris_siege.lua:6365
 msgctxt "probeShop-comms"
 msgid "Get some specialty probes"
 msgstr "Get some specialty probes"
 
-#: scripts/scenario_45_iris_siege.lua:7628
+#: scripts/scenario_45_iris_siege.lua:6366
 msgctxt "probeShop-comms"
 msgid "Check out the Proboscis Probe Shop"
 msgstr "Check out the Proboscis Probe Shop"
 
-#: scripts/scenario_45_iris_siege.lua:7634
+#: scripts/scenario_45_iris_siege.lua:6372
 msgctxt "probeShop-comms"
 msgid ""
 "Welcome to the Proboscis Probe Shop. I'm Calon Proboscis, owner and "
 "proprietor. How can I help you?"
-msgstr "Welcome to the Proboscis Probe Shop. I'm Calon Proboscis, owner and proprietor. How can I help you?"
+msgstr ""
+"Welcome to the Proboscis Probe Shop. I'm Calon Proboscis, owner and "
+"proprietor. How can I help you?"
 
-#: scripts/scenario_45_iris_siege.lua:7638
+#: scripts/scenario_45_iris_siege.lua:6376
 msgctxt "probeShop-comms"
 msgid ""
 "Hi there, I'm Calon Proboscis, owner and proprietor of the Proboscis Probe "
 "Shop. How can I help you?"
-msgstr "Hi there, I'm Calon Proboscis, owner and proprietor of the Proboscis Probe Shop. How can I help you?"
+msgstr ""
+"Hi there, I'm Calon Proboscis, owner and proprietor of the Proboscis Probe "
+"Shop. How can I help you?"
 
-#: scripts/scenario_45_iris_siege.lua:7642
+#: scripts/scenario_45_iris_siege.lua:6380
 msgctxt "probeShop-comms"
 msgid ""
 "A man comes over with a big smile and says, 'Welcome to my store, the "
 "Proboscis Probe Shop. I'm Calon Proboscis. How may I help you?'"
-msgstr "A man comes over with a big smile and says, 'Welcome to my store, the Proboscis Probe Shop. I'm Calon Proboscis. How may I help you?'"
+msgstr ""
+"A man comes over with a big smile and says, 'Welcome to my store, the "
+"Proboscis Probe Shop. I'm Calon Proboscis. How may I help you?'"
 
-#: scripts/scenario_45_iris_siege.lua:7646
+#: scripts/scenario_45_iris_siege.lua:6384
 msgctxt "probeShop-comms"
 msgid ""
 "A guy with a name tag that reads 'Calon Proboscis' greets you and says, 'We "
 "have all kinds of scan probe enhancements here in my Proboscis Probe Shop. "
 "What are you looking for?'"
-msgstr "A guy with a name tag that reads 'Calon Proboscis' greets you and says, 'We have all kinds of scan probe enhancements here in my Proboscis Probe Shop. What are you looking for?'"
+msgstr ""
+"A guy with a name tag that reads 'Calon Proboscis' greets you and says, 'We "
+"have all kinds of scan probe enhancements here in my Proboscis Probe Shop. "
+"What are you looking for?'"
 
-#: scripts/scenario_45_iris_siege.lua:7650
+#: scripts/scenario_45_iris_siege.lua:6388
 msgctxt "probeShop-comms"
 msgid "Patrol probes"
 msgstr "Patrol probes"
 
-#: scripts/scenario_45_iris_siege.lua:7653
+#: scripts/scenario_45_iris_siege.lua:6391
 msgctxt "probeShop-comms"
 msgid ""
 "Attach these kits to your probe to make them orbit your ship in a hexagon "
 "pattern until they run out of energy. They come in batches of 5."
-msgstr "Attach these kits to your probe to make them orbit your ship in a hexagon pattern until they run out of energy. They come in batches of 5."
+msgstr ""
+"Attach these kits to your probe to make them orbit your ship in a hexagon "
+"pattern until they run out of energy. They come in batches of 5."
 
-#: scripts/scenario_45_iris_siege.lua:7658
-#: scripts/scenario_45_iris_siege.lua:7770
+#: scripts/scenario_45_iris_siege.lua:6396
+#: scripts/scenario_45_iris_siege.lua:6508
 #, lua-format
 msgctxt "probeShop-comms"
 msgid ""
 "%s\n"
 "%s: warp %.1f, cost %i"
-msgstr "%s\n%s: warp %.1f, cost %i"
+msgstr ""
+"%s\n"
+"%s: warp %.1f, cost %i"
 
-#: scripts/scenario_45_iris_siege.lua:7673
-#: scripts/scenario_45_iris_siege.lua:7785
-#: scripts/scenario_45_iris_siege.lua:7900
-#: scripts/scenario_45_iris_siege.lua:8019
-#: scripts/scenario_45_iris_siege.lua:8142
-#: scripts/scenario_45_iris_siege.lua:8270
-#: scripts/scenario_45_iris_siege.lua:8392
+#: scripts/scenario_45_iris_siege.lua:6411
+#: scripts/scenario_45_iris_siege.lua:6523
+#: scripts/scenario_45_iris_siege.lua:6638
+#: scripts/scenario_45_iris_siege.lua:6757
+#: scripts/scenario_45_iris_siege.lua:6880
+#: scripts/scenario_45_iris_siege.lua:7008
+#: scripts/scenario_45_iris_siege.lua:7130
 #, lua-format
 msgctxt "probeShop-comms"
 msgid "%s (%i reputation for %i)"
 msgstr "%s (%i reputation for %i)"
 
-#: scripts/scenario_45_iris_siege.lua:7714
-#: scripts/scenario_45_iris_siege.lua:7825
-#: scripts/scenario_45_iris_siege.lua:7941
-#: scripts/scenario_45_iris_siege.lua:8062
-#: scripts/scenario_45_iris_siege.lua:8186
-#: scripts/scenario_45_iris_siege.lua:8313
-#: scripts/scenario_45_iris_siege.lua:8446
+#: scripts/scenario_45_iris_siege.lua:6452
+#: scripts/scenario_45_iris_siege.lua:6563
+#: scripts/scenario_45_iris_siege.lua:6679
+#: scripts/scenario_45_iris_siege.lua:6800
+#: scripts/scenario_45_iris_siege.lua:6924
+#: scripts/scenario_45_iris_siege.lua:7051
+#: scripts/scenario_45_iris_siege.lua:7184
 #, lua-format
 msgctxt "probeShop-comms"
 msgid "%i %s specialty probe kits added to your inventory."
 msgstr "%i %s specialty probe kits added to your inventory."
 
-#: scripts/scenario_45_iris_siege.lua:7762
+#: scripts/scenario_45_iris_siege.lua:6500
 msgctxt "probeShop-comms"
 msgid "Faster probes"
 msgstr "Faster probes"
 
-#: scripts/scenario_45_iris_siege.lua:7765
+#: scripts/scenario_45_iris_siege.lua:6503
 msgctxt "probeShop-comms"
 msgid ""
 "Attach these kits to your probe to make them travel faster to their "
 "destination. The typical probe travels at warp 1. They come in batches of 5."
-msgstr "Attach these kits to your probe to make them travel faster to their destination. The typical probe travels at warp 1. They come in batches of 5."
+msgstr ""
+"Attach these kits to your probe to make them travel faster to their "
+"destination. The typical probe travels at warp 1. They come in batches of 5."
 
-#: scripts/scenario_45_iris_siege.lua:7873
+#: scripts/scenario_45_iris_siege.lua:6611
 msgctxt "probeShop-comms"
 msgid "Warp Jammer probes"
 msgstr "Warp Jammer probes"
 
-#: scripts/scenario_45_iris_siege.lua:7876
+#: scripts/scenario_45_iris_siege.lua:6614
 msgctxt "probeShop-comms"
 msgid ""
 "Attach these kits to your probe and when the probe reaches its destination, "
 "it will drop a warp jammer. They come in batches of 5."
-msgstr "Attach these kits to your probe and when the probe reaches its destination, it will drop a warp jammer. They come in batches of 5."
+msgstr ""
+"Attach these kits to your probe and when the probe reaches its destination, "
+"it will drop a warp jammer. They come in batches of 5."
 
-#: scripts/scenario_45_iris_siege.lua:7883
+#: scripts/scenario_45_iris_siege.lua:6621
 #, lua-format
 msgctxt "probeShop-comms"
 msgid ""
 "%s\n"
 "%s: warp %.1f, warp jam range: %iu, cost: %i"
-msgstr "%s\n%s: warp %.1f, warp jam range: %iu, cost: %i"
+msgstr ""
+"%s\n"
+"%s: warp %.1f, warp jam range: %iu, cost: %i"
 
-#: scripts/scenario_45_iris_siege.lua:7990
+#: scripts/scenario_45_iris_siege.lua:6728
 msgctxt "probeShop-comms"
 msgid "Sensor range boosting probes"
 msgstr "Sensor range boosting probes"
 
-#: scripts/scenario_45_iris_siege.lua:7994
+#: scripts/scenario_45_iris_siege.lua:6732
 msgctxt "probeShop-comms"
 msgid ""
 "Attach these kits to your probe and the probe will boost your long range "
 "sensor range. They come in batches of 5."
-msgstr "Attach these kits to your probe and the probe will boost your long range sensor range. They come in batches of 5."
+msgstr ""
+"Attach these kits to your probe and the probe will boost your long range "
+"sensor range. They come in batches of 5."
 
-#: scripts/scenario_45_iris_siege.lua:8001
+#: scripts/scenario_45_iris_siege.lua:6739
 #, lua-format
 msgctxt "probeShop-comms"
 msgid ""
 "%s\n"
 "%s: warp %.1f, sensor boost: range: %iu, power: %iu cost: %i"
-msgstr "%s\n%s: warp %.1f, sensor boost: range: %iu, power: %iu cost: %i"
+msgstr ""
+"%s\n"
+"%s: warp %.1f, sensor boost: range: %iu, power: %iu cost: %i"
 
-#: scripts/scenario_45_iris_siege.lua:8112
+#: scripts/scenario_45_iris_siege.lua:6850
 msgctxt "probeShop-comms"
 msgid "Observatory deployment probes"
 msgstr "Observatory deployment probes"
 
-#: scripts/scenario_45_iris_siege.lua:8116
+#: scripts/scenario_45_iris_siege.lua:6854
 msgctxt "probeShop-comms"
 msgid ""
 "This kit causes the probe to deploy a friendly self-powered observatory at "
 "its destination. The kit comes in batches of 3."
-msgstr "This kit causes the probe to deploy a friendly self-powered observatory at its destination. The kit comes in batches of 3."
+msgstr ""
+"This kit causes the probe to deploy a friendly self-powered observatory at "
+"its destination. The kit comes in batches of 3."
 
-#: scripts/scenario_45_iris_siege.lua:8123
+#: scripts/scenario_45_iris_siege.lua:6861
 #, lua-format
 msgctxt "probeShop-comms"
 msgid ""
 "%s\n"
 "%s: warp %.1f, range %iu, hull/shield: %i/%i, cost: %i"
-msgstr "%s\n%s: warp %.1f, range %iu, hull/shield: %i/%i, cost: %i"
+msgstr ""
+"%s\n"
+"%s: warp %.1f, range %iu, hull/shield: %i/%i, cost: %i"
 
-#: scripts/scenario_45_iris_siege.lua:8236
+#: scripts/scenario_45_iris_siege.lua:6974
 msgctxt "probeShop-comms"
 msgid "Automated ship scanning probes"
 msgstr "Automated ship scanning probes"
 
-#: scripts/scenario_45_iris_siege.lua:8240
+#: scripts/scenario_45_iris_siege.lua:6978
 msgctxt "probeShop-comms"
 msgid ""
 "Attach these kits to your probe and the probe will automatically scan ships "
 "in range. They come in batches of 3."
-msgstr "Attach these kits to your probe and the probe will automatically scan ships in range. They come in batches of 3."
+msgstr ""
+"Attach these kits to your probe and the probe will automatically scan ships "
+"in range. They come in batches of 3."
 
-#: scripts/scenario_45_iris_siege.lua:8245
+#: scripts/scenario_45_iris_siege.lua:6983
 msgctxt "probeShop-comms"
 msgid "simple scan"
 msgstr "simple scan"
 
-#: scripts/scenario_45_iris_siege.lua:8247
+#: scripts/scenario_45_iris_siege.lua:6985
 msgctxt "probeShop-comms"
 msgid "full scan"
 msgstr "full scan"
 
-#: scripts/scenario_45_iris_siege.lua:8252
+#: scripts/scenario_45_iris_siege.lua:6990
 #, lua-format
 msgctxt "probeShop-comms"
 msgid ""
 "%s\n"
 "%s: warp %.1f, range %iu, %s, cost: %i"
-msgstr "%s\n%s: warp %.1f, range %iu, %s, cost: %i"
+msgstr ""
+"%s\n"
+"%s: warp %.1f, range %iu, %s, cost: %i"
 
-#: scripts/scenario_45_iris_siege.lua:8363
+#: scripts/scenario_45_iris_siege.lua:7101
 msgctxt "probeShop-comms"
 msgid "Mine deployment probes"
 msgstr "Mine deployment probes"
 
-#: scripts/scenario_45_iris_siege.lua:8367
+#: scripts/scenario_45_iris_siege.lua:7105
 msgctxt "probeShop-comms"
 msgid ""
 "Attach these probe kits to your probe and when the probe reaches its "
 "destination, it goes into stealth mode after 5 seconds. Once the birth "
 "period has passed, it will deploy one or more mines. These probe kits come "
 "in batches of 3."
-msgstr "Attach these probe kits to your probe and when the probe reaches its destination, it goes into stealth mode after 5 seconds. Once the birth period has passed, it will deploy one or more mines. These probe kits come in batches of 3."
+msgstr ""
+"Attach these probe kits to your probe and when the probe reaches its "
+"destination, it goes into stealth mode after 5 seconds. Once the birth "
+"period has passed, it will deploy one or more mines. These probe kits come "
+"in batches of 3."
 
-#: scripts/scenario_45_iris_siege.lua:8374
+#: scripts/scenario_45_iris_siege.lua:7112
 #, lua-format
 msgctxt "probeShop-comms"
 msgid ""
 "%s\n"
 "%s: warp %.1f, birth: %i seconds, mines: %i, cost: %i"
-msgstr "%s\n%s: warp %.1f, birth: %i seconds, mines: %i, cost: %i"
+msgstr ""
+"%s\n"
+"%s: warp %.1f, birth: %i seconds, mines: %i, cost: %i"
 
-#: scripts/scenario_45_iris_siege.lua:8495
+#: scripts/scenario_45_iris_siege.lua:7233
 #, lua-format
 msgctxt "probeShop-comms"
 msgid ""
 "Your mine storage capacity of %i is insufficient for this LDSM probe kit, "
 "which requires %i mines."
-msgstr "Your mine storage capacity of %i is insufficient for this LDSM probe kit, which requires %i mines."
+msgstr ""
+"Your mine storage capacity of %i is insufficient for this LDSM probe kit, "
+"which requires %i mines."
 
-#: scripts/scenario_45_iris_siege.lua:8518
+#: scripts/scenario_45_iris_siege.lua:7256
 msgctxt "intelligence-comms"
 msgid "Where are the enemy ships?"
 msgstr "Where are the enemy ships?"
 
-#: scripts/scenario_45_iris_siege.lua:8524
+#: scripts/scenario_45_iris_siege.lua:7262
 #, lua-format
 msgctxt "intelligence-comms"
 msgid "We have reports of enemies on the following bearings from %s:"
 msgstr "We have reports of enemies on the following bearings from %s:"
 
-#: scripts/scenario_45_iris_siege.lua:8532
+#: scripts/scenario_45_iris_siege.lua:7270
 #, lua-format
 msgctxt "intelligence-comms"
 msgid "We have a report of an enemy on this bearing from %s:"
 msgstr "We have a report of an enemy on this bearing from %s:"
 
-#: scripts/scenario_45_iris_siege.lua:8545
+#: scripts/scenario_45_iris_siege.lua:7283
 #, lua-format
 msgctxt "intelligence-comms"
 msgid ""
 "%s\n"
 "This report omits distance information"
-msgstr "%s\nThis report omits distance information"
+msgstr ""
+"%s\n"
+"This report omits distance information"
 
-#: scripts/scenario_45_iris_siege.lua:8554
+#: scripts/scenario_45_iris_siege.lua:7292
 msgctxt "intelligence-comms"
 msgid "We have no reports of enemies at this time."
 msgstr "We have no reports of enemies at this time."
 
-#: scripts/scenario_45_iris_siege.lua:8564
+#: scripts/scenario_45_iris_siege.lua:7302
 msgctxt "orders-comms"
 msgid "Current orders?"
 msgstr "Current orders?"
 
-#: scripts/scenario_45_iris_siege.lua:8565
+#: scripts/scenario_45_iris_siege.lua:7303
 msgctxt "orders-comms"
 msgid "What are my current orders?"
 msgstr "What are my current orders?"
 
-#: scripts/scenario_45_iris_siege.lua:8567
+#: scripts/scenario_45_iris_siege.lua:7305
 #, lua-format
 msgctxt "orders-comms"
 msgid "Current orders for %s?"
 msgstr "Current orders for %s?"
 
-#: scripts/scenario_45_iris_siege.lua:8570
+#: scripts/scenario_45_iris_siege.lua:7308
 msgctxt "orders-comms"
 msgid "Remind me of our current orders, please"
 msgstr "Remind me of our current orders, please"
 
-#: scripts/scenario_45_iris_siege.lua:8586
-msgctxt "orders-comms"
-msgid ""
-"\n"
-"Optional:"
-msgstr "\nOptional:"
-
-#: scripts/scenario_45_iris_siege.lua:8587
-msgctxt "orders-comms"
-msgid ""
-"\n"
-"Optional orders:"
-msgstr "\nOptional orders:"
-
-#: scripts/scenario_45_iris_siege.lua:8588
-msgctxt "orders-comms"
-msgid ""
-"\n"
-"These orders are optional:"
-msgstr "\nThese orders are optional:"
-
-#: scripts/scenario_45_iris_siege.lua:8589
-msgctxt "orders-comms"
-msgid ""
-"\n"
-"Not required:"
-msgstr "\nNot required:"
-
-#: scripts/scenario_45_iris_siege.lua:8599
-#, lua-format
-msgctxt "orders-comms"
-msgid ""
-"%s\n"
-"Transport %s to %s station %s in %s"
-msgstr "%s\nTransport %s to %s station %s in %s"
-
-#: scripts/scenario_45_iris_siege.lua:8608
-#, lua-format
-msgctxt "orders-comms"
-msgid ""
-"%s\n"
-"Transport %s to station %s (defunct)"
-msgstr "%s\nTransport %s to station %s (defunct)"
-
-#: scripts/scenario_45_iris_siege.lua:8624
-#, lua-format
-msgctxt "orders-comms"
-msgid ""
-"%s\n"
-"Deliver cargo for %s to station %s in %s"
-msgstr "%s\nDeliver cargo for %s to station %s in %s"
-
-#: scripts/scenario_45_iris_siege.lua:8635
-#, lua-format
-msgctxt "orders-comms"
-msgid ""
-"%s\n"
-"Deliver cargo for %s to station %s (defunct)"
-msgstr "%s\nDeliver cargo for %s to station %s (defunct)"
-
-#: scripts/scenario_45_iris_siege.lua:8650
-#, lua-format
-msgctxt "orders-comms"
-msgid ""
-"%s\n"
-"Pick up cargo for %s at station %s in %s"
-msgstr "%s\nPick up cargo for %s at station %s in %s"
-
-#: scripts/scenario_45_iris_siege.lua:8661
-#, lua-format
-msgctxt "orders-comms"
-msgid ""
-"%s\n"
-"Pick up cargo for %s at station %s (defunct)"
-msgstr "%s\nPick up cargo for %s at station %s (defunct)"
-
-#: scripts/scenario_45_iris_siege.lua:8683
-#: scripts/scenario_45_iris_siege.lua:8700
-#, lua-format
-msgctxt "orders-comms"
-msgid ""
-"%s\n"
-"%s (defunct)"
-msgstr "%s\n%s (defunct)"
-
-#: scripts/scenario_45_iris_siege.lua:9357
+#: scripts/scenario_45_iris_siege.lua:7759
 #, lua-format
 msgctxt "scienceDescription-station"
 msgid "Sensor Observatory %s"
 msgstr "Sensor Observatory %s"
 
-#: scripts/scenario_45_iris_siege.lua:9596
+#: scripts/scenario_45_iris_siege.lua:7998
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Task force launched by %s station %s in sector %s"
 msgstr "Task force launched by %s station %s in sector %s"
 
-#: scripts/scenario_45_iris_siege.lua:9651
+#: scripts/scenario_45_iris_siege.lua:8053
 msgctxt "msgRelay"
 msgid ""
 "Defense Network Report:                    (A|X) = (Active|Destroyed) Sector "
 "Type Faction Name|ID"
-msgstr "Defence Network Report:                    (A|X) = (Active|Destroyed) Sector Type Faction Name|ID"
+msgstr ""
+"Defence Network Report:                    (A|X) = (Active|Destroyed) Sector "
+"Type Faction Name|ID"
 
-#: scripts/scenario_45_iris_siege.lua:9668
+#: scripts/scenario_45_iris_siege.lua:8070
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s station %s in sector %s lost, part of the nebula defense network."
 msgstr "%s station %s in sector %s lost, part of the nebula defence network."
 
-#: scripts/scenario_45_iris_siege.lua:9682
+#: scripts/scenario_45_iris_siege.lua:8084
 #, lua-format
 msgctxt "goal-incCall"
 msgid "%s %s vessel %s delivered the final destructive blow."
 msgstr "%s %s vessel %s delivered the final destructive blow."
 
-#: scripts/scenario_45_iris_siege.lua:9782
+#: scripts/scenario_45_iris_siege.lua:8170
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s ended with %s reputation points (goal: %s)."
 msgstr "%s ended with %s reputation points (goal: %s)."
 
-#: scripts/scenario_45_iris_siege.lua:9792
+#: scripts/scenario_45_iris_siege.lua:8180
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s ended without a final reputation score (goal: %s)."
 msgstr "%s ended without a final reputation score (goal: %s)."
 
-#: scripts/scenario_45_iris_siege.lua:9799
+#: scripts/scenario_45_iris_siege.lua:8187
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%i waves cleared."
 msgstr "%i waves cleared."
 
-#: scripts/scenario_45_iris_siege.lua:9801
+#: scripts/scenario_45_iris_siege.lua:8189
 msgctxt "msgMainscreen"
 msgid "No waves cleared."
 msgstr "No waves cleared."
 
-#: scripts/scenario_45_iris_siege.lua:9803
+#: scripts/scenario_45_iris_siege.lua:8191
 msgctxt "msgMainscreen"
 msgid "One wave cleared."
 msgstr "One wave cleared."
 
-#: scripts/scenario_45_iris_siege.lua:9808
-#, lua-format
-msgctxt "msgMainscreen"
-msgid ""
-"%s\n"
-"Deployed %s player ships."
-msgstr "%s\nDeployed %s player ships."
-
-#: scripts/scenario_45_iris_siege.lua:9814
-#, lua-format
-msgctxt "msgMainscreen"
-msgid ""
-"%s\n"
-"Deployed one player ship."
-msgstr "%s\nDeployed one player ship."
-
-#: scripts/scenario_45_iris_siege.lua:9819
-#, lua-format
-msgctxt "msgMainscreen"
-msgid ""
-"%s\n"
-"Time spent: %s."
-msgstr "%s\nTime spent: %s."
-
-#: scripts/scenario_45_iris_siege.lua:9824
-#, lua-format
-msgctxt "msgMainscreen"
-msgid ""
-"%s\n"
-"Enemies:%s Murphy:%s Respawn:%s"
-msgstr "%s\nEnemies:%s Murphy:%s Respawn:%s"
-
-#: scripts/scenario_45_iris_siege.lua:9832
+#: scripts/scenario_45_iris_siege.lua:8199
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
 "%s\n"
 "Wave:%i Task forces:%i"
-msgstr "%s\nWave:%i Task forces:%i"
+msgstr ""
+"%s\n"
+"Wave:%i Task forces:%i"
 
-#: scripts/scenario_45_iris_siege.lua:9936
+#: scripts/scenario_45_iris_siege.lua:8303
 #, lua-format
 msgctxt "tabRelay&Operations"
 msgid "Wave:%i Task force:%i"
 msgstr "Wave:%i Task force:%i"
 
-#: scripts/scenario_45_iris_siege.lua:9947
-#, lua-format
-msgctxt "tabHelms-id"
-msgid "%s %s in %s"
-msgstr "%s %s in %s"
-
-#: scripts/scenario_45_iris_siege.lua:9995
+#: scripts/scenario_45_iris_siege.lua:8336
 msgctxt "msgMainscreen"
 msgid "All players destroyed."
 msgstr "All players destroyed."
 
-#: scripts/scenario_45_iris_siege.lua:9999
+#: scripts/scenario_45_iris_siege.lua:8340
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
 "%s\n"
 "%s out of %s friendly station nebula defense nodes remain."
-msgstr "%s\n%s out of %s friendly station nebula defence nodes remain."
+msgstr ""
+"%s\n"
+"%s out of %s friendly station nebula defence nodes remain."
 
-#: scripts/scenario_45_iris_siege.lua:10014
+#: scripts/scenario_45_iris_siege.lua:8355
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "All %i friendly station nebula defense nodes destroyed."
 msgstr "All %i friendly station nebula defence nodes destroyed."
 
-#: scripts/scenario_45_iris_siege.lua:10032
+#: scripts/scenario_45_iris_siege.lua:8373
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s out of %s friendly station nebula defense nodes remain."
 msgstr "%s out of %s friendly station nebula defence nodes remain."
 
-#: scripts/scenario_45_iris_siege.lua:10048
+#: scripts/scenario_45_iris_siege.lua:8389
 #, lua-format
 msgctxt "goal-incCall"
 msgid ""
@@ -1756,10 +1317,485 @@ msgid ""
 "installed the defense nodes on some friendly stations, some neutral stations "
 "and some warp jammers. Your mission is to accumulate %s reputation points "
 "before the friendly stations with the nebula defense nodes are destroyed."
-msgstr "Enemies of the %s have deployed destructive nebulae against the region around the planet %s. The deployment mechanism resembles a closing iris door as the nebulae converge on %s. We have created a nebula defence network. We installed the defence nodes on some friendly stations, some neutral stations and some warp jammers. Your mission is to accumulate %s reputation points before the friendly stations with the nebula defence nodes are destroyed."
+msgstr ""
+"Enemies of the %s have deployed destructive nebulae against the region "
+"around the planet %s. The deployment mechanism resembles a closing iris door "
+"as the nebulae converge on %s. We have created a nebula defence network. We "
+"installed the defence nodes on some friendly stations, some neutral stations "
+"and some warp jammers. Your mission is to accumulate %s reputation points "
+"before the friendly stations with the nebula defence nodes are destroyed."
 
-#: scripts/scenario_45_iris_siege.lua:10079
+#: scripts/scenario_45_iris_siege.lua:8420
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Wave %i cleared"
 msgstr "Wave %i cleared"
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "reactor"
+#~ msgstr "reactor"
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "beam weapons"
+#~ msgstr "beam weapons"
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "missile system"
+#~ msgstr "missile system"
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "maneuver"
+#~ msgstr "manoeuvre"
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "impulse engines"
+#~ msgstr "impulse engines"
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "warp drive"
+#~ msgstr "warp drive"
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "jump drive"
+#~ msgstr "jump drive"
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "front shield"
+#~ msgstr "front shield"
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "rear shield"
+#~ msgstr "rear shield"
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "beams"
+#~ msgstr "beams"
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "missiles"
+#~ msgstr "missiles"
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "impulse"
+#~ msgstr "impulse"
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "warp"
+#~ msgstr "warp"
+
+#~ msgctxt "stationServices-comms"
+#~ msgid "jump"
+#~ msgstr "jump"
+
+#~ msgctxt "trade-comms"
+#~ msgid "food"
+#~ msgstr "food"
+
+#~ msgctxt "trade-comms"
+#~ msgid "medicine"
+#~ msgstr "medicine"
+
+#~ msgctxt "trade-comms"
+#~ msgid "luxury"
+#~ msgstr "luxury"
+
+#~ msgctxt "trade-comms"
+#~ msgid "cobalt"
+#~ msgstr "cobalt"
+
+#~ msgctxt "trade-comms"
+#~ msgid "dilithium"
+#~ msgstr "dilithium"
+
+#~ msgctxt "trade-comms"
+#~ msgid "gold"
+#~ msgstr "gold"
+
+#~ msgctxt "trade-comms"
+#~ msgid "nickel"
+#~ msgstr "nickel"
+
+#~ msgctxt "trade-comms"
+#~ msgid "platinum"
+#~ msgstr "platinum"
+
+#~ msgctxt "trade-comms"
+#~ msgid "tritanium"
+#~ msgstr "tritanium"
+
+#~ msgctxt "trade-comms"
+#~ msgid "autodoc"
+#~ msgstr "autodoc"
+
+#~ msgctxt "trade-comms"
+#~ msgid "android"
+#~ msgstr "android"
+
+#~ msgctxt "trade-comms"
+#~ msgid "battery"
+#~ msgstr "battery"
+
+#~ msgctxt "trade-comms"
+#~ msgid "beam"
+#~ msgstr "beam"
+
+#~ msgctxt "trade-comms"
+#~ msgid "circuit"
+#~ msgstr "circuit"
+
+#~ msgctxt "trade-comms"
+#~ msgid "communication"
+#~ msgstr "communication"
+
+#~ msgctxt "trade-comms"
+#~ msgid "filament"
+#~ msgstr "filament"
+
+#~ msgctxt "trade-comms"
+#~ msgid "impulse"
+#~ msgstr "impulse"
+
+#~ msgctxt "trade-comms"
+#~ msgid "lifter"
+#~ msgstr "lifter"
+
+#~ msgctxt "trade-comms"
+#~ msgid "nanites"
+#~ msgstr "nanites"
+
+#~ msgctxt "trade-comms"
+#~ msgid "optic"
+#~ msgstr "optic"
+
+#~ msgctxt "trade-comms"
+#~ msgid "repulsor"
+#~ msgstr "repulsor"
+
+#~ msgctxt "trade-comms"
+#~ msgid "robotic"
+#~ msgstr "robotic"
+
+#~ msgctxt "trade-comms"
+#~ msgid "sensor"
+#~ msgstr "sensor"
+
+#~ msgctxt "trade-comms"
+#~ msgid "shield"
+#~ msgstr "shield"
+
+#~ msgctxt "trade-comms"
+#~ msgid "software"
+#~ msgstr "software"
+
+#~ msgctxt "trade-comms"
+#~ msgid "tractor"
+#~ msgstr "tractor"
+
+#~ msgctxt "trade-comms"
+#~ msgid "transporter"
+#~ msgstr "transporter"
+
+#~ msgctxt "trade-comms"
+#~ msgid "warp"
+#~ msgstr "warp"
+
+#~ msgctxt "buttonGM"
+#~ msgid "+Spawn Ship(s)"
+#~ msgstr "+Spawn Ship(s)"
+
+#~ msgctxt "msgScience"
+#~ msgid "The unscanned artifact we just picked up has fried our scanners"
+#~ msgstr "The unscanned artifact we just picked up has fried our scanners"
+
+#~ msgctxt "msgOperations"
+#~ msgid "The unscanned artifact we just picked up has fried our scanners"
+#~ msgstr "The unscanned artifact we just picked up has fried our scanners"
+
+#, lua-format
+#~ msgctxt "scienceDescription-artifact"
+#~ msgid ""
+#~ "Source of emanations interfering with long range sensors. Range:%.1fu "
+#~ "Impact:%.1fu"
+#~ msgstr ""
+#~ "Source of emanations interfering with long range sensors. Range:%.1fu "
+#~ "Impact:%.1fu"
+
+#~ msgctxt "scienceDescription-artifact"
+#~ msgid "Source of unusual emanations"
+#~ msgstr "Source of unusual emanations"
+
+#~ msgctxt "station-comms"
+#~ msgid "Connect to warp jammer"
+#~ msgstr "Connect to warp jammer"
+
+#~ msgctxt "station-comms"
+#~ msgid "Which one would you like to connect to?"
+#~ msgstr "Which one would you like to connect to?"
+
+#, lua-format
+#~ msgctxt "station-comms"
+#~ msgid "(%i reputation)"
+#~ msgstr "(%i reputation)"
+
+#, lua-format
+#~ msgctxt "station-comms"
+#~ msgid "%s Automated warp jammer access menu"
+#~ msgstr "%s Automated warp jammer access menu"
+
+#~ msgctxt "station-comms"
+#~ msgid "Reduce range to 1 unit for 1 minute"
+#~ msgstr "Reduce range to 1 unit for 1 minute"
+
+#~ msgctxt "station-comms"
+#~ msgid "Acknowledged. Range adjusted. Reset timer engaged."
+#~ msgstr "Acknowledged. Range adjusted. Reset timer engaged."
+
+#~ msgctxt "station-comms"
+#~ msgid "Reduce range by 50% for 2 minutes"
+#~ msgstr "Reduce range by 50% for 2 minutes"
+
+#~ msgctxt "station-comms"
+#~ msgid "Reduce range by 25% for 3 minutes"
+#~ msgstr "Reduce range by 25% for 3 minutes"
+
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "Why do I have to pay reputation to log in to some of these warp jammers?"
+#~ msgstr ""
+#~ "Why do I have to pay reputation to log in to some of these warp jammers?"
+
+#, lua-format
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "It's complicated. It depends on the relationships between the warp jammer "
+#~ "owner, us, station %s and you, %s. The farther apart the relationship, "
+#~ "the more reputation it costs to gain access. Do you want more details?"
+#~ msgstr ""
+#~ "It's complicated. It depends on the relationships between the warp jammer "
+#~ "owner, us, station %s and you, %s. The farther apart the relationship, "
+#~ "the more reputation it costs to gain access. Do you want more details?"
+
+#~ msgctxt "station-comms"
+#~ msgid "Yes, please provide more details"
+#~ msgstr "Yes, please provide more details"
+
+#~ msgctxt "station-comms"
+#~ msgid "These are the cases and their reputation costs:"
+#~ msgstr "These are the cases and their reputation costs:"
+
+#, lua-format
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "    WJ friendly to %s and WJ is friendly to %s = no reputation."
+#~ msgstr ""
+#~ "%s\n"
+#~ "    WJ friendly to %s and WJ is friendly to %s = no reputation."
+
+#, lua-format
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "    WJ friendly to %s and WJ is neutral to %s = 5 reputation."
+#~ msgstr ""
+#~ "%s\n"
+#~ "    WJ friendly to %s and WJ is neutral to %s = 5 reputation."
+
+#, lua-format
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "    WJ friendly to %s and WJ is enemy to %s = 10 reputation."
+#~ msgstr ""
+#~ "%s\n"
+#~ "    WJ friendly to %s and WJ is enemy to %s = 10 reputation."
+
+#, lua-format
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "    WJ neutral to %s and WJ is friendly to %s = 10 reputation."
+#~ msgstr ""
+#~ "%s\n"
+#~ "    WJ neutral to %s and WJ is friendly to %s = 10 reputation."
+
+#, lua-format
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "    WJ enemy to %s and WJ is friendly to %s = 15 reputation."
+#~ msgstr ""
+#~ "%s\n"
+#~ "    WJ enemy to %s and WJ is friendly to %s = 15 reputation."
+
+#, lua-format
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "    WJ neutral to %s and WJ is neutral to %s = 20 reputation."
+#~ msgstr ""
+#~ "%s\n"
+#~ "    WJ neutral to %s and WJ is neutral to %s = 20 reputation."
+
+#, lua-format
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "    WJ enemy to %s and WJ is neutral to %s = 20 reputation."
+#~ msgstr ""
+#~ "%s\n"
+#~ "    WJ enemy to %s and WJ is neutral to %s = 20 reputation."
+
+#, lua-format
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "    WJ neutral to %s and WJ is enemy to %s = 25 reputation."
+#~ msgstr ""
+#~ "%s\n"
+#~ "    WJ neutral to %s and WJ is enemy to %s = 25 reputation."
+
+#, lua-format
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "    WJ enemy to %s and WJ is enemy to %s = 100 reputation."
+#~ msgstr ""
+#~ "%s\n"
+#~ "    WJ enemy to %s and WJ is enemy to %s = 100 reputation."
+
+#~ msgctxt "orders-comms"
+#~ msgid ""
+#~ "\n"
+#~ "Optional:"
+#~ msgstr ""
+#~ "\n"
+#~ "Optional:"
+
+#~ msgctxt "orders-comms"
+#~ msgid ""
+#~ "\n"
+#~ "Optional orders:"
+#~ msgstr ""
+#~ "\n"
+#~ "Optional orders:"
+
+#~ msgctxt "orders-comms"
+#~ msgid ""
+#~ "\n"
+#~ "These orders are optional:"
+#~ msgstr ""
+#~ "\n"
+#~ "These orders are optional:"
+
+#~ msgctxt "orders-comms"
+#~ msgid ""
+#~ "\n"
+#~ "Not required:"
+#~ msgstr ""
+#~ "\n"
+#~ "Not required:"
+
+#, lua-format
+#~ msgctxt "orders-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "Transport %s to %s station %s in %s"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Transport %s to %s station %s in %s"
+
+#, lua-format
+#~ msgctxt "orders-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "Transport %s to station %s (defunct)"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Transport %s to station %s (defunct)"
+
+#, lua-format
+#~ msgctxt "orders-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "Deliver cargo for %s to station %s in %s"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Deliver cargo for %s to station %s in %s"
+
+#, lua-format
+#~ msgctxt "orders-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "Deliver cargo for %s to station %s (defunct)"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Deliver cargo for %s to station %s (defunct)"
+
+#, lua-format
+#~ msgctxt "orders-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "Pick up cargo for %s at station %s in %s"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Pick up cargo for %s at station %s in %s"
+
+#, lua-format
+#~ msgctxt "orders-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "Pick up cargo for %s at station %s (defunct)"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Pick up cargo for %s at station %s (defunct)"
+
+#, lua-format
+#~ msgctxt "orders-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "%s (defunct)"
+#~ msgstr ""
+#~ "%s\n"
+#~ "%s (defunct)"
+
+#, lua-format
+#~ msgctxt "msgMainscreen"
+#~ msgid ""
+#~ "%s\n"
+#~ "Deployed %s player ships."
+#~ msgstr ""
+#~ "%s\n"
+#~ "Deployed %s player ships."
+
+#, lua-format
+#~ msgctxt "msgMainscreen"
+#~ msgid ""
+#~ "%s\n"
+#~ "Deployed one player ship."
+#~ msgstr ""
+#~ "%s\n"
+#~ "Deployed one player ship."
+
+#, lua-format
+#~ msgctxt "msgMainscreen"
+#~ msgid ""
+#~ "%s\n"
+#~ "Time spent: %s."
+#~ msgstr ""
+#~ "%s\n"
+#~ "Time spent: %s."
+
+#, lua-format
+#~ msgctxt "msgMainscreen"
+#~ msgid ""
+#~ "%s\n"
+#~ "Enemies:%s Murphy:%s Respawn:%s"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Enemies:%s Murphy:%s Respawn:%s"
+
+#, lua-format
+#~ msgctxt "tabHelms-id"
+#~ msgid "%s %s in %s"
+#~ msgstr "%s %s in %s"

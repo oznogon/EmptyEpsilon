@@ -1,0 +1,187 @@
+#: scripts/comms_station_missions.lua:16
+#, lua-format
+msgctxt "station-comms"
+msgid "Deliver %s to %s"
+msgstr ""
+
+#: scripts/comms_station_missions.lua:25 scripts/comms_station_missions.lua:315
+#: scripts/comms_station_missions.lua:387
+#: scripts/comms_station_missions.lua:446
+#: scripts/comms_station_missions.lua:735
+msgctxt "station-comms"
+msgid "You need to stay docked for that action."
+msgstr ""
+
+#: scripts/comms_station_missions.lua:34
+#, lua-format
+msgctxt "station-comms"
+msgid "%s disembarks at %s and thanks you"
+msgstr ""
+
+#: scripts/comms_station_missions.lua:51 scripts/comms_station_missions.lua:333
+#: scripts/comms_station_missions.lua:361
+#: scripts/comms_station_missions.lua:364
+#: scripts/comms_station_missions.lua:405
+#: scripts/comms_station_missions.lua:462
+#: scripts/comms_station_missions.lua:754
+#: scripts/comms_station_missions.lua:782
+#: scripts/comms_station_missions.lua:785
+msgid "Back"
+msgstr ""
+
+#: scripts/comms_station_missions.lua:60
+#, lua-format
+msgctxt "shipLog"
+msgid ""
+"%s disembarks at %s because %s has been destroyed. You receive %s reputation "
+"for your efforts"
+msgstr ""
+
+#: scripts/comms_station_missions.lua:271
+msgctxt "station-comms"
+msgid "Transport Passenger"
+msgstr ""
+
+#: scripts/comms_station_missions.lua:282
+#, lua-format
+msgctxt "station-comms"
+msgid "%s wishes to be transported to %s station %s in sector %s."
+msgstr ""
+
+#: scripts/comms_station_missions.lua:292
+#, lua-format
+msgctxt "station-comms"
+msgid "%s Transporting %s would increase your reputation by %s."
+msgstr ""
+
+#: scripts/comms_station_missions.lua:304
+#, lua-format
+msgctxt "station-comms"
+msgid "Agree to transport %s to %s station %s"
+msgstr ""
+
+#: scripts/comms_station_missions.lua:327
+#, lua-format
+msgctxt "station-comms"
+msgid "You direct %s to guest quarters and say, 'Welcome aboard the %s'"
+msgstr ""
+
+#: scripts/comms_station_missions.lua:337
+msgctxt "station-comms"
+msgid "Decline transportation request"
+msgstr ""
+
+#: scripts/comms_station_missions.lua:344
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"You tell %s that you cannot take on any transportation missions at this "
+"time. The offer disappears from the message board."
+msgstr ""
+
+#: scripts/comms_station_missions.lua:355
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"You tell %s that you cannot take on any transportation missions at this time."
+msgstr ""
+
+#: scripts/comms_station_missions.lua:378
+#, lua-format
+msgctxt "station-comms"
+msgid "Deliver cargo to %s on %s"
+msgstr ""
+
+#: scripts/comms_station_missions.lua:396
+#, lua-format
+msgctxt "station-comms"
+msgid "%s thanks you for retrieving the cargo"
+msgstr ""
+
+#: scripts/comms_station_missions.lua:414
+#, lua-format
+msgctxt "shipLog"
+msgid ""
+"Automated systems on %s have informed you of the destruction of station %s. "
+"Your mission to deliver cargo for %s to %s is no longer valid. You unloaded "
+"the cargo and requested the station authorities handle it for the family of "
+"%s. You received %s reputation for your efforts. The mission has been "
+"removed from your mission log."
+msgstr ""
+
+#: scripts/comms_station_missions.lua:438
+#, lua-format
+msgctxt "station-comms"
+msgid "Pick up cargo for %s"
+msgstr ""
+
+#: scripts/comms_station_missions.lua:455
+#, lua-format
+msgctxt "station-comms"
+msgid "The cargo for %s has been loaded on %s"
+msgstr ""
+
+#: scripts/comms_station_missions.lua:471
+#, lua-format
+msgctxt "shipLog"
+msgid ""
+"Automated systems on %s have informed you of the destruction of station %s. "
+"Your mission to retrieve cargo for %s from %s is no longer valid and has "
+"been removed from your mission log."
+msgstr ""
+
+#: scripts/comms_station_missions.lua:697
+msgctxt "station-comms"
+msgid "Retrieve Cargo"
+msgstr ""
+
+#: scripts/comms_station_missions.lua:708
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s wishes you to pick up cargo from %s station %s in sector %s and deliver "
+"it here."
+msgstr ""
+
+#: scripts/comms_station_missions.lua:718
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s Retrieving and delivering this cargo for %s would increase your "
+"reputation by %s."
+msgstr ""
+
+#: scripts/comms_station_missions.lua:727
+#, lua-format
+msgctxt "station-comms"
+msgid "Agree to retrieve cargo for %s"
+msgstr ""
+
+#: scripts/comms_station_missions.lua:747
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s thanks you and contacts station %s to let them know that %s will be "
+"picking up the cargo."
+msgstr ""
+
+#: scripts/comms_station_missions.lua:758
+msgctxt "station-comms"
+msgid "Decline cargo retrieval request"
+msgstr ""
+
+#: scripts/comms_station_missions.lua:765
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"You tell %s that you cannot take on any cargo retrieval missions at this "
+"time. The offer disappears from the message board."
+msgstr ""
+
+#: scripts/comms_station_missions.lua:776
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"You tell %s that you cannot take on any cargo retrieval missions at this "
+"time."
+msgstr ""

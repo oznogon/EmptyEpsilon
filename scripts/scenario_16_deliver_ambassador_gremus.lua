@@ -16,6 +16,28 @@ require("utils.lua")
 require("generate_call_sign_scenario_utility.lua")
 require("spawn_ships_scenario_utility.lua")
 require("control_code_scenario_utility.lua")
+local ShipComms = require("comms_ship_support.lua")
+local availableForComms = ShipComms.availableForComms
+local StationCore = require("comms_station_core.lua")
+local StationMenu = require("comms_station_menu.lua")
+
+local Relation = require("comms_relation_scenario_utility.lua")
+local relation = Relation.new({
+    source = function() return player end,
+    rules = function(state, source, target)
+        if state == "ready" then return true end
+        if state == "orders" then return target:getFaction() == "Human Navy" end
+        return false
+    end,
+})
+isAllowedTo = relation.isAllowedTo
+
+local Heading = require("heading_scenario_utility.lua")
+local vectorFromAngleNorth = Heading.north(vectorFromAngle, {
+    diagnostic = function(message)
+        if spew_function_diagnostic then print(message) end
+    end,
+})
 
 function init()
     scenario_version = "5.0.4"
@@ -523,19 +545,6 @@ function createRandomAlongArc(
             a:setSize(random(4, 300) + random(4, 300) + random(4, 300))
         end
     end
-end
-function vectorFromAngleNorth(angle, distance)
-    if spew_function_diagnostic then
-        print("top of vector from angle north")
-    end
-    -- print("input angle to vectorFromAngleNorth:")
-    -- print(angle)
-    angle = (angle + 270) % 360
-    local x, y = vectorFromAngle(angle, distance)
-    if spew_function_diagnostic then
-        print("bottom (ish) of vector from angle north")
-    end
-    return x, y
 end
 ------------------------------
 --  Plot related functions  --
@@ -1721,18 +1730,75 @@ end
 ------------------------------
 --  Station Communications  --
 ------------------------------
-function commsStation()
-    if comms_target.comms_data == nil then
-        comms_target.comms_data = {}
+local station_profile
+
+commsStation = StationMenu.entrypoint(function() return station_profile end)
+
+local function showCurrentOrders()
+    local oMessage = _("orders-comms", "Whatever ambassador Gremus says. ")
+    if
+        plot1 == chasePlayer
+        or plot1 == getAmbassador
+        or plot1 == ambassadorAboard
+    then
+        oMessage = _(
+            "orders-comms",
+            "Current Orders: Get ambassador Gremus from Balindor Prime. Avoid contact if possible. "
+        )
+    elseif plot1 == gotoNingling then
+        oMessage = _(
+            "orders-comms",
+            "Current Orders: Transport ambassador Gremus to Ningling. "
+        )
+    elseif plot1 == waitForAmbassador then
+        oMessage = _(
+            "orders-comms",
+            "Current Orders: Wait for ambassador Gremus to complete business at Ningling. "
+        )
+    elseif plot1 == getFromNingling then
+        oMessage = _(
+            "orders-comms",
+            "Current Orders: Dock with Ningling to get ambassador Gremus. "
+        )
+    elseif plot1 == travelGoltin then
+        oMessage = _(
+            "orders-comms",
+            "Current Orders: Transport ambassador Gremus to Goltin 7. "
+        )
     end
-    mergeTables(comms_target.comms_data, {
-        friendlyness = random(0.0, 100.0),
-        weapons = {
-            Homing = "neutral",
-            HVLI = "neutral",
-            Mine = "neutral",
-            Nuke = "friend",
-            EMP = "friend",
+    if plot3 == artifactResearch or plot3 == artifactByStation then
+        oMessage = string.format(
+            _(
+                "artifactOrders-comms",
+                "%sAdditional Orders: Research artifacts. Some artifacts reported near Pangora, Nakor and Science-37. "
+            ),
+            oMessage
+        )
+        if plot1 == departForResearch or plot1 == goltinAndResearch then
+            oMessage = string.format(
+                _(
+                    "artifactOrders-comms",
+                    "%sProvide artifact research to ambassador Gremus on Goltin 7. "
+                ),
+                oMessage
+            )
+        end
+    end
+    setCommsMessage(oMessage)
+end
+
+station_profile = {
+    main_menu = commsStation,
+    source = function()
+        return player
+    end,
+    data = {
+        weapon_available = {
+            Homing = true,
+            HVLI = true,
+            Mine = true,
+            Nuke = true,
+            EMP = true,
         },
         weapon_cost = {
             Homing = 2,
@@ -1741,460 +1807,98 @@ function commsStation()
             Nuke = 15,
             EMP = 10,
         },
-        services = {
-            supplydrop = "friend",
-            reinforcements = "friend",
-        },
         service_cost = {
             supplydrop = 100,
             reinforcements = 150,
         },
-        reputation_cost_multipliers = {
-            friend = 1.0,
-            neutral = 2.5,
+        reputation_cost_multipliers = { neutral = 2.5 },
+    },
+    require_docked = true,
+    resources = {
+        prompt = false,
+        recruitment = false,
+        coolant = false,
+        goods = false,
+    },
+    docked = {
+        greeting = "fixed",
+        show_reputation = false,
+        group_services = false,
+        service_prompt = false,
+        service_sections = { "ordnance" },
+        restock = "simple",
+        ordnance = {
+            group = false,
+            show_reputation = false,
+            order = { "Homing", "HVLI", "Mine", "EMP", "Nuke" },
+            prompt_format = _("ammo-comms", "%s%d rep each)"),
+            prompts = {
+                Homing = {
+                    _("ammo-comms", "Do you have spare homing missiles for us? ("),
+                    _("ammo-comms", "Do you have extra homing missiles? ("),
+                    _("ammo-comms", "We could use some homing missiles. ("),
+                },
+                HVLI = {
+                    _("ammo-comms", "Can you restock us with HVLI? ("),
+                    _("ammo-comms", "What about HVLI? ("),
+                    _("ammo-comms", "We need some High Velocity Lead Impactors. ("),
+                },
+                Mine = {
+                    _("ammo-comms", "Please restock our mines. ("),
+                    _("ammo-comms", "How about mines? ("),
+                    _("ammo-comms", "We are running low on mines. ("),
+                },
+                EMP = {
+                    _("ammo-comms", "Please restock our EMP missiles. ("),
+                    _("ammo-comms", "Got any EMPs? ("),
+                    _("ammo-comms", "We need Electro-Magnetic Pulse missiles. ("),
+                },
+                Nuke = {
+                    _("ammo-comms", "Can you supply us with some nukes? ("),
+                    _("ammo-comms", "We really need some nukes. ("),
+                    _("ammo-comms", "We could use some nuclear missiles. ("),
+                },
+            },
         },
-        max_weapon_refill_amount = {
-            friend = 1.0,
-            neutral = 0.5,
-        },
-    })
-    comms_data = comms_target.comms_data
-    if comms_source:isEnemy(comms_target) then
-        return false
-    end
-    if comms_target:areEnemiesInRange(5000) then
-        setCommsMessage(
-            _("station-comms", "We are under attack! No time for chatting!")
-        )
-        return true
-    end
-    if not player:isDocked(comms_target) then
-        handleUndockedState()
-    else
-        handleDockedState()
-    end
-    return true
-end
-function handleDockedState()
-    if comms_source:isFriendly(comms_target) then
-        setCommsMessage(
-            _(
-                "station-comms",
-                "Good day, officer!\nWhat can we do for you today?"
-            )
-        )
-    else
-        setCommsMessage(_("station-comms", "Welcome to our lovely station."))
-    end
-    local weapon_prompts = {
-        ["Homing"] = {
-            string.format(
-                _(
-                    "ammo-comms",
-                    "Do you have spare homing missiles for us? (%d rep each)"
-                ),
-                getWeaponCost("Homing")
-            ),
-            string.format(
-                _(
-                    "ammo-comms",
-                    "Do you have extra homing missiles? (%d rep each)"
-                ),
-                getWeaponCost("Homing")
-            ),
-            string.format(
-                _(
-                    "ammo-comms",
-                    "We could use some homing missiles. (%d rep each)"
-                ),
-                getWeaponCost("Homing")
-            ),
-        },
-        ["HVLI"] = {
-            string.format(
-                _("ammo-comms", "Can you restock us with HVLI? (%d rep each)"),
-                getWeaponCost("HVLI")
-            ),
-            string.format(
-                _("ammo-comms", "What about HVLI? (%d rep each)"),
-                getWeaponCost("HVLI")
-            ),
-            string.format(
-                _(
-                    "ammo-comms",
-                    "We need some High Velocity Lead Impactors. (%d rep each)"
-                ),
-                getWeaponCost("HVLI")
-            ),
-        },
-        ["Mine"] = {
-            string.format(
-                _("ammo-comms", "Please restock our mines. (%d rep each)"),
-                getWeaponCost("Mine")
-            ),
-            string.format(
-                _("ammo-comms", "How about mines? (%d rep each)"),
-                getWeaponCost("Mine")
-            ),
-            string.format(
-                _("ammo-comms", "We are running low on mines. (%d rep each)"),
-                getWeaponCost("Mine")
-            ),
-        },
-        ["EMP"] = {
-            string.format(
-                _(
-                    "ammo-comms",
-                    "Please restock our EMP missiles. (%d rep each)"
-                ),
-                getWeaponCost("EMP")
-            ),
-            string.format(
-                _("ammo-comms", "Got any EMPs? (%d rep each)"),
-                getWeaponCost("EMP")
-            ),
-            string.format(
-                _(
-                    "ammo-comms",
-                    "We need Electro-Magnetic Pulse missiles. (%d rep each)"
-                ),
-                getWeaponCost("EMP")
-            ),
-        },
-        ["Nuke"] = {
-            string.format(
-                _(
-                    "ammo-comms",
-                    "Can you supply us with some nukes? (%d rep each)"
-                ),
-                getWeaponCost("Nuke")
-            ),
-            string.format(
-                _("ammo-comms", "We really need some nukes. (%d rep each)"),
-                getWeaponCost("Nuke")
-            ),
-            string.format(
-                _(
-                    "ammo-comms",
-                    "We could use some nuclear missiles. (%d rep each)"
-                ),
-                getWeaponCost("Nuke")
-            ),
-        },
-    }
-    for weapon, prompt in pairs(weapon_prompts) do
-        if comms_source:getWeaponStorageMax(weapon) > 0 then
-            addCommsReply(prompt[math.random(1, #prompt)], function()
-                string.format("")
-                handleWeaponRestock(weapon)
-            end)
-        end
-    end
-    helpfulWaypoints()
-    -- Include orders upon request for when they are missed
-    if isAllowedTo(askForOrders) then
-        addCommsReply(
-            _("orders-comms", "What are my current orders?"),
-            function()
-                oMessage =
-                    _("orders-comms", "Whatever ambassador Gremus says. ")
-                if
-                    plot1 == chasePlayer
-                    or plot1 == getAmbassador
-                    or plot1 == ambassadorAboard
-                then
-                    oMessage = _(
-                        "orders-comms",
-                        "Current Orders: Get ambassador Gremus from Balindor Prime. Avoid contact if possible. "
-                    )
-                elseif plot1 == gotoNingling then
-                    oMessage = _(
-                        "orders-comms",
-                        "Current Orders: Transport ambassador Gremus to Ningling. "
-                    )
-                elseif plot1 == waitForAmbassador then
-                    oMessage = _(
-                        "orders-comms",
-                        "Current Orders: Wait for ambassador Gremus to complete business at Ningling. "
-                    )
-                elseif plot1 == getFromNingling then
-                    oMessage = _(
-                        "orders-comms",
-                        "Current Orders: Dock with Ningling to get ambassador Gremus. "
-                    )
-                elseif plot1 == travelGoltin then
-                    oMessage = _(
-                        "orders-comms",
-                        "Current Orders: Transport ambassador Gremus to Goltin 7. "
-                    )
-                end
-                if plot3 == artifactResearch or plot3 == artifactByStation then
-                    oMessage = string.format(
-                        _(
-                            "artifactOrders-comms",
-                            "%sAdditional Orders: Research artifacts. Some artifacts reported near Pangora, Nakor and Science-37. "
-                        ),
-                        oMessage
-                    )
-                    if
-                        plot1 == departForResearch
-                        or plot1 == goltinAndResearch
-                    then
-                        oMessage = string.format(
-                            _(
-                                "artifactOrders-comms",
-                                "%sProvide artifact research to ambassador Gremus on Goltin 7. "
-                            ),
-                            oMessage
-                        )
-                    end
-                end
-                setCommsMessage(oMessage)
-                addCommsReply(_("Back"), commsStation)
+        after_services = function()
+            helpfulWaypoints()
+            if isAllowedTo(askForOrders) then
+                StationMenu.currentOrders(station_profile, showCurrentOrders)
             end
-        )
-    end
-end
-function handleWeaponRestock(weapon)
-    if not player:isDocked(comms_target) then
-        setCommsMessage(
-            _("station-comms", "You need to stay docked for that action.")
-        )
-        return
-    end
-    if not isAllowedTo(comms_data.weapons[weapon]) then
-        if weapon == "Nuke" then
-            setCommsMessage(
-                _(
-                    "ammo-comms",
-                    "We do not deal in weapons of mass destruction."
-                )
-            )
-        elseif weapon == "EMP" then
-            setCommsMessage(
-                _("ammo-comms", "We do not deal in weapons of mass disruption.")
-            )
-        else
-            setCommsMessage(_("ammo-comms", "We do not deal in those weapons."))
-        end
-        return
-    end
-    local points_per_item = getWeaponCost(weapon)
-    local item_amount = math.floor(
-        player:getWeaponStorageMax(weapon)
-            * comms_data.max_weapon_refill_amount[getFriendStatus()]
-    ) - player:getWeaponStorage(weapon)
-    if item_amount <= 0 then
-        if weapon == "Nuke" then
-            setCommsMessage(
-                _(
-                    "ammo-comms",
-                    "All nukes are charged and primed for destruction."
-                )
-            )
-        else
-            setCommsMessage(
-                _(
-                    "ammo-comms",
-                    "Sorry, sir, but you are as fully stocked as I can allow."
-                )
-            )
-        end
-    else
-        if not player:takeReputationPoints(points_per_item * item_amount) then
-            setCommsMessage(_("needRep-comms", "Not enough reputation."))
-            return
-        end
-        player:setWeaponStorage(
-            weapon,
-            player:getWeaponStorage(weapon) + item_amount
-        )
-        if
-            player:getWeaponStorage(weapon)
-            == player:getWeaponStorageMax(weapon)
-        then
-            setCommsMessage(
-                _(
-                    "ammo-comms",
-                    "You are fully loaded and ready to explode things."
-                )
-            )
-        else
-            setCommsMessage(
-                _(
-                    "ammo-comms",
-                    "We generously resupplied you with some weapon charges.\nPut them to good use."
-                )
-            )
-        end
-    end
-    addCommsReply(_("Back"), commsStation)
-end
-function handleUndockedState()
-    --Handle communications when we are not docked with the station.
-    if player:isFriendly(comms_target) then
-        setCommsMessage(
-            _(
-                "station-comms",
-                "Good day, officer.\nIf you need supplies, please dock with us first."
-            )
-        )
-    else
-        setCommsMessage(
-            _(
-                "station-comms",
-                "Greetings.\nIf you want to do business, please dock with us first."
-            )
-        )
-    end
-    if isAllowedTo(comms_target.comms_data.services.supplydrop) then
-        addCommsReply(
-            string.format(
-                _("stationAssist-comms", "Can you send a supply drop? (%s rep)"),
-                getServiceCost("supplydrop")
+        end,
+        group_resources = false,
+    },
+    undocked = {
+        supply_drop = {
+            label = _("stationAssist-comms", "Can you send a supply drop? (%s rep)"),
+            waypoint_label = _("stationAssist-comms", "Waypoint %s"),
+            dispatch_message = _(
+                "stationAssist-comms",
+                "We have dispatched a supply ship toward waypoint %s"
             ),
-            function()
-                if player:getWaypointCount() < 1 then
-                    setCommsMessage(
-                        _(
-                            "stationAssist-comms",
-                            "You need to set a waypoint before you can request backup."
-                        )
-                    )
-                else
-                    setCommsMessage(
-                        _(
-                            "stationAssist-comms",
-                            "To which waypoint should we deliver your supplies?"
-                        )
-                    )
-                    for n = 1, player:getWaypointCount() do
-                        addCommsReply(
-                            string.format(
-                                _("stationAssist-comms", "Waypoint %s"),
-                                n
-                            ),
-                            function()
-                                if
-                                    player:takeReputationPoints(
-                                        getServiceCost("supplydrop")
-                                    )
-                                then
-                                    local position_x, position_y =
-                                        comms_target:getPosition()
-                                    local target_x, target_y =
-                                        player:getWaypoint(n)
-                                    local script = Script()
-                                    script
-                                        :setVariable("position_x", position_x)
-                                        :setVariable("position_y", position_y)
-                                    script
-                                        :setVariable("target_x", target_x)
-                                        :setVariable("target_y", target_y)
-                                    script
-                                        :setVariable(
-                                            "faction_id",
-                                            comms_target:getFactionId()
-                                        )
-                                        :run("supply_drop.lua")
-                                    setCommsMessage(
-                                        string.format(
-                                            _(
-                                                "stationAssist-comms",
-                                                "We have dispatched a supply ship toward waypoint %s"
-                                            ),
-                                            n
-                                        )
-                                    )
-                                else
-                                    setCommsMessage(
-                                        _(
-                                            "needRep-comms",
-                                            "Not enough reputation!"
-                                        )
-                                    )
-                                end
-                                addCommsReply(_("Back"), commsStation)
-                            end
-                        )
-                    end
-                end
-                addCommsReply(_("Back"), commsStation)
-            end
-        )
-    end
-    if isAllowedTo(comms_target.comms_data.services.reinforcements) then
-        addCommsReply(
-            string.format(
-                _("stationAssist-comms", "Please send reinforcements! (rep %s)"),
-                getServiceCost("reinforcements")
-            ),
-            function()
-                if player:getWaypointCount() < 1 then
-                    setCommsMessage(
-                        _(
-                            "stationAssist-comms",
-                            "You need to set a waypoint before you can request reinforcements."
-                        )
-                    )
-                else
-                    setCommsMessage(
-                        _(
-                            "stationAssist-comms",
-                            "To which waypoint should we dispatch the reinforcements?"
-                        )
-                    )
-                    for n = 1, player:getWaypointCount() do
-                        addCommsReply(
-                            string.format(
-                                _("stationAssist-comms", "Waypoint %s"),
-                                comms_source:getWaypointID(n)
-                            ),
-                            function()
-                                if
-                                    player:takeReputationPoints(
-                                        getServiceCost("reinforcements")
-                                    )
-                                then
-                                    ship = CpuShip()
-                                        :setFactionId(
-                                            comms_target:getFactionId()
-                                        )
-                                        :setPosition(comms_target:getPosition())
-                                        :setTemplate(ST.ADDER_MK5)
-                                        :setScanned(true)
-                                        :orderDefendLocation(
-                                            player:getWaypoint(n)
-                                        )
-                                    setCommsMessage(
-                                        string.format(
-                                            _(
-                                                "stationAssist-comms",
-                                                "We have dispatched %s to assist at waypoint %s"
-                                            ),
-                                            ship:getCallSign(),
-                                            comms_source:getWaypointID(n)
-                                        )
-                                    )
-                                else
-                                    setCommsMessage(
-                                        _(
-                                            "needRep-comms",
-                                            "Not enough reputation!"
-                                        )
-                                    )
-                                end
-                                addCommsReply(_("Back"), commsStation)
-                            end
-                        )
-                    end
-                end
-                addCommsReply(_("Back"), commsStation)
-            end
-        )
-    end
-    helpfulWaypoints()
-end
+        },
+        reinforcements = {
+            {
+                label = _(
+                    "stationAssist-comms",
+                    "Please send reinforcements! (rep %s)"
+                ),
+                waypoint_label = _("stationAssist-comms", "Waypoint %s"),
+                success_message = _(
+                    "stationAssist-comms",
+                    "We have dispatched %s to assist at waypoint %s"
+                ),
+                call_sign = false,
+                destruction = false,
+                comms = false,
+            },
+        },
+        assistance = true,
+        after_assistance = function()
+            helpfulWaypoints()
+        end,
+    },
+}
 function helpfulWaypoints()
     -- Add helpful waypoint creation messages
     points_of_interest = {
@@ -2313,64 +2017,6 @@ function helpfulWaypoints()
             end)
         end
     end
-end
-function isAllowedTo(state)
-    if state == "friend" and player:isFriendly(comms_target) then
-        return true
-    end
-    if state == "neutral" and not player:isEnemy(comms_target) then
-        return true
-    end
-    if state == "ready" then
-        return true
-    end
-    if state == "orders" and comms_target:getFaction() == "Human Navy" then
-        return true
-    end
-    return false
-end
-function getWeaponCost(weapon) --Return reputation points required for specified weapon for player
-    return math.ceil(
-        comms_data.weapon_cost[weapon]
-            * comms_data.reputation_cost_multipliers[getFriendStatus()]
-    )
-end
-function getServiceCost(service) --Return reputation points required for specified service for player
-    return math.ceil(comms_data.service_cost[service])
-end
-function getFriendStatus()
-    if player:isFriendly(comms_target) then
-        return "friend"
-    else
-        return "neutral"
-    end
-end
-function availableForComms(p)
-    if not p:isCommsInactive() then
-        return false
-    end
-    if p:isCommsOpening() then
-        return false
-    end
-    if p:isCommsBeingHailed() then
-        return false
-    end
-    if p:isCommsBeingHailedByGM() then
-        return false
-    end
-    if p:isCommsChatOpen() then
-        return false
-    end
-    if p:isCommsChatOpenToGM() then
-        return false
-    end
-    if p:isCommsChatOpenToPlayer() then
-        return
-    end
-    if p:isCommsScriptOpen() then
-        return false
-    end
-    return true
 end
 function update(delta)
     if not player:isValid() then

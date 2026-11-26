@@ -8,7 +8,9 @@ msgctxt "msgGM"
 msgid ""
 "There are no active player ships for you to view or set the control codes "
 "for."
-msgstr "There are no active player ships for you to view or set the control codes for."
+msgstr ""
+"There are no active player ships for you to view or set the control codes "
+"for."
 
 #: scripts/control_code_scenario_utility.lua:32
 msgctxt "buttonGM"
@@ -36,7 +38,9 @@ msgctxt "msgGM"
 msgid ""
 "%s\n"
 "%s: <none> (%s)"
-msgstr "%s\n%s: <none> (%s)"
+msgstr ""
+"%s\n"
+"%s: <none> (%s)"
 
 #: scripts/control_code_scenario_utility.lua:84
 #, lua-format
@@ -44,13 +48,16 @@ msgctxt "msgGM"
 msgid ""
 "%s\n"
 "%s: %s (%s)"
-msgstr "%s\n%s: %s (%s)"
+msgstr ""
+"%s\n"
+"%s: %s (%s)"
 
 #: scripts/control_code_scenario_utility.lua:97
 msgctxt "msgGM"
 msgid ""
 "None of the active player ships have a control code set for you to view."
-msgstr "None of the active player ships have a control code set for you to view."
+msgstr ""
+"None of the active player ships have a control code set for you to view."
 
 #: scripts/control_code_scenario_utility.lua:104
 msgctxt "buttonGM"
@@ -105,21 +112,27 @@ msgctxt "msgGM"
 msgid ""
 "Object in %s selected to set control code.\n"
 "Place control code in unscanned description field via tweak button"
-msgstr "Object in %s selected to set control code.\nPlace control code in unscanned description field via tweak button"
+msgstr ""
+"Object in %s selected to set control code.\n"
+"Place control code in unscanned description field via tweak button"
 
 #: scripts/control_code_scenario_utility.lua:163
 msgctxt "msgGM"
 msgid ""
 "Select only one object to use to set control code via its unscanned "
 "description field. No action taken"
-msgstr "Select only one object to use to set control code via its unscanned description field. No action taken"
+msgstr ""
+"Select only one object to use to set control code via its unscanned "
+"description field. No action taken"
 
 #: scripts/control_code_scenario_utility.lua:172
 msgctxt "msgGM"
 msgid ""
 "Select an object to use to set control code via its unscanned description "
 "field. No action taken"
-msgstr "Select an object to use to set control code via its unscanned description field. No action taken"
+msgstr ""
+"Select an object to use to set control code via its unscanned description "
+"field. No action taken"
 
 #: scripts/control_code_scenario_utility.lua:202
 msgctxt "buttonGM"
@@ -157,7 +170,9 @@ msgctxt "msgGM"
 msgid ""
 "%s\n"
 "%s: %s"
-msgstr "%s\n%s: %s"
+msgstr ""
+"%s\n"
+"%s: %s"
 
 #: scripts/control_code_scenario_utility.lua:248
 msgctxt "msgGM"
@@ -177,7 +192,9 @@ msgctxt "msgGM"
 msgid ""
 "%s\n"
 "%s"
-msgstr "%s\n%s"
+msgstr ""
+"%s\n"
+"%s"
 
 #: scripts/control_code_scenario_utility.lua:262
 msgctxt "msgGM"
@@ -206,7 +223,9 @@ msgctxt "msgGM"
 msgid ""
 "%s\n"
 "All defaults have matching player ships.\n"
-msgstr "%s\nAll defaults have matching player ships.\n"
+msgstr ""
+"%s\n"
+"All defaults have matching player ships.\n"
 
 #: scripts/control_code_scenario_utility.lua:295
 #, lua-format
@@ -215,4 +234,28 @@ msgid ""
 "%s%s\n"
 "%s\n"
 "%s"
-msgstr "%s%s\n%s\n%s"
+msgstr ""
+"%s%s\n"
+"%s\n"
+"%s"
+
+#: scripts/control_code_scenario_utility.lua:415
+msgctxt "msgGM"
+msgid " (Kraylor)"
+msgstr ""
+
+#: scripts/control_code_scenario_utility.lua:416
+msgctxt "msgGM"
+msgid " (Ktlitan)"
+msgstr ""
+
+#: scripts/control_code_scenario_utility.lua:417
+msgctxt "msgGM"
+msgid " (Exuari)"
+msgstr ""
+
+#: scripts/control_code_scenario_utility.lua:424
+#, lua-format
+msgctxt "msgGM"
+msgid "%s: %s %s\n"
+msgstr ""

@@ -369,7 +369,7 @@ function commsNSA()
                         "Nosy Sensing Array, an old SIGINT platform."
                     ) .. " " .. _(
                         "scienceDescription-station",
-                        "The Ktlitan Swarm Commander has been located.
+                        "The Ktlitan Swarm Commander has been located."
                     )
                 )
             else

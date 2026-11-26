@@ -15,7 +15,18 @@ msgid ""
 "\n"
 "USN Discord: https://discord.gg/PntGG3a where you can join a game online. "
 "There's usually one every weekend. All experience levels are welcome."
-msgstr "Rescue a research scientist from the Kraylor's clutches. Any number of player ships supported.\n\nWith the default settings, the scenario should run for 30 to 60 minutes. Terrain changes each scenario run. Scenario difficulty: Low to medium with default settings.\n\nVersion 1\n\nUSN Discord: https://discord.gg/PntGG3a where you can join a game online. There's usually one every weekend. All experience levels are welcome."
+msgstr ""
+"Rescue a research scientist from the Kraylor's clutches. Any number of "
+"player ships supported.\n"
+"\n"
+"With the default settings, the scenario should run for 30 to 60 minutes. "
+"Terrain changes each scenario run. Scenario difficulty: Low to medium with "
+"default settings.\n"
+"\n"
+"Version 1\n"
+"\n"
+"USN Discord: https://discord.gg/PntGG3a where you can join a game online. "
+"There's usually one every weekend. All experience levels are welcome."
 
 # Scenario setting
 msgctxt "setting"
@@ -124,7 +135,9 @@ msgctxt "setting"
 msgid ""
 "Configures whether the player ship or ships automatically respawn in game or "
 "not and how often if they do automatically respawn"
-msgstr "Configures whether the player ship or ships automatically respawn in game or not and how often if they do automatically respawn"
+msgstr ""
+"Configures whether the player ship or ships automatically respawn in game or "
+"not and how often if they do automatically respawn"
 
 msgctxt "Respawn"
 msgid "None"
@@ -190,7 +203,8 @@ msgstr "Nice"
 msgctxt "Reputation"
 msgid ""
 "20 reputation - you've had a small positive influence on the local community"
-msgstr "20 reputation - you've had a small positive influence on the local community"
+msgstr ""
+"20 reputation - you've had a small positive influence on the local community"
 
 msgctxt "Reputation"
 msgid "Hero"
@@ -207,7 +221,8 @@ msgstr "Major Hero"
 msgctxt "Reputation"
 msgid ""
 "100 reputation - you're well known by nearly everyone as a force for good"
-msgstr "100 reputation - you're well known by nearly everyone as a force for good"
+msgstr ""
+"100 reputation - you're well known by nearly everyone as a force for good"
 
 msgctxt "Reputation"
 msgid "Super Hero"
@@ -217,64 +232,66 @@ msgctxt "Reputation"
 msgid "200 reputation - everyone knows you and relies on you for help"
 msgstr "200 reputation - everyone knows you and relies on you for help"
 
-#: scripts/scenario_20_rescue.lua:64
+#: scripts/scenario_20_rescue.lua:106
 msgctxt "orders-comms"
 msgid "Rescue the exotic weapons research scientist, Hans Gestalt."
 msgstr "Rescue the exotic weapons research scientist, Hans Gestalt."
 
-#: scripts/scenario_20_rescue.lua:2956
+#: scripts/scenario_20_rescue.lua:2988
 msgctxt "buttonGM"
 msgid "Random"
 msgstr "Random"
 
-#: scripts/scenario_20_rescue.lua:2957
+#: scripts/scenario_20_rescue.lua:2989
 msgctxt "buttonGM"
 msgid "Fighters"
 msgstr "Fighters"
 
-#: scripts/scenario_20_rescue.lua:2958
+#: scripts/scenario_20_rescue.lua:2990
 msgctxt "buttonGM"
 msgid "Chasers"
 msgstr "Chasers"
 
-#: scripts/scenario_20_rescue.lua:2959
+#: scripts/scenario_20_rescue.lua:2991
 msgctxt "buttonGM"
 msgid "Frigates"
 msgstr "Frigates"
 
-#: scripts/scenario_20_rescue.lua:2960
+#: scripts/scenario_20_rescue.lua:2992
 msgctxt "buttonGM"
 msgid "Beamers"
 msgstr "Beamers"
 
-#: scripts/scenario_20_rescue.lua:2961
+#: scripts/scenario_20_rescue.lua:2993
 msgctxt "buttonGM"
 msgid "Missilers"
 msgstr "Missilers"
 
-#: scripts/scenario_20_rescue.lua:2962
+#: scripts/scenario_20_rescue.lua:2994
 msgctxt "buttonGM"
 msgid "Adders"
 msgstr "Adders"
 
-#: scripts/scenario_20_rescue.lua:2963
+#: scripts/scenario_20_rescue.lua:2995
 msgctxt "buttonGM"
 msgid "Non-DB"
 msgstr "Non-DB"
 
-#: scripts/scenario_20_rescue.lua:2964
+#: scripts/scenario_20_rescue.lua:2996
 msgctxt "buttonGM"
 msgid "Drones"
 msgstr "Drones"
 
-#: scripts/scenario_20_rescue.lua:2976
+#: scripts/scenario_20_rescue.lua:3008
 msgctxt "scienceDescription-star"
 msgid ""
 "Yellow,\n"
 "spectral type G8 III"
-msgstr "Yellow,\nspectral type G8 III"
+msgstr ""
+"Yellow,\n"
+"spectral type G8 III"
 
-#: scripts/scenario_20_rescue.lua:2980
+#: scripts/scenario_20_rescue.lua:3012
 msgctxt "scienceDescription-star"
 msgid ""
 "Yellow,\n"
@@ -282,654 +299,734 @@ msgid ""
 "giant,\n"
 "surface temperature 4,833 K,\n"
 "11 solar radii"
-msgstr "Yellow,\nspectral type G8 III,\ngiant,\nsurface temperature 4,833 K,\n11 solar radii"
+msgstr ""
+"Yellow,\n"
+"spectral type G8 III,\n"
+"giant,\n"
+"surface temperature 4,833 K,\n"
+"11 solar radii"
 
-#: scripts/scenario_20_rescue.lua:2987
+#: scripts/scenario_20_rescue.lua:3019
 msgctxt "scienceDescription-star"
 msgid "Classification G5 II"
 msgstr "Classification G5 II"
 
-#: scripts/scenario_20_rescue.lua:2991
+#: scripts/scenario_20_rescue.lua:3023
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification G5 II,\n"
 "bright giant,\n"
 "binary"
-msgstr "Classification G5 II,\nbright giant,\nbinary"
+msgstr ""
+"Classification G5 II,\n"
+"bright giant,\n"
+"binary"
 
-#: scripts/scenario_20_rescue.lua:2998
+#: scripts/scenario_20_rescue.lua:3030
 msgctxt "scienceDescription-star"
 msgid "Classification K0 V or G9 V"
 msgstr "Classification K0 V or G9 V"
 
-#: scripts/scenario_20_rescue.lua:3002
+#: scripts/scenario_20_rescue.lua:3034
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification K0 V or G9 V,\n"
 "main sequence dwarf,\n"
 "84% of Sol mass"
-msgstr "Classification K0 V or G9 V,\nmain sequence dwarf,\n84% of Sol mass"
+msgstr ""
+"Classification K0 V or G9 V,\n"
+"main sequence dwarf,\n"
+"84% of Sol mass"
 
-#: scripts/scenario_20_rescue.lua:3009
+#: scripts/scenario_20_rescue.lua:3041
 msgctxt "scienceDescription-star"
 msgid "Classification A7 Ib"
 msgstr "Classification A7 Ib"
 
-#: scripts/scenario_20_rescue.lua:3013
+#: scripts/scenario_20_rescue.lua:3045
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification A7 Ib,\n"
 "supergiant,\n"
 "temperature 7,500 K,\n"
 "7xSol mass"
-msgstr "Classification A7 Ib,\nsupergiant,\ntemperature 7,500 K,\n7xSol mass"
+msgstr ""
+"Classification A7 Ib,\n"
+"supergiant,\n"
+"temperature 7,500 K,\n"
+"7xSol mass"
 
-#: scripts/scenario_20_rescue.lua:3020
+#: scripts/scenario_20_rescue.lua:3052
 msgctxt "scienceDescription-star"
 msgid "Classification A1 Vn"
 msgstr "Classification A1 Vn"
 
-#: scripts/scenario_20_rescue.lua:3024
+#: scripts/scenario_20_rescue.lua:3056
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification A1 Vn,\n"
 "type A main sequence,\n"
 "nebulous"
-msgstr "Classification A1 Vn,\ntype A main sequence,\nnebulous"
+msgstr ""
+"Classification A1 Vn,\n"
+"type A main sequence,\n"
+"nebulous"
 
-#: scripts/scenario_20_rescue.lua:3031
+#: scripts/scenario_20_rescue.lua:3063
 msgctxt "scienceDescription-star"
 msgid "Classification K5V"
 msgstr "Classification K5V"
 
-#: scripts/scenario_20_rescue.lua:3035
+#: scripts/scenario_20_rescue.lua:3067
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification K5V,\n"
 "orange,\n"
 "temperature 4,649 K"
-msgstr "Classification K5V,\norange,\ntemperature 4,649 K"
+msgstr ""
+"Classification K5V,\n"
+"orange,\n"
+"temperature 4,649 K"
 
-#: scripts/scenario_20_rescue.lua:3042
+#: scripts/scenario_20_rescue.lua:3074
 msgctxt "scienceDescription-star"
 msgid "Classification G2 IV"
 msgstr "Classification G2 IV"
 
-#: scripts/scenario_20_rescue.lua:3046
+#: scripts/scenario_20_rescue.lua:3078
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification G2 IV,\n"
 "113% of Sol mass,\n"
 "185% Sol radius"
-msgstr "Classification G2 IV,\n113% of Sol mass,\n185% Sol radius"
+msgstr ""
+"Classification G2 IV,\n"
+"113% of Sol mass,\n"
+"185% Sol radius"
 
-#: scripts/scenario_20_rescue.lua:3053
+#: scripts/scenario_20_rescue.lua:3085
 msgctxt "scienceDescription-star"
 msgid "Classification A3 IV-V"
 msgstr "Classification A3 IV-V"
 
-#: scripts/scenario_20_rescue.lua:3057
+#: scripts/scenario_20_rescue.lua:3089
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification A3 IV-V,\n"
 "2.6xSol mass"
-msgstr "Classification A3 IV-V,\n2.6xSol mass"
+msgstr ""
+"Classification A3 IV-V,\n"
+"2.6xSol mass"
 
-#: scripts/scenario_20_rescue.lua:3064
+#: scripts/scenario_20_rescue.lua:3096
 msgctxt "scienceDescription-star"
 msgid "Classification B2 III or B2 V"
 msgstr "Classification B2 III or B2 V"
 
-#: scripts/scenario_20_rescue.lua:3068
+#: scripts/scenario_20_rescue.lua:3100
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification B2 III or B2 V,\n"
 "8.6xSol mass,\n"
 "temperature 22,000 K"
-msgstr "Classification B2 III or B2 V,\n8.6xSol mass,\ntemperature 22,000 K"
+msgstr ""
+"Classification B2 III or B2 V,\n"
+"8.6xSol mass,\n"
+"temperature 22,000 K"
 
-#: scripts/scenario_20_rescue.lua:3075
+#: scripts/scenario_20_rescue.lua:3107
 msgctxt "scienceDescription-star"
 msgid "Classification G8 IIIb Fe-0.5"
 msgstr "Classification G8 IIIb Fe-0.5"
 
-#: scripts/scenario_20_rescue.lua:3079
+#: scripts/scenario_20_rescue.lua:3111
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification G8 IIIb Fe-0.5,\n"
 "yellow,\n"
 "red clump giant"
-msgstr "Classification G8 IIIb Fe-0.5,\nyellow,\nred clump giant"
+msgstr ""
+"Classification G8 IIIb Fe-0.5,\n"
+"yellow,\n"
+"red clump giant"
 
-#: scripts/scenario_20_rescue.lua:3086
+#: scripts/scenario_20_rescue.lua:3118
 msgctxt "scienceDescription-star"
 msgid "Classification F5 IV-V"
 msgstr "Classification F5 IV-V"
 
-#: scripts/scenario_20_rescue.lua:3090
+#: scripts/scenario_20_rescue.lua:3122
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification F5 IV-V,\n"
 "F-type subgiant\n"
 "F-type main sequence"
-msgstr "Classification F5 IV-V,\nF-type subgiant\nF-type main sequence"
+msgstr ""
+"Classification F5 IV-V,\n"
+"F-type subgiant\n"
+"F-type main sequence"
 
-#: scripts/scenario_20_rescue.lua:3097
+#: scripts/scenario_20_rescue.lua:3129
 msgctxt "scienceDescription-star"
 msgid "Classification B7 III"
 msgstr "Classification B7 III"
 
-#: scripts/scenario_20_rescue.lua:3101
+#: scripts/scenario_20_rescue.lua:3133
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification B7 III,\n"
 "B-class giant,\n"
 "5xSol mass"
-msgstr "Classification B7 III,\nB-class giant,\n5xSol mass"
+msgstr ""
+"Classification B7 III,\n"
+"B-class giant,\n"
+"5xSol mass"
 
-#: scripts/scenario_20_rescue.lua:3108
+#: scripts/scenario_20_rescue.lua:3140
 msgctxt "scienceDescription-star"
 msgid "Classification K0"
 msgstr "Classification K0"
 
-#: scripts/scenario_20_rescue.lua:3112
+#: scripts/scenario_20_rescue.lua:3144
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification K0,\n"
 "orange-red,\n"
 "temperature ~4,000 K"
-msgstr "Classification K0,\norange-red,\ntemperature ~4,000 K"
+msgstr ""
+"Classification K0,\n"
+"orange-red,\n"
+"temperature ~4,000 K"
 
-#: scripts/scenario_20_rescue.lua:3119
+#: scripts/scenario_20_rescue.lua:3151
 msgctxt "scienceDescription-star"
 msgid "Pulsar or Neutron star"
 msgstr "Pulsar or Neutron star"
 
-#: scripts/scenario_20_rescue.lua:3123
+#: scripts/scenario_20_rescue.lua:3155
 msgctxt "scienceDescription-star"
 msgid ""
 "Pulsar or Neutron star,\n"
 "gamma ray source"
-msgstr "Pulsar or Neutron star,\ngamma ray source"
+msgstr ""
+"Pulsar or Neutron star,\n"
+"gamma ray source"
 
-#: scripts/scenario_20_rescue.lua:3130
+#: scripts/scenario_20_rescue.lua:3162
 msgctxt "scienceDescription-star"
 msgid "Classification G2V"
 msgstr "Classification G2V"
 
-#: scripts/scenario_20_rescue.lua:3134
+#: scripts/scenario_20_rescue.lua:3166
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification G2V,\n"
 "yellow,\n"
 "temperature 5,571 K"
-msgstr "Classification G2V,\nyellow,\ntemperature 5,571 K"
+msgstr ""
+"Classification G2V,\n"
+"yellow,\n"
+"temperature 5,571 K"
 
-#: scripts/scenario_20_rescue.lua:3141
+#: scripts/scenario_20_rescue.lua:3173
 msgctxt "scienceDescription-star"
 msgid "Classification G1V(w)"
 msgstr "Classification G1V(w)"
 
-#: scripts/scenario_20_rescue.lua:3145
+#: scripts/scenario_20_rescue.lua:3177
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification G1V(w),\n"
 "1.24xSol mass,\n"
 "7th magnitude G-type main sequence"
-msgstr "Classification G1V(w),\n1.24xSol mass,\n7th magnitude G-type main sequence"
+msgstr ""
+"Classification G1V(w),\n"
+"1.24xSol mass,\n"
+"7th magnitude G-type main sequence"
 
-#: scripts/scenario_20_rescue.lua:3152
+#: scripts/scenario_20_rescue.lua:3184
 msgctxt "scienceDescription-star"
 msgid "Classification F3 III"
 msgstr "Classification F3 III"
 
-#: scripts/scenario_20_rescue.lua:3156
+#: scripts/scenario_20_rescue.lua:3188
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification F3 III,\n"
 "F-type giant,\n"
 "temperature 6,309 K"
-msgstr "Classification F3 III,\nF-type giant,\ntemperature 6,309 K"
+msgstr ""
+"Classification F3 III,\n"
+"F-type giant,\n"
+"temperature 6,309 K"
 
-#: scripts/scenario_20_rescue.lua:3163
+#: scripts/scenario_20_rescue.lua:3195
 msgctxt "scienceDescription-star"
 msgid "Classification K1 IIIb"
 msgstr "Classification K1 IIIb"
 
-#: scripts/scenario_20_rescue.lua:3167
+#: scripts/scenario_20_rescue.lua:3199
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification K1 IIIb,\n"
 "giant,\n"
 "temperature 4,768 K"
-msgstr "Classification K1 IIIb,\ngiant,\ntemperature 4,768 K"
+msgstr ""
+"Classification K1 IIIb,\n"
+"giant,\n"
+"temperature 4,768 K"
 
-#: scripts/scenario_20_rescue.lua:3174
+#: scripts/scenario_20_rescue.lua:3206
 msgctxt "scienceDescription-star"
 msgid "Classification G0V"
 msgstr "Classification G0V"
 
-#: scripts/scenario_20_rescue.lua:3178
+#: scripts/scenario_20_rescue.lua:3210
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification G0V,\n"
 "G-type giant, \n"
 "temperature 5,741 K"
-msgstr "Classification G0V,\nG-type giant, \ntemperature 5,741 K"
+msgstr ""
+"Classification G0V,\n"
+"G-type giant, \n"
+"temperature 5,741 K"
 
-#: scripts/scenario_20_rescue.lua:3185
+#: scripts/scenario_20_rescue.lua:3217
 msgctxt "scienceDescription-star"
 msgid "Classification K2IV-V or K3V"
 msgstr "Classification K2IV-V or K3V"
 
-#: scripts/scenario_20_rescue.lua:3189
+#: scripts/scenario_20_rescue.lua:3221
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification K2IV-V or K3V,\n"
 "orange,\n"
 "K-type main sequence,\n"
 "temperature 5,030 K"
-msgstr "Classification K2IV-V or K3V,\norange,\nK-type main sequence,\ntemperature 5,030 K"
+msgstr ""
+"Classification K2IV-V or K3V,\n"
+"orange,\n"
+"K-type main sequence,\n"
+"temperature 5,030 K"
 
-#: scripts/scenario_20_rescue.lua:3196
+#: scripts/scenario_20_rescue.lua:3228
 msgctxt "scienceDescription-star"
 msgid "Classification G5"
 msgstr "Classification G5"
 
-#: scripts/scenario_20_rescue.lua:3200
+#: scripts/scenario_20_rescue.lua:3232
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification G5,\n"
 "yellow,\n"
 "luminosity 7.7"
-msgstr "Classification G5,\nyellow,\nluminosity 7.7"
+msgstr ""
+"Classification G5,\n"
+"yellow,\n"
+"luminosity 7.7"
 
-#: scripts/scenario_20_rescue.lua:3207
+#: scripts/scenario_20_rescue.lua:3239
 msgctxt "scienceDescription-star"
 msgid "Classification M4.5"
 msgstr "Classification M4.5"
 
-#: scripts/scenario_20_rescue.lua:3211
+#: scripts/scenario_20_rescue.lua:3243
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification M4.5,\n"
 "Red Dwarf,\n"
 "luminosity .0035,\n"
 "temperature 3,111 K"
-msgstr "Classification M4.5,\nRed Dwarf,\nluminosity .0035,\ntemperature 3,111 K"
+msgstr ""
+"Classification M4.5,\n"
+"Red Dwarf,\n"
+"luminosity .0035,\n"
+"temperature 3,111 K"
 
-#: scripts/scenario_20_rescue.lua:3218
+#: scripts/scenario_20_rescue.lua:3250
 msgctxt "scienceDescription-star"
 msgid "Classification F7V"
 msgstr "Classification F7V"
 
-#: scripts/scenario_20_rescue.lua:3222
+#: scripts/scenario_20_rescue.lua:3254
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification F7V,\n"
 "yellow-white,\n"
 "luminosity 1.9,\n"
 "temperature 6,440 K"
-msgstr "Classification F7V,\nyellow-white,\nluminosity 1.9,\ntemperature 6,440 K"
+msgstr ""
+"Classification F7V,\n"
+"yellow-white,\n"
+"luminosity 1.9,\n"
+"temperature 6,440 K"
 
-#: scripts/scenario_20_rescue.lua:3229
+#: scripts/scenario_20_rescue.lua:3261
 msgctxt "scienceDescription-star"
 msgid "Classification F8V"
 msgstr "Classification F8V"
 
-#: scripts/scenario_20_rescue.lua:3233
+#: scripts/scenario_20_rescue.lua:3265
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification F8V,\n"
 "luminosity 2.9,\n"
 "temperature 6,122 K"
-msgstr "Classification F8V,\nluminosity 2.9,\ntemperature 6,122 K"
+msgstr ""
+"Classification F8V,\n"
+"luminosity 2.9,\n"
+"temperature 6,122 K"
 
-#: scripts/scenario_20_rescue.lua:3240
+#: scripts/scenario_20_rescue.lua:3272
 msgctxt "scienceDescription-star"
 msgid "Classification B"
 msgstr "Classification B"
 
-#: scripts/scenario_20_rescue.lua:3244
+#: scripts/scenario_20_rescue.lua:3276
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification B-type subgiant, blue-white, luminosity 600, temperature "
 "13,696 K"
-msgstr "Classification B-type subgiant, blue-white, luminosity 600, temperature 13,696 K"
+msgstr ""
+"Classification B-type subgiant, blue-white, luminosity 600, temperature "
+"13,696 K"
 
-#: scripts/scenario_20_rescue.lua:3251 scripts/scenario_20_rescue.lua:3284
+#: scripts/scenario_20_rescue.lua:3283 scripts/scenario_20_rescue.lua:3316
 msgctxt "scienceDescription-star"
 msgid "Classification G"
 msgstr "Classification G"
 
-#: scripts/scenario_20_rescue.lua:3255
+#: scripts/scenario_20_rescue.lua:3287
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification G,\n"
 "magnitude 12.26,\n"
 "temperature 5,580 K"
-msgstr "Classification G,\nmagnitude 12.26,\ntemperature 5,580 K"
+msgstr ""
+"Classification G,\n"
+"magnitude 12.26,\n"
+"temperature 5,580 K"
 
-#: scripts/scenario_20_rescue.lua:3262 scripts/scenario_20_rescue.lua:3273
+#: scripts/scenario_20_rescue.lua:3294 scripts/scenario_20_rescue.lua:3305
 msgctxt "scienceDescription-star"
 msgid "Classification K"
 msgstr "Classification K"
 
-#: scripts/scenario_20_rescue.lua:3266
+#: scripts/scenario_20_rescue.lua:3298
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification K2.5 III,\n"
 "K-type giant,\n"
 "temperature 4,244 K"
-msgstr "Classification K2.5 III,\nK-type giant,\ntemperature 4,244 K"
+msgstr ""
+"Classification K2.5 III,\n"
+"K-type giant,\n"
+"temperature 4,244 K"
 
-#: scripts/scenario_20_rescue.lua:3277
+#: scripts/scenario_20_rescue.lua:3309
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification K5V,\n"
 "K-type main sequence,\n"
 "temperature 4,782 K"
-msgstr "Classification K5V,\nK-type main sequence,\ntemperature 4,782 K"
+msgstr ""
+"Classification K5V,\n"
+"K-type main sequence,\n"
+"temperature 4,782 K"
 
-#: scripts/scenario_20_rescue.lua:3288
+#: scripts/scenario_20_rescue.lua:3320
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification G8 III,\n"
 "evolved G-type giant,\n"
 "temperature 4,790 K"
-msgstr "Classification G8 III,\nevolved G-type giant,\ntemperature 4,790 K"
+msgstr ""
+"Classification G8 III,\n"
+"evolved G-type giant,\n"
+"temperature 4,790 K"
 
-#: scripts/scenario_20_rescue.lua:3295 scripts/scenario_20_rescue.lua:3306
+#: scripts/scenario_20_rescue.lua:3327 scripts/scenario_20_rescue.lua:3338
 msgctxt "scienceDescription-star"
 msgid "Classification A"
 msgstr "Classification A"
 
-#: scripts/scenario_20_rescue.lua:3299
+#: scripts/scenario_20_rescue.lua:3331
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification A1 Vn,\n"
 "white-hued,\n"
 "A-type main sequence,\n"
 "temperature 9,911 K"
-msgstr "Classification A1 Vn,\nwhite-hued,\nA-type main sequence,\ntemperature 9,911 K"
+msgstr ""
+"Classification A1 Vn,\n"
+"white-hued,\n"
+"A-type main sequence,\n"
+"temperature 9,911 K"
 
-#: scripts/scenario_20_rescue.lua:3310
+#: scripts/scenario_20_rescue.lua:3342
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification A4 V,\n"
 "white-hued,\n"
 "A-type main sequence,\n"
 "temperature 8,296 K"
-msgstr "Classification A4 V,\nwhite-hued,\nA-type main sequence,\ntemperature 8,296 K"
+msgstr ""
+"Classification A4 V,\n"
+"white-hued,\n"
+"A-type main sequence,\n"
+"temperature 8,296 K"
 
-#: scripts/scenario_20_rescue.lua:3327 scripts/scenario_20_rescue.lua:3339
-#: scripts/scenario_20_rescue.lua:3351
+#: scripts/scenario_20_rescue.lua:3359 scripts/scenario_20_rescue.lua:3371
+#: scripts/scenario_20_rescue.lua:3383
 msgctxt "scienceDescription-planet"
 msgid "Class J"
 msgstr "Class J"
 
-#: scripts/scenario_20_rescue.lua:3330
+#: scripts/scenario_20_rescue.lua:3362
 msgctxt "scienceDescription-planet"
 msgid ""
 "Class J, Jovian, source of hydrogen, helium, and a large variety of exotic "
 "gases"
-msgstr "Class J, Jovian, source of hydrogen, helium, and a large variety of exotic gases"
+msgstr ""
+"Class J, Jovian, source of hydrogen, helium, and a large variety of exotic "
+"gases"
 
-#: scripts/scenario_20_rescue.lua:3342
+#: scripts/scenario_20_rescue.lua:3374
 msgctxt "scienceDescription-planet"
 msgid ""
 "Class J, Neptunian, source of hydrogen, helium, ammonia, methane, and water"
-msgstr "Class J, Neptunian, source of hydrogen, helium, ammonia, methane, and water"
+msgstr ""
+"Class J, Neptunian, source of hydrogen, helium, ammonia, methane, and water"
 
-#: scripts/scenario_20_rescue.lua:3354
+#: scripts/scenario_20_rescue.lua:3386
 msgctxt "scienceDescription-planet"
 msgid "Class J, Neptunian, composed of hydrogen, helium, methane, water"
 msgstr "Class J, Neptunian, composed of hydrogen, helium, methane, water"
 
-#: scripts/scenario_20_rescue.lua:3446
+#: scripts/scenario_20_rescue.lua:3478
 msgctxt "scienceDescription-buoy"
 msgid "Come to Billy Bob's for the best food in the sector"
 msgstr "Come to Billy Bob's for the best food in the sector"
 
-#: scripts/scenario_20_rescue.lua:3450
+#: scripts/scenario_20_rescue.lua:3482
 msgctxt "scienceDescription-buoy"
 msgid "It's never too late to buy life insurance"
 msgstr "It's never too late to buy life insurance"
 
-#: scripts/scenario_20_rescue.lua:3452
+#: scripts/scenario_20_rescue.lua:3484
 msgctxt "scienceDescription-buoy"
 msgid "You'll feel better in an Adder Mark 9"
 msgstr "You'll feel better in an Adder Mark 9"
 
-#: scripts/scenario_20_rescue.lua:3455
+#: scripts/scenario_20_rescue.lua:3487
 msgctxt "scienceDescription-buoy"
 msgid ""
 "Melinda's Mynock Management service: excellent rates, satisfaction guaranteed"
-msgstr "Melinda's Mynock Management service: excellent rates, satisfaction guaranteed"
+msgstr ""
+"Melinda's Mynock Management service: excellent rates, satisfaction guaranteed"
 
-#: scripts/scenario_20_rescue.lua:3459
+#: scripts/scenario_20_rescue.lua:3491
 msgctxt "scienceDescription-buoy"
 msgid "Visit Repulse shipyards for the best deals"
 msgstr "Visit Repulse shipyards for the best deals"
 
-#: scripts/scenario_20_rescue.lua:3461
+#: scripts/scenario_20_rescue.lua:3493
 msgctxt "scienceDescription-buoy"
 msgid "Fresh fish! We catch, you buy!"
 msgstr "Fresh fish! We catch, you buy!"
 
-#: scripts/scenario_20_rescue.lua:3462
+#: scripts/scenario_20_rescue.lua:3494
 msgctxt "scienceDescription-buoy"
 msgid "Get your fuel cells at Mariana's Market"
 msgstr "Get your fuel cells at Mariana's Market"
 
-#: scripts/scenario_20_rescue.lua:3465
+#: scripts/scenario_20_rescue.lua:3497
 msgctxt "scienceDescription-buoy"
 msgid "Find a special companion. All species available"
 msgstr "Find a special companion. All species available"
 
-#: scripts/scenario_20_rescue.lua:3469
+#: scripts/scenario_20_rescue.lua:3501
 msgctxt "scienceDescription-buoy"
 msgid "Feeling down? Robotherapist is there for you"
 msgstr "Feeling down? Robotherapist is there for you"
 
-#: scripts/scenario_20_rescue.lua:3471
+#: scripts/scenario_20_rescue.lua:3503
 msgctxt "scienceDescription-buoy"
 msgid "30 days, 30 kilograms, guaranteed"
 msgstr "30 days, 30 kilograms, guaranteed"
 
-#: scripts/scenario_20_rescue.lua:3472
+#: scripts/scenario_20_rescue.lua:3504
 msgctxt "scienceDescription-buoy"
 msgid "Be sure to drink your Ovaltine"
 msgstr "Be sure to drink your Ovaltine"
 
-#: scripts/scenario_20_rescue.lua:3475
+#: scripts/scenario_20_rescue.lua:3507
 msgctxt "scienceDescription-buoy"
 msgid "Need a personal upgrade? Contact Celine's Cybernetic Implants"
 msgstr "Need a personal upgrade? Contact Celine's Cybernetic Implants"
 
-#: scripts/scenario_20_rescue.lua:3479
+#: scripts/scenario_20_rescue.lua:3511
 msgctxt "scienceDescription-buoy"
 msgid "Try our asteroid dust diet weight loss program"
 msgstr "Try our asteroid dust diet weight loss program"
 
-#: scripts/scenario_20_rescue.lua:3483
+#: scripts/scenario_20_rescue.lua:3515
 msgctxt "scienceDescription-buoy"
 msgid "Best tasting water in the quadrant at Willy's Waterway"
 msgstr "Best tasting water in the quadrant at Willy's Waterway"
 
-#: scripts/scenario_20_rescue.lua:3487
+#: scripts/scenario_20_rescue.lua:3519
 msgctxt "scienceDescription-buoy"
 msgid "Amazing shows every night at Lenny's Lounge"
 msgstr "Amazing shows every night at Lenny's Lounge"
 
-#: scripts/scenario_20_rescue.lua:3491
+#: scripts/scenario_20_rescue.lua:3523
 msgctxt "scienceDescription-buoy"
 msgid "Get all your vaccinations at Fred's Pharmacy. Pick up some snacks, too"
 msgstr "Get all your vaccinations at Fred's Pharmacy. Pick up some snacks, too"
 
-#: scripts/scenario_20_rescue.lua:3495
+#: scripts/scenario_20_rescue.lua:3527
 msgctxt "scienceDescription-buoy"
 msgid "Tip: make lemons an integral part of your diet"
 msgstr "Tip: make lemons an integral part of your diet"
 
-#: scripts/scenario_20_rescue.lua:3499
+#: scripts/scenario_20_rescue.lua:3531
 msgctxt "scienceDescription-buoy"
 msgid "Visit the Proboscis shop for all your specialty probe needs"
 msgstr "Visit the Proboscis shop for all your specialty probe needs"
 
-#: scripts/scenario_20_rescue.lua:3941
+#: scripts/scenario_20_rescue.lua:3973
 msgctxt "station-comms"
 msgid "brother"
 msgstr "brother"
 
-#: scripts/scenario_20_rescue.lua:3942
+#: scripts/scenario_20_rescue.lua:3974
 msgctxt "station-comms"
 msgid "sister"
 msgstr "sister"
 
-#: scripts/scenario_20_rescue.lua:3943
+#: scripts/scenario_20_rescue.lua:3975
 msgctxt "station-comms"
 msgid "cousin"
 msgstr "cousin"
 
-#: scripts/scenario_20_rescue.lua:3944
+#: scripts/scenario_20_rescue.lua:3976
 msgctxt "station-comms"
 msgid "spouse"
 msgstr "spouse"
 
-#: scripts/scenario_20_rescue.lua:3957
+#: scripts/scenario_20_rescue.lua:3989
 #, lua-format
 msgctxt "station-comms"
 msgid ""
 "I know of station %s in sector %s because my %s is there. It's ~%sU from %s."
-msgstr "I know of station %s in sector %s because my %s is there. It's ~%sU from %s."
+msgstr ""
+"I know of station %s in sector %s because my %s is there. It's ~%sU from %s."
 
-#: scripts/scenario_20_rescue.lua:4538 scripts/scenario_20_rescue.lua:4539
-#: scripts/scenario_20_rescue.lua:5294 scripts/scenario_20_rescue.lua:5295
-#: scripts/scenario_20_rescue.lua:5306 scripts/scenario_20_rescue.lua:5307
-#: scripts/scenario_20_rescue.lua:5320 scripts/scenario_20_rescue.lua:5321
+#: scripts/scenario_20_rescue.lua:4570 scripts/scenario_20_rescue.lua:4571
+#: scripts/scenario_20_rescue.lua:5326 scripts/scenario_20_rescue.lua:5327
+#: scripts/scenario_20_rescue.lua:5338 scripts/scenario_20_rescue.lua:5339
+#: scripts/scenario_20_rescue.lua:5352 scripts/scenario_20_rescue.lua:5353
 msgctxt "scienceDescription-nebula"
 msgid "Nebula"
 msgstr "Nebula"
 
-#: scripts/scenario_20_rescue.lua:4954 scripts/scenario_20_rescue.lua:4978
-#: scripts/scenario_20_rescue.lua:4995 scripts/scenario_20_rescue.lua:5010
-#: scripts/scenario_20_rescue.lua:5022 scripts/scenario_20_rescue.lua:5037
-#: scripts/scenario_20_rescue.lua:5052
+#: scripts/scenario_20_rescue.lua:4986 scripts/scenario_20_rescue.lua:5010
+#: scripts/scenario_20_rescue.lua:5027 scripts/scenario_20_rescue.lua:5042
+#: scripts/scenario_20_rescue.lua:5054 scripts/scenario_20_rescue.lua:5069
+#: scripts/scenario_20_rescue.lua:5084
 msgctxt "scienceDescription-supplyDrop"
 msgid "Supply Drop"
 msgstr "Supply Drop"
 
-#: scripts/scenario_20_rescue.lua:4958
+#: scripts/scenario_20_rescue.lua:4990
 #, lua-format
 msgctxt "scienceDescription-supplyDrop"
 msgid "%i energy boost supply drop."
 msgstr "%i energy boost supply drop."
 
-#: scripts/scenario_20_rescue.lua:4982
+#: scripts/scenario_20_rescue.lua:5014
 #, lua-format
 msgctxt "scienceDescription-supplyDrop"
 msgid "%i %s supply drop."
 msgstr "%i %s supply drop."
 
-#: scripts/scenario_20_rescue.lua:5000
+#: scripts/scenario_20_rescue.lua:5032
 #, lua-format
 msgctxt "scienceDescription-supplyDrop"
 msgid "%.1f%% coolant supply drop."
 msgstr "%.1f%% coolant supply drop."
 
-#: scripts/scenario_20_rescue.lua:5014
+#: scripts/scenario_20_rescue.lua:5046
 msgctxt "scienceDescription-supplyDrop"
 msgid "Robotic repair crew supply drop."
 msgstr "Robotic repair crew supply drop."
 
-#: scripts/scenario_20_rescue.lua:5027
+#: scripts/scenario_20_rescue.lua:5059
 #, lua-format
 msgctxt "scienceDescription-supplyDrop"
 msgid "%i probes supply drop."
 msgstr "%i probes supply drop."
 
-#: scripts/scenario_20_rescue.lua:5042
+#: scripts/scenario_20_rescue.lua:5074
 #, lua-format
 msgctxt "scienceDescription-supplyDrop"
 msgid "%.1f hull repair points supply drop."
 msgstr "%.1f hull repair points supply drop."
 
-#: scripts/scenario_20_rescue.lua:5057
+#: scripts/scenario_20_rescue.lua:5089
 #, lua-format
 msgctxt "scienceDescription-supplyDrop"
 msgid "%.1fK jump drive charge supply drop."
 msgstr "%.1fK jump drive charge supply drop."
 
-#: scripts/scenario_20_rescue.lua:5114
+#: scripts/scenario_20_rescue.lua:5146
 msgctxt "scienceDescription-warpJammer"
 msgid "Warp jammer"
 msgstr "Warp jammer"
 
-#: scripts/scenario_20_rescue.lua:5118
+#: scripts/scenario_20_rescue.lua:5150
 #, lua-format
 msgctxt "scienceDescription-warpJammer"
 msgid "Warp jammer. Operated by %s. Placed by station %s. Identifier: %s"
 msgstr "Warp jammer. Operated by %s. Placed by station %s. Identifier: %s"
 
-#: scripts/scenario_20_rescue.lua:5164
+#: scripts/scenario_20_rescue.lua:5196
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "Sensor Record: %s station %s in %s"
 msgstr "Sensor Record: %s station %s in %s"
 
-#: scripts/scenario_20_rescue.lua:5174
+#: scripts/scenario_20_rescue.lua:5206
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "%s, %s station %s in %s"
 msgstr "%s, %s station %s in %s"
 
-#: scripts/scenario_20_rescue.lua:5225
+#: scripts/scenario_20_rescue.lua:5257
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "Sensor Record: %s %s %s in %s carrying %s"
 msgstr "Sensor Record: %s %s %s in %s carrying %s"
 
-#: scripts/scenario_20_rescue.lua:5237
+#: scripts/scenario_20_rescue.lua:5269
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "%s; %s %s %s in %s carrying %s"
 msgstr "%s; %s %s %s in %s carrying %s"
 
-#: scripts/scenario_20_rescue.lua:5253
+#: scripts/scenario_20_rescue.lua:5285
 msgctxt "scienceDescription-buoy"
 msgid "No data recorded"
 msgstr "No data recorded"
 
-#: scripts/scenario_20_rescue.lua:5258 scripts/scenario_20_rescue.lua:5282
+#: scripts/scenario_20_rescue.lua:5290 scripts/scenario_20_rescue.lua:5314
 msgctxt "scienceDescription-buoy"
 msgid "Automated data gathering device"
 msgstr "Automated data gathering device"
 
-#: scripts/scenario_20_rescue.lua:5386
-msgctxt "msgScience"
-msgid "The unscanned artifact we just picked up has fried our scanners"
-msgstr "The unscanned artifact we just picked up has fried our scanners"
-
-#: scripts/scenario_20_rescue.lua:5395
-msgctxt "msgOperations"
-msgid "The unscanned artifact we just picked up has fried our scanners"
-msgstr "The unscanned artifact we just picked up has fried our scanners"
-
-#: scripts/scenario_20_rescue.lua:5409
-#, lua-format
-msgctxt "scienceDescription-artifact"
-msgid ""
-"Source of emanations interfering with long range sensors. Range:%.1fu Impact:"
-"%.1fu"
-msgstr "Source of emanations interfering with long range sensors. Range:%.1fu Impact:%.1fu"
-
-#: scripts/scenario_20_rescue.lua:5423
-msgctxt "scienceDescription-artifact"
-msgid "Source of unusual emanations"
-msgstr "Source of unusual emanations"
-
-#: scripts/scenario_20_rescue.lua:5588
+#: scripts/scenario_20_rescue.lua:5534
 #, lua-format
 msgctxt "goal-shipLog"
 msgid ""
@@ -937,9 +1034,13 @@ msgid ""
 "encrypted message. He's being held by the Kraylor against his will in his "
 "research facility on station %s in sector %s. Your mission is to dock with "
 "%s, retrieve him and bring him to %s."
-msgstr "Hans Gestalt, a noted exotic weapons research scientist, sent us an encrypted message. He's being held by the Kraylor against his will in his research facility on station %s in sector %s. Your mission is to dock with %s, retrieve him and bring him to %s."
+msgstr ""
+"Hans Gestalt, a noted exotic weapons research scientist, sent us an "
+"encrypted message. He's being held by the Kraylor against his will in his "
+"research facility on station %s in sector %s. Your mission is to dock with "
+"%s, retrieve him and bring him to %s."
 
-#: scripts/scenario_20_rescue.lua:5602
+#: scripts/scenario_20_rescue.lua:5548
 #, lua-format
 msgctxt "goal-shipLog"
 msgid ""
@@ -947,117 +1048,141 @@ msgid ""
 "encrypted message. He's being held by the Kraylor against his will in his "
 "research facility on station %s. Your mission is to dock with %s, retrieve "
 "him and bring him to %s."
-msgstr "Hans Gestalt, a noted exotic weapons research scientist, sent us an encrypted message. He's being held by the Kraylor against his will in his research facility on station %s. Your mission is to dock with %s, retrieve him and bring him to %s."
+msgstr ""
+"Hans Gestalt, a noted exotic weapons research scientist, sent us an "
+"encrypted message. He's being held by the Kraylor against his will in his "
+"research facility on station %s. Your mission is to dock with %s, retrieve "
+"him and bring him to %s."
 
-#: scripts/scenario_20_rescue.lua:5778
+#: scripts/scenario_20_rescue.lua:5663
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
 "Rescue the scientist, don't get him killed!\n"
 "%s"
-msgstr "Rescue the scientist, don't get him killed!\n%s"
+msgstr ""
+"Rescue the scientist, don't get him killed!\n"
+"%s"
 
-#: scripts/scenario_20_rescue.lua:5790
+#: scripts/scenario_20_rescue.lua:5675
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s has been destroyed."
 msgstr "%s has been destroyed."
 
-#: scripts/scenario_20_rescue.lua:5810
+#: scripts/scenario_20_rescue.lua:5695
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "The Human Navy has respawned %s to replace %s."
 msgstr "The Human Navy has respawned %s to replace %s."
 
-#: scripts/scenario_20_rescue.lua:5947
+#: scripts/scenario_20_rescue.lua:5832
 #, lua-format
 msgctxt "Kraylor-incCall"
 msgid ""
 "You have stolen what we want. Return what you have stolen, %s, or suffer the "
 "consequences!"
-msgstr "You have stolen what we want. Return what you have stolen, %s, or suffer the consequences!"
+msgstr ""
+"You have stolen what we want. Return what you have stolen, %s, or suffer the "
+"consequences!"
 
-#: scripts/scenario_20_rescue.lua:5956
+#: scripts/scenario_20_rescue.lua:5841
 msgctxt "Kraylor-shipLog"
 msgid ""
 "[Kraylor Commander] You have stolen what we want. Return what you have stolen"
-msgstr "[Kraylor Commander] You have stolen what we want. Return what you have stolen"
+msgstr ""
+"[Kraylor Commander] You have stolen what we want. Return what you have stolen"
 
-#: scripts/scenario_20_rescue.lua:5987
+#: scripts/scenario_20_rescue.lua:5872
 msgctxt "warning-incCall"
 msgid ""
 "Keep your eyes open. The Kraylor probably have another strategy to get Hans "
 "Gestalt or kill him."
-msgstr "Keep your eyes open. The Kraylor probably have another strategy to get Hans Gestalt or kill him."
+msgstr ""
+"Keep your eyes open. The Kraylor probably have another strategy to get Hans "
+"Gestalt or kill him."
 
-#: scripts/scenario_20_rescue.lua:6053
+#: scripts/scenario_20_rescue.lua:5938
 #, lua-format
 msgctxt "goal-shipLog"
 msgid ""
 "A small team of marines has been deployed from %s to board station %s to "
 "retrieve the exotic weapons research scientist. They should take about a "
 "minute to complete their mission."
-msgstr "A small team of marines has been deployed from %s to board station %s to retrieve the exotic weapons research scientist. They should take about a minute to complete their mission."
+msgstr ""
+"A small team of marines has been deployed from %s to board station %s to "
+"retrieve the exotic weapons research scientist. They should take about a "
+"minute to complete their mission."
 
-#: scripts/scenario_20_rescue.lua:6071
+#: scripts/scenario_20_rescue.lua:5956
 #, lua-format
 msgctxt "goal-shipLog"
 msgid ""
 "The marine team has returned to %s from station %s with the exotic weapons "
 "research scientist. Dock with station %s."
-msgstr "The marine team has returned to %s from station %s with the exotic weapons research scientist. Dock with station %s."
+msgstr ""
+"The marine team has returned to %s from station %s with the exotic weapons "
+"research scientist. Dock with station %s."
 
-#: scripts/scenario_20_rescue.lua:6086
+#: scripts/scenario_20_rescue.lua:5971
 #, lua-format
 msgctxt "goal-shipLog"
 msgid ""
 "%s got the exotic weapons research scientist. The marines %s deployed have "
 "returned from station %s. %s needs to dock with station %s."
-msgstr "%s got the exotic weapons research scientist. The marines %s deployed have returned from station %s. %s needs to dock with station %s."
+msgstr ""
+"%s got the exotic weapons research scientist. The marines %s deployed have "
+"returned from station %s. %s needs to dock with station %s."
 
-#: scripts/scenario_20_rescue.lua:6103
+#: scripts/scenario_20_rescue.lua:5988
 #, lua-format
 msgctxt "goal-shipLog"
 msgid ""
 "%s got the exotic weapons research scientist. %s needs to dock with station "
 "%s."
-msgstr "%s got the exotic weapons research scientist. %s needs to dock with station %s."
+msgstr ""
+"%s got the exotic weapons research scientist. %s needs to dock with station "
+"%s."
 
-#: scripts/scenario_20_rescue.lua:6122
+#: scripts/scenario_20_rescue.lua:6007
 #, lua-format
 msgctxt "timer-tabRelay"
 msgid "Getting scientist %s"
 msgstr "Getting scientist %s"
 
-#: scripts/scenario_20_rescue.lua:6132
+#: scripts/scenario_20_rescue.lua:6017
 #, lua-format
 msgctxt "timer-tabOperations"
 msgid "Getting scientist %s"
 msgstr "Getting scientist %s"
 
-#: scripts/scenario_20_rescue.lua:6165
+#: scripts/scenario_20_rescue.lua:6050
 #, lua-format
 msgctxt "msgHelms"
 msgid ""
 "The Kraylor have gained control of station %s. They have engaged the docking "
 "clamps so that %s cannot undock."
-msgstr "The Kraylor have gained control of station %s. They have engaged the docking clamps so that %s cannot undock."
+msgstr ""
+"The Kraylor have gained control of station %s. They have engaged the docking "
+"clamps so that %s cannot undock."
 
-#: scripts/scenario_20_rescue.lua:6177
+#: scripts/scenario_20_rescue.lua:6062
 #, lua-format
 msgctxt "msgTactical"
 msgid ""
 "The Kraylor have gained control of station %s. They have engaged the docking "
 "clamps so that %s cannot undock."
-msgstr "The Kraylor have gained control of station %s. They have engaged the docking clamps so that %s cannot undock."
+msgstr ""
+"The Kraylor have gained control of station %s. They have engaged the docking "
+"clamps so that %s cannot undock."
 
-#: scripts/scenario_20_rescue.lua:6188
+#: scripts/scenario_20_rescue.lua:6073
 #, lua-format
 msgctxt "goal-shipLog"
 msgid "The Kraylor have gained control of station %s."
 msgstr "The Kraylor have gained control of station %s."
 
-#: scripts/scenario_20_rescue.lua:6210
+#: scripts/scenario_20_rescue.lua:6095
 #, lua-format
 msgctxt "msgScience"
 msgid ""
@@ -1069,9 +1194,17 @@ msgid ""
 "\n"
 "Click the buttons to send the plans to Engineering and Relay. If you don't "
 "see the buttons, look under the 'Scanning' widget."
-msgstr "Your analysis of station %s and the Kraylor takeover mechanism suggests a way to switch %s back to Independent control. It would require component fabrication by Engineering and hacking programming by Relay to create and attach a device to the docking clamps. Then several consoles would have to simultaneously activate the hacking routine to complete the switchover.\n\nClick the buttons to send the plans to Engineering and Relay. If you don't see the buttons, look under the 'Scanning' widget."
+msgstr ""
+"Your analysis of station %s and the Kraylor takeover mechanism suggests a "
+"way to switch %s back to Independent control. It would require component "
+"fabrication by Engineering and hacking programming by Relay to create and "
+"attach a device to the docking clamps. Then several consoles would have to "
+"simultaneously activate the hacking routine to complete the switchover.\n"
+"\n"
+"Click the buttons to send the plans to Engineering and Relay. If you don't "
+"see the buttons, look under the 'Scanning' widget."
 
-#: scripts/scenario_20_rescue.lua:6222
+#: scripts/scenario_20_rescue.lua:6107
 #, lua-format
 msgctxt "msgOperations"
 msgid ""
@@ -1083,151 +1216,172 @@ msgid ""
 "\n"
 "Click the buttons to send the plans to Engineering and Relay. If you don't "
 "see the buttons, look under the 'Scanning' widget."
-msgstr "Your analysis of station %s and the Kraylor takeover mechanism suggests a way to switch %s back to Independent control. It would require component fabrication by Engineering and hacking programming by Relay to create and attach a device to the docking clamps. Then several consoles would have to simultaneously activate the hacking routine to complete the switchover.\n\nClick the buttons to send the plans to Engineering and Relay. If you don't see the buttons, look under the 'Scanning' widget."
+msgstr ""
+"Your analysis of station %s and the Kraylor takeover mechanism suggests a "
+"way to switch %s back to Independent control. It would require component "
+"fabrication by Engineering and hacking programming by Relay to create and "
+"attach a device to the docking clamps. Then several consoles would have to "
+"simultaneously activate the hacking routine to complete the switchover.\n"
+"\n"
+"Click the buttons to send the plans to Engineering and Relay. If you don't "
+"see the buttons, look under the 'Scanning' widget."
 
-#: scripts/scenario_20_rescue.lua:6233
+#: scripts/scenario_20_rescue.lua:6118
 msgctxt "buttonScience"
 msgid "Inform Engineering"
 msgstr "Inform Engineering"
 
-#: scripts/scenario_20_rescue.lua:6244
+#: scripts/scenario_20_rescue.lua:6129
 msgctxt "buttonScience"
 msgid "Inform Relay"
 msgstr "Inform Relay"
 
-#: scripts/scenario_20_rescue.lua:6257
+#: scripts/scenario_20_rescue.lua:6142
 msgctxt "buttonOperations"
 msgid "Inform Engineering"
 msgstr "Inform Engineering"
 
-#: scripts/scenario_20_rescue.lua:6269
+#: scripts/scenario_20_rescue.lua:6154
 msgctxt "buttonOperations"
 msgid "Inform Relay"
 msgstr "Inform Relay"
 
-#: scripts/scenario_20_rescue.lua:6289
+#: scripts/scenario_20_rescue.lua:6174
 msgctxt "buttonHelms"
 msgid "Activate Hack"
 msgstr "Activate Hack"
 
-#: scripts/scenario_20_rescue.lua:6316
+#: scripts/scenario_20_rescue.lua:6201
 msgctxt "buttonWeapons"
 msgid "Activate Hack"
 msgstr "Activate Hack"
 
-#: scripts/scenario_20_rescue.lua:6345
+#: scripts/scenario_20_rescue.lua:6230
 msgctxt "buttonEngineering"
 msgid "Activate Hack"
 msgstr "Activate Hack"
 
-#: scripts/scenario_20_rescue.lua:6373
+#: scripts/scenario_20_rescue.lua:6258
 msgctxt "buttonScience"
 msgid "Activate Hack"
 msgstr "Activate Hack"
 
-#: scripts/scenario_20_rescue.lua:6400
+#: scripts/scenario_20_rescue.lua:6285
 msgctxt "buttonRelay"
 msgid "Activate Hack"
 msgstr "Activate Hack"
 
-#: scripts/scenario_20_rescue.lua:6427
+#: scripts/scenario_20_rescue.lua:6312
 msgctxt "buttonTactical"
 msgid "Activate Hack"
 msgstr "Activate Hack"
 
-#: scripts/scenario_20_rescue.lua:6456
+#: scripts/scenario_20_rescue.lua:6341
 msgctxt "buttonOperations"
 msgid "Activate Hack"
 msgstr "Activate Hack"
 
-#: scripts/scenario_20_rescue.lua:6486
+#: scripts/scenario_20_rescue.lua:6371
 msgctxt "buttonEngineering+"
 msgid "Activate Hack"
 msgstr "Activate Hack"
 
-#: scripts/scenario_20_rescue.lua:6516
+#: scripts/scenario_20_rescue.lua:6401
 msgctxt "buttonDamageControl"
 msgid "Activate Hack"
 msgstr "Activate Hack"
 
-#: scripts/scenario_20_rescue.lua:6546
+#: scripts/scenario_20_rescue.lua:6431
 msgctxt "buttonPowerManagement"
 msgid "Activate Hack"
 msgstr "Activate Hack"
 
-#: scripts/scenario_20_rescue.lua:6576
+#: scripts/scenario_20_rescue.lua:6461
 msgctxt "buttonStrategicMap"
 msgid "Activate Hack"
 msgstr "Activate Hack"
 
-#: scripts/scenario_20_rescue.lua:6604
+#: scripts/scenario_20_rescue.lua:6489
 msgctxt "buttonShipLog"
 msgid "Activate Hack"
 msgstr "Activate Hack"
 
-#: scripts/scenario_20_rescue.lua:6708
+#: scripts/scenario_20_rescue.lua:6593
 msgctxt "goal-shipLog"
 msgid ""
 "Hack activation was not simultaneous. Variance exceeded one second. The "
 "component needs to be reprogrammed for another attempt to activate the hack "
 "simultaneously."
-msgstr "Hack activation was not simultaneous. Variance exceeded one second. The component needs to be reprogrammed for another attempt to activate the hack simultaneously."
+msgstr ""
+"Hack activation was not simultaneous. Variance exceeded one second. The "
+"component needs to be reprogrammed for another attempt to activate the hack "
+"simultaneously."
 
-#: scripts/scenario_20_rescue.lua:6718 scripts/scenario_20_rescue.lua:6882
+#: scripts/scenario_20_rescue.lua:6603 scripts/scenario_20_rescue.lua:6767
 msgctxt "buttonRelay"
 msgid "Program Component"
 msgstr "Program Component"
 
-#: scripts/scenario_20_rescue.lua:6730 scripts/scenario_20_rescue.lua:6892
+#: scripts/scenario_20_rescue.lua:6615 scripts/scenario_20_rescue.lua:6777
 msgctxt "buttonOperations"
 msgid "Program Component"
 msgstr "Program Component"
 
-#: scripts/scenario_20_rescue.lua:6761
+#: scripts/scenario_20_rescue.lua:6646
 #, lua-format
 msgctxt "goal-shipLog"
 msgid ""
 "%s has been returned to Independent control. The docking clamps no longer "
 "restrain %s."
-msgstr "%s has been returned to Independent control. The docking clamps no longer restrain %s."
+msgstr ""
+"%s has been returned to Independent control. The docking clamps no longer "
+"restrain %s."
 
-#: scripts/scenario_20_rescue.lua:6796
+#: scripts/scenario_20_rescue.lua:6681
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
 "Rescue the exotic weapons research scientist AND preserve the research.\n"
 "%s"
-msgstr "Rescue the exotic weapons research scientist AND preserve the research.\n%s"
+msgstr ""
+"Rescue the exotic weapons research scientist AND preserve the research.\n"
+"%s"
 
-#: scripts/scenario_20_rescue.lua:6815
+#: scripts/scenario_20_rescue.lua:6700
 #, lua-format
 msgctxt "msgEngineering"
 msgid ""
 "Science just sent you the details on what is required to interface with "
 "station %s to switch the systems back to Independent control. You will need "
 "to fabricate a component to attach to the docking clamp."
-msgstr "Science just sent you the details on what is required to interface with station %s to switch the systems back to Independent control. You will need to fabricate a component to attach to the docking clamp."
+msgstr ""
+"Science just sent you the details on what is required to interface with "
+"station %s to switch the systems back to Independent control. You will need "
+"to fabricate a component to attach to the docking clamp."
 
-#: scripts/scenario_20_rescue.lua:6826
+#: scripts/scenario_20_rescue.lua:6711
 #, lua-format
 msgctxt "msgEngineering+"
 msgid ""
 "Science just sent you the details on what is required to interface with "
 "station %s to switch the systems back to Independent control. You will need "
 "to fabricate a component to attach to the docking clamp."
-msgstr "Science just sent you the details on what is required to interface with station %s to switch the systems back to Independent control. You will need to fabricate a component to attach to the docking clamp."
+msgstr ""
+"Science just sent you the details on what is required to interface with "
+"station %s to switch the systems back to Independent control. You will need "
+"to fabricate a component to attach to the docking clamp."
 
-#: scripts/scenario_20_rescue.lua:6835
+#: scripts/scenario_20_rescue.lua:6720
 msgctxt "buttonEngineering"
 msgid "Fabricate Component"
 msgstr "Fabricate Component"
 
-#: scripts/scenario_20_rescue.lua:6845
+#: scripts/scenario_20_rescue.lua:6730
 msgctxt "buttonEngineering+"
 msgid "Fabricate Component"
 msgstr "Fabricate Component"
 
-#: scripts/scenario_20_rescue.lua:6862 scripts/scenario_20_rescue.lua:6873
+#: scripts/scenario_20_rescue.lua:6747 scripts/scenario_20_rescue.lua:6758
 #, lua-format
 msgctxt "msgRelay"
 msgid ""
@@ -1235,131 +1389,149 @@ msgid ""
 "station %s to switch the systems back to Independent control. You will need "
 "to program the component to hack the systems when it interfaces with the "
 "station through the docking clamp."
-msgstr "Science just sent you the details on what is required to interface with station %s to switch the systems back to Independent control. You will need to program the component to hack the systems when it interfaces with the station through the docking clamp."
+msgstr ""
+"Science just sent you the details on what is required to interface with "
+"station %s to switch the systems back to Independent control. You will need "
+"to program the component to hack the systems when it interfaces with the "
+"station through the docking clamp."
 
-#: scripts/scenario_20_rescue.lua:7077
+#: scripts/scenario_20_rescue.lua:6801
 msgctxt "upgrade-comms"
 msgid "Check on probe capacity upgrade availability"
 msgstr "Check on probe capacity upgrade availability"
 
-#: scripts/scenario_20_rescue.lua:7082
+#: scripts/scenario_20_rescue.lua:6806
 msgctxt "upgrade-comms"
 msgid ""
 "Our scan probe system specialist, Felix Heavier, has been experimenting with "
 "probe storage systems and has some potential upgrades available."
-msgstr "Our scan probe system specialist, Felix Heavier, has been experimenting with probe storage systems and has some potential upgrades available."
+msgstr ""
+"Our scan probe system specialist, Felix Heavier, has been experimenting with "
+"probe storage systems and has some potential upgrades available."
 
-#: scripts/scenario_20_rescue.lua:7095
+#: scripts/scenario_20_rescue.lua:6819
 msgctxt "upgrade-comms"
 msgid "Tell me about the Tetris Mark 4 probe storage upgrade"
 msgstr "Tell me about the Tetris Mark 4 probe storage upgrade"
 
-#: scripts/scenario_20_rescue.lua:7108
+#: scripts/scenario_20_rescue.lua:6832
 #, lua-format
 msgctxt "upgrade-comms"
 msgid ""
 "The Tetris Mark 4 probe storage upgrade increases your probe storage "
 "capacity by %i"
-msgstr "The Tetris Mark 4 probe storage upgrade increases your probe storage capacity by %i"
+msgstr ""
+"The Tetris Mark 4 probe storage upgrade increases your probe storage "
+"capacity by %i"
 
-#: scripts/scenario_20_rescue.lua:7118
+#: scripts/scenario_20_rescue.lua:6842
 #, lua-format
 msgctxt "upgrade-comms"
 msgid ""
 "The Tetris Mark 4 probe storage upgrade increases your probe storage "
 "capacity by %i but reduces your battery capacity to %i."
-msgstr "The Tetris Mark 4 probe storage upgrade increases your probe storage capacity by %i but reduces your battery capacity to %i."
+msgstr ""
+"The Tetris Mark 4 probe storage upgrade increases your probe storage "
+"capacity by %i but reduces your battery capacity to %i."
 
-#: scripts/scenario_20_rescue.lua:7131
+#: scripts/scenario_20_rescue.lua:6855
 msgctxt "upgrade-comms"
 msgid "Please install the Tetris Mark 4 probe storage upgrade"
 msgstr "Please install the Tetris Mark 4 probe storage upgrade"
 
-#: scripts/scenario_20_rescue.lua:7146
+#: scripts/scenario_20_rescue.lua:6870
 msgctxt "upgrade-comms"
 msgid "Felix installed the Tetris Mark 4 probe storage upgrade."
 msgstr "Felix installed the Tetris Mark 4 probe storage upgrade."
 
-#: scripts/scenario_20_rescue.lua:7149 scripts/scenario_20_rescue.lua:7152
+#: scripts/scenario_20_rescue.lua:6873 scripts/scenario_20_rescue.lua:6876
+#: scripts/scenario_20_rescue.lua:6936 scripts/scenario_20_rescue.lua:6939
+#: scripts/scenario_20_rescue.lua:6999 scripts/scenario_20_rescue.lua:7002
+#: scripts/scenario_20_rescue.lua:7005 scripts/scenario_20_rescue.lua:7079
+#: scripts/scenario_20_rescue.lua:7090 scripts/scenario_20_rescue.lua:7140
+#: scripts/scenario_20_rescue.lua:7151 scripts/scenario_20_rescue.lua:7201
 #: scripts/scenario_20_rescue.lua:7212 scripts/scenario_20_rescue.lua:7215
-#: scripts/scenario_20_rescue.lua:7275 scripts/scenario_20_rescue.lua:7278
-#: scripts/scenario_20_rescue.lua:7281 scripts/scenario_20_rescue.lua:7355
-#: scripts/scenario_20_rescue.lua:7366 scripts/scenario_20_rescue.lua:7416
-#: scripts/scenario_20_rescue.lua:7427 scripts/scenario_20_rescue.lua:7477
-#: scripts/scenario_20_rescue.lua:7488 scripts/scenario_20_rescue.lua:7491
-#: scripts/scenario_20_rescue.lua:7500 scripts/scenario_20_rescue.lua:7558
-#: scripts/scenario_20_rescue.lua:7561
+#: scripts/scenario_20_rescue.lua:7224 scripts/scenario_20_rescue.lua:7255
+#: scripts/scenario_20_rescue.lua:7258
 msgid "Back"
 msgstr "Back"
 
-#: scripts/scenario_20_rescue.lua:7158
+#: scripts/scenario_20_rescue.lua:6882
 msgctxt "upgrade-comms"
 msgid "Tell me about the Jenga VI probe storage upgrade"
 msgstr "Tell me about the Jenga VI probe storage upgrade"
 
-#: scripts/scenario_20_rescue.lua:7171
+#: scripts/scenario_20_rescue.lua:6895
 #, lua-format
 msgctxt "upgrade-comms"
 msgid ""
 "The Jenga VI probe storage upgrade increases your probe storage capacity by "
 "%i"
-msgstr "The Jenga VI probe storage upgrade increases your probe storage capacity by %i"
+msgstr ""
+"The Jenga VI probe storage upgrade increases your probe storage capacity by "
+"%i"
 
-#: scripts/scenario_20_rescue.lua:7181
+#: scripts/scenario_20_rescue.lua:6905
 #, lua-format
 msgctxt "upgrade-comms"
 msgid ""
 "The Jenga VI probe storage upgrade increases your probe storage capacity by "
 "%i but reduces your battery capacity to %i."
-msgstr "The Jenga VI probe storage upgrade increases your probe storage capacity by %i but reduces your battery capacity to %i."
+msgstr ""
+"The Jenga VI probe storage upgrade increases your probe storage capacity by "
+"%i but reduces your battery capacity to %i."
 
-#: scripts/scenario_20_rescue.lua:7194
+#: scripts/scenario_20_rescue.lua:6918
 msgctxt "upgrade-comms"
 msgid "Please install the Jenga VI probe storage upgrade"
 msgstr "Please install the Jenga VI probe storage upgrade"
 
-#: scripts/scenario_20_rescue.lua:7209
+#: scripts/scenario_20_rescue.lua:6933
 msgctxt "upgrade-comms"
 msgid "Felix installed the Jenga VI probe storage upgrade."
 msgstr "Felix installed the Jenga VI probe storage upgrade."
 
-#: scripts/scenario_20_rescue.lua:7221
+#: scripts/scenario_20_rescue.lua:6945
 msgctxt "upgrade-comms"
 msgid "Tell me about the Ikea Mea 3 probe storage upgrade"
 msgstr "Tell me about the Ikea Mea 3 probe storage upgrade"
 
-#: scripts/scenario_20_rescue.lua:7234
+#: scripts/scenario_20_rescue.lua:6958
 #, lua-format
 msgctxt "upgrade-comms"
 msgid ""
 "The Ikea Mea 3 probe storage upgrade increases your probe storage capacity "
 "by %i"
-msgstr "The Ikea Mea 3 probe storage upgrade increases your probe storage capacity by %i"
+msgstr ""
+"The Ikea Mea 3 probe storage upgrade increases your probe storage capacity "
+"by %i"
 
-#: scripts/scenario_20_rescue.lua:7244
+#: scripts/scenario_20_rescue.lua:6968
 #, lua-format
 msgctxt "upgrade-comms"
 msgid ""
 "The Ikea Mea 3 probe storage upgrade increases your probe storage capacity "
 "by %i but reduces your battery capacity to %i."
-msgstr "The Ikea Mea 3 probe storage upgrade increases your probe storage capacity by %i but reduces your battery capacity to %i."
+msgstr ""
+"The Ikea Mea 3 probe storage upgrade increases your probe storage capacity "
+"by %i but reduces your battery capacity to %i."
 
-#: scripts/scenario_20_rescue.lua:7257
+#: scripts/scenario_20_rescue.lua:6981
 msgctxt "upgrade-comms"
 msgid "Please install the Ikea Mea 3 probe storage upgrade"
 msgstr "Please install the Ikea Mea 3 probe storage upgrade"
 
-#: scripts/scenario_20_rescue.lua:7272
+#: scripts/scenario_20_rescue.lua:6996
 msgctxt "upgrade-comms"
 msgid "Felix installed the Ikea Mea 3 probe storage upgrade."
 msgstr "Felix installed the Ikea Mea 3 probe storage upgrade."
 
-#: scripts/scenario_20_rescue.lua:7289
+#: scripts/scenario_20_rescue.lua:7013
 msgctxt "upgrade-comms"
 msgid "Check on long range sensor upgrade availability"
 msgstr "Check on long range sensor upgrade availability"
 
-#: scripts/scenario_20_rescue.lua:7296
+#: scripts/scenario_20_rescue.lua:7020
 #, lua-format
 msgctxt "upgrade-comms"
 msgid ""
@@ -1367,119 +1539,129 @@ msgid ""
 "upgrade packages. They were scheduled to be installed on exploration vessels "
 "coming into the region, but those exploration missions were cancelled or "
 "repurposed. She's willing to install one on %s."
-msgstr "Our quartermaster, Sylvia Trondheim, has several spare long range sensor upgrade packages. They were scheduled to be installed on exploration vessels coming into the region, but those exploration missions were cancelled or repurposed. She's willing to install one on %s."
+msgstr ""
+"Our quartermaster, Sylvia Trondheim, has several spare long range sensor "
+"upgrade packages. They were scheduled to be installed on exploration vessels "
+"coming into the region, but those exploration missions were cancelled or "
+"repurposed. She's willing to install one on %s."
 
-#: scripts/scenario_20_rescue.lua:7311
+#: scripts/scenario_20_rescue.lua:7035
 msgctxt "upgrade-comms"
 msgid "Tell me about the Richter version 7 sensor upgrade."
 msgstr "Tell me about the Richter version 7 sensor upgrade."
 
-#: scripts/scenario_20_rescue.lua:7326
+#: scripts/scenario_20_rescue.lua:7050
 #, lua-format
 msgctxt "upgrade-comms"
 msgid ""
 "The Richter version 7 sets your long range sensor range to %i units and your "
 "short range sensor range to %.1f units."
-msgstr "The Richter version 7 sets your long range sensor range to %i units and your short range sensor range to %.1f units."
+msgstr ""
+"The Richter version 7 sets your long range sensor range to %i units and your "
+"short range sensor range to %.1f units."
 
-#: scripts/scenario_20_rescue.lua:7335
+#: scripts/scenario_20_rescue.lua:7059
 msgctxt "upgrade-comms"
 msgid "Please install the Richter version 7 sensor upgrade"
 msgstr "Please install the Richter version 7 sensor upgrade"
 
-#: scripts/scenario_20_rescue.lua:7352
+#: scripts/scenario_20_rescue.lua:7076
 msgctxt "upgrade-comms"
 msgid "Sylvia has installed the Richter version 7 sensor upgrade."
 msgstr "Sylvia has installed the Richter version 7 sensor upgrade."
 
-#: scripts/scenario_20_rescue.lua:7362
+#: scripts/scenario_20_rescue.lua:7086
 msgctxt "upgrade-comms"
 msgid "The Richter version 7 would not add any sensor range benefit"
 msgstr "The Richter version 7 would not add any sensor range benefit"
 
-#: scripts/scenario_20_rescue.lua:7372
+#: scripts/scenario_20_rescue.lua:7096
 msgctxt "upgrade-comms"
 msgid "What about the Omniscient Mark 4 sensor upgrade?"
 msgstr "What about the Omniscient Mark 4 sensor upgrade?"
 
-#: scripts/scenario_20_rescue.lua:7387
+#: scripts/scenario_20_rescue.lua:7111
 #, lua-format
 msgctxt "upgrade-comms"
 msgid ""
 "The Omniscient Mark 4 sets your long range sensor range to %i units and your "
 "short range sensor range to %.1f units."
-msgstr "The Omniscient Mark 4 sets your long range sensor range to %i units and your short range sensor range to %.1f units."
+msgstr ""
+"The Omniscient Mark 4 sets your long range sensor range to %i units and your "
+"short range sensor range to %.1f units."
 
-#: scripts/scenario_20_rescue.lua:7396
+#: scripts/scenario_20_rescue.lua:7120
 msgctxt "upgrade-comms"
 msgid "Please install the Omniscient Mark 4 sensor upgrade"
 msgstr "Please install the Omniscient Mark 4 sensor upgrade"
 
-#: scripts/scenario_20_rescue.lua:7413
+#: scripts/scenario_20_rescue.lua:7137
 msgctxt "upgrade-comms"
 msgid "Sylvia has installed the Omniscient Mark 4 sensor upgrade."
 msgstr "Sylvia has installed the Omniscient Mark 4 sensor upgrade."
 
-#: scripts/scenario_20_rescue.lua:7423
+#: scripts/scenario_20_rescue.lua:7147
 msgctxt "upgrade-comms"
 msgid "The Omniscient Mark 4 would not add any sensor range benefit"
 msgstr "The Omniscient Mark 4 would not add any sensor range benefit"
 
-#: scripts/scenario_20_rescue.lua:7433
+#: scripts/scenario_20_rescue.lua:7157
 msgctxt "upgrade-comms"
 msgid "Please provide details on the Voriax II sensor upgrade."
 msgstr "Please provide details on the Voriax II sensor upgrade."
 
-#: scripts/scenario_20_rescue.lua:7448
+#: scripts/scenario_20_rescue.lua:7172
 #, lua-format
 msgctxt "upgrade-comms"
 msgid ""
 "The Voriax II sets your long range sensor range to %i units and your short "
 "range sensor range to %.1f units."
-msgstr "The Voriax II sets your long range sensor range to %i units and your short range sensor range to %.1f units."
+msgstr ""
+"The Voriax II sets your long range sensor range to %i units and your short "
+"range sensor range to %.1f units."
 
-#: scripts/scenario_20_rescue.lua:7457
+#: scripts/scenario_20_rescue.lua:7181
 msgctxt "upgrade-comms"
 msgid "Please install the Voriax II sensor upgrade"
 msgstr "Please install the Voriax II sensor upgrade"
 
-#: scripts/scenario_20_rescue.lua:7474
+#: scripts/scenario_20_rescue.lua:7198
 msgctxt "upgrade-comms"
 msgid "Sylvia has installed the Voriax II sensor upgrade."
 msgstr "Sylvia has installed the Voriax II sensor upgrade."
 
-#: scripts/scenario_20_rescue.lua:7484
+#: scripts/scenario_20_rescue.lua:7208
 msgctxt "upgrade-comms"
 msgid "The Voriax II would not add any sensor range benefit"
 msgstr "The Voriax II would not add any sensor range benefit"
 
-#: scripts/scenario_20_rescue.lua:7533
+#: scripts/scenario_20_rescue.lua:7230
 msgctxt "orders-comms"
 msgid "Current orders?"
 msgstr "Current orders?"
 
-#: scripts/scenario_20_rescue.lua:7534
+#: scripts/scenario_20_rescue.lua:7231
 msgctxt "orders-comms"
 msgid "What are my current orders?"
 msgstr "What are my current orders?"
 
-#: scripts/scenario_20_rescue.lua:7536
+#: scripts/scenario_20_rescue.lua:7233
 #, lua-format
 msgctxt "orders-comms"
 msgid "Current orders for %s?"
 msgstr "Current orders for %s?"
 
-#: scripts/scenario_20_rescue.lua:7539
+#: scripts/scenario_20_rescue.lua:7236
 msgctxt "orders-comms"
 msgid "Remind me of our current orders, please"
 msgstr "Remind me of our current orders, please"
 
-#: scripts/scenario_20_rescue.lua:7546
+#: scripts/scenario_20_rescue.lua:7243
 msgctxt "orders-comms"
 msgid "Get background on Hans Gestalt"
 msgstr "Get background on Hans Gestalt"
 
-#: scripts/scenario_20_rescue.lua:7552
+#: scripts/scenario_20_rescue.lua:7249
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -1494,159 +1676,215 @@ msgid ""
 "his own research facilities. He managed to communicate with us to indicate "
 "that he needs rescuing. We also believe that the Kraylor have put up a "
 "barrier around %s to prevent any rescue attempt."
-msgstr "Hans Gestalt is a noted exotic weapons research scientist. For years, several factions have tried to enlist or convert him so that they could be the sole beneficiary of his research and thus gain an advantage over enemy factions. He always refuses. He remains independent and sells his research to any faction except for the Exuari (who usually just steal it after it's sold). Needless to say, he's rich. This time, though, the Kraylor have insidiously put barriers on Independent station %s to prevent Hans Gestalt from interacting with any other faction. He's being held against his will in his own research facilities. He managed to communicate with us to indicate that he needs rescuing. We also believe that the Kraylor have put up a barrier around %s to prevent any rescue attempt."
+msgstr ""
+"Hans Gestalt is a noted exotic weapons research scientist. For years, "
+"several factions have tried to enlist or convert him so that they could be "
+"the sole beneficiary of his research and thus gain an advantage over enemy "
+"factions. He always refuses. He remains independent and sells his research "
+"to any faction except for the Exuari (who usually just steal it after it's "
+"sold). Needless to say, he's rich. This time, though, the Kraylor have "
+"insidiously put barriers on Independent station %s to prevent Hans Gestalt "
+"from interacting with any other faction. He's being held against his will in "
+"his own research facilities. He managed to communicate with us to indicate "
+"that he needs rescuing. We also believe that the Kraylor have put up a "
+"barrier around %s to prevent any rescue attempt."
 
-#: scripts/scenario_20_rescue.lua:7571
-msgctxt "orders-comms"
-msgid ""
-"\n"
-"Optional:"
-msgstr "\nOptional:"
-
-#: scripts/scenario_20_rescue.lua:7572
-msgctxt "orders-comms"
-msgid ""
-"\n"
-"Optional orders:"
-msgstr "\nOptional orders:"
-
-#: scripts/scenario_20_rescue.lua:7573
-msgctxt "orders-comms"
-msgid ""
-"\n"
-"These orders are optional:"
-msgstr "\nThese orders are optional:"
-
-#: scripts/scenario_20_rescue.lua:7574
-msgctxt "orders-comms"
-msgid ""
-"\n"
-"Not required:"
-msgstr "\nNot required:"
-
-#: scripts/scenario_20_rescue.lua:7584
-#, lua-format
-msgctxt "orders-comms"
-msgid ""
-"%s\n"
-"Transport %s to %s station %s in %s"
-msgstr "%s\nTransport %s to %s station %s in %s"
-
-#: scripts/scenario_20_rescue.lua:7593
-#, lua-format
-msgctxt "orders-comms"
-msgid ""
-"%s\n"
-"Transport %s to station %s (defunct)"
-msgstr "%s\nTransport %s to station %s (defunct)"
-
-#: scripts/scenario_20_rescue.lua:7609
-#, lua-format
-msgctxt "orders-comms"
-msgid ""
-"%s\n"
-"Deliver cargo for %s to station %s in %s"
-msgstr "%s\nDeliver cargo for %s to station %s in %s"
-
-#: scripts/scenario_20_rescue.lua:7620
-#, lua-format
-msgctxt "orders-comms"
-msgid ""
-"%s\n"
-"Deliver cargo for %s to station %s (defunct)"
-msgstr "%s\nDeliver cargo for %s to station %s (defunct)"
-
-#: scripts/scenario_20_rescue.lua:7635
-#, lua-format
-msgctxt "orders-comms"
-msgid ""
-"%s\n"
-"Pick up cargo for %s at station %s in %s"
-msgstr "%s\nPick up cargo for %s at station %s in %s"
-
-#: scripts/scenario_20_rescue.lua:7646
-#, lua-format
-msgctxt "orders-comms"
-msgid ""
-"%s\n"
-"Pick up cargo for %s at station %s (defunct)"
-msgstr "%s\nPick up cargo for %s at station %s (defunct)"
-
-#: scripts/scenario_20_rescue.lua:7668 scripts/scenario_20_rescue.lua:7685
-#, lua-format
-msgctxt "orders-comms"
-msgid ""
-"%s\n"
-"%s (defunct)"
-msgstr "%s\n%s (defunct)"
-
-#: scripts/scenario_20_rescue.lua:7697
-#, lua-format
-msgctxt "msgMainscreen"
-msgid ""
-"%s\n"
-"Deployed %s player ships."
-msgstr "%s\nDeployed %s player ships."
-
-#: scripts/scenario_20_rescue.lua:7703
-#, lua-format
-msgctxt "msgMainscreen"
-msgid ""
-"%s\n"
-"Deployed one player ship."
-msgstr "%s\nDeployed one player ship."
-
-#: scripts/scenario_20_rescue.lua:7709
+#: scripts/scenario_20_rescue.lua:7266
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
 "%s\n"
 "Scientist retrieved from station."
-msgstr "%s\nScientist retrieved from station."
-
-#: scripts/scenario_20_rescue.lua:7714
-#, lua-format
-msgctxt "msgMainscreen"
-msgid ""
+msgstr ""
 "%s\n"
-"Time spent in scenario: %s"
-msgstr "%s\nTime spent in scenario: %s"
+"Scientist retrieved from station."
 
-#: scripts/scenario_20_rescue.lua:7719
-#, lua-format
-msgctxt "msgMainscreen"
-msgid ""
-"%s\n"
-"Enemies:%s Murphy:%s"
-msgstr "%s\nEnemies:%s Murphy:%s"
-
-#: scripts/scenario_20_rescue.lua:7743
+#: scripts/scenario_20_rescue.lua:7291
 #, lua-format
 msgctxt "nameSector-tabRelay&Ops&Helm&Tactical"
 msgid "%s in %s"
 msgstr "%s in %s"
 
-#: scripts/scenario_20_rescue.lua:7767
+#: scripts/scenario_20_rescue.lua:7315
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
 "You rescued Hans Gestalt. Congratulations!\n"
 "%s"
-msgstr "You rescued Hans Gestalt. Congratulations!\n%s"
+msgstr ""
+"You rescued Hans Gestalt. Congratulations!\n"
+"%s"
 
-#: scripts/scenario_20_rescue.lua:7781
+#: scripts/scenario_20_rescue.lua:7329
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
 "Rescue the exotic weapons research scientist AND preserve your home "
 "station.\n"
 "%s"
-msgstr "Rescue the exotic weapons research scientist AND preserve your home station.\n%s"
+msgstr ""
+"Rescue the exotic weapons research scientist AND preserve your home "
+"station.\n"
+"%s"
 
-#: scripts/scenario_20_rescue.lua:7792
+#: scripts/scenario_20_rescue.lua:7340
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
 "All available player ships destroyed.\n"
 "%s"
-msgstr "All available player ships destroyed.\n%s"
+msgstr ""
+"All available player ships destroyed.\n"
+"%s"
+
+#~ msgctxt "msgScience"
+#~ msgid "The unscanned artifact we just picked up has fried our scanners"
+#~ msgstr "The unscanned artifact we just picked up has fried our scanners"
+
+#~ msgctxt "msgOperations"
+#~ msgid "The unscanned artifact we just picked up has fried our scanners"
+#~ msgstr "The unscanned artifact we just picked up has fried our scanners"
+
+#, lua-format
+#~ msgctxt "scienceDescription-artifact"
+#~ msgid ""
+#~ "Source of emanations interfering with long range sensors. Range:%.1fu "
+#~ "Impact:%.1fu"
+#~ msgstr ""
+#~ "Source of emanations interfering with long range sensors. Range:%.1fu "
+#~ "Impact:%.1fu"
+
+#~ msgctxt "scienceDescription-artifact"
+#~ msgid "Source of unusual emanations"
+#~ msgstr "Source of unusual emanations"
+
+#~ msgctxt "orders-comms"
+#~ msgid ""
+#~ "\n"
+#~ "Optional:"
+#~ msgstr ""
+#~ "\n"
+#~ "Optional:"
+
+#~ msgctxt "orders-comms"
+#~ msgid ""
+#~ "\n"
+#~ "Optional orders:"
+#~ msgstr ""
+#~ "\n"
+#~ "Optional orders:"
+
+#~ msgctxt "orders-comms"
+#~ msgid ""
+#~ "\n"
+#~ "These orders are optional:"
+#~ msgstr ""
+#~ "\n"
+#~ "These orders are optional:"
+
+#~ msgctxt "orders-comms"
+#~ msgid ""
+#~ "\n"
+#~ "Not required:"
+#~ msgstr ""
+#~ "\n"
+#~ "Not required:"
+
+#, lua-format
+#~ msgctxt "orders-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "Transport %s to %s station %s in %s"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Transport %s to %s station %s in %s"
+
+#, lua-format
+#~ msgctxt "orders-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "Transport %s to station %s (defunct)"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Transport %s to station %s (defunct)"
+
+#, lua-format
+#~ msgctxt "orders-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "Deliver cargo for %s to station %s in %s"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Deliver cargo for %s to station %s in %s"
+
+#, lua-format
+#~ msgctxt "orders-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "Deliver cargo for %s to station %s (defunct)"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Deliver cargo for %s to station %s (defunct)"
+
+#, lua-format
+#~ msgctxt "orders-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "Pick up cargo for %s at station %s in %s"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Pick up cargo for %s at station %s in %s"
+
+#, lua-format
+#~ msgctxt "orders-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "Pick up cargo for %s at station %s (defunct)"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Pick up cargo for %s at station %s (defunct)"
+
+#, lua-format
+#~ msgctxt "orders-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "%s (defunct)"
+#~ msgstr ""
+#~ "%s\n"
+#~ "%s (defunct)"
+
+#, lua-format
+#~ msgctxt "msgMainscreen"
+#~ msgid ""
+#~ "%s\n"
+#~ "Deployed %s player ships."
+#~ msgstr ""
+#~ "%s\n"
+#~ "Deployed %s player ships."
+
+#, lua-format
+#~ msgctxt "msgMainscreen"
+#~ msgid ""
+#~ "%s\n"
+#~ "Deployed one player ship."
+#~ msgstr ""
+#~ "%s\n"
+#~ "Deployed one player ship."
+
+#, lua-format
+#~ msgctxt "msgMainscreen"
+#~ msgid ""
+#~ "%s\n"
+#~ "Time spent in scenario: %s"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Time spent in scenario: %s"
+
+#, lua-format
+#~ msgctxt "msgMainscreen"
+#~ msgid ""
+#~ "%s\n"
+#~ "Enemies:%s Murphy:%s"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Enemies:%s Murphy:%s"

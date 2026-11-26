@@ -1,0 +1,21 @@
+#: scripts/statistics_scenario_utility.lua:8
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"%s\n"
+"Deployed %s player ships."
+msgstr ""
+
+#: scripts/statistics_scenario_utility.lua:14
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"%s\n"
+"Deployed one player ship."
+msgstr ""
+
+#: scripts/statistics_scenario_utility.lua:21
+#: scripts/statistics_scenario_utility.lua:33
+#, lua-format
+msgid "msgMainscreen"
+msgstr ""

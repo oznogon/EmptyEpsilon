@@ -1,0 +1,547 @@
+#: scripts/shoreline_station_placement.lua:44
+msgctxt "scienceDescription-station"
+msgid "Ship building and maintenance facility"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:77
+msgctxt "stationGeneralInfo-comms"
+msgid "Human Navy headquarters. Loss of this station would be devastating"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:93
+msgctxt "scienceDescription-station"
+msgid "Warp engine components"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:129
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We specialize in the esoteric components necessary to make warp drives "
+"function properly"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:133
+msgctxt "stationStory-comms"
+msgid ""
+"Zefram Cochrane constructed the first warp drive in human history. We named "
+"our station after him because of the specialized warp systems work we do"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:162
+msgctxt "scienceDescription-station"
+msgid "Energy Beam Components"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:191
+msgctxt "stationGeneralInfo-comms"
+msgid "We manufacture energy beam components"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:195
+msgctxt "stationStory-comms"
+msgid ""
+"Station named after Guglielmo Marconi an Italian inventor from early 20th "
+"century Earth who, along with Nicolo Tesla, claimed to have invented a death "
+"ray or particle beam weapon"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:223
+msgctxt "scienceDescription-station"
+msgid "Trading station"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:251
+msgctxt "stationGeneralInfo-comms"
+msgid "Come to Muddvile for all your trade and commerce needs and desires"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:255
+msgctxt "stationStory-comms"
+msgid ""
+"Upon retirement, Harry Mudd started this commercial venture using his "
+"leftover inventory and extensive connections obtained while he traveled the "
+"stars as a salesman"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:279
+msgctxt "scienceDescription-station"
+msgid "Optical Components"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:309
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We make and supply optic components for various station and ship systems"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:313
+msgctxt "stationStory-comms"
+msgid ""
+"This station continues the businesses from Earth based on the merging of "
+"several companies including Leica from Switzerland, the lens manufacturer "
+"and the Japanese advanced low carbon (ALCA) electronic and optic research "
+"and development company"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:341
+#: scripts/shoreline_station_placement.lua:2062
+#: scripts/shoreline_station_placement.lua:2163
+#: scripts/shoreline_station_placement.lua:2264
+#: scripts/shoreline_station_placement.lua:2382
+msgctxt "scienceDescription-station"
+msgid "Mining station"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:391
+msgctxt "scienceDescription-station"
+msgid "Mining and trade"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:459
+msgctxt "scienceDescription-station"
+msgid "Mining and gambling"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:528
+#: scripts/shoreline_station_placement.lua:1724
+#: scripts/shoreline_station_placement.lua:1975
+msgctxt "scienceDescription-station"
+msgid "Resupply"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:569
+msgctxt "scienceDescription-station"
+msgid "Shielded Circuitry Fabrication"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:599
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We specialize in circuitry shielded from external hacking suitable for ship "
+"systems"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:603
+msgctxt "stationStory-comms"
+msgid ""
+"We started as an expansion from the lunar based chip manufacturer of Earth "
+"legacy Intel electronic chips"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:628
+msgctxt "scienceDescription-station"
+msgid "Shield and Armor Research"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:658
+msgctxt "stationGeneralInfo-comms"
+msgid "The finest shield and armor manufacturer in the quadrant"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:662
+msgctxt "stationStory-comms"
+msgid ""
+"We named this station for the pioneering spirit of the 22nd century "
+"Starfleet explorer, Captain Jonathan Archer"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:689
+msgctxt "scienceDescription-station"
+msgid "Repulsor and Tractor Beam Components"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:723
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We can meet all your pushing and pulling needs with specialized equipment "
+"custom made"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:727
+msgctxt "stationStory-comms"
+msgid ""
+"The station name comes from a short story by the 20th century author "
+"Clifford D. Simak as well as from the 19th century developer John Deere who "
+"inspired a company that makes the Earth bound equivalents of our products"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:754
+msgctxt "scienceDescription-station"
+msgid "Advanced Material components"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:783
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We fabricate several different kinds of materials critical to various space "
+"industries like ship building, station construction and mineral extraction"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:787
+msgctxt "stationStory-comms"
+msgid ""
+"We named our station after Dr. Cavor, the physicist that invented a barrier "
+"material for gravity waves - Cavorite"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:824
+msgctxt "scienceDescription-station"
+msgid "Transporter components"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:885
+msgctxt "scienceDescription-station"
+msgid "Sensor components"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:914
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We research and construct components for the most powerful and accurate "
+"sensors used aboard ships along with the software to make them easy to use"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:918
+msgctxt "stationStory-comms"
+msgid ""
+"The Veloquan company has its roots in the manufacturing of LIDAR sensors in "
+"the early 21st century on Earth in the United States for autonomous ground-"
+"based vehicles. They expanded research and manufacturing operations to "
+"include various sensors for space vehicles. Veloquan was the result of "
+"numerous mergers and acquisitions of several companies including Velodyne "
+"and Quanergy"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:947
+msgctxt "scienceDescription-station"
+msgid "Communication components"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:977
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We provide a range of communication equipment and software for use aboard "
+"ships"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:981
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Reginald Barclay who established the first "
+"transgalactic com link through the creative application of a quantum "
+"singularity. Station personnel often refer to the station as the Broccoli "
+"station"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1009
+msgctxt "scienceDescription-station"
+msgid "Autodoc components"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1038
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We build and repair and provide components and upgrades for automated "
+"facilities designed for ships where a doctor cannot be a crew member "
+"(commonly called autodocs)"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1042
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Dr. Lipkin who pioneered some of the research and "
+"application around robot assisted surgery in the area of partial nephrectomy "
+"for renal tumors in the early 21st century on Earth"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1068
+msgctxt "scienceDescription-station"
+msgid "Load lifters and components"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1101
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide load lifters and components"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1105
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Ellen Ripley who made creative and effective use "
+"of one of our load lifters when defending her ship"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1134
+msgctxt "scienceDescription-station"
+msgid "Android components"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1163
+msgctxt "stationGeneralInfo-comms"
+msgid "Supplier of android components, programming and service"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1167
+msgctxt "stationStory-comms"
+msgid ""
+"Named for Richard Deckard who inspired many of the sophisticated safety "
+"security algorithms now required for all androids"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1194
+msgctxt "scienceDescription-station"
+msgid "Automated weapons systems"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1230
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We research and create automated weapons systems to improve ship combat "
+"capability"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1260
+msgctxt "scienceDescription-station"
+msgid "Battery and software engineering"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1293
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We provide high quality high capacity batteries and specialized software for "
+"all shipboard systems"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1297
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after a fictional software engineer in a late 20th "
+"century movie depicting humanity unknowingly conquered by aliens and kept "
+"docile by software generated illusion"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1321
+msgctxt "scienceDescription-station"
+msgid "Nanotechnology research"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1353
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide nanites and software for a variety of ship-board systems"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1357
+msgctxt "stationStory-comms"
+msgid ""
+"This station's name recognizes one of the first scientific researchers into "
+"nanotechnology, physicist Richard Feynman"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1383
+msgctxt "scienceDescription-station"
+msgid "Medical Research"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1415
+msgctxt "stationGeneralInfo-comms"
+msgid "We research exotic diseases and other human medical conditions"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1419
+msgctxt "stationStory-comms"
+msgid ""
+"We continue the medical work started by William Worrall Mayo in the late "
+"19th century on Earth"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1435
+msgctxt "scienceDescription-station"
+msgid "Commerce and recreation"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1474
+msgctxt "scienceDescription-station"
+msgid "Biotech research"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1523
+msgctxt "scienceDescription-station"
+msgid "Trading post"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1570
+msgctxt "scienceDescription-station"
+msgid "Logistics coordination"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1599
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We support the stations and ships in the area with planning and "
+"communication services"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1603
+msgctxt "stationStory-comms"
+msgid ""
+"We recognize the influence of Starfleet Captain James Tiberius Kirk in the "
+"23rd century in our station name"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1619
+msgctxt "scienceDescription-station"
+msgid "Stress Psychology Research"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1672
+msgctxt "scienceDescription-station"
+msgid "Zero gravity sports and entertainment"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1764
+msgctxt "scienceDescription-station"
+msgid "Casino and Gambling"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1812
+msgctxt "scienceDescription-station"
+msgid "Xenopsychology training"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1841
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We provide classes and simulation to help train diverse species in how to "
+"relate to each other"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1845
+msgctxt "stationStory-comms"
+msgid ""
+"A continuation of the research initially conducted by Dr. Gennady Komov in "
+"the early 22nd century on Venus, supported by the application of these "
+"principles"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1874
+msgctxt "scienceDescription-station"
+msgid "Research Lab and Observatory"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:1925
+msgctxt "scienceDescription-station"
+msgid "Textiles and fashion"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:2014
+msgctxt "scienceDescription-station"
+msgid "Diplomatic training"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:2043
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"The premeire academy for leadership and diplomacy training in the region"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:2047
+msgctxt "stationStory-comms"
+msgid ""
+"Established by the royal family so critical during the political upheaval era"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:2547
+msgctxt "scienceDescription-station"
+msgid "Observatory"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:2583
+msgctxt "scienceDescription-station"
+msgid "Impulse engine components"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:2616
+msgctxt "stationGeneralInfo-comms"
+msgid "We supply high quality impulse engines and parts for use aboard ships"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:2620
+msgctxt "stationStory-comms"
+msgid ""
+"This station was named after the fictional engineer, Cyrus Smith created by "
+"19th century author Jules Verne"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:2648
+msgctxt "scienceDescription-station"
+msgid "Robotic research"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:2677
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and provide robotic systems and components"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:2681
+msgctxt "stationStory-comms"
+msgid ""
+"This station is named after Dr. Susan Calvin who pioneered robotic "
+"behavioral research and programming"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:3538
+#: scripts/shoreline_station_placement.lua:3545
+#: scripts/shoreline_station_placement.lua:3552
+#: scripts/shoreline_station_placement.lua:3563
+#: scripts/shoreline_station_placement.lua:3570
+#: scripts/shoreline_station_placement.lua:3577
+#: scripts/shoreline_station_placement.lua:3588
+#: scripts/shoreline_station_placement.lua:3595
+#: scripts/shoreline_station_placement.lua:3602
+#: scripts/shoreline_station_placement.lua:3613
+#: scripts/shoreline_station_placement.lua:3620
+#: scripts/shoreline_station_placement.lua:3627
+#: scripts/shoreline_station_placement.lua:3638
+#: scripts/shoreline_station_placement.lua:3645
+#: scripts/shoreline_station_placement.lua:3652
+#: scripts/shoreline_station_placement.lua:3663
+#: scripts/shoreline_station_placement.lua:3670
+#: scripts/shoreline_station_placement.lua:3677
+msgctxt "scienceDescription-artifact"
+msgid "Unusual object"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:3541
+#: scripts/shoreline_station_placement.lua:3566
+#: scripts/shoreline_station_placement.lua:3591
+#: scripts/shoreline_station_placement.lua:3616
+#: scripts/shoreline_station_placement.lua:3641
+#: scripts/shoreline_station_placement.lua:3666
+msgctxt "scienceDescription-artifact"
+msgid "Artifact with quantum biometric characteristics"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:3548
+#: scripts/shoreline_station_placement.lua:3573
+#: scripts/shoreline_station_placement.lua:3598
+#: scripts/shoreline_station_placement.lua:3623
+#: scripts/shoreline_station_placement.lua:3648
+#: scripts/shoreline_station_placement.lua:3673
+msgctxt "scienceDescription-artifact"
+msgid "Artifact with embedded chroniton particles"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:3555
+#: scripts/shoreline_station_placement.lua:3580
+#: scripts/shoreline_station_placement.lua:3605
+#: scripts/shoreline_station_placement.lua:3630
+#: scripts/shoreline_station_placement.lua:3655
+#: scripts/shoreline_station_placement.lua:3680
+msgctxt "scienceDescription-artifact"
+msgid "Artifact bridging two parallel universes"
+msgstr ""
+
+#: scripts/shoreline_station_placement.lua:3782
+msgctxt "scienceDescription-planet"
+msgid "Lush planet with only mild seasonal variations"
+msgstr ""

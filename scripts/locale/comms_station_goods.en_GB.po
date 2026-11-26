@@ -1,0 +1,189 @@
+#: scripts/comms_station_goods.lua:38
+msgctxt "trade-comms"
+msgid "Buy, sell, trade"
+msgstr ""
+
+#: scripts/comms_station_goods.lua:42 scripts/comms_station_goods.lua:254
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Station %s:\n"
+"Goods or components available: quantity, cost in reputation\n"
+msgstr ""
+
+#: scripts/comms_station_goods.lua:49
+#, lua-format
+msgctxt "trade-comms"
+msgid "     %s: %i, %i\n"
+msgstr ""
+
+#: scripts/comms_station_goods.lua:55
+msgctxt "trade-comms"
+msgid "Current Cargo:\n"
+msgstr ""
+
+#: scripts/comms_station_goods.lua:61
+#, lua-format
+msgctxt "trade-comms"
+msgid "     %s: %i\n"
+msgstr ""
+
+#: scripts/comms_station_goods.lua:69
+msgctxt "trade-comms"
+msgid "     Empty\n"
+msgstr ""
+
+#: scripts/comms_station_goods.lua:76
+#, lua-format
+msgctxt "trade-comms"
+msgid "Available Space: %i, Available Reputation: %i\n"
+msgstr ""
+
+#: scripts/comms_station_goods.lua:89
+#, lua-format
+msgctxt "trade-comms"
+msgid "Buy one %s for %i reputation"
+msgstr ""
+
+#: scripts/comms_station_goods.lua:95
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s, Quantity: %i, Rep: %i"
+msgstr ""
+
+#: scripts/comms_station_goods.lua:104
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Insufficient cargo space for purchase"
+msgstr ""
+
+#: scripts/comms_station_goods.lua:110 scripts/comms_station_goods.lua:123
+msgctxt "needRep-comms"
+msgid ""
+"\n"
+"Insufficient reputation for purchase"
+msgstr ""
+
+#: scripts/comms_station_goods.lua:116 scripts/comms_station_goods.lua:169
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Insufficient station inventory"
+msgstr ""
+
+#: scripts/comms_station_goods.lua:129
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"purchased"
+msgstr ""
+
+#: scripts/comms_station_goods.lua:133 scripts/comms_station_goods.lua:178
+#: scripts/comms_station_goods.lua:186 scripts/comms_station_goods.lua:218
+#: scripts/comms_station_goods.lua:222 scripts/comms_station_goods.lua:268
+#: scripts/comms_station_goods.lua:295 scripts/comms_station_goods.lua:328
+#: scripts/comms_station_goods.lua:333
+msgid "Back"
+msgstr ""
+
+#: scripts/comms_station_goods.lua:152
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade food for %s"
+msgstr ""
+
+#: scripts/comms_station_goods.lua:153
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade medicine for %s"
+msgstr ""
+
+#: scripts/comms_station_goods.lua:154
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade luxury for %s"
+msgstr ""
+
+#: scripts/comms_station_goods.lua:161
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s,  Quantity: %i"
+msgstr ""
+
+#: scripts/comms_station_goods.lua:175
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Traded"
+msgstr ""
+
+#: scripts/comms_station_goods.lua:196
+msgctxt "trade-comms"
+msgid "Jettison cargo"
+msgstr ""
+
+#: scripts/comms_station_goods.lua:201
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Available space: %i\n"
+"What would you like to jettison?"
+msgstr ""
+
+#: scripts/comms_station_goods.lua:214
+#, lua-format
+msgctxt "trade-comms"
+msgid "One %s jettisoned"
+msgstr ""
+
+#: scripts/comms_station_goods.lua:249
+msgctxt "trade-comms"
+msgid "What goods do you have available for sale or trade?"
+msgstr ""
+
+#: scripts/comms_station_goods.lua:261
+#, lua-format
+msgctxt "trade-comms"
+msgid "   %14s: %2i, %3i\n"
+msgstr ""
+
+#: scripts/comms_station_goods.lua:282
+msgctxt "trade-comms"
+msgid "Where can I find particular goods?"
+msgstr ""
+
+#: scripts/comms_station_goods.lua:286
+msgctxt "trade-comms"
+msgid ""
+"Friendly stations generally have food or medicine or both. Neutral stations "
+"often trade their goods for food, medicine or luxury."
+msgstr ""
+
+#: scripts/comms_station_goods.lua:292
+msgctxt "trade-comms"
+msgid ""
+" Beyond that, I have no knowledge of specific stations.\n"
+"\n"
+"Check back later, someone else may have better knowledge"
+msgstr ""
+
+#: scripts/comms_station_goods.lua:305
+msgctxt "trade-comms"
+msgid " Beyond that, I have no knowledge of specific stations"
+msgstr ""
+
+#: scripts/comms_station_goods.lua:311
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"\n"
+"What goods are you interested in?\n"
+"I've heard about these:"
+msgstr ""
+
+#: scripts/comms_station_goods.lua:320
+#, lua-format
+msgctxt "trade-comms"
+msgid "Station %s in sector %s has %s%s"
+msgstr ""

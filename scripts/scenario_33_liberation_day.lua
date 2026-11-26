@@ -44,10 +44,42 @@ require("place_station_scenario_utility.lua")
 require("cpu_ship_diversification_scenario_utility.lua")
 require("generate_call_sign_scenario_utility.lua")
 require("player_ship_upgrade_downgrade_path_scenario_utility.lua")
-require("spawn_ships_scenario_utility.lua")
+local Fleet = require("spawn_ships_scenario_utility.lua")
+local getTemplatePool = Fleet.templatePoolGetter({
+    catalog = function() return ship_template end,
+    selectivity = function() return pool_selectivity end,
+    composition = function() return fleetComposition end,
+    limit = function() return template_pool_size end,
+    stock_template = function() return stockTemplate end,
+    fleet_group = function() return fleet_group end,
+})
+
+local Heading = require("heading_scenario_utility.lua")
+local vectorFromAngleNorth = Heading.north(vectorFromAngle, {
+    diagnostic = function(message)
+        if spew_function_diagnostic then print(message) end
+    end,
+})
+
+local playerPower = Fleet.playerPower
+
 require("comms_scenario_utility.lua")
+local defaults = require("defaults_scenario_utility.lua")
+local ShipNames = require("player_ship_names_scenario_utility.lua")
+local ShipComms = require("comms_ship_support.lua")
+local PlayerState = require("player_state_scenario_utility.lua")
+local Sensor = require("sensor_scenario_utility.lua")
+local sensorJammer = Sensor.sensorJammerBasic
+local sensorJammerPickupProcess = Sensor.sensorJammerPickupBasic
+
+local availableForComms = ShipComms.availableForComms
+goodsOnShip = ShipComms.goodsOnShip
+
 
 -- Initialization routines
+local GmSettings = require("gm_settings_scenario_utility.lua")
+mainGMButtons = GmSettings.spawnMenu
+
 function init()
     scenario_version = "1.0.1"
     ee_version = "2024.12.08"
@@ -71,41 +103,22 @@ function init()
     onNewPlayerShip(setPlayers)
 end
 function setPlayers()
-    for i, p in ipairs(getActivePlayerShips()) do
-        if p.shipScore == nil then
-            updatePlayerSoftTemplate(p)
-        end
-        local already_recorded = false
-        for j, dp in ipairs(deployed_players) do
-            if p == dp.p then
-                already_recorded = true
-                break
+    PlayerState.recordDeployments(getActivePlayerShips(), deployed_players, {
+        prepare = function(p)
+            if p.shipScore == nil then
+                updatePlayerSoftTemplate(p)
             end
-        end
-        if not already_recorded then
-            table.insert(
-                deployed_players,
-                { p = p, name = p:getCallSign(), count = 1 }
-            )
-        end
-    end
+        end,
+    })
 end
 function updatePlayerSoftTemplate(p)
-    p:setPosition(player_spawn_x, player_spawn_y)
-    --set defaults for those ships not found in the list
-    p.shipScore = 24
-    p.maxCargo = 5
-    p.cargo = p.maxCargo
-    p.tractor = false
-    p.tractor_target_lock = false
-    p.mining = false
-    p.goods = {}
-    p:setFaction(player_faction)
+    PlayerState.applyDefaults(p, {
+        position = { player_spawn_x, player_spawn_y },
+        faction = player_faction,
+        reputation = reputation_start_amount,
+    })
     p:onDestroyed(playerDestroyed)
     p:onDestruction(playerDestruction)
-    if p:getReputationPoints() == 0 then
-        p:setReputationPoints(reputation_start_amount)
-    end
     local temp_type_name = p:getTypeName()
     if temp_type_name ~= nil then
         local p_stat = player_ship_stats[temp_type_name]
@@ -155,59 +168,7 @@ function updatePlayerSoftTemplate(p)
             )
         end
     end
-    p.maxRepairCrew = p:getRepairCrewCount()
-    p.healthyShield = 1.0
-    p.prevShield = 1.0
-    p.healthyReactor = 1.0
-    p.prevReactor = 1.0
-    p.healthyManeuver = 1.0
-    p.prevManeuver = 1.0
-    p.healthyImpulse = 1.0
-    p.prevImpulse = 1.0
-    if p:getBeamWeaponRange(0) > 0 then
-        p.healthyBeam = 1.0
-        p.prevBeam = 1.0
-    end
-    local tube_count = p:getWeaponTubeCount()
-    if tube_count > 0 then
-        p.healthyMissile = 1.0
-        p.prevMissile = 1.0
-        local size_letter = {
-            ["small"] = "S",
-            ["medium"] = "M",
-            ["large"] = "L",
-        }
-        p.tube_size = ""
-        for i = 1, tube_count do
-            p.tube_size = p.tube_size .. size_letter[p:getTubeSize(i - 1)]
-        end
-    end
-    if p:hasWarpDrive() then
-        p.healthyWarp = 1.0
-        p.prevWarp = 1.0
-    end
-    if p:hasJumpDrive() then
-        p.healthyJump = 1.0
-        p.prevJump = 1.0
-    end
-    p.initialCoolant = p:getMaxCoolant()
-    local system_types = {
-        "reactor",
-        "beamweapons",
-        "missilesystem",
-        "maneuver",
-        "impulse",
-        "warp",
-        "jumpdrive",
-        "frontshield",
-        "rearshield",
-    }
-    p.normal_coolant_rate = {}
-    p.normal_power_rate = {}
-    for _, system in ipairs(system_types) do
-        p.normal_coolant_rate[system] = p:getSystemCoolantRate(system)
-        p.normal_power_rate[system] = p:getSystemPowerRate(system)
-    end
+    PlayerState.resetBaseline(p, {})
 end
 function setVariations()
     local nova_config = {
@@ -3123,89 +3084,10 @@ function setConstants() --variables that don't change
             mining = true,
         },
     }
-    commonGoods = {
-        "food",
-        "medicine",
-        "nickel",
-        "platinum",
-        "gold",
-        "dilithium",
-        "tritanium",
-        "luxury",
-        "cobalt",
-        "impulse",
-        "warp",
-        "shield",
-        "tractor",
-        "repulsor",
-        "beam",
-        "optic",
-        "robotic",
-        "filament",
-        "transporter",
-        "sensor",
-        "communication",
-        "autodoc",
-        "lifter",
-        "android",
-        "nanites",
-        "software",
-        "circuit",
-        "battery",
-    }
-    componentGoods = {
-        "impulse",
-        "warp",
-        "shield",
-        "tractor",
-        "repulsor",
-        "beam",
-        "optic",
-        "robotic",
-        "filament",
-        "transporter",
-        "sensor",
-        "communication",
-        "autodoc",
-        "lifter",
-        "android",
-        "nanites",
-        "software",
-        "circuit",
-        "battery",
-    }
-    mineralGoods =
-        { "nickel", "platinum", "gold", "dilithium", "tritanium", "cobalt" }
-    good_desc = {
-        ["food"] = _("trade-comms", "food"),
-        ["medicine"] = _("trade-comms", "medicine"),
-        ["luxury"] = _("trade-comms", "luxury"),
-        ["cobalt"] = _("trade-comms", "cobalt"),
-        ["dilithium"] = _("trade-comms", "dilithium"),
-        ["gold"] = _("trade-comms", "gold"),
-        ["nickel"] = _("trade-comms", "nickel"),
-        ["platinum"] = _("trade-comms", "platinum"),
-        ["tritanium"] = _("trade-comms", "tritanium"),
-        ["autodoc"] = _("trade-comms", "autodoc"),
-        ["android"] = _("trade-comms", "android"),
-        ["battery"] = _("trade-comms", "battery"),
-        ["beam"] = _("trade-comms", "beam"),
-        ["circuit"] = _("trade-comms", "circuit"),
-        ["communication"] = _("trade-comms", "communication"),
-        ["filament"] = _("trade-comms", "filament"),
-        ["impulse"] = _("trade-comms", "impulse"),
-        ["lifter"] = _("trade-comms", "lifter"),
-        ["nanites"] = _("trade-comms", "nanites"),
-        ["optic"] = _("trade-comms", "optic"),
-        ["repulsor"] = _("trade-comms", "repulsor"),
-        ["robotic"] = _("trade-comms", "robotic"),
-        ["sensor"] = _("trade-comms", "sensor"),
-        ["shield"] = _("trade-comms", "shield"),
-        ["software"] = _("trade-comms", "software"),
-        ["tractor"] = _("trade-comms", "tractor"),
-        ["transporter"] = _("trade-comms", "transporter"),
-        ["warp"] = _("trade-comms", "warp"),
-    }
+    commonGoods = defaults.goods().commonGoods
+    componentGoods = defaults.goods().componentGoods
+    mineralGoods = defaults.goods().mineralGoods
+    good_desc = defaults.goods().good_desc
     faction_letter = {
         ["Human Navy"] = "H",
         ["Independent"] = "I",
@@ -3268,176 +3150,7 @@ function setGlobals() --variables that might change
         ["CUF"] = { id = "C", count = 0 },
         ["Mehklar"] = { id = "M", count = 0 },
     }
-    player_ship_names_for = {
-        [ST.ATLANTIS] = {
-            "Excaliber",
-            "Thrasher",
-            "Punisher",
-            "Vorpal",
-            "Protang",
-            "Drummond",
-            "Parchim",
-            "Coronado",
-        },
-        ["Atlantis II"] = {
-            "Spyder",
-            "Shelob",
-            "Tarantula",
-            "Aragog",
-            "Charlotte",
-        },
-        [ST.BENEDICT] = {
-            "Elizabeth",
-            "Ford",
-            "Vikramaditya",
-            "Liaoning",
-            "Avenger",
-            "Naruebet",
-            "Washington",
-            "Lincoln",
-            "Garibaldi",
-            "Eisenhower",
-        },
-        [ST.CRUCIBLE] = { "Sling", "Stark", "Torrid", "Kicker", "Flummox" },
-        [ST.ENDER] = {
-            "Mongo",
-            "Godzilla",
-            "Leviathan",
-            "Kraken",
-            "Jupiter",
-            "Saturn",
-        },
-        [ST.FLAVIA_PFALCON] = {
-            "Ladyhawke",
-            "Hunter",
-            "Seeker",
-            "Gyrefalcon",
-            "Kestrel",
-            "Magpie",
-            "Bandit",
-            "Buccaneer",
-        },
-        [ST.HATHCOCK] = {
-            "Hayha",
-            "Waldron",
-            "Plunkett",
-            "Mawhinney",
-            "Furlong",
-            "Zaytsev",
-            "Pavlichenko",
-            "Pegahmagabow",
-            "Fett",
-            "Hawkeye",
-            "Hanzo",
-        },
-        [ST.KIRIYA] = {
-            "Cavour",
-            "Reagan",
-            "Gaulle",
-            "Paulo",
-            "Truman",
-            "Stennis",
-            "Kuznetsov",
-            "Roosevelt",
-            "Vinson",
-            "Old Salt",
-        },
-        [ST.MAVERICK] = {
-            "Angel",
-            "Thunderbird",
-            "Roaster",
-            "Magnifier",
-            "Hedge",
-        },
-        [ST.MP52_HORNET] = {
-            "Dragonfly",
-            "Scarab",
-            "Mantis",
-            "Yellow Jacket",
-            "Jimminy",
-            "Flik",
-            "Thorny",
-            "Buzz",
-        },
-        [ST.NAUTILUS] = {
-            "October",
-            "Abdiel",
-            "Manxman",
-            "Newcon",
-            "Nusret",
-            "Pluton",
-            "Amiral",
-            "Amur",
-            "Heinkel",
-            "Dornier",
-        },
-        [ST.PHOBOS_M3P] = {
-            "Blinder",
-            "Shadow",
-            "Distortion",
-            "Diemos",
-            "Ganymede",
-            "Castillo",
-            "Thebe",
-            "Retrograde",
-        },
-        [ST.PIRANHA] = {
-            "Razor",
-            "Biter",
-            "Ripper",
-            "Voracious",
-            "Carnivorous",
-            "Characid",
-            "Vulture",
-            "Predator",
-        },
-        [ST.VINDICATOR] = {
-            "Excelsior",
-            "Velociraptor",
-            "Thunder",
-            "Kona",
-            "Encounter",
-            "Perth",
-            "Aspern",
-            "Panther",
-        },
-        [ST.STINGRAY] = {
-            "Buzzer",
-            "Flitter",
-            "Zippiticus",
-            "Hopper",
-            "Molt",
-            "Stinger",
-            "Stripe",
-        },
-        [ST.AVALANCHE] = {
-            "Projectus",
-            "Hurlmeister",
-            "Flinger",
-            "Ovod",
-            "Amatola",
-            "Nakhimov",
-            "Antigone",
-        },
-        ["Proto-Atlantis"] = {
-            "Narsil",
-            "Blade",
-            "Decapitator",
-            "Trisect",
-            "Sabre",
-        },
-        ["Redhook"] = { "Headhunter", "Thud", "Troll", "Scalper", "Shark" },
-        [ST.REPULSE] = {
-            "Fiddler",
-            "Brinks",
-            "Loomis",
-            "Mowag",
-            "Patria",
-            "Pandur",
-            "Terrex",
-            "Komatsu",
-            "Eitan",
-        },
+    player_ship_names_for = ShipNames.forScenario({
         [ST.SAIPAN] = {
             "Atlas",
             "Bernard",
@@ -3448,28 +3161,8 @@ function setGlobals() --variables that might change
             "Saratoga",
             "Pegasus",
         },
-        ["Stricken"] = { "Blazon", "Streaker", "Pinto", "Spear", "Javelin" },
-        [ST.CROW] = {
-            "Sparrow",
-            "Sizzle",
-            "Squawk",
-            "Crow",
-            "Phoenix",
-            "Snowbird",
-            "Hawk",
-        },
-        ["Surkov"] = { "Sting", "Sneak", "Bingo", "Thrill", "Vivisect" },
-        ["ZX-Lindworm"] = {
-            "Seagull",
-            "Catapult",
-            "Blowhard",
-            "Flapper",
-            "Nixie",
-            "Pixie",
-            "Tinkerbell",
-        },
         ["Leftovers"] = { "Foregone", "Righteous", "Scandalous" },
-    }
+    })
     star_list = {
         {
             radius = random(600, 1400),
@@ -3596,10 +3289,6 @@ function setGlobals() --variables that might change
             },
         },
     }
-end
-function mainGMButtons()
-    clearGMFunctions()
-    addGMFunction(_("buttonGM", "+Spawn Ship(s)"), spawnGMShips)
 end
 function constructEnvironment()
     -- set player faction and friendly factions
@@ -5112,28 +4801,6 @@ function constructNovaDemo()
     -- end of test code showing artifact location
 end
 -- Utilities
-function angleFromVectorNorth(p1x, p1y, p2x, p2y)
-    TWOPI = 6.2831853071795865
-    RAD2DEG = 57.2957795130823209
-    atan2parm1 = p2x - p1x
-    atan2parm2 = p2y - p1y
-    theta = math.atan2(atan2parm1, atan2parm2)
-    if theta < 0 then
-        theta = theta + TWOPI
-    end
-    return (360 - (RAD2DEG * theta)) % 360
-end
-function vectorFromAngleNorth(angle, distance)
-    if spew_function_diagnostic then
-        print("top of vector from angle north")
-    end
-    angle = (angle + 270) % 360
-    local x, y = vectorFromAngle(angle, distance)
-    if spew_function_diagnostic then
-        print("bottom (ish) of vector from angle north")
-    end
-    return x, y
-end
 function spawnEnemies(
     xOrigin,
     yOrigin,
@@ -5217,117 +4884,6 @@ function spawnEnemies(
     end
     return enemyList
 end
-function getTemplatePool(max_strength)
-    local function getStrengthSort(tbl, sortFunction)
-        local keys = {}
-        for key in pairs(tbl) do
-            table.insert(keys, key)
-        end
-        table.sort(keys, function(a, b)
-            return sortFunction(tbl[a], tbl[b])
-        end)
-        return keys
-    end
-    local ship_template_by_strength = getStrengthSort(
-        ship_template,
-        function(a, b)
-            return a.strength > b.strength
-        end
-    )
-    local template_pool = {}
-    if pool_selectivity == "less/heavy" then
-        for _, current_ship_template in ipairs(ship_template_by_strength) do
-            if
-                ship_template[current_ship_template].strength <= max_strength
-            then
-                if fleetComposition == "Non-DB" then
-                    if
-                        ship_template[current_ship_template].create
-                        ~= stockTemplate
-                    then
-                        table.insert(template_pool, current_ship_template)
-                    end
-                elseif fleetComposition == "Random" then
-                    table.insert(template_pool, current_ship_template)
-                else
-                    if
-                        ship_template[current_ship_template].fleet_group[fleetComposition]
-                    then
-                        table.insert(template_pool, current_ship_template)
-                    end
-                end
-            end
-            if #template_pool >= template_pool_size then
-                break
-            end
-        end
-    elseif pool_selectivity == "more/light" then
-        for i = #ship_template_by_strength, 1, -1 do
-            local current_ship_template = ship_template_by_strength[i]
-            if
-                ship_template[current_ship_template].strength <= max_strength
-            then
-                if fleetComposition == "Non-DB" then
-                    if
-                        ship_template[current_ship_template].create
-                        ~= stockTemplate
-                    then
-                        table.insert(template_pool, current_ship_template)
-                    end
-                elseif fleetComposition == "Random" then
-                    table.insert(template_pool, current_ship_template)
-                else
-                    if
-                        ship_template[current_ship_template].fleet_group[fleetComposition]
-                    then
-                        table.insert(template_pool, current_ship_template)
-                    end
-                end
-            end
-            if #template_pool >= template_pool_size then
-                break
-            end
-        end
-    else --full
-        for current_ship_template, details in pairs(ship_template) do
-            if details.strength <= max_strength then
-                if fleetComposition == "Non-DB" then
-                    if
-                        ship_template[current_ship_template].create
-                        ~= stockTemplate
-                    then
-                        table.insert(template_pool, current_ship_template)
-                    end
-                elseif fleetComposition == "Random" then
-                    table.insert(template_pool, current_ship_template)
-                else
-                    if
-                        ship_template[current_ship_template][fleet_group[fleetComposition]]
-                    then
-                        table.insert(template_pool, current_ship_template)
-                    end
-                end
-            end
-        end
-    end
-    --print("returning template pool containing these templates:")
-    --for _, template in ipairs(template_pool) do
-    -- print(template)
-    --end
-    return template_pool
-end
-function playerPower()
-    --evaluate the players for enemy strength and size spawning purposes
-    local playerShipScore = 0
-    for i, p in ipairs(getActivePlayerShips()) do
-        if p.shipScore == nil then
-            playerShipScore = playerShipScore + 24
-        else
-            playerShipScore = playerShipScore + p.shipScore
-        end
-    end
-    return playerShipScore
-end
 -- Scenario specific utilities
 function minorTrapScan(p)
     for i, ship in ipairs(minor_trap_ships) do
@@ -5375,28 +4931,7 @@ function novaEnd()
     return false
 end
 function addCommandLogButton(p)
-    p.command_log_button_rel = "command_log_button_rel"
-    p:addCustomButton(
-        "Relay",
-        p.command_log_button_rel,
-        _("buttonRelay", "Command Log"),
-        function()
-            string.format("")
-            showPlayerCommandLog(p, "Relay")
-        end,
-        7
-    )
-    p.command_log_button_ops = "command_log_button_ops"
-    p:addCustomButton(
-        "Operations",
-        p.command_log_button_ops,
-        _("buttonOperations", "Command Log"),
-        function()
-            string.format("")
-            showPlayerCommandLog(p, "Operations")
-        end,
-        7
-    )
+    PlayerState.addCommandLogButton(p, showPlayerCommandLog)
 end
 function missionMessages()
     if message_stations == nil then
@@ -7530,34 +7065,6 @@ function placeAsteroid(placement_area)
     end
 end
 -- Transport utilities
-function goodsOnShip(comms_target, comms_data)
-    comms_data.goods = {}
-    comms_data.goods[commonGoods[math.random(1, #commonGoods)]] =
-        { quantity = 1, cost = random(20, 80) }
-    local shipType = comms_target:getTypeName()
-    if shipType:find("Freighter") ~= nil then
-        if
-            shipType:find("Goods") ~= nil
-            or shipType:find("Equipment") ~= nil
-        then
-            local count_repeat_loop = 0
-            repeat
-                comms_data.goods[commonGoods[math.random(1, #commonGoods)]] =
-                    { quantity = 1, cost = random(20, 80) }
-                local goodCount = 0
-                for good, goodData in pairs(comms_data.goods) do
-                    goodCount = goodCount + 1
-                end
-                count_repeat_loop = count_repeat_loop + 1
-            until goodCount >= 3 or count_repeat_loop > max_repeat_loop
-            if count_repeat_loop > max_repeat_loop then
-                print(
-                    "repeated too many times when setting up goods for freighter"
-                )
-            end
-        end
-    end
-end
 function randomTransportType()
     local transport_type =
         { "Personnel", "Goods", "Garbage", "Equipment", "Fuel" }
@@ -7710,66 +7217,6 @@ function maintainTransports()
     end
 end
 -- Sensor jammer utilities
-function sensorJammerPickupProcess(self, retriever)
-    string.format("")
-    local jammer_call_sign = self:getCallSign()
-    sensor_jammer_list[jammer_call_sign] = nil
-    if not self:isScannedBy(retriever) then
-        retriever:setCanScan(false)
-        retriever.scanner_dead = "scanner_dead"
-        retriever:addCustomMessage(
-            "Science",
-            retriever.scanner_dead,
-            _(
-                "msgScience",
-                "The unscanned artifact we just picked up has fried our scanners"
-            )
-        )
-        retriever.scanner_dead_ops = "scanner_dead_ops"
-        retriever:addCustomMessage(
-            "Operations",
-            retriever.scanner_dead_ops,
-            _(
-                "msgOperations",
-                "The unscanned artifact we just picked up has fried our scanners"
-            )
-        )
-    end
-    may_explain_sensor_jammer = true
-end
-function sensorJammer(x, y)
-    artifact_number = artifact_number + math.random(1, 4)
-    local random_suffix = string.char(math.random(65, 90))
-    local jammer_call_sign =
-        string.format("SJ%i%s", artifact_number, random_suffix)
-    local scanned_description = string.format(
-        _(
-            "scienceDescription-artifact",
-            "Source of emanations interfering with long range sensors. Range:%.1fu Impact:%.1fu"
-        ),
-        sensor_jammer_range / 1000,
-        sensor_jammer_impact / 1000
-    )
-    local sensor_jammer = Artifact()
-        :setPosition(x, y)
-        :setScanningParameters(
-            sensor_jammer_scan_complexity,
-            sensor_jammer_scan_depth
-        )
-        :setRadarSignatureInfo(0.2, 0.4, 0.1)
-        :setModel("SensorBuoyMKIII")
-        :setDescriptions(
-            _("scienceDescription-artifact", "Source of unusual emanations"),
-            scanned_description
-        )
-        :setCallSign(jammer_call_sign)
-    sensor_jammer:onPickUp(sensorJammerPickupProcess)
-    sensor_jammer_list[jammer_call_sign] = sensor_jammer
-    sensor_jammer.jam_range = sensor_jammer_range
-    sensor_jammer.jam_impact = sensor_jammer_impact
-    sensor_jammer.jam_impact_units = sensor_jammer_power_units
-    return sensor_jammer
-end
 -- Nova functions
 function addEjecta(start_x, start_y, lo, hi)
     local max_ejecta = math.random(lo, hi)
@@ -9817,33 +9264,6 @@ function talkToNovaDemo(p)
         end
     end
 end
-function availableForComms(p)
-    if not p:isCommsInactive() then
-        return false
-    end
-    if p:isCommsOpening() then
-        return false
-    end
-    if p:isCommsBeingHailed() then
-        return false
-    end
-    if p:isCommsBeingHailedByGM() then
-        return false
-    end
-    if p:isCommsChatOpen() then
-        return false
-    end
-    if p:isCommsChatOpenToGM() then
-        return false
-    end
-    if p:isCommsChatOpenToPlayer() then
-        return
-    end
-    if p:isCommsScriptOpen() then
-        return false
-    end
-    return true
-end
 -- Update player ship functions
 function powerSensorEnabledButtons(p)
     p.power_sensor_state = "enabled"
@@ -9852,99 +9272,6 @@ end
 function powerSensorStandbyButtons(p)
     p.power_sensor_state = "standby"
     updatePowerSensorButtons(p)
-end
-function updatePowerSensorButtons(p)
-    if p.power_sensor_button ~= nil then
-        for console, button in pairs(p.power_sensor_button) do
-            p:removeCustom(button)
-        end
-        p.power_sensor_button = nil
-    end
-    if p.power_sensor_state == "disabled" then
-        --do nothing: initial loop removes buttons
-    elseif p.power_sensor_state == "standby" then
-        p.power_sensor_button = {}
-        p:addCustomButton(
-            "Engineering",
-            "power_sensor_button_standby_eng",
-            _("buttonEngineer", "Boost Sensors"),
-            function()
-                string.format("")
-                powerSensorConfigButtons(p)
-            end,
-            30
-        )
-        p.power_sensor_button["Engineering"] = "power_sensor_button_standby_eng"
-        p:addCustomButton(
-            "Engineering+",
-            "power_sensor_button_standby_plus",
-            _("buttonEngineer+", "Boost Sensors"),
-            function()
-                string.format("")
-                powerSensorConfigButtons(p)
-            end,
-            30
-        )
-        p.power_sensor_button["Engineering+"] =
-            "power_sensor_button_standby_plus"
-    elseif p.power_sensor_state == "configure" then
-        p.power_sensor_button = {}
-        for i = 1, 3 do
-            p:addCustomButton(
-                "Engineering",
-                string.format("power_sensor_button_config_eng%i", i),
-                string.format(_("buttonEngineer", "Sensor Boost %i"), i),
-                function()
-                    string.format("")
-                    p.power_sensor_level = i
-                    powerSensorEnabledButtons(p)
-                end,
-                30 + i
-            )
-            p.power_sensor_button[string.format("Engineering %i", i)] =
-                string.format("power_sensor_button_config_eng%i", i)
-        end
-        for i = 1, 3 do
-            p:addCustomButton(
-                "Engineering+",
-                string.format("power_sensor_button_config_plus%i", i),
-                string.format(_("buttonEngineer+", "Sensor Boost %i"), i),
-                function()
-                    string.format("")
-                    p.power_sensor_level = i
-                    powerSensorEnabledButtons(p)
-                end,
-                30 + i
-            )
-            p.power_sensor_button[string.format("Engineering+ %i", i)] =
-                string.format("power_sensor_button_config_plus%i", i)
-        end
-    elseif p.power_sensor_state == "enabled" then
-        p.power_sensor_button = {}
-        p:addCustomButton(
-            "Engineering",
-            "power_sensor_button_enabled_eng",
-            _("buttonEngineer", "Stop Sensor Boost"),
-            function()
-                string.format("")
-                powerSensorStandbyButtons(p)
-            end,
-            30
-        )
-        p.power_sensor_button["Engineering"] = "power_sensor_button_enabled_eng"
-        p:addCustomButton(
-            "Engineering+",
-            "power_sensor_button_enabled_plus",
-            _("buttonEngineer+", "Stop Sensor Boost"),
-            function()
-                string.format("")
-                powerSensorStandbyButtons(p)
-            end,
-            30
-        )
-        p.power_sensor_button["Engineering+"] =
-            "power_sensor_button_enabled_plus"
-    end
 end
 function updatePlayerLongRangeSensors(delta, p)
     local free_sensor_boost = false

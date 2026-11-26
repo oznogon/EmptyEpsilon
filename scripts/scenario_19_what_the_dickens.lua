@@ -12,7 +12,8 @@
 -- Enemies[Hard]: Hard goals and/or enemies. Good for experienced crews looking for a challenge.
 
 require("utils.lua")
--- Initialization functions
+local StationCore = require("comms_station_core.lua")
+local StationMenu = require("comms_station_menu.lua")
 function init()
     scenario_version = "2.0.1"
     ee_version = "2024.12.08"
@@ -684,357 +685,27 @@ function zoneChecks(delta)
     end
 end
 -- Station communications
-function commsStation()
-    if comms_target.comms_data == nil then
-        comms_target.comms_data = {}
-    end
-    mergeTables(comms_target.comms_data, {
-        friendlyness = random(0.0, 100.0),
-        weapons = {
-            Homing = "neutral",
-            HVLI = "neutral",
-            Mine = "neutral",
-            Nuke = "friend",
-            EMP = "friend",
-        },
-        weapon_cost = {
-            Homing = math.random(1, 4),
-            HVLI = math.random(1, 3),
-            Mine = math.random(2, 5),
-            Nuke = math.random(12, 18),
-            EMP = math.random(7, 13),
-        },
-        services = {
-            supplydrop = "friend",
-            reinforcements = "friend",
-        },
-        service_cost = {
-            supplydrop = 100,
-            reinforcements = 150,
-        },
-        reputation_cost_multipliers = {
-            friend = 1.0,
-            neutral = 2.5,
-        },
-        max_weapon_refill_amount = {
-            friend = 1.0,
-            neutral = 0.5,
-        },
-    })
-    comms_data = comms_target.comms_data
-    if player:isEnemy(comms_target) then
-        return false
-    end
-    if comms_target:areEnemiesInRange(5000) then
-        setCommsMessage(
-            _("station-comms", "We are under attack! No time for chatting!")
-        )
-        return true
-    end
-    if not player:isDocked(comms_target) then
-        handleUndockedState()
-    else
-        handleDockedState()
-    end
-    return true
+local station_profile
+
+commsStation = StationMenu.entrypoint(function() return station_profile end)
+
+local function showDockedOrders()
+    local ordMsg = primaryOrders .. "\n" .. secondaryOrders
+    setCommsMessage(ordMsg)
 end
-function handleDockedState()
-    -- Handle communications while docked with this station.
-    if player:isFriendly(comms_target) then
-        setCommsMessage(
-            _(
-                "station-comms",
-                "Good day, officer!\nWhat can we do for you today?"
-            )
-        )
-    else
-        setCommsMessage(_("station-comms", "Welcome to our lovely station."))
-    end
-    if player:getWeaponStorageMax("Homing") > 0 then
-        addCommsReply(
-            string.format(
-                _(
-                    "ammo-comms",
-                    "Do you have spare homing missiles for us? (%d rep each)"
-                ),
-                getWeaponCost("Homing")
-            ),
-            function()
-                handleWeaponRestock("Homing")
-            end
-        )
-    end
-    if player:getWeaponStorageMax("HVLI") > 0 then
-        addCommsReply(
-            string.format(
-                _("ammo-comms", "Can you restock us with HVLI? (%d rep each)"),
-                getWeaponCost("HVLI")
-            ),
-            function()
-                handleWeaponRestock("HVLI")
-            end
-        )
-    end
-    if player:getWeaponStorageMax("Mine") > 0 then
-        addCommsReply(
-            string.format(
-                _("ammo-comms", "Please re-stock our mines. (%d rep each)"),
-                getWeaponCost("Mine")
-            ),
-            function()
-                handleWeaponRestock("Mine")
-            end
-        )
-    end
-    if player:getWeaponStorageMax("Nuke") > 0 then
-        addCommsReply(
-            string.format(
-                _(
-                    "ammo-comms",
-                    "Can you supply us with some nukes? (%d rep each)"
-                ),
-                getWeaponCost("Nuke")
-            ),
-            function()
-                handleWeaponRestock("Nuke")
-            end
-        )
-    end
-    if player:getWeaponStorageMax("EMP") > 0 then
-        addCommsReply(
-            string.format(
-                _(
-                    "ammo-comms",
-                    "Please re-stock our EMP missiles. (%d rep each)"
-                ),
-                getWeaponCost("EMP")
-            ),
-            function()
-                handleWeaponRestock("EMP")
-            end
-        )
-    end
-    if player:isFriendly(comms_target) then
-        addCommsReply(
-            _("orders-comms", "What are my current orders?"),
-            function()
-                ordMsg = primaryOrders .. "\n" .. secondaryOrders
-                setCommsMessage(ordMsg)
-                addCommsReply(_("Back"), commsStation)
-            end
-        )
-        addCommsReply(
-            _("areaDescription-comms", "Interesting points in the area"),
-            function()
-                setCommsMessage(
-                    _(
-                        "areaDescription-comms",
-                        "You may be interested in one or more of these:"
-                    )
-                )
-                addCommsReply(_("areaDescription-comms", "City"), function()
-                    setCommsMessage(
-                        _(
-                            "areaDescription-comms",
-                            "The City station represents one of the most developed stations in the area. Correlating the station to olde Earth, this would be where the walled medieval area of London would have been located"
-                        )
-                    )
-                    addCommsReply(_("Back"), commsStation)
-                end)
-                addCommsReply(_("areaDescription-comms", "Change"), function()
-                    setCommsMessage(
-                        _(
-                            "areaDescription-comms",
-                            "Much of the area's financial business is handled at the station named Change. The station name is an oblique reference to the Royal Exchange of London"
-                        )
-                    )
-                    addCommsReply(_("Back"), commsStation)
-                end)
-                addCommsReply(
-                    _("areaDescription-comms", "Foundling"),
-                    function()
-                        setCommsMessage(
-                            _(
-                                "areaDescription-comms",
-                                "Foundling station specializes in medical research for children. The station name honors Foundling Hospital in London, an orphanage established in 1739 by Captain Thomas Coram, a retired seaman"
-                            )
-                        )
-                        addCommsReply(_("Back"), commsStation)
-                    end
-                )
-                addCommsReply(_("areaDescription-comms", "Thames"), function()
-                    setCommsMessage(
-                        _(
-                            "areaDescription-comms",
-                            "The zone running through this area colored blue is named Thames after the river Thames in London of olde Earth. Ships should avoid entering this zoneexcept by bridges designated due to the adverse effects it has on ship systems. This is why navigation systems automatically show this region for all ships in the area."
-                        )
-                    )
-                    addCommsReply(_("Back"), commsStation)
-                end)
-                addCommsReply(_("areaDescription-comms", "Covent"), function()
-                    setCommsMessage(
-                        _(
-                            "areaDescription-comms",
-                            "Most of the area's food supply comes from station Covent. It specializes in hydroponics. THe station derives its name from Covent Garden from olde Earth London where fruits, vegetables and flowers were bought and sold"
-                        )
-                    )
-                    addCommsReply(_("Back"), commsStation)
-                end)
-                addCommsReply(_("areaDescription-comms", "Cheshire"), function()
-                    setCommsMessage(
-                        _(
-                            "areaDescription-comms",
-                            "You can find fine dining and drinking at Cheshire station. The name alludes to the Ye Olde Cheshire Cheese pub from London on olde earth"
-                        )
-                    )
-                    addCommsReply(_("Back"), commsStation)
-                end)
-                addCommsReply(_("areaDescription-comms", "Tower"), function()
-                    setCommsMessage(
-                        _(
-                            "areaDescription-comms",
-                            "Station Tower serves as a residence for the wealthiest members of the London area community"
-                        )
-                    )
-                    addCommsReply(_("Back"), commsStation)
-                end)
-                addCommsReply(_("Back"), commsStation)
-            end
-        )
-    end
-    if comms_target == stationCamden then
-        addCommsReply(
-            _(
-                "station-comms",
-                "What do you know about unusual readings around here?"
-            ),
-            function()
-                local reference_visual_asteroid =
-                    VisualAsteroid():setPosition(-51273, -88975):setSize(115)
-                setCommsMessage(
-                    string.format(
-                        _(
-                            "station-comms",
-                            "The unusual readings happen in %s. They are sporadic, illogical, and creepy."
-                        ),
-                        reference_visual_asteroid:getSectorName()
-                    )
-                )
-                addCommsReply(_("Back"), commsStation)
-                reference_visual_asteroid:destroy()
-            end
-        )
-    end
+
+local function showUndockedOrders()
+    local ordMsg = primaryOrders
+        .. "\n"
+        .. secondaryOrders
+        .. optionalOrders
+    setCommsMessage(ordMsg)
 end
-function handleWeaponRestock(weapon)
-    if not player:isDocked(comms_target) then
-        setCommsMessage(
-            _("station-comms", "You need to stay docked for that action.")
-        )
-        return
-    end
-    if not isAllowedTo(comms_data.weapons[weapon]) then
-        if weapon == "Nuke" then
-            setCommsMessage(
-                _(
-                    "ammo-comms",
-                    "We do not deal in weapons of mass destruction."
-                )
-            )
-        elseif weapon == "EMP" then
-            setCommsMessage(
-                _("ammo-comms", "We do not deal in weapons of mass disruption.")
-            )
-        else
-            setCommsMessage(_("ammo-comms", "We do not deal in those weapons."))
-        end
-        return
-    end
-    local points_per_item = getWeaponCost(weapon)
-    local item_amount = math.floor(
-        player:getWeaponStorageMax(weapon)
-            * comms_data.max_weapon_refill_amount[getFriendStatus()]
-    ) - player:getWeaponStorage(weapon)
-    if item_amount <= 0 then
-        if weapon == "Nuke" then
-            setCommsMessage(
-                _(
-                    "ammo-comms",
-                    "All nukes are charged and primed for destruction."
-                )
-            )
-        else
-            setCommsMessage(
-                _(
-                    "ammo-comms",
-                    "Sorry, sir, but you are as fully stocked as I can allow."
-                )
-            )
-        end
-        addCommsReply(_("Back"), commsStation)
-    else
-        if not player:takeReputationPoints(points_per_item * item_amount) then
-            setCommsMessage(_("needRep-comms", "Not enough reputation."))
-            return
-        end
-        player:setWeaponStorage(
-            weapon,
-            player:getWeaponStorage(weapon) + item_amount
-        )
-        if
-            player:getWeaponStorage(weapon)
-            == player:getWeaponStorageMax(weapon)
-        then
-            setCommsMessage(
-                _(
-                    "ammo-comms",
-                    "You are fully loaded and ready to explode things."
-                )
-            )
-        else
-            setCommsMessage(
-                _(
-                    "ammo-comms",
-                    "We generously resupplied you with some weapon charges.\nPut them to good use."
-                )
-            )
-        end
-        addCommsReply(_("Back"), commsStation)
-    end
-end
-function handleUndockedState()
-    --Handle communications when we are not docked with the station.
-    if player:isFriendly(comms_target) then
-        setCommsMessage(
-            _(
-                "station-comms",
-                "Good day, officer.\nIf you need supplies, please dock with us first."
-            )
-        )
-    else
-        setCommsMessage(
-            _(
-                "station-comms",
-                "Greetings.\nIf you want to do business, please dock with us first."
-            )
-        )
-    end
-    if player:isFriendly(comms_target) then
-        addCommsReply(
-            _("orders-comms", "What are my current orders?"),
-            function()
-                ordMsg = primaryOrders
-                    .. "\n"
-                    .. secondaryOrders
-                    .. optionalOrders
-                setCommsMessage(ordMsg)
-                addCommsReply(_("Back"), commsStation)
-            end
-        )
-    end
+
+local function addDiagnosticData()
     if diagnostic then
         addCommsReply("Diagnostic data", function()
-            oMsg = string.format("Difficulty: %.1f", difficulty)
+            local oMsg = string.format("Difficulty: %.1f", difficulty)
             if plot1name == nil or plot1 == nil then
                 oMsg = oMsg .. ""
             else
@@ -1060,152 +731,90 @@ function handleUndockedState()
             addCommsReply(_("Back"), commsStation)
         end)
     end
-    if isAllowedTo(comms_target.comms_data.services.supplydrop) then
-        addCommsReply(
-            string.format(
-                _("stationAssist-comms", "Can you send a supply drop? (%d rep)"),
-                getServiceCost("supplydrop")
-            ),
-            function()
-                if player:getWaypointCount() < 1 then
-                    setCommsMessage(
-                        _(
-                            "stationAssist-comms",
-                            "You need to set a waypoint before you can request backup."
-                        )
+end
+
+local function addInterestingPoints()
+    addCommsReply(
+        _("areaDescription-comms", "Interesting points in the area"),
+        function()
+            setCommsMessage(
+                _(
+                    "areaDescription-comms",
+                    "You may be interested in one or more of these:"
+                )
+            )
+            addCommsReply(_("areaDescription-comms", "City"), function()
+                setCommsMessage(
+                    _(
+                        "areaDescription-comms",
+                        "The City station represents one of the most developed stations in the area. Correlating the station to olde Earth, this would be where the walled medieval area of London would have been located"
                     )
-                else
-                    setCommsMessage(
-                        _(
-                            "stationAssist-comms",
-                            "To which waypoint should we deliver your supplies?"
-                        )
-                    )
-                    for n = 1, player:getWaypointCount() do
-                        addCommsReply(
-                            string.format(
-                                _("stationAssist-comms", "WP %d"),
-                                comms_source:getWaypointID(n)
-                            ),
-                            function()
-                                if
-                                    player:takeReputationPoints(
-                                        getServiceCost("supplydrop")
-                                    )
-                                then
-                                    local position_x, position_y =
-                                        comms_target:getPosition()
-                                    local target_x, target_y =
-                                        player:getWaypoint(n)
-                                    local script = Script()
-                                    script
-                                        :setVariable("position_x", position_x)
-                                        :setVariable("position_y", position_y)
-                                    script
-                                        :setVariable("target_x", target_x)
-                                        :setVariable("target_y", target_y)
-                                    script
-                                        :setVariable(
-                                            "faction_id",
-                                            comms_target:getFactionId()
-                                        )
-                                        :run("supply_drop.lua")
-                                    setCommsMessage(
-                                        string.format(
-                                            _(
-                                                "stationAssist-comms",
-                                                "We have dispatched a supply ship toward WP %d"
-                                            ),
-                                            comms_source:getWaypointID(n)
-                                        )
-                                    )
-                                else
-                                    setCommsMessage(
-                                        _(
-                                            "needRep-comms",
-                                            "Not enough reputation!"
-                                        )
-                                    )
-                                end
-                                addCommsReply(_("Back"), commsStation)
-                            end
-                        )
-                    end
-                end
+                )
                 addCommsReply(_("Back"), commsStation)
-            end
-        )
-    end
-    if isAllowedTo(comms_target.comms_data.services.reinforcements) then
-        addCommsReply(
-            string.format(
-                _("stationAssist-comms", "Please send reinforcements! (%d rep)"),
-                getServiceCost("reinforcements")
-            ),
-            function()
-                if player:getWaypointCount() < 1 then
-                    setCommsMessage(
-                        _(
-                            "stationAssist-comms",
-                            "You need to set a waypoint before you can request reinforcements."
-                        )
+            end)
+            addCommsReply(_("areaDescription-comms", "Change"), function()
+                setCommsMessage(
+                    _(
+                        "areaDescription-comms",
+                        "Much of the area's financial business is handled at the station named Change. The station name is an oblique reference to the Royal Exchange of London"
                     )
-                else
-                    setCommsMessage(
-                        _(
-                            "stationAssist-comms",
-                            "To which waypoint should we dispatch the reinforcements?"
-                        )
-                    )
-                    for n = 1, player:getWaypointCount() do
-                        addCommsReply(
-                            string.format(
-                                _("stationAssist-comms", "WP %d"),
-                                comms_source:getWaypointID(n)
-                            ),
-                            function()
-                                if
-                                    player:takeReputationPoints(
-                                        getServiceCost("reinforcements")
-                                    )
-                                then
-                                    ship = CpuShip()
-                                        :setFactionId(
-                                            comms_target:getFactionId()
-                                        )
-                                        :setPosition(comms_target:getPosition())
-                                        :setTemplate(ST.ADDER_MK5)
-                                        :setScanned(true)
-                                        :orderDefendLocation(
-                                            player:getWaypoint(n)
-                                        )
-                                    setCommsMessage(
-                                        string.format(
-                                            _(
-                                                "stationAssist-comms",
-                                                "We have dispatched %s to assist at WP %d "
-                                            ),
-                                            ship:getCallSign(),
-                                            comms_source:getWaypointID(n)
-                                        )
-                                    )
-                                else
-                                    setCommsMessage(
-                                        _(
-                                            "needRep-comms",
-                                            "Not enough reputation!"
-                                        )
-                                    )
-                                end
-                                addCommsReply(_("Back"), commsStation)
-                            end
-                        )
-                    end
-                end
+                )
                 addCommsReply(_("Back"), commsStation)
-            end
-        )
-    end
+            end)
+            addCommsReply(
+                _("areaDescription-comms", "Foundling"),
+                function()
+                    setCommsMessage(
+                        _(
+                            "areaDescription-comms",
+                            "Foundling station specializes in medical research for children. The station name honors Foundling Hospital in London, an orphanage established in 1739 by Captain Thomas Coram, a retired seaman"
+                        )
+                    )
+                    addCommsReply(_("Back"), commsStation)
+                end
+            )
+            addCommsReply(_("areaDescription-comms", "Thames"), function()
+                setCommsMessage(
+                    _(
+                        "areaDescription-comms",
+                        "The zone running through this area colored blue is named Thames after the river Thames in London of olde Earth. Ships should avoid entering this zoneexcept by bridges designated due to the adverse effects it has on ship systems. This is why navigation systems automatically show this region for all ships in the area."
+                    )
+                )
+                addCommsReply(_("Back"), commsStation)
+            end)
+            addCommsReply(_("areaDescription-comms", "Covent"), function()
+                setCommsMessage(
+                    _(
+                        "areaDescription-comms",
+                        "Most of the area's food supply comes from station Covent. It specializes in hydroponics. THe station derives its name from Covent Garden from olde Earth London where fruits, vegetables and flowers were bought and sold"
+                    )
+                )
+                addCommsReply(_("Back"), commsStation)
+            end)
+            addCommsReply(_("areaDescription-comms", "Cheshire"), function()
+                setCommsMessage(
+                    _(
+                        "areaDescription-comms",
+                        "You can find fine dining and drinking at Cheshire station. The name alludes to the Ye Olde Cheshire Cheese pub from London of olde earth"
+                    )
+                )
+                addCommsReply(_("Back"), commsStation)
+            end)
+            addCommsReply(_("areaDescription-comms", "Tower"), function()
+                setCommsMessage(
+                    _(
+                        "areaDescription-comms",
+                        "Station Tower serves as a residence for the wealthiest members of the London area community"
+                    )
+                )
+                addCommsReply(_("Back"), commsStation)
+            end)
+            addCommsReply(_("Back"), commsStation)
+        end
+    )
+end
+
+local function addCamdenReadings()
     if comms_target == stationCamden then
         addCommsReply(
             _(
@@ -1230,31 +839,93 @@ function handleUndockedState()
         )
     end
 end
-function isAllowedTo(state)
-    if state == "friend" and player:isFriendly(comms_target) then
-        return true
-    end
-    if state == "neutral" and not player:isEnemy(comms_target) then
-        return true
-    end
-    return false
-end
-function getWeaponCost(weapon)
-    return math.ceil(
-        comms_data.weapon_cost[weapon]
-            * comms_data.reputation_cost_multipliers[getFriendStatus()]
-    )
-end
-function getServiceCost(service)
-    return math.ceil(comms_data.service_cost[service])
-end
-function getFriendStatus()
-    if player:isFriendly(comms_target) then
-        return "friend"
-    else
-        return "neutral"
-    end
-end
+
+station_profile = {
+    main_menu = commsStation,
+    source = function()
+        return player
+    end,
+    data = {
+        weapon_available = {
+            Homing = true,
+            HVLI = true,
+            Mine = true,
+            Nuke = true,
+            EMP = true,
+        },
+        service_cost = {
+            supplydrop = 100,
+            reinforcements = 150,
+        },
+        reputation_cost_multipliers = { neutral = 2.5 },
+    },
+    require_docked = true,
+    resources = {
+        prompt = false,
+        recruitment = false,
+        coolant = false,
+        goods = false,
+    },
+    docked = {
+        greeting = "fixed",
+        show_reputation = false,
+        group_services = false,
+        service_prompt = false,
+        service_sections = { "ordnance" },
+        restock = "simple",
+        ordnance = {
+            group = false,
+            show_reputation = false,
+            order = { "Homing", "HVLI", "Mine", "Nuke", "EMP" },
+            prompts = {
+                Homing = {
+                    _("ammo-comms", "Do you have spare homing missiles for us? ("),
+                },
+                HVLI = {
+                    _("ammo-comms", "Can you restock us with HVLI? ("),
+                },
+                Mine = {
+                    _("ammo-comms", "Please re-stock our mines. ("),
+                },
+                Nuke = {
+                    _("ammo-comms", "Can you supply us with some nukes? ("),
+                },
+                EMP = {
+                    _("ammo-comms", "Please re-stock our EMP missiles. ("),
+                },
+            },
+        },
+        after_services = function()
+            if player:isFriendly(comms_target) then
+                StationMenu.currentOrders(station_profile, showDockedOrders)
+                addInterestingPoints()
+            end
+            addCamdenReadings()
+        end,
+        group_resources = false,
+    },
+    undocked = {
+        before_assistance = function()
+            if player:isFriendly(comms_target) then
+                StationMenu.currentOrders(station_profile, showUndockedOrders)
+            end
+            addDiagnosticData()
+        end,
+        reinforcements = {
+            {
+                success_message = _(
+                    "stationAssist-comms",
+                    "We have dispatched %s to assist at WP %d "
+                ),
+                call_sign = false,
+                destruction = false,
+                comms = false,
+            },
+        },
+        assistance = true,
+        after_assistance = addCamdenReadings,
+    },
+}
 -- plot1 functions
 function missionMessage(delta)
     if getScenarioTime() > plot1_time then

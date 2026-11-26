@@ -1,0 +1,42 @@
+#: scripts/player_state_scenario_utility.lua:140
+msgctxt "buttonRelay"
+msgid "Command Log"
+msgstr ""
+
+#: scripts/player_state_scenario_utility.lua:151
+msgctxt "buttonOperations"
+msgid "Command Log"
+msgstr ""
+
+#: scripts/player_state_scenario_utility.lua:163
+#, lua-format
+msgctxt "-tabWeapons&Tactical"
+msgid "%s tubes: %s"
+msgstr ""
+
+#: scripts/player_state_scenario_utility.lua:169
+#, lua-format
+msgctxt "-tabWeapons&Tactical"
+msgid "%s tube: %s"
+msgstr ""
+
+#: scripts/player_state_scenario_utility.lua:183
+#, lua-format
+msgctxt "tabHelms-id"
+msgid "%s %s in %s"
+msgstr ""
+
+#: scripts/player_state_scenario_utility.lua:394
+msgctxt "tubeSize-tabWeapons"
+msgid "S"
+msgstr ""
+
+#: scripts/player_state_scenario_utility.lua:395
+msgctxt "tubeSize-tabWeapons"
+msgid "M"
+msgstr ""
+
+#: scripts/player_state_scenario_utility.lua:396
+msgctxt "tubeSize-tabWeapons"
+msgid "L"
+msgstr ""

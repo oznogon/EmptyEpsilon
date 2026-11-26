@@ -102,6 +102,33 @@ function fillPrefixPool()
         table.insert(call_sign_prefix_pool, string.char(i + 64))
     end
 end
+
+-- Optional per-scenario pool patches. Keys are the global pool names used below.
+-- Example: call_sign_name_overrides = { human_names = { add = {"Heracles"} } }
+function applyCallSignNameOverrides(pool_name, names)
+    local overrides = call_sign_name_overrides
+        and call_sign_name_overrides[pool_name]
+    if overrides == nil then
+        return
+    end
+    if overrides.remove ~= nil then
+        local excluded = {}
+        for _, name in ipairs(overrides.remove) do
+            excluded[name] = true
+        end
+        for index = #names, 1, -1 do
+            if excluded[names[index]] then
+                table.remove(names, index)
+            end
+        end
+    end
+    if overrides.add ~= nil then
+        for _, name in ipairs(overrides.add) do
+            table.insert(names, name)
+        end
+    end
+end
+
 function getFactionPrefix(faction)
     local faction_prefix = nil
     if faction == "Kraylor" then
@@ -336,8 +363,9 @@ function setGhostsNames()
         "Version",
         "View",
         "WYSIWYG",
-        "XOR"
+        "XOR",
     }
+    applyCallSignNameOverrides("ghosts_names", ghosts_names)
 end
 function setExuariNames()
     exuari_names = {
@@ -441,8 +469,9 @@ function setExuariNames()
         "Yakildivix",
         "Yegomparik",
         "Zapondehex",
-        "Zikandelat"
+        "Zikandelat",
     }
+    applyCallSignNameOverrides("exuari_names", exuari_names)
 end
 function setKraylorNames()
     kraylor_names = {
@@ -547,8 +576,9 @@ function setKraylorNames()
         "Wickurt",
         "Xokbrek",
         "Yeskret",
-        "Zacktrope"
+        "Zacktrope",
     }
+    applyCallSignNameOverrides("kraylor_names", kraylor_names)
 end
 function setIndependentNames()
     independent_names = {
@@ -632,8 +662,9 @@ function setIndependentNames()
         "Kitpak", --faux Ktlitans
         "Kitplak", --faux Ktlitans
         "Pipklat", --faux Ktlitans
-        "Piptik" --faux Ktlitans
+        "Piptik", --faux Ktlitans
     }
+    applyCallSignNameOverrides("independent_names", independent_names)
 end
 function setCufNames()
     cuf_names = {
@@ -663,8 +694,9 @@ function setCufNames()
         "Slick",
         "Thumper",
         "Torpid",
-        "Triple Take"
+        "Triple Take",
     }
+    applyCallSignNameOverrides("cuf_names", cuf_names)
 end
 function setUsnNames()
     usn_names = {
@@ -698,8 +730,9 @@ function setUsnNames()
         "Sun's Grief",
         "Tortuga Shadows",
         "Trinity",
-        "Wayfaring Wind"
+        "Wayfaring Wind",
     }
+    applyCallSignNameOverrides("usn_names", usn_names)
 end
 function setTsnNames()
     tsn_names = {
@@ -734,6 +767,7 @@ function setTsnNames()
         "Valkyrie",
         "Viper",
     }
+    applyCallSignNameOverrides("tsn_names", tsn_names)
 end
 function setHumanNames()
     human_names = {
@@ -836,8 +870,9 @@ function setHumanNames()
         "Urgent",
         "Victoria",
         "Wee Bit",
-        "Wet Willie"
+        "Wet Willie",
     }
+    applyCallSignNameOverrides("human_names", human_names)
 end
 function setKtlitanNames()
     ktlitan_names = {
@@ -918,8 +953,9 @@ function setKtlitanNames()
         "Tochpit",
         "Tochkit",
         "Totlop",
-        "Totlot"
+        "Totlot",
     }
+    applyCallSignNameOverrides("ktlitan_names", ktlitan_names)
 end
 function setArlenianNames()
     arlenian_names = {
@@ -1001,6 +1037,7 @@ function setArlenianNames()
         "Wilena",
         "Wodarla",
         "Yamelda",
-        "Yelanda"
+        "Yelanda",
     }
+    applyCallSignNameOverrides("arlenian_names", arlenian_names)
 end

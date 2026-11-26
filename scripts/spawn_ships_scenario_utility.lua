@@ -20,6 +20,7 @@
 --
 -- Version 1.2
 require("utils.lua")
+local Heading = require("heading_scenario_utility.lua")
 require("cpu_ship_diversification_scenario_utility.lua")
 require("generate_call_sign_scenario_utility.lua")
 function spawnGMShips()
@@ -1327,7 +1328,7 @@ function setSpawnShipGlobals()
                 dist = 200,
                 create = phobosR2,
             },
-            ["Missile Cruiser"] = {
+            [ST.POLARIS] = {
                 strength = 14,
                 adder = false,
                 missiler = true,
@@ -1565,7 +1566,7 @@ function setSpawnShipGlobals()
                 dist = 200,
                 create = phobosT4,
             },
-            ["Cruiser"] = {
+            [ST.KARNACK_MK2] = {
                 strength = 18,
                 adder = true,
                 missiler = false,
@@ -4830,11 +4831,7 @@ function angleFromVectorNorth(p1x, p1y, p2x, p2y)
     end
     return (360 - (RAD2DEG * theta)) % 360
 end
-function vectorFromAngleNorth(angle, distance)
-    angle = (angle + 270) % 360
-    local x, y = vectorFromAngle(angle, distance)
-    return x, y
-end
+vectorFromAngleNorth = Heading.north(vectorFromAngle)
 -- Spawn fleet functions
 function spawnGMFleet()
     clearGMFunctions()
@@ -6741,3 +6738,242 @@ function setFighterWing()
         )
     end
 end
+
+local Fleet = {}
+
+function Fleet.noopDestroyed()
+    string.format("")
+end
+
+function Fleet.templatePool(catalog, max_strength, options)
+    options = options or {}
+    local names = {}
+    for name in pairs(catalog) do
+        table.insert(names, name)
+    end
+    if options.selectivity ~= "full" then
+        table.sort(names, function(a, b)
+            return catalog[a].strength > catalog[b].strength
+        end)
+        if options.selectivity == "more/light" then
+            local reversed = {}
+            for index = #names, 1, -1 do
+                table.insert(reversed, names[index])
+            end
+            names = reversed
+        end
+    end
+
+    local pool = {}
+    local limit = options.limit or math.huge
+    if options.selectivity == "full" then
+        limit = math.huge
+    end
+    local composition = options.composition or "Random"
+    for _, name in ipairs(names) do
+        local entry = catalog[name]
+        if entry and entry.strength <= max_strength then
+            local include = composition == "Random"
+            if composition == "Non-DB" then
+                include = entry.create ~= options.stock_template
+            elseif composition ~= "Random" and options.role then
+                include = options.role(name, entry, composition)
+            end
+            if include and not (options.exclude and options.exclude(name)) then
+                table.insert(pool, name)
+                if #pool >= limit then
+                    break
+                end
+            end
+        end
+    end
+    return pool
+end
+
+function Fleet.templatePoolGetter(options)
+    local function resolve(value)
+        if type(value) == "function" then
+            return value()
+        end
+        return value
+    end
+
+    return function(max_strength)
+        local role = resolve(options.role)
+        if role == nil then
+            role = function(name, entry, composition)
+                if entry.fleet_group ~= nil then
+                    return entry.fleet_group[composition]
+                end
+                local groups = resolve(options.fleet_group)
+                local group_role = groups and groups[composition]
+                return group_role ~= nil and entry[group_role]
+            end
+        end
+        return Fleet.templatePool(resolve(options.catalog), max_strength, {
+            selectivity = resolve(options.selectivity),
+            composition = resolve(options.composition),
+            limit = resolve(options.limit),
+            stock_template = resolve(options.stock_template),
+            exclude = resolve(options.exclude),
+            role = role,
+        })
+    end
+end
+
+function Fleet.playerPowerGetter(options)
+    return function()
+        return Fleet.playerPower(options)
+    end
+end
+
+function Fleet.playerPower(options)
+    options = options or {}
+    local score = 0
+    local players = options.players
+    if players == nil then
+        if options.player then
+            players = {}
+        else
+            players = getActivePlayerShips()
+        end
+    end
+    local score_field = options.score_field or "shipScore"
+    local default_score = options.default_score or 24
+    for index = 1, options.limit or #players do
+        local ship = options.player and options.player(index) or players[index]
+        if ship ~= nil and ship:isValid() then
+            if ship[score_field] ~= nil then
+                score = score + ship[score_field]
+            elseif options.fallback and options.fallback(ship) ~= nil then
+                score = score + options.fallback(ship)
+            else
+                if options.set_default_score then
+                    ship[score_field] = default_score
+                end
+                score = score + default_score
+            end
+        end
+    end
+    if options.minimum and score < options.minimum then
+        return options.minimum
+    end
+    return score
+end
+
+function Fleet.singleEnemySpawner(options)
+    return function(x, y, danger, enemy_faction, enemy_strength, template_pool)
+        enemy_faction = enemy_faction or "Kraylor"
+        danger = danger or 1
+        if enemy_strength == nil then
+            enemy_strength = math.max(
+                danger * options.enemy_power() * options.player_power(),
+                5
+            )
+        end
+        if template_pool == nil then
+            options.configure_pool()
+            template_pool = options.pool(enemy_strength)
+            options.restore_pool()
+        end
+        if #template_pool < 1 then
+            print("Empty Template pool: fix excludes or other criteria")
+            return nil
+        end
+        local selected_template = template_pool[math.random(1, #template_pool)]
+        local ship = options
+            .catalog()[selected_template]
+            .create(enemy_faction, selected_template)
+        ship:setCallSign(options.callsign(nil, enemy_faction)):orderRoaming()
+        ship:setPosition(x, y)
+        ship:setCommsScript(""):setCommsFunction(options.comms())
+        return ship
+    end
+end
+
+function Fleet.relativeSpawner(options)
+    return function(x, y, enemy_strength, template_pool)
+        return Fleet.spawnRandomArmed({
+            x = x,
+            y = y,
+            enemy_strength = enemy_strength,
+            catalog = options.catalog(),
+            template_pool = template_pool,
+            strength = function()
+                return options.relative_strength()
+                    * options.player_power()
+                    * options.enemy_power()
+            end,
+            pool = options.pool,
+            spacing_min = options.spacing_min or 500,
+            spacing_max = options.spacing_max or 1000,
+            random_shape = options.random_shape ~= false,
+            alternate_shape = options.alternate_shape or "hexagonal",
+            formation = options.formation(),
+            prefix = options.prefix,
+            faction = options.faction,
+            set_faction = options.set_faction,
+            callsign = options.callsign,
+            empty_message = "Empty Template pool: fix excludes or other criteria",
+            on_spawn = options.on_spawn,
+        })
+    end
+end
+
+function Fleet.spawnRandomArmed(options)
+    local random = options.random or _G.random or math.random
+    local catalog = options.catalog
+    local strength = options.enemy_strength
+    if strength == nil then
+        strength = math.max(options.strength(), 5)
+    end
+    local spacing =
+        random(options.spacing_min or 500, options.spacing_max or 1000)
+    local shape = options.shape or "square"
+    if options.random_shape and random(1, 100) < 50 then
+        shape = options.alternate_shape or "hexagonal"
+    end
+    local pool = options.template_pool
+    if pool == nil then
+        pool = options.pool(strength)
+    end
+    local ships = {}
+    if #pool < 1 then
+        if options.empty_message then
+            addGMMessage(options.empty_message)
+        end
+        return ships
+    end
+
+    local prefix = options.prefix()
+    local faction = options.faction()
+    if faction == nil then
+        faction = "Kraylor"
+        options.set_faction(faction)
+    end
+    local position = 0
+    while strength > 0 do
+        local name = pool[math.random(1, #pool)]
+        local entry = catalog[name]
+        if entry == nil or entry.create == nil then
+            print("Template", name, "does not have a create routine")
+        else
+            local ship = entry.create(faction, name)
+            ship:setCallSign(options.callsign(nil, faction))
+            ship:orderRoaming()
+            position = position + 1
+            ship:setPosition(
+                options.x + options.formation[shape].x[position] * spacing,
+                options.y + options.formation[shape].y[position] * spacing
+            )
+            if options.on_spawn then
+                options.on_spawn(ship, name)
+            end
+            table.insert(ships, ship)
+            strength = strength - entry.strength
+        end
+    end
+    return ships
+end
+
+return Fleet

@@ -411,6 +411,44 @@ function _fourArgumentsIntoCoordinates(a, b, c, d)
     return x1, y1, x2, y2
 end
 
+-- Convert a vector to a north-based heading.
+function angleFromVectorNorth(p1x, p1y, p2x, p2y)
+    local two_pi = 6.2831853071795865
+    local rad_to_deg = 57.2957795130823209
+    local theta = math.atan2(p2x - p1x, p2y - p1y)
+    if theta < 0 then
+        theta = theta + two_pi
+    end
+    return (360 - rad_to_deg * theta) % 360
+end
+
+-- Remove and return a random array element. Returns nil for an empty array.
+function tableRemoveRandom(array)
+    local count = #array
+    if count == 0 then
+        return nil
+    end
+    local index = math.random(count)
+    local value = array[index]
+    array[index] = array[count]
+    array[count] = value
+    return table.remove(array)
+end
+
+-- Return a random array element, or nil for an empty array.
+function tableSelectRandom(array)
+    if #array == 0 then
+        return nil
+    end
+    return array[math.random(1, #array)]
+end
+
+-- Convert a north-based heading to the rotation convention used by vectorFromAngle.
+function vectorFromAngleNorth(angle, distance)
+    angle = (angle + 270) % 360
+    return vectorFromAngle(angle, distance)
+end
+
 -- Converts a number of seconds to a string in hh:mm:ss format.
 function formatTime(seconds)
     local str = ""

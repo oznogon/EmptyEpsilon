@@ -1,0 +1,5 @@
+#: scripts/continuum_scenario_utility.lua:84
+#, lua-format
+msgctxt "-tabRelay&Operations"
+msgid "Disruption %i"
+msgstr ""

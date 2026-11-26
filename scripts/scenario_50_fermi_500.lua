@@ -25,10 +25,41 @@
 
 require("utils.lua")
 require("place_station_scenario_utility.lua")
+require("control_code_scenario_utility.lua")
+local Environment = require("environment_scenario_utility.lua")
+local createRandomAlongArc = Environment.createRandomAlongArc
+local defaults = require("defaults_scenario_utility.lua")
+local ShipNames = require("player_ship_names_scenario_utility.lua")
+local StationCore = require("comms_station_core.lua")
+local StationMenu = require("comms_station_menu.lua")
+local StationGoods = require("comms_station_goods.lua")
+local ShipComms = require("comms_ship_support.lua")
+local ship_profile
 
 ----------------------
 --  Initialization  --
 ----------------------
+local Relation = require("comms_relation_scenario_utility.lua")
+local relation = Relation.new({})
+isAllowedTo = relation.isAllowedTo
+getFriendStatus = relation.friendStatus
+
+local Inventory = require("inventory_scenario_utility.lua")
+local player_goods = Inventory.indexedGoods({
+    registry = function() return goods end,
+    owner = function() return comms_source end,
+})
+local target_goods = Inventory.indexedGoods({
+    registry = function() return goods end,
+    owner = function() return comms_target end,
+})
+incrementPlayerGoods = player_goods.increment
+decrementPlayerGoods = player_goods.decrement
+decrementStationGoods = target_goods.decrement
+decrementShipGoods = target_goods.decrement
+
+local Runtime = require("runtime_scenario_utility.lua")
+
 function init()
     scenario_version = "2.2.3"
     ee_version = "2024.12.08"
@@ -95,36 +126,7 @@ function init()
     }
     mineral_goods =
         { "nickel", "platinum", "gold", "dilithium", "tritanium", "cobalt" }
-    good_desc = {
-        ["food"] = _("trade-comms", "food"),
-        ["medicine"] = _("trade-comms", "medicine"),
-        ["luxury"] = _("trade-comms", "luxury"),
-        ["cobalt"] = _("trade-comms", "cobalt"),
-        ["dilithium"] = _("trade-comms", "dilithium"),
-        ["gold"] = _("trade-comms", "gold"),
-        ["nickel"] = _("trade-comms", "nickel"),
-        ["platinum"] = _("trade-comms", "platinum"),
-        ["tritanium"] = _("trade-comms", "tritanium"),
-        ["autodoc"] = _("trade-comms", "autodoc"),
-        ["android"] = _("trade-comms", "android"),
-        ["battery"] = _("trade-comms", "battery"),
-        ["beam"] = _("trade-comms", "beam"),
-        ["circuit"] = _("trade-comms", "circuit"),
-        ["communication"] = _("trade-comms", "communication"),
-        ["filament"] = _("trade-comms", "filament"),
-        ["impulse"] = _("trade-comms", "impulse"),
-        ["lifter"] = _("trade-comms", "lifter"),
-        ["nanites"] = _("trade-comms", "nanites"),
-        ["optic"] = _("trade-comms", "optic"),
-        ["repulsor"] = _("trade-comms", "repulsor"),
-        ["robotic"] = _("trade-comms", "robotic"),
-        ["sensor"] = _("trade-comms", "sensor"),
-        ["shield"] = _("trade-comms", "shield"),
-        ["software"] = _("trade-comms", "software"),
-        ["tractor"] = _("trade-comms", "tractor"),
-        ["transporter"] = _("trade-comms", "transporter"),
-        ["warp"] = _("trade-comms", "warp"),
-    }
+    good_desc = defaults.goods().good_desc
 
     diagnostic = false
     player_count = 0
@@ -277,46 +279,10 @@ function init()
     }
     --Player ship name lists to supplant standard randomized call sign generation
     playerShipNamesFor = {}
-    playerShipNamesFor[ST.MP52_HORNET] = {
-        "Dragonfly",
-        "Scarab",
-        "Mantis",
-        "Yellow Jacket",
-        "Jimminy",
-        "Flik",
-        "Thorny",
-        "Buzz",
-    }
-    playerShipNamesFor[ST.PIRANHA] = {
-        "Razor",
-        "Biter",
-        "Ripper",
-        "Voracious",
-        "Carnivorous",
-        "Characid",
-        "Vulture",
-        "Predator",
-    }
-    playerShipNamesFor[ST.FLAVIA_PFALCON] = {
-        "Ladyhawke",
-        "Hunter",
-        "Seeker",
-        "Gyrefalcon",
-        "Kestrel",
-        "Magpie",
-        "Bandit",
-        "Buccaneer",
-    }
-    playerShipNamesFor[ST.PHOBOS_M3P] = {
-        "Blinder",
-        "Shadow",
-        "Distortion",
-        "Diemos",
-        "Ganymede",
-        "Castillo",
-        "Thebe",
-        "Retrograde",
-    }
+    playerShipNamesFor[ST.MP52_HORNET] = ShipNames.pool("MP52 Hornet")
+    playerShipNamesFor[ST.PIRANHA] = ShipNames.pool("Piranha")
+    playerShipNamesFor[ST.FLAVIA_PFALCON] = ShipNames.pool("Flavia P.Falcon")
+    playerShipNamesFor[ST.PHOBOS_M3P] = ShipNames.pool("Phobos M3P")
     playerShipNamesFor[ST.ATLANTIS] = {
         "Excalibur",
         "Thrasher",
@@ -327,94 +293,17 @@ function init()
         "Parchim",
         "Coronado",
     }
-    playerShipNamesFor[ST.VINDICATOR] = {
-        "Excelsior",
-        "Velociraptor",
-        "Thunder",
-        "Kona",
-        "Encounter",
-        "Perth",
-        "Aspern",
-        "Panther",
-    }
-    playerShipNamesFor[ST.AVALANCHE] = {
-        "Projectus",
-        "Hurlmeister",
-        "Flinger",
-        "Ovod",
-        "Amatola",
-        "Nakhimov",
-        "Antigone",
-    }
-    playerShipNamesFor[ST.STINGRAY] = {
-        "Buzzer",
-        "Flitter",
-        "Zippiticus",
-        "Hopper",
-        "Molt",
-        "Stinger",
-        "Stripe",
-    }
-    playerShipNamesFor[ST.BENEDICT] = {
-        "Elizabeth",
-        "Ford",
-        "Vikramaditya",
-        "Liaoning",
-        "Avenger",
-        "Naruebet",
-        "Washington",
-        "Lincoln",
-        "Garibaldi",
-        "Eisenhower",
-    }
-    playerShipNamesFor[ST.KIRIYA] = {
-        "Cavour",
-        "Reagan",
-        "Gaulle",
-        "Paulo",
-        "Truman",
-        "Stennis",
-        "Kuznetsov",
-        "Roosevelt",
-        "Vinson",
-        "Old Salt",
-    }
+    playerShipNamesFor[ST.VINDICATOR] = ShipNames.pool("Vindicator")
+    playerShipNamesFor[ST.AVALANCHE] = ShipNames.pool("Avalanche")
+    playerShipNamesFor[ST.STINGRAY] = ShipNames.pool("Stingray")
+    playerShipNamesFor[ST.BENEDICT] = ShipNames.pool("Benedict")
+    playerShipNamesFor[ST.KIRIYA] = ShipNames.pool("Kiriya")
     playerShipNamesFor[ST.CROW] =
         { "Sparrow", "Sizzle", "Squawk", "Crow", "Snowbird", "Hawk" }
-    playerShipNamesFor["ZX-Lindworm"] = {
-        "Seagull",
-        "Catapult",
-        "Blowhard",
-        "Flapper",
-        "Nixie",
-        "Pixie",
-        "Tinkerbell",
-    }
-    playerShipNamesFor[ST.REPULSE] = {
-        "Fiddler",
-        "Brinks",
-        "Loomis",
-        "Mowag",
-        "Patria",
-        "Pandur",
-        "Terrex",
-        "Komatsu",
-        "Eitan",
-    }
-    playerShipNamesFor[ST.ENDER] =
-        { "Mongo", "Godzilla", "Leviathan", "Kraken", "Jupiter", "Saturn" }
-    playerShipNamesFor[ST.NAUTILUS] = {
-        "October",
-        "Abdiel",
-        "Manxman",
-        "Newcon",
-        "Nusret",
-        "Pluton",
-        "Amiral",
-        "Amur",
-        "Heinkel",
-        "Dornier",
-    }
+    playerShipNamesFor["ZX-Lindworm"] = ShipNames.pool("ZX-Lindworm")
+    playerShipNamesFor[ST.REPULSE] = ShipNames.pool("Repulse")
+    playerShipNamesFor[ST.ENDER] = ShipNames.pool("Ender")
+    playerShipNamesFor[ST.NAUTILUS] = ShipNames.pool("Nautilus")
     playerShipNamesFor[ST.HATHCOCK] = {
         "Hayha",
         "Waldron",
@@ -427,10 +316,8 @@ function init()
         "Hawkeye",
         "Hanzo",
     }
-    playerShipNamesFor[ST.MAVERICK] =
-        { "Angel", "Thunderbird", "Roaster", "Magnifier", "Hedge" }
-    playerShipNamesFor[ST.CRUCIBLE] =
-        { "Sling", "Stark", "Torrid", "Kicker", "Flummox" }
+    playerShipNamesFor[ST.MAVERICK] = ShipNames.pool("Maverick")
+    playerShipNamesFor[ST.CRUCIBLE] = ShipNames.pool("Crucible")
     playerShipNamesFor["Leftovers"] = {
         "Adelphi",
         "Ahwahnee",
@@ -618,64 +505,7 @@ function init()
         "Zhukov",
         "Zodiac",
     }
-    control_code_stem =
-        { --All control codes must use capital letters or they will not work.
-            "ALWAYS",
-            "ASTRO",
-            "BLACK",
-            "BLANK",
-            "BLUE",
-            "BRIGHT",
-            "BROWN",
-            "CHAIN",
-            "CHURCH",
-            "CORNER",
-            "DARK",
-            "DOORWAY",
-            "DOUBLE",
-            "DULL",
-            "ELBOW",
-            "EMPTY",
-            "EPSILON",
-            "FAST",
-            "FLOWER",
-            "FLY",
-            "FROZEN",
-            "GIG",
-            "GREEN",
-            "GLOW",
-            "HAND",
-            "HAMMER",
-            "INK",
-            "INTEL",
-            "JOUST",
-            "JUMP",
-            "KEY",
-            "KINDLE",
-            "LAP",
-            "LETTER",
-            "LIST",
-            "MORNING",
-            "NEXT",
-            "OPEN",
-            "ORANGE",
-            "OUTSIDE",
-            "PURPLE",
-            "QUARTER",
-            "QUIET",
-            "RED",
-            "SHINE",
-            "SIGMA",
-            "STAR",
-            "STREET",
-            "TOKEN",
-            "THIRSTY",
-            "UNDER",
-            "VANISH",
-            "WHITE",
-            "WRENCH",
-            "YELLOW",
-        }
+    control_code_stem = controlCodeStems()
     reward_grid = {
         { 10 }, --1
         { 10, 5 }, --2
@@ -1128,59 +958,7 @@ function getPredefinedPlayerShipNames()
     return predefined_player_ships
 end
 -- GM Buttons
-function setGMButtons()
-    mainGMButtons = mainGMButtonsDuringPause
-    mainGMButtons()
-end
-function showControlCodes(faction_filter)
-    local code_list = {}
-    for pidx = 1, 32 do
-        local p = getPlayerShip(pidx)
-        if p ~= nil and p:isValid() then
-            if faction_filter == "Kraylor" then
-                if p:getFaction() == "Kraylor" then
-                    code_list[p:getCallSign()] =
-                        { code = p.control_code, faction = p:getFaction() }
-                end
-            elseif faction_filter == "Human Navy" then
-                if p:getFaction() == "Human Navy" then
-                    code_list[p:getCallSign()] =
-                        { code = p.control_code, faction = p:getFaction() }
-                end
-            elseif faction_filter == "Ktlitans" then
-                if p:getFaction() == "Ktlitans" then
-                    code_list[p:getCallSign()] =
-                        { code = p.control_code, faction = p:getFaction() }
-                end
-            else
-                code_list[p:getCallSign()] =
-                    { code = p.control_code, faction = p:getFaction() }
-            end
-        end
-    end
-    local sorted_names = {}
-    for name in pairs(code_list) do
-        table.insert(sorted_names, name)
-    end
-    table.sort(sorted_names)
-    local output = ""
-    for i, name in ipairs(sorted_names) do
-        local faction = ""
-        if code_list[name].faction == "Kraylor" then
-            faction = _("msgGM", " (Kraylor)")
-        elseif code_list[name].faction == "Ktlitans" then
-            faction = _("msgGM", " (Ktlitan)")
-        end
-        output = output
-            .. string.format(
-                _("msgGM", "%s: %s %s\n"),
-                name,
-                code_list[name].code,
-                faction
-            )
-    end
-    addGMMessage(output)
-end
+setGMButtons = Runtime.setGMButtons
 -- GM buttons while paused
 function mainGMButtonsDuringPause()
     clearGMFunctions()
@@ -1260,15 +1038,6 @@ function mainGMButtonsDuringPause()
         end
         addGMMessage(out)
     end)
-end
-function resetControlCodes()
-    for i, p in ipairs(getActivePlayerShips()) do
-        local stem = tableRemoveRandom(control_code_stem)
-        local branch = math.random(100, 999)
-        p.control_code = stem .. branch
-        p:setControlCode(stem .. branch)
-    end
-    showControlCodes()
 end
 function setShootBack()
     clearGMFunctions()
@@ -1554,7 +1323,7 @@ function setStations()
     local muddAngle = marconiAngle + random(60, 180)
     local xMudd, yMudd = vectorFromAngle(muddAngle, random(12500, 15000))
     stationMudd =
-        placeStation(xMudd, yMudd, "Nefatha", "Independent", "Medium Station")
+        placeStation(xMudd, yMudd, "Muddville", "Independent", "Medium Station")
     table.insert(stationList, stationMudd)
     stationMudd.comms_data.goods.luxury = { cost = 60, quantity = 10 }
     --Alcaleica
@@ -2005,17 +1774,17 @@ function setStations()
         :setModel("artifact4")
         :allowPickup(false)
         :setScanningParameters(2, 2)
-        :setRadarSignatureInfo(random(0.4, 0.20), random(0.2, 0.12), random(0.7, 0.13))
+        :setRadarSignatureInfo(random(0.20, 0.4), random(0.12, 0.2), random(0.13, 0.7))
     art2 = Artifact()
         :setModel("artifact5")
         :allowPickup(false)
         :setScanningParameters(2, 3)
-        :setRadarSignatureInfo(random(0.2, 0.12), random(0.7, 0.13), random(0.4, 0.20))
+        :setRadarSignatureInfo(random(0.12, 0.2), random(0.13, 0.7), random(0.20, 0.4))
     art3 = Artifact()
         :setModel("artifact6")
         :allowPickup(false)
         :setScanningParameters(3, 2)
-        :setRadarSignatureInfo(random(0.7, 0.13), random(0.4, 0.20), random(0.2, 0.12))
+        :setRadarSignatureInfo(random(0.13, 0.7), random(0.20, 0.4), random(0.12, 0.2))
     art1:setPosition(random(-50000, 50000), random(-80000, -70000))
     art2:setPosition(random(-90000, -75000), random(-40000, -20000))
     art3:setPosition(random(50000, 75000), random(62500, 80000))
@@ -2733,164 +2502,13 @@ function setStations()
         end
     end
 end
-function createRandomAlongArc(
-    object_type,
-    amount,
-    x,
-    y,
-    distance,
-    startArc,
-    endArcClockwise,
-    randomize
-)
-    -- Create amount of objects of type object_type along arc
-    -- Center defined by x and y
-    -- Radius defined by distance
-    -- Start of arc between 0 and 360 (startArc), end arc: endArcClockwise
-    -- Use randomize to vary the distance from the center point. Omit to keep distance constant
-    -- Example:
-    --   createRandomAlongArc(Asteroid, 100, 500, 3000, 65, 120, 450)
-    if randomize == nil then
-        randomize = 0
-    end
-    if amount == nil then
-        amount = 1
-    end
-    arcLen = endArcClockwise - startArc
-    if startArc > endArcClockwise then
-        endArcClockwise = endArcClockwise + 360
-        arcLen = arcLen + 360
-    end
-    if amount > arcLen then
-        for ndex = 1, arcLen do
-            radialPoint = startArc + ndex
-            pointDist = distance + random(-randomize, randomize)
-            object_type():setPosition(
-                x + math.cos(radialPoint / 180 * math.pi) * pointDist,
-                y + math.sin(radialPoint / 180 * math.pi) * pointDist
-            )
-        end
-        for ndex = 1, amount - arcLen do
-            radialPoint = random(startArc, endArcClockwise)
-            pointDist = distance + random(-randomize, randomize)
-            object_type():setPosition(
-                x + math.cos(radialPoint / 180 * math.pi) * pointDist,
-                y + math.sin(radialPoint / 180 * math.pi) * pointDist
-            )
-        end
-    else
-        for ndex = 1, amount do
-            radialPoint = random(startArc, endArcClockwise)
-            pointDist = distance + random(-randomize, randomize)
-            object_type():setPosition(
-                x + math.cos(radialPoint / 180 * math.pi) * pointDist,
-                y + math.sin(radialPoint / 180 * math.pi) * pointDist
-            )
-        end
-    end
-end
+-----------------------------
 -----------------------------
 --  Station communication  --
 -----------------------------
-function commsStation()
-    if comms_target.comms_data == nil then
-        comms_target.comms_data = {}
-    end
-    mergeTables(comms_target.comms_data, {
-        friendlyness = random(0.0, 100.0),
-        weapons = {
-            Homing = "neutral",
-            HVLI = "neutral",
-            Mine = "neutral",
-            Nuke = "friend",
-            EMP = "friend",
-        },
-        weapon_cost = {
-            Homing = 2,
-            HVLI = 2,
-            Mine = 2,
-            Nuke = 15,
-            EMP = 10,
-        },
-        services = {
-            supplydrop = "friend",
-            reinforcements = "friend",
-        },
-        service_cost = {
-            supplydrop = 100,
-            reinforcements = 150,
-        },
-        reputation_cost_multipliers = {
-            friend = 1.0,
-            neutral = 2.5,
-        },
-        max_weapon_refill_amount = {
-            friend = 1.0,
-            neutral = 0.5,
-        },
-    })
-    comms_data = comms_target.comms_data -- global comms_data cache for getWeaponCost() and handleWeaponRestock()
-    if comms_source:isEnemy(comms_target) then
-        return false
-    end
-    if comms_target:areEnemiesInRange(5000) then
-        setCommsMessage(
-            _("station-comms", "We are under attack! No time for chatting!")
-        )
-        return true
-    end
-    if not comms_source:isDocked(comms_target) then
-        handleUndockedState()
-    else
-        handleDockedState()
-    end
-    return true
-end
-function handleDockedState()
-    if comms_source:isFriendly(comms_target) then
-        oMsg = _(
-            "station-comms",
-            "Good day, officer!\nWhat can we do for you today?\n"
-        )
-    else
-        oMsg = _("station-comms", "Welcome to our lovely station.\n")
-    end
-    if comms_target:areEnemiesInRange(20000) then
-        oMsg = oMsg
-            .. _(
-                "station-comms",
-                "Forgive us if we seem a little distracted. We are carefully monitoring the enemies nearby."
-            )
-    end
-    setCommsMessage(oMsg)
-    missilePresence = 0
-    local missile_types = { "Homing", "Nuke", "Mine", "EMP", "HVLI" }
-    for i, missile_type in ipairs(missile_types) do
-        missilePresence = missilePresence
-            + comms_source:getWeaponStorageMax(missile_type)
-    end
-    if missilePresence > 0 then
-        addCommsReply(
-            _("ammo-comms", "I need ordnance restocked"), function()
-                setCommsMessage(_("ammo-comms", "What type of ordnance?"))
-                for i, missile_type in ipairs(missile_types) do
-                    if comms_source:getWeaponStorageMax(missile_type) > 0 then
-                        addCommsReply(
-                            string.format(
-                                _("ammo-comms", "%s (%d rep each)"),
-                                missile_type,
-                                getWeaponCost(missile_type)
-                            ),
-                            function()
-                                handleWeaponRestock(missile_type)
-                            end
-                        )
-                    end
-                end
-                addCommsReplay(_("Back"), commsStation)
-            end
-        )
-    end
+local station_profile
+
+local function addCurrentOrders()
     if comms_source:isFriendly(comms_target) then
         addCommsReply(
             _("orders-comms", "What are my current orders?"),
@@ -2922,6 +2540,9 @@ function handleDockedState()
             end
         )
     end
+end
+
+local function addUpgradeInformation()
     addCommsReply(_("upgrade-comms", "Do you upgrade spaceships?"), function()
         for i, station_info in ipairs(station_upgrade_list) do
             if station_info.station == comms_target then
@@ -2935,6 +2556,9 @@ function handleDockedState()
         end
         addCommsReply(_("Back"), commsStation)
     end)
+end
+
+local function addCartographyOffice()
     addCommsReply(
         _("cartographyOffice-comms", "Visit cartography office"),
         function()
@@ -3053,152 +2677,23 @@ function handleDockedState()
             addCommsReply(_("Back"), commsStation)
         end
     )
-    local commerce_available = false
-    local station_sells = false
-    local goods_for_sale = ""
-    local player_has_goods = false
-    local goods_in_cargo_hold = ""
-    if comms_target.comms_data.goods ~= nil then
-        for good, good_data in pairs(comms_target.comms_data.goods) do
-            if good_data.quantity ~= nil and good_data.quantity > 0 then
-                commerce_available = true
-                station_sells = true
-                goods_for_sale = string.format(
-                    _("trade-comms", "%s\n%s %s @ %s"),
-                    goods_for_sale,
-                    good_data.quantity,
-                    good_desc[good],
-                    good_data.cost
-                )
-            end
-        end
-    end
-    if comms_source.goods ~= nil then
-        for good, quantity in pairs(comms_source.goods) do
-            if quantity > 0 then
-                player_has_goods = true
-                goods_in_cargo_hold = string.format(
-                    _("trade-comms", "%s\n%s: %s"),
-                    goods_in_cargo_hold,
-                    good_desc[good],
-                    quantity
-                )
-            end
-        end
-    end
-    if commerce_available then
-        addCommsReply(_("trade-comms", "Buy, sell, trade"), function()
-            local oMsg = string.format(
-                _(
-                    "trade-comms",
-                    "Goods or components available for sale here:%s"
-                ),
-                goods_for_sale
-            )
-            if player_has_goods then
-                oMsg = string.format(
-                    _("trade-comms", "%s\nGoods in cargo hold:%s"),
-                    oMsg,
-                    goods_in_cargo_hold
-                )
-            else
-                oMsg = string.format(
-                    _("trade-comms", "%s\nCargo hold is empty"),
-                    oMsg
-                )
-            end
-            oMsg = string.format(
-                _("trade-comms", "%s\nAvailable space:%s"),
-                oMsg,
-                comms_source.cargo
-            )
-            setCommsMessage(oMsg)
-            if station_sells then
-                local alt_goods = {}
-                for good, good_data in pairs(comms_target.comms_data.goods) do
-                    if good_data["quantity"] > 0 then
-                        addCommsReply(
-                            string.format(
-                                _("trade-comms", "Buy a %s for %s reputation"),
-                                good_desc[good],
-                                good_data["cost"]
-                            ),
-                            function()
-                                if not comms_source:isDocked(comms_target) then
-                                    setCommsMessage(
-                                        _(
-                                            "trade-comms",
-                                            "You have to be docked to complete the transaction."
-                                        )
-                                    )
-                                    return
-                                end
-                                if comms_source.cargo < 1 then
-                                    setCommsMessage(
-                                        string.format(
-                                            _(
-                                                "trade-comms",
-                                                "Not enough room on %s to purchase %s"
-                                            ),
-                                            comms_source:getCallSign(),
-                                            good_desc[good]
-                                        )
-                                    )
-                                elseif good_data.quantity < 1 then
-                                    setCommsMessage(
-                                        string.format(
-                                            _(
-                                                "trade-comms",
-                                                "%s ran out of %s."
-                                            ),
-                                            comms_target:getCallSign(),
-                                            good_desc[good]
-                                        )
-                                    )
-                                elseif
-                                    comms_source:takeReputationPoints(
-                                        good_data["cost"]
-                                    )
-                                then
-                                    comms_source.cargo = comms_source.cargo - 1
-                                    good_data["quantity"] = good_data["quantity"]
-                                        - 1
-                                    if comms_source.goods == nil then
-                                        comms_source.goods = {}
-                                    end
-                                    if comms_source.goods[good] == nil then
-                                        comms_source.goods[good] = 0
-                                    end
-                                    comms_source.goods[good] = comms_source.goods[good]
-                                        + 1
-                                    setCommsMessage(
-                                        string.format(
-                                            _("trade-comms", "One %s purchased"),
-                                            good_desc[good]
-                                        )
-                                    )
-                                else
-                                    setCommsMessage(
-                                        _(
-                                            "trade-comms",
-                                            "Insufficient reputation"
-                                        )
-                                    )
-                                end
-                            end
-                        )
-                    end
-                    for i, upgrade_good in ipairs(upgrade_goods) do
-                        if
-                            upgrade_good == good
-                            and comms_source:getReputationPoints()
-                                < good_data.cost
-                        then
-                            table.insert(alt_goods, good)
-                        end
-                    end
+end
+
+local function addContractGoods()
+    local alt_goods = {}
+    for good, good_data in pairs(comms_target.comms_data.goods) do
+        if good_data.quantity > 0 then
+            for index, upgrade_good in ipairs(upgrade_goods) do
+                if
+                    upgrade_good == good
+                    and comms_source:getReputationPoints() < good_data.cost
+                then
+                    table.insert(alt_goods, good)
                 end
-                if #alt_goods > 0 then
+            end
+        end
+    end
+    if #alt_goods > 0 then
                     if comms_source.asteroid_contract ~= nil then
                         local contract_match = false
                         local contract_completed = false
@@ -3592,261 +3087,10 @@ function handleDockedState()
                             )
                         end
                     end
-                end
-            end
-        end)
     end
-    if goods[comms_target] ~= nil then
-        addCommsReply(_("trade-comms", "Buy, sell, trade"), function()
-            oMsg = _(
-                "trade-comms",
-                "Goods or components available here: quantity, cost in reputation\n"
-            )
-            gi = 1 -- initialize goods index
-            repeat
-                goodsType = goods[comms_target][gi][1]
-                goodsQuantity = goods[comms_target][gi][2]
-                goodsRep = goods[comms_target][gi][3]
-                oMsg = oMsg
-                    .. string.format(
-                        _("trade-comms", "     %s: %i, %i\n"),
-                        goodsType,
-                        goodsQuantity,
-                        goodsRep
-                    )
-                gi = gi + 1
-            until gi > #goods[comms_target]
-            oMsg = oMsg .. _("trade-comms", "Current Cargo:\n")
-            gi = 1
-            cargoHoldEmpty = true
-            repeat
-                playerGoodsType = goods[comms_source][gi][1]
-                playerGoodsQuantity = goods[comms_source][gi][2]
-                if playerGoodsQuantity > 0 then
-                    oMsg = oMsg
-                        .. string.format(
-                            _("trade-comms", "     %s: %i\n"),
-                            playerGoodsType,
-                            playerGoodsQuantity
-                        )
-                    cargoHoldEmpty = false
-                end
-                gi = gi + 1
-            until gi > #goods[comms_source]
-            if cargoHoldEmpty then
-                oMsg = oMsg .. _("trade-comms", "     Empty\n")
-            end
-            playerRep = math.floor(comms_source:getReputationPoints())
-            oMsg = oMsg
-                .. string.format(
-                    _(
-                        "trade-comms",
-                        "Available Space: %i, Available Reputation: %i\n"
-                    ),
-                    comms_source.cargo,
-                    playerRep
-                )
-            setCommsMessage(oMsg)
-            -- Buttons for reputation purchases
-            gi = 1
-            repeat
-                local goodsType = goods[comms_target][gi][1]
-                local goodsQuantity = goods[comms_target][gi][2]
-                local goodsRep = goods[comms_target][gi][3]
-                addCommsReply(
-                    string.format(
-                        _("trade-comms", "Buy one %s for %i reputation"),
-                        goods[comms_target][gi][1],
-                        goods[comms_target][gi][3]
-                    ),
-                    function()
-                        oMsg = string.format(
-                            _("trade-comms", "Type: %s, Quantity: %i, Rep: %i"),
-                            goodsType,
-                            goodsQuantity,
-                            goodsRep
-                        )
-                        if comms_source.cargo < 1 then
-                            oMsg = oMsg
-                                .. _(
-                                    "trade-comms",
-                                    "\nInsufficient cargo space for purchase"
-                                )
-                        elseif goodsRep > playerRep then
-                            oMsg = oMsg
-                                .. _(
-                                    "needRep-comms",
-                                    "\nInsufficient reputation for purchase"
-                                )
-                        elseif goodsQuantity < 1 then
-                            oMsg = oMsg
-                                .. _(
-                                    "trade-comms",
-                                    "\nInsufficient station inventory"
-                                )
-                        else
-                            if
-                                not comms_source:takeReputationPoints(goodsRep)
-                            then
-                                oMsg = oMsg
-                                    .. _(
-                                        "needRep-comms",
-                                        "\nInsufficient reputation for purchase"
-                                    )
-                            else
-                                comms_source.cargo = comms_source.cargo - 1
-                                decrementStationGoods(goodsType)
-                                incrementPlayerGoods(goodsType)
-                                oMsg = oMsg .. _("trade-comms", "\npurchased")
-                            end
-                        end
-                        setCommsMessage(oMsg)
-                        addCommsReply(_("Back"), commsStation)
-                    end
-                )
-                gi = gi + 1
-            until gi > #goods[comms_target]
-            -- Buttons for food trades
-            if tradeFood[comms_target] ~= nil then
-                gi = 1
-                foodQuantity = 0
-                repeat
-                    if goods[comms_source][gi][1] == "food" then
-                        foodQuantity = goods[comms_source][gi][2]
-                    end
-                    gi = gi + 1
-                until gi > #goods[comms_source]
-                if foodQuantity > 0 then
-                    gi = 1
-                    repeat
-                        local goodsType = goods[comms_target][gi][1]
-                        local goodsQuantity = goods[comms_target][gi][2]
-                        addCommsReply(
-                            string.format(
-                                _("trade-comms", "Trade food for %s"),
-                                goods[comms_target][gi][1]
-                            ),
-                            function()
-                                oMsg = string.format(
-                                    _("trade-comms", "Type: %s,  Quantity: %i"),
-                                    goodsType,
-                                    goodsQuantity
-                                )
-                                if goodsQuantity < 1 then
-                                    oMsg = oMsg
-                                        .. _(
-                                            "trade-comms",
-                                            "\nInsufficient station inventory"
-                                        )
-                                else
-                                    decrementStationGoods(goodsType)
-                                    incrementPlayerGoods(goodsType)
-                                    decrementPlayerGoods("food")
-                                    oMsg = oMsg .. _("trade-comms", "\nTraded")
-                                end
-                                setCommsMessage(oMsg)
-                                addCommsReply(_("Back"), commsStation)
-                            end
-                        )
-                        gi = gi + 1
-                    until gi > #goods[comms_target]
-                end
-            end
-            -- Buttons for luxury trades
-            if tradeLuxury[comms_target] ~= nil then
-                gi = 1
-                luxuryQuantity = 0
-                repeat
-                    if goods[comms_source][gi][1] == "luxury" then
-                        luxuryQuantity = goods[comms_source][gi][2]
-                    end
-                    gi = gi + 1
-                until gi > #goods[comms_source]
-                if luxuryQuantity > 0 then
-                    gi = 1
-                    repeat
-                        local goodsType = goods[comms_target][gi][1]
-                        local goodsQuantity = goods[comms_target][gi][2]
-                        addCommsReply(
-                            string.format(
-                                _("trade-comms", "Trade luxury for %s"),
-                                goods[comms_target][gi][1]
-                            ),
-                            function()
-                                oMsg = string.format(
-                                    _("trade-comms", "Type: %s,  Quantity: %i"),
-                                    goodsType,
-                                    goodsQuantity
-                                )
-                                if goodsQuantity < 1 then
-                                    oMsg = oMsg
-                                        .. _(
-                                            "trade-comms",
-                                            "\nInsufficient station inventory"
-                                        )
-                                else
-                                    decrementStationGoods(goodsType)
-                                    incrementPlayerGoods(goodsType)
-                                    decrementPlayerGoods("luxury")
-                                    oMsg = oMsg .. _("trade-comms", "\nTraded")
-                                end
-                                setCommsMessage(oMsg)
-                                addCommsReply(_("Back"), commsStation)
-                            end
-                        )
-                        gi = gi + 1
-                    until gi > #goods[comms_target]
-                end
-            end
-            -- Buttons for medicine trades
-            if tradeMedicine[comms_target] ~= nil then
-                gi = 1
-                medicineQuantity = 0
-                repeat
-                    if goods[comms_source][gi][1] == "medicine" then
-                        medicineQuantity = goods[comms_source][gi][2]
-                    end
-                    gi = gi + 1
-                until gi > #goods[comms_source]
-                if medicineQuantity > 0 then
-                    gi = 1
-                    repeat
-                        local goodsType = goods[comms_target][gi][1]
-                        local goodsQuantity = goods[comms_target][gi][2]
-                        addCommsReply(
-                            string.format(
-                                _("trade-comms", "Trade medicine for %s"),
-                                goods[comms_target][gi][1]
-                            ),
-                            function()
-                                oMsg = string.format(
-                                    _("trade-comms", "Type: %s,  Quantity: %i"),
-                                    goodsType,
-                                    goodsQuantity
-                                )
-                                if goodsQuantity < 1 then
-                                    oMsg = oMsg
-                                        .. _(
-                                            "trade-comms",
-                                            "\nInsufficient station inventory"
-                                        )
-                                else
-                                    decrementStationGoods(goodsType)
-                                    incrementPlayerGoods(goodsType)
-                                    decrementPlayerGoods("medicine")
-                                    oMsg = oMsg .. _("trade-comms", "\nTraded")
-                                end
-                                setCommsMessage(oMsg)
-                                addCommsReply(_("Back"), commsStation)
-                            end
-                        )
-                        gi = gi + 1
-                    until gi > #goods[comms_target]
-                end
-            end
-            addCommsReply(_("Back"), commsStation)
-        end)
-    end
+end
+
+local function addUpgradeGoods()
     if comms_target == stationZefram then
         if comms_source:hasJumpDrive() then
             if comms_source.goods ~= nil then
@@ -4338,140 +3582,17 @@ function handleDockedState()
         end
     end
 end
-function isAllowedTo(state)
-    if state == "friend" and comms_source:isFriendly(comms_target) then
-        return true
-    end
-    if state == "neutral" and not comms_source:isEnemy(comms_target) then
-        return true
-    end
-    return false
+
+local function addLegacyTrade()
+    StationGoods.addTrade({ back = commsStation })
 end
-function handleWeaponRestock(weapon)
-    if not comms_source:isDocked(comms_target) then
-        setCommsMessage(
-            _("station-comms", "You need to stay docked for that action.")
-        )
-        return
-    end
-    if not isAllowedTo(comms_data.weapons[weapon]) then
-        if weapon == "Nuke" then
-            setCommsMessage(
-                _(
-                    "ammo-comms",
-                    "We do not deal in weapons of mass destruction."
-                )
-            )
-        elseif weapon == "EMP" then
-            setCommsMessage(
-                _("ammo-comms", "We do not deal in weapons of mass disruption.")
-            )
-        else
-            setCommsMessage(_("ammo-comms", "We do not deal in those weapons."))
-        end
-        return
-    end
-    local points_per_item = getWeaponCost(weapon)
-    local item_amount = math.floor(
-        comms_source:getWeaponStorageMax(weapon)
-            * comms_data.max_weapon_refill_amount[getFriendStatus()]
-    ) - comms_source:getWeaponStorage(weapon)
-    if item_amount <= 0 then
-        if weapon == "Nuke" then
-            setCommsMessage(
-                _(
-                    "ammo-comms",
-                    "All nukes are charged and primed for destruction."
-                )
-            )
-        else
-            setCommsMessage(
-                _(
-                    "ammo-comms",
-                    "Sorry, sir, but you are as fully stocked as I can allow."
-                )
-            )
-        end
-        addCommsReply(_("Back"), commsStation)
-    else
-        if
-            not comms_source:takeReputationPoints(points_per_item * item_amount)
-        then
-            setCommsMessage(_("needRep-comms", "Not enough reputation."))
-            return
-        end
-        comms_source:setWeaponStorage(
-            weapon,
-            comms_source:getWeaponStorage(weapon) + item_amount
-        )
-        if
-            comms_source:getWeaponStorage(weapon)
-            == comms_source:getWeaponStorageMax(weapon)
-        then
-            setCommsMessage(
-                _(
-                    "ammo-comms",
-                    "You are fully loaded and ready to explode things."
-                )
-            )
-        else
-            setCommsMessage(
-                _(
-                    "ammo-comms",
-                    "We generously resupplied you with some weapon charges.\nPut them to good use."
-                )
-            )
-        end
-        addCommsReply(_("Back"), commsStation)
-    end
-end
-function getWeaponCost(weapon)
-    return math.ceil(
-        comms_data.weapon_cost[weapon]
-            * comms_data.reputation_cost_multipliers[getFriendStatus()]
-    )
-end
-function handleUndockedState()
-    --Handle communications when we are not docked with the station.
-    if comms_source:isFriendly(comms_target) then
-        oMsg = _(
-            "station-comms",
-            "Good day, officer.\nIf you need supplies, please dock with us first."
-        )
-    else
-        oMsg = _(
-            "station-comms",
-            "Greetings.\nIf you want to do business, please dock with us first."
-        )
-    end
-    if comms_target:areEnemiesInRange(20000) then
-        oMsg = oMsg
-            .. _(
-                "station-comms",
-                "\nBe aware that if enemies in the area get much closer, we will be too busy to conduct business with you."
-            )
-    end
-    setCommsMessage(oMsg)
+
+local function addUndockedInformation()
     addCommsReply(_("station-comms", "I need information"), function()
         setCommsMessage(
             _("station-comms", "What kind of information do you need?")
         )
-        addCommsReply(
-            _("upgrade-comms", "Do you upgrade spaceships?"),
-            function()
-                for i, station_info in ipairs(station_upgrade_list) do
-                    if station_info.station == comms_target then
-                        setCommsMessage(station_info.desc)
-                        break
-                    else
-                        setCommsMessage(
-                            _("upgrade-comms", "We don't upgrade spaceships")
-                        )
-                    end
-                end
-                addCommsReply(_("Back"), commsStation)
-            end
-        )
+        addUpgradeInformation()
         if comms_target == stationTimer then
             addCommsReply(
                 _("station-comms", "How far am I from the race start point?"),
@@ -4528,21 +3649,21 @@ function handleUndockedState()
                     _("station-comms", "%s\nRestock scan probes: %s"),
                     out,
                     (
-                        comms_target:getRestocksScanProbes() and _("station-comms", "Available") _("station-comms", "Unavailable")
+                        comms_target:getRestocksScanProbes() and _("station-comms", "Available") or _("station-comms", "Unavailable")
                     )
                 )
                 out = string.format(
                     _("station-comms", "%s\nRecharge energy: %s"),
                     out,
                     (
-                        comms_target:getSharesEnergyWithDocked() and _("station-comms", "Available") _("station-comms", "Unavailable")
+                        comms_target:getSharesEnergyWithDocked() and _("station-comms", "Available") or _("station-comms", "Unavailable")
                     )
                 )
                 out = string.format(
                     _("station-comms", "%s\nRepair hull: %s"),
                     out,
                     (
-                        comms_target:getRepairDocked() and _("station-comms", "Available") _("station-comms", "Unavailable")
+                        comms_target:getRepairDocked() and _("station-comms", "Available") or _("station-comms", "Unavailable")
                     )
                 )
                 setCommsMessage(out)
@@ -4550,37 +3671,9 @@ function handleUndockedState()
             end
         )
     end)
-    if comms_source:isFriendly(comms_target) then
-        addCommsReply(
-            _("orders-comms", "What are my current orders?"),
-            function()
-                ordMsg = primaryOrders
-                if raceStartDelay > 0 then
-                    ordMsg = ordMsg
-                        .. string.format(
-                            _(
-                                "orders-comms",
-                                "\n%i seconds remain until start of race"
-                            ),
-                            math.floor(raceStartDelay)
-                        )
-                else
-                    if comms_source.goal ~= nil then
-                        ordMsg = ordMsg
-                            .. string.format(
-                                _(
-                                    "orders-comms",
-                                    "\nImmediate goal: race waypoint %i"
-                                ),
-                                comms_source.goal
-                            )
-                    end
-                end
-                setCommsMessage(ordMsg)
-                addCommsReply(_("Back"), commsStation)
-            end
-        )
-    end
+end
+
+local function addDiagnosticData()
     if diagnostic then
         addCommsReply("Diagnostic data", function()
             if raceStartDelay > 0 then
@@ -4658,420 +3751,96 @@ function handleUndockedState()
             addCommsReply(_("Back"), commsStation)
         end)
     end
-    if isAllowedTo(comms_target.comms_data.services.supplydrop) then
-        addCommsReply(
-            string.format(
-                _("stationAssist-comms", "Can you send a supply drop? (%d rep)"),
-                getServiceCost("supplydrop")
-            ),
-            function()
-                if comms_source:getWaypointCount() < 1 then
-                    setCommsMessage(
-                        _(
-                            "stationAssist-comms",
-                            "You need to set a waypoint before you can request backup."
-                        )
-                    )
-                else
-                    setCommsMessage(
-                        _(
-                            "stationAssist-comms",
-                            "To which waypoint should we deliver your supplies?"
-                        )
-                    )
-                    for n = 1, comms_source:getWaypointCount() do
-                        addCommsReply(
-                            string.format(
-                                _("stationAssist-comms", "WP %d"),
-                                comms_source:getWaypointID(n)
-                            ),
-                            function()
-                                if
-                                    comms_source:takeReputationPoints(
-                                        getServiceCost("supplydrop")
-                                    )
-                                then
-                                    local position_x, position_y =
-                                        comms_target:getPosition()
-                                    local target_x, target_y =
-                                        comms_source:getWaypoint(n)
-                                    local script = Script()
-                                    script
-                                        :setVariable("position_x", position_x)
-                                        :setVariable("position_y", position_y)
-                                    script
-                                        :setVariable("target_x", target_x)
-                                        :setVariable("target_y", target_y)
-                                    script
-                                        :setVariable(
-                                            "faction_id",
-                                            comms_target:getFactionId()
-                                        )
-                                        :run("supply_drop.lua")
-                                    setCommsMessage(
-                                        string.format(
-                                            _(
-                                                "stationAssist-comms",
-                                                "We have dispatched a supply ship toward WP %d"
-                                            ),
-                                            comms_source:getWaypointID(n)
-                                        )
-                                    )
-                                else
-                                    setCommsMessage(
-                                        _(
-                                            "needRep-comms",
-                                            "Not enough reputation!"
-                                        )
-                                    )
-                                end
-                                addCommsReply(_("Back"), commsStation)
-                            end
-                        )
-                    end
-                end
-                addCommsReply(_("Back"), commsStation)
-            end
-        )
-    end
-    if isAllowedTo(comms_target.comms_data.services.reinforcements) then
-        addCommsReply(
-            string.format(
-                _("stationAssist-comms", "Please send reinforcements! (%d rep)"),
-                getServiceCost("reinforcements")
-            ),
-            function()
-                if comms_source:getWaypointCount() < 1 then
-                    setCommsMessage(
-                        _(
-                            "stationAssist-comms",
-                            "You need to set a waypoint before you can request reinforcements."
-                        )
-                    )
-                else
-                    setCommsMessage(
-                        _(
-                            "stationAssist-comms",
-                            "To which waypoint should we dispatch the reinforcements?"
-                        )
-                    )
-                    for n = 1, comms_source:getWaypointCount() do
-                        addCommsReply(
-                            string.format(
-                                _("stationAssist-comms", "WP %d"),
-                                comms_source:getWaypointID(n)
-                            ),
-                            function()
-                                if
-                                    comms_source:takeReputationPoints(
-                                        getServiceCost("reinforcements")
-                                    )
-                                then
-                                    ship = CpuShip()
-                                        :setFactionId(
-                                            comms_target:getFactionId()
-                                        )
-                                        :setPosition(comms_target:getPosition())
-                                        :setTemplate(ST.ADDER_MK5)
-                                        :setScanned(true)
-                                        :orderDefendLocation(
-                                            comms_source:getWaypoint(n)
-                                        )
-                                    setCommsMessage(
-                                        string.format(
-                                            _(
-                                                "stationAssist-comms",
-                                                "We have dispatched %s to assist at WP %d"
-                                            ),
-                                            ship:getCallSign(),
-                                            comms_source:getWaypointID(n)
-                                        )
-                                    )
-                                else
-                                    setCommsMessage(
-                                        _(
-                                            "needRep-comms",
-                                            "Not enough reputation!"
-                                        )
-                                    )
-                                end
-                                addCommsReply(_("Back"), commsStation)
-                            end
-                        )
-                    end
-                end
-                addCommsReply(_("Back"), commsStation)
-            end
-        )
-    end
 end
-function getServiceCost(service)
-    -- Return the number of reputation points that a specified service costs for
-    -- the current player.
-    return math.ceil(comms_target.comms_data.service_cost[service])
-end
-function getFriendStatus()
-    if comms_source:isFriendly(comms_target) then
-        return "friend"
-    else
-        return "neutral"
-    end
-end
-function tableSelectRandom(array)
-    local array_item_count = #array
-    if array_item_count == 0 then
-        return nil
-    end
-    return array[math.random(1, #array)]
-end
+
+commsStation = StationMenu.entrypoint(function() return station_profile end)
+
+station_profile = {
+    main_menu = commsStation,
+    data = {
+        weapon_available = {
+            Homing = true,
+            HVLI = true,
+            Mine = true,
+            Nuke = true,
+            EMP = true,
+        },
+        weapon_cost = {
+            Homing = 2,
+            HVLI = 2,
+            Mine = 2,
+            Nuke = 15,
+            EMP = 10,
+        },
+        service_cost = {
+            supplydrop = 100,
+            reinforcements = 150,
+        },
+        reputation_cost_multipliers = { neutral = 2.5 },
+    },
+    goods_name = function(good)
+        return good_desc[good]
+    end,
+    goods = {
+        transfer = addContractGoods,
+    },
+    resources = {
+        prompt = false,
+        recruitment = false,
+        coolant = false,
+        after_goods = function()
+            addLegacyTrade()
+            addUpgradeGoods()
+        end,
+    },
+    docked = {
+        greeting = "fixed",
+        show_reputation = false,
+        group_services = false,
+        service_prompt = false,
+        service_sections = { "ordnance" },
+        restock = "simple",
+        ordnance = {
+            label = _("ammo-comms", "I need ordnance restocked"),
+            back = true,
+            show_reputation = false,
+            order = { "Homing", "Nuke", "Mine", "EMP", "HVLI" },
+            prompt_format = _("ammo-comms", "%s (%d rep each)"),
+            prompts = {
+                Homing = { _("ammo-comms", "Homing") },
+                Nuke = { _("ammo-comms", "Nuke") },
+                Mine = { _("ammo-comms", "Mine") },
+                EMP = { _("ammo-comms", "EMP") },
+                HVLI = { _("ammo-comms", "HVLI") },
+            },
+        },
+        after_services = function()
+            addCurrentOrders()
+            addUpgradeInformation()
+            addCartographyOffice()
+        end,
+        group_resources = false,
+    },
+    undocked = {
+        before_information = addUndockedInformation,
+        before_assistance = function()
+            addCurrentOrders()
+            addDiagnosticData()
+        end,
+        assistance = true,
+    },
+}
+
 --------------------------
 --  Ship communication  --
 --------------------------
-function commsShip()
-    if comms_target.comms_data == nil then
-        comms_target.comms_data = { friendlyness = random(0.0, 100.0) }
-    end
-    if comms_target.comms_data.goods == nil then
-        comms_target.comms_data.goods = {}
-        local selected_good = tableSelectRandom(component_goods)
-        if random(1, 100) < 40 then
-            selected_good = tableSelectRandom(mineral_goods)
+commsShip = ShipComms.commsShipGetter(function() return ship_profile end)
+
+ship_profile = {
+    enemy = function(comms_data)
+        if comms_target.owner == nil then
+            return ShipComms.enemyCommsSimple(comms_data)
         end
-        comms_target.comms_data.goods[selected_good] =
-            { cost = math.random(20, 80), quantity = 1 }
-    end
-    if comms_source:isFriendly(comms_target) then
-        return friendlyComms()
-    end
-    if
-        comms_source:isEnemy(comms_target)
-        and comms_target:isFriendOrFoeIdentifiedBy(comms_source)
-    then
-        return enemyComms()
-    end
-    return neutralComms()
-end
-function friendlyComms()
-    if comms_target.comms_data.friendlyness < 20 then
-        setCommsMessage(_("shipAssist-comms", "What do you want?"))
-    else
-        setCommsMessage(_("shipAssist-comms", "Sir, how can we assist?"))
-    end
-    addCommsReply(_("shipAssist-comms", "Defend a waypoint"), function()
-        if comms_source:getWaypointCount() == 0 then
-            setCommsMessage(
-                _(
-                    "shipAssist-comms",
-                    "No waypoints set. Please set a waypoint first."
-                )
-            )
-            addCommsReply(_("Back"), commsShip)
-        else
-            setCommsMessage(
-                _("shipAssist-comms", "Which waypoint should we defend?")
-            )
-            for n = 1, comms_source:getWaypointCount() do
-                addCommsReply(
-                    string.format(
-                        _("shipAssist-comms", "Defend WP %d"),
-                        comms_source:getWaypointID(n)
-                    ),
-                    function()
-                        comms_target:orderDefendLocation(
-                            comms_source:getWaypoint(n)
-                        )
-                        setCommsMessage(
-                            string.format(
-                                _(
-                                    "shipAssist-comms",
-                                    "We are heading to assist at WP %d."
-                                ),
-                                comms_source:getWaypointID(n)
-                            )
-                        )
-                        addCommsReply(_("Back"), commsShip)
-                    end
-                )
-            end
-        end
-    end)
-    if comms_target.comms_data.friendlyness > 0.2 then
-        addCommsReply(_("shipAssist-comms", "Assist me"), function()
-            setCommsMessage(
-                _("shipAssist-comms", "Heading toward you to assist.")
-            )
-            comms_target:orderDefendTarget(comms_source)
-            addCommsReply(_("Back"), commsShip)
-        end)
-    end
-    addCommsReply(_("shipAssist-comms", "Report status"), function()
-        msg = string.format(
-            _("shipAssist-comms", "Hull: %d%%\n"),
-            comms_target:getHullPercentage()
-        )
-        shields = comms_target:getShieldCount()
-        if shields == 1 then
-            msg = string.format(
-                _("shipAssist-comms", "%sShield: %d%%\n"),
-                msg,
-                math.floor(
-                    comms_target:getShieldLevel(0)
-                        / comms_target:getShieldMax(0)
-                        * 100
-                )
-            )
-        elseif shields == 2 then
-            msg = string.format(
-                _("shipAssist-comms", "%sFront Shield: %d%%\n"),
-                msg,
-                math.floor(
-                    comms_target:getShieldLevel(0)
-                        / comms_target:getShieldMax(0)
-                        * 100
-                )
-            )
-            msg = string.format(
-                _("shipAssist-comms", "%sRear Shield: %d%%\n"),
-                msg,
-                math.floor(
-                    comms_target:getShieldLevel(1)
-                        / comms_target:getShieldMax(1)
-                        * 100
-                )
-            )
-        else
-            for n = 0, shields - 1 do
-                msg = string.format(
-                    _("shipAssist-comms", "%sShield %s: %d%%\n"),
-                    msg,
-                    n,
-                    math.floor(
-                        comms_target:getShieldLevel(n)
-                            / comms_target:getShieldMax(n)
-                            * 100
-                    )
-                )
-            end
-        end
-        local missile_types = { "Homing", "Nuke", "Mine", "EMP", "HVLI" }
-        for i, missile_type in ipairs(missile_types) do
-            if comms_target:getWeaponStorageMax(missile_type) > 0 then
-                msg = string.format(
-                    _("shipAssist-comms", "%s%s Missiles: %d/%d\n"),
-                    msg,
-                    missile_type,
-                    math.floor(comms_target:getWeaponStorage(missile_type)),
-                    math.floor(comms_target:getWeaponStorageMax(missile_type))
-                )
-            end
-        end
-        setCommsMessage(msg)
-        addCommsReply(_("Back"), commsShip)
-    end)
-    for i, obj in ipairs(comms_target:getObjectsInRange(5000)) do
-        if
-            isObjectType(obj, "SpaceStation") and not comms_target:isEnemy(obj)
-        then
-            addCommsReply(
-                string.format(
-                    _("shipAssist-comms", "Dock at %s"),
-                    obj:getCallSign()
-                ),
-                function()
-                    setCommsMessage(
-                        string.format(
-                            _("shipAssist-comms", "Docking at %s."),
-                            obj:getCallSign()
-                        )
-                    )
-                    comms_target:orderDock(obj)
-                    addCommsReply(_("Back"), commsShip)
-                end
-            )
-        end
-    end
-    return true
-end
-function enemyComms()
-    if comms_target.owner == nil then
-        if comms_target.comms_data.friendlyness > 50 then
-            faction = comms_target:getFaction()
-            taunt_option =
-                _("shipEnemy-comms", "We will see to your destruction!")
-            taunt_success_reply =
-                _("shipEnemy-comms", "Your bloodline will end here!")
-            taunt_failed_reply =
-                _("shipEnemy-comms", "Your feeble threats are meaningless.")
-            if faction == "Kraylor" then
-                setCommsMessage(
-                    _(
-                        "shipEnemy-comms",
-                        "Ktzzzsss.\nYou will DIEEee weaklingsss!"
-                    )
-                )
-            elseif faction == "Arlenians" then
-                setCommsMessage(
-                    _(
-                        "shipEnemy-comms",
-                        "We wish you no harm, but will harm you if we must.\nEnd of transmission."
-                    )
-                )
-            elseif faction == "Exuari" then
-                setCommsMessage(
-                    _(
-                        "shipEnemy-comms",
-                        "Stay out of our way, or your death will amuse us extremely!"
-                    )
-                )
-            elseif faction == "Ghosts" then
-                setCommsMessage(
-                    _(
-                        "shipEnemy-comms",
-                        "One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted."
-                    )
-                )
-                taunt_option = _("shipEnemy-comms", "EXECUTE: SELFDESTRUCT")
-                taunt_success_reply = _(
-                    "shipEnemy-comms",
-                    "Rogue command received. Targeting source."
-                )
-                taunt_failed_reply =
-                    _("shipEnemy-comms", "External command ignored.")
-            elseif faction == "Ktlitans" then
-                setCommsMessage(
-                    _(
-                        "shipEnemy-comms",
-                        "The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition."
-                    )
-                )
-                taunt_option = _(
-                    "shipEnemy-comms",
-                    "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-                )
-                taunt_success_reply = _(
-                    "shipEnemy-comms",
-                    "We do not need permission to pluck apart such an insignificant threat."
-                )
-                taunt_failed_reply = _(
-                    "shipEnemy-comms",
-                    "The hive has greater priorities than exterminating pests."
-                )
-            else
-                setCommsMessage(_("shipEnemy-comms", "Mind your own business!"))
-            end
-            comms_target.comms_data.friendlyness = comms_target.comms_data.friendlyness
-                - random(0, 10)
-            addCommsReply(taunt_option, function()
-                if random(0, 100) < 30 then
-                    comms_target:orderAttack(comms_source)
-                    setCommsMessage(taunt_success_reply)
-                else
-                    setCommsMessage(taunt_failed_reply)
-                end
-            end)
-            return true
-        end
-    else
         setCommsMessage(
             string.format(
                 _("shipEnemy-comms", "I belong to %s"),
@@ -5079,385 +3848,49 @@ function enemyComms()
             )
         )
         addCommsReply(_("Back"), commsShip)
-    end
-    return false
-end
-function neutralComms()
-    shipType = comms_target:getTypeName()
-    if shipType:find("Freighter") ~= nil then
-        if comms_target.comms_data.friendlyness > 66 then
-            setCommsMessage(_("trade-comms", "Yes?"))
-            -- Offer destination information
-            addCommsReply(_("trade-comms", "Where are you headed?"), function()
-                setCommsMessage(comms_target.target:getCallSign())
-                addCommsReply(_("Back"), commsShip)
-            end)
-            -- Offer to trade goods if goods or equipment freighter
-            if distance(comms_source, comms_target) < 5000 then
-                if
-                    shipType:find("Goods") ~= nil
-                    or shipType:find("Equipment") ~= nil
-                then
-                    gi = 1
-                    luxuryQuantity = 0
-                    repeat
-                        if goods[comms_source][gi][1] == "luxury" then
-                            luxuryQuantity = goods[comms_source][gi][2]
-                        end
-                        gi = gi + 1
-                    until gi > #goods[comms_source]
-                    if luxuryQuantity > 0 then
-                        gi = 1
-                        repeat
-                            local goodsType = goods[comms_target][gi][1]
-                            local goodsQuantity = goods[comms_target][gi][2]
-                            addCommsReply(
-                                string.format(
-                                    _("trade-comms", "Trade luxury for %s"),
-                                    goods[comms_target][gi][1]
-                                ),
-                                function()
-                                    if goodsQuantity < 1 then
-                                        setCommsMessage(
-                                            _(
-                                                "trade-comms",
-                                                "Insufficient inventory on freighter for trade"
-                                            )
-                                        )
-                                    else
-                                        decrementShipGoods(goodsType)
-                                        incrementPlayerGoods(goodsType)
-                                        decrementPlayerGoods("luxury")
-                                        setCommsMessage(
-                                            _("trade-comms", "Traded")
-                                        )
-                                    end
-                                    addCommsReply(_("Back"), commsShip)
-                                end
-                            )
-                            gi = gi + 1
-                        until gi > #goods[comms_target]
-                    else
-                        setCommsMessage(
-                            _("trade-comms", "Insufficient luxury to trade")
-                        )
-                    end
-                    addCommsReply(_("Back"), commsShip)
-                else
-                    -- Offer to sell goods
-                    gi = 1
-                    repeat
-                        local goodsType = goods[comms_target][gi][1]
-                        local goodsQuantity = goods[comms_target][gi][2]
-                        local goodsRep = goods[comms_target][gi][3]
-                        addCommsReply(
-                            string.format(
-                                _("trade-comms", "Buy one %s for %i reputation"),
-                                goods[comms_target][gi][1],
-                                goods[comms_target][gi][3]
-                            ),
-                            function()
-                                if comms_source.cargo < 1 then
-                                    setCommsMessage(
-                                        _(
-                                            "trade-comms",
-                                            "Insufficient cargo space for purchase"
-                                        )
-                                    )
-                                elseif goodsQuantity < 1 then
-                                    setCommsMessage(
-                                        _(
-                                            "trade-comms",
-                                            "Insufficient inventory on freighter"
-                                        )
-                                    )
-                                else
-                                    if
-                                        not comms_source:takeReputationPoints(
-                                            goodsRep
-                                        )
-                                    then
-                                        setCommsMessage(
-                                            _(
-                                                "needRep-comms",
-                                                "Insufficient reputation for purchase"
-                                            )
-                                        )
-                                    else
-                                        comms_source.cargo = comms_source.cargo
-                                            - 1
-                                        decrementShipGoods(goodsType)
-                                        incrementPlayerGoods(goodsType)
-                                        setCommsMessage(
-                                            _("trade-comms", "Purchased")
-                                        )
-                                    end
-                                end
-                                addCommsReply(_("Back"), commsShip)
-                            end
-                        )
-                        gi = gi + 1
-                    until gi > #goods[comms_target]
-                end
+        return false
+    end,
+    main_menu = commsShip,
+    init_goods = function(comms_target, comms_data)
+        if comms_data.goods == nil or goods[comms_target] == nil then
+            local selected_good = tableSelectRandom(component_goods)
+            if random(1, 100) < 40 then
+                selected_good = tableSelectRandom(mineral_goods)
             end
-        elseif comms_target.comms_data.friendlyness > 33 then
-            setCommsMessage(_("shipAssist-comms", "What do you want?"))
-            -- Offer to sell destination information
-            destRep = random(1, 5)
-            addCommsReply(
-                string.format(
-                    _(
-                        "trade-comms",
-                        "Where are you headed? (cost: %f reputation)"
-                    ),
-                    destRep
-                ),
-                function()
-                    if not comms_source:takeReputationPoints(destRep) then
-                        setCommsMessage(
-                            _("needRep-comms", "Insufficient reputation")
-                        )
-                    else
-                        setCommsMessage(comms_target.target:getCallSign())
-                    end
-                    addCommsReply(_("Back"), commsShip)
-                end
-            )
-            -- Offer to sell goods if goods or equipment freighter
-            if distance(comms_source, comms_target) < 5000 then
-                if
-                    shipType:find("Goods") ~= nil
-                    or shipType:find("Equipment") ~= nil
-                then
-                    gi = 1
-                    repeat
-                        local goodsType = goods[comms_target][gi][1]
-                        local goodsQuantity = goods[comms_target][gi][2]
-                        local goodsRep = goods[comms_target][gi][3]
-                        addCommsReply(
-                            string.format(
-                                _("trade-comms", "Buy one %s for %i reputation"),
-                                goods[comms_target][gi][1],
-                                goods[comms_target][gi][3]
-                            ),
-                            function()
-                                if comms_source.cargo < 1 then
-                                    setCommsMessage(
-                                        _(
-                                            "trade-comms",
-                                            "Insufficient cargo space for purchase"
-                                        )
-                                    )
-                                elseif goodsQuantity < 1 then
-                                    setCommsMessage(
-                                        _(
-                                            "trade-comms",
-                                            "Insufficient inventory on freighter"
-                                        )
-                                    )
-                                else
-                                    if
-                                        not comms_source:takeReputationPoints(
-                                            goodsRep
-                                        )
-                                    then
-                                        setCommsMessage(
-                                            _(
-                                                "needRep-comms",
-                                                "Insufficient reputation for purchase"
-                                            )
-                                        )
-                                    else
-                                        comms_source.cargo = comms_source.cargo
-                                            - 1
-                                        decrementShipGoods(goodsType)
-                                        incrementPlayerGoods(goodsType)
-                                        setCommsMessage(
-                                            _("trade-comms", "Purchased")
-                                        )
-                                    end
-                                end
-                                addCommsReply(_("Back"), commsShip)
-                            end
-                        )
-                        gi = gi + 1
-                    until gi > #goods[comms_target]
-                else
-                    -- Offer to sell goods double price
-                    gi = 1
-                    repeat
-                        local goodsType = goods[comms_target][gi][1]
-                        local goodsQuantity = goods[comms_target][gi][2]
-                        local goodsRep = goods[comms_target][gi][3] * 2
-                        addCommsReply(
-                            string.format(
-                                _("trade-comms", "Buy one %s for %i reputation"),
-                                goods[comms_target][gi][1],
-                                goods[comms_target][gi][3] * 2
-                            ),
-                            function()
-                                if comms_source.cargo < 1 then
-                                    setCommsMessage(
-                                        _(
-                                            "trade-comms",
-                                            "Insufficient cargo space for purchase"
-                                        )
-                                    )
-                                elseif goodsQuantity < 1 then
-                                    setCommsMessage(
-                                        _(
-                                            "trade-comms",
-                                            "Insufficient inventory on freighter"
-                                        )
-                                    )
-                                else
-                                    if
-                                        not comms_source:takeReputationPoints(
-                                            goodsRep
-                                        )
-                                    then
-                                        setCommsMessage(
-                                            _(
-                                                "needRep-comms",
-                                                "Insufficient reputation for purchase"
-                                            )
-                                        )
-                                    else
-                                        comms_source.cargo = comms_source.cargo
-                                            - 1
-                                        decrementShipGoods(goodsType)
-                                        incrementPlayerGoods(goodsType)
-                                        setCommsMessage(
-                                            _("trade-comms", "Purchased")
-                                        )
-                                    end
-                                end
-                                addCommsReply(_("Back"), commsShip)
-                            end
-                        )
-                        gi = gi + 1
-                    until gi > #goods[comms_target]
-                end
-            end
-        else
-            setCommsMessage(_("trade-comms", "Why are you bothering me?"))
-            -- Offer to sell goods if goods or equipment freighter double price
-            if distance(comms_source, comms_target) < 5000 then
-                if
-                    shipType:find("Goods") ~= nil
-                    or shipType:find("Equipment") ~= nil
-                then
-                    gi = 1
-                    repeat
-                        local goodsType = goods[comms_target][gi][1]
-                        local goodsQuantity = goods[comms_target][gi][2]
-                        local goodsRep = goods[comms_target][gi][3] * 2
-                        addCommsReply(
-                            string.format(
-                                _("trade-comms", "Buy one %s for %i reputation"),
-                                goods[comms_target][gi][1],
-                                goods[comms_target][gi][3] * 2
-                            ),
-                            function()
-                                if comms_source.cargo < 1 then
-                                    setCommsMessage(
-                                        _(
-                                            "trade-comms",
-                                            "Insufficient cargo space for purchase"
-                                        )
-                                    )
-                                elseif goodsQuantity < 1 then
-                                    setCommsMessage(
-                                        _(
-                                            "trade-comms",
-                                            "Insufficient inventory on freighter"
-                                        )
-                                    )
-                                else
-                                    if
-                                        not comms_source:takeReputationPoints(
-                                            goodsRep
-                                        )
-                                    then
-                                        setCommsMessage(
-                                            _(
-                                                "needRep-comms",
-                                                "Insufficient reputation for purchase"
-                                            )
-                                        )
-                                    else
-                                        comms_source.cargo = comms_source.cargo
-                                            - 1
-                                        decrementShipGoods(goodsType)
-                                        incrementPlayerGoods(goodsType)
-                                        setCommsMessage(
-                                            _("trade-comms", "Purchased")
-                                        )
-                                    end
-                                end
-                                addCommsReply(_("Back"), commsShip)
-                            end
-                        )
-                        gi = gi + 1
-                    until gi > #goods[comms_target]
-                end
-            end
+            local cost = math.random(20, 80)
+            comms_data.goods = {
+                [selected_good] = { cost = cost, quantity = 1 },
+            }
+            goods[comms_target] = { { selected_good, 1, cost } }
         end
-    else
-        if comms_target.comms_data.friendlyness > 50 then
-            setCommsMessage(
-                _(
-                    "ship-comms",
-                    "Sorry, we have no time to chat with you.\nWe are on an important mission."
-                )
-            )
-        else
-            setCommsMessage(
-                _("ship-comms", "We have nothing for you.\nGood day.")
-            )
-        end
-    end
-    return true
-end
+    end,
+    friendly_options = { "defend", "assist", "status", "dock" },
+    inventory = function(owner)
+        return goods[owner]
+    end,
+    inventory_format = "array",
+    trade = {
+        jettison = false,
+        require_cargo = false,
+        check_inventory = true,
+        multiplier = ShipComms.arrayTradeMultiplier,
+        luxury_neutral = true,
+        luxury_replaces_purchase = true,
+        purchase_message = function()
+            return _("trade-comms", "Purchased")
+        end,
+        luxury_message = function()
+            return _("trade-comms", "Traded")
+        end,
+    },
+    neutral_cargo_query = false,
+    neutral_message = ShipComms.freighterNeutralMessage,
+    neutral_destination_query = "paid",
+    neutral_destination_cost_format = "Where are you headed? (cost: %f reputation)",
+}
 ------------------------
 --  Cargo management  --
 ------------------------
-function incrementPlayerGoods(goodsType)
-    local gi = 1
-    repeat
-        if goods[comms_source][gi][1] == goodsType then
-            goods[comms_source][gi][2] = goods[comms_source][gi][2] + 1
-        end
-        gi = gi + 1
-    until gi > #goods[comms_source]
-end
-function decrementPlayerGoods(goodsType)
-    local gi = 1
-    repeat
-        if goods[comms_source][gi][1] == goodsType then
-            goods[comms_source][gi][2] = goods[comms_source][gi][2] - 1
-        end
-        gi = gi + 1
-    until gi > #goods[comms_source]
-end
-function decrementStationGoods(goodsType)
-    local gi = 1
-    repeat
-        if goods[comms_target][gi][1] == goodsType then
-            goods[comms_target][gi][2] = goods[comms_target][gi][2] - 1
-        end
-        gi = gi + 1
-    until gi > #goods[comms_target]
-end
-function decrementShipGoods(goodsType)
-    local gi = 1
-    repeat
-        if goods[comms_target][gi][1] == goodsType then
-            goods[comms_target][gi][2] = goods[comms_target][gi][2] - 1
-        end
-        gi = gi + 1
-    until gi > #goods[comms_target]
-end
 -- Target drones
 function spawnTargetDrone(originx, originy, targetDroneID, area, sequenceNumber)
     if shootBack then
@@ -5520,19 +3953,6 @@ function moveHazardPacMines(pmList, pmDiameter)
     end
 end
 -- Naming player ships
-function tableRemoveRandom(array)
-    -- Remove random element from array and return it.
-    -- Returns nil if the array is empty,
-    -- analogous to `table.remove`.
-    local array_item_count = #array
-    if array_item_count == 0 then
-        return nil
-    end
-    local selected_item = math.random(array_item_count)
-    array[selected_item], array[array_item_count] =
-        array[array_item_count], array[selected_item]
-    return table.remove(array)
-end
 function namePlayerShip(p, template_type)
     if
         playerShipNamesFor[template_type] ~= nil
@@ -6037,13 +4457,7 @@ function update(delta)
                         )
                     else
                         namePlayerShip(p, tempPlayerType)
-                        local control_code_index =
-                            math.random(1, #control_code_stem)
-                        local stem = control_code_stem[control_code_index]
-                        table.remove(control_code_stem, control_code_index)
-                        local branch = math.random(100, 999)
-                        p.control_code = stem .. branch
-                        p:setControlCode(stem .. branch)
+                        assignControlCode(p)
                     end
                     p.name = p:getCallSign()
                     local gi = 1

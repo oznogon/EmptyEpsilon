@@ -7,7 +7,10 @@ msgid ""
 "An entry level, learn to play scenario.  Designed for trainees in the Human "
 "Navy. Up to 16 player ships may train simultaneously. Based on Earn Your "
 "Wings Scenario by Kilted Klingon."
-msgstr "An entry level, learn to play scenario.  Designed for trainees in the Human Navy. Up to 16 player ships may train simultaneously. Based on Earn Your Wings Scenario by Kilted Klingon."
+msgstr ""
+"An entry level, learn to play scenario.  Designed for trainees in the Human "
+"Navy. Up to 16 player ships may train simultaneously. Based on Earn Your "
+"Wings Scenario by Kilted Klingon."
 
 # Scenario setting
 msgctxt "setting"
@@ -17,7 +20,8 @@ msgstr "Orbits"
 msgctxt "setting"
 msgid ""
 "Configures orbit speeds of planets. Further refinement available on GM screen"
-msgstr "Configures orbit speeds of planets. Further refinement available on GM screen"
+msgstr ""
+"Configures orbit speeds of planets. Further refinement available on GM screen"
 
 msgctxt "Orbits"
 msgid "Sedate"
@@ -213,7 +217,9 @@ msgctxt "Control"
 msgid ""
 "Control codes will be used. GM button Random PShip Names switches to random "
 "control codes and player ship names"
-msgstr "Control codes will be used. GM button Random PShip Names switches to random control codes and player ship names"
+msgstr ""
+"Control codes will be used. GM button Random PShip Names switches to random "
+"control codes and player ship names"
 
 msgctxt "Control"
 msgid "None"
@@ -232,7 +238,9 @@ msgctxt "setting"
 msgid ""
 "Configure whether a popup message for inexperienced players appears for each "
 "task"
-msgstr "Configure whether a popup message for inexperienced players appears for each task"
+msgstr ""
+"Configure whether a popup message for inexperienced players appears for each "
+"task"
 
 msgctxt "Crutch"
 msgid "Use"
@@ -267,7 +275,9 @@ msgctxt "Insight"
 msgid ""
 "Players see the number portion of their task evaluation, but not the "
 "evaluation portion"
-msgstr "Players see the number portion of their task evaluation, but not the evaluation portion"
+msgstr ""
+"Players see the number portion of their task evaluation, but not the "
+"evaluation portion"
 
 msgctxt "Insight"
 msgid "Yes"
@@ -285,7 +295,8 @@ msgstr "Names"
 msgctxt "setting"
 msgid ""
 "Configures whether player ship names are selected at random or are fixed"
-msgstr "Configures whether player ship names are selected at random or are fixed"
+msgstr ""
+"Configures whether player ship names are selected at random or are fixed"
 
 msgctxt "Names"
 msgid "Fixed"
@@ -303,288 +314,299 @@ msgctxt "Names"
 msgid "Player ship names are selected at random from a list"
 msgstr "Player ship names are selected at random from a list"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2389
-#: scripts/scenario_06_early_evaluation_exercise.lua:2421
+#: scripts/scenario_06_early_evaluation_exercise.lua:2326
+#: scripts/scenario_06_early_evaluation_exercise.lua:2358
 #, lua-format
 msgctxt "buttonGM"
 msgid "Version %s"
 msgstr "Version %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2392
-#: scripts/scenario_06_early_evaluation_exercise.lua:2424
+#: scripts/scenario_06_early_evaluation_exercise.lua:2329
+#: scripts/scenario_06_early_evaluation_exercise.lua:2361
 #, lua-format
 msgctxt "buttonGM"
 msgid ""
 "Scenario version %s\n"
 " LUA version %s"
-msgstr "Scenario version %s\n LUA version %s"
+msgstr ""
+"Scenario version %s\n"
+" LUA version %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2401
-#: scripts/scenario_06_early_evaluation_exercise.lua:2433
+#: scripts/scenario_06_early_evaluation_exercise.lua:2338
+#: scripts/scenario_06_early_evaluation_exercise.lua:2370
 msgctxt "buttonGM"
 msgid "Show control codes"
 msgstr "Show control codes"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2402
+#: scripts/scenario_06_early_evaluation_exercise.lua:2339
 msgctxt "buttonGM"
 msgid "Reset control codes"
 msgstr "Reset control codes"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2404
+#: scripts/scenario_06_early_evaluation_exercise.lua:2341
 msgctxt "buttonGM"
 msgid "+Orbital Scheme"
 msgstr "+Orbital Scheme"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2406
+#: scripts/scenario_06_early_evaluation_exercise.lua:2343
 msgctxt "buttonGM"
 msgid "Random PShip Names"
 msgstr "Random PShip Names"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2411
+#: scripts/scenario_06_early_evaluation_exercise.lua:2348
 msgctxt "buttonGM"
 msgid ""
 "Human Navy Player ship names will now be selected at random.\n"
 "Human Navy Player ship control codes will now be generated at random"
-msgstr "Human Navy Player ship names will now be selected at random.\nHuman Navy Player ship control codes will now be generated at random"
+msgstr ""
+"Human Navy Player ship names will now be selected at random.\n"
+"Human Navy Player ship control codes will now be generated at random"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2435
+#: scripts/scenario_06_early_evaluation_exercise.lua:2372
 msgctxt "buttonGM"
 msgid "+Evaluations"
 msgstr "+Evaluations"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2436
+#: scripts/scenario_06_early_evaluation_exercise.lua:2373
 msgctxt "buttonGM"
 msgid "+Trigger Waves"
 msgstr "+Trigger Waves"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2437
+#: scripts/scenario_06_early_evaluation_exercise.lua:2374
 msgctxt "buttonGM"
 msgid "+End Scenario"
 msgstr "+End Scenario"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2439
+#: scripts/scenario_06_early_evaluation_exercise.lua:2376
 msgctxt "buttonGM"
 msgid "+Trigger end task"
 msgstr "+Trigger end task"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2443
+#: scripts/scenario_06_early_evaluation_exercise.lua:2380
 msgctxt "msgGM"
 msgid ""
 "These triggers are for testing purposes. You should not use them with actual "
 "players."
-msgstr "These triggers are for testing purposes. You should not use them with actual players."
+msgstr ""
+"These triggers are for testing purposes. You should not use them with actual "
+"players."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2460
-#: scripts/scenario_06_early_evaluation_exercise.lua:2568
-#: scripts/scenario_06_early_evaluation_exercise.lua:2752
+#: scripts/scenario_06_early_evaluation_exercise.lua:2388
+#: scripts/scenario_06_early_evaluation_exercise.lua:2496
+#: scripts/scenario_06_early_evaluation_exercise.lua:2655
 msgctxt "buttonGM"
 msgid "-Main"
 msgstr "-Main"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2461
+#: scripts/scenario_06_early_evaluation_exercise.lua:2389
 msgctxt "buttonGM"
 msgid "Dock"
 msgstr "Dock"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2474
+#: scripts/scenario_06_early_evaluation_exercise.lua:2402
 msgctxt "msgGM"
 msgid ""
 "Docking frequencies set for all players. All player missile systems powered "
 "down. Players still have to dock, but the protocols have been set"
-msgstr "Docking frequencies set for all players. All player missile systems powered down. Players still have to dock, but the protocols have been set"
+msgstr ""
+"Docking frequencies set for all players. All player missile systems powered "
+"down. Players still have to dock, but the protocols have been set"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2478
+#: scripts/scenario_06_early_evaluation_exercise.lua:2406
 msgctxt "buttonGM"
 msgid "Scan"
 msgstr "Scan"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2491
+#: scripts/scenario_06_early_evaluation_exercise.lua:2419
 msgctxt "msgGM"
 msgid "Scan targets set to scanned for these players:"
 msgstr "Scan targets set to scanned for these players:"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2496
+#: scripts/scenario_06_early_evaluation_exercise.lua:2424
 #, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
 "They still need to report the results of the scans"
-msgstr "%s\nThey still need to report the results of the scans"
+msgstr ""
+"%s\n"
+"They still need to report the results of the scans"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2501
+#: scripts/scenario_06_early_evaluation_exercise.lua:2429
 msgctxt "buttonGM"
 msgid "Destroy freighter"
 msgstr "Destroy freighter"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2504
+#: scripts/scenario_06_early_evaluation_exercise.lua:2432
 msgctxt "msgGM"
 msgid "Player ships with corresponding Kraylor freighters destroyed:"
 msgstr "Player ships with corresponding Kraylor freighters destroyed:"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2514
+#: scripts/scenario_06_early_evaluation_exercise.lua:2442
 msgctxt "buttonGM"
 msgid "Assist Freighter"
 msgstr "Assist Freighter"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2517
+#: scripts/scenario_06_early_evaluation_exercise.lua:2445
 msgctxt "msgGM"
 msgid "Player ships with freighter fixed and marauders destroyed:"
 msgstr "Player ships with freighter fixed and marauders destroyed:"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2547
+#: scripts/scenario_06_early_evaluation_exercise.lua:2475
 msgctxt "buttonGM"
 msgid "Research"
 msgstr "Research"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2550
+#: scripts/scenario_06_early_evaluation_exercise.lua:2478
 msgctxt "msgGM"
 msgid ""
 "Player ships where research of orbital bodies has all been marked complete:"
-msgstr "Player ships where research of orbital bodies has all been marked complete:"
+msgstr ""
+"Player ships where research of orbital bodies has all been marked complete:"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2569
-#: scripts/scenario_06_early_evaluation_exercise.lua:2770
+#: scripts/scenario_06_early_evaluation_exercise.lua:2497
+#: scripts/scenario_06_early_evaluation_exercise.lua:2673
 msgctxt "buttonGM"
 msgid "+Scan"
 msgstr "+Scan"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2570
-#: scripts/scenario_06_early_evaluation_exercise.lua:2772
+#: scripts/scenario_06_early_evaluation_exercise.lua:2498
+#: scripts/scenario_06_early_evaluation_exercise.lua:2675
 msgctxt "buttonGM"
 msgid "+Destroy freighter"
 msgstr "+Destroy freighter"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2571
+#: scripts/scenario_06_early_evaluation_exercise.lua:2499
 msgctxt "buttonGM"
 msgid "+Assist Freighter"
 msgstr "+Assist Freighter"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2572
-#: scripts/scenario_06_early_evaluation_exercise.lua:2779
+#: scripts/scenario_06_early_evaluation_exercise.lua:2500
+#: scripts/scenario_06_early_evaluation_exercise.lua:2682
 msgctxt "buttonGM"
 msgid "+Research"
 msgstr "+Research"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2576
+#: scripts/scenario_06_early_evaluation_exercise.lua:2504
 msgctxt "buttonGM"
 msgid "-Main from scan"
 msgstr "-Main from scan"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2577
-#: scripts/scenario_06_early_evaluation_exercise.lua:2594
-#: scripts/scenario_06_early_evaluation_exercise.lua:2612
-#: scripts/scenario_06_early_evaluation_exercise.lua:2631
+#: scripts/scenario_06_early_evaluation_exercise.lua:2505
+#: scripts/scenario_06_early_evaluation_exercise.lua:2522
+#: scripts/scenario_06_early_evaluation_exercise.lua:2540
+#: scripts/scenario_06_early_evaluation_exercise.lua:2559
 msgctxt "buttonGM"
 msgid "-Jump"
 msgstr "-Jump"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2593
+#: scripts/scenario_06_early_evaluation_exercise.lua:2521
 msgctxt "buttonGM"
 msgid "-Main frm dstry frgtr"
 msgstr "-Main frm dstry frgtr"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2611
+#: scripts/scenario_06_early_evaluation_exercise.lua:2539
 msgctxt "buttonGM"
 msgid "-Main frm hlp frgtr"
 msgstr "-Main frm hlp frgtr"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2630
+#: scripts/scenario_06_early_evaluation_exercise.lua:2558
 msgctxt "buttonGM"
 msgid "-Main from research"
 msgstr "-Main from research"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2687
+#: scripts/scenario_06_early_evaluation_exercise.lua:2590
 msgctxt "buttonGM"
 msgid "Strix wave"
 msgstr "Strix wave"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2696
+#: scripts/scenario_06_early_evaluation_exercise.lua:2599
 msgctxt "buttonGM"
 msgid "Fighter wave"
 msgstr "Fighter wave"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2705
+#: scripts/scenario_06_early_evaluation_exercise.lua:2608
 msgctxt "buttonGM"
 msgid "Gunship wave"
 msgstr "Gunship wave"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2714
+#: scripts/scenario_06_early_evaluation_exercise.lua:2617
 msgctxt "buttonGM"
 msgid "Dreadnought"
 msgstr "Dreadnought"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2723
+#: scripts/scenario_06_early_evaluation_exercise.lua:2626
 msgctxt "buttonGM"
 msgid "Missile cruiser wave"
 msgstr "Missile cruiser wave"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2732
+#: scripts/scenario_06_early_evaluation_exercise.lua:2635
 msgctxt "buttonGM"
 msgid "Cruiser wave"
 msgstr "Cruiser wave"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2741
+#: scripts/scenario_06_early_evaluation_exercise.lua:2644
 msgctxt "buttonGM"
 msgid "Adv. striker wave"
 msgstr "Adv. striker wave"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2753
+#: scripts/scenario_06_early_evaluation_exercise.lua:2656
 msgctxt "buttonGM"
 msgid "Trainees win"
 msgstr "Trainees win"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2757
+#: scripts/scenario_06_early_evaluation_exercise.lua:2660
 msgctxt "buttonGM"
 msgid "Trainers win"
 msgstr "Trainers win"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2761
+#: scripts/scenario_06_early_evaluation_exercise.lua:2664
 msgctxt "buttonGM"
 msgid "Scenario wins"
 msgstr "Scenario wins"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2768
+#: scripts/scenario_06_early_evaluation_exercise.lua:2671
 msgctxt "buttonGM"
 msgid "-From evaluations"
 msgstr "-From evaluations"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2769
+#: scripts/scenario_06_early_evaluation_exercise.lua:2672
 msgctxt "buttonGM"
 msgid "+Dock"
 msgstr "+Dock"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2776
+#: scripts/scenario_06_early_evaluation_exercise.lua:2679
 msgctxt "buttonGM"
 msgid "+Assist freighter"
 msgstr "+Assist freighter"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2780
+#: scripts/scenario_06_early_evaluation_exercise.lua:2683
 msgctxt "buttonGM"
 msgid "+Bonus"
 msgstr "+Bonus"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2781
+#: scripts/scenario_06_early_evaluation_exercise.lua:2684
 msgctxt "buttonGM"
 msgid "+Posthumous"
 msgstr "+Posthumous"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2785
+#: scripts/scenario_06_early_evaluation_exercise.lua:2688
 msgctxt "buttonGM"
 msgid "-Main from Posthumous"
 msgstr "-Main from Posthumous"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2786
-#: scripts/scenario_06_early_evaluation_exercise.lua:2820
-#: scripts/scenario_06_early_evaluation_exercise.lua:2843
-#: scripts/scenario_06_early_evaluation_exercise.lua:2870
-#: scripts/scenario_06_early_evaluation_exercise.lua:2898
-#: scripts/scenario_06_early_evaluation_exercise.lua:2929
+#: scripts/scenario_06_early_evaluation_exercise.lua:2689
+#: scripts/scenario_06_early_evaluation_exercise.lua:2723
+#: scripts/scenario_06_early_evaluation_exercise.lua:2746
+#: scripts/scenario_06_early_evaluation_exercise.lua:2773
+#: scripts/scenario_06_early_evaluation_exercise.lua:2801
+#: scripts/scenario_06_early_evaluation_exercise.lua:2832
 msgctxt "buttonGM"
 msgid "-Evaluations"
 msgstr "-Evaluations"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2789
-#: scripts/scenario_06_early_evaluation_exercise.lua:8510
+#: scripts/scenario_06_early_evaluation_exercise.lua:2692
+#: scripts/scenario_06_early_evaluation_exercise.lua:7424
 msgctxt "evaluation-comms"
 msgid ""
 "Posthumous evaluations are intended for those times when you want the "
@@ -602,64 +624,88 @@ msgid ""
 "C = Competent\n"
 "E = Exceeds expectations\n"
 "S = Superior"
-msgstr "Posthumous evaluations are intended for those times when you want the evaluation information, but the player ship has been destroyed. A copy is made in the posthumous list at the time the task is completed. So, just because they are on the posthumous list does not mean the player ship has been destroyed. Only the first instance of a task is recorded. If the player ship does a task again, the posthumous table only keeps their first attempt. If they are destroyed a second time, no new record is made of any tasks they had already completed the first time. Of course if they live, their current evaluation information is attached to their ship and thus is available.\n\nSingle letter evaluation decode:\nN = Needs improvement\nC = Competent\nE = Exceeds expectations\nS = Superior"
+msgstr ""
+"Posthumous evaluations are intended for those times when you want the "
+"evaluation information, but the player ship has been destroyed. A copy is "
+"made in the posthumous list at the time the task is completed. So, just "
+"because they are on the posthumous list does not mean the player ship has "
+"been destroyed. Only the first instance of a task is recorded. If the player "
+"ship does a task again, the posthumous table only keeps their first attempt. "
+"If they are destroyed a second time, no new record is made of any tasks they "
+"had already completed the first time. Of course if they live, their current "
+"evaluation information is attached to their ship and thus is available.\n"
+"\n"
+"Single letter evaluation decode:\n"
+"N = Needs improvement\n"
+"C = Competent\n"
+"E = Exceeds expectations\n"
+"S = Superior"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2797
-#: scripts/scenario_06_early_evaluation_exercise.lua:8518
+#: scripts/scenario_06_early_evaluation_exercise.lua:2700
+#: scripts/scenario_06_early_evaluation_exercise.lua:7432
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s     %s     Clock: %.1f\n"
 "%s"
-msgstr "%s     %s     Clock: %.1f\n%s"
+msgstr ""
+"%s     %s     Clock: %.1f\n"
+"%s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2810
-#: scripts/scenario_06_early_evaluation_exercise.lua:8532
+#: scripts/scenario_06_early_evaluation_exercise.lua:2713
+#: scripts/scenario_06_early_evaluation_exercise.lua:7446
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "\n"
 "No tasks completed, so no tasks recorded in the posthumous table"
-msgstr "%s\n\nNo tasks completed, so no tasks recorded in the posthumous table"
+msgstr ""
+"%s\n"
+"\n"
+"No tasks completed, so no tasks recorded in the posthumous table"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2819
+#: scripts/scenario_06_early_evaluation_exercise.lua:2722
 msgctxt "buttonGM"
 msgid "-Main from Bonus"
 msgstr "-Main from Bonus"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2826
+#: scripts/scenario_06_early_evaluation_exercise.lua:2729
 msgctxt "evaluation-comms"
 msgid "Research task is not complete, no bonus possible yet"
 msgstr "Research task is not complete, no bonus possible yet"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2831
+#: scripts/scenario_06_early_evaluation_exercise.lua:2734
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s Bonus Evaluation:\n"
 "%s"
-msgstr "%s Bonus Evaluation:\n%s"
+msgstr ""
+"%s Bonus Evaluation:\n"
+"%s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2842
+#: scripts/scenario_06_early_evaluation_exercise.lua:2745
 msgctxt "buttonGM"
 msgid "-Main from Research"
 msgstr "-Main from Research"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2847
+#: scripts/scenario_06_early_evaluation_exercise.lua:2750
 msgctxt "evaluation-comms"
 msgid "Research task is not complete"
 msgstr "Research task is not complete"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2851
+#: scripts/scenario_06_early_evaluation_exercise.lua:2754
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s Research Evaluation:\n"
 "%s"
-msgstr "%s Research Evaluation:\n%s"
+msgstr ""
+"%s Research Evaluation:\n"
+"%s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2859
+#: scripts/scenario_06_early_evaluation_exercise.lua:2762
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
@@ -671,27 +717,38 @@ msgid ""
 "Did Engineering boost maneuver for Helm? Did Helm request a maneuver boost?\n"
 "Was Weapons diligent about the shields?\n"
 "Did Science let everyone know when the data was gathered for a planet?"
-msgstr "%s\n\nSuggested subjective evaluation criteria:\nDid anyone suggest using probes to gather data?\nDid Relay put out waypoints for guidance around the planets?\nDid Engineering boost manoeuvre for Helm? Did Helm request a manoeuvre boost?\nWas Weapons diligent about the shields?\nDid Science let everyone know when the data was gathered for a planet?"
+msgstr ""
+"%s\n"
+"\n"
+"Suggested subjective evaluation criteria:\n"
+"Did anyone suggest using probes to gather data?\n"
+"Did Relay put out waypoints for guidance around the planets?\n"
+"Did Engineering boost manoeuvre for Helm? Did Helm request a manoeuvre "
+"boost?\n"
+"Was Weapons diligent about the shields?\n"
+"Did Science let everyone know when the data was gathered for a planet?"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2869
+#: scripts/scenario_06_early_evaluation_exercise.lua:2772
 msgctxt "buttonGM"
 msgid "-Main frm Help Frgtr"
 msgstr "-Main frm Help Frgtr"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2875
+#: scripts/scenario_06_early_evaluation_exercise.lua:2778
 msgctxt "evaluation-comms"
 msgid "Assist freighter task is not complete"
 msgstr "Assist freighter task is not complete"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2879
+#: scripts/scenario_06_early_evaluation_exercise.lua:2782
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s Assist Freighter Evaluation:\n"
 "%s"
-msgstr "%s Assist Freighter Evaluation:\n%s"
+msgstr ""
+"%s Assist Freighter Evaluation:\n"
+"%s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2887
+#: scripts/scenario_06_early_evaluation_exercise.lua:2790
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
@@ -709,27 +766,43 @@ msgid ""
 "Did Science provide beam frequencies for Weapons? Did Science keep the crew "
 "informed on the shield/hull status of enemies?\n"
 "Did Relay hack any enemy systems?"
-msgstr "%s\n\nSuggested subjective evaluation criteria:\nDid anyone suggest using probes to find the freighter?\nDid Relay put out waypoints for the freighter and the home station?\nHow did the captain and crew handle the balancing of getting the parts and protecting the freighter?\nHow well did the crew coordinate during combat?\nWere targets prioritised/identified?\nDid Engineering boost systems based on weapon use?\nWas the type of combat identified (beam/missile)?\nDid Science provide beam frequencies for Weapons? Did Science keep the crew informed on the shield/hull status of enemies?\nDid Relay hack any enemy systems?"
+msgstr ""
+"%s\n"
+"\n"
+"Suggested subjective evaluation criteria:\n"
+"Did anyone suggest using probes to find the freighter?\n"
+"Did Relay put out waypoints for the freighter and the home station?\n"
+"How did the captain and crew handle the balancing of getting the parts and "
+"protecting the freighter?\n"
+"How well did the crew coordinate during combat?\n"
+"Were targets prioritised/identified?\n"
+"Did Engineering boost systems based on weapon use?\n"
+"Was the type of combat identified (beam/missile)?\n"
+"Did Science provide beam frequencies for Weapons? Did Science keep the crew "
+"informed on the shield/hull status of enemies?\n"
+"Did Relay hack any enemy systems?"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2897
+#: scripts/scenario_06_early_evaluation_exercise.lua:2800
 msgctxt "buttonGM"
 msgid "-Main frm Destroy Frgtr"
 msgstr "-Main frm Destroy Frgtr"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2903
+#: scripts/scenario_06_early_evaluation_exercise.lua:2806
 msgctxt "evaluation-comms"
 msgid "Destroy freighter task is not complete"
 msgstr "Destroy freighter task is not complete"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2909
+#: scripts/scenario_06_early_evaluation_exercise.lua:2812
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s Destroy Freighter Evaluation:\n"
 "%s"
-msgstr "%s Destroy Freighter Evaluation:\n%s"
+msgstr ""
+"%s Destroy Freighter Evaluation:\n"
+"%s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2918
+#: scripts/scenario_06_early_evaluation_exercise.lua:2821
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
@@ -746,27 +819,42 @@ msgid ""
 "communicated?\n"
 "Did Science provide details on enemy shield and hull strengths?\n"
 "How well did Helm and Weapons coordinate the firing of HVLIs?"
-msgstr "%s\n\nSuggested subjective evaluation criteria:\nDid Helm and Science coordinate verbally to determine where to go to destroy the freighter?\nDid Weapons and Engineering collaborate on boosting applicable combat systems like missiles?\nDid Helm indicate the method of approaching the enemy freighter (impulse/jump)?\nDid Relay hack the enemy ship? If so, what systems and were those communicated?\nDid Science provide details on enemy shield and hull strengths?\nHow well did Helm and Weapons coordinate the firing of HVLIs?"
+msgstr ""
+"%s\n"
+"\n"
+"Suggested subjective evaluation criteria:\n"
+"Did Helm and Science coordinate verbally to determine where to go to destroy "
+"the freighter?\n"
+"Did Weapons and Engineering collaborate on boosting applicable combat "
+"systems like missiles?\n"
+"Did Helm indicate the method of approaching the enemy freighter (impulse/"
+"jump)?\n"
+"Did Relay hack the enemy ship? If so, what systems and were those "
+"communicated?\n"
+"Did Science provide details on enemy shield and hull strengths?\n"
+"How well did Helm and Weapons coordinate the firing of HVLIs?"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2928
+#: scripts/scenario_06_early_evaluation_exercise.lua:2831
 msgctxt "buttonGM"
 msgid "-Main from Scan"
 msgstr "-Main from Scan"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2933
+#: scripts/scenario_06_early_evaluation_exercise.lua:2836
 msgctxt "evaluation-comms"
 msgid "Scan task is not complete"
 msgstr "Scan task is not complete"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2937
+#: scripts/scenario_06_early_evaluation_exercise.lua:2840
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s Scan Evaluation:\n"
 "%s"
-msgstr "%s Scan Evaluation:\n%s"
+msgstr ""
+"%s Scan Evaluation:\n"
+"%s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2945
+#: scripts/scenario_06_early_evaluation_exercise.lua:2848
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
@@ -777,27 +865,36 @@ msgid ""
 "Did Science communicate which target he started scanning first?\n"
 "Was Relay standing by to report the scan results as soon as they came in?\n"
 "Was there clear communication between Science and Relay?"
-msgstr "%s\n\nSuggested subjective evaluation criteria:\nDid science request a probe in the nebula?\nDid Science communicate which target he started scanning first?\nWas Relay standing by to report the scan results as soon as they came in?\nWas there clear communication between Science and Relay?"
+msgstr ""
+"%s\n"
+"\n"
+"Suggested subjective evaluation criteria:\n"
+"Did science request a probe in the nebula?\n"
+"Did Science communicate which target he started scanning first?\n"
+"Was Relay standing by to report the scan results as soon as they came in?\n"
+"Was there clear communication between Science and Relay?"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2955
+#: scripts/scenario_06_early_evaluation_exercise.lua:2858
 msgctxt "buttonGM"
 msgid "-Main from Dock"
 msgstr "-Main from Dock"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2960
+#: scripts/scenario_06_early_evaluation_exercise.lua:2863
 msgctxt "evaluation-comms"
 msgid "Dock task is not complete"
 msgstr "Dock task is not complete"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2964
+#: scripts/scenario_06_early_evaluation_exercise.lua:2867
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s Dock Evaluation:\n"
 "%s"
-msgstr "%s Dock Evaluation:\n%s"
+msgstr ""
+"%s Dock Evaluation:\n"
+"%s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2972
+#: scripts/scenario_06_early_evaluation_exercise.lua:2875
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
@@ -810,146 +907,153 @@ msgid ""
 "Did Helm request an impulse boost to get to the station more quickly?\n"
 "Did Helm fly backwards to the station?\n"
 "Did Engineering confirm that missile systems were powered down?"
-msgstr "%s\n\nSuggested subjective evaluation criteria (mostly about collaboration and communication):\nDid Relay verbally communicate the initial instructions? How about the docking protocol to Weapons and Engineering?\nDid Helm request an impulse boost to get to the station more quickly?\nDid Helm fly backwards to the station?\nDid Engineering confirm that missile systems were powered down?"
+msgstr ""
+"%s\n"
+"\n"
+"Suggested subjective evaluation criteria (mostly about collaboration and "
+"communication):\n"
+"Did Relay verbally communicate the initial instructions? How about the "
+"docking protocol to Weapons and Engineering?\n"
+"Did Helm request an impulse boost to get to the station more quickly?\n"
+"Did Helm fly backwards to the station?\n"
+"Did Engineering confirm that missile systems were powered down?"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:2986
+#: scripts/scenario_06_early_evaluation_exercise.lua:2889
 msgctxt "buttonGM"
 msgid "-From Orbit Scheme"
 msgstr "-From Orbit Scheme"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:3002
+#: scripts/scenario_06_early_evaluation_exercise.lua:2905
 #, lua-format
 msgctxt "buttonGM"
 msgid "Faster in %.2f -> %.2f"
 msgstr "Faster in %.2f -> %.2f"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:3015
+#: scripts/scenario_06_early_evaluation_exercise.lua:2918
 #, lua-format
 msgctxt "buttonGM"
 msgid "Slower in %.2f -> %.2f"
 msgstr "Slower in %.2f -> %.2f"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:3028
+#: scripts/scenario_06_early_evaluation_exercise.lua:2931
 #, lua-format
 msgctxt "buttonGM"
 msgid "Faster out %.2f -> %.2f"
 msgstr "Faster out %.2f -> %.2f"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:3041
+#: scripts/scenario_06_early_evaluation_exercise.lua:2944
 #, lua-format
 msgctxt "buttonGM"
 msgid "Slower out %.2f -> %.2f"
 msgstr "Slower out %.2f -> %.2f"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:3105
+#: scripts/scenario_06_early_evaluation_exercise.lua:3008
 msgctxt "callsign-blackhole"
 msgid "Balor"
 msgstr "Balor"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:3106
+#: scripts/scenario_06_early_evaluation_exercise.lua:3009
 msgctxt "callsign-planet"
 msgid "Draugr"
 msgstr "Draugr"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:3107
+#: scripts/scenario_06_early_evaluation_exercise.lua:3010
 msgctxt "callsign-planet"
 msgid "Dimidium"
 msgstr "Dimidium"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:3108
+#: scripts/scenario_06_early_evaluation_exercise.lua:3011
 msgctxt "callsign-planet"
 msgid "Phobetor"
 msgstr "Phobetor"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:3109
+#: scripts/scenario_06_early_evaluation_exercise.lua:3012
 msgctxt "callsign-planet"
 msgid "Saffar"
 msgstr "Saffar"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:3110
+#: scripts/scenario_06_early_evaluation_exercise.lua:3013
 msgctxt "callsign-planet"
 msgid "Keplar-452b"
 msgstr "Keplar-452b"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:3111
+#: scripts/scenario_06_early_evaluation_exercise.lua:3014
 msgctxt "callsign-planet"
 msgid "HD 23472 d"
 msgstr "HD 23472 d"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:3112
+#: scripts/scenario_06_early_evaluation_exercise.lua:3015
 msgctxt "callsign-planet"
 msgid "K2-89 b"
 msgstr "K2-89 b"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:3113
+#: scripts/scenario_06_early_evaluation_exercise.lua:3016
 msgctxt "callsign-planet"
 msgid "Samh"
 msgstr "Samh"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:3114
+#: scripts/scenario_06_early_evaluation_exercise.lua:3017
 msgctxt "callsign-planet"
 msgid "GJ 1061 d"
 msgstr "GJ 1061 d"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:3115
+#: scripts/scenario_06_early_evaluation_exercise.lua:3018
 msgctxt "callsign-planet"
 msgid "Teegarden's Star b"
 msgstr "Teegarden's Star b"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:3116
+#: scripts/scenario_06_early_evaluation_exercise.lua:3019
 msgctxt "callsign-planet"
 msgid "Wolf 503b"
 msgstr "Wolf 503b"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:3117
+#: scripts/scenario_06_early_evaluation_exercise.lua:3020
 msgctxt "callsign-planet"
 msgid "YZ Ceti b"
 msgstr "YZ Ceti b"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:3843
-#: scripts/scenario_06_early_evaluation_exercise.lua:3927
-#: scripts/scenario_06_early_evaluation_exercise.lua:3988
-#: scripts/scenario_06_early_evaluation_exercise.lua:4038
+#: scripts/scenario_06_early_evaluation_exercise.lua:3627
+#: scripts/scenario_06_early_evaluation_exercise.lua:3711
+#: scripts/scenario_06_early_evaluation_exercise.lua:3772
+#: scripts/scenario_06_early_evaluation_exercise.lua:3822
 #, lua-format
 msgctxt "msgScience"
 msgid "Scan complete for %s"
 msgstr "Scan complete for %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:3856
-#: scripts/scenario_06_early_evaluation_exercise.lua:3940
-#: scripts/scenario_06_early_evaluation_exercise.lua:4000
-#: scripts/scenario_06_early_evaluation_exercise.lua:4051
+#: scripts/scenario_06_early_evaluation_exercise.lua:3640
+#: scripts/scenario_06_early_evaluation_exercise.lua:3724
+#: scripts/scenario_06_early_evaluation_exercise.lua:3784
+#: scripts/scenario_06_early_evaluation_exercise.lua:3835
 #, lua-format
 msgctxt "msgOperations"
 msgid "Scan complete for %s"
 msgstr "Scan complete for %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:4851
+#: scripts/scenario_06_early_evaluation_exercise.lua:4581
 msgctxt "shipLog"
 msgid ""
 "Destroy Human Navy ships and bases. You might get help from Independent "
 "bases. Destroying Exuari is secondary but glorifies the Kraylor empire in "
 "the eyes of those around you. Avoid planetary bodies."
-msgstr "Destroy Human Navy ships and bases. You might get help from Independent bases. Destroying Exuari is secondary but glorifies the Kraylor empire in the eyes of those around you. Avoid planetary bodies."
+msgstr ""
+"Destroy Human Navy ships and bases. You might get help from Independent "
+"bases. Destroying Exuari is secondary but glorifies the Kraylor empire in "
+"the eyes of those around you. Avoid planetary bodies."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5192
+#: scripts/scenario_06_early_evaluation_exercise.lua:4917
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s has been destroyed%s! Respawning"
 msgstr "%s has been destroyed%s! Respawning"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5205
+#: scripts/scenario_06_early_evaluation_exercise.lua:4930
 #, lua-format
 msgctxt "shipLog"
 msgid "%s has been destroyed%s! All crew lost. Rest in peace"
 msgstr "%s has been destroyed%s! All crew lost. Rest in peace"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5271
-msgctxt "station-comms"
-msgid "We are under attack! No time for chatting!"
-msgstr "We are under attack! No time for chatting!"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:5282
+#: scripts/scenario_06_early_evaluation_exercise.lua:4959
 #, lua-format
 msgctxt "station-comms"
 msgid ""
@@ -958,99 +1062,118 @@ msgid ""
 "evaluation.\n"
 "\n"
 "Ready for your first task?"
-msgstr "Greetings captain and crew of %s. You have been assigned to station %s. You will be given several tasks. For each task, you will be provided an evaluation.\n\nReady for your first task?"
+msgstr ""
+"Greetings captain and crew of %s. You have been assigned to station %s. You "
+"will be given several tasks. For each task, you will be provided an "
+"evaluation.\n"
+"\n"
+"Ready for your first task?"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5289
+#: scripts/scenario_06_early_evaluation_exercise.lua:4966
 msgctxt "station-comms"
 msgid "We are ready for our first task"
 msgstr "We are ready for our first task"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5302
+#: scripts/scenario_06_early_evaluation_exercise.lua:4979
 #, lua-format
 msgctxt "station-comms"
 msgid ""
 "Your first task is to dock with %s. Check with the docking port authority on "
 "%s for any docking protocols. Your evaluation has begun. Clock: %s"
-msgstr "Your first task is to dock with %s. Check with the docking port authority on %s for any docking protocols. Your evaluation has begun. Clock: %s"
+msgstr ""
+"Your first task is to dock with %s. Check with the docking port authority on "
+"%s for any docking protocols. Your evaluation has begun. Clock: %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5316
+#: scripts/scenario_06_early_evaluation_exercise.lua:4993
 #, lua-format
 msgctxt "station-comms"
 msgid ""
 "Congratulations on completing your docking task, %s. Are you ready for your "
 "next task?"
-msgstr "Congratulations on completing your docking task, %s. Are you ready for your next task?"
+msgstr ""
+"Congratulations on completing your docking task, %s. Are you ready for your "
+"next task?"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5322
-#: scripts/scenario_06_early_evaluation_exercise.lua:5630
-#: scripts/scenario_06_early_evaluation_exercise.lua:5673
-#: scripts/scenario_06_early_evaluation_exercise.lua:6589
-#: scripts/scenario_06_early_evaluation_exercise.lua:6628
-#: scripts/scenario_06_early_evaluation_exercise.lua:8543
+#: scripts/scenario_06_early_evaluation_exercise.lua:4999
+#: scripts/scenario_06_early_evaluation_exercise.lua:5275
+#: scripts/scenario_06_early_evaluation_exercise.lua:5318
+#: scripts/scenario_06_early_evaluation_exercise.lua:5491
+#: scripts/scenario_06_early_evaluation_exercise.lua:5530
+#: scripts/scenario_06_early_evaluation_exercise.lua:7457
 msgctxt "station-comms"
 msgid "View docking task evalutation"
 msgstr "View docking task evalutation"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5326
+#: scripts/scenario_06_early_evaluation_exercise.lua:5003
 msgctxt "station-comms"
 msgid "We are ready for our second task"
 msgstr "We are ready for our second task"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5339
+#: scripts/scenario_06_early_evaluation_exercise.lua:5016
 #, lua-format
 msgctxt "station-comms"
 msgid ""
 "Identify the targets at bearing %.1f from %s. A probe might help. Report "
 "those details to us once you've completed your scans. Your evaluation has "
 "begun. Clock: %s"
-msgstr "Identify the targets at bearing %.1f from %s. A probe might help. Report those details to us once you've completed your scans. Your evaluation has begun. Clock: %s"
+msgstr ""
+"Identify the targets at bearing %.1f from %s. A probe might help. Report "
+"those details to us once you've completed your scans. Your evaluation has "
+"begun. Clock: %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5353
+#: scripts/scenario_06_early_evaluation_exercise.lua:5030
 #, lua-format
 msgctxt "station-comms"
 msgid ""
 "Congratulations on completing your scanning task, %s. Are you ready for your "
 "next task?"
-msgstr "Congratulations on completing your scanning task, %s. Are you ready for your next task?"
+msgstr ""
+"Congratulations on completing your scanning task, %s. Are you ready for your "
+"next task?"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5359
+#: scripts/scenario_06_early_evaluation_exercise.lua:5036
 msgctxt "station-comms"
 msgid "View scanning task evaluation"
 msgstr "View scanning task evaluation"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5363
+#: scripts/scenario_06_early_evaluation_exercise.lua:5040
 msgctxt "station-comms"
 msgid "We are ready for our third task"
 msgstr "We are ready for our third task"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5377
+#: scripts/scenario_06_early_evaluation_exercise.lua:5054
 #, lua-format
 msgctxt "station-comms"
 msgid ""
 "Destroy the Kraylor freighter you identified during your scanning task. Use "
 "HVLI. Your beams will take too long to cycle. Your evaluation has begun. "
 "Clock: %s"
-msgstr "Destroy the Kraylor freighter you identified during your scanning task. Use HVLI. Your beams will take too long to cycle. Your evaluation has begun. Clock: %s"
+msgstr ""
+"Destroy the Kraylor freighter you identified during your scanning task. Use "
+"HVLI. Your beams will take too long to cycle. Your evaluation has begun. "
+"Clock: %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5391
+#: scripts/scenario_06_early_evaluation_exercise.lua:5068
 #, lua-format
 msgctxt "station-comms"
 msgid ""
 "Congratulations on completing your task to destroy that Kraylor freighter, "
 "%s. Are you ready for your next task?"
-msgstr "Congratulations on completing your task to destroy that Kraylor freighter, %s. Are you ready for your next task?"
+msgstr ""
+"Congratulations on completing your task to destroy that Kraylor freighter, "
+"%s. Are you ready for your next task?"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5397
+#: scripts/scenario_06_early_evaluation_exercise.lua:5074
 msgctxt "station-comms"
 msgid "View destroy freighter task evaluation"
 msgstr "View destroy freighter task evaluation"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5401
+#: scripts/scenario_06_early_evaluation_exercise.lua:5078
 msgctxt "station-comms"
 msgid "We are ready for our fourth task"
 msgstr "We are ready for our fourth task"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5415
+#: scripts/scenario_06_early_evaluation_exercise.lua:5092
 #, lua-format
 msgctxt "station-comms"
 msgid ""
@@ -1061,141 +1184,124 @@ msgid ""
 "%s has the repair parts for their engines, but will need details on the "
 "problem before providing any parts. You can find %s in sector %s. Your "
 "combat systems are fully operational. Your evaluation has begun. Clock: %s"
-msgstr "We received a distress call from Arlenian freighter %s. They report experiencing engine trouble, but the report lacked technical details. They're worried about possible Kraylor nearby. Your task: talk to them, find out about their needs, help them and protect them if necessary. Most likely, %s has the repair parts for their engines, but will need details on the problem before providing any parts. You can find %s in sector %s. Your combat systems are fully operational. Your evaluation has begun. Clock: %s"
+msgstr ""
+"We received a distress call from Arlenian freighter %s. They report "
+"experiencing engine trouble, but the report lacked technical details. "
+"They're worried about possible Kraylor nearby. Your task: talk to them, find "
+"out about their needs, help them and protect them if necessary. Most likely, "
+"%s has the repair parts for their engines, but will need details on the "
+"problem before providing any parts. You can find %s in sector %s. Your "
+"combat systems are fully operational. Your evaluation has begun. Clock: %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5431
+#: scripts/scenario_06_early_evaluation_exercise.lua:5108
 #, lua-format
 msgctxt "station-comms"
 msgid ""
 "We just received a panicky call from Arlenian freighter %s. Their sensors "
 "have picked up Kraylor fighters 20 units away headed for them at 4.8 units "
 "per minute. They urgently request you come protect them."
-msgstr "We just received a panicky call from Arlenian freighter %s. Their sensors have picked up Kraylor fighters 20 units away headed for them at 4.8 units per minute. They urgently request you come protect them."
+msgstr ""
+"We just received a panicky call from Arlenian freighter %s. Their sensors "
+"have picked up Kraylor fighters 20 units away headed for them at 4.8 units "
+"per minute. They urgently request you come protect them."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5444
-#: scripts/scenario_06_early_evaluation_exercise.lua:5583
-#: scripts/scenario_06_early_evaluation_exercise.lua:5669
-#: scripts/scenario_06_early_evaluation_exercise.lua:5860
-#: scripts/scenario_06_early_evaluation_exercise.lua:5951
-#: scripts/scenario_06_early_evaluation_exercise.lua:5996
-#: scripts/scenario_06_early_evaluation_exercise.lua:6041
-#: scripts/scenario_06_early_evaluation_exercise.lua:6089
-#: scripts/scenario_06_early_evaluation_exercise.lua:6135
-#: scripts/scenario_06_early_evaluation_exercise.lua:6140
-#: scripts/scenario_06_early_evaluation_exercise.lua:6251
-#: scripts/scenario_06_early_evaluation_exercise.lua:6298
-#: scripts/scenario_06_early_evaluation_exercise.lua:6429
-#: scripts/scenario_06_early_evaluation_exercise.lua:6501
-#: scripts/scenario_06_early_evaluation_exercise.lua:6508
-#: scripts/scenario_06_early_evaluation_exercise.lua:6562
-#: scripts/scenario_06_early_evaluation_exercise.lua:6624
-#: scripts/scenario_06_early_evaluation_exercise.lua:6680
-#: scripts/scenario_06_early_evaluation_exercise.lua:6835
-#: scripts/scenario_06_early_evaluation_exercise.lua:6868
-#: scripts/scenario_06_early_evaluation_exercise.lua:6880
-#: scripts/scenario_06_early_evaluation_exercise.lua:6896
-#: scripts/scenario_06_early_evaluation_exercise.lua:7040
-#: scripts/scenario_06_early_evaluation_exercise.lua:7047
-#: scripts/scenario_06_early_evaluation_exercise.lua:7117
-#: scripts/scenario_06_early_evaluation_exercise.lua:7181
-#: scripts/scenario_06_early_evaluation_exercise.lua:7188
-#: scripts/scenario_06_early_evaluation_exercise.lua:7263
-#: scripts/scenario_06_early_evaluation_exercise.lua:7307
-#: scripts/scenario_06_early_evaluation_exercise.lua:7322
-#: scripts/scenario_06_early_evaluation_exercise.lua:7364
-#: scripts/scenario_06_early_evaluation_exercise.lua:7569
-#: scripts/scenario_06_early_evaluation_exercise.lua:7726
-#: scripts/scenario_06_early_evaluation_exercise.lua:7827
-#: scripts/scenario_06_early_evaluation_exercise.lua:8213
-#: scripts/scenario_06_early_evaluation_exercise.lua:8396
-#: scripts/scenario_06_early_evaluation_exercise.lua:8525
-#: scripts/scenario_06_early_evaluation_exercise.lua:8546
-#: scripts/scenario_06_early_evaluation_exercise.lua:8553
-#: scripts/scenario_06_early_evaluation_exercise.lua:8562
-#: scripts/scenario_06_early_evaluation_exercise.lua:8571
-#: scripts/scenario_06_early_evaluation_exercise.lua:8580
-#: scripts/scenario_06_early_evaluation_exercise.lua:8583
-#: scripts/scenario_06_early_evaluation_exercise.lua:8585
-#: scripts/scenario_06_early_evaluation_exercise.lua:8683
-#: scripts/scenario_06_early_evaluation_exercise.lua:8688
-#: scripts/scenario_06_early_evaluation_exercise.lua:8696
-#: scripts/scenario_06_early_evaluation_exercise.lua:8783
-#: scripts/scenario_06_early_evaluation_exercise.lua:8803
-#: scripts/scenario_06_early_evaluation_exercise.lua:8845
-#: scripts/scenario_06_early_evaluation_exercise.lua:8887
-#: scripts/scenario_06_early_evaluation_exercise.lua:8942
-#: scripts/scenario_06_early_evaluation_exercise.lua:9003
-#: scripts/scenario_06_early_evaluation_exercise.lua:9058
-#: scripts/scenario_06_early_evaluation_exercise.lua:9120
-#: scripts/scenario_06_early_evaluation_exercise.lua:9148
-#: scripts/scenario_06_early_evaluation_exercise.lua:9911
-#: scripts/scenario_06_early_evaluation_exercise.lua:9914
-#: scripts/scenario_06_early_evaluation_exercise.lua:9917
-#: scripts/scenario_06_early_evaluation_exercise.lua:10020
-#: scripts/scenario_06_early_evaluation_exercise.lua:10052
-#: scripts/scenario_06_early_evaluation_exercise.lua:10056
-#: scripts/scenario_06_early_evaluation_exercise.lua:10114
-#: scripts/scenario_06_early_evaluation_exercise.lua:10169
-#: scripts/scenario_06_early_evaluation_exercise.lua:10229
-#: scripts/scenario_06_early_evaluation_exercise.lua:10284
-#: scripts/scenario_06_early_evaluation_exercise.lua:10344
+#: scripts/scenario_06_early_evaluation_exercise.lua:5121
+#: scripts/scenario_06_early_evaluation_exercise.lua:5222
+#: scripts/scenario_06_early_evaluation_exercise.lua:5314
+#: scripts/scenario_06_early_evaluation_exercise.lua:5370
+#: scripts/scenario_06_early_evaluation_exercise.lua:5462
+#: scripts/scenario_06_early_evaluation_exercise.lua:5526
+#: scripts/scenario_06_early_evaluation_exercise.lua:5585
+#: scripts/scenario_06_early_evaluation_exercise.lua:5743
+#: scripts/scenario_06_early_evaluation_exercise.lua:5954
+#: scripts/scenario_06_early_evaluation_exercise.lua:5961
+#: scripts/scenario_06_early_evaluation_exercise.lua:6031
+#: scripts/scenario_06_early_evaluation_exercise.lua:6095
+#: scripts/scenario_06_early_evaluation_exercise.lua:6102
+#: scripts/scenario_06_early_evaluation_exercise.lua:6177
+#: scripts/scenario_06_early_evaluation_exercise.lua:6221
+#: scripts/scenario_06_early_evaluation_exercise.lua:6236
+#: scripts/scenario_06_early_evaluation_exercise.lua:6278
+#: scripts/scenario_06_early_evaluation_exercise.lua:6483
+#: scripts/scenario_06_early_evaluation_exercise.lua:6640
+#: scripts/scenario_06_early_evaluation_exercise.lua:6741
+#: scripts/scenario_06_early_evaluation_exercise.lua:7127
+#: scripts/scenario_06_early_evaluation_exercise.lua:7310
+#: scripts/scenario_06_early_evaluation_exercise.lua:7439
+#: scripts/scenario_06_early_evaluation_exercise.lua:7460
+#: scripts/scenario_06_early_evaluation_exercise.lua:7467
+#: scripts/scenario_06_early_evaluation_exercise.lua:7476
+#: scripts/scenario_06_early_evaluation_exercise.lua:7485
+#: scripts/scenario_06_early_evaluation_exercise.lua:7494
+#: scripts/scenario_06_early_evaluation_exercise.lua:7497
+#: scripts/scenario_06_early_evaluation_exercise.lua:7499
+#: scripts/scenario_06_early_evaluation_exercise.lua:7546
+#: scripts/scenario_06_early_evaluation_exercise.lua:7549
+#: scripts/scenario_06_early_evaluation_exercise.lua:7552
 msgid "Back"
 msgstr "Back"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5447
+#: scripts/scenario_06_early_evaluation_exercise.lua:5124
 msgctxt "station-comms"
 msgid "We'll protect them as soon as we can"
 msgstr "We'll protect them as soon as we can"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5452
+#: scripts/scenario_06_early_evaluation_exercise.lua:5129
 msgctxt "station-comms"
 msgid "I'm sure they'll appreciate any protection you can provide."
 msgstr "I'm sure they'll appreciate any protection you can provide."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5460
+#: scripts/scenario_06_early_evaluation_exercise.lua:5137
 msgctxt "station-comms"
 msgid "We've got their parts and are en route"
 msgstr "We've got their parts and are en route"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5465
+#: scripts/scenario_06_early_evaluation_exercise.lua:5142
 msgctxt "station-comms"
 msgid ""
 "We will pass along that information. Good luck and keep a sharp eye out for "
 "those Kraylor"
-msgstr "We will pass along that information. Good luck and keep a sharp eye out for those Kraylor"
+msgstr ""
+"We will pass along that information. Good luck and keep a sharp eye out for "
+"those Kraylor"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5473
+#: scripts/scenario_06_early_evaluation_exercise.lua:5150
 msgctxt "station-comms"
 msgid "What about their repair parts?"
 msgstr "What about their repair parts?"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5478
+#: scripts/scenario_06_early_evaluation_exercise.lua:5155
 msgctxt "station-comms"
 msgid ""
 "You must prioritize and choose your next destination. If they get destroyed, "
 "there won't be any engine to repair. Also, their destruction could adversely "
 "impact our ongoing diplomatic negotiations with the Arlenians"
-msgstr "You must prioritise and choose your next destination. If they get destroyed, there won't be any engine to repair. Also, their destruction could adversely impact our ongoing diplomatic negotiations with the Arlenians"
+msgstr ""
+"You must prioritise and choose your next destination. If they get destroyed, "
+"there won't be any engine to repair. Also, their destruction could adversely "
+"impact our ongoing diplomatic negotiations with the Arlenians"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5490
+#: scripts/scenario_06_early_evaluation_exercise.lua:5167
 #, lua-format
 msgctxt "station-comms"
 msgid ""
 "Congratulations on completing your task to assist that Arlenian freighter, "
 "%s. Are you ready for your next task?"
-msgstr "Congratulations on completing your task to assist that Arlenian freighter, %s. Are you ready for your next task?"
+msgstr ""
+"Congratulations on completing your task to assist that Arlenian freighter, "
+"%s. Are you ready for your next task?"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5496
+#: scripts/scenario_06_early_evaluation_exercise.lua:5173
 msgctxt "station-comms"
 msgid "View assist freighter task evaluation"
 msgstr "View assist freighter task evaluation"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5500
+#: scripts/scenario_06_early_evaluation_exercise.lua:5177
 msgctxt "station-comms"
 msgid "We are ready for our fifth task"
 msgstr "We are ready for our fifth task"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5513
+#: scripts/scenario_06_early_evaluation_exercise.lua:5190
 #, lua-format
 msgctxt "station-comms"
 msgid ""
@@ -1209,49 +1315,26 @@ msgid ""
 "facilitate your research, we've added a warp drive to your ship. It's fast, "
 "but it still takes time to switch from impulse to warp and back. Use caution "
 "when you approach those planetary bodies. Your evaluation has begun. Clock %s"
-msgstr "We've observed several Kraylor appearing near the planetary bodies orbiting the black hole, %s. The energy signatures when they appear match the exit point from a wormhole. This implies a degree of control over wormhole physics by the Kraylor previously unsuspected. We think it relates to the planetary bodies orbiting %s. Get detailed readings on over half of the planetary bodies using probes or your ship. You or the probe must get within 1.8 units and remain there for %s seconds to gather the required data. To facilitate your research, we've added a warp drive to your ship. It's fast, but it still takes time to switch from impulse to warp and back. Use caution when you approach those planetary bodies. Your evaluation has begun. Clock %s"
+msgstr ""
+"We've observed several Kraylor appearing near the planetary bodies orbiting "
+"the black hole, %s. The energy signatures when they appear match the exit "
+"point from a wormhole. This implies a degree of control over wormhole "
+"physics by the Kraylor previously unsuspected. We think it relates to the "
+"planetary bodies orbiting %s. Get detailed readings on over half of the "
+"planetary bodies using probes or your ship. You or the probe must get within "
+"1.8 units and remain there for %s seconds to gather the required data. To "
+"facilitate your research, we've added a warp drive to your ship. It's fast, "
+"but it still takes time to switch from impulse to warp and back. Use caution "
+"when you approach those planetary bodies. Your evaluation has begun. Clock %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5546
-#, lua-format
-msgctxt "station-comms"
-msgid ""
-"Greetings %s!\n"
-"How may we help you today?"
-msgstr "Greetings %s!\nHow may we help you today?"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:5552
-msgctxt "station-comms"
-msgid ""
-"Good day, officer!\n"
-"What can we do for you today?"
-msgstr "Good day, officer!\nWhat can we do for you today?"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:5555
-msgctxt "station-comms"
-msgid "Hello, may I help you?"
-msgstr "Hello, may I help you?"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:5558
-msgctxt "station-comms"
-msgid "Welcome to our lovely station."
-msgstr "Welcome to our lovely station."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:5564
-msgctxt "station-comms"
-msgid ""
-"\n"
-"Forgive us if we seem a little distracted. We are carefully monitoring the "
-"enemies nearby."
-msgstr "\nForgive us if we seem a little distracted. We are carefully monitoring the enemies nearby."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:5569
-#: scripts/scenario_06_early_evaluation_exercise.lua:6545
+#: scripts/scenario_06_early_evaluation_exercise.lua:5208
+#: scripts/scenario_06_early_evaluation_exercise.lua:5445
 msgctxt "station-comms"
 msgid "Check with docking port authority"
 msgstr "Check with docking port authority"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5575
-#: scripts/scenario_06_early_evaluation_exercise.lua:6554
+#: scripts/scenario_06_early_evaluation_exercise.lua:5214
+#: scripts/scenario_06_early_evaluation_exercise.lua:5454
 #, lua-format
 msgctxt "station-comms"
 msgid ""
@@ -1261,795 +1344,541 @@ msgid ""
 "dock or undock with %s.\n"
 "\n"
 "Have a nice day!"
-msgstr "Greetings %s. I am your automated docking port authority message provider. Protocol dictates that you calibrate your shields to %s THz, your beam weapons to %s THz and that you power down your missile systems in order to dock or undock with %s.\n\nHave a nice day!"
+msgstr ""
+"Greetings %s. I am your automated docking port authority message provider. "
+"Protocol dictates that you calibrate your shields to %s THz, your beam "
+"weapons to %s THz and that you power down your missile systems in order to "
+"dock or undock with %s.\n"
+"\n"
+"Have a nice day!"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5597
+#: scripts/scenario_06_early_evaluation_exercise.lua:5239
 #, lua-format
 msgctxt "station-comms"
 msgid "Get parts to repair %s"
 msgstr "Get parts to repair %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5605
+#: scripts/scenario_06_early_evaluation_exercise.lua:5247
 #, lua-format
 msgctxt "station-comms"
 msgid ""
 "We've loaded the parts aboard %s. Now all you need to do is get within 5 "
 "units of %s and you can deliver the parts so they can make repairs."
-msgstr "We've loaded the parts aboard %s. Now all you need to do is get within 5 units of %s and you can deliver the parts so they can make repairs."
+msgstr ""
+"We've loaded the parts aboard %s. Now all you need to do is get within 5 "
+"units of %s and you can deliver the parts so they can make repairs."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5622
-#: scripts/scenario_06_early_evaluation_exercise.lua:6581
+#: scripts/scenario_06_early_evaluation_exercise.lua:5267
+#: scripts/scenario_06_early_evaluation_exercise.lua:5483
 msgctxt "station-comms"
 msgid "View evaluations"
 msgstr "View evaluations"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5626
-#: scripts/scenario_06_early_evaluation_exercise.lua:6585
-#: scripts/scenario_06_early_evaluation_exercise.lua:8540
+#: scripts/scenario_06_early_evaluation_exercise.lua:5271
+#: scripts/scenario_06_early_evaluation_exercise.lua:5487
+#: scripts/scenario_06_early_evaluation_exercise.lua:7454
 msgctxt "station-comms"
 msgid "Which task evaluation would you like to view?"
 msgstr "Which task evaluation would you like to view?"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5634
-#: scripts/scenario_06_early_evaluation_exercise.lua:6593
-#: scripts/scenario_06_early_evaluation_exercise.lua:8550
+#: scripts/scenario_06_early_evaluation_exercise.lua:5279
+#: scripts/scenario_06_early_evaluation_exercise.lua:5495
+#: scripts/scenario_06_early_evaluation_exercise.lua:7464
 msgctxt "station-comms"
 msgid "View scanning task evalutation"
 msgstr "View scanning task evalutation"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5641
-#: scripts/scenario_06_early_evaluation_exercise.lua:6600
-#: scripts/scenario_06_early_evaluation_exercise.lua:8557
+#: scripts/scenario_06_early_evaluation_exercise.lua:5286
+#: scripts/scenario_06_early_evaluation_exercise.lua:5502
+#: scripts/scenario_06_early_evaluation_exercise.lua:7471
 msgctxt "station-comms"
 msgid "View destroy freighter task evalutation"
 msgstr "View destroy freighter task evalutation"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5650
-#: scripts/scenario_06_early_evaluation_exercise.lua:6609
-#: scripts/scenario_06_early_evaluation_exercise.lua:8566
+#: scripts/scenario_06_early_evaluation_exercise.lua:5295
+#: scripts/scenario_06_early_evaluation_exercise.lua:5511
+#: scripts/scenario_06_early_evaluation_exercise.lua:7480
 msgctxt "station-comms"
 msgid "View assist freighter task evalutation"
 msgstr "View assist freighter task evalutation"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5657
-#: scripts/scenario_06_early_evaluation_exercise.lua:6616
-#: scripts/scenario_06_early_evaluation_exercise.lua:8575
+#: scripts/scenario_06_early_evaluation_exercise.lua:5302
+#: scripts/scenario_06_early_evaluation_exercise.lua:5518
+#: scripts/scenario_06_early_evaluation_exercise.lua:7489
 msgctxt "station-comms"
 msgid "View research task evalutation"
 msgstr "View research task evalutation"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5661
-#: scripts/scenario_06_early_evaluation_exercise.lua:6620
+#: scripts/scenario_06_early_evaluation_exercise.lua:5306
+#: scripts/scenario_06_early_evaluation_exercise.lua:5522
 msgctxt "station-comms"
 msgid "View bonus task evalutation"
 msgstr "View bonus task evalutation"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5665
+#: scripts/scenario_06_early_evaluation_exercise.lua:5310
 msgctxt "station-comms"
 msgid "Posthumous evaluations"
 msgstr "Posthumous evaluations"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:5678
-msgctxt "station-comms"
-msgid "Restock Ordnance"
-msgstr "Restock Ordnance"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:5710
-#, lua-format
-msgctxt "ammo-comms"
-msgid ""
-"What type of ordnance?\n"
-"\n"
-"Reputation: %i"
-msgstr "What type of ordnance?\n\nReputation: %i"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:5734
-msgctxt "ammo-comms"
-msgid "Can you supply us with some nukes? ("
-msgstr "Can you supply us with some nukes? ("
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:5738
-msgctxt "ammo-comms"
-msgid "We really need some nukes ("
-msgstr "We really need some nukes ("
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:5745
-#: scripts/scenario_06_early_evaluation_exercise.lua:5772
-#: scripts/scenario_06_early_evaluation_exercise.lua:5797
-#: scripts/scenario_06_early_evaluation_exercise.lua:5817
-#: scripts/scenario_06_early_evaluation_exercise.lua:5837
-#, lua-format
-msgctxt "ammo-comms"
-msgid "%s%d rep each)"
-msgstr "%s%d rep each)"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:5765
-msgctxt "ammo-comms"
-msgid "Please re-stock our EMP missiles. ("
-msgstr "Please re-stock our EMP missiles. ("
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:5768
-msgctxt "ammo-comms"
-msgid "Got any EMPs? ("
-msgstr "Got any EMPs? ("
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:5787
-msgctxt "ammo-comms"
-msgid "Do you have spare homing missiles for us? ("
-msgstr "Do you have spare homing missiles for us? ("
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:5792
-msgctxt "ammo-comms"
-msgid "Do you have extra homing missiles? ("
-msgstr "Do you have extra homing missiles? ("
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:5811
-msgctxt "ammo-comms"
-msgid "We could use some mines. ("
-msgstr "We could use some mines. ("
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:5813
-msgctxt "ammo-comms"
-msgid "How about mines? ("
-msgstr "How about mines? ("
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:5830
-msgctxt "ammo-comms"
-msgid "What about HVLI? ("
-msgstr "What about HVLI? ("
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:5833
-msgctxt "ammo-comms"
-msgid "Could you provide HVLI? ("
-msgstr "Could you provide HVLI? ("
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:5851
-msgctxt "ammo-comms"
-msgid "Sorry, we don't have any ordnance you can use today"
-msgstr "Sorry, we don't have any ordnance you can use today"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:5857
-msgctxt "ammo-comms"
-msgid "Sorry, we don't have any ordnance today"
-msgstr "Sorry, we don't have any ordnance today"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:5900
-msgctxt "dockingServicesStatus-comms"
-msgid "Repair ship system"
-msgstr "Repair ship system"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:5906
-#, lua-format
-msgctxt "dockingServicesStatus-comms"
-msgid ""
-"What system would you like repaired?\n"
-"\n"
-"Reputation: %i"
-msgstr "What system would you like repaired?\n\nReputation: %i"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:5917
-#, lua-format
-msgctxt "dockingServicesStatus-comms"
-msgid "Repair probe launch system (%s Rep)"
-msgstr "Repair probe launch system (%s Rep)"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:5926
-#: scripts/scenario_06_early_evaluation_exercise.lua:5971
-#: scripts/scenario_06_early_evaluation_exercise.lua:6016
-#: scripts/scenario_06_early_evaluation_exercise.lua:6064
-#: scripts/scenario_06_early_evaluation_exercise.lua:6110
-#: scripts/scenario_06_early_evaluation_exercise.lua:6387
-msgctxt "ammo-comms"
-msgid "You need to stay docked for that action."
-msgstr "You need to stay docked for that action."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:5940
-msgctxt "dockingServicesStatus-comms"
-msgid "Your probe launch system has been repaired"
-msgstr "Your probe launch system has been repaired"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:5947
-#: scripts/scenario_06_early_evaluation_exercise.lua:5992
-#: scripts/scenario_06_early_evaluation_exercise.lua:6037
-#: scripts/scenario_06_early_evaluation_exercise.lua:6085
-#: scripts/scenario_06_early_evaluation_exercise.lua:6131
-msgctxt "needRep-comms"
-msgid "Insufficient reputation"
-msgstr "Insufficient reputation"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:5962
-#, lua-format
-msgctxt "dockingServicesStatus-comms"
-msgid "Repair hacking system (%s Rep)"
-msgstr "Repair hacking system (%s Rep)"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:5985
-msgctxt "dockingServicesStatus-comms"
-msgid "Your hack system has been repaired"
-msgstr "Your hack system has been repaired"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6007
-#, lua-format
-msgctxt "dockingServicesStatus-comms"
-msgid "Repair scanning system (%s Rep)"
-msgstr "Repair scanning system (%s Rep)"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6030
-msgctxt "dockingServicesStatus-comms"
-msgid "Your scanners have been repaired"
-msgstr "Your scanners have been repaired"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6053
-#, lua-format
-msgctxt "dockingServicesStatus-comms"
-msgid "Repair combat maneuver (%s Rep)"
-msgstr "Repair combat manoeuvre (%s Rep)"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6078
-msgctxt "dockingServicesStatus-comms"
-msgid "Your combat maneuver has been repaired"
-msgstr "Your combat manoeuvre has been repaired"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6101
-#, lua-format
-msgctxt "dockingServicesStatus-comms"
-msgid "Repair self destruct system (%s Rep)"
-msgstr "Repair self destruct system (%s Rep)"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6124
-msgctxt "dockingServicesStatus-comms"
-msgid "Your self destruct system has been repaired"
-msgstr "Your self destruct system has been repaired"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6145
-msgctxt "dockingServicesStatus-comms"
-msgid "Docking services status"
-msgstr "Docking services status"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6150
-#, lua-format
-msgctxt "dockingServicesStatus-comms"
-msgid "Station %s docking services status:"
-msgstr "Station %s docking services status:"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6158
-#: scripts/scenario_06_early_evaluation_exercise.lua:6742
-#, lua-format
-msgctxt "dockingServicesStatus-comms"
-msgid ""
-"%s\n"
-"Replenish scan probes."
-msgstr "%s\nReplenish scan probes."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6167
-#: scripts/scenario_06_early_evaluation_exercise.lua:6751
-msgctxt "dockingServicesStatus-comms"
-msgid "Cannot replenish scan probes due to fabrication unit failure."
-msgstr "Cannot replenish scan probes due to fabrication unit failure."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6171
-#: scripts/scenario_06_early_evaluation_exercise.lua:6755
-msgctxt "dockingServicesStatus-comms"
-msgid "Parts shortage prevents scan probe replenishment."
-msgstr "Parts shortage prevents scan probe replenishment."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6175
-#: scripts/scenario_06_early_evaluation_exercise.lua:6759
-msgctxt "dockingServicesStatus-comms"
-msgid ""
-"Station management has curtailed scan probe replenishment for cost cutting "
-"reasons."
-msgstr "Station management has curtailed scan probe replenishment for cost cutting reasons."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6189
-#: scripts/scenario_06_early_evaluation_exercise.lua:6773
-#, lua-format
-msgctxt "dockingServicesStatus-comms"
-msgid ""
-"%s\n"
-"Ship hull repair."
-msgstr "%s\nShip hull repair."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6197
-#: scripts/scenario_06_early_evaluation_exercise.lua:6781
-msgctxt "dockingServicesStatus-comms"
-msgid "We're out of the necessary materials and supplies for hull repair."
-msgstr "We're out of the necessary materials and supplies for hull repair."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6201
-msgctxt "dockingServicesStatus-comms"
-msgid "Hull repair automation unavailable while it is undergoing maintenance."
-msgstr "Hull repair automation unavailable while it is undergoing maintenance."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6205
-#: scripts/scenario_06_early_evaluation_exercise.lua:6789
-msgctxt "dockingServicesStatus-comms"
-msgid "All hull repair technicians quarantined to quarters due to illness."
-msgstr "All hull repair technicians quarantined to quarters due to illness."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6221
-#: scripts/scenario_06_early_evaluation_exercise.lua:6805
-#, lua-format
-msgctxt "dockingServicesStatus-comms"
-msgid ""
-"%s\n"
-"Recharge ship energy stores."
-msgstr "%s\nRecharge ship energy stores."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6230
-#: scripts/scenario_06_early_evaluation_exercise.lua:6814
-msgctxt "dockingServicesStatus-comms"
-msgid ""
-"A recent reactor failure has put us on auxiliary power, so we cannot "
-"recharge ships."
-msgstr "A recent reactor failure has put us on auxiliary power, so we cannot recharge ships."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6234
-#: scripts/scenario_06_early_evaluation_exercise.lua:6818
-msgctxt "dockingServicesStatus-comms"
-msgid "A damaged power coupling makes it too dangerous to recharge ships."
-msgstr "A damaged power coupling makes it too dangerous to recharge ships."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6238
-#: scripts/scenario_06_early_evaluation_exercise.lua:6822
-msgctxt "dockingServicesStatus-comms"
-msgid ""
-"An asteroid strike damaged our solar cells and we are short on power, so we "
-"can't recharge ships right now."
-msgstr "An asteroid strike damaged our solar cells and we are short on power, so we can't recharge ships right now."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6256
-#: scripts/scenario_06_early_evaluation_exercise.lua:6635
+#: scripts/scenario_06_early_evaluation_exercise.lua:5328
+#: scripts/scenario_06_early_evaluation_exercise.lua:5540
 msgctxt "orders-comms"
 msgid "What are my current orders?"
 msgstr "What are my current orders?"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6260
-#: scripts/scenario_06_early_evaluation_exercise.lua:6639
+#: scripts/scenario_06_early_evaluation_exercise.lua:5332
+#: scripts/scenario_06_early_evaluation_exercise.lua:5544
 msgctxt "orders-comms"
 msgid "Perform tasks as given"
 msgstr "Perform tasks as given"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6263
-#: scripts/scenario_06_early_evaluation_exercise.lua:6642
+#: scripts/scenario_06_early_evaluation_exercise.lua:5335
+#: scripts/scenario_06_early_evaluation_exercise.lua:5547
 #, lua-format
 msgctxt "orders-comms"
 msgid "Dock with %s"
 msgstr "Dock with %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6270
-#: scripts/scenario_06_early_evaluation_exercise.lua:6649
+#: scripts/scenario_06_early_evaluation_exercise.lua:5342
+#: scripts/scenario_06_early_evaluation_exercise.lua:5554
 #, lua-format
 msgctxt "orders-comms"
 msgid "Scan the targets. Report results to %s"
 msgstr "Scan the targets. Report results to %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6277
-#: scripts/scenario_06_early_evaluation_exercise.lua:6656
+#: scripts/scenario_06_early_evaluation_exercise.lua:5349
+#: scripts/scenario_06_early_evaluation_exercise.lua:5561
 msgctxt "orders-comms"
 msgid "Destroy the Kraylor freighter or transport"
 msgstr "Destroy the Kraylor freighter or transport"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6281
-#: scripts/scenario_06_early_evaluation_exercise.lua:6660
+#: scripts/scenario_06_early_evaluation_exercise.lua:5353
+#: scripts/scenario_06_early_evaluation_exercise.lua:5565
 msgctxt "orders-comms"
 msgid "Assist the Arlenian freighter"
 msgstr "Assist the Arlenian freighter"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6284
-#: scripts/scenario_06_early_evaluation_exercise.lua:6663
+#: scripts/scenario_06_early_evaluation_exercise.lua:5356
+#: scripts/scenario_06_early_evaluation_exercise.lua:5568
 msgctxt "orders-comms"
 msgid "Gather data on orbiting bodies"
 msgstr "Gather data on orbiting bodies"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6293
-#: scripts/scenario_06_early_evaluation_exercise.lua:6674
+#: scripts/scenario_06_early_evaluation_exercise.lua:5365
+#: scripts/scenario_06_early_evaluation_exercise.lua:5579
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
 "\n"
 "   %i Minutes remain in game"
-msgstr "\n   %i Minutes remain in game"
+msgstr ""
+"\n"
+"   %i Minutes remain in game"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6311
+#: scripts/scenario_06_early_evaluation_exercise.lua:5384
 #, lua-format
 msgctxt "orders-comms"
 msgid "Contact %s in %s."
 msgstr "Contact %s in %s."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6321
+#: scripts/scenario_06_early_evaluation_exercise.lua:5394
 #, lua-format
 msgctxt "orders-comms"
 msgid "Report details of Arlenian freighter %s engine damage to %s."
 msgstr "Report details of Arlenian freighter %s engine damage to %s."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6331
+#: scripts/scenario_06_early_evaluation_exercise.lua:5404
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
 "Deliver parts to %s in %s by traveling to within 5 units of them and "
 "contacting them to deliver the parts."
-msgstr "Deliver parts to %s in %s by travelling to within 5 units of them and contacting them to deliver the parts."
+msgstr ""
+"Deliver parts to %s in %s by travelling to within 5 units of them and "
+"contacting them to deliver the parts."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6340
+#: scripts/scenario_06_early_evaluation_exercise.lua:5413
 #, lua-format
 msgctxt "orders-comms"
 msgid "Dock with %s and get parts for %s's engines."
 msgstr "Dock with %s and get parts for %s's engines."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6349
+#: scripts/scenario_06_early_evaluation_exercise.lua:5422
 #, lua-format
 msgctxt "orders-comms"
 msgid "Deep scan %s in %s."
 msgstr "Deep scan %s in %s."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6364
+#: scripts/scenario_06_early_evaluation_exercise.lua:5437
 #, lua-format
 msgctxt "orders-comms"
 msgid " Protect %s."
 msgstr " Protect %s."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6396
-msgctxt "ammo-comms"
-msgid "We do not deal in weapons of mass destruction."
-msgstr "We do not deal in weapons of mass destruction."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6401
-msgctxt "ammo-comms"
-msgid "We do not deal in weapons of mass disruption."
-msgstr "We do not deal in weapons of mass disruption."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6404
-msgctxt "ammo-comms"
-msgid "We do not deal in those weapons."
-msgstr "We do not deal in those weapons."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6418
-msgctxt "ammo-comms"
-msgid "All nukes are charged and primed for destruction."
-msgstr "All nukes are charged and primed for destruction."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6425
-msgctxt "ammo-comms"
-msgid "Sorry, sir, but you are as fully stocked as I can allow."
-msgstr "Sorry, sir, but you are as fully stocked as I can allow."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6449
-#: scripts/scenario_06_early_evaluation_exercise.lua:6485
-msgctxt "ammo-comms"
-msgid "You are fully loaded and ready to explode things."
-msgstr "You are fully loaded and ready to explode things."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6456
-#: scripts/scenario_06_early_evaluation_exercise.lua:6492
-msgctxt "ammo-comms"
-msgid ""
-"We generously resupplied you with some weapon charges.\n"
-"Put them to good use."
-msgstr "We generously resupplied you with some weapon charges.\nPut them to good use."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6461
-#: scripts/scenario_06_early_evaluation_exercise.lua:6498
-#: scripts/scenario_06_early_evaluation_exercise.lua:6504
-msgctxt "needRep-comms"
-msgid "Not enough reputation."
-msgstr "Not enough reputation."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6469
-msgctxt "ammo-comms"
-msgid "You can't afford as much as I'd like to give you"
-msgstr "You can't afford as much as I'd like to give you"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6472
-msgctxt "ammo-comms"
-msgid "Get just one"
-msgstr "Get just one"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6528
-msgctxt "station-comms"
-msgid ""
-"Good day, officer.\n"
-"If you need supplies, please dock with us first."
-msgstr "Good day, officer.\nIf you need supplies, please dock with us first."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6533
-msgctxt "station-comms"
-msgid ""
-"Greetings.\n"
-"If you want to do business, please dock with us first."
-msgstr "Greetings.\nIf you want to do business, please dock with us first."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6540
-msgctxt "station-comms"
-msgid ""
-"\n"
-"Be aware that if enemies in the area get much closer, we will be too busy to "
-"conduct business with you."
-msgstr "\nBe aware that if enemies in the area get much closer, we will be too busy to conduct business with you."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6575
-msgctxt "station-comms"
-msgid "I need information"
-msgstr "I need information"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6577
-msgctxt "station-comms"
-msgid "What kind of information do you need?"
-msgstr "What kind of information do you need?"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:6684
+#: scripts/scenario_06_early_evaluation_exercise.lua:5592
 msgctxt "station-comms"
 msgid "Station services"
 msgstr "Station services"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6690
+#: scripts/scenario_06_early_evaluation_exercise.lua:5598
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   Nuke"
-msgstr "\n   Nuke"
+msgstr ""
+"\n"
+"   Nuke"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6694
+#: scripts/scenario_06_early_evaluation_exercise.lua:5602
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   EMP"
-msgstr "\n   EMP"
+msgstr ""
+"\n"
+"   EMP"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6699
+#: scripts/scenario_06_early_evaluation_exercise.lua:5607
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   Homing"
-msgstr "\n   Homing"
+msgstr ""
+"\n"
+"   Homing"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6704
+#: scripts/scenario_06_early_evaluation_exercise.lua:5612
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   Mine"
-msgstr "\n   Mine"
+msgstr ""
+"\n"
+"   Mine"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6709
+#: scripts/scenario_06_early_evaluation_exercise.lua:5617
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   HVLI"
-msgstr "\n   HVLI"
+msgstr ""
+"\n"
+"   HVLI"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6713
+#: scripts/scenario_06_early_evaluation_exercise.lua:5621
 msgctxt "ammo-comms"
 msgid "We have no ordnance available for restock"
 msgstr "We have no ordnance available for restock"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6718
+#: scripts/scenario_06_early_evaluation_exercise.lua:5626
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following type of ordnance available for restock:%s"
 msgstr "We have the following type of ordnance available for restock:%s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6726
+#: scripts/scenario_06_early_evaluation_exercise.lua:5634
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following types of ordnance available for restock:%s"
 msgstr "We have the following types of ordnance available for restock:%s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6734
+#: scripts/scenario_06_early_evaluation_exercise.lua:5642
 #, lua-format
 msgctxt "dockingServicesStatus-comms"
 msgid ""
 "%s\n"
 "Station primary docking services:"
-msgstr "%s\nStation primary docking services:"
+msgstr ""
+"%s\n"
+"Station primary docking services:"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6785
+#: scripts/scenario_06_early_evaluation_exercise.lua:5650
+#, lua-format
+msgctxt "dockingServicesStatus-comms"
+msgid ""
+"%s\n"
+"Replenish scan probes."
+msgstr ""
+"%s\n"
+"Replenish scan probes."
+
+#: scripts/scenario_06_early_evaluation_exercise.lua:5659
+msgctxt "dockingServicesStatus-comms"
+msgid "Cannot replenish scan probes due to fabrication unit failure."
+msgstr "Cannot replenish scan probes due to fabrication unit failure."
+
+#: scripts/scenario_06_early_evaluation_exercise.lua:5663
+msgctxt "dockingServicesStatus-comms"
+msgid "Parts shortage prevents scan probe replenishment."
+msgstr "Parts shortage prevents scan probe replenishment."
+
+#: scripts/scenario_06_early_evaluation_exercise.lua:5667
+msgctxt "dockingServicesStatus-comms"
+msgid ""
+"Station management has curtailed scan probe replenishment for cost cutting "
+"reasons."
+msgstr ""
+"Station management has curtailed scan probe replenishment for cost cutting "
+"reasons."
+
+#: scripts/scenario_06_early_evaluation_exercise.lua:5681
+#, lua-format
+msgctxt "dockingServicesStatus-comms"
+msgid ""
+"%s\n"
+"Ship hull repair."
+msgstr ""
+"%s\n"
+"Ship hull repair."
+
+#: scripts/scenario_06_early_evaluation_exercise.lua:5689
+msgctxt "dockingServicesStatus-comms"
+msgid "We're out of the necessary materials and supplies for hull repair."
+msgstr "We're out of the necessary materials and supplies for hull repair."
+
+#: scripts/scenario_06_early_evaluation_exercise.lua:5693
 msgctxt "dockingServicesStatus-comms"
 msgid "Hull repair automation unavailable whie it is undergoing maintenance."
 msgstr "Hull repair automation unavailable whie it is undergoing maintenance."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6852
-msgctxt "stationGeneralInfo-comms"
-msgid "Tell me more about your station"
-msgstr "Tell me more about your station"
+#: scripts/scenario_06_early_evaluation_exercise.lua:5697
+msgctxt "dockingServicesStatus-comms"
+msgid "All hull repair technicians quarantined to quarters due to illness."
+msgstr "All hull repair technicians quarantined to quarters due to illness."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6857
-msgctxt "stationGeneralInfo-comms"
-msgid "What would you like to know?"
-msgstr "What would you like to know?"
+#: scripts/scenario_06_early_evaluation_exercise.lua:5713
+#, lua-format
+msgctxt "dockingServicesStatus-comms"
+msgid ""
+"%s\n"
+"Recharge ship energy stores."
+msgstr ""
+"%s\n"
+"Recharge ship energy stores."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6865
-msgctxt "stationGeneralInfo-comms"
-msgid "General information"
-msgstr "General information"
+#: scripts/scenario_06_early_evaluation_exercise.lua:5722
+msgctxt "dockingServicesStatus-comms"
+msgid ""
+"A recent reactor failure has put us on auxiliary power, so we cannot "
+"recharge ships."
+msgstr ""
+"A recent reactor failure has put us on auxiliary power, so we cannot "
+"recharge ships."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6877
-msgctxt "stationGeneralInfo-comms"
-msgid "Station history"
-msgstr "Station history"
+#: scripts/scenario_06_early_evaluation_exercise.lua:5726
+msgctxt "dockingServicesStatus-comms"
+msgid "A damaged power coupling makes it too dangerous to recharge ships."
+msgstr "A damaged power coupling makes it too dangerous to recharge ships."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6891
-msgctxt "stationGeneralInfo-comms"
-msgid "Gossip"
-msgstr "Gossip"
+#: scripts/scenario_06_early_evaluation_exercise.lua:5730
+msgctxt "dockingServicesStatus-comms"
+msgid ""
+"An asteroid strike damaged our solar cells and we are short on power, so we "
+"can't recharge ships right now."
+msgstr ""
+"An asteroid strike damaged our solar cells and we are short on power, so we "
+"can't recharge ships right now."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6952
+#: scripts/scenario_06_early_evaluation_exercise.lua:5816
+msgctxt "station-comms"
+msgid "Restock Ordnance"
+msgstr "Restock Ordnance"
+
+#: scripts/scenario_06_early_evaluation_exercise.lua:5828
+msgctxt "station-comms"
+msgid "What kind of information do you need?"
+msgstr "What kind of information do you need?"
+
+#: scripts/scenario_06_early_evaluation_exercise.lua:5866
 msgctxt "station-comms"
 msgid "Report ship type on scanned ships"
 msgstr "Report ship type on scanned ships"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6967
-#: scripts/scenario_06_early_evaluation_exercise.lua:7146
+#: scripts/scenario_06_early_evaluation_exercise.lua:5881
+#: scripts/scenario_06_early_evaluation_exercise.lua:6060
 #, lua-format
 msgctxt "station-comms"
 msgid "Report on %s"
 msgstr "Report on %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6976
+#: scripts/scenario_06_early_evaluation_exercise.lua:5890
 #, lua-format
 msgctxt "station-comms"
 msgid "What type of ship is %s?"
 msgstr "What type of ship is %s?"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6984
-#: scripts/scenario_06_early_evaluation_exercise.lua:11012
+#: scripts/scenario_06_early_evaluation_exercise.lua:5898
+#: scripts/scenario_06_early_evaluation_exercise.lua:8514
 msgctxt "station-comms"
 msgid "Personnel Freighter 5"
 msgstr "Personnel Freighter 5"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6988
-#: scripts/scenario_06_early_evaluation_exercise.lua:11013
+#: scripts/scenario_06_early_evaluation_exercise.lua:5902
+#: scripts/scenario_06_early_evaluation_exercise.lua:8515
 msgctxt "station-comms"
 msgid "Goods Freighter 5"
 msgstr "Goods Freighter 5"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6992
-#: scripts/scenario_06_early_evaluation_exercise.lua:11014
+#: scripts/scenario_06_early_evaluation_exercise.lua:5906
+#: scripts/scenario_06_early_evaluation_exercise.lua:8516
 msgctxt "station-comms"
 msgid "Garbage Freighter 5"
 msgstr "Garbage Freighter 5"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:6996
-#: scripts/scenario_06_early_evaluation_exercise.lua:11015
+#: scripts/scenario_06_early_evaluation_exercise.lua:5910
+#: scripts/scenario_06_early_evaluation_exercise.lua:8517
 msgctxt "station-comms"
 msgid "Equipment Freighter 5"
 msgstr "Equipment Freighter 5"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7000
-#: scripts/scenario_06_early_evaluation_exercise.lua:11016
+#: scripts/scenario_06_early_evaluation_exercise.lua:5914
+#: scripts/scenario_06_early_evaluation_exercise.lua:8518
 msgctxt "station-comms"
 msgid "Fuel Freighter 5"
 msgstr "Fuel Freighter 5"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7004
-#: scripts/scenario_06_early_evaluation_exercise.lua:11017
+#: scripts/scenario_06_early_evaluation_exercise.lua:5918
+#: scripts/scenario_06_early_evaluation_exercise.lua:8519
 msgctxt "station-comms"
 msgid "Transport1x5"
 msgstr "Transport1x5"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7008
-#: scripts/scenario_06_early_evaluation_exercise.lua:11018
+#: scripts/scenario_06_early_evaluation_exercise.lua:5922
+#: scripts/scenario_06_early_evaluation_exercise.lua:8520
 msgctxt "station-comms"
 msgid "Transport2x5"
 msgstr "Transport2x5"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7012
-#: scripts/scenario_06_early_evaluation_exercise.lua:11019
+#: scripts/scenario_06_early_evaluation_exercise.lua:5926
+#: scripts/scenario_06_early_evaluation_exercise.lua:8521
 msgctxt "station-comms"
 msgid "Transport3x5"
 msgstr "Transport3x5"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7016
-#: scripts/scenario_06_early_evaluation_exercise.lua:11020
+#: scripts/scenario_06_early_evaluation_exercise.lua:5930
+#: scripts/scenario_06_early_evaluation_exercise.lua:8522
 msgctxt "station-comms"
 msgid "Transport4x5"
 msgstr "Transport4x5"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7020
-#: scripts/scenario_06_early_evaluation_exercise.lua:11021
+#: scripts/scenario_06_early_evaluation_exercise.lua:5934
+#: scripts/scenario_06_early_evaluation_exercise.lua:8523
 msgctxt "station-comms"
 msgid "Transport5x5"
 msgstr "Transport5x5"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7036
-#: scripts/scenario_06_early_evaluation_exercise.lua:7177
+#: scripts/scenario_06_early_evaluation_exercise.lua:5950
+#: scripts/scenario_06_early_evaluation_exercise.lua:6091
 msgctxt "station-comms"
 msgid "Your report has been noted"
 msgstr "Your report has been noted"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7060
-#: scripts/scenario_06_early_evaluation_exercise.lua:7081
-#: scripts/scenario_06_early_evaluation_exercise.lua:7201
-#: scripts/scenario_06_early_evaluation_exercise.lua:7226
+#: scripts/scenario_06_early_evaluation_exercise.lua:5974
+#: scripts/scenario_06_early_evaluation_exercise.lua:5995
+#: scripts/scenario_06_early_evaluation_exercise.lua:6115
+#: scripts/scenario_06_early_evaluation_exercise.lua:6140
 msgctxt "station-comms"
 msgid "Review of ships already reported:"
 msgstr "Review of ships already reported:"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7066
-#: scripts/scenario_06_early_evaluation_exercise.lua:7087
+#: scripts/scenario_06_early_evaluation_exercise.lua:5980
+#: scripts/scenario_06_early_evaluation_exercise.lua:6001
 #, lua-format
 msgctxt "station-comms"
 msgid ""
 "%s\n"
 "%s reported as type %s"
-msgstr "%s\n%s reported as type %s"
+msgstr ""
+"%s\n"
+"%s reported as type %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7101
-#: scripts/scenario_06_early_evaluation_exercise.lua:7247
+#: scripts/scenario_06_early_evaluation_exercise.lua:6015
+#: scripts/scenario_06_early_evaluation_exercise.lua:6161
 #, lua-format
 msgctxt "station-comms"
 msgid ""
 "%s\n"
 "\n"
 "What ship do you want to report on?"
-msgstr "%s\n\nWhat ship do you want to report on?"
+msgstr ""
+"%s\n"
+"\n"
+"What ship do you want to report on?"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7108
-#: scripts/scenario_06_early_evaluation_exercise.lua:7254
+#: scripts/scenario_06_early_evaluation_exercise.lua:6022
+#: scripts/scenario_06_early_evaluation_exercise.lua:6168
 msgctxt "station-comms"
 msgid "What ship do you want to report on?"
 msgstr "What ship do you want to report on?"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7113
-#: scripts/scenario_06_early_evaluation_exercise.lua:7259
+#: scripts/scenario_06_early_evaluation_exercise.lua:6027
+#: scripts/scenario_06_early_evaluation_exercise.lua:6173
 msgctxt "station-comms"
 msgid "Nothing to report"
 msgstr "Nothing to report"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7125
+#: scripts/scenario_06_early_evaluation_exercise.lua:6039
 msgctxt "station-comms"
 msgid "Report shield frequency on deep scanned ships"
 msgstr "Report shield frequency on deep scanned ships"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7155
+#: scripts/scenario_06_early_evaluation_exercise.lua:6069
 #, lua-format
 msgctxt "station-comms"
 msgid "At what shield frequency does ship %s block the most beam damage?"
 msgstr "At what shield frequency does ship %s block the most beam damage?"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7165
+#: scripts/scenario_06_early_evaluation_exercise.lua:6079
 #, lua-format
 msgctxt "station-comms"
 msgid "%s THz"
 msgstr "%s THz"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7207
-#: scripts/scenario_06_early_evaluation_exercise.lua:7232
+#: scripts/scenario_06_early_evaluation_exercise.lua:6121
+#: scripts/scenario_06_early_evaluation_exercise.lua:6146
 #, lua-format
 msgctxt "station-comms"
 msgid ""
 "%s\n"
 "The shield frequency of %s was reported the strongest at %s THz"
-msgstr "%s\nThe shield frequency of %s was reported the strongest at %s THz"
+msgstr ""
+"%s\n"
+"The shield frequency of %s was reported the strongest at %s THz"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7277
+#: scripts/scenario_06_early_evaluation_exercise.lua:6191
 #, lua-format
 msgctxt "station-comms"
 msgid "Provide %s engine damage details"
 msgstr "Provide %s engine damage details"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7285
+#: scripts/scenario_06_early_evaluation_exercise.lua:6199
 #, lua-format
 msgctxt "station-comms"
 msgid ""
 "What is the damage level of the impulse engines on %s? Select the value that "
 "is the closest."
-msgstr "What is the damage level of the impulse engines on %s? Select the value that is the closest."
+msgstr ""
+"What is the damage level of the impulse engines on %s? Select the value that "
+"is the closest."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7299
+#: scripts/scenario_06_early_evaluation_exercise.lua:6213
 #, lua-format
 msgctxt "station-comms"
 msgid ""
 "We've got repair parts for that kind of engine damage. Dock with us to pick "
 "up the parts. Then you can take the parts to %s. Travel to within 5 units of "
 "%s to deliver the parts"
-msgstr "We've got repair parts for that kind of engine damage. Dock with us to pick up the parts. Then you can take the parts to %s. Travel to within 5 units of %s to deliver the parts"
+msgstr ""
+"We've got repair parts for that kind of engine damage. Dock with us to pick "
+"up the parts. Then you can take the parts to %s. Travel to within 5 units of "
+"%s to deliver the parts"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7311
+#: scripts/scenario_06_early_evaluation_exercise.lua:6225
 msgctxt "station-comms"
 msgid "How do we get engine damage details?"
 msgstr "How do we get engine damage details?"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7317
+#: scripts/scenario_06_early_evaluation_exercise.lua:6231
 #, lua-format
 msgctxt "station-comms"
 msgid ""
@@ -2058,9 +1887,14 @@ msgid ""
 "all the ship's systems and the degree of functioning or damage. Anything "
 "less than 100%% is functional but damaged. Negative numbers indicate a non-"
 "functioning system."
-msgstr "To get engine damage details on %s, you need to deep scan it. After completing the second scan, click on 'Tactical' and select 'Systems' to see all the ship's systems and the degree of functioning or damage. Anything less than 100%% is functional but damaged. Negative numbers indicate a non-functioning system."
+msgstr ""
+"To get engine damage details on %s, you need to deep scan it. After "
+"completing the second scan, click on 'Tactical' and select 'Systems' to see "
+"all the ship's systems and the degree of functioning or damage. Anything "
+"less than 100%% is functional but damaged. Negative numbers indicate a non-"
+"functioning system."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7359
+#: scripts/scenario_06_early_evaluation_exercise.lua:6273
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
@@ -2069,218 +1903,236 @@ msgid ""
 "Certain members are measured on part of the task.\n"
 "----- First Task: Dock -----\n"
 "%s"
-msgstr "We only have objective evaluation data. Subjective evaluation must come from a different source. The entire crew contributes to the success of a task. Certain members are measured on part of the task.\n----- First Task: Dock -----\n%s"
+msgstr ""
+"We only have objective evaluation data. Subjective evaluation must come from "
+"a different source. The entire crew contributes to the success of a task. "
+"Certain members are measured on part of the task.\n"
+"----- First Task: Dock -----\n"
+"%s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7383
-#: scripts/scenario_06_early_evaluation_exercise.lua:7404
-#: scripts/scenario_06_early_evaluation_exercise.lua:7427
-#: scripts/scenario_06_early_evaluation_exercise.lua:7448
-#: scripts/scenario_06_early_evaluation_exercise.lua:7471
-#: scripts/scenario_06_early_evaluation_exercise.lua:7500
-#: scripts/scenario_06_early_evaluation_exercise.lua:7849
-#: scripts/scenario_06_early_evaluation_exercise.lua:7873
-#: scripts/scenario_06_early_evaluation_exercise.lua:7907
-#: scripts/scenario_06_early_evaluation_exercise.lua:7948
-#: scripts/scenario_06_early_evaluation_exercise.lua:7985
-#: scripts/scenario_06_early_evaluation_exercise.lua:8025
-#: scripts/scenario_06_early_evaluation_exercise.lua:8058
-#: scripts/scenario_06_early_evaluation_exercise.lua:8127
-#: scripts/scenario_06_early_evaluation_exercise.lua:8242
-#: scripts/scenario_06_early_evaluation_exercise.lua:8280
-#: scripts/scenario_06_early_evaluation_exercise.lua:8305
-#: scripts/scenario_06_early_evaluation_exercise.lua:8307
-#: scripts/scenario_06_early_evaluation_exercise.lua:8321
+#: scripts/scenario_06_early_evaluation_exercise.lua:6297
+#: scripts/scenario_06_early_evaluation_exercise.lua:6318
+#: scripts/scenario_06_early_evaluation_exercise.lua:6341
+#: scripts/scenario_06_early_evaluation_exercise.lua:6362
+#: scripts/scenario_06_early_evaluation_exercise.lua:6385
+#: scripts/scenario_06_early_evaluation_exercise.lua:6414
+#: scripts/scenario_06_early_evaluation_exercise.lua:6763
+#: scripts/scenario_06_early_evaluation_exercise.lua:6787
+#: scripts/scenario_06_early_evaluation_exercise.lua:6821
+#: scripts/scenario_06_early_evaluation_exercise.lua:6862
+#: scripts/scenario_06_early_evaluation_exercise.lua:6899
+#: scripts/scenario_06_early_evaluation_exercise.lua:6939
+#: scripts/scenario_06_early_evaluation_exercise.lua:6972
+#: scripts/scenario_06_early_evaluation_exercise.lua:7041
+#: scripts/scenario_06_early_evaluation_exercise.lua:7156
+#: scripts/scenario_06_early_evaluation_exercise.lua:7194
+#: scripts/scenario_06_early_evaluation_exercise.lua:7219
+#: scripts/scenario_06_early_evaluation_exercise.lua:7221
+#: scripts/scenario_06_early_evaluation_exercise.lua:7235
 msgctxt "evaluation-comms"
 msgid "N"
 msgstr "N"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7387
-#: scripts/scenario_06_early_evaluation_exercise.lua:7407
-#: scripts/scenario_06_early_evaluation_exercise.lua:7431
-#: scripts/scenario_06_early_evaluation_exercise.lua:7454
-#: scripts/scenario_06_early_evaluation_exercise.lua:7480
-#: scripts/scenario_06_early_evaluation_exercise.lua:7503
-#: scripts/scenario_06_early_evaluation_exercise.lua:7852
-#: scripts/scenario_06_early_evaluation_exercise.lua:7880
-#: scripts/scenario_06_early_evaluation_exercise.lua:7915
-#: scripts/scenario_06_early_evaluation_exercise.lua:7956
-#: scripts/scenario_06_early_evaluation_exercise.lua:7992
-#: scripts/scenario_06_early_evaluation_exercise.lua:8031
-#: scripts/scenario_06_early_evaluation_exercise.lua:8065
-#: scripts/scenario_06_early_evaluation_exercise.lua:8129
-#: scripts/scenario_06_early_evaluation_exercise.lua:8245
-#: scripts/scenario_06_early_evaluation_exercise.lua:8283
-#: scripts/scenario_06_early_evaluation_exercise.lua:8309
-#: scripts/scenario_06_early_evaluation_exercise.lua:8324
+#: scripts/scenario_06_early_evaluation_exercise.lua:6301
+#: scripts/scenario_06_early_evaluation_exercise.lua:6321
+#: scripts/scenario_06_early_evaluation_exercise.lua:6345
+#: scripts/scenario_06_early_evaluation_exercise.lua:6368
+#: scripts/scenario_06_early_evaluation_exercise.lua:6394
+#: scripts/scenario_06_early_evaluation_exercise.lua:6417
+#: scripts/scenario_06_early_evaluation_exercise.lua:6766
+#: scripts/scenario_06_early_evaluation_exercise.lua:6794
+#: scripts/scenario_06_early_evaluation_exercise.lua:6829
+#: scripts/scenario_06_early_evaluation_exercise.lua:6870
+#: scripts/scenario_06_early_evaluation_exercise.lua:6906
+#: scripts/scenario_06_early_evaluation_exercise.lua:6945
+#: scripts/scenario_06_early_evaluation_exercise.lua:6979
+#: scripts/scenario_06_early_evaluation_exercise.lua:7043
+#: scripts/scenario_06_early_evaluation_exercise.lua:7159
+#: scripts/scenario_06_early_evaluation_exercise.lua:7197
+#: scripts/scenario_06_early_evaluation_exercise.lua:7223
+#: scripts/scenario_06_early_evaluation_exercise.lua:7238
 msgctxt "evaluation-comms"
 msgid "S"
 msgstr "S"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7390
-#: scripts/scenario_06_early_evaluation_exercise.lua:7410
-#: scripts/scenario_06_early_evaluation_exercise.lua:7434
-#: scripts/scenario_06_early_evaluation_exercise.lua:7457
-#: scripts/scenario_06_early_evaluation_exercise.lua:7483
-#: scripts/scenario_06_early_evaluation_exercise.lua:7506
-#: scripts/scenario_06_early_evaluation_exercise.lua:7855
-#: scripts/scenario_06_early_evaluation_exercise.lua:7883
-#: scripts/scenario_06_early_evaluation_exercise.lua:7918
-#: scripts/scenario_06_early_evaluation_exercise.lua:7959
-#: scripts/scenario_06_early_evaluation_exercise.lua:7995
-#: scripts/scenario_06_early_evaluation_exercise.lua:8034
-#: scripts/scenario_06_early_evaluation_exercise.lua:8068
-#: scripts/scenario_06_early_evaluation_exercise.lua:8131
-#: scripts/scenario_06_early_evaluation_exercise.lua:8248
-#: scripts/scenario_06_early_evaluation_exercise.lua:8286
-#: scripts/scenario_06_early_evaluation_exercise.lua:8312
-#: scripts/scenario_06_early_evaluation_exercise.lua:8327
+#: scripts/scenario_06_early_evaluation_exercise.lua:6304
+#: scripts/scenario_06_early_evaluation_exercise.lua:6324
+#: scripts/scenario_06_early_evaluation_exercise.lua:6348
+#: scripts/scenario_06_early_evaluation_exercise.lua:6371
+#: scripts/scenario_06_early_evaluation_exercise.lua:6397
+#: scripts/scenario_06_early_evaluation_exercise.lua:6420
+#: scripts/scenario_06_early_evaluation_exercise.lua:6769
+#: scripts/scenario_06_early_evaluation_exercise.lua:6797
+#: scripts/scenario_06_early_evaluation_exercise.lua:6832
+#: scripts/scenario_06_early_evaluation_exercise.lua:6873
+#: scripts/scenario_06_early_evaluation_exercise.lua:6909
+#: scripts/scenario_06_early_evaluation_exercise.lua:6948
+#: scripts/scenario_06_early_evaluation_exercise.lua:6982
+#: scripts/scenario_06_early_evaluation_exercise.lua:7045
+#: scripts/scenario_06_early_evaluation_exercise.lua:7162
+#: scripts/scenario_06_early_evaluation_exercise.lua:7200
+#: scripts/scenario_06_early_evaluation_exercise.lua:7226
+#: scripts/scenario_06_early_evaluation_exercise.lua:7241
 msgctxt "evaluation-comms"
 msgid "E"
 msgstr "E"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7393
-#: scripts/scenario_06_early_evaluation_exercise.lua:7413
-#: scripts/scenario_06_early_evaluation_exercise.lua:7437
-#: scripts/scenario_06_early_evaluation_exercise.lua:7460
-#: scripts/scenario_06_early_evaluation_exercise.lua:7486
-#: scripts/scenario_06_early_evaluation_exercise.lua:7509
-#: scripts/scenario_06_early_evaluation_exercise.lua:7858
-#: scripts/scenario_06_early_evaluation_exercise.lua:7886
-#: scripts/scenario_06_early_evaluation_exercise.lua:7921
-#: scripts/scenario_06_early_evaluation_exercise.lua:7962
-#: scripts/scenario_06_early_evaluation_exercise.lua:7998
-#: scripts/scenario_06_early_evaluation_exercise.lua:8037
-#: scripts/scenario_06_early_evaluation_exercise.lua:8071
-#: scripts/scenario_06_early_evaluation_exercise.lua:8133
-#: scripts/scenario_06_early_evaluation_exercise.lua:8251
-#: scripts/scenario_06_early_evaluation_exercise.lua:8289
-#: scripts/scenario_06_early_evaluation_exercise.lua:8315
-#: scripts/scenario_06_early_evaluation_exercise.lua:8330
+#: scripts/scenario_06_early_evaluation_exercise.lua:6307
+#: scripts/scenario_06_early_evaluation_exercise.lua:6327
+#: scripts/scenario_06_early_evaluation_exercise.lua:6351
+#: scripts/scenario_06_early_evaluation_exercise.lua:6374
+#: scripts/scenario_06_early_evaluation_exercise.lua:6400
+#: scripts/scenario_06_early_evaluation_exercise.lua:6423
+#: scripts/scenario_06_early_evaluation_exercise.lua:6772
+#: scripts/scenario_06_early_evaluation_exercise.lua:6800
+#: scripts/scenario_06_early_evaluation_exercise.lua:6835
+#: scripts/scenario_06_early_evaluation_exercise.lua:6876
+#: scripts/scenario_06_early_evaluation_exercise.lua:6912
+#: scripts/scenario_06_early_evaluation_exercise.lua:6951
+#: scripts/scenario_06_early_evaluation_exercise.lua:6985
+#: scripts/scenario_06_early_evaluation_exercise.lua:7047
+#: scripts/scenario_06_early_evaluation_exercise.lua:7165
+#: scripts/scenario_06_early_evaluation_exercise.lua:7203
+#: scripts/scenario_06_early_evaluation_exercise.lua:7229
+#: scripts/scenario_06_early_evaluation_exercise.lua:7244
 msgctxt "evaluation-comms"
 msgid "C"
 msgstr "C"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7397
-#: scripts/scenario_06_early_evaluation_exercise.lua:7598
-#: scripts/scenario_06_early_evaluation_exercise.lua:7755
-#: scripts/scenario_06_early_evaluation_exercise.lua:7862
-#: scripts/scenario_06_early_evaluation_exercise.lua:8255
+#: scripts/scenario_06_early_evaluation_exercise.lua:6311
+#: scripts/scenario_06_early_evaluation_exercise.lua:6512
+#: scripts/scenario_06_early_evaluation_exercise.lua:6669
+#: scripts/scenario_06_early_evaluation_exercise.lua:6776
+#: scripts/scenario_06_early_evaluation_exercise.lua:7169
 #, lua-format
 msgctxt "evaluation-comms"
 msgid "Overall time to complete the task: %s"
 msgstr "Overall time to complete the task: %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7419
+#: scripts/scenario_06_early_evaluation_exercise.lua:6333
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "Relay time taken to request dock protocol: %s"
-msgstr "%s\nRelay time taken to request dock protocol: %s"
+msgstr ""
+"%s\n"
+"Relay time taken to request dock protocol: %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7441
+#: scripts/scenario_06_early_evaluation_exercise.lua:6355
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "Weapons time taken to calibrate beams: %s"
-msgstr "%s\nWeapons time taken to calibrate beams: %s"
+msgstr ""
+"%s\n"
+"Weapons time taken to calibrate beams: %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7464
+#: scripts/scenario_06_early_evaluation_exercise.lua:6378
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "Weapons time taken to calibrate shields: %s"
-msgstr "%s\nWeapons time taken to calibrate shields: %s"
+msgstr ""
+"%s\n"
+"Weapons time taken to calibrate shields: %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7492
+#: scripts/scenario_06_early_evaluation_exercise.lua:6406
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "Engineering time taken to power down missile system: %s"
-msgstr "%s\nEngineering time taken to power down missile system: %s"
+msgstr ""
+"%s\n"
+"Engineering time taken to power down missile system: %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7515
+#: scripts/scenario_06_early_evaluation_exercise.lua:6429
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "Helm/Engineering maximum velocity reached: %.1f units per minute"
-msgstr "%s\nHelm/Engineering maximum velocity reached: %.1f units per minute"
+msgstr ""
+"%s\n"
+"Helm/Engineering maximum velocity reached: %.1f units per minute"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7523
-#: scripts/scenario_06_early_evaluation_exercise.lua:7586
-#: scripts/scenario_06_early_evaluation_exercise.lua:7680
-#: scripts/scenario_06_early_evaluation_exercise.lua:7743
-#: scripts/scenario_06_early_evaluation_exercise.lua:7767
-#: scripts/scenario_06_early_evaluation_exercise.lua:7781
-#: scripts/scenario_06_early_evaluation_exercise.lua:8167
-#: scripts/scenario_06_early_evaluation_exercise.lua:8350
+#: scripts/scenario_06_early_evaluation_exercise.lua:6437
+#: scripts/scenario_06_early_evaluation_exercise.lua:6500
+#: scripts/scenario_06_early_evaluation_exercise.lua:6594
+#: scripts/scenario_06_early_evaluation_exercise.lua:6657
+#: scripts/scenario_06_early_evaluation_exercise.lua:6681
+#: scripts/scenario_06_early_evaluation_exercise.lua:6695
+#: scripts/scenario_06_early_evaluation_exercise.lua:7081
+#: scripts/scenario_06_early_evaluation_exercise.lua:7264
 msgctxt "evaluation-comms"
 msgid "Needs improvement"
 msgstr "Needs improvement"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7525
-#: scripts/scenario_06_early_evaluation_exercise.lua:7682
-#: scripts/scenario_06_early_evaluation_exercise.lua:7783
-#: scripts/scenario_06_early_evaluation_exercise.lua:8169
-#: scripts/scenario_06_early_evaluation_exercise.lua:8352
+#: scripts/scenario_06_early_evaluation_exercise.lua:6439
+#: scripts/scenario_06_early_evaluation_exercise.lua:6596
+#: scripts/scenario_06_early_evaluation_exercise.lua:6697
+#: scripts/scenario_06_early_evaluation_exercise.lua:7083
+#: scripts/scenario_06_early_evaluation_exercise.lua:7266
 msgctxt "evaluation-comms"
 msgid "Perfect"
 msgstr "Perfect"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7527
-#: scripts/scenario_06_early_evaluation_exercise.lua:7588
-#: scripts/scenario_06_early_evaluation_exercise.lua:7684
-#: scripts/scenario_06_early_evaluation_exercise.lua:7745
-#: scripts/scenario_06_early_evaluation_exercise.lua:7769
-#: scripts/scenario_06_early_evaluation_exercise.lua:7785
-#: scripts/scenario_06_early_evaluation_exercise.lua:8171
-#: scripts/scenario_06_early_evaluation_exercise.lua:8354
+#: scripts/scenario_06_early_evaluation_exercise.lua:6441
+#: scripts/scenario_06_early_evaluation_exercise.lua:6502
+#: scripts/scenario_06_early_evaluation_exercise.lua:6598
+#: scripts/scenario_06_early_evaluation_exercise.lua:6659
+#: scripts/scenario_06_early_evaluation_exercise.lua:6683
+#: scripts/scenario_06_early_evaluation_exercise.lua:6699
+#: scripts/scenario_06_early_evaluation_exercise.lua:7085
+#: scripts/scenario_06_early_evaluation_exercise.lua:7268
 msgctxt "evaluation-comms"
 msgid "Superior"
 msgstr "Superior"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7529
-#: scripts/scenario_06_early_evaluation_exercise.lua:7591
-#: scripts/scenario_06_early_evaluation_exercise.lua:7686
-#: scripts/scenario_06_early_evaluation_exercise.lua:7748
-#: scripts/scenario_06_early_evaluation_exercise.lua:7772
-#: scripts/scenario_06_early_evaluation_exercise.lua:7787
-#: scripts/scenario_06_early_evaluation_exercise.lua:8173
-#: scripts/scenario_06_early_evaluation_exercise.lua:8356
+#: scripts/scenario_06_early_evaluation_exercise.lua:6443
+#: scripts/scenario_06_early_evaluation_exercise.lua:6505
+#: scripts/scenario_06_early_evaluation_exercise.lua:6600
+#: scripts/scenario_06_early_evaluation_exercise.lua:6662
+#: scripts/scenario_06_early_evaluation_exercise.lua:6686
+#: scripts/scenario_06_early_evaluation_exercise.lua:6701
+#: scripts/scenario_06_early_evaluation_exercise.lua:7087
+#: scripts/scenario_06_early_evaluation_exercise.lua:7270
 msgctxt "evaluation-comms"
 msgid "Exceeds expectations"
 msgstr "Exceeds expectations"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7531
-#: scripts/scenario_06_early_evaluation_exercise.lua:7594
-#: scripts/scenario_06_early_evaluation_exercise.lua:7688
-#: scripts/scenario_06_early_evaluation_exercise.lua:7751
-#: scripts/scenario_06_early_evaluation_exercise.lua:7775
-#: scripts/scenario_06_early_evaluation_exercise.lua:7789
-#: scripts/scenario_06_early_evaluation_exercise.lua:8175
-#: scripts/scenario_06_early_evaluation_exercise.lua:8358
+#: scripts/scenario_06_early_evaluation_exercise.lua:6445
+#: scripts/scenario_06_early_evaluation_exercise.lua:6508
+#: scripts/scenario_06_early_evaluation_exercise.lua:6602
+#: scripts/scenario_06_early_evaluation_exercise.lua:6665
+#: scripts/scenario_06_early_evaluation_exercise.lua:6689
+#: scripts/scenario_06_early_evaluation_exercise.lua:6703
+#: scripts/scenario_06_early_evaluation_exercise.lua:7089
+#: scripts/scenario_06_early_evaluation_exercise.lua:7272
 msgctxt "evaluation-comms"
 msgid "Competent"
 msgstr "Competent"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7537
+#: scripts/scenario_06_early_evaluation_exercise.lua:6451
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "\n"
 "With a score of %i points out of 18, the system gives a rating of %s"
-msgstr "%s\n\nWith a score of %i points out of 18, the system gives a rating of %s"
+msgstr ""
+"%s\n"
+"\n"
+"With a score of %i points out of 18, the system gives a rating of %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7546
-#: scripts/scenario_06_early_evaluation_exercise.lua:7703
-#: scripts/scenario_06_early_evaluation_exercise.lua:7804
-#: scripts/scenario_06_early_evaluation_exercise.lua:8190
-#: scripts/scenario_06_early_evaluation_exercise.lua:8373
+#: scripts/scenario_06_early_evaluation_exercise.lua:6460
+#: scripts/scenario_06_early_evaluation_exercise.lua:6617
+#: scripts/scenario_06_early_evaluation_exercise.lua:6718
+#: scripts/scenario_06_early_evaluation_exercise.lua:7104
+#: scripts/scenario_06_early_evaluation_exercise.lua:7287
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
@@ -2291,9 +2143,16 @@ msgid ""
 "    C = Competent\n"
 "    E = Exceeds expectations\n"
 "    S = Superior"
-msgstr "%s\n\nFor each subtask, the single letter evaluations are:\n    N = Needs improvement\n    C = Competent\n    E = Exceeds expectations\n    S = Superior"
+msgstr ""
+"%s\n"
+"\n"
+"For each subtask, the single letter evaluations are:\n"
+"    N = Needs improvement\n"
+"    C = Competent\n"
+"    E = Exceeds expectations\n"
+"    S = Superior"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7564
+#: scripts/scenario_06_early_evaluation_exercise.lua:6478
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
@@ -2302,9 +2161,14 @@ msgid ""
 "Certain members are measured on part of the task.\n"
 "----- Second Task: Scan -----\n"
 "%s"
-msgstr "We only have objective evaluation data. Subjective evaluation must come from a different source. The entire crew contributes to the success of a task. Certain members are measured on part of the task.\n----- Second Task: Scan -----\n%s"
+msgstr ""
+"We only have objective evaluation data. Subjective evaluation must come from "
+"a different source. The entire crew contributes to the success of a task. "
+"Certain members are measured on part of the task.\n"
+"----- Second Task: Scan -----\n"
+"%s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7607
+#: scripts/scenario_06_early_evaluation_exercise.lua:6521
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
@@ -2312,38 +2176,47 @@ msgid ""
 "Report line per scan ship: faction name: SS = Simple Scan time in seconds, "
 "DS = Deep Scan time in seconds, RT = Reported Type time in seconds (yes/no), "
 "RF = Reported Frequency time in seconds (yes/no)"
-msgstr "%s\nReport line per scan ship: faction name: SS = Simple Scan time in seconds, DS = Deep Scan time in seconds, RT = Reported Type time in seconds (yes/no), RF = Reported Frequency time in seconds (yes/no)"
+msgstr ""
+"%s\n"
+"Report line per scan ship: faction name: SS = Simple Scan time in seconds, "
+"DS = Deep Scan time in seconds, RT = Reported Type time in seconds (yes/no), "
+"RF = Reported Frequency time in seconds (yes/no)"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7637
-#: scripts/scenario_06_early_evaluation_exercise.lua:7651
+#: scripts/scenario_06_early_evaluation_exercise.lua:6551
+#: scripts/scenario_06_early_evaluation_exercise.lua:6565
 msgctxt "evaluation-comms"
 msgid "(no)"
 msgstr "(no)"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7640
-#: scripts/scenario_06_early_evaluation_exercise.lua:7653
+#: scripts/scenario_06_early_evaluation_exercise.lua:6554
+#: scripts/scenario_06_early_evaluation_exercise.lua:6567
 msgctxt "evaluation-comms"
 msgid "(yes)"
 msgstr "(yes)"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7657
+#: scripts/scenario_06_early_evaluation_exercise.lua:6571
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "%s %s: SS:%s, DS:%s, RT:%s %s, RF:%s %s"
-msgstr "%s\n%s %s: SS:%s, DS:%s, RT:%s %s, RF:%s %s"
+msgstr ""
+"%s\n"
+"%s %s: SS:%s, DS:%s, RT:%s %s, RF:%s %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7694
+#: scripts/scenario_06_early_evaluation_exercise.lua:6608
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "\n"
 "With a score of %i points out of 54, the system gives a rating of %s"
-msgstr "%s\n\nWith a score of %i points out of 54, the system gives a rating of %s"
+msgstr ""
+"%s\n"
+"\n"
+"With a score of %i points out of 54, the system gives a rating of %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7721
+#: scripts/scenario_06_early_evaluation_exercise.lua:6635
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
@@ -2352,26 +2225,36 @@ msgid ""
 "Certain members are measured on part of the task.\n"
 "----- Third Task: Destroy Freighter -----\n"
 "%s"
-msgstr "We only have objective evaluation data. Subjective evaluation must come from a different source. The entire crew contributes to the success of a task. Certain members are measured on part of the task.\n----- Third Task: Destroy Freighter -----\n%s"
+msgstr ""
+"We only have objective evaluation data. Subjective evaluation must come from "
+"a different source. The entire crew contributes to the success of a task. "
+"Certain members are measured on part of the task.\n"
+"----- Third Task: Destroy Freighter -----\n"
+"%s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7762
+#: scripts/scenario_06_early_evaluation_exercise.lua:6676
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "Helm/Weapons HVLI in storage: %i"
-msgstr "%s\nHelm/Weapons HVLI in storage: %i"
+msgstr ""
+"%s\n"
+"Helm/Weapons HVLI in storage: %i"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7795
+#: scripts/scenario_06_early_evaluation_exercise.lua:6709
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "\n"
 "With a score of %i points out of 6, the system gives a rating of %s"
-msgstr "%s\n\nWith a score of %i points out of 6, the system gives a rating of %s"
+msgstr ""
+"%s\n"
+"\n"
+"With a score of %i points out of 6, the system gives a rating of %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7822
+#: scripts/scenario_06_early_evaluation_exercise.lua:6736
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
@@ -2380,162 +2263,202 @@ msgid ""
 "Certain members are measured on part of the task.\n"
 "----- Fourth Task: Assist Freighter -----\n"
 "%s"
-msgstr "We only have objective evaluation data. Subjective evaluation must come from a different source. The entire crew contributes to the success of a task. Certain members are measured on part of the task.\n----- Fourth Task: Assist Freighter -----\n%s"
+msgstr ""
+"We only have objective evaluation data. Subjective evaluation must come from "
+"a different source. The entire crew contributes to the success of a task. "
+"Certain members are measured on part of the task.\n"
+"----- Fourth Task: Assist Freighter -----\n"
+"%s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7868
+#: scripts/scenario_06_early_evaluation_exercise.lua:6782
 msgctxt "evaluation-comms"
 msgid "Arlenian freighter"
 msgstr "Arlenian freighter"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7890
+#: scripts/scenario_06_early_evaluation_exercise.lua:6804
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "Relay time taken to contact %s: %s"
-msgstr "%s\nRelay time taken to contact %s: %s"
+msgstr ""
+"%s\n"
+"Relay time taken to contact %s: %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7900
+#: scripts/scenario_06_early_evaluation_exercise.lua:6814
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "Failed to contact Arlenian freighter"
-msgstr "%s\nFailed to contact Arlenian freighter"
+msgstr ""
+"%s\n"
+"Failed to contact Arlenian freighter"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7904
-#: scripts/scenario_06_early_evaluation_exercise.lua:7945
-#: scripts/scenario_06_early_evaluation_exercise.lua:7982
-#: scripts/scenario_06_early_evaluation_exercise.lua:8022
-#: scripts/scenario_06_early_evaluation_exercise.lua:8055
-#: scripts/scenario_06_early_evaluation_exercise.lua:8089
+#: scripts/scenario_06_early_evaluation_exercise.lua:6818
+#: scripts/scenario_06_early_evaluation_exercise.lua:6859
+#: scripts/scenario_06_early_evaluation_exercise.lua:6896
+#: scripts/scenario_06_early_evaluation_exercise.lua:6936
+#: scripts/scenario_06_early_evaluation_exercise.lua:6969
+#: scripts/scenario_06_early_evaluation_exercise.lua:7003
 #, lua-format
 msgctxt "evaluation-comms"
 msgid "%s N"
 msgstr "%s N"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7927
+#: scripts/scenario_06_early_evaluation_exercise.lua:6841
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "Relay time taken to report damage to %s's engines: %s"
-msgstr "%s\nRelay time taken to report damage to %s's engines: %s"
+msgstr ""
+"%s\n"
+"Relay time taken to report damage to %s's engines: %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7940
+#: scripts/scenario_06_early_evaluation_exercise.lua:6854
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "Failed to report damage to Arlenian freighter"
-msgstr "%s\nFailed to report damage to Arlenian freighter"
+msgstr ""
+"%s\n"
+"Failed to report damage to Arlenian freighter"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7966
+#: scripts/scenario_06_early_evaluation_exercise.lua:6880
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "Helm/Relay time taken to get parts: %s"
-msgstr "%s\nHelm/Relay time taken to get parts: %s"
+msgstr ""
+"%s\n"
+"Helm/Relay time taken to get parts: %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:7977
+#: scripts/scenario_06_early_evaluation_exercise.lua:6891
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "Failed to get parts for Arlenian freighter"
-msgstr "%s\nFailed to get parts for Arlenian freighter"
+msgstr ""
+"%s\n"
+"Failed to get parts for Arlenian freighter"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:8004
+#: scripts/scenario_06_early_evaluation_exercise.lua:6918
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "Helm/Relay time taken to provide parts for %s: %s"
-msgstr "%s\nHelm/Relay time taken to provide parts for %s: %s"
+msgstr ""
+"%s\n"
+"Helm/Relay time taken to provide parts for %s: %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:8017
+#: scripts/scenario_06_early_evaluation_exercise.lua:6931
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "Failed to provide parts to Arlenian freighter"
-msgstr "%s\nFailed to provide parts to Arlenian freighter"
+msgstr ""
+"%s\n"
+"Failed to provide parts to Arlenian freighter"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:8041
+#: scripts/scenario_06_early_evaluation_exercise.lua:6955
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "Science time taken to scan %s: %s"
-msgstr "%s\nScience time taken to scan %s: %s"
+msgstr ""
+"%s\n"
+"Science time taken to scan %s: %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:8051
+#: scripts/scenario_06_early_evaluation_exercise.lua:6965
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "Failed to scan Arlenian freighter"
-msgstr "%s\nFailed to scan Arlenian freighter"
+msgstr ""
+"%s\n"
+"Failed to scan Arlenian freighter"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:8075
+#: scripts/scenario_06_early_evaluation_exercise.lua:6989
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "Science time taken to fully scan %s: %s"
-msgstr "%s\nScience time taken to fully scan %s: %s"
+msgstr ""
+"%s\n"
+"Science time taken to fully scan %s: %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:8085
+#: scripts/scenario_06_early_evaluation_exercise.lua:6999
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "Failed to deep scan Arlenian freighter"
-msgstr "%s\nFailed to deep scan Arlenian freighter"
+msgstr ""
+"%s\n"
+"Failed to deep scan Arlenian freighter"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:8095
+#: scripts/scenario_06_early_evaluation_exercise.lua:7009
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "Weapons/Helm/Engineering time to destroy each marauder in seconds:\n"
-msgstr "%s\nWeapons/Helm/Engineering time to destroy each marauder in seconds:\n"
+msgstr ""
+"%s\n"
+"Weapons/Helm/Engineering time to destroy each marauder in seconds:\n"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:8145
+#: scripts/scenario_06_early_evaluation_exercise.lua:7059
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "Task status: complete"
-msgstr "%s\nTask status: complete"
+msgstr ""
+"%s\n"
+"Task status: complete"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:8155
+#: scripts/scenario_06_early_evaluation_exercise.lua:7069
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "Task status: failed (partial success in providing repair parts)"
-msgstr "%s\nTask status: failed (partial success in providing repair parts)"
+msgstr ""
+"%s\n"
+"Task status: failed (partial success in providing repair parts)"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:8162
+#: scripts/scenario_06_early_evaluation_exercise.lua:7076
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "Task status: failed"
-msgstr "%s\nTask status: failed"
+msgstr ""
+"%s\n"
+"Task status: failed"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:8181
+#: scripts/scenario_06_early_evaluation_exercise.lua:7095
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "\n"
 "With a score of %i points out of 43, the system gives a rating of %s"
-msgstr "%s\n\nWith a score of %i points out of 43, the system gives a rating of %s"
+msgstr ""
+"%s\n"
+"\n"
+"With a score of %i points out of 43, the system gives a rating of %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:8208
+#: scripts/scenario_06_early_evaluation_exercise.lua:7122
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
@@ -2544,18 +2467,26 @@ msgid ""
 "Certain members are measured on part of the task.\n"
 "----- Fifth Task: Research -----\n"
 "%s"
-msgstr "We only have objective evaluation data. Subjective evaluation must come from a different source. The entire crew contributes to the success of a task. Certain members are measured on part of the task.\n----- Fifth Task: Research -----\n%s"
+msgstr ""
+"We only have objective evaluation data. Subjective evaluation must come from "
+"a different source. The entire crew contributes to the success of a task. "
+"Certain members are measured on part of the task.\n"
+"----- Fifth Task: Research -----\n"
+"%s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:8364
+#: scripts/scenario_06_early_evaluation_exercise.lua:7278
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "\n"
 "With a score of %i points out of 48, the system gives a rating of %s"
-msgstr "%s\n\nWith a score of %i points out of 48, the system gives a rating of %s"
+msgstr ""
+"%s\n"
+"\n"
+"With a score of %i points out of 48, the system gives a rating of %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:8391
+#: scripts/scenario_06_early_evaluation_exercise.lua:7305
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
@@ -2564,541 +2495,153 @@ msgid ""
 "Certain members are measured on part of the task.\n"
 "----- Bonus Task -----\n"
 "%s"
-msgstr "We only have objective evaluation data. Subjective evaluation must come from a different source. The entire crew contributes to the success of a task. Certain members are measured on part of the task.\n----- Bonus Task -----\n%s"
+msgstr ""
+"We only have objective evaluation data. Subjective evaluation must come from "
+"a different source. The entire crew contributes to the success of a task. "
+"Certain members are measured on part of the task.\n"
+"----- Bonus Task -----\n"
+"%s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:8415
+#: scripts/scenario_06_early_evaluation_exercise.lua:7329
 msgctxt "evaluation-comms"
 msgid "complete"
 msgstr "complete"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:8416
+#: scripts/scenario_06_early_evaluation_exercise.lua:7330
 msgctxt "evaluation-comms"
 msgid "incomplete"
 msgstr "incomplete"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:8417
+#: scripts/scenario_06_early_evaluation_exercise.lua:7331
 msgctxt "evaluation-comms"
 msgid "partially complete"
 msgstr "partially complete"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:8429
+#: scripts/scenario_06_early_evaluation_exercise.lua:7343
 #, lua-format
 msgctxt "evaluation-comms"
 msgid "%s time: %s"
 msgstr "%s time: %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:8437
+#: scripts/scenario_06_early_evaluation_exercise.lua:7351
 #, lua-format
 msgctxt "evaluation-comms"
 msgid "Bonus task length: %s     Status: %s"
 msgstr "Bonus task length: %s     Status: %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:8442
-#: scripts/scenario_06_early_evaluation_exercise.lua:8476
+#: scripts/scenario_06_early_evaluation_exercise.lua:7356
+#: scripts/scenario_06_early_evaluation_exercise.lua:7390
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "Station %s %s"
-msgstr "%s\nStation %s %s"
+msgstr ""
+"%s\n"
+"Station %s %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:8450
-#: scripts/scenario_06_early_evaluation_exercise.lua:8484
+#: scripts/scenario_06_early_evaluation_exercise.lua:7364
+#: scripts/scenario_06_early_evaluation_exercise.lua:7398
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "     Ships spawned: count: %i, strength: %.1f"
-msgstr "%s\n     Ships spawned: count: %i, strength: %.1f"
+msgstr ""
+"%s\n"
+"     Ships spawned: count: %i, strength: %.1f"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:8459
-#: scripts/scenario_06_early_evaluation_exercise.lua:8493
+#: scripts/scenario_06_early_evaluation_exercise.lua:7373
+#: scripts/scenario_06_early_evaluation_exercise.lua:7407
 #, lua-format
 msgctxt "evaluation-comms"
 msgid ""
 "%s\n"
 "     Ships destroyed: count: %i, strength: %.1f"
-msgstr "%s\n     Ships destroyed: count: %i, strength: %.1f"
+msgstr ""
+"%s\n"
+"     Ships destroyed: count: %i, strength: %.1f"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:8471
+#: scripts/scenario_06_early_evaluation_exercise.lua:7385
 msgctxt "evaluation-comms"
 msgid "(destroyed)"
 msgstr "(destroyed)"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:8538
+#: scripts/scenario_06_early_evaluation_exercise.lua:7452
 msgctxt "evaluation-comms"
 msgid "Current Evaluations"
 msgstr "Current Evaluations"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:8648
-msgctxt "shipAssist-comms"
-msgid "What do you want?"
-msgstr "What do you want?"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:8650
-msgctxt "shipAssist-comms"
-msgid "Sir, how can we assist?"
-msgstr "Sir, how can we assist?"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:8652
-msgctxt "shipAssist-comms"
-msgid "Defend a waypoint"
-msgstr "Defend a waypoint"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:8657
-msgctxt "shipAssist-comms"
-msgid "No waypoints set. Please set a waypoint first."
-msgstr "No waypoints set. Please set a waypoint first."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:8662
-msgctxt "shipAssist-comms"
-msgid "Which waypoint should we defend?"
-msgstr "Which waypoint should we defend?"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:8667
-#, lua-format
-msgctxt "shipAssist-comms"
-msgid "Defend WP %d"
-msgstr "Defend WP %d"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:8678
-#, lua-format
-msgctxt "shipAssist-comms"
-msgid "We are heading to assist at WP %d."
-msgstr "We are heading to assist at WP %d."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:8691
-msgctxt "shipAssist-comms"
-msgid "Assist me"
-msgstr "Assist me"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:8693
-msgctxt "shipAssist-comms"
-msgid "Heading toward you to assist."
-msgstr "Heading toward you to assist."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:8699
-msgctxt "shipAssist-comms"
-msgid "Report status"
-msgstr "Report status"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:8700
-msgctxt "shipAssist-comms"
-msgid "Hull: "
-msgstr "Hull: "
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:8706
-msgctxt "shipAssist-comms"
-msgid "Shield: "
-msgstr "Shield: "
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:8715
-msgctxt "shipAssist-comms"
-msgid "Front Shield: "
-msgstr "Front Shield: "
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:8723
-msgctxt "shipAssist-comms"
-msgid "Rear Shield: "
-msgstr "Rear Shield: "
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:8733
-msgctxt "shipAssist-comms"
-msgid "Shield "
-msgstr "Shield "
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:8749
-msgctxt "shipAssist-comms"
-msgid " Missiles: "
-msgstr " Missiles: "
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:8761
-#: scripts/scenario_06_early_evaluation_exercise.lua:9994
-#, lua-format
-msgctxt "shipAssist-comms"
-msgid ""
-"%s\n"
-"Docked with %s"
-msgstr "%s\nDocked with %s"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:8772
-#, lua-format
-msgctxt "shipAssist-comms"
-msgid ""
-"%s\n"
-"Heading for %s station %s in %s"
-msgstr "%s\nHeading for %s station %s in %s"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:8792
-#, lua-format
-msgctxt "shipAssist-comms"
-msgid "Dock at %s"
-msgstr "Dock at %s"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:8798
-#, lua-format
-msgctxt "shipAssist-comms"
-msgid "Docking at %s."
-msgstr "Docking at %s."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:8819
-#: scripts/scenario_06_early_evaluation_exercise.lua:10030
-msgctxt "trade-comms"
-msgid "Jettison cargo"
-msgstr "Jettison cargo"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:8824
-#: scripts/scenario_06_early_evaluation_exercise.lua:10035
-#, lua-format
-msgctxt "trade-comms"
-msgid ""
-"Available space: %i\n"
-"What would you like to jettison?"
-msgstr "Available space: %i\nWhat would you like to jettison?"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:8837
-#: scripts/scenario_06_early_evaluation_exercise.lua:10048
-#, lua-format
-msgctxt "trade-comms"
-msgid "One %s jettisoned"
-msgstr "One %s jettisoned"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:8862
-#, lua-format
-msgctxt "trade-comms"
-msgid "Trade luxury for %s"
-msgstr "Trade luxury for %s"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:8882
-#, lua-format
-msgctxt "trade-comms"
-msgid "Traded luxury for %s"
-msgstr "Traded luxury for %s"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:8901
-#: scripts/scenario_06_early_evaluation_exercise.lua:8960
-#: scripts/scenario_06_early_evaluation_exercise.lua:9015
-#: scripts/scenario_06_early_evaluation_exercise.lua:9077
-#: scripts/scenario_06_early_evaluation_exercise.lua:10071
-#: scripts/scenario_06_early_evaluation_exercise.lua:10126
-#: scripts/scenario_06_early_evaluation_exercise.lua:10186
-#: scripts/scenario_06_early_evaluation_exercise.lua:10241
-#: scripts/scenario_06_early_evaluation_exercise.lua:10301
-#, lua-format
-msgctxt "trade-comms"
-msgid "Buy one %s for %i reputation"
-msgstr "Buy one %s for %i reputation"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:8928
-#: scripts/scenario_06_early_evaluation_exercise.lua:8989
-#: scripts/scenario_06_early_evaluation_exercise.lua:9044
-#: scripts/scenario_06_early_evaluation_exercise.lua:9106
-#: scripts/scenario_06_early_evaluation_exercise.lua:10100
-#: scripts/scenario_06_early_evaluation_exercise.lua:10155
-#: scripts/scenario_06_early_evaluation_exercise.lua:10215
-#: scripts/scenario_06_early_evaluation_exercise.lua:10270
-#: scripts/scenario_06_early_evaluation_exercise.lua:10330
-#, lua-format
-msgctxt "trade-comms"
-msgid "Purchased %s from %s"
-msgstr "Purchased %s from %s"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:8938
-#: scripts/scenario_06_early_evaluation_exercise.lua:8999
-#: scripts/scenario_06_early_evaluation_exercise.lua:9054
-#: scripts/scenario_06_early_evaluation_exercise.lua:9116
-#: scripts/scenario_06_early_evaluation_exercise.lua:10110
-#: scripts/scenario_06_early_evaluation_exercise.lua:10165
-#: scripts/scenario_06_early_evaluation_exercise.lua:10225
-#: scripts/scenario_06_early_evaluation_exercise.lua:10280
-#: scripts/scenario_06_early_evaluation_exercise.lua:10340
-msgctxt "needRep-comms"
-msgid "Insufficient reputation for purchase"
-msgstr "Insufficient reputation for purchase"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9130
-#: scripts/scenario_06_early_evaluation_exercise.lua:9960
-msgctxt "trade-comms"
-msgid "Do you have cargo you might sell?"
-msgstr "Do you have cargo you might sell?"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9133
-#: scripts/scenario_06_early_evaluation_exercise.lua:9963
-msgctxt "trade-comms"
-msgid "We've got "
-msgstr "We've got "
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9145
-#: scripts/scenario_06_early_evaluation_exercise.lua:9975
-msgctxt "trade-comms"
-msgid "nothing"
-msgstr "nothing"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9165
-msgctxt "shipEnemy-comms"
-msgid "We will see to your destruction!"
-msgstr "We will see to your destruction!"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9167
-msgctxt "shipEnemy-comms"
-msgid "Your bloodline will end here!"
-msgstr "Your bloodline will end here!"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9169
-msgctxt "shipEnemy-comms"
-msgid "Your feeble threats are meaningless."
-msgstr "Your feeble threats are meaningless."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9176
-msgctxt "shipEnemy-comms"
-msgid ""
-"Ktzzzsss.\n"
-"You will DIEEee weaklingsss!"
-msgstr "Ktzzzsss.\nYou will DIEEee weaklingsss!"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9180
-msgctxt "shipEnemy-comms"
-msgid "We will destroy you"
-msgstr "We will destroy you"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9183
-msgctxt "shipEnemy-comms"
-msgid "We think not. It is you who will experience destruction!"
-msgstr "We think not. It is you who will experience destruction!"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9186
-msgctxt "shipEnemy-comms"
-msgid "You have no honor"
-msgstr "You have no honour"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9189
-msgctxt "shipEnemy-comms"
-msgid "Your insult has brought our wrath upon you. Prepare to die."
-msgstr "Your insult has brought our wrath upon you. Prepare to die."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9193
-msgctxt "shipEnemy-comms"
-msgid "Your comments about honor have no meaning to us"
-msgstr "Your comments about honour have no meaning to us"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9197
-msgctxt "shipEnemy-comms"
-msgid "We pity your pathetic race"
-msgstr "We pity your pathetic race"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9200
-msgctxt "shipEnemy-comms"
-msgid "Pathetic? You will regret your disparagement!"
-msgstr "Pathetic? You will regret your disparagement!"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9203
-msgctxt "shipEnemy-comms"
-msgid "We don't care what you think of us"
-msgstr "We don't care what you think of us"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9211
-msgctxt "shipEnemy-comms"
-msgid ""
-"We wish you no harm, but will harm you if we must.\n"
-"End of transmission."
-msgstr "We wish you no harm, but will harm you if we must.\nEnd of transmission."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9220
-msgctxt "shipEnemy-comms"
-msgid "Stay out of our way, or your death will amuse us extremely!"
-msgstr "Stay out of our way, or your death will amuse us extremely!"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9229
-msgctxt "shipEnemy-comms"
-msgid ""
-"One zero one.\n"
-"No binary communication detected.\n"
-"Switching to universal speech.\n"
-"Generating appropriate response for target from human language archives.\n"
-":Do not cross us:\n"
-"Communication halted."
-msgstr "One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9232
-msgctxt "shipEnemy-comms"
-msgid "EXECUTE: SELFDESTRUCT"
-msgstr "EXECUTE: SELFDESTRUCT"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9235
-msgctxt "shipEnemy-comms"
-msgid "Rogue command received. Targeting source."
-msgstr "Rogue command received. Targeting source."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9238
-msgctxt "shipEnemy-comms"
-msgid "External command ignored."
-msgstr "External command ignored."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9243
-msgctxt "shipEnemy-comms"
-msgid ""
-"The hive suffers no threats. Opposition to any of us is opposition to us "
-"all.\n"
-"Stand down or prepare to donate your corpses toward our nutrition."
-msgstr "The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9248
-msgctxt "shipEnemy-comms"
-msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-msgstr "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9252
-msgctxt "shipEnemy-comms"
-msgid "We do not need permission to pluck apart such an insignificant threat."
-msgstr "We do not need permission to pluck apart such an insignificant threat."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9256
-msgctxt "shipEnemy-comms"
-msgid "The hive has greater priorities than exterminating pests."
-msgstr "The hive has greater priorities than exterminating pests."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9261
-msgctxt "shipEnemy-comms"
-msgid "State your business"
-msgstr "State your business"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9266
-msgctxt "shipEnemy-comms"
-msgid "What do you want? (not that we care)"
-msgstr "What do you want? (not that we care)"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9271
-msgctxt "shipEnemy-comms"
-msgid "Don't waste our time"
-msgstr "Don't waste our time"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9273
-msgctxt "shipEnemy-comms"
-msgid "Mind your own business!"
-msgstr "Mind your own business!"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9325
-msgctxt "shipEnemy-comms"
-msgid "Subspace and time continuum disruption authorized"
-msgstr "Subspace and time continuum disruption authorised"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9354
-msgctxt "shipEnemy-comms"
-msgid "Stop your actions"
-msgstr "Stop your actions"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9392
-msgctxt "shipEnemy-comms"
-msgid "Just this once, we'll take your advice"
-msgstr "Just this once, we'll take your advice"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9396
-msgctxt "shipEnemy-comms"
-msgid "No"
-msgstr "No"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9818
-#, lua-format
-msgctxt "tabRelay"
-msgid "Disruption %i"
-msgstr "Disruption %i"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9869
-msgctxt "trade-comms"
-msgid "Yes?"
-msgstr "Yes?"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9873
+#: scripts/scenario_06_early_evaluation_exercise.lua:7509
 msgctxt "ship-comms"
 msgid "We are in need of some assistance."
 msgstr "We are in need of some assistance."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:9876
+#: scripts/scenario_06_early_evaluation_exercise.lua:7511
 msgctxt "ship-comms"
 msgid "What kind of assistance do you need?"
 msgstr "What kind of assistance do you need?"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:9884
+#: scripts/scenario_06_early_evaluation_exercise.lua:7519
 msgctxt "ship-comms"
 msgid "We're not exactly sure. We just know our engines are not working"
 msgstr "We're not exactly sure. We just know our engines are not working"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:9888
+#: scripts/scenario_06_early_evaluation_exercise.lua:7523
 msgctxt "ship-comms"
 msgid "May we scan your ship?"
 msgstr "May we scan your ship?"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:9893
+#: scripts/scenario_06_early_evaluation_exercise.lua:7528
 msgctxt "ship-comms"
 msgid ""
 "If that helps you figure out what's wrong with the engines, go right ahead"
-msgstr "If that helps you figure out what's wrong with the engines, go right ahead"
+msgstr ""
+"If that helps you figure out what's wrong with the engines, go right ahead"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:9900
+#: scripts/scenario_06_early_evaluation_exercise.lua:7535
 #, lua-format
 msgctxt "ship-comms"
 msgid "We'll provide %s with your ship data and get back to you"
 msgstr "We'll provide %s with your ship data and get back to you"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:9908
+#: scripts/scenario_06_early_evaluation_exercise.lua:7543
 msgctxt "ship-comms"
 msgid ""
 "We'll be here. We're not going enywhere. We are worried about Kraylor in the "
 "area, so don't take too long"
-msgstr "We'll be here. We're not going enywhere. We are worried about Kraylor in the area, so don't take too long"
+msgstr ""
+"We'll be here. We're not going enywhere. We are worried about Kraylor in the "
+"area, so don't take too long"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:9924
+#: scripts/scenario_06_early_evaluation_exercise.lua:7557
 msgctxt "ship-comms"
 msgid "Deliver repair parts"
 msgstr "Deliver repair parts"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:9933
+#: scripts/scenario_06_early_evaluation_exercise.lua:7565
 msgctxt "ship-comms"
 msgid ""
 "These match exactly what we need. We will fully restore our engines shortly"
-msgstr "These match exactly what we need. We will fully restore our engines shortly"
+msgstr ""
+"These match exactly what we need. We will fully restore our engines shortly"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:9946
+#: scripts/scenario_06_early_evaluation_exercise.lua:7575
 msgctxt "ship-comms"
 msgid ""
 "These parts don't look like they solve our problem. You may want to double "
 "check the information you provided to the parts supplier"
-msgstr "These parts don't look like they solve our problem. You may want to double check the information you provided to the parts supplier"
+msgstr ""
+"These parts don't look like they solve our problem. You may want to double "
+"check the information you provided to the parts supplier"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:9985
-msgctxt "shipAssist-comms"
-msgid "Where are you going?"
-msgstr "Where are you going?"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:9989
+#: scripts/scenario_06_early_evaluation_exercise.lua:7829
 #, lua-format
-msgctxt "shipAssist-comms"
-msgid "Hi %s,"
-msgstr "Hi %s,"
+msgctxt "tabRelay"
+msgid "Disruption %i"
+msgstr "Disruption %i"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:10009
-#, lua-format
-msgctxt "shipAssist-comms"
-msgid ""
-"%s\n"
-"Heading for %s station %s in sector %s"
-msgstr "%s\nHeading for %s station %s in sector %s"
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:10358
-msgctxt "ship-comms"
-msgid ""
-"Sorry, we have no time to chat with you.\n"
-"We are on an important mission."
-msgstr "Sorry, we have no time to chat with you.\nWe are on an important mission."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:10363
-msgctxt "ship-comms"
-msgid ""
-"We have nothing for you.\n"
-"Good day."
-msgstr "We have nothing for you.\nGood day."
-
-#: scripts/scenario_06_early_evaluation_exercise.lua:10389
+#: scripts/scenario_06_early_evaluation_exercise.lua:7891
 #, lua-format
 msgctxt "msgHelms"
 msgid ""
@@ -3107,9 +2650,14 @@ msgid ""
 "engineering to put more power in the impulse engines. You get a better "
 "evaluation score the higher your speed. You won't be able to dock until the "
 "docking protocols are satisfied."
-msgstr "The most direct route to dock with station %s is to put the ship in full reverse impulse. The engines start at minimal power, so you may have to ask engineering to put more power in the impulse engines. You get a better evaluation score the higher your speed. You won't be able to dock until the docking protocols are satisfied."
+msgstr ""
+"The most direct route to dock with station %s is to put the ship in full "
+"reverse impulse. The engines start at minimal power, so you may have to ask "
+"engineering to put more power in the impulse engines. You get a better "
+"evaluation score the higher your speed. You won't be able to dock until the "
+"docking protocols are satisfied."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:10403
+#: scripts/scenario_06_early_evaluation_exercise.lua:7905
 #, lua-format
 msgctxt "msgWeapons"
 msgid ""
@@ -3117,18 +2665,25 @@ msgid ""
 "shields by adjusting the frequency in the lower right of your console then "
 "click the calibrate button. Set the beam weapons frequency by adjusting the "
 "frequency above the shield frequency in the lower right of your console."
-msgstr "Get the docking protocol shield and beam frequency from %s. Calibrate the shields by adjusting the frequency in the lower right of your console then click the calibrate button. Set the beam weapons frequency by adjusting the frequency above the shield frequency in the lower right of your console."
+msgstr ""
+"Get the docking protocol shield and beam frequency from %s. Calibrate the "
+"shields by adjusting the frequency in the lower right of your console then "
+"click the calibrate button. Set the beam weapons frequency by adjusting the "
+"frequency above the shield frequency in the lower right of your console."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:10417
+#: scripts/scenario_06_early_evaluation_exercise.lua:7919
 #, lua-format
 msgctxt "msgTactical"
 msgid ""
 "%s Get the docking protocol beam frequency from %s. Calibrate the beams "
 "using the frequency shown along the bottom edge of your console in the "
 "middle of your console."
-msgstr "%s Get the docking protocol beam frequency from %s. Calibrate the beams using the frequency shown along the bottom edge of your console in the middle of your console."
+msgstr ""
+"%s Get the docking protocol beam frequency from %s. Calibrate the beams "
+"using the frequency shown along the bottom edge of your console in the "
+"middle of your console."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:10432
+#: scripts/scenario_06_early_evaluation_exercise.lua:7934
 #, lua-format
 msgctxt "msgEngineer"
 msgid ""
@@ -3138,9 +2693,15 @@ msgid ""
 "reach the station. You'll hear from %s that the docking protocol calls for "
 "zero power in the missile systems, so take the power all the way out of "
 "missile systems."
-msgstr "All systems start at a low power level. You'll want to put power in the impulse engines based on the first task requirement. Be prepared to run the impulse engines up to 300%% with max coolant at Helm's request until you reach the station. You'll hear from %s that the docking protocol calls for zero power in the missile systems, so take the power all the way out of missile systems."
+msgstr ""
+"All systems start at a low power level. You'll want to put power in the "
+"impulse engines based on the first task requirement. Be prepared to run the "
+"impulse engines up to 300%% with max coolant at Helm's request until you "
+"reach the station. You'll hear from %s that the docking protocol calls for "
+"zero power in the missile systems, so take the power all the way out of "
+"missile systems."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:10446
+#: scripts/scenario_06_early_evaluation_exercise.lua:7948
 #, lua-format
 msgctxt "msgEngineer+"
 msgid ""
@@ -3148,9 +2709,13 @@ msgid ""
 "shield frequency. Adjust the shield frequency with the frequency selector "
 "along the left edge of your console in the middle. Click the Calibrate "
 "button after you have set the frequency."
-msgstr "%s The docking protocol also calls for shield calibration. Listen for the shield frequency. Adjust the shield frequency with the frequency selector along the left edge of your console in the middle. Click the Calibrate button after you have set the frequency."
+msgstr ""
+"%s The docking protocol also calls for shield calibration. Listen for the "
+"shield frequency. Adjust the shield frequency with the frequency selector "
+"along the left edge of your console in the middle. Click the Calibrate "
+"button after you have set the frequency."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:10460
+#: scripts/scenario_06_early_evaluation_exercise.lua:7962
 #, lua-format
 msgctxt "msgRelay"
 msgid ""
@@ -3158,9 +2723,13 @@ msgid ""
 "Comms button in the upper left of your console. Once communications are "
 "open, click the Check with docking port authority button to determine the "
 "docking protocol. Report the protocol to your crew."
-msgstr "To contact station %s for the docking protocol, click %s then click the Open Comms button in the upper left of your console. Once communications are open, click the Check with docking port authority button to determine the docking protocol. Report the protocol to your crew."
+msgstr ""
+"To contact station %s for the docking protocol, click %s then click the Open "
+"Comms button in the upper left of your console. Once communications are "
+"open, click the Check with docking port authority button to determine the "
+"docking protocol. Report the protocol to your crew."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:10475
+#: scripts/scenario_06_early_evaluation_exercise.lua:7977
 #, lua-format
 msgctxt "msgOperations"
 msgid ""
@@ -3168,16 +2737,22 @@ msgid ""
 "Comms button along the bottom edge of your console to the right. Once "
 "communications are open, click the Check with docking port authority button "
 "to determine the docking protocol. Report the protocol to your crew."
-msgstr "To contact station %s for the docking protocol, click %s then click the Open Comms button along the bottom edge of your console to the right. Once communications are open, click the Check with docking port authority button to determine the docking protocol. Report the protocol to your crew."
+msgstr ""
+"To contact station %s for the docking protocol, click %s then click the Open "
+"Comms button along the bottom edge of your console to the right. Once "
+"communications are open, click the Check with docking port authority button "
+"to determine the docking protocol. Report the protocol to your crew."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:10492
+#: scripts/scenario_06_early_evaluation_exercise.lua:7994
 msgctxt "msgHelms"
 msgid ""
 "You might be asked to jump into the nearby nebula so that a freighter can be "
 "scanned."
-msgstr "You might be asked to jump into the nearby nebula so that a freighter can be scanned."
+msgstr ""
+"You might be asked to jump into the nearby nebula so that a freighter can be "
+"scanned."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:10513
+#: scripts/scenario_06_early_evaluation_exercise.lua:8015
 #, lua-format
 msgctxt "msgScience"
 msgid ""
@@ -3187,18 +2762,28 @@ msgid ""
 "scan, get the scanned ship's strongest shield deflection frequency by "
 "hovering over the lowest, reddest point on the bar graph. Report that "
 "frequency."
-msgstr "Start scanning the target at bearing %.1f right away. Report the type of ship as soon as you finish the simple scan. Then start the deep scan. The default keyboard shortcut is S to start the scan. After completing the deep scan, get the scanned ship's strongest shield deflection frequency by hovering over the lowest, reddest point on the bar graph. Report that frequency."
+msgstr ""
+"Start scanning the target at bearing %.1f right away. Report the type of "
+"ship as soon as you finish the simple scan. Then start the deep scan. The "
+"default keyboard shortcut is S to start the scan. After completing the deep "
+"scan, get the scanned ship's strongest shield deflection frequency by "
+"hovering over the lowest, reddest point on the bar graph. Report that "
+"frequency."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:10522
+#: scripts/scenario_06_early_evaluation_exercise.lua:8024
 msgctxt "msgRelay"
 msgid ""
 "Send a probe to the middle of the nearest nebula: click the launch probe "
 "button, then click the middle of the nebula. Once it's there, link it to "
 "science. Be ready to report the ship type and the frequency as soon as "
 "Science completes each scan."
-msgstr "Send a probe to the middle of the nearest nebula: click the launch probe button, then click the middle of the nebula. Once it's there, link it to science. Be ready to report the ship type and the frequency as soon as Science completes each scan."
+msgstr ""
+"Send a probe to the middle of the nearest nebula: click the launch probe "
+"button, then click the middle of the nebula. Once it's there, link it to "
+"science. Be ready to report the ship type and the frequency as soon as "
+"Science completes each scan."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:10530
+#: scripts/scenario_06_early_evaluation_exercise.lua:8032
 #, lua-format
 msgctxt "msgOperations"
 msgid ""
@@ -3211,9 +2796,18 @@ msgid ""
 "point on the bar graph. Report that frequency. Once you scan the other "
 "targets that are likely in the nebula, you will need to exit the nebula to "
 "report their characteristics to %s."
-msgstr "Start scanning the target at bearing %.1f right away. There are likely more targets in the nebula, so you should request that helm or tactical take you closer to the nebula. Report the type of ship as soon as you finish the simple scan. Then start the deep scan. The default keyboard shortcut is S to start the scan. After completing the deep scan, get the scanned ship's strongest shield deflection frequency by hovering over the lowest, reddest point on the bar graph. Report that frequency. Once you scan the other targets that are likely in the nebula, you will need to exit the nebula to report their characteristics to %s."
+msgstr ""
+"Start scanning the target at bearing %.1f right away. There are likely more "
+"targets in the nebula, so you should request that helm or tactical take you "
+"closer to the nebula. Report the type of ship as soon as you finish the "
+"simple scan. Then start the deep scan. The default keyboard shortcut is S to "
+"start the scan. After completing the deep scan, get the scanned ship's "
+"strongest shield deflection frequency by hovering over the lowest, reddest "
+"point on the bar graph. Report that frequency. Once you scan the other "
+"targets that are likely in the nebula, you will need to exit the nebula to "
+"report their characteristics to %s."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:10545
+#: scripts/scenario_06_early_evaluation_exercise.lua:8047
 msgctxt "msgHelms"
 msgid ""
 "Jump to the enemy freighter if it's farther than 5 units away. Get the "
@@ -3221,117 +2815,165 @@ msgid ""
 "you in optimal firing range. Once you're near, rotate to point the left or "
 "right tube to the enemy. He'll try to run away, so be ready to angle the "
 "tube to lead the HVLIs in front of the enemy freighter."
-msgstr "Jump to the enemy freighter if it's farther than 5 units away. Get the bearing and distance from Science or Operations, subtract 2 units to place you in optimal firing range. Once you're near, rotate to point the left or right tube to the enemy. He'll try to run away, so be ready to angle the tube to lead the HVLIs in front of the enemy freighter."
+msgstr ""
+"Jump to the enemy freighter if it's farther than 5 units away. Get the "
+"bearing and distance from Science or Operations, subtract 2 units to place "
+"you in optimal firing range. Once you're near, rotate to point the left or "
+"right tube to the enemy. He'll try to run away, so be ready to angle the "
+"tube to lead the HVLIs in front of the enemy freighter."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:10556
+#: scripts/scenario_06_early_evaluation_exercise.lua:8058
 msgctxt "msgWeapons"
 msgid ""
 "Load up HVLIs on both sides. You may have to ask Engineering for power to "
 "missile systems."
-msgstr "Load up HVLIs on both sides. You may have to ask Engineering for power to missile systems."
+msgstr ""
+"Load up HVLIs on both sides. You may have to ask Engineering for power to "
+"missile systems."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:10579
+#: scripts/scenario_06_early_evaluation_exercise.lua:8081
 msgctxt "msgEngineer"
 msgid ""
 "Raise power to missile systems to 100%. Put even more in along with coolant "
 "to make them load faster. Be ready to add power to impulse and/or "
 "maneuvering as requested."
-msgstr "Raise power to missile systems to 100%. Put even more in along with coolant to make them load faster. Be ready to add power to impulse and/or manoeuvring as requested."
+msgstr ""
+"Raise power to missile systems to 100%. Put even more in along with coolant "
+"to make them load faster. Be ready to add power to impulse and/or "
+"manoeuvring as requested."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:10598
+#: scripts/scenario_06_early_evaluation_exercise.lua:8100
 msgctxt "msgScience"
 msgid ""
 "Select the enemy freighter. Use radar or probe view as applicable. Provide "
 "bearing and distance to freighter to crew. You can find it along the right "
 "of your console screen."
-msgstr "Select the enemy freighter. Use radar or probe view as applicable. Provide bearing and distance to freighter to crew. You can find it along the right of your console screen."
+msgstr ""
+"Select the enemy freighter. Use radar or probe view as applicable. Provide "
+"bearing and distance to freighter to crew. You can find it along the right "
+"of your console screen."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:10609
+#: scripts/scenario_06_early_evaluation_exercise.lua:8111
 msgctxt "msgOperations"
 msgid ""
 "Provide bearing and range to enemy freighter. If nebula obscures your view, "
 "estimate based on recent scans, otherwise click the enemy freighter and read "
 "the bearing and distance from your console."
-msgstr "Provide bearing and range to enemy freighter. If nebula obscures your view, estimate based on recent scans, otherwise click the enemy freighter and read the bearing and distance from your console."
+msgstr ""
+"Provide bearing and range to enemy freighter. If nebula obscures your view, "
+"estimate based on recent scans, otherwise click the enemy freighter and read "
+"the bearing and distance from your console."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:10620
+#: scripts/scenario_06_early_evaluation_exercise.lua:8122
 msgctxt "msgRelay"
 msgid ""
 "Hack enemy ships once they are in range either via probe or your ship. "
 "Impulse engines for the fighter types is a good choice since it makes it "
 "easier to shoot them down."
-msgstr "Hack enemy ships once they are in range either via probe or your ship. Impulse engines for the fighter types is a good choice since it makes it easier to shoot them down."
+msgstr ""
+"Hack enemy ships once they are in range either via probe or your ship. "
+"Impulse engines for the fighter types is a good choice since it makes it "
+"easier to shoot them down."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:10632
+#: scripts/scenario_06_early_evaluation_exercise.lua:8134
 msgctxt "msgHelms"
 msgid ""
 "You will have to go to the distressed freighter to help defend it against "
 "Kraylor and to help repair it. You may have to pick up parts from your home "
 "station. Deciding which to do first will be up to your commanding officer or "
 "CO. Be thinking about both options."
-msgstr "You will have to go to the distressed freighter to help defend it against Kraylor and to help repair it. You may have to pick up parts from your home station. Deciding which to do first will be up to your commanding officer or CO. Be thinking about both options."
+msgstr ""
+"You will have to go to the distressed freighter to help defend it against "
+"Kraylor and to help repair it. You may have to pick up parts from your home "
+"station. Deciding which to do first will be up to your commanding officer or "
+"CO. Be thinking about both options."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:10643
+#: scripts/scenario_06_early_evaluation_exercise.lua:8145
 msgctxt "msgWeapons"
 msgid ""
 "Your beams are fully functional. Your missiles have been returned to you. "
 "Load up your tubes in preparation for combat. Homing missiles are "
 "recommended. Even homing missiles can be dodged by the enemy. Try for as "
 "straight a shot as possible."
-msgstr "Your beams are fully functional. Your missiles have been returned to you. Load up your tubes in preparation for combat. Homing missiles are recommended. Even homing missiles can be dodged by the enemy. Try for as straight a shot as possible."
+msgstr ""
+"Your beams are fully functional. Your missiles have been returned to you. "
+"Load up your tubes in preparation for combat. Homing missiles are "
+"recommended. Even homing missiles can be dodged by the enemy. Try for as "
+"straight a shot as possible."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:10666
+#: scripts/scenario_06_early_evaluation_exercise.lua:8168
 msgctxt "msgEngineer"
 msgid ""
 "Pay careful attention to what systems are used and give them additional "
 "power when needed (along with coolant). Remember the docking/undocking "
 "protocol (no missile energy)"
-msgstr "Pay careful attention to what systems are used and give them additional power when needed (along with coolant). Remember the docking/undocking protocol (no missile energy)"
+msgstr ""
+"Pay careful attention to what systems are used and give them additional "
+"power when needed (along with coolant). Remember the docking/undocking "
+"protocol (no missile energy)"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:10685
+#: scripts/scenario_06_early_evaluation_exercise.lua:8187
 msgctxt "msgScience"
 msgid ""
 "Scan the distressed Arlenian freighter as soon as you can (twice). After the "
 "second scan, get the impulse engine damage percentage by clicking the "
 "Tactical widget and selecting Systems. Report it to Relay who will report it "
 "to the home station."
-msgstr "Scan the distressed Arlenian freighter as soon as you can (twice). After the second scan, get the impulse engine damage percentage by clicking the Tactical widget and selecting Systems. Report it to Relay who will report it to the home station."
+msgstr ""
+"Scan the distressed Arlenian freighter as soon as you can (twice). After the "
+"second scan, get the impulse engine damage percentage by clicking the "
+"Tactical widget and selecting Systems. Report it to Relay who will report it "
+"to the home station."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:10696
+#: scripts/scenario_06_early_evaluation_exercise.lua:8198
 msgctxt "msgRelay"
 msgid ""
 "Launch probes to cover the sector where the distressed Arlenian freighter is "
 "located. Link the probe that finds the freighter to science. Contact the "
 "freighter. Report Science's scan results to your home station."
-msgstr "Launch probes to cover the sector where the distressed Arlenian freighter is located. Link the probe that finds the freighter to science. Contact the freighter. Report Science's scan results to your home station."
+msgstr ""
+"Launch probes to cover the sector where the distressed Arlenian freighter is "
+"located. Link the probe that finds the freighter to science. Contact the "
+"freighter. Report Science's scan results to your home station."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:10707
+#: scripts/scenario_06_early_evaluation_exercise.lua:8209
 msgctxt "msgOperations"
 msgid ""
 "Contact the distressed Arlenian freighter, then scan the freighter as soon "
 "as you can (twice). After the second scan, get the impulse engine damage "
 "percentage by clicking the Tactical widget and selecting Systems. Report it "
 "to the home station."
-msgstr "Contact the distressed Arlenian freighter, then scan the freighter as soon as you can (twice). After the second scan, get the impulse engine damage percentage by clicking the Tactical widget and selecting Systems. Report it to the home station."
+msgstr ""
+"Contact the distressed Arlenian freighter, then scan the freighter as soon "
+"as you can (twice). After the second scan, get the impulse engine damage "
+"percentage by clicking the Tactical widget and selecting Systems. Report it "
+"to the home station."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:10719
+#: scripts/scenario_06_early_evaluation_exercise.lua:8221
 msgctxt "msgHelms"
 msgid ""
 "Use warp to approach but not intersect the planets and moons in motion. "
 "Intersetion will damage and quickly destroy your ship. Use guidance from "
 "Relay/Science/Operations for good approach vectors. Warn Engineering when "
 "you use warp, especially anything above warp one."
-msgstr "Use warp to approach but not intersect the planets and moons in motion. Intersetion will damage and quickly destroy your ship. Use guidance from Relay/Science/Operations for good approach vectors. Warn Engineering when you use warp, especially anything above warp one."
+msgstr ""
+"Use warp to approach but not intersect the planets and moons in motion. "
+"Intersetion will damage and quickly destroy your ship. Use guidance from "
+"Relay/Science/Operations for good approach vectors. Warn Engineering when "
+"you use warp, especially anything above warp one."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:10730
+#: scripts/scenario_06_early_evaluation_exercise.lua:8232
 msgctxt "msgWeapons"
 msgid ""
 "Watch for enemy targets of opportunity. The planets and moons are far more "
 "dangerous, but if you leave the enemies alone, eventually, they will start "
 "attacking your home station."
-msgstr "Watch for enemy targets of opportunity. The planets and moons are far more dangerous, but if you leave the enemies alone, eventually, they will start attacking your home station."
+msgstr ""
+"Watch for enemy targets of opportunity. The planets and moons are far more "
+"dangerous, but if you leave the enemies alone, eventually, they will start "
+"attacking your home station."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:10753
+#: scripts/scenario_06_early_evaluation_exercise.lua:8255
 msgctxt "msgEngineer"
 msgid ""
 "Suggested default settings: 50% coolant in warp, 50% coolant in maneuvering, "
@@ -3339,54 +2981,680 @@ msgid ""
 "Watch energy carefully and let the commanding officer know when you get "
 "below 200 so you can dock and get more. The reactor will help, but charging "
 "at a station is more efficient."
-msgstr "Suggested default settings: 50% coolant in warp, 50% coolant in manoeuvring, 150% power in manoeuvring, remaining systems: 100%, remainig coolant: 0. Watch energy carefully and let the commanding officer know when you get below 200 so you can dock and get more. The reactor will help, but charging at a station is more efficient."
+msgstr ""
+"Suggested default settings: 50% coolant in warp, 50% coolant in manoeuvring, "
+"150% power in manoeuvring, remaining systems: 100%, remainig coolant: 0. "
+"Watch energy carefully and let the commanding officer know when you get "
+"below 200 so you can dock and get more. The reactor will help, but charging "
+"at a station is more efficient."
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:11641
+#: scripts/scenario_06_early_evaluation_exercise.lua:9143
 #, lua-format
 msgctxt "human-incCall"
 msgid "You completed the research task. Destroy any Kraylor headed for %s"
 msgstr "You completed the research task. Destroy any Kraylor headed for %s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:11650
+#: scripts/scenario_06_early_evaluation_exercise.lua:9152
 msgctxt "goal-shipLog"
 msgid ""
 "You completed the research task. Destroy any Kraylor that were headed for "
 "your home base"
-msgstr "You completed the research task. Destroy any Kraylor that were headed for your home base"
+msgstr ""
+"You completed the research task. Destroy any Kraylor that were headed for "
+"your home base"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:11843
+#: scripts/scenario_06_early_evaluation_exercise.lua:9345
 #, lua-format
 msgctxt "msgRelay&Operations"
 msgid "%s   Scan started at %.1f"
 msgstr "%s   Scan started at %.1f"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:11857
+#: scripts/scenario_06_early_evaluation_exercise.lua:9359
 #, lua-format
 msgctxt "msgRelay&Operations"
 msgid ""
 "Orbital body researched status:\n"
 "Completed: %s     Remaining: %s\n"
 "%s"
-msgstr "Orbital body researched status:\nCompleted: %s     Remaining: %s\n%s"
+msgstr ""
+"Orbital body researched status:\n"
+"Completed: %s     Remaining: %s\n"
+"%s"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:11865
+#: scripts/scenario_06_early_evaluation_exercise.lua:9367
 msgctxt "msgRelay&Operations"
 msgid "Enemy ships hunting"
 msgstr "Enemy ships hunting"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:11868
+#: scripts/scenario_06_early_evaluation_exercise.lua:9370
 #, lua-format
 msgctxt "msgRelay&Operations"
 msgid "%s for %s:"
 msgstr "%s for %s:"
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:11878
+#: scripts/scenario_06_early_evaluation_exercise.lua:9380
 #, lua-format
 msgctxt "msgRelay&Operations"
 msgid ""
 "%s\n"
 "   %s in %s"
-msgstr "%s\n   %s in %s"
+msgstr ""
+"%s\n"
+"   %s in %s"
+
+#~ msgctxt "station-comms"
+#~ msgid "We are under attack! No time for chatting!"
+#~ msgstr "We are under attack! No time for chatting!"
+
+#, lua-format
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "Greetings %s!\n"
+#~ "How may we help you today?"
+#~ msgstr ""
+#~ "Greetings %s!\n"
+#~ "How may we help you today?"
+
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "Good day, officer!\n"
+#~ "What can we do for you today?"
+#~ msgstr ""
+#~ "Good day, officer!\n"
+#~ "What can we do for you today?"
+
+#~ msgctxt "station-comms"
+#~ msgid "Hello, may I help you?"
+#~ msgstr "Hello, may I help you?"
+
+#~ msgctxt "station-comms"
+#~ msgid "Welcome to our lovely station."
+#~ msgstr "Welcome to our lovely station."
+
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "\n"
+#~ "Forgive us if we seem a little distracted. We are carefully monitoring "
+#~ "the enemies nearby."
+#~ msgstr ""
+#~ "\n"
+#~ "Forgive us if we seem a little distracted. We are carefully monitoring "
+#~ "the enemies nearby."
+
+#, lua-format
+#~ msgctxt "ammo-comms"
+#~ msgid ""
+#~ "What type of ordnance?\n"
+#~ "\n"
+#~ "Reputation: %i"
+#~ msgstr ""
+#~ "What type of ordnance?\n"
+#~ "\n"
+#~ "Reputation: %i"
+
+#~ msgctxt "ammo-comms"
+#~ msgid "Can you supply us with some nukes? ("
+#~ msgstr "Can you supply us with some nukes? ("
+
+#~ msgctxt "ammo-comms"
+#~ msgid "We really need some nukes ("
+#~ msgstr "We really need some nukes ("
+
+#, lua-format
+#~ msgctxt "ammo-comms"
+#~ msgid "%s%d rep each)"
+#~ msgstr "%s%d rep each)"
+
+#~ msgctxt "ammo-comms"
+#~ msgid "Please re-stock our EMP missiles. ("
+#~ msgstr "Please re-stock our EMP missiles. ("
+
+#~ msgctxt "ammo-comms"
+#~ msgid "Got any EMPs? ("
+#~ msgstr "Got any EMPs? ("
+
+#~ msgctxt "ammo-comms"
+#~ msgid "Do you have spare homing missiles for us? ("
+#~ msgstr "Do you have spare homing missiles for us? ("
+
+#~ msgctxt "ammo-comms"
+#~ msgid "Do you have extra homing missiles? ("
+#~ msgstr "Do you have extra homing missiles? ("
+
+#~ msgctxt "ammo-comms"
+#~ msgid "We could use some mines. ("
+#~ msgstr "We could use some mines. ("
+
+#~ msgctxt "ammo-comms"
+#~ msgid "How about mines? ("
+#~ msgstr "How about mines? ("
+
+#~ msgctxt "ammo-comms"
+#~ msgid "What about HVLI? ("
+#~ msgstr "What about HVLI? ("
+
+#~ msgctxt "ammo-comms"
+#~ msgid "Could you provide HVLI? ("
+#~ msgstr "Could you provide HVLI? ("
+
+#~ msgctxt "ammo-comms"
+#~ msgid "Sorry, we don't have any ordnance you can use today"
+#~ msgstr "Sorry, we don't have any ordnance you can use today"
+
+#~ msgctxt "ammo-comms"
+#~ msgid "Sorry, we don't have any ordnance today"
+#~ msgstr "Sorry, we don't have any ordnance today"
+
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "Repair ship system"
+#~ msgstr "Repair ship system"
+
+#, lua-format
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid ""
+#~ "What system would you like repaired?\n"
+#~ "\n"
+#~ "Reputation: %i"
+#~ msgstr ""
+#~ "What system would you like repaired?\n"
+#~ "\n"
+#~ "Reputation: %i"
+
+#, lua-format
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "Repair probe launch system (%s Rep)"
+#~ msgstr "Repair probe launch system (%s Rep)"
+
+#~ msgctxt "ammo-comms"
+#~ msgid "You need to stay docked for that action."
+#~ msgstr "You need to stay docked for that action."
+
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "Your probe launch system has been repaired"
+#~ msgstr "Your probe launch system has been repaired"
+
+#~ msgctxt "needRep-comms"
+#~ msgid "Insufficient reputation"
+#~ msgstr "Insufficient reputation"
+
+#, lua-format
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "Repair hacking system (%s Rep)"
+#~ msgstr "Repair hacking system (%s Rep)"
+
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "Your hack system has been repaired"
+#~ msgstr "Your hack system has been repaired"
+
+#, lua-format
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "Repair scanning system (%s Rep)"
+#~ msgstr "Repair scanning system (%s Rep)"
+
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "Your scanners have been repaired"
+#~ msgstr "Your scanners have been repaired"
+
+#, lua-format
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "Repair combat maneuver (%s Rep)"
+#~ msgstr "Repair combat manoeuvre (%s Rep)"
+
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "Your combat maneuver has been repaired"
+#~ msgstr "Your combat manoeuvre has been repaired"
+
+#, lua-format
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "Repair self destruct system (%s Rep)"
+#~ msgstr "Repair self destruct system (%s Rep)"
+
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "Your self destruct system has been repaired"
+#~ msgstr "Your self destruct system has been repaired"
+
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "Docking services status"
+#~ msgstr "Docking services status"
+
+#, lua-format
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "Station %s docking services status:"
+#~ msgstr "Station %s docking services status:"
+
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid ""
+#~ "Hull repair automation unavailable while it is undergoing maintenance."
+#~ msgstr ""
+#~ "Hull repair automation unavailable while it is undergoing maintenance."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "We do not deal in weapons of mass destruction."
+#~ msgstr "We do not deal in weapons of mass destruction."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "We do not deal in weapons of mass disruption."
+#~ msgstr "We do not deal in weapons of mass disruption."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "We do not deal in those weapons."
+#~ msgstr "We do not deal in those weapons."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "All nukes are charged and primed for destruction."
+#~ msgstr "All nukes are charged and primed for destruction."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "Sorry, sir, but you are as fully stocked as I can allow."
+#~ msgstr "Sorry, sir, but you are as fully stocked as I can allow."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "You are fully loaded and ready to explode things."
+#~ msgstr "You are fully loaded and ready to explode things."
+
+#~ msgctxt "ammo-comms"
+#~ msgid ""
+#~ "We generously resupplied you with some weapon charges.\n"
+#~ "Put them to good use."
+#~ msgstr ""
+#~ "We generously resupplied you with some weapon charges.\n"
+#~ "Put them to good use."
+
+#~ msgctxt "needRep-comms"
+#~ msgid "Not enough reputation."
+#~ msgstr "Not enough reputation."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "You can't afford as much as I'd like to give you"
+#~ msgstr "You can't afford as much as I'd like to give you"
+
+#~ msgctxt "ammo-comms"
+#~ msgid "Get just one"
+#~ msgstr "Get just one"
+
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "Good day, officer.\n"
+#~ "If you need supplies, please dock with us first."
+#~ msgstr ""
+#~ "Good day, officer.\n"
+#~ "If you need supplies, please dock with us first."
+
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "Greetings.\n"
+#~ "If you want to do business, please dock with us first."
+#~ msgstr ""
+#~ "Greetings.\n"
+#~ "If you want to do business, please dock with us first."
+
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "\n"
+#~ "Be aware that if enemies in the area get much closer, we will be too busy "
+#~ "to conduct business with you."
+#~ msgstr ""
+#~ "\n"
+#~ "Be aware that if enemies in the area get much closer, we will be too busy "
+#~ "to conduct business with you."
+
+#~ msgctxt "station-comms"
+#~ msgid "I need information"
+#~ msgstr "I need information"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "Tell me more about your station"
+#~ msgstr "Tell me more about your station"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "What would you like to know?"
+#~ msgstr "What would you like to know?"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "General information"
+#~ msgstr "General information"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "Station history"
+#~ msgstr "Station history"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "Gossip"
+#~ msgstr "Gossip"
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "What do you want?"
+#~ msgstr "What do you want?"
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Sir, how can we assist?"
+#~ msgstr "Sir, how can we assist?"
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Defend a waypoint"
+#~ msgstr "Defend a waypoint"
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "No waypoints set. Please set a waypoint first."
+#~ msgstr "No waypoints set. Please set a waypoint first."
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Which waypoint should we defend?"
+#~ msgstr "Which waypoint should we defend?"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Defend WP %d"
+#~ msgstr "Defend WP %d"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "We are heading to assist at WP %d."
+#~ msgstr "We are heading to assist at WP %d."
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Assist me"
+#~ msgstr "Assist me"
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Heading toward you to assist."
+#~ msgstr "Heading toward you to assist."
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Report status"
+#~ msgstr "Report status"
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Hull: "
+#~ msgstr "Hull: "
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Shield: "
+#~ msgstr "Shield: "
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Front Shield: "
+#~ msgstr "Front Shield: "
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Rear Shield: "
+#~ msgstr "Rear Shield: "
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Shield "
+#~ msgstr "Shield "
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid " Missiles: "
+#~ msgstr " Missiles: "
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "Docked with %s"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Docked with %s"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "Heading for %s station %s in %s"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Heading for %s station %s in %s"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Dock at %s"
+#~ msgstr "Dock at %s"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Docking at %s."
+#~ msgstr "Docking at %s."
+
+#~ msgctxt "trade-comms"
+#~ msgid "Jettison cargo"
+#~ msgstr "Jettison cargo"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "Available space: %i\n"
+#~ "What would you like to jettison?"
+#~ msgstr ""
+#~ "Available space: %i\n"
+#~ "What would you like to jettison?"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "One %s jettisoned"
+#~ msgstr "One %s jettisoned"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Trade luxury for %s"
+#~ msgstr "Trade luxury for %s"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Traded luxury for %s"
+#~ msgstr "Traded luxury for %s"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Buy one %s for %i reputation"
+#~ msgstr "Buy one %s for %i reputation"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Purchased %s from %s"
+#~ msgstr "Purchased %s from %s"
+
+#~ msgctxt "needRep-comms"
+#~ msgid "Insufficient reputation for purchase"
+#~ msgstr "Insufficient reputation for purchase"
+
+#~ msgctxt "trade-comms"
+#~ msgid "Do you have cargo you might sell?"
+#~ msgstr "Do you have cargo you might sell?"
+
+#~ msgctxt "trade-comms"
+#~ msgid "We've got "
+#~ msgstr "We've got "
+
+#~ msgctxt "trade-comms"
+#~ msgid "nothing"
+#~ msgstr "nothing"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "We will see to your destruction!"
+#~ msgstr "We will see to your destruction!"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Your bloodline will end here!"
+#~ msgstr "Your bloodline will end here!"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Your feeble threats are meaningless."
+#~ msgstr "Your feeble threats are meaningless."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid ""
+#~ "Ktzzzsss.\n"
+#~ "You will DIEEee weaklingsss!"
+#~ msgstr ""
+#~ "Ktzzzsss.\n"
+#~ "You will DIEEee weaklingsss!"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "We will destroy you"
+#~ msgstr "We will destroy you"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "We think not. It is you who will experience destruction!"
+#~ msgstr "We think not. It is you who will experience destruction!"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "You have no honor"
+#~ msgstr "You have no honour"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Your insult has brought our wrath upon you. Prepare to die."
+#~ msgstr "Your insult has brought our wrath upon you. Prepare to die."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Your comments about honor have no meaning to us"
+#~ msgstr "Your comments about honour have no meaning to us"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "We pity your pathetic race"
+#~ msgstr "We pity your pathetic race"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Pathetic? You will regret your disparagement!"
+#~ msgstr "Pathetic? You will regret your disparagement!"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "We don't care what you think of us"
+#~ msgstr "We don't care what you think of us"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid ""
+#~ "We wish you no harm, but will harm you if we must.\n"
+#~ "End of transmission."
+#~ msgstr ""
+#~ "We wish you no harm, but will harm you if we must.\n"
+#~ "End of transmission."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Stay out of our way, or your death will amuse us extremely!"
+#~ msgstr "Stay out of our way, or your death will amuse us extremely!"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid ""
+#~ "One zero one.\n"
+#~ "No binary communication detected.\n"
+#~ "Switching to universal speech.\n"
+#~ "Generating appropriate response for target from human language archives.\n"
+#~ ":Do not cross us:\n"
+#~ "Communication halted."
+#~ msgstr ""
+#~ "One zero one.\n"
+#~ "No binary communication detected.\n"
+#~ "Switching to universal speech.\n"
+#~ "Generating appropriate response for target from human language archives.\n"
+#~ ":Do not cross us:\n"
+#~ "Communication halted."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "EXECUTE: SELFDESTRUCT"
+#~ msgstr "EXECUTE: SELFDESTRUCT"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Rogue command received. Targeting source."
+#~ msgstr "Rogue command received. Targeting source."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "External command ignored."
+#~ msgstr "External command ignored."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid ""
+#~ "The hive suffers no threats. Opposition to any of us is opposition to us "
+#~ "all.\n"
+#~ "Stand down or prepare to donate your corpses toward our nutrition."
+#~ msgstr ""
+#~ "The hive suffers no threats. Opposition to any of us is opposition to us "
+#~ "all.\n"
+#~ "Stand down or prepare to donate your corpses toward our nutrition."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
+#~ msgstr "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid ""
+#~ "We do not need permission to pluck apart such an insignificant threat."
+#~ msgstr ""
+#~ "We do not need permission to pluck apart such an insignificant threat."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "The hive has greater priorities than exterminating pests."
+#~ msgstr "The hive has greater priorities than exterminating pests."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "State your business"
+#~ msgstr "State your business"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "What do you want? (not that we care)"
+#~ msgstr "What do you want? (not that we care)"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Don't waste our time"
+#~ msgstr "Don't waste our time"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Mind your own business!"
+#~ msgstr "Mind your own business!"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Subspace and time continuum disruption authorized"
+#~ msgstr "Subspace and time continuum disruption authorised"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Stop your actions"
+#~ msgstr "Stop your actions"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Just this once, we'll take your advice"
+#~ msgstr "Just this once, we'll take your advice"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "No"
+#~ msgstr "No"
+
+#~ msgctxt "trade-comms"
+#~ msgid "Yes?"
+#~ msgstr "Yes?"
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Where are you going?"
+#~ msgstr "Where are you going?"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Hi %s,"
+#~ msgstr "Hi %s,"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "Heading for %s station %s in sector %s"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Heading for %s station %s in sector %s"
+
+#~ msgctxt "ship-comms"
+#~ msgid ""
+#~ "Sorry, we have no time to chat with you.\n"
+#~ "We are on an important mission."
+#~ msgstr ""
+#~ "Sorry, we have no time to chat with you.\n"
+#~ "We are on an important mission."
+
+#~ msgctxt "ship-comms"
+#~ msgid ""
+#~ "We have nothing for you.\n"
+#~ "Good day."
+#~ msgstr ""
+#~ "We have nothing for you.\n"
+#~ "Good day."
 
 #~ msgctxt "buttonGM"
 #~ msgid "Strikeship wave"

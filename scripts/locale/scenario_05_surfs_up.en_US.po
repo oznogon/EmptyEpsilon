@@ -249,171 +249,171 @@ msgctxt "Advance"
 msgid "Advance wave start to 9"
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:70
+#: scripts/scenario_05_surfs_up.lua:73
 msgctxt "msgMainscreen"
 msgid "Easy"
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:71
+#: scripts/scenario_05_surfs_up.lua:74
 msgctxt "msgMainscreen"
 msgid "Normal"
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:72
+#: scripts/scenario_05_surfs_up.lua:75
 msgctxt "msgMainscreen"
 msgid "Hard"
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:73
+#: scripts/scenario_05_surfs_up.lua:76
 msgctxt "msgMainscreen"
 msgid "Extreme"
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:74
+#: scripts/scenario_05_surfs_up.lua:77
 msgctxt "msgMainscreen"
 msgid "Quixotic"
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:128
+#: scripts/scenario_05_surfs_up.lua:131
 msgctxt "orders-comms"
 msgid "Defend friendly stations."
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:153 scripts/scenario_05_surfs_up.lua:795
+#: scripts/scenario_05_surfs_up.lua:156 scripts/scenario_05_surfs_up.lua:798
 msgctxt "situationReport-comms"
 msgid ""
 "A recent reactor failure has put us on auxiliary power, so we cannot "
 "recharge ships."
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:171 scripts/scenario_05_surfs_up.lua:799
+#: scripts/scenario_05_surfs_up.lua:174 scripts/scenario_05_surfs_up.lua:802
 msgctxt "situationReport-comms"
 msgid "A damaged power coupling makes it too dangerous to recharge ships."
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:188 scripts/scenario_05_surfs_up.lua:803
+#: scripts/scenario_05_surfs_up.lua:191 scripts/scenario_05_surfs_up.lua:806
 msgctxt "situationReport-comms"
 msgid ""
 "An asteroid strike damaged our solar cells and we are short on power, so we "
 "can't recharge ships right now."
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:206 scripts/scenario_05_surfs_up.lua:774
+#: scripts/scenario_05_surfs_up.lua:209 scripts/scenario_05_surfs_up.lua:777
 msgctxt "situationReport-comms"
 msgid "We're out of the necessary materials and supplies for hull repair."
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:223 scripts/scenario_05_surfs_up.lua:778
+#: scripts/scenario_05_surfs_up.lua:226 scripts/scenario_05_surfs_up.lua:781
 msgctxt "situationReport-comms"
 msgid "Hull repair automation unavailable while it is undergoing maintenance."
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:243 scripts/scenario_05_surfs_up.lua:782
+#: scripts/scenario_05_surfs_up.lua:246 scripts/scenario_05_surfs_up.lua:785
 msgctxt "situationReport-comms"
 msgid "All hull repair technicians quarantined to quarters due to illness."
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:257 scripts/scenario_05_surfs_up.lua:753
+#: scripts/scenario_05_surfs_up.lua:260 scripts/scenario_05_surfs_up.lua:756
 msgctxt "situationReport-comms"
 msgid "Cannot replenish scan probes due to fabrication unit failure."
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:275 scripts/scenario_05_surfs_up.lua:757
+#: scripts/scenario_05_surfs_up.lua:278 scripts/scenario_05_surfs_up.lua:760
 msgctxt "situationReport-comms"
 msgid "Parts shortage prevents scan probe replenishment."
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:290 scripts/scenario_05_surfs_up.lua:761
+#: scripts/scenario_05_surfs_up.lua:293 scripts/scenario_05_surfs_up.lua:764
 msgctxt "situationReport-comms"
 msgid ""
 "Station management has curtailed scan probe replenishment for cost cutting "
 "reasons."
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:1298
+#: scripts/scenario_05_surfs_up.lua:1262
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s hours, %s minutes and %s seconds"
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:1308
+#: scripts/scenario_05_surfs_up.lua:1272
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s hours, %s minutes and %s second"
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:1320
+#: scripts/scenario_05_surfs_up.lua:1284
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s hours, %s minute and %s seconds"
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:1330
+#: scripts/scenario_05_surfs_up.lua:1294
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s hours, %s minute and %s second"
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:1344
+#: scripts/scenario_05_surfs_up.lua:1308
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s hour, %s minutes and %s seconds"
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:1354
+#: scripts/scenario_05_surfs_up.lua:1318
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s hour, %s minutes and %s second"
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:1366
+#: scripts/scenario_05_surfs_up.lua:1330
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s hour, %s minute and %s seconds"
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:1376
+#: scripts/scenario_05_surfs_up.lua:1340
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s hour, %s minute and %s second"
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:1388
+#: scripts/scenario_05_surfs_up.lua:1352
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s minutes and %s seconds"
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:1394
+#: scripts/scenario_05_surfs_up.lua:1358
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s minutes and %s second"
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:1402
+#: scripts/scenario_05_surfs_up.lua:1366
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s minute and %s seconds"
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:1409
+#: scripts/scenario_05_surfs_up.lua:1373
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s seconds"
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:1415
+#: scripts/scenario_05_surfs_up.lua:1379
 #, lua-format
 msgctxt "name-tab"
 msgid "%s in %s"
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:1435
+#: scripts/scenario_05_surfs_up.lua:1399
 msgctxt "buttonGM"
 msgid "End with Odin"
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:1440
+#: scripts/scenario_05_surfs_up.lua:1404
 msgctxt "shipLog"
 msgid ""
 "We picked up an anomalous chroniton particle reading nearby. Encoded within "
@@ -424,110 +424,110 @@ msgid ""
 "when this event is supposed to occur."
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:1450
+#: scripts/scenario_05_surfs_up.lua:1414
 msgctxt "msgGM"
 msgid "30 second countdown to Odin spawn has begun."
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:1523
+#: scripts/scenario_05_surfs_up.lua:1487
 #, lua-format
 msgctxt "timer-tab"
 msgid "Anomalous Time:%s"
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:1541
+#: scripts/scenario_05_surfs_up.lua:1505
 msgctxt "orders-comms"
 msgid "What are my current orders?"
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:1544
+#: scripts/scenario_05_surfs_up.lua:1508
 msgid "Back"
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:1585 scripts/scenario_05_surfs_up.lua:1594
+#: scripts/scenario_05_surfs_up.lua:1549 scripts/scenario_05_surfs_up.lua:1558
 #, lua-format
 msgctxt "shipLog"
 msgid "Wave %i. Hunt down enemy base."
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:1602 scripts/scenario_05_surfs_up.lua:1608
+#: scripts/scenario_05_surfs_up.lua:1566 scripts/scenario_05_surfs_up.lua:1572
 #, lua-format
 msgctxt "shipLog"
 msgid "Wave %i."
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:1623
+#: scripts/scenario_05_surfs_up.lua:1587
 msgctxt "orders-comms"
 msgid "Hunt down enemy base."
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:1630
+#: scripts/scenario_05_surfs_up.lua:1594
 #, lua-format
 msgctxt "shipLog"
 msgid "%s Asteroid storm reported."
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:1638
+#: scripts/scenario_05_surfs_up.lua:1602
 #, lua-format
 msgctxt "tabRelay&Ops"
 msgid "Wave %i"
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:1776
+#: scripts/scenario_05_surfs_up.lua:1740
 msgctxt "shipLog"
 msgid "Defense platform self destruct activated."
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:2613
+#: scripts/scenario_05_surfs_up.lua:2577
 msgctxt "msgScience"
 msgid ""
 "In addition to jamming our FTL drive, there's a warp jammer that is damaging "
 "our beam weapons"
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:2622
+#: scripts/scenario_05_surfs_up.lua:2586
 msgctxt "msgOperations"
 msgid ""
 "In addition to jamming our FTL drive, there's a warp jammer that is damaging "
 "our beam weapons"
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:2652
+#: scripts/scenario_05_surfs_up.lua:2616
 msgctxt "msgScience"
 msgid ""
 "In addition to jamming our FTL drive, there's a warp jammer that is damaging "
 "our missile systems"
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:2661
+#: scripts/scenario_05_surfs_up.lua:2625
 msgctxt "msgOperations"
 msgid ""
 "In addition to jamming our FTL drive, there's a warp jammer that is damaging "
 "our missile systems"
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:2734
+#: scripts/scenario_05_surfs_up.lua:2698
 msgctxt "msgMainscreen"
 msgid "Surf's up! Let the waves begin."
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:2736
+#: scripts/scenario_05_surfs_up.lua:2700
 msgctxt "msgMainscreen"
 msgid "Wave cleared!"
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:2740
+#: scripts/scenario_05_surfs_up.lua:2704
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Wave %i cleared."
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:2756
+#: scripts/scenario_05_surfs_up.lua:2720
 msgctxt "msgMainscreen"
 msgid "All friendly bases destroyed."
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:2759
+#: scripts/scenario_05_surfs_up.lua:2723
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -535,7 +535,7 @@ msgid ""
 "%i player ships deployed."
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:2765
+#: scripts/scenario_05_surfs_up.lua:2729
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -543,7 +543,7 @@ msgid ""
 "One player ship deployed."
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:2771
+#: scripts/scenario_05_surfs_up.lua:2735
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -551,7 +551,7 @@ msgid ""
 "%i waves completed at the %s setting."
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:2778
+#: scripts/scenario_05_surfs_up.lua:2742
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -559,7 +559,7 @@ msgid ""
 "One wave completed at the %s setting."
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:2785
+#: scripts/scenario_05_surfs_up.lua:2749
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -567,7 +567,7 @@ msgid ""
 "No waves completed at the %s setting."
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:2792
+#: scripts/scenario_05_surfs_up.lua:2756
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -575,7 +575,7 @@ msgid ""
 "Duration: %s."
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:2798
+#: scripts/scenario_05_surfs_up.lua:2762
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -583,7 +583,7 @@ msgid ""
 "Wave advance setting: %s"
 msgstr ""
 
-#: scripts/scenario_05_surfs_up.lua:2805
+#: scripts/scenario_05_surfs_up.lua:2769
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""

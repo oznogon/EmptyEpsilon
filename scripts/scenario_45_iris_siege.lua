@@ -43,7 +43,71 @@ require("place_station_scenario_utility.lua")
 require("cpu_ship_diversification_scenario_utility.lua")
 require("generate_call_sign_scenario_utility.lua")
 require("comms_scenario_utility.lua")
-require("spawn_ships_scenario_utility.lua")
+local Fleet = require("spawn_ships_scenario_utility.lua")
+local Stats = require("statistics_scenario_utility.lua")
+local playerDestroyed = Fleet.noopDestroyed
+local Environment = require("environment_scenario_utility.lua")
+local defaults = require("defaults_scenario_utility.lua")
+local ShipNames = require("player_ship_names_scenario_utility.lua")
+local PlayerState = require("player_state_scenario_utility.lua")
+local updateNameBanner = PlayerState.updateNameBanner
+local updateTubeBanner = PlayerState.updateTubeBanner
+local ShipComms = require("comms_ship_support.lua")
+local Sensor = require("sensor_scenario_utility.lua")
+local List = require("list_scenario_utility.lua")
+local cleanList = List.clean
+
+local GmSettings = require("gm_settings_scenario_utility.lua")
+mainGMButtons = GmSettings.spawnMenu
+
+local function queueProbeRespawn(self, instigator)
+    probe_respawn = Sensor.queueProbeRespawn(self, probe_respawn, instigator)
+end
+probeExpired = queueProbeRespawn
+probeDestroyed = queueProbeRespawn
+local MissionMenu = require("comms_mission_menu.lua")
+local Transport = require("transport_scenario_utility.lua")
+local warpJammerMaintenance = Transport.warpJammerMaintenance(function() return transportCommerceMaintenance end)
+local Supply = require("supply_scenario_utility.lua")
+local supplyPickupProcess = Supply.supplyPickupProcess
+
+local randomTransportType = Transport.randomTransportTypeBasic
+
+local scenarioMissionsUndocked = MissionMenu.scenarioMissionsUndocked
+local setOptionalOrders = MissionMenu.setOptionalOrders
+
+local sensorJammer = Sensor.sensorJammerBasic
+local sensorJammerPickupProcess = Sensor.sensorJammerPickupBasic
+local updatePlayerLongRangeSensors = Sensor.updatePlayerLongRangeSensorsBasic
+
+local availableForComms = ShipComms.availableForComms
+
+
+local getTemplatePool = Fleet.templatePoolGetter({
+    catalog = function() return ship_template end,
+    selectivity = function() return pool_selectivity end,
+    composition = function() return fleetComposition end,
+    limit = function() return template_pool_size end,
+    stock_template = function() return stockTemplate end,
+    fleet_group = function() return fleet_group end,
+})
+
+goodsOnShip = ShipComms.goodsOnShip
+
+local playerPower = Fleet.playerPower
+
+local spawnRandomArmed = Fleet.relativeSpawner({
+    catalog = function() return ship_template end,
+    relative_strength = function() return relative_strength end,
+    player_power = playerPower,
+    enemy_power = function() return enemy_power end,
+    pool = getTemplatePool,
+    formation = function() return formation_delta end,
+    prefix = generateCallSignPrefix,
+    faction = function() return fleetSpawnFaction end,
+    set_faction = function(faction) fleetSpawnFaction = faction end,
+    callsign = generateCallSign,
+})
 
 function init()
     scenario_version = "1.0.0"
@@ -70,39 +134,9 @@ function init()
     onNewPlayerShip(setPlayers)
 end
 function setConstants()
-    pretty_system = {
-        ["reactor"] = _("stationServices-comms", "reactor"),
-        ["beamweapons"] = _("stationServices-comms", "beam weapons"),
-        ["missilesystem"] = _("stationServices-comms", "missile system"),
-        ["maneuver"] = _("stationServices-comms", "maneuver"),
-        ["impulse"] = _("stationServices-comms", "impulse engines"),
-        ["warp"] = _("stationServices-comms", "warp drive"),
-        ["jumpdrive"] = _("stationServices-comms", "jump drive"),
-        ["frontshield"] = _("stationServices-comms", "front shield"),
-        ["rearshield"] = _("stationServices-comms", "rear shield"),
-    }
-    pretty_short_system = {
-        ["reactor"] = _("stationServices-comms", "reactor"),
-        ["beamweapons"] = _("stationServices-comms", "beams"),
-        ["missilesystem"] = _("stationServices-comms", "missiles"),
-        ["maneuver"] = _("stationServices-comms", "maneuver"),
-        ["impulse"] = _("stationServices-comms", "impulse"),
-        ["warp"] = _("stationServices-comms", "warp"),
-        ["jumpdrive"] = _("stationServices-comms", "jump"),
-        ["frontshield"] = _("stationServices-comms", "front shield"),
-        ["rearshield"] = _("stationServices-comms", "rear shield"),
-    }
-    system_types = {
-        "reactor",
-        "beamweapons",
-        "missilesystem",
-        "maneuver",
-        "impulse",
-        "warp",
-        "jumpdrive",
-        "frontshield",
-        "rearshield",
-    }
+    pretty_system = defaults.systems().pretty_system
+    pretty_short_system = defaults.systems().pretty_short_system
+    system_types = defaults.systems().system_types
     stations_improve_ships = true
     stations_sell_goods = true
     stations_buy_goods = true
@@ -115,89 +149,10 @@ function setConstants()
     inner_orbit = 20000
     outer_orbit = 40000
     max_repeat_loop = 100
-    commonGoods = {
-        "food",
-        "medicine",
-        "nickel",
-        "platinum",
-        "gold",
-        "dilithium",
-        "tritanium",
-        "luxury",
-        "cobalt",
-        "impulse",
-        "warp",
-        "shield",
-        "tractor",
-        "repulsor",
-        "beam",
-        "optic",
-        "robotic",
-        "filament",
-        "transporter",
-        "sensor",
-        "communication",
-        "autodoc",
-        "lifter",
-        "android",
-        "nanites",
-        "software",
-        "circuit",
-        "battery",
-    }
-    mineralGoods =
-        { "nickel", "platinum", "gold", "dilithium", "tritanium", "cobalt" }
-    componentGoods = {
-        "impulse",
-        "warp",
-        "shield",
-        "tractor",
-        "repulsor",
-        "beam",
-        "optic",
-        "robotic",
-        "filament",
-        "transporter",
-        "sensor",
-        "communication",
-        "autodoc",
-        "lifter",
-        "android",
-        "nanites",
-        "software",
-        "circuit",
-        "battery",
-    }
-    good_desc = {
-        ["food"] = _("trade-comms", "food"),
-        ["medicine"] = _("trade-comms", "medicine"),
-        ["luxury"] = _("trade-comms", "luxury"),
-        ["cobalt"] = _("trade-comms", "cobalt"),
-        ["dilithium"] = _("trade-comms", "dilithium"),
-        ["gold"] = _("trade-comms", "gold"),
-        ["nickel"] = _("trade-comms", "nickel"),
-        ["platinum"] = _("trade-comms", "platinum"),
-        ["tritanium"] = _("trade-comms", "tritanium"),
-        ["autodoc"] = _("trade-comms", "autodoc"),
-        ["android"] = _("trade-comms", "android"),
-        ["battery"] = _("trade-comms", "battery"),
-        ["beam"] = _("trade-comms", "beam"),
-        ["circuit"] = _("trade-comms", "circuit"),
-        ["communication"] = _("trade-comms", "communication"),
-        ["filament"] = _("trade-comms", "filament"),
-        ["impulse"] = _("trade-comms", "impulse"),
-        ["lifter"] = _("trade-comms", "lifter"),
-        ["nanites"] = _("trade-comms", "nanites"),
-        ["optic"] = _("trade-comms", "optic"),
-        ["repulsor"] = _("trade-comms", "repulsor"),
-        ["robotic"] = _("trade-comms", "robotic"),
-        ["sensor"] = _("trade-comms", "sensor"),
-        ["shield"] = _("trade-comms", "shield"),
-        ["software"] = _("trade-comms", "software"),
-        ["tractor"] = _("trade-comms", "tractor"),
-        ["transporter"] = _("trade-comms", "transporter"),
-        ["warp"] = _("trade-comms", "warp"),
-    }
+    commonGoods = defaults.goods().commonGoods
+    mineralGoods = defaults.goods().mineralGoods
+    componentGoods = defaults.goods().componentGoods
+    good_desc = defaults.goods().good_desc
     transport_factions = {
         "Independent",
         "Kraylor",
@@ -3127,125 +3082,7 @@ function setGlobals()
             mining = true,
         },
     }
-    player_ship_names_for = {
-        ["Atlantis II"] = {
-            "Spyder",
-            "Shelob",
-            "Tarantula",
-            "Aragog",
-            "Charlotte",
-        },
-        [ST.ATLANTIS] = {
-            "Excaliber",
-            "Thrasher",
-            "Punisher",
-            "Vorpal",
-            "Protang",
-            "Drummond",
-            "Parchim",
-            "Coronado",
-        },
-        [ST.BENEDICT] = {
-            "Elizabeth",
-            "Ford",
-            "Vikramaditya",
-            "Liaoning",
-            "Avenger",
-            "Naruebet",
-            "Washington",
-            "Lincoln",
-            "Garibaldi",
-            "Eisenhower",
-        },
-        [ST.CRUCIBLE] = {
-            "Sling",
-            "Stark",
-            "Torrid",
-            "Kicker",
-            "Flummox",
-        },
-        [ST.ENDER] = {
-            "Mongo",
-            "Godzilla",
-            "Leviathan",
-            "Kraken",
-            "Jupiter",
-            "Saturn",
-        },
-        [ST.FLAVIA_PFALCON] = {
-            "Ladyhawke",
-            "Hunter",
-            "Seeker",
-            "Gyrefalcon",
-            "Kestrel",
-            "Magpie",
-            "Bandit",
-            "Buccaneer",
-        },
-        [ST.HATHCOCK] = {
-            "Hayha",
-            "Waldron",
-            "Plunkett",
-            "Mawhinney",
-            "Furlong",
-            "Zaytsev",
-            "Pavlichenko",
-            "Pegahmagabow",
-            "Fett",
-            "Hawkeye",
-            "Hanzo",
-        },
-        [ST.KIRIYA] = {
-            "Cavour",
-            "Reagan",
-            "Gaulle",
-            "Paulo",
-            "Truman",
-            "Stennis",
-            "Kuznetsov",
-            "Roosevelt",
-            "Vinson",
-            "Old Salt",
-        },
-        [ST.MAVERICK] = {
-            "Angel",
-            "Thunderbird",
-            "Roaster",
-            "Magnifier",
-            "Hedge",
-        },
-        [ST.MP52_HORNET] = {
-            "Dragonfly",
-            "Scarab",
-            "Mantis",
-            "Yellow Jacket",
-            "Jimminy",
-            "Flik",
-            "Thorny",
-            "Buzz",
-        },
-        [ST.NAUTILUS] = {
-            "October",
-            "Abdiel",
-            "Manxman",
-            "Newcon",
-            "Nusret",
-            "Pluton",
-            "Amiral",
-            "Amur",
-            "Heinkel",
-            "Dornier",
-        },
-        [ST.PHOBOS_M3P] = {
-            "Blinder",
-            "Shadow",
-            "Distortion",
-            "Diemos",
-            "Ganymede",
-            "Castillo",
-            "Thebe",
-            "Retrograde",
-        },
+    player_ship_names_for = ShipNames.forScenario({
         ["Phobos M5P"] = {
             "Blinder",
             "Shadow",
@@ -3260,69 +3097,6 @@ function setGlobals()
             "Thrust",
             "Coyote",
         },
-        [ST.PIRANHA] = {
-            "Razor",
-            "Biter",
-            "Ripper",
-            "Voracious",
-            "Carnivorous",
-            "Characid",
-            "Vulture",
-            "Predator",
-        },
-        [ST.VINDICATOR] = {
-            "Excelsior",
-            "Velociraptor",
-            "Thunder",
-            "Kona",
-            "Encounter",
-            "Perth",
-            "Aspern",
-            "Panther",
-        },
-        [ST.STINGRAY] = {
-            "Buzzer",
-            "Flitter",
-            "Zippiticus",
-            "Hopper",
-            "Molt",
-            "Stinger",
-            "Stripe",
-        },
-        [ST.AVALANCHE] = {
-            "Projectus",
-            "Hurlmeister",
-            "Flinger",
-            "Ovod",
-            "Amatola",
-            "Nakhimov",
-            "Antigone",
-        },
-        ["Proto-Atlantis"] = {
-            "Narsil",
-            "Blade",
-            "Decapitator",
-            "Trisect",
-            "Sabre",
-        },
-        ["Redhook"] = {
-            "Headhunter",
-            "Thud",
-            "Troll",
-            "Scalper",
-            "Shark",
-        },
-        [ST.REPULSE] = {
-            "Fiddler",
-            "Brinks",
-            "Loomis",
-            "Mowag",
-            "Patria",
-            "Pandur",
-            "Terrex",
-            "Komatsu",
-            "Eitan",
-        },
         [ST.SAIPAN] = {
             "Atlas",
             "Bernard",
@@ -3333,40 +3107,8 @@ function setGlobals()
             "Saratoga",
             "Pegasus",
         },
-        ["Stricken"] = {
-            "Blazon",
-            "Streaker",
-            "Pinto",
-            "Spear",
-            "Javelin",
-        },
-        [ST.CROW] = {
-            "Sparrow",
-            "Sizzle",
-            "Squawk",
-            "Crow",
-            "Phoenix",
-            "Snowbird",
-            "Hawk",
-        },
-        ["Surkov"] = {
-            "Sting",
-            "Sneak",
-            "Bingo",
-            "Thrill",
-            "Vivisect",
-        },
-        ["ZX-Lindworm"] = {
-            "Seagull",
-            "Catapult",
-            "Blowhard",
-            "Flapper",
-            "Nixie",
-            "Pixie",
-            "Tinkerbell",
-        },
         ["Leftovers"] = { "Foregone", "Righteous", "Scandalous" },
-    }
+    })
     fleetComposition = "Random"
     fleet_composition_labels = {
         ["Random"] = _("buttonGM", "Random"),
@@ -3805,52 +3547,27 @@ function setVariations()
         reputation_goal
     )
 end
-function mainGMButtons()
-    clearGMFunctions()
-    addGMFunction(_("buttonGM", "+Spawn Ship(s)"), spawnGMShips)
-end
 function setPlayers()
-    for i, p in ipairs(getActivePlayerShips()) do
-        if p.shipScore == nil then
-            updatePlayerSoftTemplate(p)
-            deployed_player_count = deployed_player_count + 1
-        end
-        local already_recorded = false
-        for j, dp in ipairs(deployed_players) do
-            if p == dp.p then
-                already_recorded = true
-                break
+    PlayerState.recordDeployments(getActivePlayerShips(), deployed_players, {
+        include_template = true,
+        prepare = function(p)
+            if p.shipScore == nil then
+                updatePlayerSoftTemplate(p)
+                deployed_player_count = deployed_player_count + 1
             end
-        end
-        if not already_recorded then
-            table.insert(
-                deployed_players,
-                { p = p, name = p:getCallSign(), count = 1, template = p:getTypeName() }
-            )
-        end
-    end
+        end,
+    })
 end
 function updatePlayerSoftTemplate(p)
-    p:setPosition(player_spawn_x, player_spawn_y)
-    --set defaults for those ships not found in the list
-    p.shipScore = 24
-    p.maxCargo = 5
-    p.cargo = p.maxCargo
-    p.tractor = false
-    p.tractor_target_lock = false
-    p.mining = false
-    p.goods = {}
-    p:setFaction(player_faction)
-    p.command_log = {}
+    PlayerState.applyDefaults(p, {
+        position = { player_spawn_x, player_spawn_y },
+        faction = player_faction,
+        reputation = reputation_start_amount,
+        command_log = true,
+        probe_type_list = true,
+    })
     p:onDestroyed(playerDestroyed)
     p:onDestruction(playerDestruction)
-    if p:getReputationPoints() == 0 then
-        p:setReputationPoints(reputation_start_amount)
-    end
-    if p.probe_type_list == nil then
-        p.probe_type_list = {}
-        table.insert(p.probe_type_list, { name = "standard", count = -1 })
-    end
     local temp_type_name = p:getTypeName()
     if temp_type_name ~= nil then
         local p_stat = player_ship_stats[temp_type_name]
@@ -3897,71 +3614,7 @@ function updatePlayerSoftTemplate(p)
             )
         end
     end
-    p.maxRepairCrew = p:getRepairCrewCount()
-    p.healthyShield = 1.0
-    p.prevShield = 1.0
-    p.healthyReactor = 1.0
-    p.prevReactor = 1.0
-    p.healthyManeuver = 1.0
-    p.prevManeuver = 1.0
-    p.healthyImpulse = 1.0
-    p.prevImpulse = 1.0
-    if p:getBeamWeaponRange(0) > 0 then
-        p.healthyBeam = 1.0
-        p.prevBeam = 1.0
-    end
-    local tube_count = p:getWeaponTubeCount()
-    if tube_count > 0 then
-        p.healthyMissile = 1.0
-        p.prevMissile = 1.0
-        local size_letter = {
-            ["small"] = "S",
-            ["medium"] = "M",
-            ["large"] = "L",
-        }
-        p.tube_size = ""
-        for i = 1, tube_count do
-            p.tube_size = p.tube_size .. size_letter[p:getTubeSize(i - 1)]
-        end
-    end
-    if p:hasWarpDrive() then
-        p.healthyWarp = 1.0
-        p.prevWarp = 1.0
-    end
-    if p:hasJumpDrive() then
-        p.healthyJump = 1.0
-        p.prevJump = 1.0
-    end
-    p.initialCoolant = p:getMaxCoolant()
-    p.normal_coolant_rate = {}
-    p.normal_power_rate = {}
-    for _, system in ipairs(system_types) do
-        p.normal_coolant_rate[system] = p:getSystemCoolantRate(system)
-        p.normal_power_rate[system] = p:getSystemPowerRate(system)
-    end
-    p.defense_network_button_rel = "defense_network_button_rel"
-    p:addCustomButton(
-        "Relay",
-        p.defense_network_button_rel,
-        "Defense Network",
-        function()
-            string.format("")
-            showDefenseNetwork(p, "Relay")
-        end
-    )
-    p.defense_network_button_ops = "defense_network_button_ops"
-    p:addCustomButton(
-        "Operations",
-        p.defense_network_button_ops,
-        "Defense Network",
-        function()
-            string.format("")
-            showDefenseNetwork(p, "Operations")
-        end
-    )
-end
-function playerDestroyed()
-    string.format("")
+    PlayerState.resetBaseline(p, {})
 end
 function playerDestruction(self, instigator)
     string.format("")
@@ -4257,7 +3910,7 @@ function constructEnvironment()
         print("second inner station count:", inner_station_count)
     end
     for i = 1, inner_station_count do
-        local psx, psy = findClearSpot(
+        local psx, psy = Environment.findClearSpot(
             inner_space,
             "bell torus",
             center_x,
@@ -4459,7 +4112,7 @@ function constructEnvironment()
         print("second outer station count:", outer_station_count)
     end
     for i = 1, outer_station_count do
-        local psx, psy = findClearSpot(
+        local psx, psy = Environment.findClearSpot(
             outer_space,
             "bell torus",
             center_x,
@@ -4683,7 +4336,7 @@ function constructEnvironment()
     for i, faction in ipairs(enemy_factions) do
         table.insert(enemy_faction_pool, faction)
     end
-    local psx, psy = findClearSpot(
+    local psx, psy = Environment.findClearSpot(
         inner_space,
         "torus",
         center_x,
@@ -4716,7 +4369,7 @@ function constructEnvironment()
 --        print("could not find place for enemy station in inner space")
     end
     for i, faction in ipairs(enemy_faction_pool) do
-        psx, psy = findClearSpot(
+        psx, psy = Environment.findClearSpot(
             outer_space,
             "torus",
             center_x,
@@ -4751,7 +4404,7 @@ function constructEnvironment()
     end
     peripheral_stations = {}
     for i, faction in ipairs(factions) do
-        psx, psy = findClearSpot(
+        psx, psy = Environment.findClearSpot(
             outer_space,
             "torus",
             center_x,
@@ -5350,533 +5003,6 @@ function constructEnvironment()
         objects_placed_count = objects_placed_count + 1
     until objects_placed_count >= 120
 end
-function findClearSpot(
-    objects,
-    area_shape,
-    area_point_x,
-    area_point_y,
-    area_distance,
-    area_distance_2,
-    area_angle,
-    new_buffer,
-    placing_station
-)
-    --area distance 2 is only required for torus areas, bell torus areas and rectangle areas
-    --area angle is only required for rectangle areas
-    assert(
-        type(objects) == "table",
-        string.format(
-            "function findClearSpot expects an object list table as the first parameter, but got a %s instead",
-            type(objects)
-        )
-    )
-    assert(
-        type(area_shape) == "string",
-        string.format(
-            "function findClearSpot expects an area shape string as the second parameter, but got a %s instead",
-            type(area_shape)
-        )
-    )
-    assert(
-        type(area_point_x) == "number",
-        string.format(
-            "function findClearSpot expects an area point X coordinate number as the third parameter, but got a %s instead",
-            type(area_point_x)
-        )
-    )
-    assert(
-        type(area_point_y) == "number",
-        string.format(
-            "function findClearSpot expects an area point Y coordinate number as the fourth parameter, but got a %s instead",
-            type(area_point_y)
-        )
-    )
-    assert(
-        type(area_distance) == "number",
-        string.format(
-            "function findClearSpot expects an area distance number as the fifth parameter, but got a %s instead",
-            type(area_distance)
-        )
-    )
-    local valid_shapes = { "circle", "torus", "rectangle" }
-    assert(
-        valid_shapes[area_shape] == nil,
-        string.format(
-            "function findClearSpot expects a valid shape in the second parameter, but got %s instead",
-            area_shape
-        )
-    )
-    assert(
-        type(new_buffer) == "number",
-        string.format(
-            "function findClearSpot expects a new item buffer distance number as the eighth parameter, but got a %s instead",
-            type(new_buffer)
-        )
-    )
-    local valid_table_item_shapes = { "circle", "zone" }
-    local far_enough = true
-    local current_loop_count = 0
-    local cx, cy = 0 --candidate x and y coordinates
-    if area_shape == "circle" then
-        repeat
-            current_loop_count = current_loop_count + 1
-            cx, cy =
-                vectorFromAngle(random(0, 360), random(0, area_distance), true)
-            cx = cx + area_point_x
-            cy = cy + area_point_y
-            far_enough = true
-            for i, item in ipairs(objects) do
-                assert(
-                    item.shape ~= nil,
-                    string.format(
-                        "function findClearSpot expects an object list table where each item in the table is identified by shape, but item index %s's shape was nil",
-                        i
-                    )
-                )
-                assert(
-                    valid_table_item_shapes[item.shape] == nil,
-                    string.format(
-                        "function findClearSpot expects a valid shape in the object list table item index %i, but got %s instead",
-                        i,
-                        item.shape
-                    )
-                )
-                if item.shape == "circle" then
-                    assert(
-                        type(item.obj) == "table"
-                            or type(item.obj) == "userdata",
-                        string.format(
-                            "function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",
-                            i,
-                            type(item.obj)
-                        )
-                    )
-                    local ix, iy = item.obj:getPosition()
-                    assert(
-                        type(item.dist) == "number",
-                        string.format(
-                            "function findClearSpot expects a distance number as the dist value in the object list table item index %i, but got a %s instead",
-                            i,
-                            type(item.dist)
-                        )
-                    )
-                    local comparison_dist = item.dist
-                    if placing_station ~= nil then
-                        if placing_station then
-                            if isObjectType(item.obj, "SpaceStation") then
-                                comparison_dist = 12000
-                            end
-                        end
-                    end
-                    if distance_diagnostic then
-                        print(
-                            "distance_diagnostic 1: cx, cy, ix, iy in find clear spot, circle",
-                            cx,
-                            cy,
-                            ix,
-                            iy
-                        )
-                    end
-                    if
-                        distance(cx, cy, ix, iy)
-                        < (comparison_dist + new_buffer)
-                    then
-                        far_enough = false
-                        break
-                    end
-                end
-                if item.shape == "zone" then
-                    assert(
-                        type(item.obj) == "table"
-                            or type(item.obj) == "userdata",
-                        string.format(
-                            "function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",
-                            i,
-                            type(item.obj)
-                        )
-                    )
-                    local ta = Artifact():setPosition(cx, cy)
-                    if item.obj:isInside(ta) then
-                        far_enough = false
-                    end
-                    ta:destroy()
-                    if not far_enough then
-                        break
-                    end
-                end
-            end
-        until far_enough or current_loop_count > max_repeat_loop
-        if current_loop_count > max_repeat_loop then
-            return
-        else
-            return cx, cy
-        end
-    elseif area_shape == "bell torus" then
-        assert(
-            type(area_distance_2) == "table",
-            string.format(
-                "function findClearSpot expects a table of random range parameters as the sixth parameter when the shape is bell torus, but got a %s instead",
-                type(area_distance_2)
-            )
-        )
-        repeat
-            local random_radius = 0
-            for i, dist in ipairs(area_distance_2) do
-                random_radius = random_radius + random(dist.lo, dist.hi)
-            end
-            cx, cy = vectorFromAngle(random(0, 360), random_radius, true)
-            cx = cx + area_point_x
-            cy = cy + area_point_y
-            far_enough = true
-            for i, item in ipairs(objects) do
-                assert(
-                    item.shape ~= nil,
-                    string.format(
-                        "function findClearSpot expects an object list table where each item in the table is identified by shape, but item index %s's shape was nil",
-                        i
-                    )
-                )
-                assert(
-                    valid_table_item_shapes[item.shape] == nil,
-                    string.format(
-                        "function findClearSpot expects a valid shape in the object list table item index %i, but got %s instead",
-                        i,
-                        item.shape
-                    )
-                )
-                if item.shape == "circle" then
-                    assert(
-                        type(item.obj) == "table"
-                            or type(item.obj) == "userdata",
-                        string.format(
-                            "function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",
-                            i,
-                            type(item.obj)
-                        )
-                    )
-                    local ix, iy = item.obj:getPosition()
-                    assert(
-                        type(item.dist) == "number",
-                        string.format(
-                            "function findClearSpot expects a distance number as the dist value in the object list table item index %i, but got a %s instead",
-                            i,
-                            type(item.dist)
-                        )
-                    )
-                    local comparison_dist = item.dist
-                    if placing_station ~= nil then
-                        if placing_station then
-                            if isObjectType(item.obj, "SpaceStation") then
-                                comparison_dist = 12000
-                            end
-                        end
-                    end
-                    if distance_diagnostic then
-                        print(
-                            "distance_diagnostic 2: cx, cy, ix, iy in find clear spot, bell torus:",
-                            cx,
-                            cy,
-                            ix,
-                            iy
-                        )
-                    end
-                    if
-                        distance(cx, cy, ix, iy)
-                        < (comparison_dist + new_buffer)
-                    then
-                        far_enough = false
-                        break
-                    end
-                end
-            end
-            current_loop_count = current_loop_count + 1
-        until far_enough or current_loop_count > max_repeat_loop
-        if current_loop_count > max_repeat_loop then
-            return
-        else
-            return cx, cy
-        end
-    elseif area_shape == "torus" then
-        assert(
-            type(area_distance_2) == "number",
-            string.format(
-                "function findClearSpot expects an area distance number as the sixth parameter when the shape is torus, but got a %s instead",
-                type(area_distance_2)
-            )
-        )
-        repeat
-            cx, cy = vectorFromAngle(
-                random(0, 360),
-                random(area_distance, area_distance_2),
-                true
-            )
-            cx = cx + area_point_x
-            cy = cy + area_point_y
-            far_enough = true
-            for i, item in ipairs(objects) do
-                assert(
-                    item.shape ~= nil,
-                    string.format(
-                        "function findClearSpot expects an object list table where each item in the table is identified by shape, but item index %s's shape was nil",
-                        i
-                    )
-                )
-                assert(
-                    valid_table_item_shapes[item.shape] == nil,
-                    string.format(
-                        "function findClearSpot expects a valid shape in the object list table item index %i, but got %s instead",
-                        i,
-                        item.shape
-                    )
-                )
-                if item.shape == "circle" then
-                    assert(
-                        type(item.obj) == "table"
-                            or type(item.obj) == "userdata",
-                        string.format(
-                            "function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",
-                            i,
-                            type(item.obj)
-                        )
-                    )
-                    local ix, iy = item.obj:getPosition()
-                    assert(
-                        type(item.dist) == "number",
-                        string.format(
-                            "function findClearSpot expects a distance number as the dist value in the object list table item index %i, but got a %s instead",
-                            i,
-                            type(item.dist)
-                        )
-                    )
-                    local comparison_dist = item.dist
-                    if placing_station ~= nil then
-                        if placing_station then
-                            if isObjectType(item.obj, "SpaceStation") then
-                                comparison_dist = 12000
-                            end
-                        end
-                    end
-                    if distance_diagnostic then
-                        print(
-                            "distance_diagnostic 3: cx, cy, ix, iy: find clear spot, torus:",
-                            cx,
-                            cy,
-                            ix,
-                            iy
-                        )
-                    end
-                    if
-                        distance(cx, cy, ix, iy)
-                        < (comparison_dist + new_buffer)
-                    then
-                        far_enough = false
-                        break
-                    end
-                end
-            end
-            current_loop_count = current_loop_count + 1
-        until far_enough or current_loop_count > max_repeat_loop
-        if current_loop_count > max_repeat_loop then
-            return
-        else
-            return cx, cy
-        end
-    elseif area_shape == "central rectangle" then
-        assert(
-            type(area_distance_2) == "number",
-            string.format(
-                "function findClearSpot expects an area distance number (width) as the sixth parameter when the shape is rectangle, but got a %s instead",
-                type(area_distance_2)
-            )
-        )
-        assert(
-            type(area_angle) == "number",
-            string.format(
-                "function findClearSpot expects an area angle number as the seventh parameter when the shape is rectangle, but got a %s instead",
-                type(area_angle)
-            )
-        )
-        repeat
-            cx, cy = vectorFromAngle(
-                area_angle,
-                random(-area_distance / 2, area_distance / 2),
-                true
-            )
-            cx = cx + area_point_x
-            cy = cy + area_point_y
-            local px, py = vectorFromAngle(
-                area_angle + 90,
-                random(-area_distance_2 / 2, area_distance_2 / 2),
-                true
-            )
-            cx = cx + px
-            cy = cy + py
-            far_enough = true
-            for i, item in ipairs(objects) do
-                assert(
-                    item.shape ~= nil,
-                    string.format(
-                        "function findClearSpot expects an object list table where each item in the table is identified by shape, but item index %s's shape was nil",
-                        i
-                    )
-                )
-                assert(
-                    valid_table_item_shapes[item.shape] == nil,
-                    string.format(
-                        "function findClearSpot expects a valid shape in the object list table item index %i, but got %s instead",
-                        i,
-                        item.shape
-                    )
-                )
-                if item.shape == "circle" then
-                    assert(
-                        type(item.obj) == "table"
-                            or type(item.obj) == "userdata",
-                        string.format(
-                            "function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",
-                            i,
-                            type(item.obj)
-                        )
-                    )
-                    local ix, iy = item.obj:getPosition()
-                    assert(
-                        type(item.dist) == "number",
-                        string.format(
-                            "function findClearSpot expects a distance number as the dist value in the object list table item index %i, but got a %s instead",
-                            i,
-                            type(item.dist)
-                        )
-                    )
-                    local comparison_dist = item.dist
-                    if placing_station ~= nil then
-                        if placing_station then
-                            if isObjectType(item.obj, "SpaceStation") then
-                                comparison_dist = 12000
-                            end
-                        end
-                    end
-                    if distance_diagnostic then
-                        print(
-                            "distance_diagnostic 4: cx,cy,ix,iy: find clear spot, central rectangle:",
-                            cx,
-                            cy,
-                            ix,
-                            iy
-                        )
-                    end
-                    if
-                        distance(cx, cy, ix, iy)
-                        < (comparison_dist + new_buffer)
-                    then
-                        far_enough = false
-                        break
-                    end
-                end
-            end
-            current_loop_count = current_loop_count + 1
-        until far_enough or current_loop_count > max_repeat_loop
-        if current_loop_count > max_repeat_loop then
-            return
-        else
-            return cx, cy
-        end
-    elseif area_shape == "rectangle" then
-        assert(
-            type(area_distance_2) == "number",
-            string.format(
-                "function findClearSpot expects an area distance number (width) as the sixth parameter when the shape is rectangle, but got a %s instead",
-                type(area_distance_2)
-            )
-        )
-        assert(
-            type(area_angle) == "number",
-            string.format(
-                "function findClearSpot expects an area angle number as the seventh parameter when the shape is rectangle, but got a %s instead",
-                type(area_angle)
-            )
-        )
-        repeat
-            cx, cy = vectorFromAngle(area_angle, random(0, area_distance), true)
-            cx = cx + area_point_x
-            cy = cy + area_point_y
-            local px, py = vectorFromAngle(
-                area_angle + 90,
-                random(-area_distance_2 / 2, area_distance_2 / 2),
-                true
-            )
-            cx = cx + px
-            cy = cy + py
-            far_enough = true
-            for i, item in ipairs(objects) do
-                assert(
-                    item.shape ~= nil,
-                    string.format(
-                        "function findClearSpot expects an object list table where each item in the table is identified by shape, but item index %s's shape was nil",
-                        i
-                    )
-                )
-                assert(
-                    valid_table_item_shapes[item.shape] == nil,
-                    string.format(
-                        "function findClearSpot expects a valid shape in the object list table item index %i, but got %s instead",
-                        i,
-                        item.shape
-                    )
-                )
-                if item.shape == "circle" then
-                    assert(
-                        type(item.obj) == "table"
-                            or type(item.obj) == "userdata",
-                        string.format(
-                            "function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",
-                            i,
-                            type(item.obj)
-                        )
-                    )
-                    local ix, iy = item.obj:getPosition()
-                    assert(
-                        type(item.dist) == "number",
-                        string.format(
-                            "function findClearSpot expects a distance number as the dist value in the object list table item index %i, but got a %s instead",
-                            i,
-                            type(item.dist)
-                        )
-                    )
-                    local comparison_dist = item.dist
-                    if placing_station ~= nil then
-                        if placing_station then
-                            if isObjectType(item.obj, "SpaceStation") then
-                                comparison_dist = 12000
-                            end
-                        end
-                    end
-                    if distance_diagnostic then
-                        print(
-                            "distance_diagnostic 5: cx, cy, ix, iy: find clear spot, rectangle:",
-                            cx,
-                            cy,
-                            ix,
-                            iy
-                        )
-                    end
-                    if
-                        distance(cx, cy, ix, iy)
-                        < (comparison_dist + new_buffer)
-                    then
-                        far_enough = false
-                        break
-                    end
-                end
-            end
-            current_loop_count = current_loop_count + 1
-        until far_enough or current_loop_count > max_repeat_loop
-        if current_loop_count > max_repeat_loop then
-            return
-        else
-            return cx, cy
-        end
-    end
-end
 function placeTerrain(placement_area, terrain)
     local function getStationPool(placement_area)
         local station_pool = {}
@@ -5904,7 +5030,7 @@ function placeTerrain(placement_area, terrain)
             or placement_area == "Outer Torus"
             or placement_area == "Peripheral Torus"
         then
-            eo_x, eo_y = findClearSpot(
+            eo_x, eo_y = Environment.findClearSpot(
                 area.space,
                 area.shape,
                 area.center_x,
@@ -5972,7 +5098,7 @@ function placeTerrain(placement_area, terrain)
         or placement_area == "Outer Torus"
         or placement_area == "Peripheral Torus"
     then
-        eo_x, eo_y = findClearSpot(
+        eo_x, eo_y = Environment.findClearSpot(
             area.space,
             area.shape,
             area.center_x,
@@ -5992,7 +5118,7 @@ function placeTerrain(placement_area, terrain)
                     placement_area == "Outer Torus"
                     or placement_area == "Peripheral Torus"
                 then
-                    we_x, we_y = findClearSpot(
+                    we_x, we_y = Environment.findClearSpot(
                         area.space,
                         area.shape,
                         area.center_x,
@@ -6138,7 +5264,7 @@ function placeTerrain(placement_area, terrain)
                     asteroid_size = asteroid_size + random(2, 200)
                 end
                 local dist = random(100, field_size)
-                local x, y = findClearSpot(
+                local x, y = Environment.findClearSpot(
                     asteroid_field,
                     "bell torus",
                     eo_x,
@@ -6933,322 +6059,9 @@ function placeTerrain(placement_area, terrain)
         return false
     end
 end
-function supplyPickupProcess(self, player)
-    if self.repairCrew ~= nil then
-        player:setRepairCrewCount(player:getRepairCrewCount() + self.repairCrew)
-    end
-    if self.coolant ~= nil then
-        player:setMaxCoolant(player:getMaxCoolant() + self.coolant)
-    end
-    if self.probes ~= nil then
-        player:setScanProbeCount(
-            math.min(
-                player:getScanProbeCount() + self.probes,
-                player:getMaxScanProbeCount()
-            )
-        )
-    end
-    if self.armor ~= nil then
-        player:setHull(
-            math.min(player:getHull() + self.armor, player:getHullMax())
-        )
-    end
-    if player:hasJumpDrive() then
-        if self.jump_charge ~= nil then
-            player:setJumpDriveCharge(
-                player:getJumpDriveCharge() + self.jump_charge
-            )
-        end
-    end
-end
 --    Dynamic terrain probes
-function probeExpired(self)
-    if probe_respawn == nil then
-        probe_respawn = {}
-    end
-    local station_owner = self:getOwner()
-    local target_x, target_y = self:getTarget()
-    table.insert(
-        probe_respawn,
-        {
-            time = getScenarioTime() + random(60, 240),
-            owner = station_owner,
-            x = target_x,
-            y = target_y,
-        }
-    )
-end
-function probeDestroyed(self, instigator)
-    if probe_respawn == nil then
-        probe_respawn = {}
-    end
-    local station_owner = self:getOwner()
-    local target_x, target_y = self:getTarget()
-    table.insert(
-        probe_respawn,
-        {
-            time = getScenarioTime() + random(60, 240),
-            owner = station_owner,
-            x = target_x,
-            y = target_y,
-            instigator = instigator,
-        }
-    )
-end
 --    Transport utilities
-function goodsOnShip(comms_target, comms_data)
-    comms_data.goods = {}
-    comms_data.goods[commonGoods[math.random(1, #commonGoods)]] =
-        { quantity = 1, cost = random(20, 80) }
-    local shipType = comms_target:getTypeName()
-    if shipType:find("Freighter") ~= nil then
-        if
-            shipType:find("Goods") ~= nil
-            or shipType:find("Equipment") ~= nil
-        then
-            local count_repeat_loop = 0
-            repeat
-                comms_data.goods[commonGoods[math.random(1, #commonGoods)]] =
-                    { quantity = 1, cost = random(20, 80) }
-                local goodCount = 0
-                for good, goodData in pairs(comms_data.goods) do
-                    goodCount = goodCount + 1
-                end
-                count_repeat_loop = count_repeat_loop + 1
-            until goodCount >= 3 or count_repeat_loop > max_repeat_loop
-            if count_repeat_loop > max_repeat_loop then
-                print(
-                    "repeated too many times when setting up goods for freighter"
-                )
-            end
-        end
-    end
-end
-function randomTransportType()
-    local transport_type =
-        { "Personnel", "Goods", "Garbage", "Equipment", "Fuel" }
-    local freighter_engine = "Freighter"
-    local freighter_size = math.random(1, 5)
-    if random(1, 100) < 30 then
-        freighter_engine = "Jump Freighter"
-        freighter_size = math.random(3, 5)
-    end
-    local transport_template = string.format(
-        "%s %s %i",
-        tableSelectRandom(transport_type),
-        freighter_engine,
-        freighter_size
-    )
-    return CpuShip()
-        :setTemplate(transport_template)
-        :setCommsScript("")
-        :setCommsFunction(commsShip),
-        freighter_size
-end
 --    Sensor jammer utilities
-function sensorJammerPickupProcess(self, retriever)
-    string.format("")
-    local jammer_call_sign = self:getCallSign()
-    sensor_jammer_list[jammer_call_sign] = nil
-    if not self:isScannedBy(retriever) then
-        retriever:setCanScan(false)
-        retriever.scanner_dead = "scanner_dead"
-        retriever:addCustomMessage(
-            "Science",
-            retriever.scanner_dead,
-            _(
-                "msgScience",
-                "The unscanned artifact we just picked up has fried our scanners"
-            )
-        )
-        retriever.scanner_dead_ops = "scanner_dead_ops"
-        retriever:addCustomMessage(
-            "Operations",
-            retriever.scanner_dead_ops,
-            _(
-                "msgOperations",
-                "The unscanned artifact we just picked up has fried our scanners"
-            )
-        )
-    end
-    may_explain_sensor_jammer = true
-end
-function sensorJammer(x, y)
-    artifact_number = artifact_number + math.random(1, 4)
-    local random_suffix = string.char(math.random(65, 90))
-    local jammer_call_sign =
-        string.format("SJ%i%s", artifact_number, random_suffix)
-    local scanned_description = string.format(
-        _(
-            "scienceDescription-artifact",
-            "Source of emanations interfering with long range sensors. Range:%.1fu Impact:%.1fu"
-        ),
-        sensor_jammer_range / 1000,
-        sensor_jammer_impact / 1000
-    )
-    local sensor_jammer = Artifact()
-        :setPosition(x, y)
-        :setScanningParameters(
-            sensor_jammer_scan_complexity,
-            sensor_jammer_scan_depth
-        )
-        :setRadarSignatureInfo(0.2, 0.4, 0.1)
-        :setModel("SensorBuoyMKIII")
-        :setDescriptions(
-            _("scienceDescription-artifact", "Source of unusual emanations"),
-            scanned_description
-        )
-        :setCallSign(jammer_call_sign)
-    sensor_jammer:onPickUp(sensorJammerPickupProcess)
-    sensor_jammer_list[jammer_call_sign] = sensor_jammer
-    sensor_jammer.jam_range = sensor_jammer_range
-    sensor_jammer.jam_impact = sensor_jammer_impact
-    sensor_jammer.jam_impact_units = sensor_jammer_power_units
-    return sensor_jammer
-end
-function updatePlayerLongRangeSensors(delta, p)
-    local free_sensor_boost = false
-    local sensor_boost_present = false
-    local sensor_boost_amount = 0
-    if p.station_sensor_boost == nil then
-        local station_pool = {}
-        for i, station in ipairs(inner_stations) do
-            if station ~= nil and station:isValid() then
-                table.insert(station_pool, station)
-            end
-        end
-        for i, sensor_station in ipairs(station_pool) do
-            if sensor_station:isValid() and p:isDocked(sensor_station) then
-                if sensor_station.comms_data.sensor_boost ~= nil then
-                    sensor_boost_present = true
-                    if sensor_station.comms_data.sensor_boost.cost < 1 then
-                        free_sensor_boost = true
-                        p.station_sensor_boost =
-                            sensor_station.comms_data.sensor_boost.value
-                        break
-                    end
-                    sensor_boost_amount =
-                        sensor_station.comms_data.sensor_boost.value
-                end
-            end
-        end
-    end
-    local base_range = p.normal_long_range_radar
-    if p.station_sensor_boost ~= nil then
-        base_range = base_range + p.station_sensor_boost
-    end
-    if not p:getDockedWith() then
-        base_range = p.normal_long_range_radar
-        p.station_sensor_boost = nil
-    end
-    if
-        p.power_sensor_interval ~= nil
-        and p.power_sensor_interval > 0
-        and p:getEnergyLevel() > p:getEnergyLevelMax() * 0.05
-    then
-        if p.power_sensor_state == nil then
-            p.power_sensor_state = "disabled"
-        end
-        if p.power_sensor_state == "disabled" then
-            p.power_sensor_state = "standby"
-            updatePowerSensorButtons(p)
-        elseif p.power_sensor_state == "enabled" then
-            base_range = base_range
-                + (1000 * p.power_sensor_interval * p.power_sensor_level)
-            local power_decrement = delta * p.power_sensor_level * 2
-            p:setEnergyLevel(p:getEnergyLevel() - power_decrement)
-        end
-    else
-        if p.power_sensor_state ~= nil then
-            p.power_sensor_state = "disabled"
-            updatePowerSensorButtons(p)
-        end
-    end
-    local impact_range =
-        math.max(base_range * sensor_impact, p:getShortRangeRadarRange())
-    local sensor_jammer_impact = 0
-    for jammer_name, sensor_jammer in pairs(sensor_jammer_list) do
-        if sensor_jammer ~= nil and sensor_jammer:isValid() then
-            if distance_diagnostic then
-                print(
-                    "distance_diagnostic 13: p, sensor_jammer: update player long range sensors, sensor jammer:",
-                    p:getCallSign(),
-                    jammer_name
-                )
-            end
-            local jammer_distance = distance(p, sensor_jammer)
-            if jammer_distance < sensor_jammer.jam_range then
-                if sensor_jammer.jam_impact_units then
-                    sensor_jammer_impact = math.max(
-                        sensor_jammer_impact,
-                        sensor_jammer.jam_impact
-                            * (1 - (jammer_distance / sensor_jammer.jam_range))
-                    )
-                else
-                    sensor_jammer_impact = math.max(
-                        sensor_jammer_impact,
-                        impact_range
-                            * sensor_jammer.jam_impact
-                            / 100000
-                            * (1 - (jammer_distance / sensor_jammer.jam_range))
-                    )
-                end
-            end
-        else
-            sensor_jammer_list[jammer_name] = nil
-        end
-    end
-    impact_range = math.max(
-        p:getShortRangeRadarRange(),
-        impact_range - sensor_jammer_impact
-    )
-    local probe_scan_boost_impact = 0
-    if boost_probe_list ~= nil then
-        for boost_probe_index, boost_probe in ipairs(boost_probe_list) do
-            if boost_probe ~= nil and boost_probe:isValid() then
-                if distance_diagnostic then
-                    local bp_x, bp_y = boost_probe:getPosition()
-                    print(
-                        "distance_diagnostic 14: boost_probe, p: update player long range sensors, boost probe:",
-                        bp_x,
-                        bp_y,
-                        p:getCallSign()
-                    )
-                end
-                local boost_probe_distance = distance(boost_probe, p)
-                if boost_probe_distance < boost_probe.range * 1000 then
-                    if boost_probe_distance < boost_probe.range * 1000 / 2 then
-                        probe_scan_boost_impact = math.max(
-                            probe_scan_boost_impact,
-                            boost_probe.boost * 1000
-                        )
-                    else
-                        local best_boost = boost_probe.boost * 1000
-                        local adjusted_range = boost_probe.range * 1000
-                        local half_adjusted_range = adjusted_range / 2
-                        local raw_scan_gradient = boost_probe_distance
-                            / half_adjusted_range
-                        local scan_gradient = 2 - raw_scan_gradient
-                        probe_scan_boost_impact = math.max(
-                            probe_scan_boost_impact,
-                            best_boost * scan_gradient
-                        )
-                    end
-                end
-            else
-                boost_probe_list[boost_probe_index] =
-                    boost_probe_list[#boost_probe_list]
-                boost_probe_list[#boost_probe_list] = nil
-                break
-            end
-        end
-    end
-    impact_range = math.max(
-        p:getShortRangeRadarRange(),
-        impact_range + probe_scan_boost_impact
-    )
-    p:setLongRangeRadarRange(impact_range)
-end
 --    Communication
 function commsSensorObservatory()
     if comms_source:isEnemy(comms_target) then
@@ -7261,293 +6074,6 @@ function commsSensorObservatory()
             math.floor(comms_target:getShortRangeRadarRange() / 1000)
         )
     )
-end
-function scenarioMissionsUndocked()
-    local accessible_warp_jammers = {}
-    if comms_target.warp_jammer_list ~= nil then
-        for index, wj in ipairs(comms_target.warp_jammer_list) do
-            if wj ~= nil and wj:isValid() then
-                table.insert(accessible_warp_jammers, wj)
-            end
-        end
-    end
-    for i, wj in ipairs(warp_jammer_list) do
-        if wj ~= nil and wj:isValid() then
-            local already_accessible = false
-            for j, awj in ipairs(accessible_warp_jammers) do
-                if awj == wj then
-                    already_accessible = true
-                end
-            end
-            if not already_accessible then
-                if distance_diagnostic then
-                    print(
-                        "distance_diagnostic 15: comms_target,wj: scenario missions undocked, warp jammer:",
-                        comms_target:getCallSign(),
-                        wj:getCallSign()
-                    )
-                end
-                if distance(comms_target, wj) < 30000 then
-                    if
-                        wj:isFriendly(comms_source)
-                        or wj:isFriendly(comms_target)
-                    then
-                        table.insert(accessible_warp_jammers, wj)
-                    elseif
-                        not wj:isEnemy(comms_source)
-                        or not wj:isEnemy(comms_target)
-                    then
-                        table.insert(accessible_warp_jammers, wj)
-                    end
-                end
-            end
-        end
-    end
-    if #accessible_warp_jammers > 0 then
-        addCommsReply(_("station-comms", "Connect to warp jammer"), function()
-            setCommsMessage(
-                _("station-comms", "Which one would you like to connect to?")
-            )
-            local pay_rep = false
-            for index, wj in ipairs(accessible_warp_jammers) do
-                local wj_rep = 0
-                if wj:isFriendly(comms_target) then
-                    if wj:isFriendly(comms_source) then
-                        wj_rep = 0
-                    else
-                        if wj:isEnemy(comms_source) then
-                            wj_rep = 10
-                            pay_rep = true
-                        else
-                            wj_rep = 5
-                            pay_rep = true
-                        end
-                    end
-                elseif wj:isEnemy(comms_target) then
-                    if wj:isFriendly(comms_source) then
-                        wj_rep = 15
-                        pay_rep = true
-                    else
-                        if wj:isEnemy(comms_source) then
-                            wj_rep = 100
-                            pay_rep = true
-                        else
-                            wj_rep = 20
-                            pay_rep = true
-                        end
-                    end
-                else
-                    if wj:isFriendly(comms_source) then
-                        wj_rep = 10
-                        pay_rep = true
-                    else
-                        if wj:isEnemy(comms_source) then
-                            wj_rep = 25
-                            pay_rep = true
-                        else
-                            wj_rep = 20
-                            pay_rep = true
-                        end
-                    end
-                end
-                local reputation_prompt = ""
-                if wj_rep > 0 then
-                    reputation_prompt = string.format(
-                        _("station-comms", "(%i reputation)"),
-                        wj_rep
-                    )
-                end
-                addCommsReply(
-                    string.format("%s %s", wj.identifier, reputation_prompt),
-                    function()
-                        if comms_source:takeReputationPoints(wj_rep) then
-                            setCommsMessage(
-                                string.format(
-                                    _(
-                                        "station-comms",
-                                        "%s Automated warp jammer access menu"
-                                    ),
-                                    wj:getCallSign()
-                                )
-                            )
-                            addCommsReply(
-                                _(
-                                    "station-comms",
-                                    "Reduce range to 1 unit for 1 minute"
-                                ),
-                                function()
-                                    wj:setRange(1000)
-                                    wj.reset_time = getScenarioTime() + 60
-                                    setCommsMessage(
-                                        _(
-                                            "station-comms",
-                                            "Acknowledged. Range adjusted. Reset timer engaged."
-                                        )
-                                    )
-                                    addCommsReply(_("Back"), commsStation)
-                                end
-                            )
-                            addCommsReply(
-                                _(
-                                    "station-comms",
-                                    "Reduce range by 50% for 2 minutes"
-                                ),
-                                function()
-                                    wj:setRange(wj.range / 2)
-                                    wj.reset_time = getScenarioTime() + 120
-                                    setCommsMessage(
-                                        _(
-                                            "station-comms",
-                                            "Acknowledged. Range adjusted. Reset timer engaged."
-                                        )
-                                    )
-                                    addCommsReply(_("Back"), commsStation)
-                                end
-                            )
-                            addCommsReply(
-                                _(
-                                    "station-comms",
-                                    "Reduce range by 25% for 3 minutes"
-                                ),
-                                function()
-                                    wj:setRange(wj.range * 0.75)
-                                    wj.reset_time = getScenarioTime() + 180
-                                    setCommsMessage(
-                                        _(
-                                            "station-comms",
-                                            "Acknowledged. Range adjusted. Reset timer engaged."
-                                        )
-                                    )
-                                    addCommsReply(_("Back"), commsStation)
-                                end
-                            )
-                        else
-                            setCommsMessage(
-                                _("needRep-comms", "Insufficient reputation")
-                            )
-                        end
-                    end
-                )
-            end
-            if pay_rep then
-                addCommsReply(
-                    _(
-                        "station-comms",
-                        "Why do I have to pay reputation to log in to some of these warp jammers?"
-                    ),
-                    function()
-                        setCommsMessage(
-                            string.format(
-                                _(
-                                    "station-comms",
-                                    "It's complicated. It depends on the relationships between the warp jammer owner, us, station %s and you, %s. The farther apart the relationship, the more reputation it costs to gain access. Do you want more details?"
-                                ),
-                                comms_target:getCallSign(),
-                                comms_source:getCallSign()
-                            )
-                        )
-                        addCommsReply(
-                            _(
-                                "station-comms",
-                                "Yes, please provide more details"
-                            ),
-                            function()
-                                local out = _(
-                                    "station-comms",
-                                    "These are the cases and their reputation costs:"
-                                )
-                                out = string.format(
-                                    _(
-                                        "station-comms",
-                                        "%s\n    WJ friendly to %s and WJ is friendly to %s = no reputation."
-                                    ),
-                                    out,
-                                    comms_target:getCallSign(),
-                                    comms_source:getCallSign()
-                                )
-                                out = string.format(
-                                    _(
-                                        "station-comms",
-                                        "%s\n    WJ friendly to %s and WJ is neutral to %s = 5 reputation."
-                                    ),
-                                    out,
-                                    comms_target:getCallSign(),
-                                    comms_source:getCallSign()
-                                )
-                                out = string.format(
-                                    _(
-                                        "station-comms",
-                                        "%s\n    WJ friendly to %s and WJ is enemy to %s = 10 reputation."
-                                    ),
-                                    out,
-                                    comms_target:getCallSign(),
-                                    comms_source:getCallSign()
-                                )
-                                out = string.format(
-                                    _(
-                                        "station-comms",
-                                        "%s\n    WJ neutral to %s and WJ is friendly to %s = 10 reputation."
-                                    ),
-                                    out,
-                                    comms_target:getCallSign(),
-                                    comms_source:getCallSign()
-                                )
-                                out = string.format(
-                                    _(
-                                        "station-comms",
-                                        "%s\n    WJ enemy to %s and WJ is friendly to %s = 15 reputation."
-                                    ),
-                                    out,
-                                    comms_target:getCallSign(),
-                                    comms_source:getCallSign()
-                                )
-                                out = string.format(
-                                    _(
-                                        "station-comms",
-                                        "%s\n    WJ neutral to %s and WJ is neutral to %s = 20 reputation."
-                                    ),
-                                    out,
-                                    comms_target:getCallSign(),
-                                    comms_source:getCallSign()
-                                )
-                                out = string.format(
-                                    _(
-                                        "station-comms",
-                                        "%s\n    WJ enemy to %s and WJ is neutral to %s = 20 reputation."
-                                    ),
-                                    out,
-                                    comms_target:getCallSign(),
-                                    comms_source:getCallSign()
-                                )
-                                out = string.format(
-                                    _(
-                                        "station-comms",
-                                        "%s\n    WJ neutral to %s and WJ is enemy to %s = 25 reputation."
-                                    ),
-                                    out,
-                                    comms_target:getCallSign(),
-                                    comms_source:getCallSign()
-                                )
-                                out = string.format(
-                                    _(
-                                        "station-comms",
-                                        "%s\n    WJ enemy to %s and WJ is enemy to %s = 100 reputation."
-                                    ),
-                                    out,
-                                    comms_target:getCallSign(),
-                                    comms_source:getCallSign()
-                                )
-                                setCommsMessage(out)
-                                addCommsReply(_("Back"), commsStation)
-                            end
-                        )
-                        addCommsReply(_("Back"), commsStation)
-                    end
-                )
-            end
-            addCommsReply(_("Back"), commsStation)
-        end)
-    end
 end
 function scenarioMissions()
     local presented = 0
@@ -8576,324 +7102,7 @@ function getCurrentOrders()
         addCommsReply(_("Back"), commsStation)
     end)
 end
-function setOptionalOrders()
-    optional_orders = ""
-    if
-        comms_source.transport_mission ~= nil
-        or comms_source.cargo_mission ~= nil
-    then
-        local optional_orders_header = {
-            _("orders-comms", "\nOptional:"),
-            _("orders-comms", "\nOptional orders:"),
-            _("orders-comms", "\nThese orders are optional:"),
-            _("orders-comms", "\nNot required:"),
-        }
-        optional_orders = tableRemoveRandom(optional_orders_header)
-    end
-    if comms_source.transport_mission ~= nil then
-        if
-            comms_source.transport_mission.destination ~= nil
-            and comms_source.transport_mission.destination:isValid()
-        then
-            optional_orders = string.format(
-                _("orders-comms", "%s\nTransport %s to %s station %s in %s"),
-                optional_orders,
-                comms_source.transport_mission.character.name,
-                comms_source.transport_mission.destination:getFaction(),
-                comms_source.transport_mission.destination_name,
-                comms_source.transport_mission.destination:getSectorName()
-            )
-        else
-            optional_orders = string.format(
-                _("orders-comms", "%s\nTransport %s to station %s (defunct)"),
-                optional_orders,
-                comms_source.transport_mission.character.name,
-                comms_source.transport_mission.destination_name
-            )
-        end
-    end
-    if comms_source.cargo_mission ~= nil then
-        if comms_source.cargo_mission.loaded then
-            if
-                comms_source.cargo_mission.destination ~= nil
-                and comms_source.cargo_mission.destination:isValid()
-            then
-                optional_orders = string.format(
-                    _(
-                        "orders-comms",
-                        "%s\nDeliver cargo for %s to station %s in %s"
-                    ),
-                    optional_orders,
-                    comms_source.cargo_mission.character.name,
-                    comms_source.cargo_mission.destination_name,
-                    comms_source.cargo_mission.destination:getSectorName()
-                )
-            else
-                optional_orders = string.format(
-                    _(
-                        "orders-comms",
-                        "%s\nDeliver cargo for %s to station %s (defunct)"
-                    ),
-                    optional_orders,
-                    comms_source.cargo_mission.character.name,
-                    comms_source.cargo_mission.destination_name
-                )
-            end
-        else
-            if
-                comms_source.cargo_mission.origin ~= nil
-                and comms_source.cargo_mission.origin:isValid()
-            then
-                optional_orders = string.format(
-                    _(
-                        "orders-comms",
-                        "%s\nPick up cargo for %s at station %s in %s"
-                    ),
-                    optional_orders,
-                    comms_source.cargo_mission.character.name,
-                    comms_source.cargo_mission.origin_name,
-                    comms_source.cargo_mission.origin:getSectorName()
-                )
-            else
-                optional_orders = string.format(
-                    _(
-                        "orders-comms",
-                        "%s\nPick up cargo for %s at station %s (defunct)"
-                    ),
-                    optional_orders,
-                    comms_source.cargo_mission.character.name,
-                    comms_source.cargo_mission.origin_name
-                )
-            end
-        end
-    end
-    if comms_source.restoration_mission ~= nil then
-        if comms_source.restoration_mission.achievement then
-            if
-                comms_source.restoration_mission.destination ~= nil
-                and comms_source.restoration_mission.destination:isValid()
-            then
-                optional_orders = string.format(
-                    "%s\n%s",
-                    optional_orders,
-                    comms_source.restoration_mission.optional_orders_second_half
-                )
-            else
-                optional_orders = string.format(
-                    _("orders-comms", "%s\n%s (defunct)"),
-                    optional_orders,
-                    comms_source.restoration_mission.optional_orders_second_half
-                )
-            end
-        else
-            if
-                comms_source.restoration_mission.origin ~= nil
-                and comms_source.restoration_mission.origin:isValid()
-            then
-                optional_orders = string.format(
-                    "%s\n%s",
-                    optional_orders,
-                    comms_source.restoration_mission.optional_orders_first_half
-                )
-            else
-                optional_orders = string.format(
-                    _("orders-comms", "%s\n%s (defunct)"),
-                    optional_orders,
-                    comms_source.restoration_mission.optional_orders_first_half
-                )
-            end
-        end
-    end
-end
-function availableForComms(p)
-    if not p:isCommsInactive() then
-        return false
-    end
-    if p:isCommsOpening() then
-        return false
-    end
-    if p:isCommsBeingHailed() then
-        return false
-    end
-    if p:isCommsBeingHailedByGM() then
-        return false
-    end
-    if p:isCommsChatOpen() then
-        return false
-    end
-    if p:isCommsChatOpenToGM() then
-        return false
-    end
-    if p:isCommsChatOpenToPlayer() then
-        return
-    end
-    if p:isCommsScriptOpen() then
-        return false
-    end
-    return true
-end
 --    Spawning
-function getTemplatePool(max_strength)
-    local function getStrengthSort(tbl, sortFunction)
-        local keys = {}
-        for key in pairs(tbl) do
-            table.insert(keys, key)
-        end
-        table.sort(keys, function(a, b)
-            return sortFunction(tbl[a], tbl[b])
-        end)
-        return keys
-    end
-    local ship_template_by_strength = getStrengthSort(
-        ship_template,
-        function(a, b)
-            return a.strength > b.strength
-        end
-    )
-    local template_pool = {}
-    if pool_selectivity == "less/heavy" then
-        for _, current_ship_template in ipairs(ship_template_by_strength) do
-            if
-                ship_template[current_ship_template].strength <= max_strength
-            then
-                if fleetComposition == "Non-DB" then
-                    if
-                        ship_template[current_ship_template].create
-                        ~= stockTemplate
-                    then
-                        table.insert(template_pool, current_ship_template)
-                    end
-                elseif fleetComposition == "Random" then
-                    table.insert(template_pool, current_ship_template)
-                else
-                    if
-                        ship_template[current_ship_template].fleet_group[fleetComposition]
-                    then
-                        table.insert(template_pool, current_ship_template)
-                    end
-                end
-            end
-            if #template_pool >= template_pool_size then
-                break
-            end
-        end
-    elseif pool_selectivity == "more/light" then
-        for i = #ship_template_by_strength, 1, -1 do
-            local current_ship_template = ship_template_by_strength[i]
-            if
-                ship_template[current_ship_template].strength <= max_strength
-            then
-                if fleetComposition == "Non-DB" then
-                    if
-                        ship_template[current_ship_template].create
-                        ~= stockTemplate
-                    then
-                        table.insert(template_pool, current_ship_template)
-                    end
-                elseif fleetComposition == "Random" then
-                    table.insert(template_pool, current_ship_template)
-                else
-                    if
-                        ship_template[current_ship_template].fleet_group[fleetComposition]
-                    then
-                        table.insert(template_pool, current_ship_template)
-                    end
-                end
-            end
-            if #template_pool >= template_pool_size then
-                break
-            end
-        end
-    else --full
-        for current_ship_template, details in pairs(ship_template) do
-            if details.strength <= max_strength then
-                if fleetComposition == "Non-DB" then
-                    if
-                        ship_template[current_ship_template].create
-                        ~= stockTemplate
-                    then
-                        table.insert(template_pool, current_ship_template)
-                    end
-                elseif fleetComposition == "Random" then
-                    table.insert(template_pool, current_ship_template)
-                else
-                    if
-                        ship_template[current_ship_template][fleet_group[fleetComposition]]
-                    then
-                        table.insert(template_pool, current_ship_template)
-                    end
-                end
-            end
-        end
-    end
-    return template_pool
-end
-function spawnRandomArmed(x, y, enemy_strength, template_pool)
-    --x and y are central spawn coordinates
-    --fleetIndex is the number of the fleet to be spawned
-    --spawn_distance optional - used for ambush or pyramid
-    --spawn_angle optional - used for ambush or pyramid
-    --px and py are the player coordinates or the pyramid fly towards point coordinates
-    if enemy_strength == nil then
-        enemy_strength =
-            math.max(relative_strength * playerPower() * enemy_power, 5)
-    end
-    local sp = random(500, 1000) --random spacing of spawned group
-    local shape = "square"
-    if random(1, 100) < 50 then
-        shape = "hexagonal"
-    end
-    local enemy_position = 0
-    local enemyList = {}
-    --print("in spawn random armed function about to call get template pool function")
-    if template_pool == nil then
-        template_pool = getTemplatePool(enemy_strength)
-    end
-    if #template_pool < 1 then
-        addGMMessage("Empty Template pool: fix excludes or other criteria")
-        return enemyList
-    end
-    local fleet_prefix = generateCallSignPrefix()
-    if fleetSpawnFaction == nil then
-        fleetSpawnFaction = "Kraylor"
-    end
-    while enemy_strength > 0 do
-        local selected_template = template_pool[math.random(1, #template_pool)]
-        if ship_template[selected_template].create == nil then
-            print(
-                "Template",
-                selected_template,
-                "does not have a create routine in ship_template"
-            )
-        end
-        local ship = ship_template[selected_template].create(
-            fleetSpawnFaction,
-            selected_template
-        )
-        ship:setCallSign(generateCallSign(nil, fleetSpawnFaction))
-        ship:orderRoaming()
-        enemy_position = enemy_position + 1
-        ship:setPosition(
-            x + formation_delta[shape].x[enemy_position] * sp,
-            y + formation_delta[shape].y[enemy_position] * sp
-        )
-        table.insert(enemyList, ship)
-        enemy_strength = enemy_strength
-            - ship_template[selected_template].strength
-    end
-    return enemyList
-end
-function playerPower()
-    local playerShipScore = 0
-    for i, p in ipairs(getActivePlayerShips()) do
-        if p.shipScore ~= nil then
-            playerShipScore = playerShipScore + p.shipScore
-        else
-            playerShipScore = playerShipScore + 24
-        end
-    end
-    return playerShipScore
-end
 --    Maintenance
 function respawnProbe()
     if probe_respawn ~= nil then
@@ -8932,25 +7141,6 @@ function respawnProbe()
         end
     end
     maintenancePlot = warpJammerMaintenance
-end
-function warpJammerMaintenance()
-    if #warp_jammer_list > 0 then
-        for wj_index, wj in ipairs(warp_jammer_list) do
-            if wj ~= nil and wj:isValid() then
-                if wj.reset_time ~= nil then
-                    if getScenarioTime() > wj.reset_time then
-                        wj:setRange(wj.range)
-                        wj.reset_time = nil
-                    end
-                end
-            else
-                warp_jammer_list[wj_index] = warp_jammer_list[#warp_jammer_list]
-                warp_jammer_list[#warp_jammer_list] = nil
-                break
-            end
-        end
-    end
-    maintenancePlot = transportCommerceMaintenance
 end
 function transportCommerceMaintenance()
     if cleanList(transport_list) then
@@ -9693,20 +7883,6 @@ function nebulaDefenseLoss(self, instigator)
         table.insert(messages[messages_index].list, p)
     end
 end
-function cleanList(list)
-    local clean_list = true
-    if #list > 0 then
-        for i, obj in ipairs(list) do
-            if obj == nil or not obj:isValid() then
-                list[i] = list[#list]
-                list[#list] = nil
-                clean_list = false
-                break
-            end
-        end
-    end
-    return clean_list
-end
 function updateNebulaEncroachment()
     for i, neb in ipairs(seige_nebula) do
         local halt_neb = false
@@ -9803,30 +7979,9 @@ function finalStats()
         cleared_message = _("msgMainscreen", "One wave cleared.")
     end
     final_message = string.format("%s\n%s", final_message, cleared_message)
-    if deployed_player_count > 1 then
-        final_message = string.format(
-            _("msgMainscreen", "%s\nDeployed %s player ships."),
-            final_message,
-            deployed_player_count
-        )
-    else
-        final_message = string.format(
-            _("msgMainscreen", "%s\nDeployed one player ship."),
-            final_message
-        )
-    end
-    final_message = string.format(
-        _("msgMainscreen", "%s\nTime spent: %s."),
-        final_message,
-        formatTime(getScenarioTime())
-    )
-    final_message = string.format(
-        _("msgMainscreen", "%s\nEnemies:%s Murphy:%s Respawn:%s"),
-        final_message,
-        getScenarioSetting("Enemies"),
-        getScenarioSetting("Murphy"),
-        getScenarioSetting("Respawn")
-    )
+    final_message = Stats.appendDeployed(final_message, deployed_player_count)
+    final_message = Stats.appendDuration(final_message, "%s\nTime spent: %s.")
+    final_message = Stats.appendSettings(final_message, "%s\nEnemies:%s Murphy:%s Respawn:%s", "Enemies", "Murphy", "Respawn")
     for i, wt in ipairs(wave_task) do
         final_message = string.format(
             _("msgMainscreen", "%s\nWave:%i Task forces:%i"),
@@ -9941,32 +8096,6 @@ function updateWaveBanner(p)
     p:addCustomInfo("Relay", p.wave_banner_rel, wave_banner, 3)
     p.wave_banner_ops = "wave_banner_ops"
     p:addCustomInfo("Operations", p.wave_banner_ops, wave_banner, 3)
-end
-function updateNameBanner(p)
-    local name_banner = string.format(
-        _("tabHelms-id", "%s %s in %s"),
-        p:getFaction(),
-        p:getCallSign(),
-        p:getSectorName()
-    )
-    p.name_banner_hlm = "name_banner_hlm"
-    p:addCustomInfo("Helms", p.name_banner_hlm, name_banner, 1)
-    p.name_banner_tac = "name_banner_tac"
-    p:addCustomInfo("Tactical", p.name_banner_tac, name_banner, 1)
-end
-function updateTubeBanner(p)
-    if p.tube_size ~= nil then
-        local tube_size_banner =
-            string.format("%s tubes: %s", p:getCallSign(), p.tube_size)
-        if #p.tube_size == 1 then
-            local tube_size_banner =
-                string.format("%s tube: %s", p:getCallSign(), p.tube_size)
-        end
-        p.tube_size_banner_wea = "tube_size_banner_wea"
-        p:addCustomInfo("Weapons", p.tube_size_banner_wea, tube_size_banner, 2)
-        p.tube_size_banner_tac = "tube_size_banner_tac"
-        p:addCustomInfo("Tactical", p.tube_size_banner_tac, tube_size_banner, 2)
-    end
 end
 
 function update(delta)

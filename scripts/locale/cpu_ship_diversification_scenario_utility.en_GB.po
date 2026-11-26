@@ -97,7 +97,9 @@ msgctxt "scienceDB"
 msgid ""
 "The Atlantis Y42 improves on the Atlantis X23 with stronger shields, faster "
 "impulse and turn speeds, an extra beam in back and a larger missile stock"
-msgstr "The Atlantis Y42 improves on the Atlantis X23 with stronger shields, faster impulse and turn speeds, an extra beam in back and a larger missile stock"
+msgstr ""
+"The Atlantis Y42 improves on the Atlantis X23 with stronger shields, faster "
+"impulse and turn speeds, an extra beam in back and a larger missile stock"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:195
 #: scripts/cpu_ship_diversification_scenario_utility.lua:275
@@ -246,7 +248,12 @@ msgid ""
 "missiles at a prodigious rate.\n"
 "\n"
 "It barely qualifies as a frigate and is more like a small corvette."
-msgstr "The Barracuda is a variant of the Phobos T3 with massive upgrades to its shields, hull, missile weapons, and impulse system. It's designed to spray missiles at a prodigious rate.\n\nIt barely qualifies as a frigate and is more like a small corvette."
+msgstr ""
+"The Barracuda is a variant of the Phobos T3 with massive upgrades to its "
+"shields, hull, missile weapons, and impulse system. It's designed to spray "
+"missiles at a prodigious rate.\n"
+"\n"
+"It barely qualifies as a frigate and is more like a small corvette."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:257
 msgctxt "scienceDB"
@@ -265,7 +272,11 @@ msgid ""
 "shields, faster impulse, and better maneuverability. Some of these might "
 "have slipped out of the automated manufacturing facility to be refurbished "
 "for militia use."
-msgstr "A Karnack cruiser modifed for target practice with stronger hull and shields, faster impulse, and better maneuverability. Some of these might have slipped out of the automated manufacturing facility to be refurbished for militia use."
+msgstr ""
+"A Karnack cruiser modifed for target practice with stronger hull and "
+"shields, faster impulse, and better maneuverability. Some of these might "
+"have slipped out of the automated manufacturing facility to be refurbished "
+"for militia use."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:328
 #: scripts/cpu_ship_diversification_scenario_utility.lua:436
@@ -295,7 +306,9 @@ msgctxt "scienceDB"
 msgid ""
 "The Cucaracha is a tug modified for agility, with heavy shields and a heavy "
 "beam weapon. It's designed to be difficult to squash."
-msgstr "The Cucaracha is a tug modified for agility, with heavy shields and a heavy beam weapon. It's designed to be difficult to squash."
+msgstr ""
+"The Cucaracha is a tug modified for agility, with heavy shields and a heavy "
+"beam weapon. It's designed to be difficult to squash."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:358
 msgctxt "scienceDB"
@@ -326,7 +339,10 @@ msgid ""
 "A Dreadnought modified to have a stronger hull, weaker shields, and impulse "
 "and turn speeds that are about three times faster. A homing missile tube has "
 "also been added."
-msgstr "A Dreadnought modified to have a stronger hull, weaker shields, and impulse and turn speeds that are about three times faster. A homing missile tube has also been added."
+msgstr ""
+"A Dreadnought modified to have a stronger hull, weaker shields, and impulse "
+"and turn speeds that are about three times faster. A homing missile tube has "
+"also been added."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:437
 msgctxt "scienceDB"
@@ -346,7 +362,9 @@ msgctxt "scienceDB"
 msgid ""
 "The heavy drone has a stronger hull and beam weapon than the normal Ktlitan "
 "Drone, but it also moves slower"
-msgstr "The heavy drone has a stronger hull and beam weapon than the normal Ktlitan Drone, but it also moves slower"
+msgstr ""
+"The heavy drone has a stronger hull and beam weapon than the normal Ktlitan "
+"Drone, but it also moves slower"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:481
 msgctxt "scienceDB"
@@ -358,7 +376,9 @@ msgctxt "scienceDB"
 msgid ""
 "The Jacket Drone is a Ktlitan Drone with a shield. It's also slightly slower "
 "and has a slightly weaker beam due to the shield's energy requirements."
-msgstr "The Jacket Drone is a Ktlitan Drone with a shield. It's also slightly slower and has a slightly weaker beam due to the shield's energy requirements."
+msgstr ""
+"The Jacket Drone is a Ktlitan Drone with a shield. It's also slightly slower "
+"and has a slightly weaker beam due to the shield's energy requirements."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:520
 msgctxt "scienceDB"
@@ -371,7 +391,10 @@ msgid ""
 "The lite drone was pieced together from scavenged parts of various damaged "
 "Ktlitan drones. Compared to a Ktlitan drone, a lite drone has a weaker hull "
 "and beam weapon, but a faster turn rate and impulse speed."
-msgstr "The lite drone was pieced together from scavenged parts of various damaged Ktlitan drones. Compared to a Ktlitan drone, a lite drone has a weaker hull and beam weapon, but a faster turn rate and impulse speed."
+msgstr ""
+"The lite drone was pieced together from scavenged parts of various damaged "
+"Ktlitan drones. Compared to a Ktlitan drone, a lite drone has a weaker hull "
+"and beam weapon, but a faster turn rate and impulse speed."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:582
 msgctxt "scienceDB"
@@ -423,7 +446,12 @@ msgid ""
 "speed. Three fore-facing missile tubes were also added to fire large homing "
 "missiles. This variant removes the Blockade Runner's aft-facing beams to "
 "strengthen its fore beams."
-msgstr "The Enforcer is a highly modified Blockade Runner with a warp drive, stronger shields and hull, boosted impulse engines, and improved turning speed. Three fore-facing missile tubes were also added to fire large homing missiles. This variant removes the Blockade Runner's aft-facing beams to strengthen its fore beams."
+msgstr ""
+"The Enforcer is a highly modified Blockade Runner with a warp drive, "
+"stronger shields and hull, boosted impulse engines, and improved turning "
+"speed. Three fore-facing missile tubes were also added to fire large homing "
+"missiles. This variant removes the Blockade Runner's aft-facing beams to "
+"strengthen its fore beams."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:640
 msgctxt "scienceDB"
@@ -464,7 +492,10 @@ msgid ""
 "The Farco models are evolutionary changes to the Phobos T3. In the case of "
 "the Farco 3, the beams are longer and faster and the shields are slightly "
 "stronger."
-msgstr "The Farco models are evolutionary changes to the Phobos T3. In the case of the Farco 3, the beams are longer and faster and the shields are slightly stronger."
+msgstr ""
+"The Farco models are evolutionary changes to the Phobos T3. In the case of "
+"the Farco 3, the beams are longer and faster and the shields are slightly "
+"stronger."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:688
 msgctxt "scienceDB"
@@ -483,7 +514,9 @@ msgctxt "scienceDB"
 msgid ""
 "The Farco models are evolutionary changes to the Phobos T3. In the case of "
 "the Farco 5, the tubes load faster and the shields are slightly stronger."
-msgstr "The Farco models are evolutionary changes to the Phobos T3. In the case of the Farco 5, the tubes load faster and the shields are slightly stronger."
+msgstr ""
+"The Farco models are evolutionary changes to the Phobos T3. In the case of "
+"the Farco 5, the tubes load faster and the shields are slightly stronger."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:738
 msgctxt "scienceDB"
@@ -496,7 +529,10 @@ msgid ""
 "The Farco models are evolutionary changes to the Phobos T3. In the case of "
 "the Farco 8, the beams are longer and faster, the tubes load faster and the "
 "shields are stronger."
-msgstr "The Farco models are evolutionary changes to the Phobos T3. In the case of the Farco 8, the beams are longer and faster, the tubes load faster and the shields are stronger."
+msgstr ""
+"The Farco models are evolutionary changes to the Phobos T3. In the case of "
+"the Farco 8, the beams are longer and faster, the tubes load faster and the "
+"shields are stronger."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:788
 msgctxt "scienceDB"
@@ -509,7 +545,10 @@ msgid ""
 "The Farco models are evolutionary changes to the Phobos T3. In the case of "
 "the Farco 11, the maneuver speed is faster, the beams are longer and faster, "
 "there's an added longer sniping beam and the shields are stronger."
-msgstr "The Farco models are evolutionary changes to the Phobos T3. In the case of the Farco 11, the manoeuvre speed is faster, the beams are longer and faster, there's an added longer sniping beam and the shields are stronger."
+msgstr ""
+"The Farco models are evolutionary changes to the Phobos T3. In the case of "
+"the Farco 11, the manoeuvre speed is faster, the beams are longer and "
+"faster, there's an added longer sniping beam and the shields are stronger."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:845
 msgctxt "scienceDB"
@@ -523,7 +562,11 @@ msgid ""
 "the Farco 13, the maneuver speed is faster, the beams are longer and faster, "
 "there's an added longer sniping beam, the tubes load faster, there are more "
 "missiles and the shields are stronger."
-msgstr "The Farco models are evolutionary changes to the Phobos T3. In the case of the Farco 13, the manoeuvre speed is faster, the beams are longer and faster, there's an added longer sniping beam, the tubes load faster, there are more missiles and the shields are stronger."
+msgstr ""
+"The Farco models are evolutionary changes to the Phobos T3. In the case of "
+"the Farco 13, the manoeuvre speed is faster, the beams are longer and "
+"faster, there's an added longer sniping beam, the tubes load faster, there "
+"are more missiles and the shields are stronger."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:879
 msgctxt "scienceDB"
@@ -562,14 +605,20 @@ msgid ""
 "Ripostes are weak, nimble interceptors with a single beam weapon that become "
 "a greater threat when they engage in larger groups. They're often deployed "
 "in reconnaissance, patrol, and outpost-defense roles."
-msgstr "Ripostes are weak, nimble interceptors with a single beam weapon that become a greater threat when they engage in larger groups. They're often deployed in reconnaissance, patrol, and outpost-defence roles."
+msgstr ""
+"Ripostes are weak, nimble interceptors with a single beam weapon that become "
+"a greater threat when they engage in larger groups. They're often deployed "
+"in reconnaissance, patrol, and outpost-defence roles."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:929
 msgid ""
 "The Riposte II is a more powerful version with stronger beams, hull, and "
 "shields and an added homing missile tube. These additions reduce its speed, "
 "however."
-msgstr "The Riposte II is a more powerful version with stronger beams, hull, and shields and an added homing missile tube. These additions reduce its speed, however."
+msgstr ""
+"The Riposte II is a more powerful version with stronger beams, hull, and "
+"shields and an added homing missile tube. These additions reduce its speed, "
+"however."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:953
 msgctxt "scienceDB"
@@ -581,7 +630,9 @@ msgctxt "scienceDB"
 msgid ""
 "The Gnat is a nimbler version of the Ktlitan Drone. It has half the hull "
 "strength, but it moves and turns faster."
-msgstr "The Gnat is a nimbler version of the Ktlitan Drone. It has half the hull strength, but it moves and turns faster."
+msgstr ""
+"The Gnat is a nimbler version of the Ktlitan Drone. It has half the hull "
+"strength, but it moves and turns faster."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:980
 msgctxt "scienceDB"
@@ -598,7 +649,10 @@ msgid ""
 "The Advanced Gunship corvette adds a second homing missile tube to damage "
 "targets at range, and dual front-firing beams to finish its foes off. It's "
 "designed to quickly take out enemies weaker then itself."
-msgstr "The Advanced Gunship corvette adds a second homing missile tube to damage targets at range, and dual front-firing beams to finish its foes off. It's designed to quickly take out enemies weaker then itself."
+msgstr ""
+"The Advanced Gunship corvette adds a second homing missile tube to damage "
+"targets at range, and dual front-firing beams to finish its foes off. It's "
+"designed to quickly take out enemies weaker then itself."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1023
 msgid "Version II has stronger beams but a weaker hull."
@@ -623,7 +677,11 @@ msgid ""
 "Hornet models, its beam weapon has a longer but narrower range and does more "
 "damage, its maximum impulse speed and turn rate are faster, and its hull is "
 "weaker."
-msgstr "The FX64 Hornet is similar to the MT52 and MU52 models. Compared to other Hornet models, its beam weapon has a longer but narrower range and does more damage, its maximum impulse speed and turn rate are faster, and its hull is weaker."
+msgstr ""
+"The FX64 Hornet is similar to the MT52 and MU52 models. Compared to other "
+"Hornet models, its beam weapon has a longer but narrower range and does more "
+"damage, its maximum impulse speed and turn rate are faster, and its hull is "
+"weaker."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1101
 msgctxt "scienceDB"
@@ -635,7 +693,9 @@ msgctxt "scienceDB"
 msgid ""
 "The MT55 Hornet is similar to the other Hornet models. Its impulse speed is "
 "faster but is slower to turn."
-msgstr "The MT55 Hornet is similar to the other Hornet models. Its impulse speed is faster but is slower to turn."
+msgstr ""
+"The MT55 Hornet is similar to the other Hornet models. Its impulse speed is "
+"faster but is slower to turn."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1147
 msgctxt "scienceDB"
@@ -648,7 +708,10 @@ msgid ""
 "The MV52 Hornet is similar to the MT52 and MU52 models. Compared to other "
 "Hornet models, the beam does more damage, its maximum impulse speed is "
 "faster, it turns faster than the MT52, but it's slower than the MU52."
-msgstr "The MV52 Hornet is similar to the MT52 and MU52 models. Compared to other Hornet models, the beam does more damage, its maximum impulse speed is faster, it turns faster than the MT52, but it's slower than the MU52."
+msgstr ""
+"The MV52 Hornet is similar to the MT52 and MU52 models. Compared to other "
+"Hornet models, the beam does more damage, its maximum impulse speed is "
+"faster, it turns faster than the MT52, but it's slower than the MU52."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1209
 msgctxt "scienceDB"
@@ -703,7 +766,10 @@ msgid ""
 "The Hurricane is designed to jump in and shower the target with missiles. It "
 "is based on the Piranha F8, but with a jump drive, five more weapon tubes "
 "mounted in various directions and sizes, and lots more missiles to shoot."
-msgstr "The Hurricane is designed to jump in and shower the target with missiles. It is based on the Piranha F8, but with a jump drive, five more weapon tubes mounted in various directions and sizes, and lots more missiles to shoot."
+msgstr ""
+"The Hurricane is designed to jump in and shower the target with missiles. It "
+"is based on the Piranha F8, but with a jump drive, five more weapon tubes "
+"mounted in various directions and sizes, and lots more missiles to shoot."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1270
 msgctxt "scienceDB"
@@ -722,7 +788,9 @@ msgctxt "scienceDB"
 msgid ""
 "Conversions R Us purchased a number of Adder MK 5 ships at auction and added "
 "jump drives to them to produce the Jade 5"
-msgstr "Conversions R Us purchased a number of Adder MK 5 ships at auction and added jump drives to them to produce the Jade 5"
+msgstr ""
+"Conversions R Us purchased a number of Adder MK 5 ships at auction and added "
+"jump drives to them to produce the Jade 5"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1325
 msgctxt "scienceDB"
@@ -745,7 +813,10 @@ msgid ""
 "The K2 Breaker designers took the Ktlitan Breaker and beefed up the hull, "
 "added two bracketing tubes, enlarged the center tube and added more missiles "
 "to shoot. Should be good for a couple of enemy ships"
-msgstr "The K2 Breaker designers took the Ktlitan Breaker and beefed up the hull, added two bracketing tubes, enlarged the centre tube and added more missiles to shoot. Should be good for a couple of enemy ships"
+msgstr ""
+"The K2 Breaker designers took the Ktlitan Breaker and beefed up the hull, "
+"added two bracketing tubes, enlarged the centre tube and added more missiles "
+"to shoot. Should be good for a couple of enemy ships"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1360
 msgctxt "scienceDB"
@@ -764,7 +835,10 @@ msgid ""
 "Enterprising designers published this design specification based on salvaged "
 "Ktlitan Fighters. Comparatively, it's got beams that cycle faster, but the "
 "hull is a bit weaker."
-msgstr "Enterprising designers published this design specification based on salvaged Ktlitan Fighters. Comparatively, it's got beams that cycle faster, but the hull is a bit weaker."
+msgstr ""
+"Enterprising designers published this design specification based on salvaged "
+"Ktlitan Fighters. Comparatively, it's got beams that cycle faster, but the "
+"hull is a bit weaker."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1405
 msgctxt "scienceDB"
@@ -777,7 +851,10 @@ msgid ""
 "Enterprising designers published this design specification based on salvaged "
 "Ktlitan Fighters. Comparatively, it's got beams that are stronger and that "
 "cycle faster, but the hull is weaker."
-msgstr "Enterprising designers published this design specification based on salvaged Ktlitan Fighters. Comparatively, it's got beams that are stronger and that cycle faster, but the hull is weaker."
+msgstr ""
+"Enterprising designers published this design specification based on salvaged "
+"Ktlitan Fighters. Comparatively, it's got beams that are stronger and that "
+"cycle faster, but the hull is weaker."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1479
 msgctxt "scienceDB"
@@ -866,7 +943,11 @@ msgid ""
 "maniacal designer was tasked with packing as many missiles as possible in "
 "this tiny starfighter frame. This record has yet to be beaten. "
 "Unfortunately, this ship is often a danger to friends as well as foes."
-msgstr "The Maniapak is an extreme modification of an Adder MK5 and a Blade. A maniacal designer was tasked with packing as many missiles as possible in this tiny starfighter frame. This record has yet to be beaten. Unfortunately, this ship is often a danger to friends as well as foes."
+msgstr ""
+"The Maniapak is an extreme modification of an Adder MK5 and a Blade. A "
+"maniacal designer was tasked with packing as many missiles as possible in "
+"this tiny starfighter frame. This record has yet to be beaten. "
+"Unfortunately, this ship is often a danger to friends as well as foes."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1555
 msgctxt "scienceDB"
@@ -878,7 +959,9 @@ msgctxt "scienceDB"
 msgid ""
 "The Phobos R2 model is similar to the Phobos T3. It's got a faster turn "
 "speed, but only one missile tube"
-msgstr "The Phobos R2 model is similar to the Phobos T3. It's got a faster turn speed, but only one missile tube"
+msgstr ""
+"The Phobos R2 model is similar to the Phobos T3. It's got a faster turn "
+"speed, but only one missile tube"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1604
 msgctxt "scienceDB"
@@ -891,7 +974,10 @@ msgid ""
 "The Phobos T4 makes some simple improvements on the Phobos T3: faster "
 "maneuver, stronger front shields, though weaker rear shields and longer and "
 "faster beam weapons"
-msgstr "The Phobos T4 makes some simple improvements on the Phobos T3: faster manoeuvre, stronger front shields, though weaker rear shields and longer and faster beam weapons"
+msgstr ""
+"The Phobos T4 makes some simple improvements on the Phobos T3: faster "
+"manoeuvre, stronger front shields, though weaker rear shields and longer and "
+"faster beam weapons"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1680
 msgctxt "scienceDB"
@@ -925,7 +1011,11 @@ msgid ""
 "hull, faster impulse and turning speeds, a jump drive, beam weapons, eight "
 "missile tubes pointing in six directions and a large number of homing "
 "missiles to shoot."
-msgstr "The Predator is a significantly improved Piranha F8. Stronger shields and hull, faster impulse and turning speeds, a jump drive, beam weapons, eight missile tubes pointing in six directions and a large number of homing missiles to shoot."
+msgstr ""
+"The Predator is a significantly improved Piranha F8. Stronger shields and "
+"hull, faster impulse and turning speeds, a jump drive, beam weapons, eight "
+"missile tubes pointing in six directions and a large number of homing "
+"missiles to shoot."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1740
 msgctxt "scienceDB"
@@ -949,7 +1039,9 @@ msgctxt "scienceDB"
 msgid ""
 "The Shepherd is a Fighter with a long narrow beam. Tactical recommendation: "
 "hack the impulse engines"
-msgstr "The Shepherd is a Fighter with a long narrow beam. Tactical recommendation: hack the impulse engines"
+msgstr ""
+"The Shepherd is a Fighter with a long narrow beam. Tactical recommendation: "
+"hack the impulse engines"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1788
 msgctxt "scienceDB"
@@ -968,7 +1060,10 @@ msgid ""
 "The designers of the Starhammer III modified the Starhammer II to add a rear-"
 "facing beam, enlarge one of the missile tubes, and increase its missile "
 "stocks."
-msgstr "The designers of the Starhammer III modified the Starhammer II to add a rear-facing beam, enlarge one of the missile tubes, and increase its missile stocks."
+msgstr ""
+"The designers of the Starhammer III modified the Starhammer II to add a rear-"
+"facing beam, enlarge one of the missile tubes, and increase its missile "
+"stocks."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1843
 msgctxt "scienceDB"
@@ -982,7 +1077,11 @@ msgid ""
 "Starhammer II: stronger shields, faster impulse and turning speeds, "
 "additional rear beam and more missiles to shoot. These changes make the "
 "Starhammer V a force to be reckoned with."
-msgstr "The Starhammer V recognises common modifications made in the field to the Starhammer II: stronger shields, faster impulse and turning speeds, additional rear beam and more missiles to shoot. These changes make the Starhammer V a force to be reckoned with."
+msgstr ""
+"The Starhammer V recognises common modifications made in the field to the "
+"Starhammer II: stronger shields, faster impulse and turning speeds, "
+"additional rear beam and more missiles to shoot. These changes make the "
+"Starhammer V a force to be reckoned with."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1906
 msgctxt "scienceDB"
@@ -1040,7 +1139,9 @@ msgctxt "scienceDB"
 msgid ""
 "Loosely based on the Piranha F12, the Tempest adds four more broadside tubes "
 "(two on each side), more HVLIs, more homing missiles and 8 nukes."
-msgstr "Loosely based on the Piranha F12, the Tempest adds four more broadside tubes (two on each side), more HVLIs, more homing missiles and 8 nukes."
+msgstr ""
+"Loosely based on the Piranha F12, the Tempest adds four more broadside tubes "
+"(two on each side), more HVLIs, more homing missiles and 8 nukes."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:1968
 msgctxt "scienceDB"
@@ -1052,7 +1153,9 @@ msgctxt "scienceDB"
 msgid ""
 "Touchy is a Riposte-model fighter with a highly modified beam weapon made "
 "narrower, longer, slower, and stronger."
-msgstr "Touchy is a Riposte-model fighter with a highly modified beam weapon made narrower, longer, slower, and stronger."
+msgstr ""
+"Touchy is a Riposte-model fighter with a highly modified beam weapon made "
+"narrower, longer, slower, and stronger."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:2027
 msgctxt "scienceDB"
@@ -1072,7 +1175,12 @@ msgid ""
 "on the Battlestation by fitting the Tyr with more than twice the impulse "
 "speed and more than six times the turn speed. They threw in stronger shields "
 "and hull and wider beam coverage just to show that they could."
-msgstr "The Tyr is the shipyard's answer to Admiral Konstatz's casual statement that the Battlestation model was too slow to be effective. The shipyards improved on the Battlestation by fitting the Tyr with more than twice the impulse speed and more than six times the turn speed. They threw in stronger shields and hull and wider beam coverage just to show that they could."
+msgstr ""
+"The Tyr is the shipyard's answer to Admiral Konstatz's casual statement that "
+"the Battlestation model was too slow to be effective. The shipyards improved "
+"on the Battlestation by fitting the Tyr with more than twice the impulse "
+"speed and more than six times the turn speed. They threw in stronger shields "
+"and hull and wider beam coverage just to show that they could."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:2071
 msgctxt "scienceDB"
@@ -1084,7 +1192,9 @@ msgctxt "scienceDB"
 msgid ""
 "Conversions R Us purchased a number of Adder MK 5 ships at auction and added "
 "warp drives to them to produce the Waddle 5."
-msgstr "Conversions R Us purchased a number of Adder MK 5 ships at auction and added warp drives to them to produce the Waddle 5."
+msgstr ""
+"Conversions R Us purchased a number of Adder MK 5 ships at auction and added "
+"warp drives to them to produce the Waddle 5."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:2104
 msgctxt "scienceDB"
@@ -1103,7 +1213,11 @@ msgid ""
 "extremely slow to turn, but its beam weapons deal significant damage. The "
 "weapons platform II is a modification of the original design with a stronger "
 "hull, but moves slower and has weaker beams."
-msgstr "The weapons platform is a stationary platform with beam weapons. It's extremely slow to turn, but its beam weapons deal significant damage. The weapons platform II is a modification of the original design with a stronger hull, but moves slower and has weaker beams."
+msgstr ""
+"The weapons platform is a stationary platform with beam weapons. It's "
+"extremely slow to turn, but its beam weapons deal significant damage. The "
+"weapons platform II is a modification of the original design with a stronger "
+"hull, but moves slower and has weaker beams."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:2185
 msgctxt "scienceDB"
@@ -1155,7 +1269,9 @@ msgctxt "scienceDB"
 msgid ""
 "The Whirlwind is a heavy artillery cruiser that adds tubes and missiles to "
 "the Storm hull. Expect to see lots of missiles."
-msgstr "The Whirlwind is a heavy artillery cruiser that adds tubes and missiles to the Storm hull. Expect to see lots of missiles."
+msgstr ""
+"The Whirlwind is a heavy artillery cruiser that adds tubes and missiles to "
+"the Storm hull. Expect to see lots of missiles."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:2248
 msgctxt "scienceDB"
@@ -1184,7 +1300,11 @@ msgid ""
 "homing missiles, and nukes. They had to remove some of the armor to fit the "
 "additional missiles, so the hull is weaker. Also, the WZ turns a little more "
 "slowly than the WX."
-msgstr "The WZ-Lindworm is essentially the stock WX-Lindworm with additional HVLIs, homing missiles, and nukes. They had to remove some of the armour to fit the additional missiles, so the hull is weaker. Also, the WZ turns a little more slowly than the WX."
+msgstr ""
+"The WZ-Lindworm is essentially the stock WX-Lindworm with additional HVLIs, "
+"homing missiles, and nukes. They had to remove some of the armour to fit the "
+"additional missiles, so the hull is weaker. Also, the WZ turns a little more "
+"slowly than the WX."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:2290
 #: scripts/cpu_ship_diversification_scenario_utility.lua:2466
@@ -1236,13 +1356,13 @@ msgid "Freighter"
 msgstr "Freighter"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:2395
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2643
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2657
 msgctxt "scienceDB"
 msgid "Sub-class"
 msgstr "Sub-class"
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:2396
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2644
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2658
 msgctxt "scienceDB"
 msgid "Size"
 msgstr "Size"
@@ -1253,7 +1373,10 @@ msgid ""
 "Small, medium, and large scale transport ships. These are the working ships "
 "that keep commerce going in any sector. They might carry personnel, goods, "
 "cargo, equipment, garbage, fuel, research material, etc."
-msgstr "Small, medium, and large scale transport ships. These are the working ships that keep commerce going in any sector. They might carry personnel, goods, cargo, equipment, garbage, fuel, research material, etc."
+msgstr ""
+"Small, medium, and large scale transport ships. These are the working ships "
+"that keep commerce going in any sector. They might carry personnel, goods, "
+"cargo, equipment, garbage, fuel, research material, etc."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:2479
 msgctxt "scienceDB"
@@ -1266,7 +1389,10 @@ msgid ""
 "The Space Sedan was built around a surplus Personnel Jump Freighter 3. It's "
 "modified to provide relatively low-cost transportation primarily for people, "
 "but also has a limited amount of cargo space."
-msgstr "The Space Sedan was built around a surplus Personnel Jump Freighter 3. It's modified to provide relatively low-cost transportation primarily for people, but also has a limited amount of cargo space."
+msgstr ""
+"The Space Sedan was built around a surplus Personnel Jump Freighter 3. It's "
+"modified to provide relatively low-cost transportation primarily for people, "
+"but also has a limited amount of cargo space."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:2500
 msgctxt "scienceDB"
@@ -1279,7 +1405,10 @@ msgid ""
 "The Omnibus is a Personnel Jump Freighter 5 modified to transport large "
 "numbers of passengers of various types along with their luggage and any "
 "associated cargo."
-msgstr "The Omnibus is a Personnel Jump Freighter 5 modified to transport large numbers of passengers of various types along with their luggage and any associated cargo."
+msgstr ""
+"The Omnibus is a Personnel Jump Freighter 5 modified to transport large "
+"numbers of passengers of various types along with their luggage and any "
+"associated cargo."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:2521
 msgctxt "scienceDB"
@@ -1292,7 +1421,10 @@ msgid ""
 "The Service Jonque is an Equipment Jump Freighter 4 modified to carry spare "
 "parts and equipment as well as the necessary repair personnel. It operates "
 "wherever it's needed in order to repair stations and ships."
-msgstr "The Service Jonque is an Equipment Jump Freighter 4 modified to carry spare parts and equipment as well as the necessary repair personnel. It operates wherever it's needed in order to repair stations and ships."
+msgstr ""
+"The Service Jonque is an Equipment Jump Freighter 4 modified to carry spare "
+"parts and equipment as well as the necessary repair personnel. It operates "
+"wherever it's needed in order to repair stations and ships."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:2546
 msgctxt "scienceDB"
@@ -1304,7 +1436,9 @@ msgctxt "scienceDB"
 msgid ""
 "The Courier is a souped-up Personnel Freighter 1 designed to deliver people "
 "and messages very quickly."
-msgstr "The Courier is a souped-up Personnel Freighter 1 designed to deliver people and messages very quickly."
+msgstr ""
+"The Courier is a souped-up Personnel Freighter 1 designed to deliver people "
+"and messages very quickly."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:2567
 msgctxt "scienceDB"
@@ -1316,7 +1450,9 @@ msgctxt "scienceDB"
 msgid ""
 "The Work Wagon is a conversion of an Equipment Freighter 2 designed to carry "
 "equipment and parts where they are needed for repair or construction."
-msgstr "The Work Wagon is a conversion of an Equipment Freighter 2 designed to carry equipment and parts where they are needed for repair or construction."
+msgstr ""
+"The Work Wagon is a conversion of an Equipment Freighter 2 designed to carry "
+"equipment and parts where they are needed for repair or construction."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:2588
 msgctxt "scienceDB"
@@ -1329,7 +1465,10 @@ msgid ""
 "As a side contract, Conversion R Us put together the Laden Lorry from some "
 "recently acquired Goods Freighter 3 hulls. The added warp drive makes for a "
 "more versatile goods carrying vessel."
-msgstr "As a side contract, Conversion R Us put together the Laden Lorry from some recently acquired Goods Freighter 3 hulls. The added warp drive makes for a more versatile goods carrying vessel."
+msgstr ""
+"As a side contract, Conversion R Us put together the Laden Lorry from some "
+"recently acquired Goods Freighter 3 hulls. The added warp drive makes for a "
+"more versatile goods carrying vessel."
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:2609
 msgctxt "scienceDB"
@@ -1342,75 +1481,109 @@ msgid ""
 "Conversion R Us cleaned up and converted excess freighter hulls into Physics "
 "Research vessels. The reduced weight improved the impulse speed and "
 "maneuverability."
-msgstr "Conversion R Us cleaned up and converted excess freighter hulls into Physics Research vessels. The reduced weight improved the impulse speed and maneuverability."
+msgstr ""
+"Conversion R Us cleaned up and converted excess freighter hulls into Physics "
+"Research vessels. The reduced weight improved the impulse speed and "
+"maneuverability."
 
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2642
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2630
+msgctxt "scienceDB"
+msgid "Weapons"
+msgstr ""
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2638
+msgctxt "scienceDB"
+msgid ""
+"This database only covers the basic versions of the missiles used throughout "
+"the galaxy.\n"
+"\n"
+"It has been reported that some battleships started using larger variations "
+"of those missiles. Small fighters and even frigates should not have too much "
+"trouble dodging them, but space captains of bigger ships should be wary of "
+"their doubled damage potential.\n"
+"\n"
+"Smaller variations of these missiles have become common in the galaxy, too. "
+"Fighter pilots praise their speed and maneuverability, because it gives them "
+"an edge against small and fast-moving targets. They only deal half the "
+"damage of their basic counterparts, but what good is a missile if it does "
+"not hit its target?\n"
+"\n"
+"Some ships in your fleet have been equipped with these different sized "
+"weapons tubes. In some cases, the weapons officer might see a banner on the "
+"weapons console describing these tubes using the following shorthand:\n"
+"    S = Small\n"
+"    M = Medium (the normal sized missile tube)\n"
+"    L = Large\n"
+"These letters describe the tube sizes in order from top to bottom."
+msgstr ""
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2656
 msgctxt "scienceDB"
 msgid "Class"
 msgstr "Class"
 
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2664
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2678
 msgctxt "scienceDB"
 msgid "Shield"
 msgstr "Shield"
 
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2667
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2681
 msgctxt "scienceDB"
 msgid "Hull"
 msgstr "Hull"
 
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2668
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2682
 msgctxt "scienceDB"
 msgid "Move speed"
 msgstr "Move speed"
 
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2669
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2683
 msgctxt "scienceDB"
 msgid "Reverse move speed"
 msgstr "Reverse move speed"
 
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2670
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2684
 msgctxt "scienceDB"
 msgid "Turn speed"
 msgstr "Turn speed"
 
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2678
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2682
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2712
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2692
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2696
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2726
 #, lua-format
 msgctxt "scienceDB"
 msgid "%.1f u/min"
 msgstr "%.1f u/min"
 
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2687
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2701
 #, lua-format
 msgctxt "scienceDB"
 msgid "%.1f deg/sec"
 msgstr "%.1f deg/sec"
 
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2692
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2706
 msgctxt "scienceDB"
 msgid "Jump range"
 msgstr "Jump range"
 
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2708
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2722
 msgctxt "scienceDB"
 msgid "Warp Speed"
 msgstr "Warp Speed"
 
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2737
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2751
 #, lua-format
 msgctxt "scienceDB"
 msgid "Beam weapon %s:%s"
 msgstr "Beam weapon %s:%s"
 
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2747
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2761
 #, lua-format
 msgctxt "scienceDB"
 msgid "%.1f Dmg / %.1f sec"
 msgstr "%.1f Dmg / %.1f sec"
 
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2780
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2794
 #, lua-format
 msgctxt "scienceDB"
 msgid "Storage %s"

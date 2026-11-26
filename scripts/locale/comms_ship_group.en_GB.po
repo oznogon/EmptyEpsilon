@@ -1,0 +1,96 @@
+#: scripts/comms_ship_group.lua:92
+msgid "Back"
+msgstr ""
+
+#: scripts/comms_ship_group.lua:151
+msgctxt "shipAssist-comms"
+msgid "No waypoints set. Please set a waypoint first."
+msgstr ""
+
+#: scripts/comms_ship_group.lua:244
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Stopping. Doing nothing except %s."
+msgstr ""
+
+#: scripts/comms_ship_group.lua:257
+msgctxt "shipAssist-comms"
+msgid "Report hull and shield status"
+msgstr ""
+
+#: scripts/comms_ship_group.lua:261
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Fleet %s status:"
+msgstr ""
+
+#: scripts/comms_ship_group.lua:266 scripts/comms_ship_group.lua:333
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"%s\n"
+" %s:"
+msgstr ""
+
+#: scripts/comms_ship_group.lua:271
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"%s\n"
+"    Hull: %d%%"
+msgstr ""
+
+#: scripts/comms_ship_group.lua:278
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"%s\n"
+"    Shield: %d%%"
+msgstr ""
+
+#: scripts/comms_ship_group.lua:286 scripts/comms_ship_group.lua:301
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"%s\n"
+"    Shields: "
+msgstr ""
+
+#: scripts/comms_ship_group.lua:290
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%sFront: %d%% Rear: %d%%"
+msgstr ""
+
+#: scripts/comms_ship_group.lua:306
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%s %d:%d%%"
+msgstr ""
+
+#: scripts/comms_ship_group.lua:325
+msgctxt "shipAssist-comms"
+msgid "Report missile status"
+msgstr ""
+
+#: scripts/comms_ship_group.lua:328
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Fleet %s missile status:"
+msgstr ""
+
+#: scripts/comms_ship_group.lua:347
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"%s\n"
+"      %s: %d/%d"
+msgstr ""
+
+#: scripts/comms_ship_group.lua:357
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"%s\n"
+"    Missiles: %s"
+msgstr ""

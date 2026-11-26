@@ -1,0 +1,408 @@
+#: scripts/comms_ship_support.lua:49 scripts/comms_ship_support.lua:537
+#: scripts/comms_ship_support.lua:614
+msgctxt "shipEnemy-comms"
+msgid "We will see to your destruction!"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:51 scripts/comms_ship_support.lua:539
+#: scripts/comms_ship_support.lua:616
+msgctxt "shipEnemy-comms"
+msgid "Your bloodline will end here!"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:53 scripts/comms_ship_support.lua:541
+#: scripts/comms_ship_support.lua:618
+msgctxt "shipEnemy-comms"
+msgid "Your feeble threats are meaningless."
+msgstr ""
+
+#: scripts/comms_ship_support.lua:60 scripts/comms_ship_support.lua:544
+#: scripts/comms_ship_support.lua:621
+msgctxt "shipEnemy-comms"
+msgid ""
+"Ktzzzsss.\n"
+"You will DIEEee weaklingsss!"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:64
+msgctxt "shipEnemy-comms"
+msgid "We will destroy you"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:67
+msgctxt "shipEnemy-comms"
+msgid "We think not. It is you who will experience destruction!"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:70
+msgctxt "shipEnemy-comms"
+msgid "You have no honor"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:73
+msgctxt "shipEnemy-comms"
+msgid "Your insult has brought our wrath upon you. Prepare to die."
+msgstr ""
+
+#: scripts/comms_ship_support.lua:77
+msgctxt "shipEnemy-comms"
+msgid "Your comments about honor have no meaning to us"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:81
+msgctxt "shipEnemy-comms"
+msgid "We pity your pathetic race"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:84
+msgctxt "shipEnemy-comms"
+msgid "Pathetic? You will regret your disparagement!"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:87
+msgctxt "shipEnemy-comms"
+msgid "We don't care what you think of us"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:95 scripts/comms_ship_support.lua:550
+#: scripts/comms_ship_support.lua:627
+msgctxt "shipEnemy-comms"
+msgid ""
+"We wish you no harm, but will harm you if we must.\n"
+"End of transmission."
+msgstr ""
+
+#: scripts/comms_ship_support.lua:104 scripts/comms_ship_support.lua:557
+#: scripts/comms_ship_support.lua:634
+msgctxt "shipEnemy-comms"
+msgid "Stay out of our way, or your death will amuse us extremely!"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:113 scripts/comms_ship_support.lua:564
+#: scripts/comms_ship_support.lua:641
+msgctxt "shipEnemy-comms"
+msgid ""
+"One zero one.\n"
+"No binary communication detected.\n"
+"Switching to universal speech.\n"
+"Generating appropriate response for target from human language archives.\n"
+":Do not cross us:\n"
+"Communication halted."
+msgstr ""
+
+#: scripts/comms_ship_support.lua:116 scripts/comms_ship_support.lua:567
+#: scripts/comms_ship_support.lua:644
+msgctxt "shipEnemy-comms"
+msgid "EXECUTE: SELFDESTRUCT"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:119 scripts/comms_ship_support.lua:570
+#: scripts/comms_ship_support.lua:647
+msgctxt "shipEnemy-comms"
+msgid "Rogue command received. Targeting source."
+msgstr ""
+
+#: scripts/comms_ship_support.lua:122 scripts/comms_ship_support.lua:573
+#: scripts/comms_ship_support.lua:650
+msgctxt "shipEnemy-comms"
+msgid "External command ignored."
+msgstr ""
+
+#: scripts/comms_ship_support.lua:127 scripts/comms_ship_support.lua:578
+#: scripts/comms_ship_support.lua:655
+msgctxt "shipEnemy-comms"
+msgid ""
+"The hive suffers no threats. Opposition to any of us is opposition to us "
+"all.\n"
+"Stand down or prepare to donate your corpses toward our nutrition."
+msgstr ""
+
+#: scripts/comms_ship_support.lua:132 scripts/comms_ship_support.lua:583
+#: scripts/comms_ship_support.lua:660
+msgctxt "shipEnemy-comms"
+msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:136 scripts/comms_ship_support.lua:587
+#: scripts/comms_ship_support.lua:664
+msgctxt "shipEnemy-comms"
+msgid "We do not need permission to pluck apart such an insignificant threat."
+msgstr ""
+
+#: scripts/comms_ship_support.lua:140 scripts/comms_ship_support.lua:591
+#: scripts/comms_ship_support.lua:668
+msgctxt "shipEnemy-comms"
+msgid "The hive has greater priorities than exterminating pests."
+msgstr ""
+
+#: scripts/comms_ship_support.lua:145
+msgctxt "shipEnemy-comms"
+msgid "State your business"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:150
+msgctxt "shipEnemy-comms"
+msgid "What do you want? (not that we care)"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:155
+msgctxt "shipEnemy-comms"
+msgid "Don't waste our time"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:157 scripts/comms_ship_support.lua:594
+#: scripts/comms_ship_support.lua:671
+msgctxt "shipEnemy-comms"
+msgid "Mind your own business!"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:214
+msgctxt "shipEnemy-comms"
+msgid "Subspace and time continuum disruption authorized"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:243
+msgctxt "shipEnemy-comms"
+msgid "Stop your actions"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:283
+msgctxt "shipEnemy-comms"
+msgid "Just this once, we'll take your advice"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:287
+msgctxt "shipEnemy-comms"
+msgid "No"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:711
+msgid "Back"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:806
+msgctxt "trade-comms"
+msgid "Do you have cargo you might sell?"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:809
+msgctxt "trade-comms"
+msgid "We've got "
+msgstr ""
+
+#: scripts/comms_ship_support.lua:815
+msgctxt "trade-comms"
+msgid ", "
+msgstr ""
+
+#: scripts/comms_ship_support.lua:822
+msgctxt "trade-comms"
+msgid "nothing"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:838
+msgctxt "trade-comms"
+msgid "Jettison cargo"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:843
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Available space: %i\n"
+"What would you like to jettison?"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:862
+#, lua-format
+msgctxt "trade-comms"
+msgid "One %s jettisoned"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:885
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade luxury for %s"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:900
+msgctxt "trade-comms"
+msgid "Insufficient inventory on freighter for trade"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:932
+#, lua-format
+msgctxt "trade-comms"
+msgid "Traded luxury for %s"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:958
+#, lua-format
+msgctxt "trade-comms"
+msgid "Buy one %s for %i reputation"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:968
+msgctxt "trade-comms"
+msgid "Insufficient cargo space for purchase"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:982
+msgctxt "trade-comms"
+msgid "Insufficient inventory on freighter"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:986
+msgctxt "needRep-comms"
+msgid "Insufficient reputation for purchase"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:1009
+#, lua-format
+msgctxt "trade-comms"
+msgid "Purchased %s from %s"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:1146
+msgctxt "shipAssist-comms"
+msgid "Report status"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:1148
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Hull: %d%%\n"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:1155
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Shield: %d%%\n"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:1165
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Front Shield: %d%%\n"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:1174
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Rear Shield: %d%%\n"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:1185
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Shield %s: %d%%\n"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:1199
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%s Missiles: %d/%d\n"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:1212 scripts/comms_ship_support.lua:1331
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"%s\n"
+"Docked with %s"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:1222
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"%s\n"
+"Heading for %s station %s in %s"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:1234
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%sJump drive charge: %s"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:1256
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Dock at %s"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:1262
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Docking at %s."
+msgstr ""
+
+#: scripts/comms_ship_support.lua:1277 scripts/comms_ship_support.lua:1391
+msgctxt "shipAssist-comms"
+msgid "What do you want?"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:1279
+msgctxt "shipAssist-comms"
+msgid "Sir, how can we assist?"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:1323
+msgctxt "shipAssist-comms"
+msgid "Where are you going?"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:1326
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Hi %s,"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:1341
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid ""
+"%s\n"
+"Heading for %s station %s in sector %s"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:1358
+msgctxt "trade-comms"
+msgid "Where are you headed?"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:1369
+#, lua-format
+msgctxt "trade-comms"
+msgid "Where are you headed? (cost: %.1f reputation)"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:1376
+msgctxt "needRep-comms"
+msgid "Insufficient reputation"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:1389 scripts/comms_ship_support.lua:1419
+msgctxt "trade-comms"
+msgid "Yes?"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:1393
+msgctxt "trade-comms"
+msgid "Why are you bothering me?"
+msgstr ""
+
+#: scripts/comms_ship_support.lua:1406
+msgctxt "ship-comms"
+msgid ""
+"Sorry, we have no time to chat with you.\n"
+"We are on an important mission."
+msgstr ""
+
+#: scripts/comms_ship_support.lua:1411
+msgctxt "ship-comms"
+msgid ""
+"We have nothing for you.\n"
+"Good day."
+msgstr ""

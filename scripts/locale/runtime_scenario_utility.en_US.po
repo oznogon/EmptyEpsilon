@@ -1,0 +1,4 @@
+#: scripts/runtime_scenario_utility.lua:23
+msgctxt "stationReport-msgGM"
+msgid "script error - \n"
+msgstr ""

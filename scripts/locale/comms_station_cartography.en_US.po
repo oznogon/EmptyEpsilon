@@ -1,0 +1,374 @@
+#: scripts/comms_station_cartography.lua:10
+msgid "Back"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:30
+msgctxt "cartographyOffice-comms"
+msgid "Visit cartography office"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:37
+msgctxt "cartographyOffice-comms"
+msgid ""
+"The clerk behind the desk looks up briefly at you then goes back to filing "
+"her nails."
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:42
+msgctxt "cartographyOffice-comms"
+msgid ""
+"The clerk behind the desk examines you then returns to grooming her "
+"tentacles."
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:47
+msgctxt "cartographyOffice-comms"
+msgid ""
+"The clerk behind the desk glances at you then returns to preening her "
+"feathers."
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:55
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid ""
+"%s\n"
+"\n"
+"You can examine the brochure on the coffee table, talk to the apprentice "
+"cartographer or talk to the master cartographer.\n"
+"\n"
+"Reputation: %i"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:64
+msgctxt "cartographyOffice-comms"
+msgid "What's the difference between the apprentice and the master?"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:70
+msgctxt "cartographyOffice-comms"
+msgid ""
+"The clerk responds in a bored voice, 'The apprentice knows the local area "
+"and is learning the broader area. The master knows the local and the broader "
+"area but can't be bothered with the local area'"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:78
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid "Examine brochure (%i rep)"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:89
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid ""
+"The brochure has a list of nearby stations and has a list of goods nearby.\n"
+"\n"
+"Reputation: %i"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:98
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid "Examine station list (%i rep)"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:124
+#: scripts/comms_station_cartography.lua:405
+#: scripts/comms_station_cartography.lua:550
+#: scripts/comms_station_cartography.lua:671
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid "%s %s %s"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:135
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid ""
+"%s\n"
+"%s %s %s"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:151
+#: scripts/comms_station_cartography.lua:229
+#: scripts/comms_station_cartography.lua:321
+#: scripts/comms_station_cartography.lua:331
+#: scripts/comms_station_cartography.lua:790
+msgctxt "needRep-comms"
+msgid "Insufficient reputation"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:162
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid "Examine goods list (%i rep)"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:198
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid ""
+"Good, quantity, cost, station:\n"
+"%s, %i, %i, %s"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:210
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid ""
+"%s\n"
+"%s, %i, %i, %s"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:277
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid "Examine upgrades list (%i rep)"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:296
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid "%s: %s: %s"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:307
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid ""
+"%s\n"
+"%s: %s: %s"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:341
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid "Talk to apprentice cartographer (%i rep)"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:370
+msgctxt "cartographyOffice-comms"
+msgid ""
+"Hi, would you like for me to locate a station, some goods or some upgrades "
+"for you?"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:377
+msgctxt "cartographyOffice-comms"
+msgid "Hi, would you like for me to locate a station or some goods for you?"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:382
+msgctxt "cartographyOffice-comms"
+msgid "Locate station"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:387
+msgctxt "cartographyOffice-comms"
+msgid "These are stations I have learned"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:419
+#: scripts/comms_station_cartography.lua:560
+#: scripts/comms_station_cartography.lua:685
+#: scripts/comms_station_cartography.lua:898
+#: scripts/comms_station_cartography.lua:1029
+#: scripts/comms_station_cartography.lua:1125
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid ""
+"%s\n"
+"Good, quantity, cost"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:432
+#: scripts/comms_station_cartography.lua:570
+#: scripts/comms_station_cartography.lua:701
+#: scripts/comms_station_cartography.lua:908
+#: scripts/comms_station_cartography.lua:1037
+#: scripts/comms_station_cartography.lua:1135
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid ""
+"%s\n"
+"   %s, %i, %i"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:449
+#: scripts/comms_station_cartography.lua:583
+#: scripts/comms_station_cartography.lua:718
+#: scripts/comms_station_cartography.lua:921
+#: scripts/comms_station_cartography.lua:1050
+#: scripts/comms_station_cartography.lua:1148
+#, lua-format
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"%s\n"
+"General Information:\n"
+"   %s"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:463
+#: scripts/comms_station_cartography.lua:593
+#: scripts/comms_station_cartography.lua:732
+#: scripts/comms_station_cartography.lua:931
+#: scripts/comms_station_cartography.lua:1058
+#: scripts/comms_station_cartography.lua:1158
+#, lua-format
+msgctxt "stationStory-comms"
+msgid ""
+"%s\n"
+"History:\n"
+"   %s"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:477
+#: scripts/comms_station_cartography.lua:603
+#: scripts/comms_station_cartography.lua:746
+#: scripts/comms_station_cartography.lua:939
+#: scripts/comms_station_cartography.lua:1065
+#: scripts/comms_station_cartography.lua:1166
+#, lua-format
+msgctxt "gossip-comms"
+msgid ""
+"%s\n"
+"Gossip:\n"
+"   %s"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:491
+#: scripts/comms_station_cartography.lua:616
+#: scripts/comms_station_cartography.lua:760
+#: scripts/comms_station_cartography.lua:950
+#: scripts/comms_station_cartography.lua:1072
+#: scripts/comms_station_cartography.lua:1175
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid ""
+"%s\n"
+"%s:\n"
+"   %s"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:511
+msgctxt "cartographyOffice-comms"
+msgid "I have learned of no stations yet"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:519
+msgctxt "cartographyOffice-comms"
+msgid "Locate goods"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:524
+msgctxt "cartographyOffice-comms"
+msgid "These are the goods I know about"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:638
+msgctxt "cartographyOffice-comms"
+msgid "Locate upgrade station"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:644
+msgctxt "cartographyOffice-comms"
+msgid "These are stations I have learned that have upgrades"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:781
+msgctxt "cartographyOffice-comms"
+msgid "I have learned of no upgrade stations yet"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:800
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid "Talk to master cartographer (%i rep)"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:809
+msgctxt "cartographyOffice-comms"
+msgid ""
+"The clerk clears her throat:\n"
+"\n"
+"My indicators show you have zero available waypoints. To get the most from "
+"the master cartographer, you should delete one or more so that he can update "
+"your systems appropriately.\n"
+"\n"
+"I just want you to get the maximum benefit for the time you spend with him"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:815
+msgctxt "cartographyOffice-comms"
+msgid "Continue to Master Cartographer"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:858
+msgctxt "cartographyOffice-comms"
+msgid ""
+"Greetings,\n"
+"May I help you find a station, goods or an upgrade?"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:865
+msgctxt "cartographyOffice-comms"
+msgid ""
+"Greetings,\n"
+"May I help you find a station or goods?"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:869
+msgctxt "cartographyOffice-comms"
+msgid "Find station"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:870
+#: scripts/comms_station_cartography.lua:1102
+msgctxt "cartographyOffice-comms"
+msgid "What station?"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:887
+#: scripts/comms_station_cartography.lua:1019
+#: scripts/comms_station_cartography.lua:1114
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid "%s %s %s Distance:%.1fU"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:962
+#: scripts/comms_station_cartography.lua:1083
+#: scripts/comms_station_cartography.lua:1187
+#, lua-format
+msgctxt "cartographyOffice-comms"
+msgid ""
+"%s\n"
+"Added waypoint %i to your navigation system for %s"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:981
+msgctxt "cartographyOffice-comms"
+msgid "Try the apprentice, I'm tired"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:987
+msgctxt "cartographyOffice-comms"
+msgid "Find Goods"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:989
+msgctxt "cartographyOffice-comms"
+msgid "What goods are you looking for?"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:1099
+msgctxt "cartographyOffice-comms"
+msgid "Find Upgrade Station"
+msgstr ""
+
+#: scripts/comms_station_cartography.lua:1203
+msgctxt "needRep-comms"
+msgid "Insufficient Reputation"
+msgstr ""

@@ -1,0 +1,242 @@
+#: scripts/comms_mission_menu.lua:23
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"   %i Minutes remain in game"
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:37
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"Optional:"
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:38
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"Optional orders:"
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:39
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"These orders are optional:"
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:40
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"Not required:"
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:50
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Transport %s to %s station %s in %s"
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:59
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Transport %s to station %s (defunct)"
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:75
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Deliver cargo for %s to station %s in %s"
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:86
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Deliver cargo for %s to station %s (defunct)"
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:101
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Pick up cargo for %s at station %s in %s"
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:112
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Pick up cargo for %s at station %s (defunct)"
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:134 scripts/comms_mission_menu.lua:151
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"%s (defunct)"
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:202
+msgctxt "station-comms"
+msgid "Connect to warp jammer"
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:204
+msgctxt "station-comms"
+msgid "Which one would you like to connect to?"
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:251
+#, lua-format
+msgctxt "station-comms"
+msgid "(%i reputation)"
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:263
+#, lua-format
+msgctxt "station-comms"
+msgid "%s Automated warp jammer access menu"
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:271
+msgctxt "station-comms"
+msgid "Reduce range to 1 unit for 1 minute"
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:279 scripts/comms_mission_menu.lua:296
+#: scripts/comms_mission_menu.lua:313
+msgctxt "station-comms"
+msgid "Acknowledged. Range adjusted. Reset timer engaged."
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:282 scripts/comms_mission_menu.lua:299
+#: scripts/comms_mission_menu.lua:316 scripts/comms_mission_menu.lua:436
+#: scripts/comms_mission_menu.lua:439 scripts/comms_mission_menu.lua:443
+msgid "Back"
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:288
+msgctxt "station-comms"
+msgid "Reduce range by 50% for 2 minutes"
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:305
+msgctxt "station-comms"
+msgid "Reduce range by 25% for 3 minutes"
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:321
+msgctxt "needRep-comms"
+msgid "Insufficient reputation"
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:331
+msgctxt "station-comms"
+msgid ""
+"Why do I have to pay reputation to log in to some of these warp jammers?"
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:338
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"It's complicated. It depends on the relationships between the warp jammer "
+"owner, us, station %s and you, %s. The farther apart the relationship, the "
+"more reputation it costs to gain access. Do you want more details?"
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:347
+msgctxt "station-comms"
+msgid "Yes, please provide more details"
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:352
+msgctxt "station-comms"
+msgid "These are the cases and their reputation costs:"
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:357
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"    WJ friendly to %s and WJ is friendly to %s = no reputation."
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:366
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"    WJ friendly to %s and WJ is neutral to %s = 5 reputation."
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:375
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"    WJ friendly to %s and WJ is enemy to %s = 10 reputation."
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:384
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"    WJ neutral to %s and WJ is friendly to %s = 10 reputation."
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:393
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"    WJ enemy to %s and WJ is friendly to %s = 15 reputation."
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:402
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"    WJ neutral to %s and WJ is neutral to %s = 20 reputation."
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:411
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"    WJ enemy to %s and WJ is neutral to %s = 20 reputation."
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:420
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"    WJ neutral to %s and WJ is enemy to %s = 25 reputation."
+msgstr ""
+
+#: scripts/comms_mission_menu.lua:429
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"    WJ enemy to %s and WJ is enemy to %s = 100 reputation."
+msgstr ""

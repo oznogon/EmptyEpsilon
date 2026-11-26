@@ -469,876 +469,634 @@ msgctxt "Respawn"
 msgid "Player ships will automatically respawn forever"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:98
-#: scripts/scenario_44_defenders_or_pirates.lua:109
-msgctxt "stationServices-comms"
-msgid "reactor"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:99
-msgctxt "stationServices-comms"
-msgid "beam weapons"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:100
-msgctxt "stationServices-comms"
-msgid "missile system"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:101
-#: scripts/scenario_44_defenders_or_pirates.lua:112
-msgctxt "stationServices-comms"
-msgid "maneuver"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:102
-msgctxt "stationServices-comms"
-msgid "impulse engines"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:103
-msgctxt "stationServices-comms"
-msgid "warp drive"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:104
-msgctxt "stationServices-comms"
-msgid "jump drive"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:105
-#: scripts/scenario_44_defenders_or_pirates.lua:116
-msgctxt "stationServices-comms"
-msgid "front shield"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:106
-#: scripts/scenario_44_defenders_or_pirates.lua:117
-msgctxt "stationServices-comms"
-msgid "rear shield"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:110
-msgctxt "stationServices-comms"
-msgid "beams"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:111
-msgctxt "stationServices-comms"
-msgid "missiles"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:113
-msgctxt "stationServices-comms"
-msgid "impulse"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:114
-msgctxt "stationServices-comms"
-msgid "warp"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:115
-msgctxt "stationServices-comms"
-msgid "jump"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:187
-msgctxt "trade-comms"
-msgid "food"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:188
-msgctxt "trade-comms"
-msgid "medicine"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:189
-msgctxt "trade-comms"
-msgid "luxury"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:190
-msgctxt "trade-comms"
-msgid "cobalt"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:191
-msgctxt "trade-comms"
-msgid "dilithium"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:192
-msgctxt "trade-comms"
-msgid "gold"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:193
-msgctxt "trade-comms"
-msgid "nickel"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:194
-msgctxt "trade-comms"
-msgid "platinum"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:195
-msgctxt "trade-comms"
-msgid "tritanium"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:196
-msgctxt "trade-comms"
-msgid "autodoc"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:197
-msgctxt "trade-comms"
-msgid "android"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:198
-msgctxt "trade-comms"
-msgid "battery"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:199
-msgctxt "trade-comms"
-msgid "beam"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:200
-msgctxt "trade-comms"
-msgid "circuit"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:201
-msgctxt "trade-comms"
-msgid "communication"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:202
-msgctxt "trade-comms"
-msgid "filament"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:203
-msgctxt "trade-comms"
-msgid "impulse"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:204
-msgctxt "trade-comms"
-msgid "lifter"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:205
-msgctxt "trade-comms"
-msgid "nanites"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:206
-msgctxt "trade-comms"
-msgid "optic"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:207
-msgctxt "trade-comms"
-msgid "repulsor"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:208
-msgctxt "trade-comms"
-msgid "robotic"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:209
-msgctxt "trade-comms"
-msgid "sensor"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:210
-msgctxt "trade-comms"
-msgid "shield"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:211
-msgctxt "trade-comms"
-msgid "software"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:212
-msgctxt "trade-comms"
-msgid "tractor"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:213
-msgctxt "trade-comms"
-msgid "transporter"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:214
-msgctxt "trade-comms"
-msgid "warp"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:2546
+#: scripts/scenario_44_defenders_or_pirates.lua:2498
 msgctxt "msgMainscreen"
 msgid "Noble Defenders"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5163
+#: scripts/scenario_44_defenders_or_pirates.lua:5115
 msgctxt "buttonGM"
 msgid "Random"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5164
+#: scripts/scenario_44_defenders_or_pirates.lua:5116
 msgctxt "buttonGM"
 msgid "Fighters"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5165
+#: scripts/scenario_44_defenders_or_pirates.lua:5117
 msgctxt "buttonGM"
 msgid "Chasers"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5166
+#: scripts/scenario_44_defenders_or_pirates.lua:5118
 msgctxt "buttonGM"
 msgid "Frigates"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5167
+#: scripts/scenario_44_defenders_or_pirates.lua:5119
 msgctxt "buttonGM"
 msgid "Beamers"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5168
+#: scripts/scenario_44_defenders_or_pirates.lua:5120
 msgctxt "buttonGM"
 msgid "Missilers"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5169
+#: scripts/scenario_44_defenders_or_pirates.lua:5121
 msgctxt "buttonGM"
 msgid "Adders"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5170
+#: scripts/scenario_44_defenders_or_pirates.lua:5122
 msgctxt "buttonGM"
 msgid "Non-DB"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5171
+#: scripts/scenario_44_defenders_or_pirates.lua:5123
 msgctxt "buttonGM"
 msgid "Drones"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5177
+#: scripts/scenario_44_defenders_or_pirates.lua:5129
 msgctxt "scienceDescription-buoy"
 msgid "Come to Billy Bob's for the best food in the sector"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5181
+#: scripts/scenario_44_defenders_or_pirates.lua:5133
 msgctxt "scienceDescription-buoy"
 msgid "It's never too late to buy life insurance"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5183
+#: scripts/scenario_44_defenders_or_pirates.lua:5135
 msgctxt "scienceDescription-buoy"
 msgid "You'll feel better in an Adder Mark 9"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5186
+#: scripts/scenario_44_defenders_or_pirates.lua:5138
 msgctxt "scienceDescription-buoy"
 msgid ""
 "Melinda's Mynock Management service: excellent rates, satisfaction guaranteed"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5190
+#: scripts/scenario_44_defenders_or_pirates.lua:5142
 msgctxt "scienceDescription-buoy"
 msgid "Visit Repulse shipyards for the best deals"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5192
+#: scripts/scenario_44_defenders_or_pirates.lua:5144
 msgctxt "scienceDescription-buoy"
 msgid "Fresh fish! We catch, you buy!"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5193
+#: scripts/scenario_44_defenders_or_pirates.lua:5145
 msgctxt "scienceDescription-buoy"
 msgid "Get your fuel cells at Mariana's Market"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5196
+#: scripts/scenario_44_defenders_or_pirates.lua:5148
 msgctxt "scienceDescription-buoy"
 msgid "Find a special companion. All species available"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5200
+#: scripts/scenario_44_defenders_or_pirates.lua:5152
 msgctxt "scienceDescription-buoy"
 msgid "Feeling down? Robotherapist is there for you"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5202
+#: scripts/scenario_44_defenders_or_pirates.lua:5154
 msgctxt "scienceDescription-buoy"
 msgid "30 days, 30 kilograms, guaranteed"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5203
+#: scripts/scenario_44_defenders_or_pirates.lua:5155
 msgctxt "scienceDescription-buoy"
 msgid "Be sure to drink your Ovaltine"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5206
+#: scripts/scenario_44_defenders_or_pirates.lua:5158
 msgctxt "scienceDescription-buoy"
 msgid "Need a personal upgrade? Contact Celine's Cybernetic Implants"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5210
+#: scripts/scenario_44_defenders_or_pirates.lua:5162
 msgctxt "scienceDescription-buoy"
 msgid "Try our asteroid dust diet weight loss program"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5214
+#: scripts/scenario_44_defenders_or_pirates.lua:5166
 msgctxt "scienceDescription-buoy"
 msgid "Best tasting water in the quadrant at Willy's Waterway"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5218
+#: scripts/scenario_44_defenders_or_pirates.lua:5170
 msgctxt "scienceDescription-buoy"
 msgid "Amazing shows every night at Lenny's Lounge"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5222
+#: scripts/scenario_44_defenders_or_pirates.lua:5174
 msgctxt "scienceDescription-buoy"
 msgid "Get all your vaccinations at Fred's Pharmacy. Pick up some snacks, too"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5226
+#: scripts/scenario_44_defenders_or_pirates.lua:5178
 msgctxt "scienceDescription-buoy"
 msgid "Tip: make lemons an integral part of your diet"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5230
+#: scripts/scenario_44_defenders_or_pirates.lua:5182
 msgctxt "scienceDescription-buoy"
 msgid "Visit the Proboscis shop for all your specialty probe needs"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5258
+#: scripts/scenario_44_defenders_or_pirates.lua:5210
 msgctxt "scienceDescription-star"
 msgid "Yellow, spectral type G8 III"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5262
+#: scripts/scenario_44_defenders_or_pirates.lua:5214
 msgctxt "scienceDescription-star"
 msgid ""
 "Yellow, spectral type G8 III, giant, surface temperature 4,833 K, 11 solar "
 "radii"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5269
+#: scripts/scenario_44_defenders_or_pirates.lua:5221
 msgctxt "scienceDescription-star"
 msgid "Classification G5 II"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5273
+#: scripts/scenario_44_defenders_or_pirates.lua:5225
 msgctxt "scienceDescription-star"
 msgid "Classification G5 II, bright giant, possible binary"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5280
+#: scripts/scenario_44_defenders_or_pirates.lua:5232
 msgctxt "scienceDescription-star"
 msgid "Classification K0 V or G9 V"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5284
+#: scripts/scenario_44_defenders_or_pirates.lua:5236
 msgctxt "scienceDescription-star"
 msgid "Classification K0 V or G9 V, main sequence dwarf, 84% of Sol mass"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5291
+#: scripts/scenario_44_defenders_or_pirates.lua:5243
 msgctxt "scienceDescription-star"
 msgid "Classification A7 Ib"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5295
+#: scripts/scenario_44_defenders_or_pirates.lua:5247
 msgctxt "scienceDescription-star"
 msgid "Classification A7 Ib, supergiant, temperature 7,500 K, 7xSol mass"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5302
+#: scripts/scenario_44_defenders_or_pirates.lua:5254
 msgctxt "scienceDescription-star"
 msgid "Classification A1 Vn"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5306
+#: scripts/scenario_44_defenders_or_pirates.lua:5258
 msgctxt "scienceDescription-star"
 msgid "Classification A1 Vn, type A main sequence, binary, nebulous"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5313
+#: scripts/scenario_44_defenders_or_pirates.lua:5265
 msgctxt "scienceDescription-star"
 msgid "Classification K5V"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5317
+#: scripts/scenario_44_defenders_or_pirates.lua:5269
 msgctxt "scienceDescription-star"
 msgid "Classification K5V, orange, temperature 4,649 K"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5324
+#: scripts/scenario_44_defenders_or_pirates.lua:5276
 msgctxt "scienceDescription-star"
 msgid "Classification G2 IV"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5328
+#: scripts/scenario_44_defenders_or_pirates.lua:5280
 msgctxt "scienceDescription-star"
 msgid "Classification G2 IV, 113% of Sol mass, 185% Sol radius"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5335
+#: scripts/scenario_44_defenders_or_pirates.lua:5287
 msgctxt "scienceDescription-star"
 msgid "Classification A3 IV-V"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5339
+#: scripts/scenario_44_defenders_or_pirates.lua:5291
 msgctxt "scienceDescription-star"
 msgid "Classification A3 IV-V, binary, 2.6xSol mass"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5346
+#: scripts/scenario_44_defenders_or_pirates.lua:5298
 msgctxt "scienceDescription-star"
 msgid "Classification B2 III or B2 V"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5350
+#: scripts/scenario_44_defenders_or_pirates.lua:5302
 msgctxt "scienceDescription-star"
 msgid "Classification B2 III or B2 V, 8.6xSol mass, temperature 22,000 K"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5357
+#: scripts/scenario_44_defenders_or_pirates.lua:5309
 msgctxt "scienceDescription-star"
 msgid "Classification G8 IIIb Fe-0.5"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5361
+#: scripts/scenario_44_defenders_or_pirates.lua:5313
 msgctxt "scienceDescription-star"
 msgid "Classification G8 IIIb Fe-0.5, yellow, red clump giant"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5368
+#: scripts/scenario_44_defenders_or_pirates.lua:5320
 msgctxt "scienceDescription-star"
 msgid "Classification F5 IV-V"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5372
+#: scripts/scenario_44_defenders_or_pirates.lua:5324
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification F5 IV-V, binary, F-type subgiant and F-type main sequence"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5379
+#: scripts/scenario_44_defenders_or_pirates.lua:5331
 msgctxt "scienceDescription-star"
 msgid "Classification B7 III"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5383
+#: scripts/scenario_44_defenders_or_pirates.lua:5335
 msgctxt "scienceDescription-star"
 msgid "Classification B7 III, B-class giant, double star, 5xSol mass"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5390
+#: scripts/scenario_44_defenders_or_pirates.lua:5342
 msgctxt "scienceDescription-star"
 msgid "Classification K0"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5394
+#: scripts/scenario_44_defenders_or_pirates.lua:5346
 msgctxt "scienceDescription-star"
 msgid "Classification K0, orange-red, temperature ~4,000 K"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5401
+#: scripts/scenario_44_defenders_or_pirates.lua:5353
 msgctxt "scienceDescription-star"
 msgid "Pulsar or Neutron star"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5405
+#: scripts/scenario_44_defenders_or_pirates.lua:5357
 msgctxt "scienceDescription-star"
 msgid "Pulsar or Neutron star, gamma ray source"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5412
+#: scripts/scenario_44_defenders_or_pirates.lua:5364
 msgctxt "scienceDescription-star"
 msgid "Classification G2V"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5416
+#: scripts/scenario_44_defenders_or_pirates.lua:5368
 msgctxt "scienceDescription-star"
 msgid "Classification G2V, yellow, temperature 5,571 K"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5423
+#: scripts/scenario_44_defenders_or_pirates.lua:5375
 msgctxt "scienceDescription-star"
 msgid "Classification G1V(w)"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5427
+#: scripts/scenario_44_defenders_or_pirates.lua:5379
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification G1V(w), 1.24xSol mass, 7th magnitude G-type main sequence"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5434
+#: scripts/scenario_44_defenders_or_pirates.lua:5386
 msgctxt "scienceDescription-star"
 msgid "Classification F3 III"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5438
+#: scripts/scenario_44_defenders_or_pirates.lua:5390
 msgctxt "scienceDescription-star"
 msgid "Classification F3 III, F-type giant, temperature 6,309 K"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5445
+#: scripts/scenario_44_defenders_or_pirates.lua:5397
 msgctxt "scienceDescription-star"
 msgid "Classification K1 IIIb"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5449
+#: scripts/scenario_44_defenders_or_pirates.lua:5401
 msgctxt "scienceDescription-star"
 msgid "Classification K1 IIIb, giant, temperature 4,768 K"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5456
+#: scripts/scenario_44_defenders_or_pirates.lua:5408
 msgctxt "scienceDescription-star"
 msgid "Classification G0V"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5460
+#: scripts/scenario_44_defenders_or_pirates.lua:5412
 msgctxt "scienceDescription-star"
 msgid "Classification G0V, G-type giant, temperature 5,741 K"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5467
+#: scripts/scenario_44_defenders_or_pirates.lua:5419
 msgctxt "scienceDescription-star"
 msgid "Classification K2IV-V or K3V"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5471
+#: scripts/scenario_44_defenders_or_pirates.lua:5423
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification K2IV-V or K3V, orange, K-type main sequence, temperature "
 "5,030 K"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5478
+#: scripts/scenario_44_defenders_or_pirates.lua:5430
 msgctxt "scienceDescription-star"
 msgid "Classification G5"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5482
+#: scripts/scenario_44_defenders_or_pirates.lua:5434
 msgctxt "scienceDescription-star"
 msgid "Classification G5, yellow, luminosity 7.7"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5489
+#: scripts/scenario_44_defenders_or_pirates.lua:5441
 msgctxt "scienceDescription-star"
 msgid "Classification M4.5"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5493
+#: scripts/scenario_44_defenders_or_pirates.lua:5445
 msgctxt "scienceDescription-star"
 msgid "Classification M4.5, Red Dwarf, luminosity .0035, temperature 3,111 K"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5500
+#: scripts/scenario_44_defenders_or_pirates.lua:5452
 msgctxt "scienceDescription-star"
 msgid "Classification F7V"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5504
+#: scripts/scenario_44_defenders_or_pirates.lua:5456
 msgctxt "scienceDescription-star"
 msgid "Classification F7V, yellow-white, luminosity 1.9, temperature 6,440 K"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5511
+#: scripts/scenario_44_defenders_or_pirates.lua:5463
 msgctxt "scienceDescription-star"
 msgid "Classification F8V"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5515
+#: scripts/scenario_44_defenders_or_pirates.lua:5467
 msgctxt "scienceDescription-star"
 msgid "Classification F8V, luminosity 2.9, temperature 6,122 K"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5522
+#: scripts/scenario_44_defenders_or_pirates.lua:5474
 msgctxt "scienceDescription-star"
 msgid "Classification B"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5526
+#: scripts/scenario_44_defenders_or_pirates.lua:5478
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification B-type subgiant, blue-white, luminosity 600, temperature "
 "13,696 K"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5533
-#: scripts/scenario_44_defenders_or_pirates.lua:5566
+#: scripts/scenario_44_defenders_or_pirates.lua:5485
+#: scripts/scenario_44_defenders_or_pirates.lua:5518
 msgctxt "scienceDescription-star"
 msgid "Classification G"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5537
+#: scripts/scenario_44_defenders_or_pirates.lua:5489
 msgctxt "scienceDescription-star"
 msgid "Classification G, magnitude 12.26, temperature 5,580 K"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5544
-#: scripts/scenario_44_defenders_or_pirates.lua:5555
+#: scripts/scenario_44_defenders_or_pirates.lua:5496
+#: scripts/scenario_44_defenders_or_pirates.lua:5507
 msgctxt "scienceDescription-star"
 msgid "Classification K"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5548
+#: scripts/scenario_44_defenders_or_pirates.lua:5500
 msgctxt "scienceDescription-star"
 msgid "Classification K2.5 III, K-type giant, temperature 4,244 K"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5559
+#: scripts/scenario_44_defenders_or_pirates.lua:5511
 msgctxt "scienceDescription-star"
 msgid "Classification K5V, K-type main sequence, temperature 4,782 K"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5570
+#: scripts/scenario_44_defenders_or_pirates.lua:5522
 msgctxt "scienceDescription-star"
 msgid "Classification G8 III, evolved G-type giant, temperature 4,790 K"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5577
-#: scripts/scenario_44_defenders_or_pirates.lua:5588
+#: scripts/scenario_44_defenders_or_pirates.lua:5529
+#: scripts/scenario_44_defenders_or_pirates.lua:5540
 msgctxt "scienceDescription-star"
 msgid "Classification A"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5581
+#: scripts/scenario_44_defenders_or_pirates.lua:5533
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification A1 Vn, white-hued, A-type main sequence, temperature 9,911 K"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5592
+#: scripts/scenario_44_defenders_or_pirates.lua:5544
 msgctxt "scienceDescription-star"
 msgid ""
 "Classification A4 V, white-hued, A-type main sequence, temperature 8,296 K"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5609
-#: scripts/scenario_44_defenders_or_pirates.lua:5621
-#: scripts/scenario_44_defenders_or_pirates.lua:5633
+#: scripts/scenario_44_defenders_or_pirates.lua:5561
+#: scripts/scenario_44_defenders_or_pirates.lua:5573
+#: scripts/scenario_44_defenders_or_pirates.lua:5585
 msgctxt "scienceDescription-planet"
 msgid "Class J"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5612
+#: scripts/scenario_44_defenders_or_pirates.lua:5564
 msgctxt "scienceDescription-planet"
 msgid ""
 "Class J, Jovian, source of hydrogen, helium, and a large variety of exotic "
 "gases"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5624
+#: scripts/scenario_44_defenders_or_pirates.lua:5576
 msgctxt "scienceDescription-planet"
 msgid ""
 "Class J, Neptunian, source of hydrogen, helium, ammonia, methane, and water"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5636
+#: scripts/scenario_44_defenders_or_pirates.lua:5588
 msgctxt "scienceDescription-planet"
 msgid "Class J, Neptunian, composed of hydrogen, helium, methane, water"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5761
+#: scripts/scenario_44_defenders_or_pirates.lua:5713
 msgctxt "orders-comms"
 msgid "Reach your reputation goal."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:5765
-msgctxt "buttonGM"
-msgid "+Spawn Ship(s)"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:6059
+#: scripts/scenario_44_defenders_or_pirates.lua:5947
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s has been destroyed."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:6080
+#: scripts/scenario_44_defenders_or_pirates.lua:5968
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "The %s has respawned %s to replace %s."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:8048
-#: scripts/scenario_44_defenders_or_pirates.lua:8049
-#: scripts/scenario_44_defenders_or_pirates.lua:8804
-#: scripts/scenario_44_defenders_or_pirates.lua:8805
-#: scripts/scenario_44_defenders_or_pirates.lua:8816
-#: scripts/scenario_44_defenders_or_pirates.lua:8817
-#: scripts/scenario_44_defenders_or_pirates.lua:8830
-#: scripts/scenario_44_defenders_or_pirates.lua:8831
+#: scripts/scenario_44_defenders_or_pirates.lua:7409
+#: scripts/scenario_44_defenders_or_pirates.lua:7410
+#: scripts/scenario_44_defenders_or_pirates.lua:8165
+#: scripts/scenario_44_defenders_or_pirates.lua:8166
+#: scripts/scenario_44_defenders_or_pirates.lua:8177
+#: scripts/scenario_44_defenders_or_pirates.lua:8178
+#: scripts/scenario_44_defenders_or_pirates.lua:8191
+#: scripts/scenario_44_defenders_or_pirates.lua:8192
 msgctxt "scienceDescription-nebula"
 msgid "Nebula"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:8464
-#: scripts/scenario_44_defenders_or_pirates.lua:8488
-#: scripts/scenario_44_defenders_or_pirates.lua:8505
-#: scripts/scenario_44_defenders_or_pirates.lua:8520
-#: scripts/scenario_44_defenders_or_pirates.lua:8532
-#: scripts/scenario_44_defenders_or_pirates.lua:8547
-#: scripts/scenario_44_defenders_or_pirates.lua:8562
+#: scripts/scenario_44_defenders_or_pirates.lua:7825
+#: scripts/scenario_44_defenders_or_pirates.lua:7849
+#: scripts/scenario_44_defenders_or_pirates.lua:7866
+#: scripts/scenario_44_defenders_or_pirates.lua:7881
+#: scripts/scenario_44_defenders_or_pirates.lua:7893
+#: scripts/scenario_44_defenders_or_pirates.lua:7908
+#: scripts/scenario_44_defenders_or_pirates.lua:7923
 msgctxt "scienceDescription-supplyDrop"
 msgid "Supply Drop"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:8468
+#: scripts/scenario_44_defenders_or_pirates.lua:7829
 #, lua-format
 msgctxt "scienceDescription-supplyDrop"
 msgid "%i energy boost supply drop."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:8492
+#: scripts/scenario_44_defenders_or_pirates.lua:7853
 #, lua-format
 msgctxt "scienceDescription-supplyDrop"
 msgid "%i %s supply drop."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:8510
+#: scripts/scenario_44_defenders_or_pirates.lua:7871
 #, lua-format
 msgctxt "scienceDescription-supplyDrop"
 msgid "%.1f%% coolant supply drop."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:8524
+#: scripts/scenario_44_defenders_or_pirates.lua:7885
 msgctxt "scienceDescription-supplyDrop"
 msgid "Robotic repair crew supply drop."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:8537
+#: scripts/scenario_44_defenders_or_pirates.lua:7898
 #, lua-format
 msgctxt "scienceDescription-supplyDrop"
 msgid "%i probes supply drop."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:8552
+#: scripts/scenario_44_defenders_or_pirates.lua:7913
 #, lua-format
 msgctxt "scienceDescription-supplyDrop"
 msgid "%.1f hull repair points supply drop."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:8567
+#: scripts/scenario_44_defenders_or_pirates.lua:7928
 #, lua-format
 msgctxt "scienceDescription-supplyDrop"
 msgid "%.1fK jump drive charge supply drop."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:8624
+#: scripts/scenario_44_defenders_or_pirates.lua:7985
 msgctxt "scienceDescription-warpJammer"
 msgid "Warp jammer"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:8628
+#: scripts/scenario_44_defenders_or_pirates.lua:7989
 #, lua-format
 msgctxt "scienceDescription-warpJammer"
 msgid "Warp jammer. Operated by %s. Placed by station %s. Identifier: %s"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:8674
+#: scripts/scenario_44_defenders_or_pirates.lua:8035
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "Sensor Record: %s station %s in %s"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:8684
+#: scripts/scenario_44_defenders_or_pirates.lua:8045
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "%s, %s station %s in %s"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:8735
+#: scripts/scenario_44_defenders_or_pirates.lua:8096
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "Sensor Record: %s %s %s in %s carrying %s"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:8747
+#: scripts/scenario_44_defenders_or_pirates.lua:8108
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "%s; %s %s %s in %s carrying %s"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:8763
+#: scripts/scenario_44_defenders_or_pirates.lua:8124
 msgctxt "scienceDescription-buoy"
 msgid "No data recorded"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:8768
-#: scripts/scenario_44_defenders_or_pirates.lua:8792
+#: scripts/scenario_44_defenders_or_pirates.lua:8129
+#: scripts/scenario_44_defenders_or_pirates.lua:8153
 msgctxt "scienceDescription-buoy"
 msgid "Automated data gathering device"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:8902
-msgctxt "msgScience"
-msgid "The unscanned artifact we just picked up has fried our scanners"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:8911
-msgctxt "msgOperations"
-msgid "The unscanned artifact we just picked up has fried our scanners"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:8925
-#, lua-format
-msgctxt "scienceDescription-artifact"
-msgid ""
-"Source of emanations interfering with long range sensors. Range:%.1fu Impact:"
-"%.1fu"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:8939
-msgctxt "scienceDescription-artifact"
-msgid "Source of unusual emanations"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:8953
+#: scripts/scenario_44_defenders_or_pirates.lua:8221
 msgctxt "orders-comms"
 msgid "Current orders?"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:8954
+#: scripts/scenario_44_defenders_or_pirates.lua:8222
 msgctxt "orders-comms"
 msgid "What are my current orders?"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:8956
+#: scripts/scenario_44_defenders_or_pirates.lua:8224
 #, lua-format
 msgctxt "orders-comms"
 msgid "Current orders for %s?"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:8959
+#: scripts/scenario_44_defenders_or_pirates.lua:8227
 msgctxt "orders-comms"
 msgid "Remind me of our current orders, please"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:8967
+#: scripts/scenario_44_defenders_or_pirates.lua:8235
 msgctxt "orders-comms"
 msgid "Visit lounge"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:8971
+#: scripts/scenario_44_defenders_or_pirates.lua:8239
 msgctxt "orders-comms"
 msgid ""
 "When you enter the lounge, you see a guy sitting at the bar with an eye "
@@ -1346,12 +1104,12 @@ msgid ""
 "bird on his shoulder."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:8977
+#: scripts/scenario_44_defenders_or_pirates.lua:8245
 msgctxt "orders-comms"
 msgid "Ask about the eye patch, hat, peg leg and bird"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:8984
+#: scripts/scenario_44_defenders_or_pirates.lua:8252
 #, lua-format
 msgctxt "pirate-comms"
 msgid ""
@@ -1367,36 +1125,36 @@ msgid ""
 "them."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:8991
+#: scripts/scenario_44_defenders_or_pirates.lua:8259
 msgctxt "pirate-comms"
 msgid "Talk to pirate couple"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:8996
+#: scripts/scenario_44_defenders_or_pirates.lua:8264
 msgctxt "pirate-comms"
 msgid ""
 "Hi there, take a seat with us. Marcus signaled us that you've got some kind "
 "of interest in pirates. Is that right?"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9002
+#: scripts/scenario_44_defenders_or_pirates.lua:8270
 msgctxt "pirate-comms"
 msgid "Yes, I want to know about pirates"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9008
+#: scripts/scenario_44_defenders_or_pirates.lua:8276
 msgctxt "pirate-comms"
 msgid ""
 "Well, we can tell you about it. Not that we would ever engage in such "
 "practices ourselves."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9014
+#: scripts/scenario_44_defenders_or_pirates.lua:8282
 msgctxt "pirate-comms"
 msgid "Of course. How would one get loot from another ship?"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9020
+#: scripts/scenario_44_defenders_or_pirates.lua:8288
 msgctxt "pirate-comms"
 msgid ""
 "Loot?! We'd prefer to call that excess cargo. [they laugh at their own "
@@ -1406,12 +1164,12 @@ msgid ""
 "excess cargo."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9026
+#: scripts/scenario_44_defenders_or_pirates.lua:8294
 msgctxt "pirate-comms"
 msgid "What things have to come together?"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9032
+#: scripts/scenario_44_defenders_or_pirates.lua:8300
 msgctxt "pirate-comms"
 msgid ""
 "Things your ship has to do and things that have to happen on the ship you're "
@@ -1422,12 +1180,12 @@ msgid ""
 "cargo."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9038
+#: scripts/scenario_44_defenders_or_pirates.lua:8306
 msgctxt "pirate-comms"
 msgid "What about the other ship?"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9044
+#: scripts/scenario_44_defenders_or_pirates.lua:8312
 msgctxt "pirate-comms"
 msgid ""
 "Assuming you haven't destroyed it (a common mistake with inexperienced "
@@ -1436,12 +1194,12 @@ msgid ""
 "liberate."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9050
+#: scripts/scenario_44_defenders_or_pirates.lua:8318
 msgctxt "pirate-comms"
 msgid "How do we know if they have any cargo?"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9056
+#: scripts/scenario_44_defenders_or_pirates.lua:8324
 msgctxt "pirate-comms"
 msgid ""
 "Sometimes you can just ask them. Otherwise you can double scan them. You "
@@ -1450,12 +1208,12 @@ msgid ""
 "description."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9062
+#: scripts/scenario_44_defenders_or_pirates.lua:8330
 msgctxt "pirate-comms"
 msgid "How do we get them to stop?"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9068
+#: scripts/scenario_44_defenders_or_pirates.lua:8336
 msgctxt "pirate-comms"
 msgid ""
 "Your weapons officer can focus beams on their impulse engines. Once they're "
@@ -1470,24 +1228,24 @@ msgid ""
 "destroyed."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9074
+#: scripts/scenario_44_defenders_or_pirates.lua:8342
 msgctxt "pirate-comms"
 msgid "How do we get their shields down?"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9080
+#: scripts/scenario_44_defenders_or_pirates.lua:8348
 msgctxt "pirate-comms"
 msgid ""
 "First, shoot them down, then target the applicable shield generator to keep "
 "them down."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9086
+#: scripts/scenario_44_defenders_or_pirates.lua:8354
 msgctxt "pirate-comms"
 msgid "Is that it?"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9093
+#: scripts/scenario_44_defenders_or_pirates.lua:8361
 #, lua-format
 msgctxt "pirate-comms"
 msgid ""
@@ -1499,12 +1257,12 @@ msgid ""
 "Privateers. Loot neutrals or friendlies and you'll be labeled Pirates."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9101
+#: scripts/scenario_44_defenders_or_pirates.lua:8369
 msgctxt "pirate-comms"
 msgid "What do we do with the excess cargo?"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9107
+#: scripts/scenario_44_defenders_or_pirates.lua:8375
 msgctxt "pirate-comms"
 msgid ""
 "Sell it to stations that want to buy it. In fact, you should identify what "
@@ -1512,24 +1270,24 @@ msgid ""
 "innocent freighters."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9113
+#: scripts/scenario_44_defenders_or_pirates.lua:8381
 msgctxt "pirate-comms"
 msgid "How do we find out what stations want goods?"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9119
+#: scripts/scenario_44_defenders_or_pirates.lua:8387
 msgctxt "pirate-comms"
 msgid ""
 "Talk to them. Near the end of their status report, they'll say what goods "
 "they sell and what goods they'll buy."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9125
+#: scripts/scenario_44_defenders_or_pirates.lua:8393
 msgctxt "pirate-comms"
 msgid "Thanks for your help"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9131
+#: scripts/scenario_44_defenders_or_pirates.lua:8399
 msgctxt "pirate-comms"
 msgid ""
 "Don't mention it\n"
@@ -1540,287 +1298,54 @@ msgid ""
 "   ---EVER---"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9159
+#: scripts/scenario_44_defenders_or_pirates.lua:8427
 msgctxt "pirate-comms"
 msgid "No, I'm not interested in pirates"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9165
+#: scripts/scenario_44_defenders_or_pirates.lua:8433
 msgctxt "pirate-comms"
 msgid "Suit yourself. Good luck."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9177
-#: scripts/scenario_44_defenders_or_pirates.lua:9458
-#: scripts/scenario_44_defenders_or_pirates.lua:9475
-#: scripts/scenario_44_defenders_or_pirates.lua:9492
-#: scripts/scenario_44_defenders_or_pirates.lua:9612
-#: scripts/scenario_44_defenders_or_pirates.lua:9615
-#: scripts/scenario_44_defenders_or_pirates.lua:9619
-#: scripts/scenario_44_defenders_or_pirates.lua:9673
-#: scripts/scenario_44_defenders_or_pirates.lua:9733
-#: scripts/scenario_44_defenders_or_pirates.lua:9739
-#: scripts/scenario_44_defenders_or_pirates.lua:9751
-#: scripts/scenario_44_defenders_or_pirates.lua:9856
-#: scripts/scenario_44_defenders_or_pirates.lua:9859
-#: scripts/scenario_44_defenders_or_pirates.lua:9918
-#: scripts/scenario_44_defenders_or_pirates.lua:9921
-#: scripts/scenario_44_defenders_or_pirates.lua:9983
-#: scripts/scenario_44_defenders_or_pirates.lua:9986
-#: scripts/scenario_44_defenders_or_pirates.lua:9989
+#: scripts/scenario_44_defenders_or_pirates.lua:8445
+#: scripts/scenario_44_defenders_or_pirates.lua:8498
+#: scripts/scenario_44_defenders_or_pirates.lua:8558
+#: scripts/scenario_44_defenders_or_pirates.lua:8564
+#: scripts/scenario_44_defenders_or_pirates.lua:8576
+#: scripts/scenario_44_defenders_or_pirates.lua:8681
+#: scripts/scenario_44_defenders_or_pirates.lua:8684
+#: scripts/scenario_44_defenders_or_pirates.lua:8743
+#: scripts/scenario_44_defenders_or_pirates.lua:8746
+#: scripts/scenario_44_defenders_or_pirates.lua:8808
+#: scripts/scenario_44_defenders_or_pirates.lua:8811
+#: scripts/scenario_44_defenders_or_pirates.lua:8814
 msgid "Back"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9187
-msgctxt "orders-comms"
-msgid ""
-"\n"
-"Optional:"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9188
-msgctxt "orders-comms"
-msgid ""
-"\n"
-"Optional orders:"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9189
-msgctxt "orders-comms"
-msgid ""
-"\n"
-"These orders are optional:"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9190
-msgctxt "orders-comms"
-msgid ""
-"\n"
-"Not required:"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9200
-#, lua-format
-msgctxt "orders-comms"
-msgid ""
-"%s\n"
-"Transport %s to %s station %s in %s"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9209
-#, lua-format
-msgctxt "orders-comms"
-msgid ""
-"%s\n"
-"Transport %s to station %s (defunct)"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9225
-#, lua-format
-msgctxt "orders-comms"
-msgid ""
-"%s\n"
-"Deliver cargo for %s to station %s in %s"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9236
-#, lua-format
-msgctxt "orders-comms"
-msgid ""
-"%s\n"
-"Deliver cargo for %s to station %s (defunct)"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9251
-#, lua-format
-msgctxt "orders-comms"
-msgid ""
-"%s\n"
-"Pick up cargo for %s at station %s in %s"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9262
-#, lua-format
-msgctxt "orders-comms"
-msgid ""
-"%s\n"
-"Pick up cargo for %s at station %s (defunct)"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9284
-#: scripts/scenario_44_defenders_or_pirates.lua:9301
-#, lua-format
-msgctxt "orders-comms"
-msgid ""
-"%s\n"
-"%s (defunct)"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9378
-msgctxt "station-comms"
-msgid "Connect to warp jammer"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9380
-msgctxt "station-comms"
-msgid "Which one would you like to connect to?"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9427
-#, lua-format
-msgctxt "station-comms"
-msgid "(%i reputation)"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9439
-#, lua-format
-msgctxt "station-comms"
-msgid "%s Automated warp jammer access menu"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9447
-msgctxt "station-comms"
-msgid "Reduce range to 1 unit for 1 minute"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9455
-#: scripts/scenario_44_defenders_or_pirates.lua:9472
-#: scripts/scenario_44_defenders_or_pirates.lua:9489
-msgctxt "station-comms"
-msgid "Acknowledged. Range adjusted. Reset timer engaged."
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9464
-msgctxt "station-comms"
-msgid "Reduce range by 50% for 2 minutes"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9481
-msgctxt "station-comms"
-msgid "Reduce range by 25% for 3 minutes"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9497
-#: scripts/scenario_44_defenders_or_pirates.lua:9670
-#: scripts/scenario_44_defenders_or_pirates.lua:9736
-msgctxt "needRep-comms"
-msgid "Insufficient reputation"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9507
-msgctxt "station-comms"
-msgid ""
-"Why do I have to pay reputation to log in to some of these warp jammers?"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9514
-#, lua-format
-msgctxt "station-comms"
-msgid ""
-"It's complicated. It depends on the relationships between the warp jammer "
-"owner, us, station %s and you, %s. The farther apart the relationship, the "
-"more reputation it costs to gain access. Do you want more details?"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9523
-msgctxt "station-comms"
-msgid "Yes, please provide more details"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9528
-msgctxt "station-comms"
-msgid "These are the cases and their reputation costs:"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9533
-#, lua-format
-msgctxt "station-comms"
-msgid ""
-"%s\n"
-"    WJ friendly to %s and WJ is friendly to %s = no reputation."
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9542
-#, lua-format
-msgctxt "station-comms"
-msgid ""
-"%s\n"
-"    WJ friendly to %s and WJ is neutral to %s = 5 reputation."
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9551
-#, lua-format
-msgctxt "station-comms"
-msgid ""
-"%s\n"
-"    WJ friendly to %s and WJ is enemy to %s = 10 reputation."
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9560
-#, lua-format
-msgctxt "station-comms"
-msgid ""
-"%s\n"
-"    WJ neutral to %s and WJ is friendly to %s = 10 reputation."
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9569
-#, lua-format
-msgctxt "station-comms"
-msgid ""
-"%s\n"
-"    WJ enemy to %s and WJ is friendly to %s = 15 reputation."
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9578
-#, lua-format
-msgctxt "station-comms"
-msgid ""
-"%s\n"
-"    WJ neutral to %s and WJ is neutral to %s = 20 reputation."
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9587
-#, lua-format
-msgctxt "station-comms"
-msgid ""
-"%s\n"
-"    WJ enemy to %s and WJ is neutral to %s = 20 reputation."
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9596
-#, lua-format
-msgctxt "station-comms"
-msgid ""
-"%s\n"
-"    WJ neutral to %s and WJ is enemy to %s = 25 reputation."
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9605
-#, lua-format
-msgctxt "station-comms"
-msgid ""
-"%s\n"
-"    WJ enemy to %s and WJ is enemy to %s = 100 reputation."
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:9645
+#: scripts/scenario_44_defenders_or_pirates.lua:8470
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Increase long range sensors by 5 units (%i rep)"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9665
+#: scripts/scenario_44_defenders_or_pirates.lua:8490
 msgctxt "upgrade-comms"
 msgid "Sensor range improved by five units"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9688
+#: scripts/scenario_44_defenders_or_pirates.lua:8495
+#: scripts/scenario_44_defenders_or_pirates.lua:8561
+msgctxt "needRep-comms"
+msgid "Insufficient reputation"
+msgstr ""
+
+#: scripts/scenario_44_defenders_or_pirates.lua:8513
 msgctxt "upgrade-comms"
 msgid "Investigate pirate assistant AI"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9693
+#: scripts/scenario_44_defenders_or_pirates.lua:8518
 msgctxt "upgrade-comms"
 msgid ""
 "There's an AI assistant available called Mr. Smee that is supposed to advise "
@@ -1829,23 +1354,23 @@ msgid ""
 "for long. Is this something you are interested in?"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9700
+#: scripts/scenario_44_defenders_or_pirates.lua:8525
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Yes, I'd like Mr. Smee (%i reputation)"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9746
+#: scripts/scenario_44_defenders_or_pirates.lua:8571
 msgctxt "upgrade-comms"
 msgid "No. I've heard bad things about Mr. Smee"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9770
+#: scripts/scenario_44_defenders_or_pirates.lua:8595
 msgctxt "upgrade-comms"
 msgid "Check on jump drive availability"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9775
+#: scripts/scenario_44_defenders_or_pirates.lua:8600
 msgctxt "upgrade-comms"
 msgid ""
 "Jonathan Rogers, our resident engine systems specialist, has three jump "
@@ -1854,40 +1379,40 @@ msgid ""
 "D8."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9801
+#: scripts/scenario_44_defenders_or_pirates.lua:8626
 msgctxt "upgrade-comms"
 msgid "Tell me about the Repulse Rabbit XR5"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9807
-#: scripts/scenario_44_defenders_or_pirates.lua:9869
-#: scripts/scenario_44_defenders_or_pirates.lua:9934
+#: scripts/scenario_44_defenders_or_pirates.lua:8632
+#: scripts/scenario_44_defenders_or_pirates.lua:8694
+#: scripts/scenario_44_defenders_or_pirates.lua:8759
 msgctxt "upgrade-comms"
 msgid "comes fully"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9809
-#: scripts/scenario_44_defenders_or_pirates.lua:9871
-#: scripts/scenario_44_defenders_or_pirates.lua:9936
+#: scripts/scenario_44_defenders_or_pirates.lua:8634
+#: scripts/scenario_44_defenders_or_pirates.lua:8696
+#: scripts/scenario_44_defenders_or_pirates.lua:8761
 msgctxt "upgrade-comms"
 msgid "is not"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9811
-#: scripts/scenario_44_defenders_or_pirates.lua:9873
-#: scripts/scenario_44_defenders_or_pirates.lua:9938
+#: scripts/scenario_44_defenders_or_pirates.lua:8636
+#: scripts/scenario_44_defenders_or_pirates.lua:8698
+#: scripts/scenario_44_defenders_or_pirates.lua:8763
 msgctxt "upgrade-comms"
 msgid "but cannot be"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9813
-#: scripts/scenario_44_defenders_or_pirates.lua:9875
-#: scripts/scenario_44_defenders_or_pirates.lua:9940
+#: scripts/scenario_44_defenders_or_pirates.lua:8638
+#: scripts/scenario_44_defenders_or_pirates.lua:8700
+#: scripts/scenario_44_defenders_or_pirates.lua:8765
 msgctxt "upgrade-comms"
 msgid "and can be"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9819
+#: scripts/scenario_44_defenders_or_pirates.lua:8644
 #, lua-format
 msgctxt "upgrade-comms"
 msgid ""
@@ -1895,22 +1420,22 @@ msgid ""
 "range of %i units, %s charged, %s installed alongside your warp drive."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9830
+#: scripts/scenario_44_defenders_or_pirates.lua:8655
 msgctxt "upgrade-comms"
 msgid "Install the Repulse Rabbit XR5 jump drive"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9853
+#: scripts/scenario_44_defenders_or_pirates.lua:8678
 msgctxt "upgrade-comms"
 msgid "Jonathan Rogers has installed a Repulse Rabbit XR5 jump drive"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9863
+#: scripts/scenario_44_defenders_or_pirates.lua:8688
 msgctxt "upgrade-comms"
 msgid "The Vesta UK41 sounds interesting"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9881
+#: scripts/scenario_44_defenders_or_pirates.lua:8706
 #, lua-format
 msgctxt "upgrade-comms"
 msgid ""
@@ -1918,22 +1443,22 @@ msgid ""
 "of %i units, %s charged, %s installed alongside your warp drive."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9892
+#: scripts/scenario_44_defenders_or_pirates.lua:8717
 msgctxt "upgrade-comms"
 msgid "Install the Vesta UK41 jump drive"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9915
+#: scripts/scenario_44_defenders_or_pirates.lua:8740
 msgctxt "upgrade-comms"
 msgid "Jonathan Rogers has installed a Vesta UK41 jump drive"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9927
+#: scripts/scenario_44_defenders_or_pirates.lua:8752
 msgctxt "upgrade-comms"
 msgid "What do you know of the Ketrik Presence D8?"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9946
+#: scripts/scenario_44_defenders_or_pirates.lua:8771
 #, lua-format
 msgctxt "upgrade-comms"
 msgid ""
@@ -1941,279 +1466,273 @@ msgid ""
 "range of %i units, %s charged, %s installed alongside your warp drive."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9957
+#: scripts/scenario_44_defenders_or_pirates.lua:8782
 msgctxt "upgrade-comms"
 msgid "Install the Ketrik Presence D8 jump drive"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:9980
+#: scripts/scenario_44_defenders_or_pirates.lua:8805
 msgctxt "upgrade-comms"
 msgid "Jonathan Rogers has installed a Ketrik Presence D8 jump drive"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:10404
-#, lua-format
-msgctxt "tabHelms-id"
-msgid "%s %s in %s"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:11006
+#: scripts/scenario_44_defenders_or_pirates.lua:9461
 msgctxt "smee-msgRelay"
 msgid "Avast, me hearties."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11009
+#: scripts/scenario_44_defenders_or_pirates.lua:9464
 msgctxt "smee-msgRelay"
 msgid "The pirate code's more like guidelines than actual rules."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11011
+#: scripts/scenario_44_defenders_or_pirates.lua:9466
 msgctxt "smee-msgRelay"
 msgid "Where aarrrr they going?"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11014
+#: scripts/scenario_44_defenders_or_pirates.lua:9469
 msgctxt "smee-msgRelay"
 msgid "It's bad form to shoot a man in the middle of his cadenza."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11018
+#: scripts/scenario_44_defenders_or_pirates.lua:9473
 msgctxt "smee-msgRelay"
 msgid "There's a bit of bravery in everyone, even if they don't know it."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11022
+#: scripts/scenario_44_defenders_or_pirates.lua:9477
 msgctxt "smee-msgRelay"
 msgid "A good pirate never shows his true colors."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11026
+#: scripts/scenario_44_defenders_or_pirates.lua:9481
 msgctxt "smee-msgRelay"
 msgid "It's not the size of the ship, but the captain's heart that matters."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11030
+#: scripts/scenario_44_defenders_or_pirates.lua:9485
 msgctxt "smee-msgRelay"
 msgid ""
 "Always remember, laughter is the best medicine, especially when you're "
 "sailing through tough times."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11032
+#: scripts/scenario_44_defenders_or_pirates.lua:9487
 msgctxt "smee-msgRelay"
 msgid "Not all treasure is silver and gold."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11033
+#: scripts/scenario_44_defenders_or_pirates.lua:9488
 msgctxt "smee-msgRelay"
 msgid "Why join the navy if you can be a pirate?"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11034
+#: scripts/scenario_44_defenders_or_pirates.lua:9489
 msgctxt "smee-msgRelay"
 msgid "Work like a captain, play like a pirate."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11037
+#: scripts/scenario_44_defenders_or_pirates.lua:9492
 msgctxt "smee-msgRelay"
 msgid "May your blade always be wet and your powder dry."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11039
+#: scripts/scenario_44_defenders_or_pirates.lua:9494
 msgctxt "smee-msgRelay"
 msgid "Ahoy matey! Let's trouble the water!"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11040
+#: scripts/scenario_44_defenders_or_pirates.lua:9495
 msgctxt "smee-msgRelay"
 msgid "Shiver me timbers."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11041
+#: scripts/scenario_44_defenders_or_pirates.lua:9496
 msgctxt "smee-msgRelay"
 msgid "Avast, ye scurvy dog."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11042
+#: scripts/scenario_44_defenders_or_pirates.lua:9497
 msgctxt "smee-msgRelay"
 msgid "Batten down the hatches."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11043
+#: scripts/scenario_44_defenders_or_pirates.lua:9498
 msgctxt "smee-msgRelay"
 msgid "Here be treasure, matey."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11044
+#: scripts/scenario_44_defenders_or_pirates.lua:9499
 msgctxt "smee-msgRelay"
 msgid "Yo ho ho and a bottle of coolant."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11047
+#: scripts/scenario_44_defenders_or_pirates.lua:9502
 msgctxt "smee-msgRelay"
 msgid "A merry life and a short one shall be my motto."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11051
+#: scripts/scenario_44_defenders_or_pirates.lua:9506
 msgctxt "smee-msgRelay"
 msgid "Every generation welcomes the pirates from the last."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11055
+#: scripts/scenario_44_defenders_or_pirates.lua:9510
 msgctxt "smee-msgRelay"
 msgid "When a pirate grows rich enough, they make him a prince."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11059
+#: scripts/scenario_44_defenders_or_pirates.lua:9514
 msgctxt "smee-msgRelay"
 msgid "It is when pirates count their booty that they become mere thieves."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11061
+#: scripts/scenario_44_defenders_or_pirates.lua:9516
 msgctxt "smee-msgRelay"
 msgid "Take what you can, give nothing back."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11064
+#: scripts/scenario_44_defenders_or_pirates.lua:9519
 msgctxt "smee-msgRelay"
 msgid ""
 "In politics and trade, bruisers and pirates are of better promise than "
 "talkers and clerks."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11068
+#: scripts/scenario_44_defenders_or_pirates.lua:9523
 msgctxt "smee-msgRelay"
 msgid "I am a man of fortune and must seek my fortune."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11072
+#: scripts/scenario_44_defenders_or_pirates.lua:9527
 msgctxt "smee-msgRelay"
 msgid "In an honest service, there is thin commons, low wages, and hard labor."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11076
+#: scripts/scenario_44_defenders_or_pirates.lua:9531
 msgctxt "smee-msgRelay"
 msgid ""
 "Revenge may sate your being, but don't misunderstand me. It's an end, not a "
 "beginning."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11080
+#: scripts/scenario_44_defenders_or_pirates.lua:9535
 msgctxt "smee-msgRelay"
 msgid ""
 "Betrayin's all part of piratin'. If you don't know that, you're not even "
 "close to being a pirate."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11084
+#: scripts/scenario_44_defenders_or_pirates.lua:9539
 msgctxt "smee-msgRelay"
 msgid "Aye, the sea whispers secrets only the brave dare to listen."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11088
+#: scripts/scenario_44_defenders_or_pirates.lua:9543
 msgctxt "smee-msgRelay"
 msgid "Ye have the heart of a sea serpent - cold and deep as the abyss itself."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11092
+#: scripts/scenario_44_defenders_or_pirates.lua:9547
 msgctxt "smee-msgRelay"
 msgid "Weigh anchor! The dawn's light brings promise of plunder and glory."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11096
+#: scripts/scenario_44_defenders_or_pirates.lua:9551
 msgctxt "smee-msgRelay"
 msgid ""
 "Let the sea's song guide us to untold riches, hidden where X marks the spot."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11100
+#: scripts/scenario_44_defenders_or_pirates.lua:9555
 msgctxt "smee-msgRelay"
 msgid "Marooned by fate, saved by wit and will - such is the pirate's plight."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11104
+#: scripts/scenario_44_defenders_or_pirates.lua:9559
 msgctxt "smee-msgRelay"
 msgid ""
 "A chest of gold, a bottle of rum, and a sky alight with stars - pirate's "
 "paradise."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11108
+#: scripts/scenario_44_defenders_or_pirates.lua:9563
 msgctxt "smee-msgRelay"
 msgid ""
 "Coolant's the fuel that stirs the soul and emboldens the spirit of adventure."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11112
+#: scripts/scenario_44_defenders_or_pirates.lua:9567
 msgctxt "smee-msgRelay"
 msgid "A sword's edge and a cunning mind carve the path to treasures untold."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11116
+#: scripts/scenario_44_defenders_or_pirates.lua:9571
 msgctxt "smee-msgRelay"
 msgid ""
 "Let no man be called a landlubber when the call of the ocean beckons his "
 "heart."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11120
+#: scripts/scenario_44_defenders_or_pirates.lua:9575
 msgctxt "smee-msgRelay"
 msgid ""
 "The code of the sea is written in the blood of those who dare to defy it."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11124
+#: scripts/scenario_44_defenders_or_pirates.lua:9579
 msgctxt "smee-msgRelay"
 msgid ""
 "Only in the dead of night, under the moon's watchful eye, do true pirates "
 "ply their trade."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11128
+#: scripts/scenario_44_defenders_or_pirates.lua:9583
 msgctxt "smee-msgRelay"
 msgid ""
 "The call of the deep is a siren's song, luring the unwary to their doom or "
 "glory."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11132
+#: scripts/scenario_44_defenders_or_pirates.lua:9587
 msgctxt "smee-msgRelay"
 msgid ""
 "In the shadow of the mast, we find solace in the brotherhood of outcasts."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11136
+#: scripts/scenario_44_defenders_or_pirates.lua:9591
 msgctxt "smee-msgRelay"
 msgid ""
 "The gleam of treasure is not in its worth, but in the adventure it promises."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11140
+#: scripts/scenario_44_defenders_or_pirates.lua:9595
 msgctxt "smee-msgRelay"
 msgid "Gold and glory, the twin sirens that lead us through peril to paradise."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11144
+#: scripts/scenario_44_defenders_or_pirates.lua:9599
 msgctxt "smee-msgRelay"
 msgid ""
 "Let our laughter echo across the waves, a testament to the joy found in "
 "lawlessness."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11148
+#: scripts/scenario_44_defenders_or_pirates.lua:9603
 msgctxt "smee-msgRelay"
 msgid ""
 "We are the shadows that slip through the night, the whisper of danger on the "
 "wind."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11247
+#: scripts/scenario_44_defenders_or_pirates.lua:9702
 #, lua-format
 msgctxt "smee-msgRelay"
 msgid "We've stopped and %s has stopped."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11261
+#: scripts/scenario_44_defenders_or_pirates.lua:9716
 #, lua-format
 msgctxt "smee-msgRelay"
 msgid ""
@@ -2221,25 +1740,25 @@ msgid ""
 "out their engines to make them stop."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11278
+#: scripts/scenario_44_defenders_or_pirates.lua:9733
 #, lua-format
 msgctxt "smee-msgRelay"
 msgid "%s has stopped. We have to stop, too, if we're going to get some loot."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11293
+#: scripts/scenario_44_defenders_or_pirates.lua:9748
 #, lua-format
 msgctxt "smee-msgRelay"
 msgid "%s and %s both have to be stopped if we're going to get loot from %s."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11327
+#: scripts/scenario_44_defenders_or_pirates.lua:9782
 #, lua-format
 msgctxt "smee-msgRelay"
 msgid "%s and %s have both stopped."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11342
+#: scripts/scenario_44_defenders_or_pirates.lua:9797
 #, lua-format
 msgctxt "smee-msgRelay"
 msgid ""
@@ -2247,168 +1766,168 @@ msgid ""
 "picked, has not stopped."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11357
+#: scripts/scenario_44_defenders_or_pirates.lua:9812
 msgctxt "smee-msgRelay"
 msgid "We need to stop too if we want to get any loot."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11374
+#: scripts/scenario_44_defenders_or_pirates.lua:9829
 msgctxt "smee-msgRelay"
 msgid "We can't loot any cargo because we have no room in our cargo hold."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11386
+#: scripts/scenario_44_defenders_or_pirates.lua:9841
 msgctxt "smee-msgRelay"
 msgid "We've got room in our cargo hold for some loot."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11411
+#: scripts/scenario_44_defenders_or_pirates.lua:9866
 msgctxt "smee-msgRelay"
 msgid "We have to take down at least one of their shields to get loot."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11426
+#: scripts/scenario_44_defenders_or_pirates.lua:9881
 #, lua-format
 msgctxt "smee-msgRelay"
 msgid "At least one of %s's shield arcs is down."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11438
+#: scripts/scenario_44_defenders_or_pirates.lua:9893
 #, lua-format
 msgctxt "smee-msgRelay"
 msgid "%s's shield is down."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11450
+#: scripts/scenario_44_defenders_or_pirates.lua:9905
 #, lua-format
 msgctxt "smee-msgRelay"
 msgid "%s does not have any shields."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11467
+#: scripts/scenario_44_defenders_or_pirates.lua:9922
 msgctxt "smee-msgRelay"
 msgid "We can't get loot if our shields are up."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11476
+#: scripts/scenario_44_defenders_or_pirates.lua:9931
 msgctxt "smee-msgRelay"
 msgid "Our shields are down."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11528
+#: scripts/scenario_44_defenders_or_pirates.lua:9983
 #, lua-format
 msgctxt "smee-msgRelay"
 msgid "%s has cargo and ordnance we could get:%s."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11535
+#: scripts/scenario_44_defenders_or_pirates.lua:9990
 #, lua-format
 msgctxt "smee-msgRelay"
 msgid "%s has cargo we could get:%s."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11541
+#: scripts/scenario_44_defenders_or_pirates.lua:9996
 #, lua-format
 msgctxt "smee-msgRelay"
 msgid "%s has ordnance we could get:%s."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11554
+#: scripts/scenario_44_defenders_or_pirates.lua:10009
 #, lua-format
 msgctxt "smee-msgRelay"
 msgid "%s has nothing we need or want."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11573
+#: scripts/scenario_44_defenders_or_pirates.lua:10028
 msgctxt "smee-msgRelay"
 msgid "We need 50 energy per item of loot we want. Looting may fail."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11584
+#: scripts/scenario_44_defenders_or_pirates.lua:10039
 msgctxt "smee-msgRelay"
 msgid ""
 "We've got 50 or more energy. We need 50 per item. Looting will probably "
 "succeed."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11598
+#: scripts/scenario_44_defenders_or_pirates.lua:10053
 msgctxt "smee-msgRelay"
 msgid "There are no ships we can loot within three units."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11764
+#: scripts/scenario_44_defenders_or_pirates.lua:10219
 msgctxt "msgRelay"
 msgid ""
 "Cannot get munitions because there is not enough energy to power the "
 "transporters. You need at least 50 energy."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11772
+#: scripts/scenario_44_defenders_or_pirates.lua:10227
 msgctxt "msgOperations"
 msgid ""
 "Cannot get munitions because there is not enough energy to power the "
 "transporters. You need at least 50 energy."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11824
+#: scripts/scenario_44_defenders_or_pirates.lua:10279
 msgctxt "msgRelay"
 msgid ""
 "Cannot get cargo because there is not enough energy to power the "
 "transporters. You need at least 50 energy."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11832
+#: scripts/scenario_44_defenders_or_pirates.lua:10287
 msgctxt "msgOperations"
 msgid ""
 "Cannot get cargo because there is not enough energy to power the "
 "transporters. You need at least 50 energy."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11909
-#: scripts/scenario_44_defenders_or_pirates.lua:11918
+#: scripts/scenario_44_defenders_or_pirates.lua:10364
+#: scripts/scenario_44_defenders_or_pirates.lua:10373
 msgctxt "msgMainscreen"
 msgid "Pirates"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11914
+#: scripts/scenario_44_defenders_or_pirates.lua:10369
 msgctxt "msgMainscreen"
 msgid "Licensed Privateers"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11970
+#: scripts/scenario_44_defenders_or_pirates.lua:10425
 msgctxt "msgRelay"
 msgid "Cannot get cargo because the cargo bay is full."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11978
+#: scripts/scenario_44_defenders_or_pirates.lua:10433
 msgctxt "msgOperations"
 msgid "Cannot get cargo because the cargo bay is full."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11990
-#: scripts/scenario_44_defenders_or_pirates.lua:11996
+#: scripts/scenario_44_defenders_or_pirates.lua:10445
+#: scripts/scenario_44_defenders_or_pirates.lua:10451
 msgctxt "scienceDescription"
 msgid "Manifest:"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:11997
+#: scripts/scenario_44_defenders_or_pirates.lua:10452
 msgctxt "scienceDescription"
 msgid "Manifest: empty"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:12002
-#: scripts/scenario_44_defenders_or_pirates.lua:12006
+#: scripts/scenario_44_defenders_or_pirates.lua:10457
+#: scripts/scenario_44_defenders_or_pirates.lua:10461
 msgctxt "scienceDescription"
 msgid "Commercial Freighter"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:12078
+#: scripts/scenario_44_defenders_or_pirates.lua:10491
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Reputation point goal: %s"
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:12083
+#: scripts/scenario_44_defenders_or_pirates.lua:10496
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -2416,7 +1935,7 @@ msgid ""
 "The %s ended with %s reputation points."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:12092
+#: scripts/scenario_44_defenders_or_pirates.lua:10505
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -2424,7 +1943,7 @@ msgid ""
 "The %s did not quite make it."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:12099
+#: scripts/scenario_44_defenders_or_pirates.lua:10512
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -2432,39 +1951,7 @@ msgid ""
 "You have been labeled %s."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:12105
-#, lua-format
-msgctxt "msgMainscreen"
-msgid ""
-"%s\n"
-"Deployed %s player ships."
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:12111
-#, lua-format
-msgctxt "msgMainscreen"
-msgid ""
-"%s\n"
-"Deployed one player ship."
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:12116
-#, lua-format
-msgctxt "msgMainscreen"
-msgid ""
-"%s\n"
-"Time spent: %s."
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:12121
-#, lua-format
-msgctxt "msgMainscreen"
-msgid ""
-"%s\n"
-"Enemies:%s Murphy:%s Respawn:%s"
-msgstr ""
-
-#: scripts/scenario_44_defenders_or_pirates.lua:12140
+#: scripts/scenario_44_defenders_or_pirates.lua:10532
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -2472,7 +1959,7 @@ msgid ""
 "loosely affiliated with the %s, so you don't have orders per se."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:12158
+#: scripts/scenario_44_defenders_or_pirates.lua:10550
 #, lua-format
 msgctxt "goal-incCall"
 msgid ""
@@ -2484,7 +1971,7 @@ msgid ""
 "the start by the game host."
 msgstr ""
 
-#: scripts/scenario_44_defenders_or_pirates.lua:12167
+#: scripts/scenario_44_defenders_or_pirates.lua:10559
 #, lua-format
 msgctxt "goal-incCall"
 msgid "%s Visit us anytime in sector %s."

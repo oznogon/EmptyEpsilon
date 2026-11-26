@@ -216,3 +216,24 @@ msgid ""
 "%s\n"
 "%s"
 msgstr ""
+
+#: scripts/control_code_scenario_utility.lua:415
+msgctxt "msgGM"
+msgid " (Kraylor)"
+msgstr ""
+
+#: scripts/control_code_scenario_utility.lua:416
+msgctxt "msgGM"
+msgid " (Ktlitan)"
+msgstr ""
+
+#: scripts/control_code_scenario_utility.lua:417
+msgctxt "msgGM"
+msgid " (Exuari)"
+msgstr ""
+
+#: scripts/control_code_scenario_utility.lua:424
+#, lua-format
+msgctxt "msgGM"
+msgid "%s: %s %s\n"
+msgstr ""

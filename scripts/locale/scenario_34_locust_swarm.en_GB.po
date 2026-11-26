@@ -13,7 +13,16 @@ msgid ""
 "\n"
 "USN Discord: https://discord.gg/PntGG3a where you can join a game online. "
 "There's one every weekend. All experience levels are welcome."
-msgstr "What happens when you're attacked by a swarm of locusts?\n\nDesigned to run with one or more player ships with different terrain each time.\n\nVersion 1\n\nUSN Discord: https://discord.gg/PntGG3a where you can join a game online. There's one every weekend. All experience levels are welcome."
+msgstr ""
+"What happens when you're attacked by a swarm of locusts?\n"
+"\n"
+"Designed to run with one or more player ships with different terrain each "
+"time.\n"
+"\n"
+"Version 1\n"
+"\n"
+"USN Discord: https://discord.gg/PntGG3a where you can join a game online. "
+"There's one every weekend. All experience levels are welcome."
 
 # Scenario setting
 msgctxt "setting"
@@ -97,175 +106,187 @@ msgctxt "Basis"
 msgid "The Ktlitan Drone is the basis for the locusts"
 msgstr "The Ktlitan Drone is the basis for the locusts"
 
-#: scripts/scenario_34_locust_swarm.lua:49
+#: scripts/scenario_34_locust_swarm.lua:56
 msgctxt "orders-comms"
 msgid "thirty"
 msgstr "thirty"
 
-#: scripts/scenario_34_locust_swarm.lua:54
+#: scripts/scenario_34_locust_swarm.lua:61
 msgctxt "orders-comms"
 msgid "fifty"
 msgstr "fifty"
 
-#: scripts/scenario_34_locust_swarm.lua:59
+#: scripts/scenario_34_locust_swarm.lua:66
 msgctxt "orders-comms"
 msgid "eighty"
 msgstr "eighty"
 
-#: scripts/scenario_34_locust_swarm.lua:64
+#: scripts/scenario_34_locust_swarm.lua:71
 msgctxt "orders-comms"
 msgid "one hundred"
 msgstr "one hundred"
 
-#: scripts/scenario_34_locust_swarm.lua:69
+#: scripts/scenario_34_locust_swarm.lua:76
 msgctxt "orders-comms"
 msgid "one hundred and fifty"
 msgstr "one hundred and fifty"
 
-#: scripts/scenario_34_locust_swarm.lua:78
+#: scripts/scenario_34_locust_swarm.lua:85
 msgctxt "orders-comms"
 msgid "fighter"
 msgstr "fighter"
 
-#: scripts/scenario_34_locust_swarm.lua:82
+#: scripts/scenario_34_locust_swarm.lua:89
 msgctxt "orders-comms"
 msgid "hornet"
 msgstr "hornet"
 
-#: scripts/scenario_34_locust_swarm.lua:86
+#: scripts/scenario_34_locust_swarm.lua:93
 msgctxt "orders-comms"
 msgid "drone"
 msgstr "drone"
 
-#: scripts/scenario_34_locust_swarm.lua:2312
+#: scripts/scenario_34_locust_swarm.lua:2259
 msgctxt "buttonRelay"
 msgid "Locust Status"
 msgstr "Locust Status"
 
-#: scripts/scenario_34_locust_swarm.lua:2323
+#: scripts/scenario_34_locust_swarm.lua:2270
 msgctxt "buttonOperations"
 msgid "Locust Status"
 msgstr "Locust Status"
 
-#: scripts/scenario_34_locust_swarm.lua:2346
+#: scripts/scenario_34_locust_swarm.lua:2293
 #, lua-format
 msgctxt "msgRelay"
 msgid "%i Locusts remain."
 msgstr "%i Locusts remain."
 
-#: scripts/scenario_34_locust_swarm.lua:2349
+#: scripts/scenario_34_locust_swarm.lua:2296
 #, lua-format
 msgctxt "msgRelay"
 msgid "One Locust remains in sector %s"
 msgstr "One Locust remains in sector %s"
 
-#: scripts/scenario_34_locust_swarm.lua:2354
+#: scripts/scenario_34_locust_swarm.lua:2301
 #, lua-format
 msgctxt "msgRelay"
 msgid ""
 "%s\n"
 "The closest is in sector %s"
-msgstr "%s\nThe closest is in sector %s"
+msgstr ""
+"%s\n"
+"The closest is in sector %s"
 
-#: scripts/scenario_34_locust_swarm.lua:2760
+#: scripts/scenario_34_locust_swarm.lua:2675
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
 "Hello %s,\n"
 "Our sensors have picked up numerous Exuari ships."
-msgstr "Hello %s,\nOur sensors have picked up numerous Exuari ships."
+msgstr ""
+"Hello %s,\n"
+"Our sensors have picked up numerous Exuari ships."
 
-#: scripts/scenario_34_locust_swarm.lua:2765
+#: scripts/scenario_34_locust_swarm.lua:2680
 msgctxt "orders-comms"
 msgid "How many is numerous?"
 msgstr "How many is numerous?"
 
-#: scripts/scenario_34_locust_swarm.lua:2767
+#: scripts/scenario_34_locust_swarm.lua:2682
 #, lua-format
 msgctxt "orders-comms"
 msgid "Approximately %s"
 msgstr "Approximately %s"
 
-#: scripts/scenario_34_locust_swarm.lua:2770
+#: scripts/scenario_34_locust_swarm.lua:2685
 msgctxt "orders-comms"
 msgid "That's quite a few. What kind of ships?"
 msgstr "That's quite a few. What kind of ships?"
 
-#: scripts/scenario_34_locust_swarm.lua:2776
+#: scripts/scenario_34_locust_swarm.lua:2691
 #, lua-format
 msgctxt "orders-comms"
 msgid "They look like %ss. The computer calls them locusts. They're very fast."
-msgstr "They look like %ss. The computer calls them locusts. They're very fast."
+msgstr ""
+"They look like %ss. The computer calls them locusts. They're very fast."
 
-#: scripts/scenario_34_locust_swarm.lua:2782
+#: scripts/scenario_34_locust_swarm.lua:2697
 msgctxt "orders-comms"
 msgid "Should we be worried?"
 msgstr "Should we be worried?"
 
-#: scripts/scenario_34_locust_swarm.lua:2787
+#: scripts/scenario_34_locust_swarm.lua:2702
 msgctxt "orders-comms"
 msgid ""
 "Individually, they should be easy to handle. As a group, they could be a "
 "problem."
-msgstr "Individually, they should be easy to handle. As a group, they could be a problem."
+msgstr ""
+"Individually, they should be easy to handle. As a group, they could be a "
+"problem."
 
-#: scripts/scenario_34_locust_swarm.lua:2793
+#: scripts/scenario_34_locust_swarm.lua:2708
 msgctxt "orders-comms"
 msgid "What do you want us to do about them?"
 msgstr "What do you want us to do about them?"
 
-#: scripts/scenario_34_locust_swarm.lua:2799
+#: scripts/scenario_34_locust_swarm.lua:2714
 msgctxt "orders-comms"
 msgid "Get rid of them. Every last one of them."
 msgstr "Get rid of them. Every last one of them."
 
-#: scripts/scenario_34_locust_swarm.lua:2819
+#: scripts/scenario_34_locust_swarm.lua:2734
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
 "Greetings %s,\n"
 "We've got an update for you on those Exuari Locusts."
-msgstr "Greetings %s,\nWe've got an update for you on those Exuari Locusts."
+msgstr ""
+"Greetings %s,\n"
+"We've got an update for you on those Exuari Locusts."
 
-#: scripts/scenario_34_locust_swarm.lua:2824
+#: scripts/scenario_34_locust_swarm.lua:2739
 msgctxt "orders-comms"
 msgid "Tell us about it."
 msgstr "Tell us about it."
 
-#: scripts/scenario_34_locust_swarm.lua:2828
+#: scripts/scenario_34_locust_swarm.lua:2743
 msgctxt "orders-comms"
 msgid "All the Exuari on our sensors have started moving."
 msgstr "All the Exuari on our sensors have started moving."
 
-#: scripts/scenario_34_locust_swarm.lua:2831
+#: scripts/scenario_34_locust_swarm.lua:2746
 msgctxt "orders-comms"
 msgid "Where are they going?"
 msgstr "Where are they going?"
 
-#: scripts/scenario_34_locust_swarm.lua:2835
+#: scripts/scenario_34_locust_swarm.lua:2750
 msgctxt "orders-comms"
 msgid ""
 "We are not quite sure, but they seem to be converging on a central location."
-msgstr "We are not quite sure, but they seem to be converging on a central location."
+msgstr ""
+"We are not quite sure, but they seem to be converging on a central location."
 
-#: scripts/scenario_34_locust_swarm.lua:2841
+#: scripts/scenario_34_locust_swarm.lua:2756
 msgctxt "orders-comms"
 msgid "That could make it harder for us to get rid of them."
 msgstr "That could make it harder for us to get rid of them."
 
-#: scripts/scenario_34_locust_swarm.lua:2847
+#: scripts/scenario_34_locust_swarm.lua:2762
 msgctxt "orders-comms"
 msgid ""
 "How perceptive of you! We are so glad you are out there working to rid us of "
 "these Locusts. Keep up the good work!"
-msgstr "How perceptive of you! We are so glad you are out there working to rid us of these Locusts. Keep up the good work!"
+msgstr ""
+"How perceptive of you! We are so glad you are out there working to rid us of "
+"these Locusts. Keep up the good work!"
 
-#: scripts/scenario_34_locust_swarm.lua:3057
+#: scripts/scenario_34_locust_swarm.lua:2945
 msgctxt "msgMainscreen"
 msgid "Scenario needs the 'Per-system damage' option under 'Extra settings'"
 msgstr "Scenario needs the 'Per-system damage' option under 'Extra settings'"
 
-#: scripts/scenario_34_locust_swarm.lua:3124
+#: scripts/scenario_34_locust_swarm.lua:3012
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -273,9 +294,13 @@ msgid ""
 "Friendly: %i out of %i\n"
 "Neutral: %i out of %i\n"
 "Enemy: %i out of %i"
-msgstr "Surviving stations: %i\nFriendly: %i out of %i\nNeutral: %i out of %i\nEnemy: %i out of %i"
+msgstr ""
+"Surviving stations: %i\n"
+"Friendly: %i out of %i\n"
+"Neutral: %i out of %i\n"
+"Enemy: %i out of %i"
 
-#: scripts/scenario_34_locust_swarm.lua:3163
+#: scripts/scenario_34_locust_swarm.lua:3051
 msgctxt "msgMainscreen"
 msgid "All friendly stations have been destroyed."
 msgstr "All friendly stations have been destroyed."

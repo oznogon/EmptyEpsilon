@@ -2626,6 +2626,20 @@ function addFreighter(freighter_type, ship)
         end
     end
 end
+function clarifyExistingScience()
+    local weapons_key = _("scienceDB", "Weapons")
+    local weapons_db = queryScienceDatabase(weapons_key)
+    if weapons_db == nil then
+        weapons_db = ScienceDatabase():setName(weapons_key)
+    end
+    weapons_db:setLongDescription(
+        _(
+            "scienceDB",
+            "This database only covers the basic versions of the missiles used throughout the galaxy.\n\nIt has been reported that some battleships started using larger variations of those missiles. Small fighters and even frigates should not have too much trouble dodging them, but space captains of bigger ships should be wary of their doubled damage potential.\n\nSmaller variations of these missiles have become common in the galaxy, too. Fighter pilots praise their speed and maneuverability, because it gives them an edge against small and fast-moving targets. They only deal half the damage of their basic counterparts, but what good is a missile if it does not hit its target?\n\nSome ships in your fleet have been equipped with these different sized weapons tubes. In some cases, the weapons officer might see a banner on the weapons console describing these tubes using the following shorthand:\n    S = Small\n    M = Medium (the normal sized missile tube)\n    L = Large\nThese letters describe the tube sizes in order from top to bottom."
+        )
+    )
+end
+
 function addShipToDatabase(
     base_db,
     modified_db,

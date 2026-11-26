@@ -1,0 +1,354 @@
+#: scripts/comms_service_options.lua:15
+msgctxt "shipServices-comms"
+msgid "Service options"
+msgstr ""
+
+#: scripts/comms_service_options.lua:34
+msgctxt "shipServices-comms"
+msgid "Repair ship system"
+msgstr ""
+
+#: scripts/comms_service_options.lua:39
+msgctxt "shipServices-comms"
+msgid "What system would you like repaired?"
+msgstr ""
+
+#: scripts/comms_service_options.lua:46
+msgctxt "shipServices-comms"
+msgid "Repair probe launch system"
+msgstr ""
+
+#: scripts/comms_service_options.lua:56
+msgctxt "shipServices-comms"
+msgid "Your probe launch system has been repaired"
+msgstr ""
+
+#: scripts/comms_service_options.lua:63 scripts/comms_service_options.lua:89
+#: scripts/comms_service_options.lua:115 scripts/comms_service_options.lua:141
+#: scripts/comms_service_options.lua:170 scripts/comms_service_options.lua:223
+#: scripts/comms_service_options.lua:263 scripts/comms_service_options.lua:303
+msgctxt "shipServices-comms"
+msgid "You need to stay close if you want me to fix your ship"
+msgstr ""
+
+#: scripts/comms_service_options.lua:67 scripts/comms_service_options.lua:93
+#: scripts/comms_service_options.lua:119 scripts/comms_service_options.lua:145
+#: scripts/comms_service_options.lua:174 scripts/comms_service_options.lua:178
+#: scripts/comms_service_options.lua:227 scripts/comms_service_options.lua:267
+#: scripts/comms_service_options.lua:307 scripts/comms_service_options.lua:475
+#: scripts/comms_service_options.lua:562 scripts/comms_service_options.lua:712
+#: scripts/comms_service_options.lua:799 scripts/comms_service_options.lua:868
+#: scripts/comms_service_options.lua:882 scripts/comms_service_options.lua:887
+#: scripts/comms_service_options.lua:925 scripts/comms_service_options.lua:982
+#: scripts/comms_service_options.lua:1047
+#: scripts/comms_service_options.lua:1052
+#: scripts/comms_service_options.lua:1060
+#: scripts/comms_service_options.lua:1113
+#: scripts/comms_service_options.lua:1132
+#: scripts/comms_service_options.lua:1198
+msgid "Back"
+msgstr ""
+
+#: scripts/comms_service_options.lua:73
+msgctxt "shipServices-comms"
+msgid "Repair hacking system"
+msgstr ""
+
+#: scripts/comms_service_options.lua:82
+msgctxt "shipServices-comms"
+msgid "Your hack system has been repaired"
+msgstr ""
+
+#: scripts/comms_service_options.lua:99
+msgctxt "shipServices-comms"
+msgid "Repair scanning system"
+msgstr ""
+
+#: scripts/comms_service_options.lua:108
+msgctxt "shipServices-comms"
+msgid "Your scanners have been repaired"
+msgstr ""
+
+#: scripts/comms_service_options.lua:125
+msgctxt "shipServices-comms"
+msgid "Repair combat maneuver"
+msgstr ""
+
+#: scripts/comms_service_options.lua:134
+msgctxt "shipServices-comms"
+msgid "Your combat maneuver has been repaired"
+msgstr ""
+
+#: scripts/comms_service_options.lua:153
+msgctxt "shipServices-comms"
+msgid "Repair self destruct system"
+msgstr ""
+
+#: scripts/comms_service_options.lua:163
+msgctxt "shipServices-comms"
+msgid "Your self destruct system has been repaired"
+msgstr ""
+
+#: scripts/comms_service_options.lua:197
+#, lua-format
+msgctxt "shipServices-comms"
+msgid "Full hull repair (%i reputation)"
+msgstr ""
+
+#: scripts/comms_service_options.lua:211
+msgctxt "shipServices-comms"
+msgid "All fixed up and ready to go"
+msgstr ""
+
+#: scripts/comms_service_options.lua:216 scripts/comms_service_options.lua:256
+#: scripts/comms_service_options.lua:296 scripts/comms_service_options.lua:462
+#: scripts/comms_service_options.lua:549 scripts/comms_service_options.lua:572
+#: scripts/comms_service_options.lua:699 scripts/comms_service_options.lua:786
+#: scripts/comms_service_options.lua:855 scripts/comms_service_options.lua:914
+#: scripts/comms_service_options.lua:971
+msgctxt "needRep-comms"
+msgid "Insufficient reputation"
+msgstr ""
+
+#: scripts/comms_service_options.lua:232 scripts/comms_service_options.lua:272
+#, lua-format
+msgctxt "shipServices-comms"
+msgid "Add %i%% to hull (%i reputation)"
+msgstr ""
+
+#: scripts/comms_service_options.lua:251 scripts/comms_service_options.lua:291
+msgctxt "shipServices-comms"
+msgid "Repairs completed as requested"
+msgstr ""
+
+#: scripts/comms_service_options.lua:344
+msgctxt "ammo-comms"
+msgid "Restock ordnance"
+msgstr ""
+
+#: scripts/comms_service_options.lua:353
+msgctxt "ammo-comms"
+msgid "What kind of ordnance?"
+msgstr ""
+
+#: scripts/comms_service_options.lua:357
+#, lua-format
+msgctxt "ammo-comms"
+msgid "%s (%i reputation each)"
+msgstr ""
+
+#: scripts/comms_service_options.lua:387
+#, lua-format
+msgctxt "ammo-comms"
+msgid "Restocked your %s type ordnance"
+msgstr ""
+
+#: scripts/comms_service_options.lua:403
+#, lua-format
+msgctxt "needRep-comms"
+msgid ""
+"You don't have enough reputation to fully replenish your %s type ordnance. "
+"You need %i and you only have %i. How would you like to proceed?"
+msgstr ""
+
+#: scripts/comms_service_options.lua:419 scripts/comms_service_options.lua:656
+#: scripts/comms_service_options.lua:812
+#, lua-format
+msgctxt "ammo-comms"
+msgid "Get one (%i reputation)"
+msgstr ""
+
+#: scripts/comms_service_options.lua:453 scripts/comms_service_options.lua:627
+#: scripts/comms_service_options.lua:690 scripts/comms_service_options.lua:846
+#, lua-format
+msgctxt "ammo-comms"
+msgid "One %s provided"
+msgstr ""
+
+#: scripts/comms_service_options.lua:470 scripts/comms_service_options.lua:557
+#: scripts/comms_service_options.lua:707 scripts/comms_service_options.lua:794
+#: scripts/comms_service_options.lua:863 scripts/comms_service_options.lua:878
+msgctxt "ammo-comms"
+msgid "You need to stay close if you want me to restock your ordnance"
+msgstr ""
+
+#: scripts/comms_service_options.lua:505 scripts/comms_service_options.lua:742
+#, lua-format
+msgctxt "ammo-comms"
+msgid "Get %i (%i reputation)"
+msgstr ""
+
+#: scripts/comms_service_options.lua:539 scripts/comms_service_options.lua:616
+#: scripts/comms_service_options.lua:776
+#, lua-format
+msgctxt "ammo-comms"
+msgid "%i %ss provided"
+msgstr ""
+
+#: scripts/comms_service_options.lua:582
+#, lua-format
+msgctxt "ammo-comms"
+msgid ""
+"I don't have enough %s type ordnance to fully restock you. How would you "
+"like to proceed?"
+msgstr ""
+
+#: scripts/comms_service_options.lua:590
+msgctxt "ammo-comms"
+msgid "We'll take all you've got"
+msgstr ""
+
+#: scripts/comms_service_options.lua:640
+#, lua-format
+msgctxt "needRep-comms"
+msgid ""
+"You don't have enough reputation to get all of our %s type ordnance. You "
+"need %i and you only have %i. How would you like to proceed?"
+msgstr ""
+
+#: scripts/comms_service_options.lua:899
+msgctxt "shipServices-comms"
+msgid "Restock scan probes (5 reputation)"
+msgstr ""
+
+#: scripts/comms_service_options.lua:909
+msgctxt "shipServices-comms"
+msgid "I replenished your probes for you."
+msgstr ""
+
+#: scripts/comms_service_options.lua:921
+msgctxt "shipServices-comms"
+msgid "You need to stay close if you want me to restock your probes"
+msgstr ""
+
+#: scripts/comms_service_options.lua:947
+#, lua-format
+msgctxt "shipServices-comms"
+msgid "Quick charge the main batteries (%i reputation)"
+msgstr ""
+
+#: scripts/comms_service_options.lua:966
+msgctxt "shipServices-comms"
+msgid "Your batteries have been charged"
+msgstr ""
+
+#: scripts/comms_service_options.lua:978
+msgctxt "shipServices-comms"
+msgid "You need to stay close if you want your batteries charged quickly"
+msgstr ""
+
+#: scripts/comms_service_options.lua:996
+msgctxt "shipServices-comms"
+msgid "How can I help you get your ship in good running order?"
+msgstr ""
+
+#: scripts/comms_service_options.lua:1003
+msgctxt "shipServices-comms"
+msgid "There's nothing on your ship that I can help you fix. Sorry."
+msgstr ""
+
+#: scripts/comms_service_options.lua:1012
+#: scripts/comms_service_options.lua:1144
+msgctxt "shipAssist-comms"
+msgid "What do you want?"
+msgstr ""
+
+#: scripts/comms_service_options.lua:1014
+#: scripts/comms_service_options.lua:1146
+msgctxt "shipAssist-comms"
+msgid "Sir, how can we assist?"
+msgstr ""
+
+#: scripts/comms_service_options.lua:1016
+msgctxt "shipAssist-comms"
+msgid "Defend a waypoint"
+msgstr ""
+
+#: scripts/comms_service_options.lua:1021
+msgctxt "shipAssist-comms"
+msgid "No waypoints set. Please set a waypoint first."
+msgstr ""
+
+#: scripts/comms_service_options.lua:1026
+msgctxt "shipAssist-comms"
+msgid "Which waypoint should we defend?"
+msgstr ""
+
+#: scripts/comms_service_options.lua:1031
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Defend WP %i"
+msgstr ""
+
+#: scripts/comms_service_options.lua:1042
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "We are heading to assist at WP %i."
+msgstr ""
+
+#: scripts/comms_service_options.lua:1055
+msgctxt "shipAssist-comms"
+msgid "Assist me"
+msgstr ""
+
+#: scripts/comms_service_options.lua:1057
+msgctxt "shipAssist-comms"
+msgid "Heading toward you to assist."
+msgstr ""
+
+#: scripts/comms_service_options.lua:1063
+msgctxt "shipAssist-comms"
+msgid "Report status"
+msgstr ""
+
+#: scripts/comms_service_options.lua:1065
+#: scripts/comms_service_options.lua:1150
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Hull: %d%%\n"
+msgstr ""
+
+#: scripts/comms_service_options.lua:1072
+#: scripts/comms_service_options.lua:1157
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Shield: %d%%\n"
+msgstr ""
+
+#: scripts/comms_service_options.lua:1082
+#: scripts/comms_service_options.lua:1167
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Front Shield: %d%%\n"
+msgstr ""
+
+#: scripts/comms_service_options.lua:1091
+#: scripts/comms_service_options.lua:1176
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Rear Shield: %d%%\n"
+msgstr ""
+
+#: scripts/comms_service_options.lua:1102
+#: scripts/comms_service_options.lua:1187
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Shield %s: %d%%\n"
+msgstr ""
+
+#: scripts/comms_service_options.lua:1121
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Dock at %s"
+msgstr ""
+
+#: scripts/comms_service_options.lua:1127
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Docking at %s."
+msgstr ""
+
+#: scripts/comms_service_options.lua:1148
+msgctxt "shipAssist-comms"
+msgid "How are you doing?"
+msgstr ""

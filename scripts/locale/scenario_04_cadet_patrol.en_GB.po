@@ -17,536 +17,410 @@ msgid ""
 "Xansta\n"
 "\n"
 "Version 1 Mar 2025"
-msgstr "One Phobos class player ship, full of fresh academy graduates assigned to patrol duty.\nBeginner's mission. Players can save and restore if they remember their key. The terrain differs each time the scenario runs.\nDuration: 1-2 hours\n\nVoice actors:\nAndrew \"Snow\" Kenny\nBart K7AAY\nSANTAtheGREY\nXansta\n\nVersion 1 Mar 2025"
+msgstr ""
+"One Phobos class player ship, full of fresh academy graduates assigned to "
+"patrol duty.\n"
+"Beginner's mission. Players can save and restore if they remember their key. "
+"The terrain differs each time the scenario runs.\n"
+"Duration: 1-2 hours\n"
+"\n"
+"Voice actors:\n"
+"Andrew \"Snow\" Kenny\n"
+"Bart K7AAY\n"
+"SANTAtheGREY\n"
+"Xansta\n"
+"\n"
+"Version 1 Mar 2025"
 
-#: scripts/scenario_04_cadet_patrol.lua:283
-msgctxt "trade-comms"
-msgid "food"
-msgstr "food"
-
-#: scripts/scenario_04_cadet_patrol.lua:284
-msgctxt "trade-comms"
-msgid "medicine"
-msgstr "medicine"
-
-#: scripts/scenario_04_cadet_patrol.lua:285
-msgctxt "trade-comms"
-msgid "luxury"
-msgstr "luxury"
-
-#: scripts/scenario_04_cadet_patrol.lua:286
-msgctxt "trade-comms"
-msgid "cobalt"
-msgstr "cobalt"
-
-#: scripts/scenario_04_cadet_patrol.lua:287
-msgctxt "trade-comms"
-msgid "dilithium"
-msgstr "dilithium"
-
-#: scripts/scenario_04_cadet_patrol.lua:288
-msgctxt "trade-comms"
-msgid "gold"
-msgstr "gold"
-
-#: scripts/scenario_04_cadet_patrol.lua:289
-msgctxt "trade-comms"
-msgid "nickel"
-msgstr "nickel"
-
-#: scripts/scenario_04_cadet_patrol.lua:290
-msgctxt "trade-comms"
-msgid "platinum"
-msgstr "platinum"
-
-#: scripts/scenario_04_cadet_patrol.lua:291
-msgctxt "trade-comms"
-msgid "tritanium"
-msgstr "tritanium"
-
-#: scripts/scenario_04_cadet_patrol.lua:292
-msgctxt "trade-comms"
-msgid "autodoc"
-msgstr "autodoc"
-
-#: scripts/scenario_04_cadet_patrol.lua:293
-msgctxt "trade-comms"
-msgid "android"
-msgstr "android"
-
-#: scripts/scenario_04_cadet_patrol.lua:294
-msgctxt "trade-comms"
-msgid "battery"
-msgstr "battery"
-
-#: scripts/scenario_04_cadet_patrol.lua:295
-msgctxt "trade-comms"
-msgid "beam"
-msgstr "beam"
-
-#: scripts/scenario_04_cadet_patrol.lua:296
-msgctxt "trade-comms"
-msgid "circuit"
-msgstr "circuit"
-
-#: scripts/scenario_04_cadet_patrol.lua:297
-msgctxt "trade-comms"
-msgid "communication"
-msgstr "communication"
-
-#: scripts/scenario_04_cadet_patrol.lua:298
-msgctxt "trade-comms"
-msgid "filament"
-msgstr "filament"
-
-#: scripts/scenario_04_cadet_patrol.lua:299
-msgctxt "trade-comms"
-msgid "impulse"
-msgstr "impulse"
-
-#: scripts/scenario_04_cadet_patrol.lua:300
-msgctxt "trade-comms"
-msgid "lifter"
-msgstr "lifter"
-
-#: scripts/scenario_04_cadet_patrol.lua:301
-msgctxt "trade-comms"
-msgid "nanites"
-msgstr "nanites"
-
-#: scripts/scenario_04_cadet_patrol.lua:302
-msgctxt "trade-comms"
-msgid "optic"
-msgstr "optic"
-
-#: scripts/scenario_04_cadet_patrol.lua:303
-msgctxt "trade-comms"
-msgid "repulsor"
-msgstr "repulsor"
-
-#: scripts/scenario_04_cadet_patrol.lua:304
-msgctxt "trade-comms"
-msgid "robotic"
-msgstr "robotic"
-
-#: scripts/scenario_04_cadet_patrol.lua:305
-msgctxt "trade-comms"
-msgid "sensor"
-msgstr "sensor"
-
-#: scripts/scenario_04_cadet_patrol.lua:306
-msgctxt "trade-comms"
-msgid "shield"
-msgstr "shield"
-
-#: scripts/scenario_04_cadet_patrol.lua:307
-msgctxt "trade-comms"
-msgid "software"
-msgstr "software"
-
-#: scripts/scenario_04_cadet_patrol.lua:308
-msgctxt "trade-comms"
-msgid "tractor"
-msgstr "tractor"
-
-#: scripts/scenario_04_cadet_patrol.lua:309
-msgctxt "trade-comms"
-msgid "transporter"
-msgstr "transporter"
-
-#: scripts/scenario_04_cadet_patrol.lua:310
-msgctxt "trade-comms"
-msgid "warp"
-msgstr "warp"
-
-#: scripts/scenario_04_cadet_patrol.lua:2904
+#: scripts/scenario_04_cadet_patrol.lua:2847
 msgctxt "scienceDescription-buoy"
 msgid "Come to Billy Bob's for the best food in the sector"
 msgstr "Come to Billy Bob's for the best food in the sector"
 
-#: scripts/scenario_04_cadet_patrol.lua:2908
+#: scripts/scenario_04_cadet_patrol.lua:2851
 msgctxt "scienceDescription-buoy"
 msgid "It's never too late to buy life insurance"
 msgstr "It's never too late to buy life insurance"
 
-#: scripts/scenario_04_cadet_patrol.lua:2910
+#: scripts/scenario_04_cadet_patrol.lua:2853
 msgctxt "scienceDescription-buoy"
 msgid "You'll feel better in an Adder Mark 9"
 msgstr "You'll feel better in an Adder Mark 9"
 
-#: scripts/scenario_04_cadet_patrol.lua:2913
+#: scripts/scenario_04_cadet_patrol.lua:2856
 msgctxt "scienceDescription-buoy"
 msgid ""
 "Melinda's Mynock Management service: excellent rates, satisfaction guaranteed"
-msgstr "Melinda's Mynock Management service: excellent rates, satisfaction guaranteed"
+msgstr ""
+"Melinda's Mynock Management service: excellent rates, satisfaction guaranteed"
 
-#: scripts/scenario_04_cadet_patrol.lua:2917
+#: scripts/scenario_04_cadet_patrol.lua:2860
 msgctxt "scienceDescription-buoy"
 msgid "Visit Repulse shipyards for the best deals"
 msgstr "Visit Repulse shipyards for the best deals"
 
-#: scripts/scenario_04_cadet_patrol.lua:2919
+#: scripts/scenario_04_cadet_patrol.lua:2862
 msgctxt "scienceDescription-buoy"
 msgid "Fresh fish! We catch, you buy!"
 msgstr "Fresh fish! We catch, you buy!"
 
-#: scripts/scenario_04_cadet_patrol.lua:2920
+#: scripts/scenario_04_cadet_patrol.lua:2863
 msgctxt "scienceDescription-buoy"
 msgid "Get your fuel cells at Mariana's Market"
 msgstr "Get your fuel cells at Mariana's Market"
 
-#: scripts/scenario_04_cadet_patrol.lua:2923
+#: scripts/scenario_04_cadet_patrol.lua:2866
 msgctxt "scienceDescription-buoy"
 msgid "Find a special companion. All species available"
 msgstr "Find a special companion. All species available"
 
-#: scripts/scenario_04_cadet_patrol.lua:2927
+#: scripts/scenario_04_cadet_patrol.lua:2870
 msgctxt "scienceDescription-buoy"
 msgid "Feeling down? Robotherapist is there for you"
 msgstr "Feeling down? Robotherapist is there for you"
 
-#: scripts/scenario_04_cadet_patrol.lua:2929
+#: scripts/scenario_04_cadet_patrol.lua:2872
 msgctxt "scienceDescription-buoy"
 msgid "30 days, 30 kilograms, guaranteed"
 msgstr "30 days, 30 kilograms, guaranteed"
 
-#: scripts/scenario_04_cadet_patrol.lua:2930
+#: scripts/scenario_04_cadet_patrol.lua:2873
 msgctxt "scienceDescription-buoy"
 msgid "Be sure to drink your Ovaltine"
 msgstr "Be sure to drink your Ovaltine"
 
-#: scripts/scenario_04_cadet_patrol.lua:2933
+#: scripts/scenario_04_cadet_patrol.lua:2876
 msgctxt "scienceDescription-buoy"
 msgid "Need a personal upgrade? Contact Celine's Cybernetic Implants"
 msgstr "Need a personal upgrade? Contact Celine's Cybernetic Implants"
 
-#: scripts/scenario_04_cadet_patrol.lua:2937
+#: scripts/scenario_04_cadet_patrol.lua:2880
 msgctxt "scienceDescription-buoy"
 msgid "Try our asteroid dust diet weight loss program"
 msgstr "Try our asteroid dust diet weight loss program"
 
-#: scripts/scenario_04_cadet_patrol.lua:2941
+#: scripts/scenario_04_cadet_patrol.lua:2884
 msgctxt "scienceDescription-buoy"
 msgid "Best tasting water in the quadrant at Willy's Waterway"
 msgstr "Best tasting water in the quadrant at Willy's Waterway"
 
-#: scripts/scenario_04_cadet_patrol.lua:2945
+#: scripts/scenario_04_cadet_patrol.lua:2888
 msgctxt "scienceDescription-buoy"
 msgid "Amazing shows every night at Lenny's Lounge"
 msgstr "Amazing shows every night at Lenny's Lounge"
 
-#: scripts/scenario_04_cadet_patrol.lua:2949
+#: scripts/scenario_04_cadet_patrol.lua:2892
 msgctxt "scienceDescription-buoy"
 msgid "Get all your vaccinations at Fred's Pharmacy. Pick up some snacks, too"
 msgstr "Get all your vaccinations at Fred's Pharmacy. Pick up some snacks, too"
 
-#: scripts/scenario_04_cadet_patrol.lua:2953
+#: scripts/scenario_04_cadet_patrol.lua:2896
 msgctxt "scienceDescription-buoy"
 msgid "Tip: make lemons an integral part of your diet"
 msgstr "Tip: make lemons an integral part of your diet"
 
-#: scripts/scenario_04_cadet_patrol.lua:3022
+#: scripts/scenario_04_cadet_patrol.lua:2965
 msgctxt "buttonGM"
 msgid "+Spawn Ship(s)"
 msgstr "+Spawn Ship(s)"
 
-#: scripts/scenario_04_cadet_patrol.lua:3028
+#: scripts/scenario_04_cadet_patrol.lua:2971
 msgctxt "buttonGM"
 msgid "Stored ships"
 msgstr "Stored ships"
 
-#: scripts/scenario_04_cadet_patrol.lua:3029
+#: scripts/scenario_04_cadet_patrol.lua:2972
 msgctxt "msgGM"
 msgid "These are the ships encrypted in storage:"
 msgstr "These are the ships encrypted in storage:"
 
-#: scripts/scenario_04_cadet_patrol.lua:3032
+#: scripts/scenario_04_cadet_patrol.lua:2975
 #, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
 "Key:%s Name:%s Level:%s"
-msgstr "%s\nKey:%s Name:%s Level:%s"
+msgstr ""
+"%s\n"
+"Key:%s Name:%s Level:%s"
 
-#: scripts/scenario_04_cadet_patrol.lua:3041
+#: scripts/scenario_04_cadet_patrol.lua:2984
 msgctxt "buttonGM"
 msgid "Delete storage"
 msgstr "Delete storage"
 
-#: scripts/scenario_04_cadet_patrol.lua:3043
+#: scripts/scenario_04_cadet_patrol.lua:2986
 msgctxt "msgGM"
 msgid "Deleted these encrypted ships:"
 msgstr "Deleted these encrypted ships:"
 
-#: scripts/scenario_04_cadet_patrol.lua:3046
+#: scripts/scenario_04_cadet_patrol.lua:2989
 #, lua-format
 msgctxt "msgGM"
 msgid "%s-%s-name"
 msgstr "%s-%s-name"
 
-#: scripts/scenario_04_cadet_patrol.lua:3050
+#: scripts/scenario_04_cadet_patrol.lua:2993
 #, lua-format
 msgctxt "msgGM"
 msgid "%s-%s-level"
 msgstr "%s-%s-level"
 
-#: scripts/scenario_04_cadet_patrol.lua:3055
+#: scripts/scenario_04_cadet_patrol.lua:2998
 #, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
 "%s"
-msgstr "%s\n%s"
+msgstr ""
+"%s\n"
+"%s"
 
-#: scripts/scenario_04_cadet_patrol.lua:4613
+#: scripts/scenario_04_cadet_patrol.lua:4556
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "Sensor Record: %s station %s in %s"
 msgstr "Sensor Record: %s station %s in %s"
 
-#: scripts/scenario_04_cadet_patrol.lua:4623
+#: scripts/scenario_04_cadet_patrol.lua:4566
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "%s, %s station %s in %s"
 msgstr "%s, %s station %s in %s"
 
-#: scripts/scenario_04_cadet_patrol.lua:4674
+#: scripts/scenario_04_cadet_patrol.lua:4617
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "Sensor Record: %s %s %s in %s carrying %s"
 msgstr "Sensor Record: %s %s %s in %s carrying %s"
 
-#: scripts/scenario_04_cadet_patrol.lua:4686
+#: scripts/scenario_04_cadet_patrol.lua:4629
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "%s; %s %s %s in %s carrying %s"
 msgstr "%s; %s %s %s in %s carrying %s"
 
-#: scripts/scenario_04_cadet_patrol.lua:4702
+#: scripts/scenario_04_cadet_patrol.lua:4645
 msgctxt "scienceDescription-buoy"
 msgid "No data recorded"
 msgstr "No data recorded"
 
-#: scripts/scenario_04_cadet_patrol.lua:4707
-#: scripts/scenario_04_cadet_patrol.lua:4731
+#: scripts/scenario_04_cadet_patrol.lua:4650
+#: scripts/scenario_04_cadet_patrol.lua:4674
 msgctxt "scienceDescription-buoy"
 msgid "Automated data gathering device"
 msgstr "Automated data gathering device"
 
-#: scripts/scenario_04_cadet_patrol.lua:4916
-msgctxt "msgScience"
-msgid "The unscanned artifact we just picked up has fried our scanners"
-msgstr "The unscanned artifact we just picked up has fried our scanners"
-
-#: scripts/scenario_04_cadet_patrol.lua:4925
-msgctxt "msgOperations"
-msgid "The unscanned artifact we just picked up has fried our scanners"
-msgstr "The unscanned artifact we just picked up has fried our scanners"
-
-#: scripts/scenario_04_cadet_patrol.lua:4939
-#, lua-format
-msgctxt "scienceDescription-artifact"
-msgid ""
-"Source of emanations interfering with long range sensors. Range:%.1fu Impact:"
-"%.1fu"
-msgstr "Source of emanations interfering with long range sensors. Range:%.1fu Impact:%.1fu"
-
-#: scripts/scenario_04_cadet_patrol.lua:4953
-msgctxt "scienceDescription-artifact"
-msgid "Source of unusual emanations"
-msgstr "Source of unusual emanations"
-
-#: scripts/scenario_04_cadet_patrol.lua:5004
+#: scripts/scenario_04_cadet_patrol.lua:4838
 msgctxt "crypto-comms"
 msgid "Select alphabetic prefix"
 msgstr "Select alphabetic prefix"
 
-#: scripts/scenario_04_cadet_patrol.lua:5010
+#: scripts/scenario_04_cadet_patrol.lua:4844
 #, lua-format
 msgctxt "crypto-comms"
 msgid ""
 "Key: %s\n"
 "Enter first digit"
-msgstr "Key: %s\nEnter first digit"
+msgstr ""
+"Key: %s\n"
+"Enter first digit"
 
-#: scripts/scenario_04_cadet_patrol.lua:5016
+#: scripts/scenario_04_cadet_patrol.lua:4850
 #, lua-format
 msgctxt "crypto-comms"
 msgid "First digit is %i"
 msgstr "First digit is %i"
 
-#: scripts/scenario_04_cadet_patrol.lua:5022
+#: scripts/scenario_04_cadet_patrol.lua:4856
 #, lua-format
 msgctxt "crypto-comms"
 msgid ""
 "Key: %s%i\n"
 "Enter second digit"
-msgstr "Key: %s%i\nEnter second digit"
+msgstr ""
+"Key: %s%i\n"
+"Enter second digit"
 
-#: scripts/scenario_04_cadet_patrol.lua:5031
+#: scripts/scenario_04_cadet_patrol.lua:4865
 #, lua-format
 msgctxt "crypto-comms"
 msgid "Second digit is %i"
 msgstr "Second digit is %i"
 
-#: scripts/scenario_04_cadet_patrol.lua:5039
+#: scripts/scenario_04_cadet_patrol.lua:4873
 #, lua-format
 msgctxt "crypto-comms"
 msgid ""
 "Key: %s%i%i\n"
 "Enter third digit"
-msgstr "Key: %s%i%i\nEnter third digit"
+msgstr ""
+"Key: %s%i%i\n"
+"Enter third digit"
 
-#: scripts/scenario_04_cadet_patrol.lua:5051
+#: scripts/scenario_04_cadet_patrol.lua:4885
 #, lua-format
 msgctxt "crypto-comms"
 msgid "Third digit is %i"
 msgstr "Third digit is %i"
 
-#: scripts/scenario_04_cadet_patrol.lua:5068
+#: scripts/scenario_04_cadet_patrol.lua:4902
 #, lua-format
 msgctxt "crypto-comms"
 msgid "Key provided: %s"
 msgstr "Key provided: %s"
 
-#: scripts/scenario_04_cadet_patrol.lua:5112
+#: scripts/scenario_04_cadet_patrol.lua:4946
 #, lua-format
 msgctxt "crypto-comms"
 msgid "Current ship state encrypted and stored using new key %s"
 msgstr "Current ship state encrypted and stored using new key %s"
 
-#: scripts/scenario_04_cadet_patrol.lua:5127
+#: scripts/scenario_04_cadet_patrol.lua:4961
 #, lua-format
 msgctxt "crypto-comms"
 msgid "Current ship state encrypted and stored using key provided %s"
 msgstr "Current ship state encrypted and stored using key provided %s"
 
-#: scripts/scenario_04_cadet_patrol.lua:5135
-#: scripts/scenario_04_cadet_patrol.lua:5230
+#: scripts/scenario_04_cadet_patrol.lua:4969
+#: scripts/scenario_04_cadet_patrol.lua:5064
 #, lua-format
 msgctxt "crypto-comms"
 msgid "No ship stored with encryption key %s"
 msgstr "No ship stored with encryption key %s"
 
-#: scripts/scenario_04_cadet_patrol.lua:5225
+#: scripts/scenario_04_cadet_patrol.lua:5059
 msgctxt "crypto-comms"
 msgid "Ship has been decrypted and restored"
 msgstr "Ship has been decrypted and restored"
 
-#: scripts/scenario_04_cadet_patrol.lua:5240
+#: scripts/scenario_04_cadet_patrol.lua:5074
 msgctxt "station-comms"
 msgid "Request permission to dock"
 msgstr "Request permission to dock"
 
-#: scripts/scenario_04_cadet_patrol.lua:5242
+#: scripts/scenario_04_cadet_patrol.lua:5076
 msgctxt "station-comms"
 msgid "Permission granted"
 msgstr "Permission granted"
 
-#: scripts/scenario_04_cadet_patrol.lua:5251
+#: scripts/scenario_04_cadet_patrol.lua:5085
 #, lua-format
 msgctxt "station-comms"
 msgid ""
 "%s\n"
 "You have the option to restore a previously encrypted ship when docked."
-msgstr "%s\nYou have the option to restore a previously encrypted ship when docked."
+msgstr ""
+"%s\n"
+"You have the option to restore a previously encrypted ship when docked."
 
-#: scripts/scenario_04_cadet_patrol.lua:5283
+#: scripts/scenario_04_cadet_patrol.lua:5117
 msgctxt "station-comms"
 msgid "Ready for our first patrol mission"
 msgstr "Ready for our first patrol mission"
 
-#: scripts/scenario_04_cadet_patrol.lua:5293
+#: scripts/scenario_04_cadet_patrol.lua:5127
 #, lua-format
 msgctxt "station-comms"
 msgid ""
 "Your call sign is now %s. You will be contacted for your first mission "
 "shortly."
-msgstr "Your call sign is now %s. You will be contacted for your first mission shortly."
+msgstr ""
+"Your call sign is now %s. You will be contacted for your first mission "
+"shortly."
 
-#: scripts/scenario_04_cadet_patrol.lua:5319
+#: scripts/scenario_04_cadet_patrol.lua:5153
 msgctxt "crypto-comms"
 msgid "Encrypt ship state for future retrieval"
 msgstr "Encrypt ship state for future retrieval"
 
-#: scripts/scenario_04_cadet_patrol.lua:5324
+#: scripts/scenario_04_cadet_patrol.lua:5158
 msgctxt "crypto-comms"
 msgid "How would you like to encrypt the ship state for future retrieval?"
 msgstr "How would you like to encrypt the ship state for future retrieval?"
 
-#: scripts/scenario_04_cadet_patrol.lua:5329
+#: scripts/scenario_04_cadet_patrol.lua:5163
 msgctxt "crypto-comms"
 msgid "Reuse existing encryption key"
 msgstr "Reuse existing encryption key"
 
-#: scripts/scenario_04_cadet_patrol.lua:5339
+#: scripts/scenario_04_cadet_patrol.lua:5173
 msgctxt "crypto-comms"
 msgid "Discard all encryption keys and create a new key"
 msgstr "Discard all encryption keys and create a new key"
 
-#: scripts/scenario_04_cadet_patrol.lua:5349
+#: scripts/scenario_04_cadet_patrol.lua:5183
 msgctxt "crypto-comms"
 msgid "Create a new encryption key"
 msgstr "Create a new encryption key"
 
-#: scripts/scenario_04_cadet_patrol.lua:5361
+#: scripts/scenario_04_cadet_patrol.lua:5195
 msgctxt "crypto-comms"
 msgid "Retrieve and decrypt ship state from storage"
 msgstr "Retrieve and decrypt ship state from storage"
 
-#: scripts/scenario_04_cadet_patrol.lua:5373
+#: scripts/scenario_04_cadet_patrol.lua:5207
 msgctxt "upgrade-comms"
 msgid "Install EMPs"
 msgstr "Install EMPs"
 
-#: scripts/scenario_04_cadet_patrol.lua:5378
+#: scripts/scenario_04_cadet_patrol.lua:5212
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "The shipyard weapons specialists on %s have installed EMPs on %s."
 msgstr "The shipyard weapons specialists on %s have installed EMPs on %s."
 
-#: scripts/scenario_04_cadet_patrol.lua:5386
+#: scripts/scenario_04_cadet_patrol.lua:5220
 msgctxt "msgHelms"
 msgid ""
 "EMP stands for Electro-Magnetic Pulse. These missiles have a blast radius of "
 "one unit. Your ship can get caught in the blast if you fire too close to an "
 "enemy, but you can avoid shield damage if you lower the shields since EMPs "
 "only damage shields."
-msgstr "EMP stands for Electro-Magnetic Pulse. These missiles have a blast radius of one unit. Your ship can get caught in the blast if you fire too close to an enemy, but you can avoid shield damage if you lower the shields since EMPs only damage shields."
+msgstr ""
+"EMP stands for Electro-Magnetic Pulse. These missiles have a blast radius of "
+"one unit. Your ship can get caught in the blast if you fire too close to an "
+"enemy, but you can avoid shield damage if you lower the shields since EMPs "
+"only damage shields."
 
-#: scripts/scenario_04_cadet_patrol.lua:5448
+#: scripts/scenario_04_cadet_patrol.lua:5282
 msgctxt "upgrade-comms"
 msgid "Increase long range sensor range"
 msgstr "Increase long range sensor range"
 
-#: scripts/scenario_04_cadet_patrol.lua:5454
+#: scripts/scenario_04_cadet_patrol.lua:5288
 #, lua-format
 msgctxt "upgrade-comms"
 msgid ""
 "The science technicians on %s have increased the long range sensor range on "
 "%s."
-msgstr "The science technicians on %s have increased the long range sensor range on %s."
+msgstr ""
+"The science technicians on %s have increased the long range sensor range on "
+"%s."
 
-#: scripts/scenario_04_cadet_patrol.lua:5462
+#: scripts/scenario_04_cadet_patrol.lua:5296
 msgctxt "msgScience"
 msgid ""
 "The reach of your sensors is now 30 units instead of 20 units. Use the zoom "
 "control in the lower right hand corner of your screen to see more or less of "
 "the surrounding area."
-msgstr "The reach of your sensors is now 30 units instead of 20 units. Use the zoom control in the lower right hand corner of your screen to see more or less of the surrounding area."
+msgstr ""
+"The reach of your sensors is now 30 units instead of 20 units. Use the zoom "
+"control in the lower right hand corner of your screen to see more or less of "
+"the surrounding area."
 
-#: scripts/scenario_04_cadet_patrol.lua:5495
+#: scripts/scenario_04_cadet_patrol.lua:5329
 msgctxt "upgrade-comms"
 msgid "Install combat maneuver"
 msgstr "Install combat manoeuvre"
 
-#: scripts/scenario_04_cadet_patrol.lua:5500
+#: scripts/scenario_04_cadet_patrol.lua:5334
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "The %s shipyard workers have installed combat maneuver on %s."
 msgstr "The %s shipyard workers have installed combat manoeuvre on %s."
 
-#: scripts/scenario_04_cadet_patrol.lua:5508
+#: scripts/scenario_04_cadet_patrol.lua:5342
 msgctxt "msgHelms"
 msgid ""
 "Use combat maneuver by dragging the solid white circle on the right hand "
@@ -554,27 +428,34 @@ msgid ""
 "sideways or forwards in the direction of the motion of the white circle. "
 "Taking this action adds heat to the impulse and maneuvering systems, so "
 "don't over use it. Combat maneuver can help you dodge dangerous missiles."
-msgstr "Use combat manoeuvre by dragging the solid white circle on the right hand side of your screen sideways or forwards or both. This makes the ship move sideways or forwards in the direction of the motion of the white circle. Taking this action adds heat to the impulse and manoeuvring systems, so don't over use it. Combat manoeuvre can help you dodge dangerous missiles."
+msgstr ""
+"Use combat manoeuvre by dragging the solid white circle on the right hand "
+"side of your screen sideways or forwards or both. This makes the ship move "
+"sideways or forwards in the direction of the motion of the white circle. "
+"Taking this action adds heat to the impulse and manoeuvring systems, so "
+"don't over use it. Combat manoeuvre can help you dodge dangerous missiles."
 
-#: scripts/scenario_04_cadet_patrol.lua:5545
+#: scripts/scenario_04_cadet_patrol.lua:5379
 msgctxt "msgEngineer"
 msgid ""
 "With combat maneuver installed, heat will be added to maneuver and impulse "
 "when helm or tactical uses it. Be prepared."
-msgstr "With combat manoeuvre installed, heat will be added to manoeuvre and impulse when helm or tactical uses it. Be prepared."
+msgstr ""
+"With combat manoeuvre installed, heat will be added to manoeuvre and impulse "
+"when helm or tactical uses it. Be prepared."
 
-#: scripts/scenario_04_cadet_patrol.lua:5576
+#: scripts/scenario_04_cadet_patrol.lua:5410
 msgctxt "upgrade-comms"
 msgid "Install jump drive"
 msgstr "Install jump drive"
 
-#: scripts/scenario_04_cadet_patrol.lua:5581
+#: scripts/scenario_04_cadet_patrol.lua:5415
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "The %s shipyard workers have installed a jump drive on %s."
 msgstr "The %s shipyard workers have installed a jump drive on %s."
 
-#: scripts/scenario_04_cadet_patrol.lua:5589
+#: scripts/scenario_04_cadet_patrol.lua:5423
 msgctxt "msgHelms"
 msgid ""
 "The jump drive can get you to far distances much faster than your impulse "
@@ -582,9 +463,14 @@ msgid ""
 "Steer the ship to the proper bearing. Use the distance slider above the jump "
 "button to set how far you will jump. Once those are set, use the jump button "
 "to activate the jump drive. There will be a countdown to jump."
-msgstr "The jump drive can get you to far distances much faster than your impulse engines. Get bearing and distance to your destination from Science or Relay. Steer the ship to the proper bearing. Use the distance slider above the jump button to set how far you will jump. Once those are set, use the jump button to activate the jump drive. There will be a countdown to jump."
+msgstr ""
+"The jump drive can get you to far distances much faster than your impulse "
+"engines. Get bearing and distance to your destination from Science or Relay. "
+"Steer the ship to the proper bearing. Use the distance slider above the jump "
+"button to set how far you will jump. Once those are set, use the jump button "
+"to activate the jump drive. There will be a countdown to jump."
 
-#: scripts/scenario_04_cadet_patrol.lua:5598
+#: scripts/scenario_04_cadet_patrol.lua:5432
 msgctxt "msgHelms"
 msgid ""
 "The jump drive can get you to far distances much faster than your impulse "
@@ -592,9 +478,14 @@ msgid ""
 "the ship to the proper bearing. Use the distance slider above the jump "
 "button to set how far you will jump. Once those are set, use the jump button "
 "to activate the jump drive. There will be a countdown to jump."
-msgstr "The jump drive can get you to far distances much faster than your impulse engines. Get bearing and distance to your destination from Operations. Steer the ship to the proper bearing. Use the distance slider above the jump button to set how far you will jump. Once those are set, use the jump button to activate the jump drive. There will be a countdown to jump."
+msgstr ""
+"The jump drive can get you to far distances much faster than your impulse "
+"engines. Get bearing and distance to your destination from Operations. Steer "
+"the ship to the proper bearing. Use the distance slider above the jump "
+"button to set how far you will jump. Once those are set, use the jump button "
+"to activate the jump drive. There will be a countdown to jump."
 
-#: scripts/scenario_04_cadet_patrol.lua:5630
+#: scripts/scenario_04_cadet_patrol.lua:5464
 msgctxt "msgEngineer"
 msgid ""
 "The jump drive uses lots of energy. Each time the jump drive is activated, "
@@ -604,20 +495,27 @@ msgid ""
 "charge. If the ship needs to travel further than the jump drive range, you "
 "may be asked to boost power to the jump drive to make it charge faster "
 "between jumps."
-msgstr "The jump drive uses lots of energy. Each time the jump drive is activated, there will be heat added to the jump drive system. Adding coolant to the jump drive system can address the heat. If the jump drive is damaged or the power provided falls below about 25%, the jump drive will gradually lose its charge. If the ship needs to travel further than the jump drive range, you may be asked to boost power to the jump drive to make it charge faster between jumps."
+msgstr ""
+"The jump drive uses lots of energy. Each time the jump drive is activated, "
+"there will be heat added to the jump drive system. Adding coolant to the "
+"jump drive system can address the heat. If the jump drive is damaged or the "
+"power provided falls below about 25%, the jump drive will gradually lose its "
+"charge. If the ship needs to travel further than the jump drive range, you "
+"may be asked to boost power to the jump drive to make it charge faster "
+"between jumps."
 
-#: scripts/scenario_04_cadet_patrol.lua:5666
+#: scripts/scenario_04_cadet_patrol.lua:5500
 msgctxt "upgrade-comms"
 msgid "Install nuclear weapons"
 msgstr "Install nuclear weapons"
 
-#: scripts/scenario_04_cadet_patrol.lua:5671
+#: scripts/scenario_04_cadet_patrol.lua:5505
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "The %s shipyard weapons specialists have installed nukes on %s."
 msgstr "The %s shipyard weapons specialists have installed nukes on %s."
 
-#: scripts/scenario_04_cadet_patrol.lua:5679
+#: scripts/scenario_04_cadet_patrol.lua:5513
 msgctxt "msgHelms"
 msgid ""
 "Nukes have a blast radius of one unit. It is very easy to accidentally blow "
@@ -625,33 +523,40 @@ msgid ""
 "discharge of a nuclear weapon. Make sure the missile has a clear path to the "
 "intended target and that you or any friendly ships are not close to the "
 "blast when it detonates."
-msgstr "Nukes have a blast radius of one unit. It is very easy to accidentally blow yourself up or your friendly ships and stations with the accidental discharge of a nuclear weapon. Make sure the missile has a clear path to the intended target and that you or any friendly ships are not close to the blast when it detonates."
+msgstr ""
+"Nukes have a blast radius of one unit. It is very easy to accidentally blow "
+"yourself up or your friendly ships and stations with the accidental "
+"discharge of a nuclear weapon. Make sure the missile has a clear path to the "
+"intended target and that you or any friendly ships are not close to the "
+"blast when it detonates."
 
-#: scripts/scenario_04_cadet_patrol.lua:5734
+#: scripts/scenario_04_cadet_patrol.lua:5568
 #, lua-format
 msgctxt "goal-comms"
 msgid "Provide %s to %s"
 msgstr "Provide %s to %s"
 
-#: scripts/scenario_04_cadet_patrol.lua:5742
+#: scripts/scenario_04_cadet_patrol.lua:5576
 msgctxt "goal-comms"
 msgid "Thanks! We can now enable our defensive rotational thrusters."
 msgstr "Thanks! We can now enable our defensive rotational thrusters."
 
-#: scripts/scenario_04_cadet_patrol.lua:5755
+#: scripts/scenario_04_cadet_patrol.lua:5589
 msgctxt "upgrade-comms"
 msgid "Install scan proble launch system"
 msgstr "Install scan proble launch system"
 
-#: scripts/scenario_04_cadet_patrol.lua:5761
+#: scripts/scenario_04_cadet_patrol.lua:5595
 #, lua-format
 msgctxt "upgrade-comms"
 msgid ""
 "The science and shipyard propulsion miniaturization specialists on %s have "
 "installed a probe launch system and probes on %s."
-msgstr "The science and shipyard propulsion miniaturization specialists on %s have installed a probe launch system and probes on %s."
+msgstr ""
+"The science and shipyard propulsion miniaturization specialists on %s have "
+"installed a probe launch system and probes on %s."
 
-#: scripts/scenario_04_cadet_patrol.lua:5769
+#: scripts/scenario_04_cadet_patrol.lua:5603
 msgctxt "msgRelay"
 msgid ""
 "Probes give you a 5 unit radius circle of scanner information around the "
@@ -662,20 +567,28 @@ msgid ""
 "neutral station. To launch a probe, click the launch probe button, then "
 "click on the map where you want the probe to go. Probes run out of energy in "
 "about ten minutes. They can also be shot down by enemies."
-msgstr "Probes give you a 5 unit radius circle of scanner information around the probe. Once a probe reaches its destination, you can link it to Science who can then scan things within the 5 unit range of the probe. Some stations automatically, but gradually restock your probes when docked. A probe within 5 units of a neutral station can be used to open communications with the neutral station. To launch a probe, click the launch probe button, then click on the map where you want the probe to go. Probes run out of energy in about ten minutes. They can also be shot down by enemies."
+msgstr ""
+"Probes give you a 5 unit radius circle of scanner information around the "
+"probe. Once a probe reaches its destination, you can link it to Science who "
+"can then scan things within the 5 unit range of the probe. Some stations "
+"automatically, but gradually restock your probes when docked. A probe within "
+"5 units of a neutral station can be used to open communications with the "
+"neutral station. To launch a probe, click the launch probe button, then "
+"click on the map where you want the probe to go. Probes run out of energy in "
+"about ten minutes. They can also be shot down by enemies."
 
-#: scripts/scenario_04_cadet_patrol.lua:5785
+#: scripts/scenario_04_cadet_patrol.lua:5619
 msgctxt "upgrade-comms"
 msgid "Install hacking system"
 msgstr "Install hacking system"
 
-#: scripts/scenario_04_cadet_patrol.lua:5790
+#: scripts/scenario_04_cadet_patrol.lua:5624
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "The cyber security technicians on %s installed a hacking system on %s."
 msgstr "The cyber security technicians on %s installed a hacking system on %s."
 
-#: scripts/scenario_04_cadet_patrol.lua:5798
+#: scripts/scenario_04_cadet_patrol.lua:5632
 msgctxt "msgRelay"
 msgid ""
 "Your newly installed hacking system allows you to degrade the performance of "
@@ -685,54 +598,71 @@ msgid ""
 "Each successful hack reduces the reported system effectiveness by 50%. Even "
 "when hacking is reported as 100% effective, the hacked enemy system is still "
 "running at 25%. An enemy ship with hacked systems is much easier to destroy."
-msgstr "Your newly installed hacking system allows you to degrade the performance of ships within communication range. Click the enemy ship, click the start hacking button, select a subsystem on the right side of the window that pops up, and then complete the mini hacking game (mine sweeper or lights out). Each successful hack reduces the reported system effectiveness by 50%. Even when hacking is reported as 100% effective, the hacked enemy system is still running at 25%. An enemy ship with hacked systems is much easier to destroy."
+msgstr ""
+"Your newly installed hacking system allows you to degrade the performance of "
+"ships within communication range. Click the enemy ship, click the start "
+"hacking button, select a subsystem on the right side of the window that pops "
+"up, and then complete the mini hacking game (mine sweeper or lights out). "
+"Each successful hack reduces the reported system effectiveness by 50%. Even "
+"when hacking is reported as 100% effective, the hacked enemy system is still "
+"running at 25%. An enemy ship with hacked systems is much easier to destroy."
 
-#: scripts/scenario_04_cadet_patrol.lua:6033
+#: scripts/scenario_04_cadet_patrol.lua:5745
 #, lua-format
 msgctxt "goal-comms"
 msgid "We need you to get %s for us. You can get it from %s in sector %s."
 msgstr "We need you to get %s for us. You can get it from %s in sector %s."
 
-#: scripts/scenario_04_cadet_patrol.lua:6115
+#: scripts/scenario_04_cadet_patrol.lua:5827
 msgctxt "msgMainscreen"
 msgid "Arlenian resupply freighter destroyed"
 msgstr "Arlenian resupply freighter destroyed"
 
-#: scripts/scenario_04_cadet_patrol.lua:6132
+#: scripts/scenario_04_cadet_patrol.lua:5844
 #, lua-format
 msgctxt "centralcommandGoal-incCall"
 msgid ""
 "Our sensors detect one or more ships approaching from bearing %.1f. Please "
 "investigate."
-msgstr "Our sensors detect one or more ships approaching from bearing %.1f. Please investigate."
+msgstr ""
+"Our sensors detect one or more ships approaching from bearing %.1f. Please "
+"investigate."
 
-#: scripts/scenario_04_cadet_patrol.lua:6140
+#: scripts/scenario_04_cadet_patrol.lua:5852
 #, lua-format
 msgctxt "centralcommandGoal-incCall"
 msgid ""
 "Welcome to your first patrol mission, cadets.\n"
 "%s"
-msgstr "Welcome to your first patrol mission, cadets.\n%s"
+msgstr ""
+"Welcome to your first patrol mission, cadets.\n"
+"%s"
 
-#: scripts/scenario_04_cadet_patrol.lua:6148
+#: scripts/scenario_04_cadet_patrol.lua:5860
 #, lua-format
 msgctxt "centralcommandGoal-incCall"
 msgid ""
 "%s\n"
 "Make sure Arlenian freighter %s arrives safely. They have critical supplies "
 "for us."
-msgstr "%s\nMake sure Arlenian freighter %s arrives safely. They have critical supplies for us."
+msgstr ""
+"%s\n"
+"Make sure Arlenian freighter %s arrives safely. They have critical supplies "
+"for us."
 
-#: scripts/scenario_04_cadet_patrol.lua:6589
+#: scripts/scenario_04_cadet_patrol.lua:6301
 #, lua-format
 msgctxt "centralcommandGoal-incCall"
 msgid ""
 "You have been assigned patrol duty to the region in and around %s. Request "
 "permission to dock with %s and then dock with %s to get started. Redock with "
 "%s periodically to get your next assignment from the dispatch office."
-msgstr "You have been assigned patrol duty to the region in and around %s. Request permission to dock with %s and then dock with %s to get started. Redock with %s periodically to get your next assignment from the dispatch office."
+msgstr ""
+"You have been assigned patrol duty to the region in and around %s. Request "
+"permission to dock with %s and then dock with %s to get started. Redock with "
+"%s periodically to get your next assignment from the dispatch office."
 
-#: scripts/scenario_04_cadet_patrol.lua:6613
+#: scripts/scenario_04_cadet_patrol.lua:6325
 #, lua-format
 msgctxt "centralcommandGoal-incCall"
 msgid ""
@@ -740,14 +670,151 @@ msgid ""
 "Human Navy. Your task is no longer a simple patrol mission. Your task is to "
 "destroy their primary military station %s located in sector %s while at the "
 "same time protect %s in sector %s. Good luck."
-msgstr "The Kraylor finally communicated a formal declaration of war against the Human Navy. Your task is no longer a simple patrol mission. Your task is to destroy their primary military station %s located in sector %s while at the same time protect %s in sector %s. Good luck."
+msgstr ""
+"The Kraylor finally communicated a formal declaration of war against the "
+"Human Navy. Your task is no longer a simple patrol mission. Your task is to "
+"destroy their primary military station %s located in sector %s while at the "
+"same time protect %s in sector %s. Good luck."
 
-#: scripts/scenario_04_cadet_patrol.lua:6645
+#: scripts/scenario_04_cadet_patrol.lua:6357
 msgctxt "msgMainscreen"
 msgid "Your home station has been destroyed"
 msgstr "Your home station has been destroyed"
 
-#: scripts/scenario_04_cadet_patrol.lua:6653
+#: scripts/scenario_04_cadet_patrol.lua:6365
 msgctxt "msgMainscreen"
 msgid "You have destroyed the Kraylor primary military station"
 msgstr "You have destroyed the Kraylor primary military station"
+
+#~ msgctxt "trade-comms"
+#~ msgid "food"
+#~ msgstr "food"
+
+#~ msgctxt "trade-comms"
+#~ msgid "medicine"
+#~ msgstr "medicine"
+
+#~ msgctxt "trade-comms"
+#~ msgid "luxury"
+#~ msgstr "luxury"
+
+#~ msgctxt "trade-comms"
+#~ msgid "cobalt"
+#~ msgstr "cobalt"
+
+#~ msgctxt "trade-comms"
+#~ msgid "dilithium"
+#~ msgstr "dilithium"
+
+#~ msgctxt "trade-comms"
+#~ msgid "gold"
+#~ msgstr "gold"
+
+#~ msgctxt "trade-comms"
+#~ msgid "nickel"
+#~ msgstr "nickel"
+
+#~ msgctxt "trade-comms"
+#~ msgid "platinum"
+#~ msgstr "platinum"
+
+#~ msgctxt "trade-comms"
+#~ msgid "tritanium"
+#~ msgstr "tritanium"
+
+#~ msgctxt "trade-comms"
+#~ msgid "autodoc"
+#~ msgstr "autodoc"
+
+#~ msgctxt "trade-comms"
+#~ msgid "android"
+#~ msgstr "android"
+
+#~ msgctxt "trade-comms"
+#~ msgid "battery"
+#~ msgstr "battery"
+
+#~ msgctxt "trade-comms"
+#~ msgid "beam"
+#~ msgstr "beam"
+
+#~ msgctxt "trade-comms"
+#~ msgid "circuit"
+#~ msgstr "circuit"
+
+#~ msgctxt "trade-comms"
+#~ msgid "communication"
+#~ msgstr "communication"
+
+#~ msgctxt "trade-comms"
+#~ msgid "filament"
+#~ msgstr "filament"
+
+#~ msgctxt "trade-comms"
+#~ msgid "impulse"
+#~ msgstr "impulse"
+
+#~ msgctxt "trade-comms"
+#~ msgid "lifter"
+#~ msgstr "lifter"
+
+#~ msgctxt "trade-comms"
+#~ msgid "nanites"
+#~ msgstr "nanites"
+
+#~ msgctxt "trade-comms"
+#~ msgid "optic"
+#~ msgstr "optic"
+
+#~ msgctxt "trade-comms"
+#~ msgid "repulsor"
+#~ msgstr "repulsor"
+
+#~ msgctxt "trade-comms"
+#~ msgid "robotic"
+#~ msgstr "robotic"
+
+#~ msgctxt "trade-comms"
+#~ msgid "sensor"
+#~ msgstr "sensor"
+
+#~ msgctxt "trade-comms"
+#~ msgid "shield"
+#~ msgstr "shield"
+
+#~ msgctxt "trade-comms"
+#~ msgid "software"
+#~ msgstr "software"
+
+#~ msgctxt "trade-comms"
+#~ msgid "tractor"
+#~ msgstr "tractor"
+
+#~ msgctxt "trade-comms"
+#~ msgid "transporter"
+#~ msgstr "transporter"
+
+#~ msgctxt "trade-comms"
+#~ msgid "warp"
+#~ msgstr "warp"
+
+#~ msgctxt "msgScience"
+#~ msgid "The unscanned artifact we just picked up has fried our scanners"
+#~ msgstr "The unscanned artifact we just picked up has fried our scanners"
+
+#~ msgctxt "msgOperations"
+#~ msgid "The unscanned artifact we just picked up has fried our scanners"
+#~ msgstr "The unscanned artifact we just picked up has fried our scanners"
+
+#, lua-format
+#~ msgctxt "scienceDescription-artifact"
+#~ msgid ""
+#~ "Source of emanations interfering with long range sensors. Range:%.1fu "
+#~ "Impact:%.1fu"
+#~ msgstr ""
+#~ "Source of emanations interfering with long range sensors. Range:%.1fu "
+#~ "Impact:%.1fu"
+
+#~ msgctxt "scienceDescription-artifact"
+#~ msgid "Source of unusual emanations"
+#~ msgstr "Source of unusual emanations"

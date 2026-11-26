@@ -1,0 +1,49 @@
+#: scripts/artifact_scenario_utility.lua:239
+msgid "upgrade-button"
+msgstr ""
+
+#: scripts/artifact_scenario_utility.lua:252
+msgid "upgrade-msg"
+msgstr ""
+
+#: scripts/artifact_scenario_utility.lua:291
+#, lua-format
+msgctxt "coolant-button"
+msgid "%s C. Pump"
+msgstr ""
+
+#: scripts/artifact_scenario_utility.lua:304
+#, lua-format
+msgctxt "coolant-msg"
+msgid "The %s coolant pump has been repaired"
+msgstr ""
+
+#: scripts/artifact_scenario_utility.lua:865
+#, lua-format
+msgctxt "artifactEffect-msg"
+msgid "The %s retrieved has repaired some hull damage"
+msgstr ""
+
+#: scripts/artifact_scenario_utility.lua:1234
+#, lua-format
+msgctxt "scienceDescription-artifact"
+msgid "Cargo (type: %s)"
+msgstr ""
+
+#: scripts/artifact_scenario_utility.lua:1262
+#, lua-format
+msgctxt "inventory-msg"
+msgid "One %s added to ship inventory"
+msgstr ""
+
+#: scripts/artifact_scenario_utility.lua:1279
+msgctxt "inventory-msg"
+msgid "No cargo space available. Cargo wasted"
+msgstr ""
+
+#: scripts/artifact_scenario_utility.lua:1297
+msgctxt "sabotage-msg"
+msgid ""
+"Booby trapped cargo container. Fortunately automated safety protocols "
+"transported the cargo container off the ship before too much damage was taken"
+msgstr ""

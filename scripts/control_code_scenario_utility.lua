@@ -1,4 +1,7 @@
--- Control code scenario utility
+-- Control code scenario utility, used in Early Evaluation Exercise,
+-- Deliver Ambassador Gremus, Doomed Outpost, Unwanted Visitors, Fermi 500,
+-- Capture the Flag, and Chaos of War.
+--
 -- This utility adds a set of buttons to the GM screen allowing for the viewing and
 -- setting of player ship control codes
 --
@@ -299,4 +302,133 @@ function viewPlayersMatchesDefaults()
             ship_code_out
         )
     )
+end
+
+local control_code_stems = {
+    "ALWAYS",
+    "ASTRO",
+    "BLACK",
+    "BLANK",
+    "BLUE",
+    "BRIGHT",
+    "BROWN",
+    "CHAIN",
+    "CHURCH",
+    "CORNER",
+    "DARK",
+    "DOORWAY",
+    "DOUBLE",
+    "DULL",
+    "ELBOW",
+    "EMPTY",
+    "EPSILON",
+    "FAST",
+    "FLOWER",
+    "FLY",
+    "FROZEN",
+    "GIG",
+    "GREEN",
+    "GLOW",
+    "HAND",
+    "HAMMER",
+    "INK",
+    "INTEL",
+    "JOUST",
+    "JUMP",
+    "KEY",
+    "KINDLE",
+    "LAP",
+    "LETTER",
+    "LIST",
+    "MORNING",
+    "NEXT",
+    "OPEN",
+    "ORANGE",
+    "OUTSIDE",
+    "PURPLE",
+    "QUARTER",
+    "QUIET",
+    "RED",
+    "SHINE",
+    "SIGMA",
+    "STAR",
+    "STREET",
+    "TOKEN",
+    "THIRSTY",
+    "UNDER",
+    "VANISH",
+    "WHITE",
+    "WRENCH",
+    "YELLOW",
+}
+
+function controlCodeStems(extras)
+    local stems = {}
+    for _, stem in ipairs(control_code_stems) do
+        table.insert(stems, stem)
+    end
+    for _, stem in ipairs(extras or {}) do
+        table.insert(stems, stem)
+    end
+    return stems
+end
+
+local function drawControlCodeStem()
+    if control_code_stem == nil or #control_code_stem == 0 then
+        control_code_stem = controlCodeStems()
+    end
+    local index = math.random(1, #control_code_stem)
+    local stem = control_code_stem[index]
+    table.remove(control_code_stem, index)
+    return stem
+end
+
+function assignControlCode(ship, code)
+    if code == nil then
+        code = drawControlCodeStem() .. math.random(100, 999)
+    end
+    ship.control_code = code
+    ship:setControlCode(code)
+    return code
+end
+
+function resetControlCodes()
+    for _, ship in ipairs(getActivePlayerShips()) do
+        assignControlCode(ship)
+    end
+    showControlCodes()
+end
+
+function showControlCodes(faction_filter)
+    local code_list = {}
+    for _, ship in ipairs(getActivePlayerShips()) do
+        if faction_filter == nil or ship:getFaction() == faction_filter then
+            code_list[ship:getCallSign()] = {
+                code = ship.control_code,
+                faction = ship:getFaction(),
+            }
+        end
+    end
+    local sorted_names = {}
+    for name in pairs(code_list) do
+        table.insert(sorted_names, name)
+    end
+    table.sort(sorted_names)
+    local faction_labels = {
+        Kraylor = _("msgGM", " (Kraylor)"),
+        Ktlitans = _("msgGM", " (Ktlitan)"),
+        Exuari = _("msgGM", " (Exuari)"),
+    }
+    local output = ""
+    for _, name in ipairs(sorted_names) do
+        local faction = faction_labels[code_list[name].faction] or ""
+        output = output
+            .. string.format(
+                _("msgGM", "%s: %s %s\n"),
+                name,
+                code_list[name].code,
+                faction
+            )
+    end
+    addGMMessage(output)
 end

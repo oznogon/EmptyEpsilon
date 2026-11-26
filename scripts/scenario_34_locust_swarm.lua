@@ -19,9 +19,17 @@
 -- Basis[Hornet]: The Hornet is the basis for the locusts
 -- Basis[Drone]: The Ktlitan Drone is the basis for the locusts
 require("utils.lua")
+local PlayerState = require("player_state_scenario_utility.lua")
 require("place_station_scenario_utility.lua")
 require("generate_call_sign_scenario_utility.lua")
 require("cpu_ship_diversification_scenario_utility.lua")
+local ShipComms = require("comms_ship_support.lua")
+local ShipNames = require("player_ship_names_scenario_utility.lua")
+local availableForComms = ShipComms.availableForComms
+
+
+local Heading = require("heading_scenario_utility.lua")
+local vectorFromAngleNorth = Heading.north(vectorFromAngle)
 
 function init()
     scenario_version = "0.0.4"
@@ -260,183 +268,18 @@ function setConstants()
         { angle = 60 / 7 * 4 + 180, dist = 6.0827625302982 }, --165
         { angle = 60 / 7 * 4 + 300, dist = 6.0827625302982 }, --166
     }
-    player_ship_names_for = {}
+    player_ship_names_for = ShipNames.shared()
     player_ship_names_for["Amalgam"] = { "Mixer", "Igor", "Ronco", "Ginsu" }
-    player_ship_names_for[ST.ATLANTIS] = {
-        "Excaliber",
-        "Thrasher",
-        "Punisher",
-        "Vorpal",
-        "Protang",
-        "Drummond",
-        "Parchim",
-        "Coronado",
-    }
-    player_ship_names_for["Atlantis II"] =
-        { "Spyder", "Shelob", "Tarantula", "Aragog", "Charlotte" }
-    player_ship_names_for[ST.BENEDICT] = {
-        "Elizabeth",
-        "Ford",
-        "Vikramaditya",
-        "Liaoning",
-        "Avenger",
-        "Naruebet",
-        "Washington",
-        "Lincoln",
-        "Garibaldi",
-        "Eisenhower",
-    }
-    player_ship_names_for[ST.CRUCIBLE] =
-        { "Sling", "Stark", "Torrid", "Kicker", "Flummox" }
     player_ship_names_for["Cruzeiro"] =
         { "Vamanos", "Cougar", "Parthos", "Trifecta", "Light Mind" }
     player_ship_names_for["Destroyer III"] =
         { "Trebuchet", "Pitcher", "Mutant", "Gronk", "Methuselah" }
-    player_ship_names_for[ST.ENDER] =
-        { "Mongo", "Godzilla", "Leviathan", "Kraken", "Jupiter", "Saturn" }
-    player_ship_names_for[ST.FLAVIA_PFALCON] = {
-        "Ladyhawke",
-        "Hunter",
-        "Seeker",
-        "Gyrefalcon",
-        "Kestrel",
-        "Magpie",
-        "Bandit",
-        "Buccaneer",
-    }
-    player_ship_names_for[ST.HATHCOCK] = {
-        "Hayha",
-        "Waldron",
-        "Plunkett",
-        "Mawhinney",
-        "Furlong",
-        "Zaytsev",
-        "Pavlichenko",
-        "Pegahmagabow",
-        "Fett",
-        "Hawkeye",
-        "Hanzo",
-    }
-    player_ship_names_for[ST.KIRIYA] = {
-        "Cavour",
-        "Reagan",
-        "Gaulle",
-        "Paulo",
-        "Truman",
-        "Stennis",
-        "Kuznetsov",
-        "Roosevelt",
-        "Vinson",
-        "Old Salt",
-    }
-    player_ship_names_for[ST.MP52_HORNET] = {
-        "Dragonfly",
-        "Scarab",
-        "Mantis",
-        "Yellow Jacket",
-        "Jimminy",
-        "Flik",
-        "Thorny",
-        "Buzz",
-    }
-    player_ship_names_for[ST.MAVERICK] =
-        { "Angel", "Thunderbird", "Roaster", "Magnifier", "Hedge" }
     player_ship_names_for["Midian"] =
         { "Flipper", "Feint", "Dolphin", "Joker", "Trickster" }
-    player_ship_names_for[ST.NAUTILUS] = {
-        "October",
-        "Abdiel",
-        "Manxman",
-        "Newcon",
-        "Nusret",
-        "Pluton",
-        "Amiral",
-        "Amur",
-        "Heinkel",
-        "Dornier",
-    }
-    player_ship_names_for[ST.PHOBOS_M3P] = {
-        "Blinder",
-        "Shadow",
-        "Distortion",
-        "Diemos",
-        "Ganymede",
-        "Castillo",
-        "Thebe",
-        "Retrograde",
-    }
-    player_ship_names_for[ST.PIRANHA] = {
-        "Razor",
-        "Biter",
-        "Ripper",
-        "Voracious",
-        "Carnivorous",
-        "Characid",
-        "Vulture",
-        "Predator",
-    }
-    player_ship_names_for[ST.VINDICATOR] = {
-        "Excelsior",
-        "Velociraptor",
-        "Thunder",
-        "Kona",
-        "Encounter",
-        "Perth",
-        "Aspern",
-        "Panther",
-    }
-    player_ship_names_for[ST.STINGRAY] = {
-        "Buzzer",
-        "Flitter",
-        "Zippiticus",
-        "Hopper",
-        "Molt",
-        "Stinger",
-        "Stripe",
-    }
-    player_ship_names_for[ST.AVALANCHE] = {
-        "Projectus",
-        "Hurlmeister",
-        "Flinger",
-        "Ovod",
-        "Amatola",
-        "Nakhimov",
-        "Antigone",
-    }
-    player_ship_names_for["Proto-Atlantis"] =
-        { "Narsil", "Blade", "Decapitator", "Trisect", "Sabre" }
     player_ship_names_for["Raven"] =
         { "Claw", "Bethel", "Cicero", "Da Vinci", "Skaats" }
-    player_ship_names_for["Redhook"] =
-        { "Headhunter", "Thud", "Troll", "Scalper", "Shark" }
-    player_ship_names_for[ST.REPULSE] = {
-        "Fiddler",
-        "Brinks",
-        "Loomis",
-        "Mowag",
-        "Patria",
-        "Pandur",
-        "Terrex",
-        "Komatsu",
-        "Eitan",
-    }
     player_ship_names_for["Squid"] =
         { "Ink", "Tentacle", "Pierce", "Writhe", "Bogey" }
-    player_ship_names_for["Stricken"] =
-        { "Blazon", "Streaker", "Pinto", "Spear", "Javelin" }
-    player_ship_names_for[ST.CROW] =
-        { "Sparrow", "Sizzle", "Squawk", "Crow", "Phoenix", "Snowbird", "Hawk" }
-    player_ship_names_for["Surkov"] =
-        { "Sting", "Sneak", "Bingo", "Thrill", "Vivisect" }
-    player_ship_names_for["ZX-Lindworm"] = {
-        "Seagull",
-        "Catapult",
-        "Blowhard",
-        "Flapper",
-        "Nixie",
-        "Pixie",
-        "Tinkerbell",
-    }
     player_ship_names_for["Leftovers"] = { "Foregone", "Righteous", "Masher" }
     playerShipStats =
         { --taken from sandbox. Not all are used. Not all characteristics are used.
@@ -2201,21 +2044,13 @@ function setPlayers(p)
         vectorFromAngleNorth(random(0, 360), random(0, 5000))
     player_spawn_x = player_spawn_x + center_x
     player_spawn_y = player_spawn_y + center_y
-    p:setPosition(player_spawn_x, player_spawn_y)
-    --set defaults for those ships not found in the list
-    p.shipScore = 24
-    p.maxCargo = 5
-    p.cargo = p.maxCargo
-    p.tractor = false
-    p.tractor_target_lock = false
-    p.mining = false
-    p.goods = {}
-    p:setFaction(player_faction)
+    PlayerState.applyDefaults(p, {
+        position = { player_spawn_x, player_spawn_y },
+        faction = player_faction,
+        reputation = 50,
+    })
     updatePlayerSoftTemplate(p)
     p:onDestruction(playerDestruction)
-    if p:getReputationPoints() == 0 then
-        p:setReputationPoints(50)
-    end
 end
 function updatePlayerSoftTemplate(p)
     local tempTypeName = p:getTypeName()
@@ -2252,59 +2087,7 @@ function updatePlayerSoftTemplate(p)
             )
         end
     end
-    p.maxRepairCrew = p:getRepairCrewCount()
-    p.healthyShield = 1.0
-    p.prevShield = 1.0
-    p.healthyReactor = 1.0
-    p.prevReactor = 1.0
-    p.healthyManeuver = 1.0
-    p.prevManeuver = 1.0
-    p.healthyImpulse = 1.0
-    p.prevImpulse = 1.0
-    if p:getBeamWeaponRange(0) > 0 then
-        p.healthyBeam = 1.0
-        p.prevBeam = 1.0
-    end
-    local tube_count = p:getWeaponTubeCount()
-    if tube_count > 0 then
-        p.healthyMissile = 1.0
-        p.prevMissile = 1.0
-        local size_letter = {
-            ["small"] = "S",
-            ["medium"] = "M",
-            ["large"] = "L",
-        }
-        p.tube_size = ""
-        for i = 1, tube_count do
-            p.tube_size = p.tube_size .. size_letter[p:getTubeSize(i - 1)]
-        end
-    end
-    if p:hasWarpDrive() then
-        p.healthyWarp = 1.0
-        p.prevWarp = 1.0
-    end
-    if p:hasJumpDrive() then
-        p.healthyJump = 1.0
-        p.prevJump = 1.0
-    end
-    p.initialCoolant = p:getMaxCoolant()
-    local system_types = {
-        "reactor",
-        "beamweapons",
-        "missilesystem",
-        "maneuver",
-        "impulse",
-        "warp",
-        "jumpdrive",
-        "frontshield",
-        "rearshield",
-    }
-    p.normal_coolant_rate = {}
-    p.normal_power_rate = {}
-    for idx, system in ipairs(system_types) do
-        p.normal_coolant_rate[system] = p:getSystemCoolantRate(system)
-        p.normal_power_rate[system] = p:getSystemPowerRate(system)
-    end
+    PlayerState.resetBaseline(p, {})
     p.swarm_status_rel = "swarm_status_rel"
     p:addCustomButton(
         "Relay",
@@ -2399,38 +2182,6 @@ function organicSystems(self, instigator)
     end
 end
 -- Utility
-function angleFromVectorNorth(p1x, p1y, p2x, p2y)
-    TWOPI = 6.2831853071795865
-    RAD2DEG = 57.2957795130823209
-    atan2parm1 = p2x - p1x
-    atan2parm2 = p2y - p1y
-    theta = math.atan2(atan2parm1, atan2parm2)
-    if theta < 0 then
-        theta = theta + TWOPI
-    end
-    return (360 - (RAD2DEG * theta)) % 360
-end
-function vectorFromAngleNorth(angle, distance)
-    -- print("input angle to vectorFromAngleNorth:")
-    -- print(angle)
-    angle = (angle + 270) % 360
-    local x, y = vectorFromAngle(angle, distance)
-    return x, y
-end
-function tableRemoveRandom(array)
-    -- Remove random element from array and return it.
-    -- Returns nil if the array is empty,
-    -- analogous to `table.remove`.
-    local array_item_count = #array
-    if array_item_count == 0 then
-        return nil
-    end
-    local selected_item = math.random(array_item_count)
-    local temp = array[selected_item]
-    array[selected_item] = array[array_item_count]
-    array[array_item_count] = temp
-    return table.remove(array)
-end
 function testFormation()
     swarm_x = 0
     swarm_y = 0
@@ -2853,33 +2604,6 @@ function commsGatherBriefing()
             )
         end)
     end)
-end
-function availableForComms(p)
-    if not p:isCommsInactive() then
-        return false
-    end
-    if p:isCommsOpening() then
-        return false
-    end
-    if p:isCommsBeingHailed() then
-        return false
-    end
-    if p:isCommsBeingHailedByGM() then
-        return false
-    end
-    if p:isCommsChatOpen() then
-        return false
-    end
-    if p:isCommsChatOpenToGM() then
-        return false
-    end
-    if p:isCommsChatOpenToPlayer() then
-        return false
-    end
-    if p:isCommsScriptOpen() then
-        return false
-    end
-    return true
 end
 function getBriefingStation(p)
     local briefing_stations = {}

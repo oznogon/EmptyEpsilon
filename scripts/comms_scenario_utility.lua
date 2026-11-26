@@ -80,6 +80,7 @@
 --          function exists.
 --  Note: more booleans are listed before each function to which they apply
 require("utils.lua")
+local Heading = require("heading_scenario_utility.lua")
 require("generate_call_sign_scenario_utility.lua")
 require("cpu_ship_diversification_scenario_utility.lua")
 
@@ -294,11 +295,7 @@ function angleFromVectorNorth(p1x, p1y, p2x, p2y)
     end
     return (360 - (RAD2DEG * theta)) % 360
 end
-function vectorFromAngleNorth(angle, distance)
-    angle = (angle + 270) % 360
-    local x, y = vectorFromAngle(angle, distance)
-    return x, y
-end
+vectorFromAngleNorth = Heading.north(vectorFromAngle)
 --  Initialization utilities
 function initializeGoodDescription()
     good_desc = {

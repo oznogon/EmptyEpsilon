@@ -37,6 +37,7 @@
 -- Advance[9]: Advance wave start to 9
 
 require("utils.lua")
+local ShipNames = require("player_ship_names_scenario_utility.lua")
 -- For this scenario, utils.lua provides:
 --   vectorFromAngle(angle, length)
 --      Returns a relative vector (x, y coordinates)
@@ -46,6 +47,9 @@ require("place_station_scenario_utility.lua")
 require("cpu_ship_diversification_scenario_utility.lua")
 require("generate_call_sign_scenario_utility.lua")
 require("comms_scenario_utility.lua")
+
+local Heading = require("heading_scenario_utility.lua")
+local vectorFromAngleNorth = Heading.north(vectorFromAngle)
 
 function init()
     scenario_version = "1.0.8"
@@ -533,28 +537,8 @@ function setGlobals()
         },
     }
     player_ship_names = {
-        [ST.ATLANTIS] = {
-            "Excaliber",
-            "Thrasher",
-            "Punisher",
-            "Vorpal",
-            "Protang",
-            "Drummond",
-            "Parchim",
-            "Coronado",
-        },
-        [ST.BENEDICT] = {
-            "Elizabeth",
-            "Ford",
-            "Vikramaditya",
-            "Liaoning",
-            "Avenger",
-            "Naruebet",
-            "Washington",
-            "Lincoln",
-            "Garibaldi",
-            "Eisenhower",
-        },
+        [ST.ATLANTIS] = ShipNames.pool("Atlantis"),
+        [ST.BENEDICT] = ShipNames.pool("Benedict"),
         [ST.CRUCIBLE] = {
             "Sling",
             "Stark",
@@ -563,155 +547,21 @@ function setGlobals()
             "Flummox",
             "3rd Charm",
         },
-        [ST.ENDER] = {
-            "Mongo",
-            "Godzilla",
-            "Leviathan",
-            "Kraken",
-            "Jupiter",
-            "Saturn",
-        },
-        [ST.FLAVIA_PFALCON] = {
-            "Ladyhawke",
-            "Hunter",
-            "Seeker",
-            "Gyrefalcon",
-            "Kestrel",
-            "Magpie",
-            "Bandit",
-            "Buccaneer",
-        },
-        [ST.HATHCOCK] = {
-            "Hayha",
-            "Waldron",
-            "Plunkett",
-            "Mawhinney",
-            "Furlong",
-            "Zaytsev",
-            "Pavlichenko",
-            "Pegahmagabow",
-            "Fett",
-            "Hawkeye",
-            "Hanzo",
-        },
-        [ST.KIRIYA] = {
-            "Cavour",
-            "Reagan",
-            "Gaulle",
-            "Paulo",
-            "Truman",
-            "Stennis",
-            "Kuznetsov",
-            "Roosevelt",
-            "Vinson",
-            "Old Salt",
-        },
-        [ST.MP52_HORNET] = {
-            "Dragonfly",
-            "Scarab",
-            "Mantis",
-            "Yellow Jacket",
-            "Jimminy",
-            "Flik",
-            "Thorny",
-            "Buzz",
-        },
-        [ST.MAVERICK] = {
-            "Angel",
-            "Thunderbird",
-            "Roaster",
-            "Magnifier",
-            "Hedge",
-        },
-        [ST.NAUTILUS] = {
-            "October",
-            "Abdiel",
-            "Manxman",
-            "Newcon",
-            "Nusret",
-            "Pluton",
-            "Amiral",
-            "Amur",
-            "Heinkel",
-            "Dornier",
-        },
-        [ST.PHOBOS_M3P] = {
-            "Blinder",
-            "Shadow",
-            "Distortion",
-            "Diemos",
-            "Ganymede",
-            "Castillo",
-            "Thebe",
-            "Retrograde",
-        },
-        [ST.PIRANHA] = {
-            "Razor",
-            "Biter",
-            "Ripper",
-            "Voracious",
-            "Carnivorous",
-            "Characid",
-            "Vulture",
-            "Predator",
-        },
-        [ST.VINDICATOR] = {
-            "Excelsior",
-            "Velociraptor",
-            "Thunder",
-            "Kona",
-            "Encounter",
-            "Perth",
-            "Aspern",
-            "Panther",
-        },
-        [ST.STINGRAY] = {
-            "Buzzer",
-            "Flitter",
-            "Zippiticus",
-            "Hopper",
-            "Molt",
-            "Stinger",
-            "Stripe",
-        },
-        [ST.AVALANCHE] = {
-            "Projectus",
-            "Hurlmeister",
-            "Flinger",
-            "Ovod",
-            "Amatola",
-            "Nakhimov",
-            "Antigone",
-        },
-        [ST.REPULSE] = {
-            "Fiddler",
-            "Brinks",
-            "Loomis",
-            "Mowag",
-            "Patria",
-            "Pandur",
-            "Terrex",
-            "Komatsu",
-            "Eitan",
-        },
-        [ST.CROW] = {
-            "Sparrow",
-            "Sizzle",
-            "Squawk",
-            "Crow",
-            "Phoenix",
-            "Snowbird",
-            "Hawk",
-        },
-        [ST.ZX_LINDWORM] = {
-            "Seagull",
-            "Catapult",
-            "Blowhard",
-            "Flapper",
-            "Nixie",
-            "Pixie",
-            "Tinkerbell",
-        },
+        [ST.ENDER] = ShipNames.pool("Ender"),
+        [ST.FLAVIA_PFALCON] = ShipNames.pool("Flavia P.Falcon"),
+        [ST.HATHCOCK] = ShipNames.pool("Hathcock"),
+        [ST.KIRIYA] = ShipNames.pool("Kiriya"),
+        [ST.MP52_HORNET] = ShipNames.pool("MP52 Hornet"),
+        [ST.MAVERICK] = ShipNames.pool("Maverick"),
+        [ST.NAUTILUS] = ShipNames.pool("Nautilus"),
+        [ST.PHOBOS_M3P] = ShipNames.pool("Phobos M3P"),
+        [ST.PIRANHA] = ShipNames.pool("Piranha"),
+        [ST.VINDICATOR] = ShipNames.pool("Vindicator"),
+        [ST.STINGRAY] = ShipNames.pool("Stingray"),
+        [ST.AVALANCHE] = ShipNames.pool("Avalanche"),
+        [ST.REPULSE] = ShipNames.pool("Repulse"),
+        [ST.CROW] = ShipNames.pool("Crow"),
+        [ST.ZX_LINDWORM] = ShipNames.pool("ZX-Lindworm"),
         ["Leftovers"] = {
             "Foregone",
             "Righteous",
@@ -1240,45 +1090,6 @@ end
 -------------------------
 -- General utilities  --
 -------------------------
-function tableRemoveRandom(array)
-    -- Remove random element from array and return it.
-    -- Returns nil if the array is empty,
-    -- analogous to `table.remove`.
-    local array_item_count = #array
-    if array_item_count == 0 then
-        return nil
-    end
-    local selected_item = math.random(array_item_count)
-    local temp = array[selected_item]
-    array[selected_item] = array[array_item_count]
-    array[array_item_count] = temp
-    return table.remove(array)
-end
-function tableSelectRandom(array)
-    local array_item_count = #array
-    if array_item_count == 0 then
-        return nil
-    end
-    return array[math.random(1, #array)]
-end
-function angleFromVectorNorth(p1x, p1y, p2x, p2y)
-    TWOPI = 6.2831853071795865
-    RAD2DEG = 57.2957795130823209
-    atan2parm1 = p2x - p1x
-    atan2parm2 = p2y - p1y
-    theta = math.atan2(atan2parm1, atan2parm2)
-    if theta < 0 then
-        theta = theta + TWOPI
-    end
-    return (360 - (RAD2DEG * theta)) % 360
-end
-function vectorFromAngleNorth(angle, distance)
-    -- print("input angle to vectorFromAngleNorth:")
-    -- print(angle)
-    angle = (angle + 270) % 360
-    local x, y = vectorFromAngle(angle, distance)
-    return x, y
-end
 function getDuration()
     local duration = getScenarioTime()
     local duration_string = math.floor(duration)

@@ -38,6 +38,49 @@ require("place_station_scenario_utility.lua")
 require("cpu_ship_diversification_scenario_utility.lua")
 require("generate_call_sign_scenario_utility.lua")
 require("comms_scenario_utility.lua")
+local defaults = require("defaults_scenario_utility.lua")
+local ShipNames = require("player_ship_names_scenario_utility.lua")
+local PlayerState = require("player_state_scenario_utility.lua")
+local ShipComms = require("comms_ship_support.lua")
+local Sensor = require("sensor_scenario_utility.lua")
+local MissionMenu = require("comms_mission_menu.lua")
+local setOptionalOrders = MissionMenu.setOptionalOrders
+local Fleet = require("spawn_ships_scenario_utility.lua")
+local Stats = require("statistics_scenario_utility.lua")
+local playerDestroyed = Fleet.noopDestroyed
+local Supply = require("supply_scenario_utility.lua")
+local supplyPickupProcess = Supply.supplyPickupProcess
+
+
+local sensorJammer = Sensor.sensorJammerBasic
+local sensorJammerPickupProcess = Sensor.sensorJammerPickupBasic
+
+local availableForComms = ShipComms.availableForComms
+
+
+local getTemplatePool = Fleet.templatePoolGetter({
+    catalog = function() return ship_template end,
+    selectivity = function() return pool_selectivity end,
+    composition = function() return fleetComposition end,
+    limit = function() return template_pool_size end,
+    stock_template = function() return stockTemplate end,
+    fleet_group = function() return fleet_group end,
+})
+
+local playerPower = Fleet.playerPower
+
+local spawnRandomArmed = Fleet.relativeSpawner({
+    catalog = function() return ship_template end,
+    relative_strength = function() return relative_strength end,
+    player_power = playerPower,
+    enemy_power = function() return enemy_power end,
+    pool = getTemplatePool,
+    formation = function() return formation_delta end,
+    prefix = generateCallSignPrefix,
+    faction = function() return fleetSpawnFaction end,
+    set_faction = function(faction) fleetSpawnFaction = faction end,
+    callsign = generateCallSign,
+})
 
 --	Initialization
 function init()
@@ -71,17 +114,7 @@ function setConstants()
     relative_strength = 1
     max_repeat_loop = 100
     ordnance_types = { "Homing", "Nuke", "Mine", "EMP", "HVLI" }
-    system_types = {
-        "reactor",
-        "beamweapons",
-        "missilesystem",
-        "maneuver",
-        "impulse",
-        "warp",
-        "jumpdrive",
-        "frontshield",
-        "rearshield",
-    }
+    system_types = defaults.systems().system_types
     ship_template = { --ordered by relative strength
         -- normal ships that are part of the fleet spawn process
         ["Gnat"] = {
@@ -2734,119 +2767,7 @@ function setGlobals()
             mining = true,
         },
     }
-    player_ship_names_for = {
-        [ST.ATLANTIS] = {
-            "Excaliber",
-            "Thrasher",
-            "Punisher",
-            "Vorpal",
-            "Protang",
-            "Drummond",
-            "Parchim",
-            "Coronado",
-        },
-        ["Atlantis II"] = {
-            "Spyder",
-            "Shelob",
-            "Tarantula",
-            "Aragog",
-            "Charlotte",
-        },
-        [ST.BENEDICT] = {
-            "Elizabeth",
-            "Ford",
-            "Vikramaditya",
-            "Liaoning",
-            "Avenger",
-            "Naruebet",
-            "Washington",
-            "Lincoln",
-            "Garibaldi",
-            "Eisenhower",
-        },
-        [ST.CRUCIBLE] = { "Sling", "Stark", "Torrid", "Kicker", "Flummox" },
-        [ST.ENDER] = {
-            "Mongo",
-            "Godzilla",
-            "Leviathan",
-            "Kraken",
-            "Jupiter",
-            "Saturn",
-        },
-        [ST.FLAVIA_PFALCON] = {
-            "Ladyhawke",
-            "Hunter",
-            "Seeker",
-            "Gyrefalcon",
-            "Kestrel",
-            "Magpie",
-            "Bandit",
-            "Buccaneer",
-        },
-        [ST.HATHCOCK] = {
-            "Hayha",
-            "Waldron",
-            "Plunkett",
-            "Mawhinney",
-            "Furlong",
-            "Zaytsev",
-            "Pavlichenko",
-            "Pegahmagabow",
-            "Fett",
-            "Hawkeye",
-            "Hanzo",
-        },
-        [ST.KIRIYA] = {
-            "Cavour",
-            "Reagan",
-            "Gaulle",
-            "Paulo",
-            "Truman",
-            "Stennis",
-            "Kuznetsov",
-            "Roosevelt",
-            "Vinson",
-            "Old Salt",
-        },
-        [ST.MAVERICK] = {
-            "Angel",
-            "Thunderbird",
-            "Roaster",
-            "Magnifier",
-            "Hedge",
-        },
-        [ST.MP52_HORNET] = {
-            "Dragonfly",
-            "Scarab",
-            "Mantis",
-            "Yellow Jacket",
-            "Jimminy",
-            "Flik",
-            "Thorny",
-            "Buzz",
-        },
-        [ST.NAUTILUS] = {
-            "October",
-            "Abdiel",
-            "Manxman",
-            "Newcon",
-            "Nusret",
-            "Pluton",
-            "Amiral",
-            "Amur",
-            "Heinkel",
-            "Dornier",
-        },
-        [ST.PHOBOS_M3P] = {
-            "Blinder",
-            "Shadow",
-            "Distortion",
-            "Diemos",
-            "Ganymede",
-            "Castillo",
-            "Thebe",
-            "Retrograde",
-        },
+    player_ship_names_for = ShipNames.forScenario({
         ["Phobos M5P"] = {
             "Blinder",
             "Shadow",
@@ -2861,63 +2782,6 @@ function setGlobals()
             "Thrust",
             "Coyote",
         },
-        [ST.PIRANHA] = {
-            "Razor",
-            "Biter",
-            "Ripper",
-            "Voracious",
-            "Carnivorous",
-            "Characid",
-            "Vulture",
-            "Predator",
-        },
-        [ST.VINDICATOR] = {
-            "Excelsior",
-            "Velociraptor",
-            "Thunder",
-            "Kona",
-            "Encounter",
-            "Perth",
-            "Aspern",
-            "Panther",
-        },
-        [ST.STINGRAY] = {
-            "Buzzer",
-            "Flitter",
-            "Zippiticus",
-            "Hopper",
-            "Molt",
-            "Stinger",
-            "Stripe",
-        },
-        [ST.AVALANCHE] = {
-            "Projectus",
-            "Hurlmeister",
-            "Flinger",
-            "Ovod",
-            "Amatola",
-            "Nakhimov",
-            "Antigone",
-        },
-        ["Proto-Atlantis"] = {
-            "Narsil",
-            "Blade",
-            "Decapitator",
-            "Trisect",
-            "Sabre",
-        },
-        ["Redhook"] = { "Headhunter", "Thud", "Troll", "Scalper", "Shark" },
-        [ST.REPULSE] = {
-            "Fiddler",
-            "Brinks",
-            "Loomis",
-            "Mowag",
-            "Patria",
-            "Pandur",
-            "Terrex",
-            "Komatsu",
-            "Eitan",
-        },
         [ST.SAIPAN] = {
             "Atlas",
             "Bernard",
@@ -2928,28 +2792,8 @@ function setGlobals()
             "Saratoga",
             "Pegasus",
         },
-        ["Stricken"] = { "Blazon", "Streaker", "Pinto", "Spear", "Javelin" },
-        [ST.CROW] = {
-            "Sparrow",
-            "Sizzle",
-            "Squawk",
-            "Crow",
-            "Phoenix",
-            "Snowbird",
-            "Hawk",
-        },
-        ["Surkov"] = { "Sting", "Sneak", "Bingo", "Thrill", "Vivisect" },
-        ["ZX-Lindworm"] = {
-            "Seagull",
-            "Catapult",
-            "Blowhard",
-            "Flapper",
-            "Nixie",
-            "Pixie",
-            "Tinkerbell",
-        },
         ["Leftovers"] = { "Foregone", "Righteous", "Scandalous" },
-    }
+    })
     stations = {}
     fleetComposition = "Random"
     fleet_composition_labels = {
@@ -5342,95 +5186,7 @@ function placeTerrain(placement_area, terrain)
         return false
     end
 end
-function supplyPickupProcess(self, player)
-    if self.repairCrew ~= nil then
-        player:setRepairCrewCount(player:getRepairCrewCount() + self.repairCrew)
-    end
-    if self.coolant ~= nil then
-        player:setMaxCoolant(player:getMaxCoolant() + self.coolant)
-    end
-    if self.probes ~= nil then
-        player:setScanProbeCount(
-            math.min(
-                player:getScanProbeCount() + self.probes,
-                player:getMaxScanProbeCount()
-            )
-        )
-    end
-    if self.armor ~= nil then
-        player:setHull(
-            math.min(player:getHull() + self.armor, player:getHullMax())
-        )
-    end
-    if player:hasJumpDrive() then
-        if self.jump_charge ~= nil then
-            player:setJumpDriveCharge(
-                player:getJumpDriveCharge() + self.jump_charge
-            )
-        end
-    end
-end
 --	Sensor jammer functions
-function sensorJammerPickupProcess(self, retriever)
-    string.format("")
-    local jammer_call_sign = self:getCallSign()
-    sensor_jammer_list[jammer_call_sign] = nil
-    if not self:isScannedBy(retriever) then
-        retriever:setCanScan(false)
-        retriever.scanner_dead = "scanner_dead"
-        retriever:addCustomMessage(
-            "Science",
-            retriever.scanner_dead,
-            _(
-                "msgScience",
-                "The unscanned artifact we just picked up has fried our scanners"
-            )
-        )
-        retriever.scanner_dead_ops = "scanner_dead_ops"
-        retriever:addCustomMessage(
-            "Operations",
-            retriever.scanner_dead_ops,
-            _(
-                "msgOperations",
-                "The unscanned artifact we just picked up has fried our scanners"
-            )
-        )
-    end
-    may_explain_sensor_jammer = true
-end
-function sensorJammer(x, y)
-    artifact_number = artifact_number + math.random(1, 4)
-    local random_suffix = string.char(math.random(65, 90))
-    local jammer_call_sign =
-        string.format("SJ%i%s", artifact_number, random_suffix)
-    local scanned_description = string.format(
-        _(
-            "scienceDescription-artifact",
-            "Source of emanations interfering with long range sensors. Range:%.1fu Impact:%.1fu"
-        ),
-        sensor_jammer_range / 1000,
-        sensor_jammer_impact / 1000
-    )
-    local sensor_jammer = Artifact()
-        :setPosition(x, y)
-        :setScanningParameters(
-            sensor_jammer_scan_complexity,
-            sensor_jammer_scan_depth
-        )
-        :setRadarSignatureInfo(0.2, 0.4, 0.1)
-        :setModel("SensorBuoyMKIII")
-        :setDescriptions(
-            _("scienceDescription-artifact", "Source of unusual emanations"),
-            scanned_description
-        )
-        :setCallSign(jammer_call_sign)
-    sensor_jammer:onPickUp(sensorJammerPickupProcess)
-    sensor_jammer_list[jammer_call_sign] = sensor_jammer
-    sensor_jammer.jam_range = sensor_jammer_range
-    sensor_jammer.jam_impact = sensor_jammer_impact
-    sensor_jammer.jam_impact_units = sensor_jammer_power_units
-    return sensor_jammer
-end
 function updatePlayerLongRangeSensors(delta, p)
     local free_sensor_boost = false
     local sensor_boost_present = false
@@ -5576,56 +5332,48 @@ function updatePlayerLongRangeSensors(delta, p)
 end
 --	Players
 function setPlayers()
-    for i, p in ipairs(getActivePlayerShips()) do
-        if p.shipScore == nil then
-            updatePlayerSoftTemplate(p)
-            deployed_player_count = deployed_player_count + 1
-            if difficulty < 1 then
-                p:addToShipLog(
-                    string.format(
-                        _(
-                            "goal-shipLog",
-                            "Hans Gestalt, a noted exotic weapons research scientist, sent us an encrypted message. He's being held by the Kraylor against his will in his research facility on station %s in sector %s. Your mission is to dock with %s, retrieve him and bring him to %s."
+    PlayerState.recordDeployments(getActivePlayerShips(), deployed_players, {
+        include_template = true,
+        prepare = function(p)
+            if p.shipScore == nil then
+                updatePlayerSoftTemplate(p)
+                deployed_player_count = deployed_player_count + 1
+                if difficulty < 1 then
+                    p:addToShipLog(
+                        string.format(
+                            _(
+                                "goal-shipLog",
+                                "Hans Gestalt, a noted exotic weapons research scientist, sent us an encrypted message. He's being held by the Kraylor against his will in his research facility on station %s in sector %s. Your mission is to dock with %s, retrieve him and bring him to %s."
+                            ),
+                            target_station:getCallSign(),
+                            target_station:getSectorName(),
+                            target_station:getCallSign(),
+                            home_station:getCallSign()
                         ),
-                        target_station:getCallSign(),
-                        target_station:getSectorName(),
-                        target_station:getCallSign(),
-                        home_station:getCallSign()
-                    ),
-                    "Magenta"
-                )
-            else
-                p:addToShipLog(
-                    string.format(
-                        _(
-                            "goal-shipLog",
-                            "Hans Gestalt, a noted exotic weapons research scientist, sent us an encrypted message. He's being held by the Kraylor against his will in his research facility on station %s. Your mission is to dock with %s, retrieve him and bring him to %s."
+                        "Magenta"
+                    )
+                else
+                    p:addToShipLog(
+                        string.format(
+                            _(
+                                "goal-shipLog",
+                                "Hans Gestalt, a noted exotic weapons research scientist, sent us an encrypted message. He's being held by the Kraylor against his will in his research facility on station %s. Your mission is to dock with %s, retrieve him and bring him to %s."
+                            ),
+                            target_station:getCallSign(),
+                            target_station:getCallSign(),
+                            home_station:getCallSign()
                         ),
-                        target_station:getCallSign(),
-                        target_station:getCallSign(),
-                        home_station:getCallSign()
-                    ),
-                    "Magenta"
-                )
+                        "Magenta"
+                    )
+                end
             end
-        end
-        local already_recorded = false
-        for j, dp in ipairs(deployed_players) do
-            if p == dp.p then
-                already_recorded = true
-                break
+        end,
+        after = function(p)
+            if p:getReputationPoints() == 0 then
+                p:setReputationPoints(reputation_start_amount)
             end
-        end
-        if not already_recorded then
-            table.insert(
-                deployed_players,
-                { p = p, name = p:getCallSign(), count = 1, template = p:getTypeName() }
-            )
-        end
-        if p:getReputationPoints() == 0 then
-            p:setReputationPoints(reputation_start_amount)
-        end
-    end
+        end,
+    })
 end
 function updatePlayerSoftTemplate(p)
     --set defaults for those ships not found in the list
@@ -5648,14 +5396,7 @@ function updatePlayerSoftTemplate(p)
         multiple_player_spawn[pidx].y + es_y
     )
     ship:orderAttack(p)
-    p.shipScore = 24
-    p.maxCargo = 5
-    p.cargo = p.maxCargo
-    p.tractor = false
-    p.tractor_target_lock = false
-    p.mining = false
-    p.goods = {}
-    p:setFaction("Human Navy")
+    PlayerState.applyDefaults(p, { faction = "Human Navy" })
     p:onDestroyed(playerDestroyed)
     p:onDestruction(playerDestruction)
     local temp_type_name = p:getTypeName()
@@ -5721,51 +5462,7 @@ function updatePlayerSoftTemplate(p)
             )
         end
     end
-    p.maxRepairCrew = p:getRepairCrewCount()
-    p.healthyShield = 1.0
-    p.prevShield = 1.0
-    p.healthyReactor = 1.0
-    p.prevReactor = 1.0
-    p.healthyManeuver = 1.0
-    p.prevManeuver = 1.0
-    p.healthyImpulse = 1.0
-    p.prevImpulse = 1.0
-    if p:getBeamWeaponRange(0) > 0 then
-        p.healthyBeam = 1.0
-        p.prevBeam = 1.0
-    end
-    local tube_count = p:getWeaponTubeCount()
-    if tube_count > 0 then
-        p.healthyMissile = 1.0
-        p.prevMissile = 1.0
-        local size_letter = {
-            ["small"] = "S",
-            ["medium"] = "M",
-            ["large"] = "L",
-        }
-        p.tube_size = ""
-        for i = 1, tube_count do
-            p.tube_size = p.tube_size .. size_letter[p:getTubeSize(i - 1)]
-        end
-    end
-    if p:hasWarpDrive() then
-        p.healthyWarp = 1.0
-        p.prevWarp = 1.0
-    end
-    if p:hasJumpDrive() then
-        p.healthyJump = 1.0
-        p.prevJump = 1.0
-    end
-    p.initialCoolant = p:getMaxCoolant()
-    p.normal_coolant_rate = {}
-    p.normal_power_rate = {}
-    for _, system in ipairs(system_types) do
-        p.normal_coolant_rate[system] = p:getSystemCoolantRate(system)
-        p.normal_power_rate[system] = p:getSystemPowerRate(system)
-    end
-end
-function playerDestroyed()
-    string.format("")
+    PlayerState.resetBaseline(p, {})
 end
 function playerDestruction(self, instigator)
     string.format("")
@@ -6909,167 +6606,6 @@ function programComponent(p)
     p:removeCustom(p.program_component_ops)
 end
 --	Spawning
-function getTemplatePool(max_strength)
-    local function getStrengthSort(tbl, sortFunction)
-        local keys = {}
-        for key in pairs(tbl) do
-            table.insert(keys, key)
-        end
-        table.sort(keys, function(a, b)
-            return sortFunction(tbl[a], tbl[b])
-        end)
-        return keys
-    end
-    local ship_template_by_strength = getStrengthSort(
-        ship_template,
-        function(a, b)
-            return a.strength > b.strength
-        end
-    )
-    local template_pool = {}
-    if pool_selectivity == "less/heavy" then
-        for _, current_ship_template in ipairs(ship_template_by_strength) do
-            if
-                ship_template[current_ship_template].strength <= max_strength
-            then
-                if fleetComposition == "Non-DB" then
-                    if
-                        ship_template[current_ship_template].create
-                        ~= stockTemplate
-                    then
-                        table.insert(template_pool, current_ship_template)
-                    end
-                elseif fleetComposition == "Random" then
-                    table.insert(template_pool, current_ship_template)
-                else
-                    if
-                        ship_template[current_ship_template].fleet_group[fleetComposition]
-                    then
-                        table.insert(template_pool, current_ship_template)
-                    end
-                end
-            end
-            if #template_pool >= template_pool_size then
-                break
-            end
-        end
-    elseif pool_selectivity == "more/light" then
-        for i = #ship_template_by_strength, 1, -1 do
-            local current_ship_template = ship_template_by_strength[i]
-            if
-                ship_template[current_ship_template].strength <= max_strength
-            then
-                if fleetComposition == "Non-DB" then
-                    if
-                        ship_template[current_ship_template].create
-                        ~= stockTemplate
-                    then
-                        table.insert(template_pool, current_ship_template)
-                    end
-                elseif fleetComposition == "Random" then
-                    table.insert(template_pool, current_ship_template)
-                else
-                    if
-                        ship_template[current_ship_template].fleet_group[fleetComposition]
-                    then
-                        table.insert(template_pool, current_ship_template)
-                    end
-                end
-            end
-            if #template_pool >= template_pool_size then
-                break
-            end
-        end
-    else --full
-        for current_ship_template, details in pairs(ship_template) do
-            if details.strength <= max_strength then
-                if fleetComposition == "Non-DB" then
-                    if
-                        ship_template[current_ship_template].create
-                        ~= stockTemplate
-                    then
-                        table.insert(template_pool, current_ship_template)
-                    end
-                elseif fleetComposition == "Random" then
-                    table.insert(template_pool, current_ship_template)
-                else
-                    if
-                        ship_template[current_ship_template][fleet_group[fleetComposition]]
-                    then
-                        table.insert(template_pool, current_ship_template)
-                    end
-                end
-            end
-        end
-    end
-    return template_pool
-end
-function spawnRandomArmed(x, y, enemy_strength, template_pool)
-    --x and y are central spawn coordinates
-    --fleetIndex is the number of the fleet to be spawned
-    --spawn_distance optional - used for ambush or pyramid
-    --spawn_angle optional - used for ambush or pyramid
-    --px and py are the player coordinates or the pyramid fly towards point coordinates
-    if enemy_strength == nil then
-        enemy_strength =
-            math.max(relative_strength * playerPower() * enemy_power, 5)
-    end
-    local sp = random(500, 1000) --random spacing of spawned group
-    local shape = "square"
-    if random(1, 100) < 50 then
-        shape = "hexagonal"
-    end
-    local enemy_position = 0
-    local enemyList = {}
-    --print("in spawn random armed function about to call get template pool function")
-    if template_pool == nil then
-        template_pool = getTemplatePool(enemy_strength)
-    end
-    if #template_pool < 1 then
-        addGMMessage("Empty Template pool: fix excludes or other criteria")
-        return enemyList
-    end
-    local fleet_prefix = generateCallSignPrefix()
-    if fleetSpawnFaction == nil then
-        fleetSpawnFaction = "Kraylor"
-    end
-    while enemy_strength > 0 do
-        local selected_template = template_pool[math.random(1, #template_pool)]
-        if ship_template[selected_template].create == nil then
-            print(
-                "Template",
-                selected_template,
-                "does not have a create routine in ship_template"
-            )
-        end
-        local ship = ship_template[selected_template].create(
-            fleetSpawnFaction,
-            selected_template
-        )
-        ship:setCallSign(generateCallSign(nil, fleetSpawnFaction))
-        ship:orderRoaming()
-        enemy_position = enemy_position + 1
-        ship:setPosition(
-            x + formation_delta[shape].x[enemy_position] * sp,
-            y + formation_delta[shape].y[enemy_position] * sp
-        )
-        table.insert(enemyList, ship)
-        enemy_strength = enemy_strength
-            - ship_template[selected_template].strength
-    end
-    return enemyList
-end
-function playerPower()
-    local playerShipScore = 0
-    for i, p in ipairs(getActivePlayerShips()) do
-        if p.shipScore ~= nil then
-            playerShipScore = playerShipScore + p.shipScore
-        else
-            playerShipScore = playerShipScore + 24
-        end
-    end
-    return playerShipScore
-end
 --	Messaging
 function scenarioShipEnhancements()
     if comms_source.probe_upgrade == nil then
@@ -7501,33 +7037,6 @@ function scenarioInformation()
         end)
     end
 end
-function availableForComms(p)
-    if not p:isCommsInactive() then
-        return false
-    end
-    if p:isCommsOpening() then
-        return false
-    end
-    if p:isCommsBeingHailed() then
-        return false
-    end
-    if p:isCommsBeingHailedByGM() then
-        return false
-    end
-    if p:isCommsChatOpen() then
-        return false
-    end
-    if p:isCommsChatOpenToGM() then
-        return false
-    end
-    if p:isCommsChatOpenToPlayer() then
-        return
-    end
-    if p:isCommsScriptOpen() then
-        return false
-    end
-    return true
-end
 function getCurrentOrders()
     local current_orders_prompts = {
         _("orders-comms", "Current orders?"),
@@ -7561,166 +7070,17 @@ function getCurrentOrders()
         addCommsReply(_("Back"), commsStation)
     end)
 end
-function setOptionalOrders()
-    optional_orders = ""
-    if
-        comms_source.transport_mission ~= nil
-        or comms_source.cargo_mission ~= nil
-    then
-        local optional_orders_header = {
-            _("orders-comms", "\nOptional:"),
-            _("orders-comms", "\nOptional orders:"),
-            _("orders-comms", "\nThese orders are optional:"),
-            _("orders-comms", "\nNot required:"),
-        }
-        optional_orders = tableRemoveRandom(optional_orders_header)
-    end
-    if comms_source.transport_mission ~= nil then
-        if
-            comms_source.transport_mission.destination ~= nil
-            and comms_source.transport_mission.destination:isValid()
-        then
-            optional_orders = string.format(
-                _("orders-comms", "%s\nTransport %s to %s station %s in %s"),
-                optional_orders,
-                comms_source.transport_mission.character.name,
-                comms_source.transport_mission.destination:getFaction(),
-                comms_source.transport_mission.destination_name,
-                comms_source.transport_mission.destination:getSectorName()
-            )
-        else
-            optional_orders = string.format(
-                _("orders-comms", "%s\nTransport %s to station %s (defunct)"),
-                optional_orders,
-                comms_source.transport_mission.character.name,
-                comms_source.transport_mission.destination_name
-            )
-        end
-    end
-    if comms_source.cargo_mission ~= nil then
-        if comms_source.cargo_mission.loaded then
-            if
-                comms_source.cargo_mission.destination ~= nil
-                and comms_source.cargo_mission.destination:isValid()
-            then
-                optional_orders = string.format(
-                    _(
-                        "orders-comms",
-                        "%s\nDeliver cargo for %s to station %s in %s"
-                    ),
-                    optional_orders,
-                    comms_source.cargo_mission.character.name,
-                    comms_source.cargo_mission.destination_name,
-                    comms_source.cargo_mission.destination:getSectorName()
-                )
-            else
-                optional_orders = string.format(
-                    _(
-                        "orders-comms",
-                        "%s\nDeliver cargo for %s to station %s (defunct)"
-                    ),
-                    optional_orders,
-                    comms_source.cargo_mission.character.name,
-                    comms_source.cargo_mission.destination_name
-                )
-            end
-        else
-            if
-                comms_source.cargo_mission.origin ~= nil
-                and comms_source.cargo_mission.origin:isValid()
-            then
-                optional_orders = string.format(
-                    _(
-                        "orders-comms",
-                        "%s\nPick up cargo for %s at station %s in %s"
-                    ),
-                    optional_orders,
-                    comms_source.cargo_mission.character.name,
-                    comms_source.cargo_mission.origin_name,
-                    comms_source.cargo_mission.origin:getSectorName()
-                )
-            else
-                optional_orders = string.format(
-                    _(
-                        "orders-comms",
-                        "%s\nPick up cargo for %s at station %s (defunct)"
-                    ),
-                    optional_orders,
-                    comms_source.cargo_mission.character.name,
-                    comms_source.cargo_mission.origin_name
-                )
-            end
-        end
-    end
-    if comms_source.restoration_mission ~= nil then
-        if comms_source.restoration_mission.achievement then
-            if
-                comms_source.restoration_mission.destination ~= nil
-                and comms_source.restoration_mission.destination:isValid()
-            then
-                optional_orders = string.format(
-                    "%s\n%s",
-                    optional_orders,
-                    comms_source.restoration_mission.optional_orders_second_half
-                )
-            else
-                optional_orders = string.format(
-                    _("orders-comms", "%s\n%s (defunct)"),
-                    optional_orders,
-                    comms_source.restoration_mission.optional_orders_second_half
-                )
-            end
-        else
-            if
-                comms_source.restoration_mission.origin ~= nil
-                and comms_source.restoration_mission.origin:isValid()
-            then
-                optional_orders = string.format(
-                    "%s\n%s",
-                    optional_orders,
-                    comms_source.restoration_mission.optional_orders_first_half
-                )
-            else
-                optional_orders = string.format(
-                    _("orders-comms", "%s\n%s (defunct)"),
-                    optional_orders,
-                    comms_source.restoration_mission.optional_orders_first_half
-                )
-            end
-        end
-    end
-end
 function finalStats()
     local final_message = ""
-    if deployed_player_count > 1 then
-        final_message = string.format(
-            _("msgMainscreen", "%s\nDeployed %s player ships."),
-            final_message,
-            deployed_player_count
-        )
-    else
-        final_message = string.format(
-            _("msgMainscreen", "%s\nDeployed one player ship."),
-            final_message
-        )
-    end
+    final_message = Stats.appendDeployed(final_message, deployed_player_count)
     if scientist_aboard then
         final_message = string.format(
             _("msgMainscreen", "%s\nScientist retrieved from station."),
             final_message
         )
     end
-    final_message = string.format(
-        _("msgMainscreen", "%s\nTime spent in scenario: %s"),
-        final_message,
-        formatTime(getScenarioTime())
-    )
-    final_message = string.format(
-        _("msgMainscreen", "%s\nEnemies:%s Murphy:%s"),
-        final_message,
-        getScenarioSetting("Enemies"),
-        getScenarioSetting("Murphy")
-    )
+    final_message = Stats.appendDuration(final_message, "%s\nTime spent in scenario: %s")
+    final_message = Stats.appendSettings(final_message, "%s\nEnemies:%s Murphy:%s", "Enemies", "Murphy")
     return final_message
 end
 --	General

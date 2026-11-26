@@ -1,0 +1,10 @@
+#: scripts/gm_settings_scenario_utility.lua:10
+#: scripts/gm_settings_scenario_utility.lua:58
+#, lua-format
+msgid "buttonGM"
+msgstr ""
+
+#: scripts/gm_settings_scenario_utility.lua:48
+msgctxt "buttonGM"
+msgid "+Spawn Ship(s)"
+msgstr ""

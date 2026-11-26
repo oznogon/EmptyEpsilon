@@ -1236,13 +1236,13 @@ msgid "Freighter"
 msgstr ""
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:2395
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2643
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2657
 msgctxt "scienceDB"
 msgid "Sub-class"
 msgstr ""
 
 #: scripts/cpu_ship_diversification_scenario_utility.lua:2396
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2644
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2658
 msgctxt "scienceDB"
 msgid "Size"
 msgstr ""
@@ -1344,73 +1344,104 @@ msgid ""
 "maneuverability."
 msgstr ""
 
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2642
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2630
+msgctxt "scienceDB"
+msgid "Weapons"
+msgstr ""
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2638
+msgctxt "scienceDB"
+msgid ""
+"This database only covers the basic versions of the missiles used throughout "
+"the galaxy.\n"
+"\n"
+"It has been reported that some battleships started using larger variations "
+"of those missiles. Small fighters and even frigates should not have too much "
+"trouble dodging them, but space captains of bigger ships should be wary of "
+"their doubled damage potential.\n"
+"\n"
+"Smaller variations of these missiles have become common in the galaxy, too. "
+"Fighter pilots praise their speed and maneuverability, because it gives them "
+"an edge against small and fast-moving targets. They only deal half the "
+"damage of their basic counterparts, but what good is a missile if it does "
+"not hit its target?\n"
+"\n"
+"Some ships in your fleet have been equipped with these different sized "
+"weapons tubes. In some cases, the weapons officer might see a banner on the "
+"weapons console describing these tubes using the following shorthand:\n"
+"    S = Small\n"
+"    M = Medium (the normal sized missile tube)\n"
+"    L = Large\n"
+"These letters describe the tube sizes in order from top to bottom."
+msgstr ""
+
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2656
 msgctxt "scienceDB"
 msgid "Class"
 msgstr ""
 
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2664
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2678
 msgctxt "scienceDB"
 msgid "Shield"
 msgstr ""
 
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2667
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2681
 msgctxt "scienceDB"
 msgid "Hull"
 msgstr ""
 
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2668
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2682
 msgctxt "scienceDB"
 msgid "Move speed"
 msgstr ""
 
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2669
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2683
 msgctxt "scienceDB"
 msgid "Reverse move speed"
 msgstr ""
 
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2670
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2684
 msgctxt "scienceDB"
 msgid "Turn speed"
 msgstr ""
 
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2678
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2682
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2712
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2692
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2696
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2726
 #, lua-format
 msgctxt "scienceDB"
 msgid "%.1f u/min"
 msgstr ""
 
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2687
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2701
 #, lua-format
 msgctxt "scienceDB"
 msgid "%.1f deg/sec"
 msgstr ""
 
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2692
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2706
 msgctxt "scienceDB"
 msgid "Jump range"
 msgstr ""
 
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2708
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2722
 msgctxt "scienceDB"
 msgid "Warp Speed"
 msgstr ""
 
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2737
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2751
 #, lua-format
 msgctxt "scienceDB"
 msgid "Beam weapon %s:%s"
 msgstr ""
 
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2747
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2761
 #, lua-format
 msgctxt "scienceDB"
 msgid "%.1f Dmg / %.1f sec"
 msgstr ""
 
-#: scripts/cpu_ship_diversification_scenario_utility.lua:2780
+#: scripts/cpu_ship_diversification_scenario_utility.lua:2794
 #, lua-format
 msgctxt "scienceDB"
 msgid "Storage %s"

@@ -20,7 +20,23 @@ msgid ""
 "allies, so beware\n"
 "\n"
 "Version 2.2"
-msgstr "Race three laps of four waypoints (1 to 2 to 3 to 4 to 1 = 1 lap) in the shortest time. Play for time by yourself, but have more fun with multiple player ships.\n\nPlacement points depend on the number of racers present at the starting point when the race starts. Precise values are given to Relay at that time. Each target drone of yours shot earns one point. Shoot an opponent's drone and they get the point.\n\nBefore the race starts, scope out the course, visit some stations, maybe improve your ship for the race. But, watch your time carefully. If you are not at waypoint 1 at the start of the race, your ship will be destroyed. Your competitors may also try to destroy you despite being your nominal allies, so beware\n\nVersion 2.2"
+msgstr ""
+"Race three laps of four waypoints (1 to 2 to 3 to 4 to 1 = 1 lap) in the "
+"shortest time. Play for time by yourself, but have more fun with multiple "
+"player ships.\n"
+"\n"
+"Placement points depend on the number of racers present at the starting "
+"point when the race starts. Precise values are given to Relay at that time. "
+"Each target drone of yours shot earns one point. Shoot an opponent's drone "
+"and they get the point.\n"
+"\n"
+"Before the race starts, scope out the course, visit some stations, maybe "
+"improve your ship for the race. But, watch your time carefully. If you are "
+"not at waypoint 1 at the start of the race, your ship will be destroyed. "
+"Your competitors may also try to destroy you despite being your nominal "
+"allies, so beware\n"
+"\n"
+"Version 2.2"
 
 # Scenario setting
 msgctxt "setting"
@@ -81,7 +97,9 @@ msgctxt "setting"
 msgid ""
 "Configures whether or not hazards will appear at the race point markers to "
 "impede the race"
-msgstr "Configures whether or not hazards will appear at the race point markers to impede the race"
+msgstr ""
+"Configures whether or not hazards will appear at the race point markers to "
+"impede the race"
 
 msgctxt "Hazards"
 msgid "No"
@@ -108,7 +126,9 @@ msgctxt "setting"
 msgid ""
 "Configures whether player ship names and control codes will be predefined or "
 "random. See Game master screen to get control codes"
-msgstr "Configures whether player ship names and control codes will be predefined or random. See Game master screen to get control codes"
+msgstr ""
+"Configures whether player ship names and control codes will be predefined or "
+"random. See Game master screen to get control codes"
 
 msgctxt "Ship Name"
 msgid "Predefined"
@@ -118,7 +138,9 @@ msgctxt "Ship Name"
 msgid ""
 "Player ship names and control codes will be predefined as scripted. See Game "
 "master screen to get control codes"
-msgstr "Player ship names and control codes will be predefined as scripted. See Game master screen to get control codes"
+msgstr ""
+"Player ship names and control codes will be predefined as scripted. See Game "
+"master screen to get control codes"
 
 msgctxt "Ship Name"
 msgid "Random"
@@ -129,7 +151,10 @@ msgid ""
 "Player ship names will be selected at random from a list of names and player "
 "ship control codes will be randomly generated. See Game master screen to get "
 "control codes"
-msgstr "Player ship names will be selected at random from a list of names and player ship control codes will be randomly generated. See Game master screen to get control codes"
+msgstr ""
+"Player ship names will be selected at random from a list of names and player "
+"ship control codes will be randomly generated. See Game master screen to get "
+"control codes"
 
 # Scenario setting
 msgctxt "setting"
@@ -156,392 +181,245 @@ msgctxt "Sound"
 msgid "Start sound will be Pole Position beep"
 msgstr "Start sound will be Pole Position beep"
 
-#: scripts/scenario_50_fermi_500.lua:99
-msgctxt "trade-comms"
-msgid "food"
-msgstr "food"
-
-#: scripts/scenario_50_fermi_500.lua:100
-msgctxt "trade-comms"
-msgid "medicine"
-msgstr "medicine"
-
-#: scripts/scenario_50_fermi_500.lua:101
-msgctxt "trade-comms"
-msgid "luxury"
-msgstr "luxury"
-
-#: scripts/scenario_50_fermi_500.lua:102
-msgctxt "trade-comms"
-msgid "cobalt"
-msgstr "cobalt"
-
-#: scripts/scenario_50_fermi_500.lua:103
-msgctxt "trade-comms"
-msgid "dilithium"
-msgstr "dilithium"
-
-#: scripts/scenario_50_fermi_500.lua:104
-msgctxt "trade-comms"
-msgid "gold"
-msgstr "gold"
-
-#: scripts/scenario_50_fermi_500.lua:105
-msgctxt "trade-comms"
-msgid "nickel"
-msgstr "nickel"
-
-#: scripts/scenario_50_fermi_500.lua:106
-msgctxt "trade-comms"
-msgid "platinum"
-msgstr "platinum"
-
-#: scripts/scenario_50_fermi_500.lua:107
-msgctxt "trade-comms"
-msgid "tritanium"
-msgstr "tritanium"
-
-#: scripts/scenario_50_fermi_500.lua:108
-msgctxt "trade-comms"
-msgid "autodoc"
-msgstr "autodoc"
-
-#: scripts/scenario_50_fermi_500.lua:109
-msgctxt "trade-comms"
-msgid "android"
-msgstr "android"
-
-#: scripts/scenario_50_fermi_500.lua:110
-msgctxt "trade-comms"
-msgid "battery"
-msgstr "battery"
-
-#: scripts/scenario_50_fermi_500.lua:111
-msgctxt "trade-comms"
-msgid "beam"
-msgstr "beam"
-
-#: scripts/scenario_50_fermi_500.lua:112
-msgctxt "trade-comms"
-msgid "circuit"
-msgstr "circuit"
-
-#: scripts/scenario_50_fermi_500.lua:113
-msgctxt "trade-comms"
-msgid "communication"
-msgstr "communication"
-
-#: scripts/scenario_50_fermi_500.lua:114
-msgctxt "trade-comms"
-msgid "filament"
-msgstr "filament"
-
-#: scripts/scenario_50_fermi_500.lua:115
-msgctxt "trade-comms"
-msgid "impulse"
-msgstr "impulse"
-
-#: scripts/scenario_50_fermi_500.lua:116
-msgctxt "trade-comms"
-msgid "lifter"
-msgstr "lifter"
-
-#: scripts/scenario_50_fermi_500.lua:117
-msgctxt "trade-comms"
-msgid "nanites"
-msgstr "nanites"
-
-#: scripts/scenario_50_fermi_500.lua:118
-msgctxt "trade-comms"
-msgid "optic"
-msgstr "optic"
-
-#: scripts/scenario_50_fermi_500.lua:119
-msgctxt "trade-comms"
-msgid "repulsor"
-msgstr "repulsor"
-
-#: scripts/scenario_50_fermi_500.lua:120
-msgctxt "trade-comms"
-msgid "robotic"
-msgstr "robotic"
-
-#: scripts/scenario_50_fermi_500.lua:121
-msgctxt "trade-comms"
-msgid "sensor"
-msgstr "sensor"
-
-#: scripts/scenario_50_fermi_500.lua:122
-msgctxt "trade-comms"
-msgid "shield"
-msgstr "shield"
-
-#: scripts/scenario_50_fermi_500.lua:123
-msgctxt "trade-comms"
-msgid "software"
-msgstr "software"
-
-#: scripts/scenario_50_fermi_500.lua:124
-msgctxt "trade-comms"
-msgid "tractor"
-msgstr "tractor"
-
-#: scripts/scenario_50_fermi_500.lua:125
-msgctxt "trade-comms"
-msgid "transporter"
-msgstr "transporter"
-
-#: scripts/scenario_50_fermi_500.lua:126
-msgctxt "trade-comms"
-msgid "warp"
-msgstr "warp"
-
-#: scripts/scenario_50_fermi_500.lua:1170
-msgctxt "msgGM"
-msgid " (Kraylor)"
-msgstr " (Kraylor)"
-
-#: scripts/scenario_50_fermi_500.lua:1172
-msgctxt "msgGM"
-msgid " (Ktlitan)"
-msgstr " (Ktlitan)"
-
-#: scripts/scenario_50_fermi_500.lua:1176
-#, lua-format
-msgctxt "msgGM"
-msgid "%s: %s %s\n"
-msgstr "%s: %s %s\n"
-
-#: scripts/scenario_50_fermi_500.lua:1188
-#: scripts/scenario_50_fermi_500.lua:1401
+#: scripts/scenario_50_fermi_500.lua:1080
+#: scripts/scenario_50_fermi_500.lua:1284
 #, lua-format
 msgctxt "buttonGM"
 msgid "Version %s"
 msgstr "Version %s"
 
-#: scripts/scenario_50_fermi_500.lua:1191
-#: scripts/scenario_50_fermi_500.lua:1404
+#: scripts/scenario_50_fermi_500.lua:1083
+#: scripts/scenario_50_fermi_500.lua:1287
 #, lua-format
 msgctxt "msgGM"
 msgid ""
 "Scenario version %s\n"
 " LUA version %s"
-msgstr "Scenario version %s\n LUA version %s"
+msgstr ""
+"Scenario version %s\n"
+" LUA version %s"
 
-#: scripts/scenario_50_fermi_500.lua:1199
-#: scripts/scenario_50_fermi_500.lua:1412
+#: scripts/scenario_50_fermi_500.lua:1091
+#: scripts/scenario_50_fermi_500.lua:1295
 msgctxt "buttonGM"
 msgid "Show control codes"
 msgstr "Show control codes"
 
-#: scripts/scenario_50_fermi_500.lua:1200
+#: scripts/scenario_50_fermi_500.lua:1092
 msgctxt "buttonGM"
 msgid "Reset control codes"
 msgstr "Reset control codes"
 
-#: scripts/scenario_50_fermi_500.lua:1202
+#: scripts/scenario_50_fermi_500.lua:1094
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Start Delay: %i"
 msgstr "+Start Delay: %i"
 
-#: scripts/scenario_50_fermi_500.lua:1206
+#: scripts/scenario_50_fermi_500.lua:1098
 #, lua-format
 msgctxt "buttonGM"
 msgid "+Patience: %i"
 msgstr "+Patience: %i"
 
-#: scripts/scenario_50_fermi_500.lua:1210
+#: scripts/scenario_50_fermi_500.lua:1102
 msgctxt "buttonGM"
 msgid "Random PShip Names"
 msgstr "Random PShip Names"
 
-#: scripts/scenario_50_fermi_500.lua:1214
+#: scripts/scenario_50_fermi_500.lua:1106
 msgctxt "msgGM"
 msgid ""
 "Player ship names will be selected at random.\n"
 "Control codes will be randomly generated"
-msgstr "Player ship names will be selected at random.\nControl codes will be randomly generated"
+msgstr ""
+"Player ship names will be selected at random.\n"
+"Control codes will be randomly generated"
 
-#: scripts/scenario_50_fermi_500.lua:1221
+#: scripts/scenario_50_fermi_500.lua:1113
 msgctxt "buttonGM"
 msgid "+Shoot Back: "
 msgstr "+Shoot Back: "
 
-#: scripts/scenario_50_fermi_500.lua:1223
-#: scripts/scenario_50_fermi_500.lua:1230
-#: scripts/scenario_50_fermi_500.lua:1237
+#: scripts/scenario_50_fermi_500.lua:1115
+#: scripts/scenario_50_fermi_500.lua:1122
+#: scripts/scenario_50_fermi_500.lua:1129
 msgctxt "buttonGM"
 msgid "Yes"
 msgstr "Yes"
 
-#: scripts/scenario_50_fermi_500.lua:1225
-#: scripts/scenario_50_fermi_500.lua:1232
-#: scripts/scenario_50_fermi_500.lua:1239
+#: scripts/scenario_50_fermi_500.lua:1117
+#: scripts/scenario_50_fermi_500.lua:1124
+#: scripts/scenario_50_fermi_500.lua:1131
 msgctxt "buttonGM"
 msgid "No"
 msgstr "No"
 
-#: scripts/scenario_50_fermi_500.lua:1228
+#: scripts/scenario_50_fermi_500.lua:1120
 msgctxt "buttonGM"
 msgid "+Chase: "
 msgstr "+Chase: "
 
-#: scripts/scenario_50_fermi_500.lua:1235
+#: scripts/scenario_50_fermi_500.lua:1127
 msgctxt "buttonGM"
 msgid "+Hazards: "
 msgstr "+Hazards: "
 
-#: scripts/scenario_50_fermi_500.lua:1242
+#: scripts/scenario_50_fermi_500.lua:1134
 msgctxt "buttonGM"
 msgid "Show Statistics"
 msgstr "Show Statistics"
 
-#: scripts/scenario_50_fermi_500.lua:1244
+#: scripts/scenario_50_fermi_500.lua:1136
 msgctxt "msgGM"
 msgid "Not much to show since the game is still paused"
 msgstr "Not much to show since the game is still paused"
 
-#: scripts/scenario_50_fermi_500.lua:1248
+#: scripts/scenario_50_fermi_500.lua:1140
 #, lua-format
 msgctxt "msgGM"
 msgid "Total player ships: %i"
 msgstr "Total player ships: %i"
 
-#: scripts/scenario_50_fermi_500.lua:1253
+#: scripts/scenario_50_fermi_500.lua:1145
 #, lua-format
 msgctxt "msgGM"
 msgid "%2i Name:%s, Type:%s"
 msgstr "%2i Name:%s, Type:%s"
 
-#: scripts/scenario_50_fermi_500.lua:1275
+#: scripts/scenario_50_fermi_500.lua:1158
 msgctxt "buttonGM"
 msgid "-From Shoot Back"
 msgstr "-From Shoot Back"
 
-#: scripts/scenario_50_fermi_500.lua:1276
+#: scripts/scenario_50_fermi_500.lua:1159
 msgctxt "buttonGM"
 msgid "Shoot Back Yes"
 msgstr "Shoot Back Yes"
 
-#: scripts/scenario_50_fermi_500.lua:1278
-#: scripts/scenario_50_fermi_500.lua:1286
-#: scripts/scenario_50_fermi_500.lua:1298
-#: scripts/scenario_50_fermi_500.lua:1306
-#: scripts/scenario_50_fermi_500.lua:1318
-#: scripts/scenario_50_fermi_500.lua:1326
+#: scripts/scenario_50_fermi_500.lua:1161
+#: scripts/scenario_50_fermi_500.lua:1169
+#: scripts/scenario_50_fermi_500.lua:1181
+#: scripts/scenario_50_fermi_500.lua:1189
+#: scripts/scenario_50_fermi_500.lua:1201
+#: scripts/scenario_50_fermi_500.lua:1209
 msgctxt "buttonGM"
 msgid "*"
 msgstr "*"
 
-#: scripts/scenario_50_fermi_500.lua:1284
+#: scripts/scenario_50_fermi_500.lua:1167
 msgctxt "buttonGM"
 msgid "Shoot Back No"
 msgstr "Shoot Back No"
 
-#: scripts/scenario_50_fermi_500.lua:1295
+#: scripts/scenario_50_fermi_500.lua:1178
 msgctxt "buttonGM"
 msgid "-From Chase"
 msgstr "-From Chase"
 
-#: scripts/scenario_50_fermi_500.lua:1296
+#: scripts/scenario_50_fermi_500.lua:1179
 msgctxt "buttonGM"
 msgid "Chase Yes"
 msgstr "Chase Yes"
 
-#: scripts/scenario_50_fermi_500.lua:1304
+#: scripts/scenario_50_fermi_500.lua:1187
 msgctxt "buttonGM"
 msgid "Chase No"
 msgstr "Chase No"
 
-#: scripts/scenario_50_fermi_500.lua:1315
+#: scripts/scenario_50_fermi_500.lua:1198
 msgctxt "buttonGM"
 msgid "-From Hazards"
 msgstr "-From Hazards"
 
-#: scripts/scenario_50_fermi_500.lua:1316
+#: scripts/scenario_50_fermi_500.lua:1199
 msgctxt "buttonGM"
 msgid "Hazards Yes"
 msgstr "Hazards Yes"
 
-#: scripts/scenario_50_fermi_500.lua:1324
+#: scripts/scenario_50_fermi_500.lua:1207
 msgctxt "buttonGM"
 msgid "Hazards No"
 msgstr "Hazards No"
 
-#: scripts/scenario_50_fermi_500.lua:1335
-#: scripts/scenario_50_fermi_500.lua:1367
+#: scripts/scenario_50_fermi_500.lua:1218
+#: scripts/scenario_50_fermi_500.lua:1250
 msgctxt "buttonGM"
 msgid "-Main"
 msgstr "-Main"
 
-#: scripts/scenario_50_fermi_500.lua:1339
+#: scripts/scenario_50_fermi_500.lua:1222
 #, lua-format
 msgctxt "buttonGM"
 msgid "%i Patience + -> %i"
 msgstr "%i Patience + -> %i"
 
-#: scripts/scenario_50_fermi_500.lua:1353
+#: scripts/scenario_50_fermi_500.lua:1236
 #, lua-format
 msgctxt "buttonGM"
 msgid "%i Patience - -> %i"
 msgstr "%i Patience - -> %i"
 
-#: scripts/scenario_50_fermi_500.lua:1371
+#: scripts/scenario_50_fermi_500.lua:1254
 #, lua-format
 msgctxt "buttonGM"
 msgid "%i Delay + -> %i"
 msgstr "%i Delay + -> %i"
 
-#: scripts/scenario_50_fermi_500.lua:1385
+#: scripts/scenario_50_fermi_500.lua:1268
 #, lua-format
 msgctxt "buttonGM"
 msgid "%i Delay - -> %i"
 msgstr "%i Delay - -> %i"
 
-#: scripts/scenario_50_fermi_500.lua:1413
+#: scripts/scenario_50_fermi_500.lua:1296
 msgctxt "buttonGM"
 msgid "Show statistics"
 msgstr "Show statistics"
 
-#: scripts/scenario_50_fermi_500.lua:1417
+#: scripts/scenario_50_fermi_500.lua:1300
 msgctxt "msgGM"
 msgid ""
 "Current Statistics:\n"
 "Ship: state, laps, waypoint goal, drone pts"
-msgstr "Current Statistics:\nShip: state, laps, waypoint goal, drone pts"
+msgstr ""
+"Current Statistics:\n"
+"Ship: state, laps, waypoint goal, drone pts"
 
-#: scripts/scenario_50_fermi_500.lua:1422
+#: scripts/scenario_50_fermi_500.lua:1305
 msgctxt "msgGM"
 msgid "alive, "
 msgstr "alive, "
 
-#: scripts/scenario_50_fermi_500.lua:1424
+#: scripts/scenario_50_fermi_500.lua:1307
 msgctxt "msgGM"
 msgid "dead, "
 msgstr "dead, "
 
-#: scripts/scenario_50_fermi_500.lua:1427
+#: scripts/scenario_50_fermi_500.lua:1310
 msgctxt "msgGM"
 msgid ", "
 msgstr ", "
 
-#: scripts/scenario_50_fermi_500.lua:1435
+#: scripts/scenario_50_fermi_500.lua:1318
 #, lua-format
 msgctxt "msgGM"
 msgid "%s%i, %i, %i"
 msgstr "%s%i, %i, %i"
 
-#: scripts/scenario_50_fermi_500.lua:1447
+#: scripts/scenario_50_fermi_500.lua:1330
 #, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
 "\n"
 "With %i racers, we have the following points awarded for final race place:"
-msgstr "%s\n\nWith %i racers, we have the following points awarded for final race place:"
+msgstr ""
+"%s\n"
+"\n"
+"With %i racers, we have the following points awarded for final race place:"
 
-#: scripts/scenario_50_fermi_500.lua:1456
+#: scripts/scenario_50_fermi_500.lua:1339
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -549,580 +427,458 @@ msgid ""
 "\n"
 "With %i racers remaining from the original %i registrants, we have the "
 "following points awarded for final race place:"
-msgstr "%s\n\nWith %i racers remaining from the original %i registrants, we have the following points awarded for final race place:"
+msgstr ""
+"%s\n"
+"\n"
+"With %i racers remaining from the original %i registrants, we have the "
+"following points awarded for final race place:"
 
-#: scripts/scenario_50_fermi_500.lua:1464
+#: scripts/scenario_50_fermi_500.lua:1347
 msgctxt "msgGM"
 msgid "First"
 msgstr "First"
 
-#: scripts/scenario_50_fermi_500.lua:1465
+#: scripts/scenario_50_fermi_500.lua:1348
 msgctxt "msgGM"
 msgid "Second"
 msgstr "Second"
 
-#: scripts/scenario_50_fermi_500.lua:1466
+#: scripts/scenario_50_fermi_500.lua:1349
 msgctxt "msgGM"
 msgid "Third"
 msgstr "Third"
 
-#: scripts/scenario_50_fermi_500.lua:1467
+#: scripts/scenario_50_fermi_500.lua:1350
 msgctxt "msgGM"
 msgid "Fourth"
 msgstr "Fourth"
 
-#: scripts/scenario_50_fermi_500.lua:1468
+#: scripts/scenario_50_fermi_500.lua:1351
 msgctxt "msgGM"
 msgid "Fifth"
 msgstr "Fifth"
 
-#: scripts/scenario_50_fermi_500.lua:1469
+#: scripts/scenario_50_fermi_500.lua:1352
 msgctxt "msgGM"
 msgid "Sixth"
 msgstr "Sixth"
 
-#: scripts/scenario_50_fermi_500.lua:1470
+#: scripts/scenario_50_fermi_500.lua:1353
 msgctxt "msgGM"
 msgid "Seventh"
 msgstr "Seventh"
 
-#: scripts/scenario_50_fermi_500.lua:1471
+#: scripts/scenario_50_fermi_500.lua:1354
 msgctxt "msgGM"
 msgid "Eighth"
 msgstr "Eighth"
 
-#: scripts/scenario_50_fermi_500.lua:1472
+#: scripts/scenario_50_fermi_500.lua:1355
 msgctxt "msgGM"
 msgid "Ninth"
 msgstr "Ninth"
 
-#: scripts/scenario_50_fermi_500.lua:1473
+#: scripts/scenario_50_fermi_500.lua:1356
 msgctxt "msgGM"
 msgid "Tenth"
 msgstr "Tenth"
 
-#: scripts/scenario_50_fermi_500.lua:1478
+#: scripts/scenario_50_fermi_500.lua:1361
 #, lua-format
 msgctxt "msgGM"
 msgid ""
 "%s\n"
 "    %s:%s"
-msgstr "%s\n    %s:%s"
+msgstr ""
+"%s\n"
+"    %s:%s"
 
-#: scripts/scenario_50_fermi_500.lua:1490
+#: scripts/scenario_50_fermi_500.lua:1373
 msgctxt "buttonGM"
 msgid "Show final results"
 msgstr "Show final results"
 
-#: scripts/scenario_50_fermi_500.lua:1493
+#: scripts/scenario_50_fermi_500.lua:1376
 msgctxt "msgGM"
 msgid ""
 "Final results:\n"
 "Note: this data appears on the main screen after the race is complete. If "
 "the race is not complete, what you see here may not be accurate."
-msgstr "Final results:\nNote: this data appears on the main screen after the race is complete. If the race is not complete, what you see here may not be accurate."
+msgstr ""
+"Final results:\n"
+"Note: this data appears on the main screen after the race is complete. If "
+"the race is not complete, what you see here may not be accurate."
 
-#: scripts/scenario_50_fermi_500.lua:1515
+#: scripts/scenario_50_fermi_500.lua:1398
 msgctxt "scienceDescription-station"
 msgid "Race Timing Facility"
 msgstr "Race Timing Facility"
 
-#: scripts/scenario_50_fermi_500.lua:2025
-#: scripts/scenario_50_fermi_500.lua:2032
-#: scripts/scenario_50_fermi_500.lua:2039
-#: scripts/scenario_50_fermi_500.lua:2050
-#: scripts/scenario_50_fermi_500.lua:2057
-#: scripts/scenario_50_fermi_500.lua:2064
-#: scripts/scenario_50_fermi_500.lua:2075
-#: scripts/scenario_50_fermi_500.lua:2082
-#: scripts/scenario_50_fermi_500.lua:2089
-#: scripts/scenario_50_fermi_500.lua:2100
-#: scripts/scenario_50_fermi_500.lua:2107
-#: scripts/scenario_50_fermi_500.lua:2114
-#: scripts/scenario_50_fermi_500.lua:2125
-#: scripts/scenario_50_fermi_500.lua:2132
-#: scripts/scenario_50_fermi_500.lua:2139
-#: scripts/scenario_50_fermi_500.lua:2150
-#: scripts/scenario_50_fermi_500.lua:2157
-#: scripts/scenario_50_fermi_500.lua:2164
+#: scripts/scenario_50_fermi_500.lua:1908
+#: scripts/scenario_50_fermi_500.lua:1915
+#: scripts/scenario_50_fermi_500.lua:1922
+#: scripts/scenario_50_fermi_500.lua:1933
+#: scripts/scenario_50_fermi_500.lua:1940
+#: scripts/scenario_50_fermi_500.lua:1947
+#: scripts/scenario_50_fermi_500.lua:1958
+#: scripts/scenario_50_fermi_500.lua:1965
+#: scripts/scenario_50_fermi_500.lua:1972
+#: scripts/scenario_50_fermi_500.lua:1983
+#: scripts/scenario_50_fermi_500.lua:1990
+#: scripts/scenario_50_fermi_500.lua:1997
+#: scripts/scenario_50_fermi_500.lua:2008
+#: scripts/scenario_50_fermi_500.lua:2015
+#: scripts/scenario_50_fermi_500.lua:2022
+#: scripts/scenario_50_fermi_500.lua:2033
+#: scripts/scenario_50_fermi_500.lua:2040
+#: scripts/scenario_50_fermi_500.lua:2047
 msgctxt "scienceDescription-artifact"
 msgid "Unusual object"
 msgstr "Unusual object"
 
-#: scripts/scenario_50_fermi_500.lua:2028
-#: scripts/scenario_50_fermi_500.lua:2053
-#: scripts/scenario_50_fermi_500.lua:2078
-#: scripts/scenario_50_fermi_500.lua:2103
-#: scripts/scenario_50_fermi_500.lua:2128
-#: scripts/scenario_50_fermi_500.lua:2153
+#: scripts/scenario_50_fermi_500.lua:1911
+#: scripts/scenario_50_fermi_500.lua:1936
+#: scripts/scenario_50_fermi_500.lua:1961
+#: scripts/scenario_50_fermi_500.lua:1986
+#: scripts/scenario_50_fermi_500.lua:2011
+#: scripts/scenario_50_fermi_500.lua:2036
 msgctxt "scienceDescription-artifact"
 msgid "Artifact with quantum biometric characteristics"
 msgstr "Artifact with quantum biometric characteristics"
 
-#: scripts/scenario_50_fermi_500.lua:2035
-#: scripts/scenario_50_fermi_500.lua:2060
-#: scripts/scenario_50_fermi_500.lua:2085
-#: scripts/scenario_50_fermi_500.lua:2110
-#: scripts/scenario_50_fermi_500.lua:2135
-#: scripts/scenario_50_fermi_500.lua:2160
+#: scripts/scenario_50_fermi_500.lua:1918
+#: scripts/scenario_50_fermi_500.lua:1943
+#: scripts/scenario_50_fermi_500.lua:1968
+#: scripts/scenario_50_fermi_500.lua:1993
+#: scripts/scenario_50_fermi_500.lua:2018
+#: scripts/scenario_50_fermi_500.lua:2043
 msgctxt "scienceDescription-artifact"
 msgid "Artifact with embedded chroniton particles"
 msgstr "Artifact with embedded chroniton particles"
 
-#: scripts/scenario_50_fermi_500.lua:2042
-#: scripts/scenario_50_fermi_500.lua:2067
-#: scripts/scenario_50_fermi_500.lua:2092
-#: scripts/scenario_50_fermi_500.lua:2117
-#: scripts/scenario_50_fermi_500.lua:2142
-#: scripts/scenario_50_fermi_500.lua:2167
+#: scripts/scenario_50_fermi_500.lua:1925
+#: scripts/scenario_50_fermi_500.lua:1950
+#: scripts/scenario_50_fermi_500.lua:1975
+#: scripts/scenario_50_fermi_500.lua:2000
+#: scripts/scenario_50_fermi_500.lua:2025
+#: scripts/scenario_50_fermi_500.lua:2050
 msgctxt "scienceDescription-artifact"
 msgid "Artifact bridging two parallel universes"
 msgstr "Artifact bridging two parallel universes"
 
-#: scripts/scenario_50_fermi_500.lua:2223
+#: scripts/scenario_50_fermi_500.lua:2106
 msgctxt "scienceDescription-planet"
 msgid "Lush planet with only mild seasonal variations"
 msgstr "Lush planet with only mild seasonal variations"
 
-#: scripts/scenario_50_fermi_500.lua:2361
+#: scripts/scenario_50_fermi_500.lua:2244
 msgctxt "upgrade-comms"
 msgid "jump drive"
 msgstr "jump drive"
 
-#: scripts/scenario_50_fermi_500.lua:2364
+#: scripts/scenario_50_fermi_500.lua:2247
 msgctxt "upgrade-comms"
 msgid ""
 "We can upgrade your jump drive maximum range for nanites or robotic goods"
-msgstr "We can upgrade your jump drive maximum range for nanites or robotic goods"
+msgstr ""
+"We can upgrade your jump drive maximum range for nanites or robotic goods"
 
-#: scripts/scenario_50_fermi_500.lua:2369
+#: scripts/scenario_50_fermi_500.lua:2252
 msgctxt "upgrade-comms"
 msgid "impulse drive"
 msgstr "impulse drive"
 
-#: scripts/scenario_50_fermi_500.lua:2373
+#: scripts/scenario_50_fermi_500.lua:2256
 #, lua-format
 msgctxt "upgrade-comms"
 msgid ""
 "We can increase the speed of your impulse engines by %.2f percent for "
 "tritanium or dilithium"
-msgstr "We can increase the speed of your impulse engines by %.2f percent for tritanium or dilithium"
+msgstr ""
+"We can increase the speed of your impulse engines by %.2f percent for "
+"tritanium or dilithium"
 
-#: scripts/scenario_50_fermi_500.lua:2380
+#: scripts/scenario_50_fermi_500.lua:2263
 msgctxt "upgrade-comms"
 msgid "maneuver"
 msgstr "manoeuvre"
 
-#: scripts/scenario_50_fermi_500.lua:2384
+#: scripts/scenario_50_fermi_500.lua:2267
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "We can increase the your rotate speed by %.2f percent for %s"
 msgstr "We can increase the your rotate speed by %.2f percent for %s"
 
-#: scripts/scenario_50_fermi_500.lua:2392
+#: scripts/scenario_50_fermi_500.lua:2275
 msgctxt "upgrade-comms"
 msgid "beam range"
 msgstr "beam range"
 
-#: scripts/scenario_50_fermi_500.lua:2396
+#: scripts/scenario_50_fermi_500.lua:2279
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "We can increase the range of your beam weapons by %.2f percent for %s"
 msgstr "We can increase the range of your beam weapons by %.2f percent for %s"
 
-#: scripts/scenario_50_fermi_500.lua:2404
+#: scripts/scenario_50_fermi_500.lua:2287
 msgctxt "upgrade-comms"
 msgid "extra missile tube"
 msgstr "extra missile tube"
 
-#: scripts/scenario_50_fermi_500.lua:2408
+#: scripts/scenario_50_fermi_500.lua:2291
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "We can add a homing missile tube to your ship for %s"
 msgstr "We can add a homing missile tube to your ship for %s"
 
-#: scripts/scenario_50_fermi_500.lua:2415
+#: scripts/scenario_50_fermi_500.lua:2298
 msgctxt "upgrade-comms"
 msgid "shield"
 msgstr "shield"
 
-#: scripts/scenario_50_fermi_500.lua:2419
+#: scripts/scenario_50_fermi_500.lua:2302
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "We can upgrade your shields by %.2f percent for %s"
 msgstr "We can upgrade your shields by %.2f percent for %s"
 
-#: scripts/scenario_50_fermi_500.lua:2427
+#: scripts/scenario_50_fermi_500.lua:2310
 msgctxt "upgrade-comms"
 msgid "energy capacity"
 msgstr "energy capacity"
 
-#: scripts/scenario_50_fermi_500.lua:2431
+#: scripts/scenario_50_fermi_500.lua:2314
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "We can upgrade your energy capacity by 25 percent for %s"
 msgstr "We can upgrade your energy capacity by 25 percent for %s"
 
-#: scripts/scenario_50_fermi_500.lua:2838
-msgctxt "station-comms"
-msgid "We are under attack! No time for chatting!"
-msgstr "We are under attack! No time for chatting!"
-
-#: scripts/scenario_50_fermi_500.lua:2853
-msgctxt "station-comms"
-msgid ""
-"Good day, officer!\n"
-"What can we do for you today?\n"
-msgstr "Good day, officer!\nWhat can we do for you today?\n"
-
-#: scripts/scenario_50_fermi_500.lua:2856
-msgctxt "station-comms"
-msgid "Welcome to our lovely station.\n"
-msgstr "Welcome to our lovely station.\n"
-
-#: scripts/scenario_50_fermi_500.lua:2862
-msgctxt "station-comms"
-msgid ""
-"Forgive us if we seem a little distracted. We are carefully monitoring the "
-"enemies nearby."
-msgstr "Forgive us if we seem a little distracted. We are carefully monitoring the enemies nearby."
-
-#: scripts/scenario_50_fermi_500.lua:2874
-msgctxt "ammo-comms"
-msgid "I need ordnance restocked"
-msgstr "I need ordnance restocked"
-
-#: scripts/scenario_50_fermi_500.lua:2875
-msgctxt "ammo-comms"
-msgid "What type of ordnance?"
-msgstr "What type of ordnance?"
-
-#: scripts/scenario_50_fermi_500.lua:2880
-#, lua-format
-msgctxt "ammo-comms"
-msgid "%s (%d rep each)"
-msgstr "%s (%d rep each)"
-
-#: scripts/scenario_50_fermi_500.lua:2890
-#: scripts/scenario_50_fermi_500.lua:2921
-#: scripts/scenario_50_fermi_500.lua:2936
-#: scripts/scenario_50_fermi_500.lua:3053
-#: scripts/scenario_50_fermi_500.lua:3704
-#: scripts/scenario_50_fermi_500.lua:3748
-#: scripts/scenario_50_fermi_500.lua:3794
-#: scripts/scenario_50_fermi_500.lua:3840
-#: scripts/scenario_50_fermi_500.lua:3847
-#: scripts/scenario_50_fermi_500.lua:4395
-#: scripts/scenario_50_fermi_500.lua:4425
-#: scripts/scenario_50_fermi_500.lua:4472
-#: scripts/scenario_50_fermi_500.lua:4518
-#: scripts/scenario_50_fermi_500.lua:4549
-#: scripts/scenario_50_fermi_500.lua:4580
-#: scripts/scenario_50_fermi_500.lua:4635
-#: scripts/scenario_50_fermi_500.lua:4644
-#: scripts/scenario_50_fermi_500.lua:4651
-#: scripts/scenario_50_fermi_500.lua:4658
-#: scripts/scenario_50_fermi_500.lua:4728
-#: scripts/scenario_50_fermi_500.lua:4733
-#: scripts/scenario_50_fermi_500.lua:4798
-#: scripts/scenario_50_fermi_500.lua:4803
-#: scripts/scenario_50_fermi_500.lua:4868
-#: scripts/scenario_50_fermi_500.lua:4892
-#: scripts/scenario_50_fermi_500.lua:4904
-#: scripts/scenario_50_fermi_500.lua:4969
-#: scripts/scenario_50_fermi_500.lua:4988
-#: scripts/scenario_50_fermi_500.lua:5081
-#: scripts/scenario_50_fermi_500.lua:5093
-#: scripts/scenario_50_fermi_500.lua:5135
-#: scripts/scenario_50_fermi_500.lua:5145
-#: scripts/scenario_50_fermi_500.lua:5196
-#: scripts/scenario_50_fermi_500.lua:5223
-#: scripts/scenario_50_fermi_500.lua:5280
-#: scripts/scenario_50_fermi_500.lua:5335
-#: scripts/scenario_50_fermi_500.lua:5398
-msgid "Back"
-msgstr "Back"
-
-#: scripts/scenario_50_fermi_500.lua:2896
-#: scripts/scenario_50_fermi_500.lua:4555
+#: scripts/scenario_50_fermi_500.lua:2628
 msgctxt "orders-comms"
 msgid "What are my current orders?"
 msgstr "What are my current orders?"
 
-#: scripts/scenario_50_fermi_500.lua:2904
-#: scripts/scenario_50_fermi_500.lua:4563
+#: scripts/scenario_50_fermi_500.lua:2636
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
 "\n"
 "%i seconds remain until start of race"
-msgstr "\n%i seconds remain until start of race"
+msgstr ""
+"\n"
+"%i seconds remain until start of race"
 
-#: scripts/scenario_50_fermi_500.lua:2914
-#: scripts/scenario_50_fermi_500.lua:4573
+#: scripts/scenario_50_fermi_500.lua:2646
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
 "\n"
 "Immediate goal: race waypoint %i"
-msgstr "\nImmediate goal: race waypoint %i"
+msgstr ""
+"\n"
+"Immediate goal: race waypoint %i"
 
-#: scripts/scenario_50_fermi_500.lua:2925
-#: scripts/scenario_50_fermi_500.lua:4460
+#: scripts/scenario_50_fermi_500.lua:2653
+#: scripts/scenario_50_fermi_500.lua:2671
+#: scripts/scenario_50_fermi_500.lua:2791
+#: scripts/scenario_50_fermi_500.lua:3753
+#: scripts/scenario_50_fermi_500.lua:3784
+#: scripts/scenario_50_fermi_500.lua:3842
+#: scripts/scenario_50_fermi_500.lua:3851
+#: scripts/scenario_50_fermi_500.lua:3858
+#: scripts/scenario_50_fermi_500.lua:3865
+#: scripts/scenario_50_fermi_500.lua:3964
+msgid "Back"
+msgstr "Back"
+
+#: scripts/scenario_50_fermi_500.lua:2660
 msgctxt "upgrade-comms"
 msgid "Do you upgrade spaceships?"
 msgstr "Do you upgrade spaceships?"
 
-#: scripts/scenario_50_fermi_500.lua:2932
-#: scripts/scenario_50_fermi_500.lua:4468
+#: scripts/scenario_50_fermi_500.lua:2667
 msgctxt "upgrade-comms"
 msgid "We don't upgrade spaceships"
 msgstr "We don't upgrade spaceships"
 
-#: scripts/scenario_50_fermi_500.lua:2939
+#: scripts/scenario_50_fermi_500.lua:2677
 msgctxt "cartographyOffice-comms"
 msgid "Visit cartography office"
 msgstr "Visit cartography office"
 
-#: scripts/scenario_50_fermi_500.lua:2946
+#: scripts/scenario_50_fermi_500.lua:2684
 msgctxt "cartographyOffice-comms"
 msgid ""
 "The clerk behind the desk looks up briefly at you then goes back to filing "
 "her nails."
-msgstr "The clerk behind the desk looks up briefly at you then goes back to filing her nails."
+msgstr ""
+"The clerk behind the desk looks up briefly at you then goes back to filing "
+"her nails."
 
-#: scripts/scenario_50_fermi_500.lua:2951
+#: scripts/scenario_50_fermi_500.lua:2689
 msgctxt "cartographyOffice-comms"
 msgid ""
 "The clerk behind the desk examines you then returns to grooming her "
 "tentacles."
-msgstr "The clerk behind the desk examines you then returns to grooming her tentacles."
+msgstr ""
+"The clerk behind the desk examines you then returns to grooming her "
+"tentacles."
 
-#: scripts/scenario_50_fermi_500.lua:2956
+#: scripts/scenario_50_fermi_500.lua:2694
 msgctxt "cartographyOffice-comms"
 msgid ""
 "The clerk behind the desk glances at you then returns to preening her "
 "feathers."
-msgstr "The clerk behind the desk glances at you then returns to preening her feathers."
+msgstr ""
+"The clerk behind the desk glances at you then returns to preening her "
+"feathers."
 
-#: scripts/scenario_50_fermi_500.lua:2962
+#: scripts/scenario_50_fermi_500.lua:2700
 msgctxt "cartographyOffice-comms"
 msgid ""
 "Without looking at you, the clerk tells you that the cartographers are out "
 "of the office for the race. They left this list of stations that provide "
 "upgrades for any racer that dropped by:"
-msgstr "Without looking at you, the clerk tells you that the cartographers are out of the office for the race. They left this list of stations that provide upgrades for any racer that dropped by:"
+msgstr ""
+"Without looking at you, the clerk tells you that the cartographers are out "
+"of the office for the race. They left this list of stations that provide "
+"upgrades for any racer that dropped by:"
 
-#: scripts/scenario_50_fermi_500.lua:2970
+#: scripts/scenario_50_fermi_500.lua:2708
 #, lua-format
 msgctxt "upgrade-comms"
 msgid ""
 "%s\n"
 "Sector:%s Station:%s Upgrade:%s"
-msgstr "%s\nSector:%s Station:%s Upgrade:%s"
+msgstr ""
+"%s\n"
+"Sector:%s Station:%s Upgrade:%s"
 
-#: scripts/scenario_50_fermi_500.lua:2982
+#: scripts/scenario_50_fermi_500.lua:2720
 msgctxt "cartographyOffice-comms"
 msgid ""
 "Without looking at you, the clerk tells you that the cartographers are out "
 "of the office for the race. They left this list of neutral station locations "
 "in the area and what goods they might sell for any racer that dropped by:"
-msgstr "Without looking at you, the clerk tells you that the cartographers are out of the office for the race. They left this list of neutral station locations in the area and what goods they might sell for any racer that dropped by:"
+msgstr ""
+"Without looking at you, the clerk tells you that the cartographers are out "
+"of the office for the race. They left this list of neutral station locations "
+"in the area and what goods they might sell for any racer that dropped by:"
 
-#: scripts/scenario_50_fermi_500.lua:2991
+#: scripts/scenario_50_fermi_500.lua:2729
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid ""
 "%s\n"
 "%s %s"
-msgstr "%s\n%s %s"
+msgstr ""
+"%s\n"
+"%s %s"
 
-#: scripts/scenario_50_fermi_500.lua:2998
-#: scripts/scenario_50_fermi_500.lua:3004
-#: scripts/scenario_50_fermi_500.lua:3037
+#: scripts/scenario_50_fermi_500.lua:2736
+#: scripts/scenario_50_fermi_500.lua:2742
+#: scripts/scenario_50_fermi_500.lua:2775
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "%s: none"
 msgstr "%s: none"
 
-#: scripts/scenario_50_fermi_500.lua:3017
+#: scripts/scenario_50_fermi_500.lua:2755
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "%s, %s"
 msgstr "%s, %s"
 
-#: scripts/scenario_50_fermi_500.lua:3026
+#: scripts/scenario_50_fermi_500.lua:2764
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "%s: %s"
 msgstr "%s: %s"
 
-#: scripts/scenario_50_fermi_500.lua:3048
+#: scripts/scenario_50_fermi_500.lua:2786
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "%s %s"
 msgstr "%s %s"
 
-#: scripts/scenario_50_fermi_500.lua:3067
-#, lua-format
-msgctxt "trade-comms"
-msgid ""
-"%s\n"
-"%s %s @ %s"
-msgstr "%s\n%s %s @ %s"
-
-#: scripts/scenario_50_fermi_500.lua:3081
-#, lua-format
-msgctxt "trade-comms"
-msgid ""
-"%s\n"
-"%s: %s"
-msgstr "%s\n%s: %s"
-
-#: scripts/scenario_50_fermi_500.lua:3090
-#: scripts/scenario_50_fermi_500.lua:3600
-msgctxt "trade-comms"
-msgid "Buy, sell, trade"
-msgstr "Buy, sell, trade"
-
-#: scripts/scenario_50_fermi_500.lua:3094
-#, lua-format
-msgctxt "trade-comms"
-msgid "Goods or components available for sale here:%s"
-msgstr "Goods or components available for sale here:%s"
-
-#: scripts/scenario_50_fermi_500.lua:3100
-#, lua-format
-msgctxt "trade-comms"
-msgid ""
-"%s\n"
-"Goods in cargo hold:%s"
-msgstr "%s\nGoods in cargo hold:%s"
-
-#: scripts/scenario_50_fermi_500.lua:3106
-#, lua-format
-msgctxt "trade-comms"
-msgid ""
-"%s\n"
-"Cargo hold is empty"
-msgstr "%s\nCargo hold is empty"
-
-#: scripts/scenario_50_fermi_500.lua:3111
-#, lua-format
-msgctxt "trade-comms"
-msgid ""
-"%s\n"
-"Available space:%s"
-msgstr "%s\nAvailable space:%s"
-
-#: scripts/scenario_50_fermi_500.lua:3122
-#, lua-format
-msgctxt "trade-comms"
-msgid "Buy a %s for %s reputation"
-msgstr "Buy a %s for %s reputation"
-
-#: scripts/scenario_50_fermi_500.lua:3131
-msgctxt "trade-comms"
-msgid "You have to be docked to complete the transaction."
-msgstr "You have to be docked to complete the transaction."
-
-#: scripts/scenario_50_fermi_500.lua:3141
-#, lua-format
-msgctxt "trade-comms"
-msgid "Not enough room on %s to purchase %s"
-msgstr "Not enough room on %s to purchase %s"
-
-#: scripts/scenario_50_fermi_500.lua:3152
-#, lua-format
-msgctxt "trade-comms"
-msgid "%s ran out of %s."
-msgstr "%s ran out of %s."
-
-#: scripts/scenario_50_fermi_500.lua:3176
-#, lua-format
-msgctxt "trade-comms"
-msgid "One %s purchased"
-msgstr "One %s purchased"
-
-#: scripts/scenario_50_fermi_500.lua:3184
-msgctxt "trade-comms"
-msgid "Insufficient reputation"
-msgstr "Insufficient reputation"
-
-#: scripts/scenario_50_fermi_500.lua:3224
+#: scripts/scenario_50_fermi_500.lua:2833
 #, lua-format
 msgctxt "trade-comms"
 msgid "Accept %s for removing asteroid"
 msgstr "Accept %s for removing asteroid"
 
-#: scripts/scenario_50_fermi_500.lua:3251
-#: scripts/scenario_50_fermi_500.lua:3347
+#: scripts/scenario_50_fermi_500.lua:2860
+#: scripts/scenario_50_fermi_500.lua:2956
 #, lua-format
 msgctxt "trade-comms"
 msgid "One %s obtained"
 msgstr "One %s obtained"
 
-#: scripts/scenario_50_fermi_500.lua:3273
+#: scripts/scenario_50_fermi_500.lua:2882
 msgctxt "trade-comms"
 msgid "Where's the asteroid you want us to remove?"
 msgstr "Where's the asteroid you want us to remove?"
 
-#: scripts/scenario_50_fermi_500.lua:3288
+#: scripts/scenario_50_fermi_500.lua:2897
 #, lua-format
 msgctxt "trade-comms"
 msgid "Bearing %.1f, distance %.1fu from %s"
 msgstr "Bearing %.1f, distance %.1fu from %s"
 
-#: scripts/scenario_50_fermi_500.lua:3400
-#: scripts/scenario_50_fermi_500.lua:3490
+#: scripts/scenario_50_fermi_500.lua:3009
+#: scripts/scenario_50_fermi_500.lua:3099
 msgctxt "trade-comms"
 msgid "Can I get goods without spending reputation?"
 msgstr "Can I get goods without spending reputation?"
 
-#: scripts/scenario_50_fermi_500.lua:3404
+#: scripts/scenario_50_fermi_500.lua:3013
 msgctxt "trade-comms"
 msgid "We could give you"
 msgstr "We could give you"
 
-#: scripts/scenario_50_fermi_500.lua:3416
+#: scripts/scenario_50_fermi_500.lua:3025
 #, lua-format
 msgctxt "trade-comms"
 msgid "%s, %s"
 msgstr "%s, %s"
 
-#: scripts/scenario_50_fermi_500.lua:3426
+#: scripts/scenario_50_fermi_500.lua:3035
 #, lua-format
 msgctxt "trade-comms"
 msgid "%s one of these (%s)"
 msgstr "%s one of these (%s)"
 
-#: scripts/scenario_50_fermi_500.lua:3433
+#: scripts/scenario_50_fermi_500.lua:3042
 #, lua-format
 msgctxt "trade-comms"
 msgid "%s %s"
 msgstr "%s %s"
 
-#: scripts/scenario_50_fermi_500.lua:3448
+#: scripts/scenario_50_fermi_500.lua:3057
 #, lua-format
 msgctxt "trade-comms"
 msgid ""
 "%s if you removed the asteroid at bearing %.1f, distance %.1fu for us. It's "
 "been mined out and has become a navigation hazard."
-msgstr "%s if you removed the asteroid at bearing %.1f, distance %.1fu for us. It's been mined out and has become a navigation hazard."
+msgstr ""
+"%s if you removed the asteroid at bearing %.1f, distance %.1fu for us. It's "
+"been mined out and has become a navigation hazard."
 
-#: scripts/scenario_50_fermi_500.lua:3458
+#: scripts/scenario_50_fermi_500.lua:3067
 msgctxt "trade-comms"
 msgid "Agree to remove the asteroid"
 msgstr "Agree to remove the asteroid"
 
-#: scripts/scenario_50_fermi_500.lua:3478
+#: scripts/scenario_50_fermi_500.lua:3087
 msgctxt "trade-comms"
 msgid ""
 "Come back and ask to buy your desired resource after you have removed the "
 "asteroid."
-msgstr "Come back and ask to buy your desired resource after you have removed the asteroid."
+msgstr ""
+"Come back and ask to buy your desired resource after you have removed the "
+"asteroid."
 
-#: scripts/scenario_50_fermi_500.lua:3495
+#: scripts/scenario_50_fermi_500.lua:3104
 msgctxt "trade-comms"
 msgid ""
 "The Human Navy can earn more reputation by destroying enemy stations. These "
@@ -1130,1124 +886,1364 @@ msgid ""
 "in the area, but their stations are still here. Technically, we're supposed "
 "to leave them alone, but if some were 'accidentally' destroyed, that would "
 "facilitate some future business for us. These are the known enemy stations:"
-msgstr "The Human Navy can earn more reputation by destroying enemy stations. These enemies agree to remove their ships for the race since it benefits commerce in the area, but their stations are still here. Technically, we're supposed to leave them alone, but if some were 'accidentally' destroyed, that would facilitate some future business for us. These are the known enemy stations:"
+msgstr ""
+"The Human Navy can earn more reputation by destroying enemy stations. These "
+"enemies agree to remove their ships for the race since it benefits commerce "
+"in the area, but their stations are still here. Technically, we're supposed "
+"to leave them alone, but if some were 'accidentally' destroyed, that would "
+"facilitate some future business for us. These are the known enemy stations:"
 
-#: scripts/scenario_50_fermi_500.lua:3502
+#: scripts/scenario_50_fermi_500.lua:3111
 #, lua-format
 msgctxt "destroyTrade-comms"
 msgid ""
 "%s\n"
 "%s %s"
-msgstr "%s\n%s %s"
+msgstr ""
+"%s\n"
+"%s %s"
 
-#: scripts/scenario_50_fermi_500.lua:3514
+#: scripts/scenario_50_fermi_500.lua:3123
 msgctxt "trade-comms"
 msgid "Would you exchange goods if we destroyed a station?"
 msgstr "Would you exchange goods if we destroyed a station?"
 
-#: scripts/scenario_50_fermi_500.lua:3550
+#: scripts/scenario_50_fermi_500.lua:3159
 #, lua-format
 msgctxt "trade-comms"
 msgid ""
 "We could make an exchange if %s were destroyed. It's the closest and thus "
 "disrupts our business the most."
-msgstr "We could make an exchange if %s were destroyed. It's the closest and thus disrupts our business the most."
+msgstr ""
+"We could make an exchange if %s were destroyed. It's the closest and thus "
+"disrupts our business the most."
 
-#: scripts/scenario_50_fermi_500.lua:3559
+#: scripts/scenario_50_fermi_500.lua:3168
 #, lua-format
 msgctxt "trade-comms"
 msgid "Agree to destroy station %s"
 msgstr "Agree to destroy station %s"
 
-#: scripts/scenario_50_fermi_500.lua:3582
+#: scripts/scenario_50_fermi_500.lua:3191
 #, lua-format
 msgctxt "trade-comms"
 msgid ""
 "Come back and ask to buy your desired resource after %s has been removed."
-msgstr "Come back and ask to buy your desired resource after %s has been removed."
+msgstr ""
+"Come back and ask to buy your desired resource after %s has been removed."
 
-#: scripts/scenario_50_fermi_500.lua:3603
-msgctxt "trade-comms"
-msgid "Goods or components available here: quantity, cost in reputation\n"
-msgstr "Goods or components available here: quantity, cost in reputation\n"
-
-#: scripts/scenario_50_fermi_500.lua:3612
-#, lua-format
-msgctxt "trade-comms"
-msgid "     %s: %i, %i\n"
-msgstr "     %s: %i, %i\n"
-
-#: scripts/scenario_50_fermi_500.lua:3619
-msgctxt "trade-comms"
-msgid "Current Cargo:\n"
-msgstr "Current Cargo:\n"
-
-#: scripts/scenario_50_fermi_500.lua:3628
-#, lua-format
-msgctxt "trade-comms"
-msgid "     %s: %i\n"
-msgstr "     %s: %i\n"
-
-#: scripts/scenario_50_fermi_500.lua:3637
-msgctxt "trade-comms"
-msgid "     Empty\n"
-msgstr "     Empty\n"
-
-#: scripts/scenario_50_fermi_500.lua:3644
-#, lua-format
-msgctxt "trade-comms"
-msgid "Available Space: %i, Available Reputation: %i\n"
-msgstr "Available Space: %i, Available Reputation: %i\n"
-
-#: scripts/scenario_50_fermi_500.lua:3658
-#: scripts/scenario_50_fermi_500.lua:5155
-#: scripts/scenario_50_fermi_500.lua:5239
-#: scripts/scenario_50_fermi_500.lua:5294
-#: scripts/scenario_50_fermi_500.lua:5357
-#, lua-format
-msgctxt "trade-comms"
-msgid "Buy one %s for %i reputation"
-msgstr "Buy one %s for %i reputation"
-
-#: scripts/scenario_50_fermi_500.lua:3664
-#, lua-format
-msgctxt "trade-comms"
-msgid "Type: %s, Quantity: %i, Rep: %i"
-msgstr "Type: %s, Quantity: %i, Rep: %i"
-
-#: scripts/scenario_50_fermi_500.lua:3673
-msgctxt "trade-comms"
-msgid ""
-"\n"
-"Insufficient cargo space for purchase"
-msgstr "\nInsufficient cargo space for purchase"
-
-#: scripts/scenario_50_fermi_500.lua:3679
-#: scripts/scenario_50_fermi_500.lua:3694
-msgctxt "needRep-comms"
-msgid ""
-"\n"
-"Insufficient reputation for purchase"
-msgstr "\nInsufficient reputation for purchase"
-
-#: scripts/scenario_50_fermi_500.lua:3685
-#: scripts/scenario_50_fermi_500.lua:3739
-#: scripts/scenario_50_fermi_500.lua:3785
-#: scripts/scenario_50_fermi_500.lua:3831
-msgctxt "trade-comms"
-msgid ""
-"\n"
-"Insufficient station inventory"
-msgstr "\nInsufficient station inventory"
-
-#: scripts/scenario_50_fermi_500.lua:3700
-msgctxt "trade-comms"
-msgid ""
-"\n"
-"purchased"
-msgstr "\npurchased"
-
-#: scripts/scenario_50_fermi_500.lua:3726
-#, lua-format
-msgctxt "trade-comms"
-msgid "Trade food for %s"
-msgstr "Trade food for %s"
-
-#: scripts/scenario_50_fermi_500.lua:3731
-#: scripts/scenario_50_fermi_500.lua:3777
-#: scripts/scenario_50_fermi_500.lua:3823
-#, lua-format
-msgctxt "trade-comms"
-msgid "Type: %s,  Quantity: %i"
-msgstr "Type: %s,  Quantity: %i"
-
-#: scripts/scenario_50_fermi_500.lua:3745
-#: scripts/scenario_50_fermi_500.lua:3791
-#: scripts/scenario_50_fermi_500.lua:3837
-msgctxt "trade-comms"
-msgid ""
-"\n"
-"Traded"
-msgstr "\nTraded"
-
-#: scripts/scenario_50_fermi_500.lua:3772
-#: scripts/scenario_50_fermi_500.lua:5116
-#, lua-format
-msgctxt "trade-comms"
-msgid "Trade luxury for %s"
-msgstr "Trade luxury for %s"
-
-#: scripts/scenario_50_fermi_500.lua:3818
-#, lua-format
-msgctxt "trade-comms"
-msgid "Trade medicine for %s"
-msgstr "Trade medicine for %s"
-
-#: scripts/scenario_50_fermi_500.lua:3860
+#: scripts/scenario_50_fermi_500.lua:3218
 msgctxt "upgrade-comms"
 msgid "Provide nanites for jump drive upgrade"
 msgstr "Provide nanites for jump drive upgrade"
 
-#: scripts/scenario_50_fermi_500.lua:3867
+#: scripts/scenario_50_fermi_500.lua:3225
 msgctxt "upgrade-comms"
 msgid "You already have the upgrade"
 msgstr "You already have the upgrade"
 
-#: scripts/scenario_50_fermi_500.lua:3885
-#: scripts/scenario_50_fermi_500.lua:3925
+#: scripts/scenario_50_fermi_500.lua:3243
+#: scripts/scenario_50_fermi_500.lua:3283
 msgctxt "upgrade-comms"
 msgid "Your jump drive has been upgraded"
 msgstr "Your jump drive has been upgraded"
 
-#: scripts/scenario_50_fermi_500.lua:3900
+#: scripts/scenario_50_fermi_500.lua:3258
 msgctxt "upgrade-comms"
 msgid "Provide robotic for jump drive upgrade"
 msgstr "Provide robotic for jump drive upgrade"
 
-#: scripts/scenario_50_fermi_500.lua:3907
+#: scripts/scenario_50_fermi_500.lua:3265
 msgctxt "upgrade-comms"
 msgid "You already have the jump drive upgrade"
 msgstr "You already have the jump drive upgrade"
 
-#: scripts/scenario_50_fermi_500.lua:3946
+#: scripts/scenario_50_fermi_500.lua:3304
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Provide dilithium for %f percent impulse engine speed upgrade"
 msgstr "Provide dilithium for %f percent impulse engine speed upgrade"
 
-#: scripts/scenario_50_fermi_500.lua:3955
-#: scripts/scenario_50_fermi_500.lua:3994
+#: scripts/scenario_50_fermi_500.lua:3313
+#: scripts/scenario_50_fermi_500.lua:3352
 msgctxt "upgrade-comms"
 msgid "You already have the impulse drive upgrade"
 msgstr "You already have the impulse drive upgrade"
 
-#: scripts/scenario_50_fermi_500.lua:3969
-#: scripts/scenario_50_fermi_500.lua:4008
+#: scripts/scenario_50_fermi_500.lua:3327
+#: scripts/scenario_50_fermi_500.lua:3366
 msgctxt "upgrade-comms"
 msgid "Your impulse engine speed has been upgraded"
 msgstr "Your impulse engine speed has been upgraded"
 
-#: scripts/scenario_50_fermi_500.lua:3985
+#: scripts/scenario_50_fermi_500.lua:3343
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Provide tritanium for %f percent impulse engine speed upgrade"
 msgstr "Provide tritanium for %f percent impulse engine speed upgrade"
 
-#: scripts/scenario_50_fermi_500.lua:4025
+#: scripts/scenario_50_fermi_500.lua:3383
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Provide %s for %.2f percent maneuver speed upgrade"
 msgstr "Provide %s for %.2f percent manoeuvre speed upgrade"
 
-#: scripts/scenario_50_fermi_500.lua:4035
+#: scripts/scenario_50_fermi_500.lua:3393
 msgctxt "upgrade-comms"
 msgid "You already have the maneuver speed upgrade"
 msgstr "You already have the manoeuvre speed upgrade"
 
-#: scripts/scenario_50_fermi_500.lua:4049
+#: scripts/scenario_50_fermi_500.lua:3407
 msgctxt "upgrade-comms"
 msgid "Your spin speed has been upgraded"
 msgstr "Your spin speed has been upgraded"
 
-#: scripts/scenario_50_fermi_500.lua:4066
+#: scripts/scenario_50_fermi_500.lua:3424
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Provide %s for %.2f percent beam range upgrade"
 msgstr "Provide %s for %.2f percent beam range upgrade"
 
-#: scripts/scenario_50_fermi_500.lua:4076
+#: scripts/scenario_50_fermi_500.lua:3434
 msgctxt "upgrade-comms"
 msgid "You already have the beam range upgrade"
 msgstr "You already have the beam range upgrade"
 
-#: scripts/scenario_50_fermi_500.lua:4084
+#: scripts/scenario_50_fermi_500.lua:3442
 msgctxt "upgrade-comms"
 msgid "Your ship does not support a beam weapon upgrade"
 msgstr "Your ship does not support a beam weapon upgrade"
 
-#: scripts/scenario_50_fermi_500.lua:4120
+#: scripts/scenario_50_fermi_500.lua:3478
 msgctxt "upgrade-comms"
 msgid "Your beam range has been upgraded"
 msgstr "Your beam range has been upgraded"
 
-#: scripts/scenario_50_fermi_500.lua:4138
+#: scripts/scenario_50_fermi_500.lua:3496
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Provide %s for additional homing missile tube"
 msgstr "Provide %s for additional homing missile tube"
 
-#: scripts/scenario_50_fermi_500.lua:4147
+#: scripts/scenario_50_fermi_500.lua:3505
 msgctxt "upgrade-comms"
 msgid "You already have the missile tube upgrade"
 msgstr "You already have the missile tube upgrade"
 
-#: scripts/scenario_50_fermi_500.lua:4173
+#: scripts/scenario_50_fermi_500.lua:3531
 msgctxt "upgrade-comms"
 msgid "You now have an additional homing missile tube"
 msgstr "You now have an additional homing missile tube"
 
-#: scripts/scenario_50_fermi_500.lua:4190
+#: scripts/scenario_50_fermi_500.lua:3548
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Provide %s for 25 percent energy capacity upgrade"
 msgstr "Provide %s for 25 percent energy capacity upgrade"
 
-#: scripts/scenario_50_fermi_500.lua:4199
+#: scripts/scenario_50_fermi_500.lua:3557
 msgctxt "upgrade-comms"
 msgid "You already have the energy capacity upgrade"
 msgstr "You already have the energy capacity upgrade"
 
-#: scripts/scenario_50_fermi_500.lua:4212
+#: scripts/scenario_50_fermi_500.lua:3570
 msgctxt "upgrade-comms"
 msgid "You now have upgraded energy capacity"
 msgstr "You now have upgraded energy capacity"
 
-#: scripts/scenario_50_fermi_500.lua:4231
+#: scripts/scenario_50_fermi_500.lua:3589
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Provide %s for %.2f percent shield upgrade"
 msgstr "Provide %s for %.2f percent shield upgrade"
 
-#: scripts/scenario_50_fermi_500.lua:4241
+#: scripts/scenario_50_fermi_500.lua:3599
 msgctxt "upgrade-comms"
 msgid "You already have the shield upgrade"
 msgstr "You already have the shield upgrade"
 
-#: scripts/scenario_50_fermi_500.lua:4255
+#: scripts/scenario_50_fermi_500.lua:3613
 msgctxt "upgrade-comms"
 msgid "You now have upgraded shield capacity"
 msgstr "You now have upgraded shield capacity"
 
-#: scripts/scenario_50_fermi_500.lua:4267
+#: scripts/scenario_50_fermi_500.lua:3625
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Provide %s for %.2f percent front shield upgrade"
 msgstr "Provide %s for %.2f percent front shield upgrade"
 
-#: scripts/scenario_50_fermi_500.lua:4277
+#: scripts/scenario_50_fermi_500.lua:3635
 msgctxt "upgrade-comms"
 msgid "You already have the front shield upgrade"
 msgstr "You already have the front shield upgrade"
 
-#: scripts/scenario_50_fermi_500.lua:4292
+#: scripts/scenario_50_fermi_500.lua:3650
 msgctxt "upgrade-comms"
 msgid "You now have upgraded front shield capacity"
 msgstr "You now have upgraded front shield capacity"
 
-#: scripts/scenario_50_fermi_500.lua:4303
+#: scripts/scenario_50_fermi_500.lua:3661
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Provide %s for %.2f percent rear shield upgrade"
 msgstr "Provide %s for %.2f percent rear shield upgrade"
 
-#: scripts/scenario_50_fermi_500.lua:4313
+#: scripts/scenario_50_fermi_500.lua:3671
 msgctxt "upgrade-comms"
 msgid "You already have the rear shield upgrade"
 msgstr "You already have the rear shield upgrade"
 
-#: scripts/scenario_50_fermi_500.lua:4328
+#: scripts/scenario_50_fermi_500.lua:3686
 msgctxt "upgrade-comms"
 msgid "You now have upgraded rear shield capacity"
 msgstr "You now have upgraded rear shield capacity"
 
-#: scripts/scenario_50_fermi_500.lua:4353
-msgctxt "station-comms"
-msgid "You need to stay docked for that action."
-msgstr "You need to stay docked for that action."
-
-#: scripts/scenario_50_fermi_500.lua:4362
-msgctxt "ammo-comms"
-msgid "We do not deal in weapons of mass destruction."
-msgstr "We do not deal in weapons of mass destruction."
-
-#: scripts/scenario_50_fermi_500.lua:4367
-msgctxt "ammo-comms"
-msgid "We do not deal in weapons of mass disruption."
-msgstr "We do not deal in weapons of mass disruption."
-
-#: scripts/scenario_50_fermi_500.lua:4370
-msgctxt "ammo-comms"
-msgid "We do not deal in those weapons."
-msgstr "We do not deal in those weapons."
-
-#: scripts/scenario_50_fermi_500.lua:4384
-msgctxt "ammo-comms"
-msgid "All nukes are charged and primed for destruction."
-msgstr "All nukes are charged and primed for destruction."
-
-#: scripts/scenario_50_fermi_500.lua:4391
-msgctxt "ammo-comms"
-msgid "Sorry, sir, but you are as fully stocked as I can allow."
-msgstr "Sorry, sir, but you are as fully stocked as I can allow."
-
-#: scripts/scenario_50_fermi_500.lua:4400
-msgctxt "needRep-comms"
-msgid "Not enough reputation."
-msgstr "Not enough reputation."
-
-#: scripts/scenario_50_fermi_500.lua:4414
-msgctxt "ammo-comms"
-msgid "You are fully loaded and ready to explode things."
-msgstr "You are fully loaded and ready to explode things."
-
-#: scripts/scenario_50_fermi_500.lua:4421
-msgctxt "ammo-comms"
-msgid ""
-"We generously resupplied you with some weapon charges.\n"
-"Put them to good use."
-msgstr "We generously resupplied you with some weapon charges.\nPut them to good use."
-
-#: scripts/scenario_50_fermi_500.lua:4439
-msgctxt "station-comms"
-msgid ""
-"Good day, officer.\n"
-"If you need supplies, please dock with us first."
-msgstr "Good day, officer.\nIf you need supplies, please dock with us first."
-
-#: scripts/scenario_50_fermi_500.lua:4444
-msgctxt "station-comms"
-msgid ""
-"Greetings.\n"
-"If you want to do business, please dock with us first."
-msgstr "Greetings.\nIf you want to do business, please dock with us first."
-
-#: scripts/scenario_50_fermi_500.lua:4451
-msgctxt "station-comms"
-msgid ""
-"\n"
-"Be aware that if enemies in the area get much closer, we will be too busy to "
-"conduct business with you."
-msgstr "\nBe aware that if enemies in the area get much closer, we will be too busy to conduct business with you."
-
-#: scripts/scenario_50_fermi_500.lua:4455
+#: scripts/scenario_50_fermi_500.lua:3705
 msgctxt "station-comms"
 msgid "I need information"
 msgstr "I need information"
 
-#: scripts/scenario_50_fermi_500.lua:4457
+#: scripts/scenario_50_fermi_500.lua:3707
 msgctxt "station-comms"
 msgid "What kind of information do you need?"
 msgstr "What kind of information do you need?"
 
-#: scripts/scenario_50_fermi_500.lua:4477
+#: scripts/scenario_50_fermi_500.lua:3712
 msgctxt "station-comms"
 msgid "How far am I from the race start point?"
 msgstr "How far am I from the race start point?"
 
-#: scripts/scenario_50_fermi_500.lua:4484
+#: scripts/scenario_50_fermi_500.lua:3719
 msgctxt "station-comms"
 msgid "not close enough to qualify for the start of the race"
 msgstr "not close enough to qualify for the start of the race"
 
-#: scripts/scenario_50_fermi_500.lua:4489
+#: scripts/scenario_50_fermi_500.lua:3724
 msgctxt "station-comms"
 msgid "close enough to qualify for the start of the race"
 msgstr "close enough to qualify for the start of the race"
 
-#: scripts/scenario_50_fermi_500.lua:4498
+#: scripts/scenario_50_fermi_500.lua:3733
 #, lua-format
 msgctxt "station-comms"
 msgid "%s, my messaging terminal says you're %.1f unit away, %s."
 msgstr "%s, my messaging terminal says you're %.1f unit away, %s."
 
-#: scripts/scenario_50_fermi_500.lua:4510
+#: scripts/scenario_50_fermi_500.lua:3745
 #, lua-format
 msgctxt "station-comms"
 msgid "%s, my messaging terminal says you're %.1f units away, %s."
 msgstr "%s, my messaging terminal says you're %.1f units away, %s."
 
-#: scripts/scenario_50_fermi_500.lua:4523
+#: scripts/scenario_50_fermi_500.lua:3758
 msgctxt "station-comms"
 msgid "Station docking service status"
 msgstr "Station docking service status"
 
-#: scripts/scenario_50_fermi_500.lua:4526
+#: scripts/scenario_50_fermi_500.lua:3761
 msgctxt "station-comms"
 msgid "Station docking services report:"
 msgstr "Station docking services report:"
 
-#: scripts/scenario_50_fermi_500.lua:4528
+#: scripts/scenario_50_fermi_500.lua:3763
 #, lua-format
 msgctxt "station-comms"
 msgid ""
 "%s\n"
 "Restock scan probes: %s"
-msgstr "%s\nRestock scan probes: %s"
+msgstr ""
+"%s\n"
+"Restock scan probes: %s"
 
-#: scripts/scenario_50_fermi_500.lua:4531
-#: scripts/scenario_50_fermi_500.lua:4538
-#: scripts/scenario_50_fermi_500.lua:4545
+#: scripts/scenario_50_fermi_500.lua:3766
+#: scripts/scenario_50_fermi_500.lua:3773
+#: scripts/scenario_50_fermi_500.lua:3780
 msgctxt "station-comms"
 msgid "Available"
 msgstr "Available"
 
-#: scripts/scenario_50_fermi_500.lua:4531
-#: scripts/scenario_50_fermi_500.lua:4538
-#: scripts/scenario_50_fermi_500.lua:4545
+#: scripts/scenario_50_fermi_500.lua:3766
+#: scripts/scenario_50_fermi_500.lua:3773
+#: scripts/scenario_50_fermi_500.lua:3780
 msgctxt "station-comms"
 msgid "Unavailable"
 msgstr "Unavailable"
 
-#: scripts/scenario_50_fermi_500.lua:4535
+#: scripts/scenario_50_fermi_500.lua:3770
 #, lua-format
 msgctxt "station-comms"
 msgid ""
 "%s\n"
 "Recharge energy: %s"
-msgstr "%s\nRecharge energy: %s"
+msgstr ""
+"%s\n"
+"Recharge energy: %s"
 
-#: scripts/scenario_50_fermi_500.lua:4542
+#: scripts/scenario_50_fermi_500.lua:3777
 #, lua-format
 msgctxt "station-comms"
 msgid ""
 "%s\n"
 "Repair hull: %s"
-msgstr "%s\nRepair hull: %s"
+msgstr ""
+"%s\n"
+"Repair hull: %s"
 
-#: scripts/scenario_50_fermi_500.lua:4664
+#: scripts/scenario_50_fermi_500.lua:3918
+msgctxt "ammo-comms"
+msgid "I need ordnance restocked"
+msgstr "I need ordnance restocked"
+
+#: scripts/scenario_50_fermi_500.lua:3922
 #, lua-format
-msgctxt "stationAssist-comms"
-msgid "Can you send a supply drop? (%d rep)"
-msgstr "Can you send a supply drop? (%d rep)"
+msgctxt "ammo-comms"
+msgid "%s (%d rep each)"
+msgstr "%s (%d rep each)"
 
-#: scripts/scenario_50_fermi_500.lua:4672
-msgctxt "stationAssist-comms"
-msgid "You need to set a waypoint before you can request backup."
-msgstr "You need to set a waypoint before you can request backup."
+#: scripts/scenario_50_fermi_500.lua:3924
+msgctxt "ammo-comms"
+msgid "Homing"
+msgstr ""
 
-#: scripts/scenario_50_fermi_500.lua:4679
-msgctxt "stationAssist-comms"
-msgid "To which waypoint should we deliver your supplies?"
-msgstr "To which waypoint should we deliver your supplies?"
+#: scripts/scenario_50_fermi_500.lua:3925
+msgctxt "ammo-comms"
+msgid "Nuke"
+msgstr ""
 
-#: scripts/scenario_50_fermi_500.lua:4685
-#: scripts/scenario_50_fermi_500.lua:4761
-#, lua-format
-msgctxt "stationAssist-comms"
-msgid "WP %d"
-msgstr "WP %d"
+#: scripts/scenario_50_fermi_500.lua:3926
+msgctxt "ammo-comms"
+msgid "Mine"
+msgstr ""
 
-#: scripts/scenario_50_fermi_500.lua:4715
-#, lua-format
-msgctxt "stationAssist-comms"
-msgid "We have dispatched a supply ship toward WP %d"
-msgstr "We have dispatched a supply ship toward WP %d"
+#: scripts/scenario_50_fermi_500.lua:3927
+msgctxt "ammo-comms"
+msgid "EMP"
+msgstr ""
 
-#: scripts/scenario_50_fermi_500.lua:4724
-#: scripts/scenario_50_fermi_500.lua:4794
-msgctxt "needRep-comms"
-msgid "Not enough reputation!"
-msgstr "Not enough reputation!"
+#: scripts/scenario_50_fermi_500.lua:3928
+msgctxt "ammo-comms"
+msgid "HVLI"
+msgstr ""
 
-#: scripts/scenario_50_fermi_500.lua:4740
-#, lua-format
-msgctxt "stationAssist-comms"
-msgid "Please send reinforcements! (%d rep)"
-msgstr "Please send reinforcements! (%d rep)"
-
-#: scripts/scenario_50_fermi_500.lua:4748
-msgctxt "stationAssist-comms"
-msgid "You need to set a waypoint before you can request reinforcements."
-msgstr "You need to set a waypoint before you can request reinforcements."
-
-#: scripts/scenario_50_fermi_500.lua:4755
-msgctxt "stationAssist-comms"
-msgid "To which waypoint should we dispatch the reinforcements?"
-msgstr "To which waypoint should we dispatch the reinforcements?"
-
-#: scripts/scenario_50_fermi_500.lua:4784
-#, lua-format
-msgctxt "stationAssist-comms"
-msgid "We have dispatched %s to assist at WP %d"
-msgstr "We have dispatched %s to assist at WP %d"
-
-#: scripts/scenario_50_fermi_500.lua:4856
-#: scripts/scenario_50_fermi_500.lua:5204
-msgctxt "shipAssist-comms"
-msgid "What do you want?"
-msgstr "What do you want?"
-
-#: scripts/scenario_50_fermi_500.lua:4858
-msgctxt "shipAssist-comms"
-msgid "Sir, how can we assist?"
-msgstr "Sir, how can we assist?"
-
-#: scripts/scenario_50_fermi_500.lua:4860
-msgctxt "shipAssist-comms"
-msgid "Defend a waypoint"
-msgstr "Defend a waypoint"
-
-#: scripts/scenario_50_fermi_500.lua:4865
-msgctxt "shipAssist-comms"
-msgid "No waypoints set. Please set a waypoint first."
-msgstr "No waypoints set. Please set a waypoint first."
-
-#: scripts/scenario_50_fermi_500.lua:4871
-msgctxt "shipAssist-comms"
-msgid "Which waypoint should we defend?"
-msgstr "Which waypoint should we defend?"
-
-#: scripts/scenario_50_fermi_500.lua:4876
-#, lua-format
-msgctxt "shipAssist-comms"
-msgid "Defend WP %d"
-msgstr "Defend WP %d"
-
-#: scripts/scenario_50_fermi_500.lua:4887
-#, lua-format
-msgctxt "shipAssist-comms"
-msgid "We are heading to assist at WP %d."
-msgstr "We are heading to assist at WP %d."
-
-#: scripts/scenario_50_fermi_500.lua:4899
-msgctxt "shipAssist-comms"
-msgid "Assist me"
-msgstr "Assist me"
-
-#: scripts/scenario_50_fermi_500.lua:4901
-msgctxt "shipAssist-comms"
-msgid "Heading toward you to assist."
-msgstr "Heading toward you to assist."
-
-#: scripts/scenario_50_fermi_500.lua:4907
-msgctxt "shipAssist-comms"
-msgid "Report status"
-msgstr "Report status"
-
-#: scripts/scenario_50_fermi_500.lua:4909
-#, lua-format
-msgctxt "shipAssist-comms"
-msgid "Hull: %d%%\n"
-msgstr "Hull: %d%%\n"
-
-#: scripts/scenario_50_fermi_500.lua:4915
-#, lua-format
-msgctxt "shipAssist-comms"
-msgid "%sShield: %d%%\n"
-msgstr "%sShield: %d%%\n"
-
-#: scripts/scenario_50_fermi_500.lua:4925
-#, lua-format
-msgctxt "shipAssist-comms"
-msgid "%sFront Shield: %d%%\n"
-msgstr "%sFront Shield: %d%%\n"
-
-#: scripts/scenario_50_fermi_500.lua:4934
-#, lua-format
-msgctxt "shipAssist-comms"
-msgid "%sRear Shield: %d%%\n"
-msgstr "%sRear Shield: %d%%\n"
-
-#: scripts/scenario_50_fermi_500.lua:4945
-#, lua-format
-msgctxt "shipAssist-comms"
-msgid "%sShield %s: %d%%\n"
-msgstr "%sShield %s: %d%%\n"
-
-#: scripts/scenario_50_fermi_500.lua:4960
-#, lua-format
-msgctxt "shipAssist-comms"
-msgid "%s%s Missiles: %d/%d\n"
-msgstr "%s%s Missiles: %d/%d\n"
-
-#: scripts/scenario_50_fermi_500.lua:4977
-#, lua-format
-msgctxt "shipAssist-comms"
-msgid "Dock at %s"
-msgstr "Dock at %s"
-
-#: scripts/scenario_50_fermi_500.lua:4983
-#, lua-format
-msgctxt "shipAssist-comms"
-msgid "Docking at %s."
-msgstr "Docking at %s."
-
-#: scripts/scenario_50_fermi_500.lua:5000
-msgctxt "shipEnemy-comms"
-msgid "We will see to your destruction!"
-msgstr "We will see to your destruction!"
-
-#: scripts/scenario_50_fermi_500.lua:5002
-msgctxt "shipEnemy-comms"
-msgid "Your bloodline will end here!"
-msgstr "Your bloodline will end here!"
-
-#: scripts/scenario_50_fermi_500.lua:5004
-msgctxt "shipEnemy-comms"
-msgid "Your feeble threats are meaningless."
-msgstr "Your feeble threats are meaningless."
-
-#: scripts/scenario_50_fermi_500.lua:5009
-msgctxt "shipEnemy-comms"
-msgid ""
-"Ktzzzsss.\n"
-"You will DIEEee weaklingsss!"
-msgstr "Ktzzzsss.\nYou will DIEEee weaklingsss!"
-
-#: scripts/scenario_50_fermi_500.lua:5016
-msgctxt "shipEnemy-comms"
-msgid ""
-"We wish you no harm, but will harm you if we must.\n"
-"End of transmission."
-msgstr "We wish you no harm, but will harm you if we must.\nEnd of transmission."
-
-#: scripts/scenario_50_fermi_500.lua:5023
-msgctxt "shipEnemy-comms"
-msgid "Stay out of our way, or your death will amuse us extremely!"
-msgstr "Stay out of our way, or your death will amuse us extremely!"
-
-#: scripts/scenario_50_fermi_500.lua:5030
-msgctxt "shipEnemy-comms"
-msgid ""
-"One zero one.\n"
-"No binary communication detected.\n"
-"Switching to universal speech.\n"
-"Generating appropriate response for target from human language archives.\n"
-":Do not cross us:\n"
-"Communication halted."
-msgstr "One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted."
-
-#: scripts/scenario_50_fermi_500.lua:5033
-msgctxt "shipEnemy-comms"
-msgid "EXECUTE: SELFDESTRUCT"
-msgstr "EXECUTE: SELFDESTRUCT"
-
-#: scripts/scenario_50_fermi_500.lua:5036
-msgctxt "shipEnemy-comms"
-msgid "Rogue command received. Targeting source."
-msgstr "Rogue command received. Targeting source."
-
-#: scripts/scenario_50_fermi_500.lua:5039
-msgctxt "shipEnemy-comms"
-msgid "External command ignored."
-msgstr "External command ignored."
-
-#: scripts/scenario_50_fermi_500.lua:5044
-msgctxt "shipEnemy-comms"
-msgid ""
-"The hive suffers no threats. Opposition to any of us is opposition to us "
-"all.\n"
-"Stand down or prepare to donate your corpses toward our nutrition."
-msgstr "The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition."
-
-#: scripts/scenario_50_fermi_500.lua:5049
-msgctxt "shipEnemy-comms"
-msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-msgstr "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-
-#: scripts/scenario_50_fermi_500.lua:5053
-msgctxt "shipEnemy-comms"
-msgid "We do not need permission to pluck apart such an insignificant threat."
-msgstr "We do not need permission to pluck apart such an insignificant threat."
-
-#: scripts/scenario_50_fermi_500.lua:5057
-msgctxt "shipEnemy-comms"
-msgid "The hive has greater priorities than exterminating pests."
-msgstr "The hive has greater priorities than exterminating pests."
-
-#: scripts/scenario_50_fermi_500.lua:5060
-msgctxt "shipEnemy-comms"
-msgid "Mind your own business!"
-msgstr "Mind your own business!"
-
-#: scripts/scenario_50_fermi_500.lua:5077
+#: scripts/scenario_50_fermi_500.lua:3960
 #, lua-format
 msgctxt "shipEnemy-comms"
 msgid "I belong to %s"
 msgstr "I belong to %s"
 
-#: scripts/scenario_50_fermi_500.lua:5089
-msgctxt "trade-comms"
-msgid "Yes?"
-msgstr "Yes?"
-
-#: scripts/scenario_50_fermi_500.lua:5091
-msgctxt "trade-comms"
-msgid "Where are you headed?"
-msgstr "Where are you headed?"
-
-#: scripts/scenario_50_fermi_500.lua:5124
-msgctxt "trade-comms"
-msgid "Insufficient inventory on freighter for trade"
-msgstr "Insufficient inventory on freighter for trade"
-
-#: scripts/scenario_50_fermi_500.lua:5132
-msgctxt "trade-comms"
-msgid "Traded"
-msgstr "Traded"
-
-#: scripts/scenario_50_fermi_500.lua:5142
-msgctxt "trade-comms"
-msgid "Insufficient luxury to trade"
-msgstr "Insufficient luxury to trade"
-
-#: scripts/scenario_50_fermi_500.lua:5164
-#: scripts/scenario_50_fermi_500.lua:5248
-#: scripts/scenario_50_fermi_500.lua:5303
-#: scripts/scenario_50_fermi_500.lua:5366
-msgctxt "trade-comms"
-msgid "Insufficient cargo space for purchase"
-msgstr "Insufficient cargo space for purchase"
-
-#: scripts/scenario_50_fermi_500.lua:5171
-#: scripts/scenario_50_fermi_500.lua:5255
-#: scripts/scenario_50_fermi_500.lua:5310
-#: scripts/scenario_50_fermi_500.lua:5373
-msgctxt "trade-comms"
-msgid "Insufficient inventory on freighter"
-msgstr "Insufficient inventory on freighter"
-
-#: scripts/scenario_50_fermi_500.lua:5183
-#: scripts/scenario_50_fermi_500.lua:5267
-#: scripts/scenario_50_fermi_500.lua:5322
-#: scripts/scenario_50_fermi_500.lua:5385
-msgctxt "needRep-comms"
-msgid "Insufficient reputation for purchase"
-msgstr "Insufficient reputation for purchase"
-
-#: scripts/scenario_50_fermi_500.lua:5192
-#: scripts/scenario_50_fermi_500.lua:5276
-#: scripts/scenario_50_fermi_500.lua:5331
-#: scripts/scenario_50_fermi_500.lua:5394
+#: scripts/scenario_50_fermi_500.lua:3994
 msgctxt "trade-comms"
 msgid "Purchased"
 msgstr "Purchased"
 
-#: scripts/scenario_50_fermi_500.lua:5211
-#, lua-format
+#: scripts/scenario_50_fermi_500.lua:3997
 msgctxt "trade-comms"
-msgid "Where are you headed? (cost: %f reputation)"
-msgstr "Where are you headed? (cost: %f reputation)"
+msgid "Traded"
+msgstr "Traded"
 
-#: scripts/scenario_50_fermi_500.lua:5218
-msgctxt "needRep-comms"
-msgid "Insufficient reputation"
-msgstr "Insufficient reputation"
-
-#: scripts/scenario_50_fermi_500.lua:5343
-msgctxt "trade-comms"
-msgid "Why are you bothering me?"
-msgstr "Why are you bothering me?"
-
-#: scripts/scenario_50_fermi_500.lua:5411
-msgctxt "ship-comms"
-msgid ""
-"Sorry, we have no time to chat with you.\n"
-"We are on an important mission."
-msgstr "Sorry, we have no time to chat with you.\nWe are on an important mission."
-
-#: scripts/scenario_50_fermi_500.lua:5416
-msgctxt "ship-comms"
-msgid ""
-"We have nothing for you.\n"
-"Good day."
-msgstr "We have nothing for you.\nGood day."
-
-#: scripts/scenario_50_fermi_500.lua:5578
+#: scripts/scenario_50_fermi_500.lua:4112
 msgctxt "msgMainscreen"
 msgid "Admiral"
 msgstr "Admiral"
 
-#: scripts/scenario_50_fermi_500.lua:5580
+#: scripts/scenario_50_fermi_500.lua:4114
 msgctxt "msgMainscreen"
 msgid "Captain"
 msgstr "Captain"
 
-#: scripts/scenario_50_fermi_500.lua:5582
+#: scripts/scenario_50_fermi_500.lua:4116
 msgctxt "msgMainscreen"
 msgid "Commander"
 msgstr "Commander"
 
-#: scripts/scenario_50_fermi_500.lua:5584
+#: scripts/scenario_50_fermi_500.lua:4118
 msgctxt "msgMainscreen"
 msgid "Lieutenant"
 msgstr "Lieutenant"
 
-#: scripts/scenario_50_fermi_500.lua:5586
+#: scripts/scenario_50_fermi_500.lua:4120
 msgctxt "msgMainscreen"
 msgid "Ensign"
 msgstr "Ensign"
 
-#: scripts/scenario_50_fermi_500.lua:5589
+#: scripts/scenario_50_fermi_500.lua:4123
 msgctxt "msgMainscreen"
 msgid "Undefined"
 msgstr "Undefined"
 
-#: scripts/scenario_50_fermi_500.lua:5591
+#: scripts/scenario_50_fermi_500.lua:4125
 msgctxt "msgMainscreen"
 msgid "Cadet"
 msgstr "Cadet"
 
-#: scripts/scenario_50_fermi_500.lua:5600
+#: scripts/scenario_50_fermi_500.lua:4134
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Race completed in %.2f seconds. Time rank: %s"
 msgstr "Race completed in %.2f seconds. Time rank: %s"
 
-#: scripts/scenario_50_fermi_500.lua:5607
-#: scripts/scenario_50_fermi_500.lua:5620
+#: scripts/scenario_50_fermi_500.lua:4141
+#: scripts/scenario_50_fermi_500.lua:4154
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
 "\n"
 "Target drones eliminated: %i"
-msgstr "\nTarget drones eliminated: %i"
+msgstr ""
+"\n"
+"Target drones eliminated: %i"
 
-#: scripts/scenario_50_fermi_500.lua:5615
+#: scripts/scenario_50_fermi_500.lua:4149
 msgctxt "msgMainscreen"
 msgid ""
 "Race administrators got tired of waiting. Race stopped after 2000 seconds. "
 "Time Rank: Cadet"
-msgstr "Race administrators got tyred of waiting. Race stopped after 2000 seconds. Time Rank: Cadet"
+msgstr ""
+"Race administrators got tyred of waiting. Race stopped after 2000 seconds. "
+"Time Rank: Cadet"
 
-#: scripts/scenario_50_fermi_500.lua:5626
+#: scripts/scenario_50_fermi_500.lua:4160
 msgctxt "msgMainscreen"
 msgid "Race Results"
 msgstr "Race Results"
 
-#: scripts/scenario_50_fermi_500.lua:5634
+#: scripts/scenario_50_fermi_500.lua:4168
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
 "Race administrators got tired of waiting. Race stopped after %.2f seconds."
-msgstr "Race administrators got tyred of waiting. Race stopped after %.2f seconds."
+msgstr ""
+"Race administrators got tyred of waiting. Race stopped after %.2f seconds."
 
-#: scripts/scenario_50_fermi_500.lua:5646
+#: scripts/scenario_50_fermi_500.lua:4180
 msgctxt "msgMainscreen"
 msgid ""
 "\n"
 "Ordered by score. Place, ship name, score, time in seconds, place points, "
 "drone points"
-msgstr "\nOrdered by score. Place, ship name, score, time in seconds, place points, drone points"
+msgstr ""
+"\n"
+"Ordered by score. Place, ship name, score, time in seconds, place points, "
+"drone points"
 
-#: scripts/scenario_50_fermi_500.lua:5666
+#: scripts/scenario_50_fermi_500.lua:4200
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
 "\n"
 "%i, %s, %i, %.2f, %i, %i"
-msgstr "\n%i, %s, %i, %.2f, %i, %i"
+msgstr ""
+"\n"
+"%i, %s, %i, %.2f, %i, %i"
 
-#: scripts/scenario_50_fermi_500.lua:5676
+#: scripts/scenario_50_fermi_500.lua:4210
 msgctxt "msgMainscreen"
 msgid "Nobody finished the race."
 msgstr "Nobody finished the race."
 
-#: scripts/scenario_50_fermi_500.lua:5695
+#: scripts/scenario_50_fermi_500.lua:4229
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
 "\n"
 "%s time: %.2f seconds. Time rank: %s. Placement points: %i"
-msgstr "\n%s time: %.2f seconds. Time rank: %s. Placement points: %i"
+msgstr ""
+"\n"
+"%s time: %.2f seconds. Time rank: %s. Placement points: %i"
 
-#: scripts/scenario_50_fermi_500.lua:5703
+#: scripts/scenario_50_fermi_500.lua:4237
 msgctxt "msgMainscreen"
 msgid ""
 "\n"
 "Results indeterminate"
-msgstr "\nResults indeterminate"
+msgstr ""
+"\n"
+"Results indeterminate"
 
-#: scripts/scenario_50_fermi_500.lua:5749
-#: scripts/scenario_50_fermi_500.lua:5768
+#: scripts/scenario_50_fermi_500.lua:4283
+#: scripts/scenario_50_fermi_500.lua:4302
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s Drones shot: %i, Total score: %i. "
 msgstr "%s Drones shot: %i, Total score: %i. "
 
-#: scripts/scenario_50_fermi_500.lua:6130
+#: scripts/scenario_50_fermi_500.lua:4658
 #, lua-format
 msgctxt "raceOrders-comms"
 msgid ""
 "Start race on time at waypoint 1\n"
 "Race length: %.1f units"
-msgstr "Start race on time at waypoint 1\nRace length: %.1f units"
+msgstr ""
+"Start race on time at waypoint 1\n"
+"Race length: %.1f units"
 
-#: scripts/scenario_50_fermi_500.lua:6143
+#: scripts/scenario_50_fermi_500.lua:4671
 #, lua-format
 msgctxt "raceOrders-shipLog"
 msgid "Race starts in %i minutes. Be at waypoint 1 on time or forfeit"
 msgstr "Race starts in %i minutes. Be at waypoint 1 on time or forfeit"
 
-#: scripts/scenario_50_fermi_500.lua:6154
+#: scripts/scenario_50_fermi_500.lua:4682
 #, lua-format
 msgctxt "raceOrders-shipLog"
 msgid "Race starts in %i minute. Be at waypoint 1 on time or forfeit"
 msgstr "Race starts in %i minute. Be at waypoint 1 on time or forfeit"
 
-#: scripts/scenario_50_fermi_500.lua:6165
+#: scripts/scenario_50_fermi_500.lua:4693
 #, lua-format
 msgctxt "raceOrders-shipLog"
 msgid "Today's race length: %.1f units"
 msgstr "Today's race length: %.1f units"
 
-#: scripts/scenario_50_fermi_500.lua:6180
+#: scripts/scenario_50_fermi_500.lua:4708
 #, lua-format
 msgctxt "race-"
 msgid "Race Start Countdown: %.2f"
 msgstr "Race Start Countdown: %.2f"
 
-#: scripts/scenario_50_fermi_500.lua:6199
+#: scripts/scenario_50_fermi_500.lua:4727
 msgctxt "race-shipLog"
 msgid "Ready..."
 msgstr "Ready..."
 
-#: scripts/scenario_50_fermi_500.lua:6203
+#: scripts/scenario_50_fermi_500.lua:4731
 msgctxt "race-shipLog"
 msgid "Set..."
 msgstr "Set..."
 
-#: scripts/scenario_50_fermi_500.lua:6255
+#: scripts/scenario_50_fermi_500.lua:4783
 msgctxt "raceOrders-comms"
 msgid "Complete race. Win if possible."
 msgstr "Complete race. Win if possible."
 
-#: scripts/scenario_50_fermi_500.lua:6268
+#: scripts/scenario_50_fermi_500.lua:4796
 msgctxt "raceOrders-shipLog"
 msgid "Go!"
 msgstr "Go!"
 
-#: scripts/scenario_50_fermi_500.lua:6317
+#: scripts/scenario_50_fermi_500.lua:4845
 #, lua-format
 msgctxt "race-"
 msgid "Race Run Time %.2f"
 msgstr "Race Run Time %.2f"
 
-#: scripts/scenario_50_fermi_500.lua:6342
+#: scripts/scenario_50_fermi_500.lua:4870
 msgctxt "race-shipLog"
 msgid "The race has begun!"
 msgstr "The race has begun!"
 
-#: scripts/scenario_50_fermi_500.lua:6350
+#: scripts/scenario_50_fermi_500.lua:4878
 #, lua-format
 msgctxt "race-shipLog"
 msgid ""
 "With %i racers, we have the following points awarded for final race place:"
-msgstr "With %i racers, we have the following points awarded for final race place:"
+msgstr ""
+"With %i racers, we have the following points awarded for final race place:"
 
-#: scripts/scenario_50_fermi_500.lua:6358
+#: scripts/scenario_50_fermi_500.lua:4886
 #, lua-format
 msgctxt "race-shipLog"
 msgid ""
 "With %i racers remaining from the original %i registrants, we have the "
 "following points awarded for final race place:"
-msgstr "With %i racers remaining from the original %i registrants, we have the following points awarded for final race place:"
+msgstr ""
+"With %i racers remaining from the original %i registrants, we have the "
+"following points awarded for final race place:"
 
-#: scripts/scenario_50_fermi_500.lua:6369
+#: scripts/scenario_50_fermi_500.lua:4897
 msgctxt "race-shipLog"
 msgid "First"
 msgstr "First"
 
-#: scripts/scenario_50_fermi_500.lua:6370
+#: scripts/scenario_50_fermi_500.lua:4898
 msgctxt "race-shipLog"
 msgid "Second"
 msgstr "Second"
 
-#: scripts/scenario_50_fermi_500.lua:6371
+#: scripts/scenario_50_fermi_500.lua:4899
 msgctxt "race-shipLog"
 msgid "Third"
 msgstr "Third"
 
-#: scripts/scenario_50_fermi_500.lua:6372
+#: scripts/scenario_50_fermi_500.lua:4900
 msgctxt "race-shipLog"
 msgid "Fourth"
 msgstr "Fourth"
 
-#: scripts/scenario_50_fermi_500.lua:6373
+#: scripts/scenario_50_fermi_500.lua:4901
 msgctxt "race-shipLog"
 msgid "Fifth"
 msgstr "Fifth"
 
-#: scripts/scenario_50_fermi_500.lua:6374
+#: scripts/scenario_50_fermi_500.lua:4902
 msgctxt "race-shipLog"
 msgid "Sixth"
 msgstr "Sixth"
 
-#: scripts/scenario_50_fermi_500.lua:6375
+#: scripts/scenario_50_fermi_500.lua:4903
 msgctxt "race-shipLog"
 msgid "Seventh"
 msgstr "Seventh"
 
-#: scripts/scenario_50_fermi_500.lua:6376
+#: scripts/scenario_50_fermi_500.lua:4904
 msgctxt "race-shipLog"
 msgid "Eighth"
 msgstr "Eighth"
 
-#: scripts/scenario_50_fermi_500.lua:6377
+#: scripts/scenario_50_fermi_500.lua:4905
 msgctxt "race-shipLog"
 msgid "Ninth"
 msgstr "Ninth"
 
-#: scripts/scenario_50_fermi_500.lua:6378
+#: scripts/scenario_50_fermi_500.lua:4906
 msgctxt "race-shipLog"
 msgid "Tenth"
 msgstr "Tenth"
 
-#: scripts/scenario_50_fermi_500.lua:6385
+#: scripts/scenario_50_fermi_500.lua:4913
 #, lua-format
 msgctxt "race-shipLog"
 msgid "%s, %s:%s"
 msgstr "%s, %s:%s"
 
-#: scripts/scenario_50_fermi_500.lua:6393
+#: scripts/scenario_50_fermi_500.lua:4921
 #, lua-format
 msgctxt "race-shipLog"
 msgid "%s:%s"
 msgstr "%s:%s"
 
-#: scripts/scenario_50_fermi_500.lua:6408
+#: scripts/scenario_50_fermi_500.lua:4936
 msgctxt "race-msgMainscreen"
 msgid "Race aborted. Nobody made it to the starting line"
 msgstr "Race aborted. Nobody made it to the starting line"
 
-#: scripts/scenario_50_fermi_500.lua:6473
+#: scripts/scenario_50_fermi_500.lua:5001
 #, lua-format
 msgctxt "race-tabHelms&Tactical&Singlepilot"
 msgid "%s in %s"
 msgstr "%s in %s"
 
-#: scripts/scenario_50_fermi_500.lua:6513
+#: scripts/scenario_50_fermi_500.lua:5041
 #, lua-format
 msgctxt "race-shipLog"
 msgid ""
 "Waypoint 2 met. Go to waypoint 3. Leg took %f seconds. You have completed %i "
 "%s."
-msgstr "Waypoint 2 met. Go to waypoint 3. Leg took %f seconds. You have completed %i %s."
+msgstr ""
+"Waypoint 2 met. Go to waypoint 3. Leg took %f seconds. You have completed %i "
+"%s."
 
-#: scripts/scenario_50_fermi_500.lua:6535
+#: scripts/scenario_50_fermi_500.lua:5063
 #, lua-format
 msgctxt "race-shipLog"
 msgid ""
 "Waypoint 3 met. Go to waypoint 4. Leg took %f seconds. You have completed %i "
 "%s."
-msgstr "Waypoint 3 met. Go to waypoint 4. Leg took %f seconds. You have completed %i %s."
+msgstr ""
+"Waypoint 3 met. Go to waypoint 4. Leg took %f seconds. You have completed %i "
+"%s."
 
-#: scripts/scenario_50_fermi_500.lua:6557
+#: scripts/scenario_50_fermi_500.lua:5085
 #, lua-format
 msgctxt "race-shipLog"
 msgid ""
 "Waypoint 4 met. Go to waypoint 1. Leg took %f seconds. You have completed %i "
 "%s."
-msgstr "Waypoint 4 met. Go to waypoint 1. Leg took %f seconds. You have completed %i %s."
+msgstr ""
+"Waypoint 4 met. Go to waypoint 1. Leg took %f seconds. You have completed %i "
+"%s."
 
-#: scripts/scenario_50_fermi_500.lua:6576
+#: scripts/scenario_50_fermi_500.lua:5104
 #, lua-format
 msgctxt "race-shipLog"
 msgid "Completed race. Race time in seconds: %f"
 msgstr "Completed race. Race time in seconds: %f"
 
-#: scripts/scenario_50_fermi_500.lua:6593
+#: scripts/scenario_50_fermi_500.lua:5121
 #, lua-format
 msgctxt "race-shipLog"
 msgid ""
 "Waypoint 1 met. Go to waypoint 2. Leg took %f seconds. You have completed %i "
 "%s. Lap took %f seconds."
-msgstr "Waypoint 1 met. Go to waypoint 2. Leg took %f seconds. You have completed %i %s. Lap took %f seconds."
+msgstr ""
+"Waypoint 1 met. Go to waypoint 2. Leg took %f seconds. You have completed %i "
+"%s. Lap took %f seconds."
 
-#: scripts/scenario_50_fermi_500.lua:6644
+#: scripts/scenario_50_fermi_500.lua:5172
 msgctxt "msgMainscreen"
 msgid "Race aborted. Nobody made it to the starting line"
 msgstr "Race aborted. Nobody made it to the starting line"
+
+#~ msgctxt "trade-comms"
+#~ msgid "food"
+#~ msgstr "food"
+
+#~ msgctxt "trade-comms"
+#~ msgid "medicine"
+#~ msgstr "medicine"
+
+#~ msgctxt "trade-comms"
+#~ msgid "luxury"
+#~ msgstr "luxury"
+
+#~ msgctxt "trade-comms"
+#~ msgid "cobalt"
+#~ msgstr "cobalt"
+
+#~ msgctxt "trade-comms"
+#~ msgid "dilithium"
+#~ msgstr "dilithium"
+
+#~ msgctxt "trade-comms"
+#~ msgid "gold"
+#~ msgstr "gold"
+
+#~ msgctxt "trade-comms"
+#~ msgid "nickel"
+#~ msgstr "nickel"
+
+#~ msgctxt "trade-comms"
+#~ msgid "platinum"
+#~ msgstr "platinum"
+
+#~ msgctxt "trade-comms"
+#~ msgid "tritanium"
+#~ msgstr "tritanium"
+
+#~ msgctxt "trade-comms"
+#~ msgid "autodoc"
+#~ msgstr "autodoc"
+
+#~ msgctxt "trade-comms"
+#~ msgid "android"
+#~ msgstr "android"
+
+#~ msgctxt "trade-comms"
+#~ msgid "battery"
+#~ msgstr "battery"
+
+#~ msgctxt "trade-comms"
+#~ msgid "beam"
+#~ msgstr "beam"
+
+#~ msgctxt "trade-comms"
+#~ msgid "circuit"
+#~ msgstr "circuit"
+
+#~ msgctxt "trade-comms"
+#~ msgid "communication"
+#~ msgstr "communication"
+
+#~ msgctxt "trade-comms"
+#~ msgid "filament"
+#~ msgstr "filament"
+
+#~ msgctxt "trade-comms"
+#~ msgid "impulse"
+#~ msgstr "impulse"
+
+#~ msgctxt "trade-comms"
+#~ msgid "lifter"
+#~ msgstr "lifter"
+
+#~ msgctxt "trade-comms"
+#~ msgid "nanites"
+#~ msgstr "nanites"
+
+#~ msgctxt "trade-comms"
+#~ msgid "optic"
+#~ msgstr "optic"
+
+#~ msgctxt "trade-comms"
+#~ msgid "repulsor"
+#~ msgstr "repulsor"
+
+#~ msgctxt "trade-comms"
+#~ msgid "robotic"
+#~ msgstr "robotic"
+
+#~ msgctxt "trade-comms"
+#~ msgid "sensor"
+#~ msgstr "sensor"
+
+#~ msgctxt "trade-comms"
+#~ msgid "shield"
+#~ msgstr "shield"
+
+#~ msgctxt "trade-comms"
+#~ msgid "software"
+#~ msgstr "software"
+
+#~ msgctxt "trade-comms"
+#~ msgid "tractor"
+#~ msgstr "tractor"
+
+#~ msgctxt "trade-comms"
+#~ msgid "transporter"
+#~ msgstr "transporter"
+
+#~ msgctxt "trade-comms"
+#~ msgid "warp"
+#~ msgstr "warp"
+
+#~ msgctxt "msgGM"
+#~ msgid " (Kraylor)"
+#~ msgstr " (Kraylor)"
+
+#~ msgctxt "msgGM"
+#~ msgid " (Ktlitan)"
+#~ msgstr " (Ktlitan)"
+
+#, lua-format
+#~ msgctxt "msgGM"
+#~ msgid "%s: %s %s\n"
+#~ msgstr "%s: %s %s\n"
+
+#~ msgctxt "station-comms"
+#~ msgid "We are under attack! No time for chatting!"
+#~ msgstr "We are under attack! No time for chatting!"
+
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "Good day, officer!\n"
+#~ "What can we do for you today?\n"
+#~ msgstr ""
+#~ "Good day, officer!\n"
+#~ "What can we do for you today?\n"
+
+#~ msgctxt "station-comms"
+#~ msgid "Welcome to our lovely station.\n"
+#~ msgstr "Welcome to our lovely station.\n"
+
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "Forgive us if we seem a little distracted. We are carefully monitoring "
+#~ "the enemies nearby."
+#~ msgstr ""
+#~ "Forgive us if we seem a little distracted. We are carefully monitoring "
+#~ "the enemies nearby."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "What type of ordnance?"
+#~ msgstr "What type of ordnance?"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "%s %s @ %s"
+#~ msgstr ""
+#~ "%s\n"
+#~ "%s %s @ %s"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "%s: %s"
+#~ msgstr ""
+#~ "%s\n"
+#~ "%s: %s"
+
+#~ msgctxt "trade-comms"
+#~ msgid "Buy, sell, trade"
+#~ msgstr "Buy, sell, trade"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Goods or components available for sale here:%s"
+#~ msgstr "Goods or components available for sale here:%s"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "Goods in cargo hold:%s"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Goods in cargo hold:%s"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "Cargo hold is empty"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Cargo hold is empty"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "Available space:%s"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Available space:%s"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Buy a %s for %s reputation"
+#~ msgstr "Buy a %s for %s reputation"
+
+#~ msgctxt "trade-comms"
+#~ msgid "You have to be docked to complete the transaction."
+#~ msgstr "You have to be docked to complete the transaction."
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Not enough room on %s to purchase %s"
+#~ msgstr "Not enough room on %s to purchase %s"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "%s ran out of %s."
+#~ msgstr "%s ran out of %s."
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "One %s purchased"
+#~ msgstr "One %s purchased"
+
+#~ msgctxt "trade-comms"
+#~ msgid "Insufficient reputation"
+#~ msgstr "Insufficient reputation"
+
+#~ msgctxt "trade-comms"
+#~ msgid "Goods or components available here: quantity, cost in reputation\n"
+#~ msgstr "Goods or components available here: quantity, cost in reputation\n"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "     %s: %i, %i\n"
+#~ msgstr "     %s: %i, %i\n"
+
+#~ msgctxt "trade-comms"
+#~ msgid "Current Cargo:\n"
+#~ msgstr "Current Cargo:\n"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "     %s: %i\n"
+#~ msgstr "     %s: %i\n"
+
+#~ msgctxt "trade-comms"
+#~ msgid "     Empty\n"
+#~ msgstr "     Empty\n"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Available Space: %i, Available Reputation: %i\n"
+#~ msgstr "Available Space: %i, Available Reputation: %i\n"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Buy one %s for %i reputation"
+#~ msgstr "Buy one %s for %i reputation"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Type: %s, Quantity: %i, Rep: %i"
+#~ msgstr "Type: %s, Quantity: %i, Rep: %i"
+
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "\n"
+#~ "Insufficient cargo space for purchase"
+#~ msgstr ""
+#~ "\n"
+#~ "Insufficient cargo space for purchase"
+
+#~ msgctxt "needRep-comms"
+#~ msgid ""
+#~ "\n"
+#~ "Insufficient reputation for purchase"
+#~ msgstr ""
+#~ "\n"
+#~ "Insufficient reputation for purchase"
+
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "\n"
+#~ "Insufficient station inventory"
+#~ msgstr ""
+#~ "\n"
+#~ "Insufficient station inventory"
+
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "\n"
+#~ "purchased"
+#~ msgstr ""
+#~ "\n"
+#~ "purchased"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Trade food for %s"
+#~ msgstr "Trade food for %s"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Type: %s,  Quantity: %i"
+#~ msgstr "Type: %s,  Quantity: %i"
+
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "\n"
+#~ "Traded"
+#~ msgstr ""
+#~ "\n"
+#~ "Traded"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Trade luxury for %s"
+#~ msgstr "Trade luxury for %s"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Trade medicine for %s"
+#~ msgstr "Trade medicine for %s"
+
+#~ msgctxt "station-comms"
+#~ msgid "You need to stay docked for that action."
+#~ msgstr "You need to stay docked for that action."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "We do not deal in weapons of mass destruction."
+#~ msgstr "We do not deal in weapons of mass destruction."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "We do not deal in weapons of mass disruption."
+#~ msgstr "We do not deal in weapons of mass disruption."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "We do not deal in those weapons."
+#~ msgstr "We do not deal in those weapons."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "All nukes are charged and primed for destruction."
+#~ msgstr "All nukes are charged and primed for destruction."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "Sorry, sir, but you are as fully stocked as I can allow."
+#~ msgstr "Sorry, sir, but you are as fully stocked as I can allow."
+
+#~ msgctxt "needRep-comms"
+#~ msgid "Not enough reputation."
+#~ msgstr "Not enough reputation."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "You are fully loaded and ready to explode things."
+#~ msgstr "You are fully loaded and ready to explode things."
+
+#~ msgctxt "ammo-comms"
+#~ msgid ""
+#~ "We generously resupplied you with some weapon charges.\n"
+#~ "Put them to good use."
+#~ msgstr ""
+#~ "We generously resupplied you with some weapon charges.\n"
+#~ "Put them to good use."
+
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "Good day, officer.\n"
+#~ "If you need supplies, please dock with us first."
+#~ msgstr ""
+#~ "Good day, officer.\n"
+#~ "If you need supplies, please dock with us first."
+
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "Greetings.\n"
+#~ "If you want to do business, please dock with us first."
+#~ msgstr ""
+#~ "Greetings.\n"
+#~ "If you want to do business, please dock with us first."
+
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "\n"
+#~ "Be aware that if enemies in the area get much closer, we will be too busy "
+#~ "to conduct business with you."
+#~ msgstr ""
+#~ "\n"
+#~ "Be aware that if enemies in the area get much closer, we will be too busy "
+#~ "to conduct business with you."
+
+#, lua-format
+#~ msgctxt "stationAssist-comms"
+#~ msgid "Can you send a supply drop? (%d rep)"
+#~ msgstr "Can you send a supply drop? (%d rep)"
+
+#~ msgctxt "stationAssist-comms"
+#~ msgid "You need to set a waypoint before you can request backup."
+#~ msgstr "You need to set a waypoint before you can request backup."
+
+#~ msgctxt "stationAssist-comms"
+#~ msgid "To which waypoint should we deliver your supplies?"
+#~ msgstr "To which waypoint should we deliver your supplies?"
+
+#, lua-format
+#~ msgctxt "stationAssist-comms"
+#~ msgid "WP %d"
+#~ msgstr "WP %d"
+
+#, lua-format
+#~ msgctxt "stationAssist-comms"
+#~ msgid "We have dispatched a supply ship toward WP %d"
+#~ msgstr "We have dispatched a supply ship toward WP %d"
+
+#~ msgctxt "needRep-comms"
+#~ msgid "Not enough reputation!"
+#~ msgstr "Not enough reputation!"
+
+#, lua-format
+#~ msgctxt "stationAssist-comms"
+#~ msgid "Please send reinforcements! (%d rep)"
+#~ msgstr "Please send reinforcements! (%d rep)"
+
+#~ msgctxt "stationAssist-comms"
+#~ msgid "You need to set a waypoint before you can request reinforcements."
+#~ msgstr "You need to set a waypoint before you can request reinforcements."
+
+#~ msgctxt "stationAssist-comms"
+#~ msgid "To which waypoint should we dispatch the reinforcements?"
+#~ msgstr "To which waypoint should we dispatch the reinforcements?"
+
+#, lua-format
+#~ msgctxt "stationAssist-comms"
+#~ msgid "We have dispatched %s to assist at WP %d"
+#~ msgstr "We have dispatched %s to assist at WP %d"
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "What do you want?"
+#~ msgstr "What do you want?"
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Sir, how can we assist?"
+#~ msgstr "Sir, how can we assist?"
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Defend a waypoint"
+#~ msgstr "Defend a waypoint"
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "No waypoints set. Please set a waypoint first."
+#~ msgstr "No waypoints set. Please set a waypoint first."
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Which waypoint should we defend?"
+#~ msgstr "Which waypoint should we defend?"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Defend WP %d"
+#~ msgstr "Defend WP %d"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "We are heading to assist at WP %d."
+#~ msgstr "We are heading to assist at WP %d."
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Assist me"
+#~ msgstr "Assist me"
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Heading toward you to assist."
+#~ msgstr "Heading toward you to assist."
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Report status"
+#~ msgstr "Report status"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Hull: %d%%\n"
+#~ msgstr "Hull: %d%%\n"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "%sShield: %d%%\n"
+#~ msgstr "%sShield: %d%%\n"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "%sFront Shield: %d%%\n"
+#~ msgstr "%sFront Shield: %d%%\n"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "%sRear Shield: %d%%\n"
+#~ msgstr "%sRear Shield: %d%%\n"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "%sShield %s: %d%%\n"
+#~ msgstr "%sShield %s: %d%%\n"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "%s%s Missiles: %d/%d\n"
+#~ msgstr "%s%s Missiles: %d/%d\n"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Dock at %s"
+#~ msgstr "Dock at %s"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Docking at %s."
+#~ msgstr "Docking at %s."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "We will see to your destruction!"
+#~ msgstr "We will see to your destruction!"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Your bloodline will end here!"
+#~ msgstr "Your bloodline will end here!"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Your feeble threats are meaningless."
+#~ msgstr "Your feeble threats are meaningless."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid ""
+#~ "Ktzzzsss.\n"
+#~ "You will DIEEee weaklingsss!"
+#~ msgstr ""
+#~ "Ktzzzsss.\n"
+#~ "You will DIEEee weaklingsss!"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid ""
+#~ "We wish you no harm, but will harm you if we must.\n"
+#~ "End of transmission."
+#~ msgstr ""
+#~ "We wish you no harm, but will harm you if we must.\n"
+#~ "End of transmission."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Stay out of our way, or your death will amuse us extremely!"
+#~ msgstr "Stay out of our way, or your death will amuse us extremely!"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid ""
+#~ "One zero one.\n"
+#~ "No binary communication detected.\n"
+#~ "Switching to universal speech.\n"
+#~ "Generating appropriate response for target from human language archives.\n"
+#~ ":Do not cross us:\n"
+#~ "Communication halted."
+#~ msgstr ""
+#~ "One zero one.\n"
+#~ "No binary communication detected.\n"
+#~ "Switching to universal speech.\n"
+#~ "Generating appropriate response for target from human language archives.\n"
+#~ ":Do not cross us:\n"
+#~ "Communication halted."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "EXECUTE: SELFDESTRUCT"
+#~ msgstr "EXECUTE: SELFDESTRUCT"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Rogue command received. Targeting source."
+#~ msgstr "Rogue command received. Targeting source."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "External command ignored."
+#~ msgstr "External command ignored."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid ""
+#~ "The hive suffers no threats. Opposition to any of us is opposition to us "
+#~ "all.\n"
+#~ "Stand down or prepare to donate your corpses toward our nutrition."
+#~ msgstr ""
+#~ "The hive suffers no threats. Opposition to any of us is opposition to us "
+#~ "all.\n"
+#~ "Stand down or prepare to donate your corpses toward our nutrition."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
+#~ msgstr "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid ""
+#~ "We do not need permission to pluck apart such an insignificant threat."
+#~ msgstr ""
+#~ "We do not need permission to pluck apart such an insignificant threat."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "The hive has greater priorities than exterminating pests."
+#~ msgstr "The hive has greater priorities than exterminating pests."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Mind your own business!"
+#~ msgstr "Mind your own business!"
+
+#~ msgctxt "trade-comms"
+#~ msgid "Yes?"
+#~ msgstr "Yes?"
+
+#~ msgctxt "trade-comms"
+#~ msgid "Where are you headed?"
+#~ msgstr "Where are you headed?"
+
+#~ msgctxt "trade-comms"
+#~ msgid "Insufficient inventory on freighter for trade"
+#~ msgstr "Insufficient inventory on freighter for trade"
+
+#~ msgctxt "trade-comms"
+#~ msgid "Insufficient luxury to trade"
+#~ msgstr "Insufficient luxury to trade"
+
+#~ msgctxt "trade-comms"
+#~ msgid "Insufficient cargo space for purchase"
+#~ msgstr "Insufficient cargo space for purchase"
+
+#~ msgctxt "trade-comms"
+#~ msgid "Insufficient inventory on freighter"
+#~ msgstr "Insufficient inventory on freighter"
+
+#~ msgctxt "needRep-comms"
+#~ msgid "Insufficient reputation for purchase"
+#~ msgstr "Insufficient reputation for purchase"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Where are you headed? (cost: %f reputation)"
+#~ msgstr "Where are you headed? (cost: %f reputation)"
+
+#~ msgctxt "needRep-comms"
+#~ msgid "Insufficient reputation"
+#~ msgstr "Insufficient reputation"
+
+#~ msgctxt "trade-comms"
+#~ msgid "Why are you bothering me?"
+#~ msgstr "Why are you bothering me?"
+
+#~ msgctxt "ship-comms"
+#~ msgid ""
+#~ "Sorry, we have no time to chat with you.\n"
+#~ "We are on an important mission."
+#~ msgstr ""
+#~ "Sorry, we have no time to chat with you.\n"
+#~ "We are on an important mission."
+
+#~ msgctxt "ship-comms"
+#~ msgid ""
+#~ "We have nothing for you.\n"
+#~ "Good day."
+#~ msgstr ""
+#~ "We have nothing for you.\n"
+#~ "Good day."
 
 #, lua-format
 #~ msgctxt "orders-comms"

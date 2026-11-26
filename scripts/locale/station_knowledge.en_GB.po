@@ -1,0 +1,24 @@
+#: scripts/station_knowledge.lua:88
+msgctxt "trade-comms"
+msgid " and will trade it for medicine"
+msgstr ""
+
+#: scripts/station_knowledge.lua:94
+msgctxt "trade-comms"
+msgid " or food"
+msgstr ""
+
+#: scripts/station_knowledge.lua:99
+msgctxt "trade-comms"
+msgid " and will trade it for food"
+msgstr ""
+
+#: scripts/station_knowledge.lua:107
+msgctxt "trade-comms"
+msgid " or luxury"
+msgstr ""
+
+#: scripts/station_knowledge.lua:112
+msgctxt "trade-comms"
+msgid " and will trade it for luxury"
+msgstr ""

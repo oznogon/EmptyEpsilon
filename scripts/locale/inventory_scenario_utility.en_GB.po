@@ -1,0 +1,38 @@
+#: scripts/inventory_scenario_utility.lua:9
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "%s Current cargo:"
+msgstr ""
+
+#: scripts/inventory_scenario_utility.lua:22
+#: scripts/inventory_scenario_utility.lua:38
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "     %s: %i"
+msgstr ""
+
+#: scripts/inventory_scenario_utility.lua:52
+msgctxt "inventory-shipLog"
+msgid "     Empty\n"
+msgstr ""
+
+#: scripts/inventory_scenario_utility.lua:53
+msgctxt "inventory-shipLog"
+msgid "     Empty"
+msgstr ""
+
+#: scripts/inventory_scenario_utility.lua:58
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "Available space: %i"
+msgstr ""
+
+#: scripts/inventory_scenario_utility.lua:89
+msgctxt "inventory-buttonRelay"
+msgid "Inventory"
+msgstr ""
+
+#: scripts/inventory_scenario_utility.lua:104
+msgctxt "inventory-buttonOperations"
+msgid "Inventory"
+msgstr ""

@@ -1,0 +1,529 @@
+#: scripts/comms_station_core.lua:166
+msgctxt "station-comms"
+msgid "We are under attack! No time for chatting!"
+msgstr ""
+
+#: scripts/comms_station_core.lua:209 scripts/comms_station_core.lua:247
+#: scripts/comms_station_core.lua:308
+#, lua-format
+msgctxt "trade-comms"
+msgid "Recruit repair crew member for %i reputation"
+msgstr ""
+
+#: scripts/comms_station_core.lua:214 scripts/comms_station_core.lua:252
+#: scripts/comms_station_core.lua:326 scripts/comms_station_core.lua:519
+#: scripts/comms_station_core.lua:562 scripts/comms_station_core.lua:641
+msgctxt "needRep-comms"
+msgid "Insufficient reputation"
+msgstr ""
+
+#: scripts/comms_station_core.lua:220 scripts/comms_station_core.lua:257
+#: scripts/comms_station_core.lua:346
+msgctxt "trade-comms"
+msgid "Repair crew member hired"
+msgstr ""
+
+#: scripts/comms_station_core.lua:223 scripts/comms_station_core.lua:260
+#: scripts/comms_station_core.lua:349 scripts/comms_station_core.lua:483
+#: scripts/comms_station_core.lua:530 scripts/comms_station_core.lua:570
+#: scripts/comms_station_core.lua:664 scripts/comms_station_core.lua:772
+#: scripts/comms_station_core.lua:905 scripts/comms_station_core.lua:924
+#: scripts/comms_station_core.lua:947 scripts/comms_station_core.lua:1025
+#: scripts/comms_station_core.lua:1039 scripts/comms_station_core.lua:1083
+#: scripts/comms_station_core.lua:1097
+msgid "Back"
+msgstr ""
+
+#: scripts/comms_station_core.lua:276
+msgctxt "trade-comms"
+msgid "Recruit repair crew member"
+msgstr ""
+
+#: scripts/comms_station_core.lua:301
+msgctxt "trade-comms"
+msgid "We have a repair crew candidate for you to consider"
+msgstr ""
+
+#: scripts/comms_station_core.lua:317 scripts/comms_station_core.lua:630
+#: scripts/comms_station_core.lua:870 scripts/comms_station_core.lua:991
+#: scripts/comms_station_core.lua:1047
+msgctxt "station-comms"
+msgid "You need to stay docked for that action."
+msgstr ""
+
+#: scripts/comms_station_core.lua:356 scripts/comms_station_core.lua:415
+msgctxt "trade-comms"
+msgid ""
+"A possible repair recruit is awaiting final certification. They should be "
+"available in "
+msgstr ""
+
+#: scripts/comms_station_core.lua:360 scripts/comms_station_core.lua:419
+msgctxt "trade-comms"
+msgid ""
+"There's one repair crew candidate completing their license application. They "
+"should be available in "
+msgstr ""
+
+#: scripts/comms_station_core.lua:364 scripts/comms_station_core.lua:423
+msgctxt "trade-comms"
+msgid "One repair crew should be getting here from their medical checkout in "
+msgstr ""
+
+#: scripts/comms_station_core.lua:374 scripts/comms_station_core.lua:388
+#, lua-format
+msgctxt "trade-comms"
+msgid "%s %i seconds"
+msgstr ""
+
+#: scripts/comms_station_core.lua:396
+#, lua-format
+msgctxt "trade-comms"
+msgid "%s a second"
+msgstr ""
+
+#: scripts/comms_station_core.lua:435
+#, lua-format
+msgctxt "trade-comms"
+msgid "Several arrived on station earlier. %s %i seconds"
+msgstr ""
+
+#: scripts/comms_station_core.lua:449 scripts/comms_station_core.lua:737
+#, lua-format
+msgctxt "trade-comms"
+msgid "%i seconds"
+msgstr ""
+
+#: scripts/comms_station_core.lua:452 scripts/comms_station_core.lua:742
+#, lua-format
+msgctxt "trade-comms"
+msgid "%i second"
+msgstr ""
+
+#: scripts/comms_station_core.lua:459 scripts/comms_station_core.lua:749
+#, lua-format
+msgctxt "trade-comms"
+msgid "%i minutes and %s"
+msgstr ""
+
+#: scripts/comms_station_core.lua:465 scripts/comms_station_core.lua:755
+#, lua-format
+msgctxt "trade-comms"
+msgid "%i minute and %s"
+msgstr ""
+
+#: scripts/comms_station_core.lua:475
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"There are some repair crew recruits in route for %s. Travel time remaining "
+"is %s."
+msgstr ""
+
+#: scripts/comms_station_core.lua:514 scripts/comms_station_core.lua:557
+#: scripts/comms_station_core.lua:621
+#, lua-format
+msgctxt "trade-comms"
+msgid "Purchase coolant for %i reputation"
+msgstr ""
+
+#: scripts/comms_station_core.lua:526 scripts/comms_station_core.lua:566
+#: scripts/comms_station_core.lua:660
+msgctxt "trade-comms"
+msgid "Additional coolant purchased"
+msgstr ""
+
+#: scripts/comms_station_core.lua:587
+msgctxt "trade-comms"
+msgid "Purchase Coolant"
+msgstr ""
+
+#: scripts/comms_station_core.lua:614
+msgctxt "trade-comms"
+msgid "We've got some coolant available for you"
+msgstr ""
+
+#: scripts/comms_station_core.lua:675 scripts/comms_station_core.lua:691
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"The coolant preparation facility is having difficulty packaging the coolant "
+"for transport. They say they should have it working in about %i seconds"
+msgstr ""
+
+#: scripts/comms_station_core.lua:700
+msgctxt "trade-comms"
+msgid ""
+"The coolant preparation facility is having difficulty packaging the coolant "
+"for transportation. They say they should have it working in a second"
+msgstr ""
+
+#: scripts/comms_station_core.lua:724
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Our coolant production facility just made some, but it's not quite ready to "
+"be transported. The preparation facility says it should take about %i seconds"
+msgstr ""
+
+#: scripts/comms_station_core.lua:765
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Our coolant production facility is making more right now. Coolant "
+"manufacturing time remaining is %s."
+msgstr ""
+
+#: scripts/comms_station_core.lua:825
+#, lua-format
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"Station inventory of %s type weapons reduced to %i"
+msgstr ""
+
+#: scripts/comms_station_core.lua:842
+msgctxt "ammo-comms"
+msgid "All nukes are charged and primed for destruction."
+msgstr ""
+
+#: scripts/comms_station_core.lua:847
+msgctxt "ammo-comms"
+msgid "Sorry, sir, but you are as fully stocked as I can allow."
+msgstr ""
+
+#: scripts/comms_station_core.lua:857
+msgctxt "ammo-comms"
+msgid "You are fully loaded and ready to explode things."
+msgstr ""
+
+#: scripts/comms_station_core.lua:862
+msgctxt "ammo-comms"
+msgid ""
+"We generously resupplied you with some weapon charges.\n"
+"Put them to good use."
+msgstr ""
+
+#: scripts/comms_station_core.lua:879 scripts/comms_station_core.lua:1000
+#: scripts/comms_station_core.lua:1056
+msgctxt "ammo-comms"
+msgid "We do not deal in weapons of mass destruction."
+msgstr ""
+
+#: scripts/comms_station_core.lua:884 scripts/comms_station_core.lua:1005
+#: scripts/comms_station_core.lua:1061
+msgctxt "ammo-comms"
+msgid "We do not deal in weapons of mass disruption."
+msgstr ""
+
+#: scripts/comms_station_core.lua:887 scripts/comms_station_core.lua:1008
+#: scripts/comms_station_core.lua:1064
+msgctxt "ammo-comms"
+msgid "We do not deal in those weapons."
+msgstr ""
+
+#: scripts/comms_station_core.lua:913 scripts/comms_station_core.lua:943
+#: scripts/comms_station_core.lua:950 scripts/comms_station_core.lua:1028
+#: scripts/comms_station_core.lua:1086
+msgctxt "needRep-comms"
+msgid "Not enough reputation."
+msgstr ""
+
+#: scripts/comms_station_core.lua:929
+msgctxt "ammo-comms"
+msgid "You can't afford as much as I'd like to give you"
+msgstr ""
+
+#: scripts/comms_station_core.lua:931
+msgctxt "ammo-comms"
+msgid "Get just one"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1104
+msgctxt "scienceDB"
+msgid "Stations"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1114
+msgctxt "scienceDB"
+msgid "Friendly"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1122
+msgctxt "scienceDB"
+msgid ""
+"Friendly stations share their short range telemetry with your ship on the "
+"Relay and Strategic Map consoles. These are the known friendly stations."
+msgstr ""
+
+#: scripts/comms_station_core.lua:1143
+msgctxt "scienceDB"
+msgid ""
+"Neutral stations don't share their short range telemetry with your ship, but "
+"they do allow for docking. These are the known neutral stations."
+msgstr ""
+
+#: scripts/comms_station_core.lua:1167
+#, lua-format
+msgctxt "scienceDB"
+msgid ""
+"%s\n"
+"\n"
+"General Information: %s"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1177
+#, lua-format
+msgctxt "scienceDB"
+msgid ""
+"%s\n"
+"\n"
+"History: %s"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1188
+msgctxt "scienceDB"
+msgid "Small Station"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1189
+msgctxt "scienceDB"
+msgid "Medium Station"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1190
+msgctxt "scienceDB"
+msgid "Large Station"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1191
+msgctxt "scienceDB"
+msgid "Huge Station"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1193
+msgctxt "scienceDB"
+msgid "Small"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1201
+msgctxt "scienceDB"
+msgid "Medium"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1209
+msgctxt "scienceDB"
+msgid "Large"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1217
+msgctxt "scienceDB"
+msgid "Huge"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1225
+msgctxt "scienceDB"
+msgid "Size"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1228
+msgctxt "scienceDB"
+msgid "Location, Faction"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1241
+msgctxt "scienceDB"
+msgid "share energy"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1246
+msgctxt "scienceDB"
+msgid "repair hull"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1249
+#, lua-format
+msgctxt "scienceDB"
+msgid "%s, repair hull"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1255
+msgctxt "scienceDB"
+msgid "replenish probes"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1258
+#, lua-format
+msgctxt "scienceDB"
+msgid "%s, replenish probes"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1265
+msgctxt "scienceDB"
+msgid "Docking Services"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1267
+msgctxt "scienceDB"
+msgid "Docking Service"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1289
+msgctxt "scienceDB"
+msgid "Restock Homing"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1290
+msgctxt "scienceDB"
+msgid "Restock HVLI"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1291
+msgctxt "scienceDB"
+msgid "Restock Mine"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1292
+msgctxt "scienceDB"
+msgid "Restock Nuke"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1293
+msgctxt "scienceDB"
+msgid "Restock EMP"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1299
+#, lua-format
+msgctxt "scienceDB"
+msgid "%i reputation each"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1311 scripts/comms_station_core.lua:1327
+msgctxt "scienceDB"
+msgid "Repair scanners"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1314
+msgctxt "scienceDB"
+msgid "Repair combat maneuver"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1316
+msgctxt "scienceDB"
+msgid "Repair hacking"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1319
+msgctxt "scienceDB"
+msgid "Repair probe launch"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1323
+msgctxt "scienceDB"
+msgid "Repair slow tube"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1334 scripts/comms_station_core.lua:1419
+#, lua-format
+msgctxt "scienceDB"
+msgid "%s reputation"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1343
+msgctxt "scienceDB"
+msgid "Repair reactor"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1346
+msgctxt "scienceDB"
+msgid "Repair beam weapons"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1350
+msgctxt "scienceDB"
+msgid "Repair missile weapons"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1354
+msgctxt "scienceDB"
+msgid "Repair maneuvering"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1356
+msgctxt "scienceDB"
+msgid "Repair impulse"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1357
+msgctxt "scienceDB"
+msgid "Repair warp drive"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1360
+msgctxt "scienceDB"
+msgid "Repair jump drive"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1364
+msgctxt "scienceDB"
+msgid "Repair front shield"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1368
+msgctxt "scienceDB"
+msgid "Repair rear shield"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1375
+#, lua-format
+msgctxt "scienceDB"
+msgid "%s reputation, up to %.1f%% max"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1388
+msgctxt "scienceDB"
+msgid "Drop supplies"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1392
+msgctxt "scienceDB"
+msgid "Standard reinforcements"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1396
+msgctxt "scienceDB"
+msgid "Hornet reinforcements"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1400
+msgctxt "scienceDB"
+msgid "Phobos reinforcements"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1404
+msgctxt "scienceDB"
+msgid "Adder3 reinforcements"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1408
+msgctxt "scienceDB"
+msgid "Adder8 reinforcements"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1412
+msgctxt "scienceDB"
+msgid "Shield overcharge"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1437
+#, lua-format
+msgctxt "scienceDB"
+msgid "Sells %s"
+msgstr ""
+
+#: scripts/comms_station_core.lua:1439
+#, lua-format
+msgctxt "scienceDB"
+msgid "for %s reputation each"
+msgstr ""

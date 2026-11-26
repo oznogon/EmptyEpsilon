@@ -1,0 +1,13 @@
+#: scripts/comms_defense_scenario_utility.lua:116
+msgctxt "ship-comms"
+msgid ""
+"Sorry, we have no time to chat with you.\n"
+"We are on an important mission."
+msgstr ""
+
+#: scripts/comms_defense_scenario_utility.lua:121
+msgctxt "ship-comms"
+msgid ""
+"We have nothing for you.\n"
+"Good day."
+msgstr ""

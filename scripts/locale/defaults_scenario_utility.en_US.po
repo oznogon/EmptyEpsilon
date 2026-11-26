@@ -1,0 +1,231 @@
+#: scripts/defaults_scenario_utility.lua:137
+msgctxt "trade-comms"
+msgid "food"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:138
+msgctxt "trade-comms"
+msgid "medicine"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:139
+msgctxt "trade-comms"
+msgid "luxury"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:140
+msgctxt "trade-comms"
+msgid "cobalt"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:141
+msgctxt "trade-comms"
+msgid "dilithium"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:142
+msgctxt "trade-comms"
+msgid "gold"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:143
+msgctxt "trade-comms"
+msgid "nickel"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:144
+msgctxt "trade-comms"
+msgid "platinum"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:145
+msgctxt "trade-comms"
+msgid "tritanium"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:146
+msgctxt "trade-comms"
+msgid "autodoc"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:147
+msgctxt "trade-comms"
+msgid "android"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:148
+msgctxt "trade-comms"
+msgid "battery"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:149
+msgctxt "trade-comms"
+msgid "beam"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:150
+msgctxt "trade-comms"
+msgid "circuit"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:151
+msgctxt "trade-comms"
+msgid "communication"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:152
+msgctxt "trade-comms"
+msgid "filament"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:153
+msgctxt "trade-comms"
+msgid "impulse"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:154
+msgctxt "trade-comms"
+msgid "lifter"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:155
+msgctxt "trade-comms"
+msgid "nanites"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:156
+msgctxt "trade-comms"
+msgid "optic"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:157
+msgctxt "trade-comms"
+msgid "repulsor"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:158
+msgctxt "trade-comms"
+msgid "robotic"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:159
+msgctxt "trade-comms"
+msgid "sensor"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:160
+msgctxt "trade-comms"
+msgid "shield"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:161
+msgctxt "trade-comms"
+msgid "software"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:162
+msgctxt "trade-comms"
+msgid "tractor"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:163
+msgctxt "trade-comms"
+msgid "transporter"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:164
+msgctxt "trade-comms"
+msgid "warp"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:171
+#: scripts/defaults_scenario_utility.lua:182
+msgctxt "stationServices-comms"
+msgid "reactor"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:172
+msgctxt "stationServices-comms"
+msgid "beam weapons"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:173
+msgctxt "stationServices-comms"
+msgid "missile system"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:174
+#: scripts/defaults_scenario_utility.lua:185
+msgctxt "stationServices-comms"
+msgid "maneuver"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:175
+msgctxt "stationServices-comms"
+msgid "impulse engines"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:176
+msgctxt "stationServices-comms"
+msgid "warp drive"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:177
+msgctxt "stationServices-comms"
+msgid "jump drive"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:178
+#: scripts/defaults_scenario_utility.lua:189
+msgctxt "stationServices-comms"
+msgid "front shield"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:179
+#: scripts/defaults_scenario_utility.lua:190
+msgctxt "stationServices-comms"
+msgid "rear shield"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:183
+msgctxt "stationServices-comms"
+msgid "beams"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:184
+msgctxt "stationServices-comms"
+msgid "missiles"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:186
+msgctxt "stationServices-comms"
+msgid "impulse"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:187
+msgctxt "stationServices-comms"
+msgid "warp"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:188
+msgctxt "stationServices-comms"
+msgid "jump"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:193
+#: scripts/defaults_scenario_utility.lua:197
+msgctxt "stationServices-comms"
+msgid "utility beam"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:194
+#: scripts/defaults_scenario_utility.lua:198
+msgctxt "stationServices-comms"
+msgid "sensors"
+msgstr ""
+
+#: scripts/defaults_scenario_utility.lua:195
+#: scripts/defaults_scenario_utility.lua:200
+msgctxt "stationServices-comms"
+msgid "docking bay"
+msgstr ""

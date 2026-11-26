@@ -288,7 +288,8 @@ function setStationTemplate(station, size)
     end
 end
 
-local function selectFromGroup(group, label, diagnostic, size)
+local function selectFromGroup(group, label, diagnostic, size, options)
+    options = options or {}
     local stations = station_pool[group]
     if stations == nil then
         return nil
@@ -307,7 +308,9 @@ local function selectFromGroup(group, label, diagnostic, size)
     local station = SpaceStation()
         :setCallSign(pick_name)
         :setDescription(pick_details.description)
-    setStationTemplate(station, size)
+    if options.set_template ~= false then
+        setStationTemplate(station, size)
+    end
 
     if commsStation ~= nil then
         station:setCommsScript(""):setCommsFunction(commsStation)
@@ -330,12 +333,15 @@ local function selectFromGroup(group, label, diagnostic, size)
     return group, station
 end
 
-function pickStation(name, diagnostic, size)
+-- Set options.set_template to false when the caller selects the template after
+-- picking a station, avoiding an extra size roll.
+function pickStation(name, diagnostic, size, options)
+    options = options or {}
     if station_pool == nil then
         populateStationPool()
     end
 
-    if station_template_chance == nil then
+    if station_template_chance == nil and options.set_template ~= false then
         station_template_chance = {
             [ST.SMALL_STATION] = 0,
             [ST.MEDIUM_STATION] = 20,
@@ -347,7 +353,8 @@ function pickStation(name, diagnostic, size)
     if name == nil then
         -- Default to random in priority order: first non-empty group wins.
         for _, group in ipairs(station_priority) do
-            local g, s = selectFromGroup(group, "nil", diagnostic, size)
+            local g, s =
+                selectFromGroup(group, "nil", diagnostic, size, options)
             if g ~= nil then
                 return g, s
             end
@@ -403,7 +410,9 @@ function pickStation(name, diagnostic, size)
         local station = SpaceStation()
             :setCallSign(pick.name)
             :setDescription(pick.details.description)
-        setStationTemplate(station, size)
+        if options.set_template ~= false then
+            setStationTemplate(station, size)
+        end
 
         if commsStation ~= nil then
             station:setCommsScript(""):setCommsFunction(commsStation)
@@ -425,7 +434,7 @@ function pickStation(name, diagnostic, size)
 
         return pick.group, station
     else
-        local g, s = selectFromGroup(name, name, diagnostic, size)
+        local g, s = selectFromGroup(name, name, diagnostic, size, options)
         if g ~= nil then
             return g, s
         end
@@ -436,7 +445,9 @@ function pickStation(name, diagnostic, size)
                 local station = SpaceStation()
                     :setCallSign(name)
                     :setDescription(pick_details.description)
-                setStationTemplate(station, size)
+                if options.set_template ~= false then
+                    setStationTemplate(station, size)
+                end
 
                 if commsStation ~= nil then
                     station:setCommsScript(""):setCommsFunction(commsStation)
@@ -1382,6 +1393,927 @@ function populateStationPool()
                 ),
             }),
         },
+        ["Pop Sci Fi"] = {
+            ["Anderson"] = stationBuild({
+                weapons_override = { Homing = false },
+                services = {
+                    supplydrop = "friend",
+                    reinforcements = "friend",
+                    jumpsupplydrop = "friend",
+                },
+                service_cost = {
+                    supplydrop = math.random(80, 120),
+                    reinforcements = math.random(125, 175),
+                    jumpsupplydrop = math.random(110, 140),
+                },
+                reputation_neutral = 2.0,
+                goods = {
+                    battery = {
+                        quantity = 5,
+                        cost = 66,
+                    },
+                    software = {
+                        quantity = 5,
+                        cost = 115,
+                    },
+                },
+                trade = {
+                    food = false,
+                    medicine = false,
+                    luxury = true,
+                },
+                description = _(
+                    "scienceDescription-station",
+                    "Battery and software engineering"
+                ),
+                general = _(
+                    "stationGeneralInfo-comms",
+                    "We provide high quality high capacity batteries and specialized software for all shipboard systems"
+                ),
+                history = _(
+                    "stationStory-comms",
+                    "The station is named after a fictional software engineer in a late 20th century movie depicting humanity unknowingly conquered by aliens and kept docile by software generated illusion"
+                ),
+            }),
+            ["Archer"] = stationBuild({
+                weapons_override = { HVLI = true, EMP = true },
+                services = {
+                    supplydrop = "friend",
+                    reinforcements = "friend",
+                    jumpsupplydrop = "friend",
+                },
+                service_cost = {
+                    supplydrop = math.random(80, 120),
+                    reinforcements = math.random(125, 175),
+                    jumpsupplydrop = math.random(110, 140),
+                },
+                goods = {
+                    shield = {
+                        quantity = 5,
+                        cost = 90,
+                    },
+                },
+                trade = {
+                    food = false,
+                    medicine = false,
+                    luxury = true,
+                },
+                buy = {
+                    [randomMineral()] = math.random(40, 200),
+                },
+                description = _(
+                    "scienceDescription-station",
+                    "Shield and Armor Research"
+                ),
+                general = _(
+                    "stationGeneralInfo-comms",
+                    "The finest shield and armor manufacturer in the quadrant"
+                ),
+                history = _(
+                    "stationStory-comms",
+                    "We named this station for the pioneering spirit of the 22nd century Starfleet explorer, Captain Jonathan Archer"
+                ),
+            }),
+            ["Barclay"] = stationBuild({
+                weapons_override = { Mine = false },
+                services = {
+                    supplydrop = "friend",
+                    reinforcements = "friend",
+                    jumpsupplydrop = "friend",
+                },
+                service_cost = {
+                    supplydrop = math.random(80, 120),
+                    reinforcements = math.random(125, 175),
+                    jumpsupplydrop = math.random(110, 140),
+                },
+                goods = {
+                    communication = {
+                        quantity = 5,
+                        cost = 58,
+                    },
+                },
+                trade = {
+                    food = false,
+                    medicine = false,
+                    luxury = false,
+                },
+                buy = {
+                    [randomMineral()] = math.random(40, 200),
+                },
+                description = _(
+                    "scienceDescription-station",
+                    "Communication components"
+                ),
+                general = _(
+                    "stationGeneralInfo-comms",
+                    "We provide a range of communication equipment and software for use aboard ships"
+                ),
+                history = _(
+                    "stationStory-comms",
+                    "The station is named after Reginald Barclay who established the first transgalactic com link through the creative application of a quantum singularity. Station personnel often refer to the station as the Broccoli station"
+                ),
+            }),
+            ["Calvin"] = stationBuild({
+                weapons_override = { Homing = false },
+                services = {
+                    supplydrop = "friend",
+                    reinforcements = "friend",
+                    jumpsupplydrop = "friend",
+                },
+                service_cost = {
+                    supplydrop = math.random(80, 120),
+                    reinforcements = math.random(125, 175),
+                    jumpsupplydrop = math.random(110, 140),
+                },
+                goods = {
+                    robotic = {
+                        quantity = 5,
+                        cost = 90,
+                    },
+                },
+                trade = {
+                    food = random(1, 100) <= 35,
+                    medicine = false,
+                    luxury = true,
+                },
+                buy = {
+                    [randomComponent("robotic")] = math.random(40, 200),
+                },
+                description = _(
+                    "scienceDescription-station",
+                    "Robotic research"
+                ),
+                general = _(
+                    "stationGeneralInfo-comms",
+                    "We research and provide robotic systems and components"
+                ),
+                history = _(
+                    "stationStory-comms",
+                    "This station is named after Dr. Susan Calvin who pioneered robotic behavioral research and programming"
+                ),
+            }),
+            ["Cavor"] = stationBuild({
+                services = {
+                    supplydrop = "friend",
+                    reinforcements = "friend",
+                    jumpsupplydrop = "friend",
+                },
+                service_cost = {
+                    supplydrop = math.random(80, 120),
+                    reinforcements = math.random(125, 175),
+                    jumpsupplydrop = math.random(110, 140),
+                },
+                reputation_neutral = 2.0,
+                goods = {
+                    filament = {
+                        quantity = 5,
+                        cost = 42,
+                    },
+                },
+                trade = {
+                    food = false,
+                    medicine = false,
+                    luxury = false,
+                },
+                description = _(
+                    "scienceDescription-station",
+                    "Advanced Material components"
+                ),
+                general = _(
+                    "stationGeneralInfo-comms",
+                    "We fabricate several different kinds of materials critical to various space industries like ship building, station construction and mineral extraction"
+                ),
+                history = _(
+                    "stationStory-comms",
+                    "We named our station after Dr. Cavor, the physicist that invented a barrier material for gravity waves - Cavorite"
+                ),
+            }),
+            ["Cyrus"] = stationBuild({
+                services = {
+                    supplydrop = "friend",
+                    reinforcements = "friend",
+                    jumpsupplydrop = "friend",
+                },
+                service_cost = {
+                    supplydrop = math.random(80, 120),
+                    reinforcements = math.random(125, 175),
+                    jumpsupplydrop = math.random(110, 140),
+                },
+                reputation_neutral = 3.0,
+                goods = {
+                    impulse = {
+                        quantity = 5,
+                        cost = 124,
+                    },
+                },
+                trade = {
+                    food = false,
+                    medicine = false,
+                    luxury = random(1, 100) < 78,
+                },
+                description = _(
+                    "scienceDescription-station",
+                    "Impulse engine components"
+                ),
+                general = _(
+                    "stationGeneralInfo-comms",
+                    "We supply high quality impulse engines and parts for use aboard ships"
+                ),
+                history = _(
+                    "stationStory-comms",
+                    "This station was named after the fictional engineer, Cyrus Smith created by 19th century author Jules Verne"
+                ),
+            }),
+            ["Deckard"] = stationBuild({
+                services = {
+                    supplydrop = "friend",
+                    reinforcements = "friend",
+                    jumpsupplydrop = "friend",
+                },
+                service_cost = {
+                    supplydrop = math.random(80, 120),
+                    reinforcements = math.random(125, 175),
+                    jumpsupplydrop = math.random(110, 140),
+                },
+                reputation_neutral = 2.0,
+                goods = {
+                    android = {
+                        quantity = 5,
+                        cost = 73,
+                    },
+                },
+                trade = {
+                    food = false,
+                    medicine = false,
+                    luxury = true,
+                },
+                description = _(
+                    "scienceDescription-station",
+                    "Android components"
+                ),
+                general = _(
+                    "stationGeneralInfo-comms",
+                    "Supplier of android components, programming and service"
+                ),
+                history = _(
+                    "stationStory-comms",
+                    "Named for Richard Deckard who inspired many of the sophisticated safety security algorithms now required for all androids"
+                ),
+            }),
+            ["Erickson"] = stationBuild({
+                services = {
+                    supplydrop = "friend",
+                    reinforcements = "friend",
+                    jumpsupplydrop = "friend",
+                },
+                service_cost = {
+                    supplydrop = math.random(80, 120),
+                    reinforcements = math.random(125, 175),
+                    jumpsupplydrop = math.random(110, 140),
+                },
+                goods = {
+                    transporter = {
+                        quantity = 5,
+                        cost = 63,
+                    },
+                },
+                trade = {
+                    food = false,
+                    medicine = false,
+                    luxury = true,
+                },
+                description = _(
+                    "scienceDescription-station",
+                    "Transporter components"
+                ),
+                general = _(
+                    "stationGeneralInfo-comms",
+                    "We provide transporters used aboard ships as well as the components for repair and maintenance"
+                ),
+                history = _(
+                    "stationStory-comms",
+                    "The station is named after the early 22nd century inventor of the transporter, Dr. Emory Erickson. This station is proud to have received the endorsement of Admiral Leonard McCoy"
+                ),
+            }),
+            ["Jabba"] = stationBuild({
+                services = {
+                    supplydrop = "friend",
+                    reinforcements = "friend",
+                    jumpsupplydrop = "friend",
+                },
+                service_cost = {
+                    supplydrop = math.random(80, 120),
+                    reinforcements = math.random(125, 175),
+                    jumpsupplydrop = math.random(110, 140),
+                },
+                reputation_neutral = 2.0,
+                goods = {
+                    luxury = {
+                        quantity = 5,
+                        cost = math.random(30, 80),
+                    },
+                },
+                trade = {
+                    food = false,
+                    medicine = false,
+                    luxury = false,
+                },
+                description = _(
+                    "scienceDescription-station",
+                    "Commerce and gambling"
+                ),
+                general = _(
+                    "stationGeneralInfo-comms",
+                    "Come play some games and shop. House take does not exceed 4 percent"
+                ),
+                history = "",
+            }),
+            ["Komov"] = stationBuild({
+                weapons_override = { Mine = true, Nuke = false },
+                services = {
+                    supplydrop = "friend",
+                    reinforcements = "friend",
+                    jumpsupplydrop = "friend",
+                },
+                service_cost = {
+                    supplydrop = math.random(80, 120),
+                    reinforcements = math.random(125, 175),
+                    jumpsupplydrop = math.random(110, 140),
+                },
+                reputation_neutral = 2.0,
+                goods = {
+                    filament = {
+                        quantity = 5,
+                        cost = 46,
+                    },
+                },
+                trade = {
+                    food = false,
+                    medicine = false,
+                    luxury = false,
+                },
+                description = _(
+                    "scienceDescription-station",
+                    "Xenopsychology training"
+                ),
+                general = _(
+                    "stationGeneralInfo-comms",
+                    "We provide classes and simulation to help train diverse species in how to relate to each other"
+                ),
+                history = _(
+                    "stationStory-comms",
+                    "A continuation of the research initially conducted by Dr. Gennady Komov in the early 22nd century on Venus, supported by the application of these principles"
+                ),
+            }),
+            ["Lando"] = stationBuild({
+                weapons_override = {
+                    Homing = true,
+                    HVLI = true,
+                    Mine = true,
+                    Nuke = false,
+                    EMP = false,
+                },
+                weapon_cost = {
+                    Homing = math.random(2, 5),
+                    HVLI = 2,
+                    Mine = math.random(2, 5),
+                },
+                services = {
+                    supplydrop = "friend",
+                    reinforcements = "friend",
+                    jumpsupplydrop = "friend",
+                },
+                service_cost = {
+                    supplydrop = math.random(80, 120),
+                    reinforcements = math.random(125, 175),
+                    jumpsupplydrop = math.random(110, 140),
+                },
+                goods = {
+                    shield = {
+                        quantity = 5,
+                        cost = 90,
+                    },
+                },
+                trade = {
+                    food = false,
+                    medicine = false,
+                    luxury = false,
+                },
+                description = _(
+                    "scienceDescription-station",
+                    "Casino and Gambling"
+                ),
+                general = "",
+                history = "",
+            }),
+            ["Muddville"] = stationBuild({
+                services = {
+                    supplydrop = "friend",
+                    reinforcements = "friend",
+                    jumpsupplydrop = "friend",
+                },
+                service_cost = {
+                    supplydrop = math.random(80, 120),
+                    reinforcements = math.random(125, 175),
+                    jumpsupplydrop = math.random(110, 140),
+                },
+                goods = {
+                    luxury = {
+                        quantity = 5,
+                        cost = 60,
+                    },
+                },
+                trade = {
+                    food = true,
+                    medicine = true,
+                    luxury = false,
+                },
+                description = _(
+                    "scienceDescription-station",
+                    "Trading station"
+                ),
+                general = _(
+                    "stationGeneralInfo-comms",
+                    "Come to Muddvile for all your trade and commerce needs and desires"
+                ),
+                history = _(
+                    "stationStory-comms",
+                    "Upon retirement, Harry Mudd started this commercial venture using his leftover inventory and extensive connections obtained while he traveled the stars as a salesman"
+                ),
+            }),
+            ["Nexus-6"] = stationBuild({
+                weapons_override = { HVLI = false },
+                services = {
+                    supplydrop = "friend",
+                    reinforcements = "friend",
+                    jumpsupplydrop = "friend",
+                },
+                service_cost = {
+                    supplydrop = math.random(80, 120),
+                    reinforcements = math.random(125, 175),
+                    jumpsupplydrop = math.random(110, 140),
+                },
+                reputation_neutral = 3.0,
+                goods = {
+                    android = {
+                        quantity = 5,
+                        cost = 93,
+                    },
+                },
+                trade = {
+                    food = false,
+                    medicine = true,
+                    luxury = false,
+                },
+                buy = {
+                    [randomMineral()] = math.random(40, 200),
+                    [randomComponent("android")] = math.random(40, 200),
+                },
+                description = _(
+                    "scienceDescription-station",
+                    "Android components"
+                ),
+                general = _(
+                    "stationGeneralInfo-comms",
+                    "Androids, their parts, maintenance and recylcling"
+                ),
+                history = _(
+                    "stationStory-comms",
+                    "We named the station after the ground breaking android model produced by the Tyrell corporation"
+                ),
+            }),
+            ["O'Brien"] = stationBuild({
+                services = {
+                    supplydrop = "friend",
+                    reinforcements = "friend",
+                    jumpsupplydrop = "friend",
+                },
+                service_cost = {
+                    supplydrop = math.random(80, 120),
+                    reinforcements = math.random(125, 175),
+                    jumpsupplydrop = math.random(110, 140),
+                },
+                reputation_neutral = 3.0,
+                goods = {
+                    transporter = {
+                        quantity = 5,
+                        cost = 76,
+                    },
+                },
+                trade = {
+                    food = random(1, 100) < 13,
+                    medicine = true,
+                    luxury = random(1, 100) < 43,
+                },
+                description = _(
+                    "scienceDescription-station",
+                    "Transporter components"
+                ),
+                general = _(
+                    "stationGeneralInfo-comms",
+                    "We research and fabricate high quality transporters and transporter components for use aboard ships"
+                ),
+                history = _(
+                    "stationStory-comms",
+                    "Miles O'Brien started this business after his experience as a transporter chief"
+                ),
+            }),
+            ["Organa"] = stationBuild({
+                services = {
+                    supplydrop = "friend",
+                    reinforcements = "friend",
+                    jumpsupplydrop = "friend",
+                },
+                service_cost = {
+                    supplydrop = math.random(80, 120),
+                    reinforcements = math.random(125, 175),
+                    jumpsupplydrop = math.random(110, 140),
+                },
+                reputation_neutral = 2.0,
+                goods = {
+                    luxury = {
+                        quantity = 5,
+                        cost = 95,
+                    },
+                },
+                trade = {
+                    food = false,
+                    medicine = false,
+                    luxury = false,
+                },
+                description = _(
+                    "scienceDescription-station",
+                    "Diplomatic training"
+                ),
+                general = _(
+                    "stationGeneralInfo-comms",
+                    "The premeire academy for leadership and diplomacy training in the region"
+                ),
+                history = _(
+                    "stationStory-comms",
+                    "Established by the royal family so critical during the political upheaval era"
+                ),
+            }),
+            ["Owen"] = stationBuild({
+                weapons_override = { Homing = true, HVLI = false },
+                services = {
+                    supplydrop = "friend",
+                    reinforcements = "friend",
+                    jumpsupplydrop = "friend",
+                },
+                service_cost = {
+                    supplydrop = math.random(80, 120),
+                    reinforcements = math.random(125, 175),
+                    jumpsupplydrop = math.random(110, 140),
+                },
+                reputation_neutral = 3.0,
+                goods = {
+                    lifter = {
+                        quantity = 5,
+                        cost = 61,
+                    },
+                },
+                trade = {
+                    food = false,
+                    medicine = false,
+                    luxury = true,
+                },
+                description = _(
+                    "scienceDescription-station",
+                    "Load lifters and components"
+                ),
+                general = _(
+                    "stationGeneralInfo-comms",
+                    "We provide load lifters and components for various ship systems"
+                ),
+                history = _(
+                    "stationStory-comms",
+                    "Owens started off in the moisture vaporator business on Tattooine then branched out into load lifters based on acquisition of proprietary software and protocols. The station name recognizes the tragic loss of our founder to Imperial violence"
+                ),
+            }),
+            ["Ripley"] = stationBuild({
+                weapons_override = { Homing = false, HVLI = true },
+                services = {
+                    supplydrop = "friend",
+                    reinforcements = "friend",
+                    jumpsupplydrop = "friend",
+                },
+                service_cost = {
+                    supplydrop = math.random(80, 120),
+                    reinforcements = math.random(125, 175),
+                    jumpsupplydrop = math.random(110, 140),
+                },
+                reputation_neutral = 3.0,
+                goods = {
+                    lifter = {
+                        quantity = 5,
+                        cost = 82,
+                    },
+                },
+                trade = {
+                    food = false,
+                    medicine = false,
+                    luxury = random(1, 100) < 47,
+                },
+                description = _(
+                    "scienceDescription-station",
+                    "Load lifters and components"
+                ),
+                general = _(
+                    "stationGeneralInfo-comms",
+                    "We provide load lifters and components"
+                ),
+                history = _(
+                    "stationStory-comms",
+                    "The station is named after Ellen Ripley who made creative and effective use of one of our load lifters when defending her ship"
+                ),
+            }),
+            ["Skandar"] = stationBuild({
+                services = {
+                    supplydrop = "friend",
+                    reinforcements = "friend",
+                    jumpsupplydrop = "friend",
+                },
+                service_cost = {
+                    supplydrop = math.random(80, 120),
+                    reinforcements = math.random(125, 175),
+                    jumpsupplydrop = math.random(110, 140),
+                },
+                reputation_neutral = 2.0,
+                goods = {
+                    luxury = {
+                        quantity = 5,
+                        cost = math.random(30, 80),
+                    },
+                },
+                trade = {
+                    food = false,
+                    medicine = false,
+                    luxury = false,
+                },
+                description = _(
+                    "scienceDescription-station",
+                    "Routine maintenance and entertainment"
+                ),
+                general = _(
+                    "stationGeneralInfo-comms",
+                    "Stop by for repairs. Take in one of our juggling shows featuring the four-armed Skandars"
+                ),
+                history = _(
+                    "stationStory-comms",
+                    "The nomadic Skandars have set up at this station to practice their entertainment and maintenance skills as well as build a community where Skandars can relax"
+                ),
+            }),
+            ["Soong"] = stationBuild({
+                services = {
+                    supplydrop = "friend",
+                    reinforcements = "friend",
+                    jumpsupplydrop = "friend",
+                },
+                service_cost = {
+                    supplydrop = math.random(80, 120),
+                    reinforcements = math.random(125, 175),
+                    jumpsupplydrop = math.random(110, 140),
+                },
+                reputation_neutral = 3.0,
+                goods = {
+                    android = {
+                        quantity = 5,
+                        cost = 73,
+                    },
+                },
+                trade = {
+                    food = false,
+                    medicine = false,
+                    luxury = true,
+                },
+                description = _(
+                    "scienceDescription-station",
+                    "Android components"
+                ),
+                general = _(
+                    "stationGeneralInfo-comms",
+                    "We create androids and android components"
+                ),
+                history = _(
+                    "stationStory-comms",
+                    "The station is named after Dr. Noonian Soong, the famous android researcher and builder"
+                ),
+            }),
+            ["Starnet"] = stationBuild({
+                services = {
+                    supplydrop = "friend",
+                    reinforcements = "friend",
+                    jumpsupplydrop = "friend",
+                },
+                service_cost = {
+                    supplydrop = math.random(80, 120),
+                    reinforcements = math.random(125, 175),
+                    jumpsupplydrop = math.random(110, 140),
+                },
+                reputation_neutral = 3.0,
+                goods = {
+                    software = {
+                        quantity = 5,
+                        cost = 140,
+                    },
+                },
+                trade = {
+                    food = false,
+                    medicine = false,
+                    luxury = false,
+                },
+                description = _(
+                    "scienceDescription-station",
+                    "Automated weapons systems"
+                ),
+                general = _(
+                    "stationGeneralInfo-comms",
+                    "We research and create automated weapons systems to improve ship combat capability"
+                ),
+                history = _(
+                    "stationStory-comms",
+                    "Lost the history memory bank. Recovery efforts only brought back the phrase, 'I'll be back'"
+                ),
+            }),
+            ["Tiberius"] = stationBuild({
+                services = {
+                    supplydrop = "friend",
+                    reinforcements = "friend",
+                    jumpsupplydrop = "friend",
+                },
+                service_cost = {
+                    supplydrop = math.random(80, 120),
+                    reinforcements = math.random(125, 175),
+                    jumpsupplydrop = math.random(110, 140),
+                },
+                goods = {
+                    food = {
+                        quantity = 5,
+                        cost = 1,
+                    },
+                },
+                trade = {
+                    food = false,
+                    medicine = false,
+                    luxury = false,
+                },
+                description = _(
+                    "scienceDescription-station",
+                    "Logistics coordination"
+                ),
+                general = _(
+                    "stationGeneralInfo-comms",
+                    "We support the stations and ships in the area with planning and communication services"
+                ),
+                history = _(
+                    "stationStory-comms",
+                    "We recognize the influence of Starfleet Captain James Tiberius Kirk in the 23rd century in our station name"
+                ),
+            }),
+            ["Tokra"] = stationBuild({
+                services = {
+                    supplydrop = "friend",
+                    reinforcements = "friend",
+                    jumpsupplydrop = "friend",
+                },
+                service_cost = {
+                    supplydrop = math.random(80, 120),
+                    reinforcements = math.random(125, 175),
+                    jumpsupplydrop = math.random(110, 140),
+                },
+                reputation_neutral = 3.0,
+                goods = {
+                    filament = {
+                        quantity = 5,
+                        cost = 42,
+                    },
+                },
+                trade = {
+                    food = false,
+                    medicine = false,
+                    luxury = false,
+                },
+                description = _(
+                    "scienceDescription-station",
+                    "Advanced material components"
+                ),
+                general = _(
+                    "stationGeneralInfo-comms",
+                    "We create multiple types of advanced material components. Our most popular products are our filaments"
+                ),
+                history = _(
+                    "stationStory-comms",
+                    "We learned several of our critical industrial processes from the Tokra race, so we honor our fortune by naming the station after them"
+                ),
+            }),
+            ["Utopia Planitia"] = stationBuild({
+                weapons_override = { Nuke = true },
+                services = {
+                    supplydrop = "friend",
+                    reinforcements = "friend",
+                    jumpsupplydrop = "friend",
+                },
+                service_cost = {
+                    supplydrop = math.random(80, 120),
+                    reinforcements = math.random(125, 175),
+                    jumpsupplydrop = math.random(110, 140),
+                },
+                goods = {
+                    warp = {
+                        quantity = 5,
+                        cost = 167,
+                    },
+                },
+                trade = {
+                    food = false,
+                    medicine = false,
+                    luxury = false,
+                },
+                description = _(
+                    "scienceDescription-station",
+                    "Ship building and maintenance facility"
+                ),
+                general = _(
+                    "stationGeneralInfo-comms",
+                    "We work on all aspects of naval ship building and maintenance. Many of the naval models are researched, designed and built right here on this station. Our design goals seek to make the space faring experience as simple as possible given the tremendous capabilities of the modern naval vessel"
+                ),
+                history = "",
+            }),
+            ["Vaiken"] = stationBuild({
+                services = {
+                    supplydrop = "friend",
+                    reinforcements = "friend",
+                    jumpsupplydrop = "friend",
+                },
+                service_cost = {
+                    supplydrop = math.random(80, 120),
+                    reinforcements = math.random(125, 175),
+                    jumpsupplydrop = math.random(110, 140),
+                },
+                goods = {
+                    food = {
+                        quantity = 10,
+                        cost = 1,
+                    },
+                    medicine = {
+                        quantity = 5,
+                        cost = 5,
+                    },
+                    impulse = {
+                        quantity = 5,
+                        cost = math.random(65, 97),
+                    },
+                },
+                trade = {
+                    food = false,
+                    medicine = false,
+                    luxury = false,
+                },
+                description = _(
+                    "scienceDescription-station",
+                    "Ship building and maintenance facility"
+                ),
+                general = "",
+                history = "",
+            }),
+            ["Zefram"] = stationBuild({
+                services = {
+                    supplydrop = "friend",
+                    reinforcements = "friend",
+                    jumpsupplydrop = "friend",
+                },
+                service_cost = {
+                    supplydrop = math.random(80, 120),
+                    reinforcements = math.random(125, 175),
+                    jumpsupplydrop = math.random(110, 140),
+                },
+                reputation_neutral = 3.0,
+                goods = {
+                    warp = {
+                        quantity = 5,
+                        cost = 140,
+                    },
+                },
+                trade = {
+                    food = false,
+                    medicine = false,
+                    luxury = true,
+                },
+                description = _(
+                    "scienceDescription-station",
+                    "Warp engine components"
+                ),
+                general = _(
+                    "stationGeneralInfo-comms",
+                    "We specialize in the esoteric components necessary to make warp drives function properly"
+                ),
+                history = _(
+                    "stationStory-comms",
+                    "Zefram Cochrane constructed the first warp drive in human history. We named our station after him because of the specialized warp systems work we do"
+                ),
+            }),
+        },
         ["Spec Sci Fi"] = {
             ["Alcaleica"] = stationBuild({
                 goods = { optic = stationGood(66) },
@@ -1876,6 +2808,7 @@ function populateStationPool()
     if station_priority == nil then
         station_priority = {
             "Science",
+            "Pop Sci Fi",
             "Alt Sci Fi",
             "Spec Sci Fi",
             "History",
@@ -1893,5 +2826,334 @@ function populateStationPool()
         if not already_inserted and group ~= "Sinister" then
             table.insert(station_priority, group)
         end
+    end
+end
+-- Configured placement keeps the shared station-specific goods and asteroid
+-- overlays. Scenarios may provide a custom base placer, retain its service
+-- rolls, or leave service-chance configuration untouched.
+local function stationPoolAvailable()
+    if station_pool == nil then
+        populateStationPool()
+    end
+    for group, stations in pairs(station_pool) do
+        if group ~= "Sinister" and next(stations) ~= nil then
+            return true
+        end
+    end
+    return false
+end
+
+function placeConfiguredStation(x, y, name, faction, size, options)
+    options = options or {}
+    if
+        name == nil
+        and options.quiet_if_exhausted
+        and not stationPoolAvailable()
+    then
+        return nil
+    end
+    options.asteroids_around_point = options.asteroids_around_point
+        or placeRandomAsteroidsAroundPoint
+    options.asteroid_arc = options.asteroid_arc or createRandomAsteroidAlongArc
+    if faction == nil then
+        if stationFaction ~= nil then
+            faction = stationFaction
+        else
+            faction = "Independent"
+        end
+    end
+    if options.configure_service_chances ~= false then
+        station_template_chance = {
+            [ST.SMALL_STATION] = 0,
+            [ST.MEDIUM_STATION] = 20,
+            [ST.LARGE_STATION] = 30,
+            [ST.HUGE_STATION] = 40,
+        }
+        faction_station_service_chance = {
+            ["Human Navy"] = 20,
+            ["Kraylor"] = 0,
+            ["Independent"] = 0,
+            ["Arlenians"] = 0,
+            ["Ghosts"] = 0,
+            ["Ktlitans"] = 0,
+            ["Exuari"] = 0,
+            ["TSN"] = 0,
+            ["USN"] = 0,
+            ["CUF"] = 0,
+        }
+    end
+    local station = (options.place_station or placeStation)(
+        x,
+        y,
+        name,
+        faction,
+        size
+    )
+    if station == nil then
+        return nil
+    end
+    if options.reset_system_repairs ~= false then
+        station.comms_data.system_repair = {}
+        station.comms_data.coolant_pump_repair = {}
+    end
+    local station_name = station:getCallSign()
+    local chosen_goods = random(1, 100)
+    if
+        station_name == "Grasberg"
+        or station_name == "Impala"
+        or station_name == "Outpost-15"
+        or station_name == "Outpost-21"
+    then
+        options.asteroids_around_point(15, 1, 15000, x, y)
+        if chosen_goods < 20 then
+            station.comms_data.goods.gold = { quantity = 5, cost = 25 }
+            station.comms_data.goods.cobalt = { quantity = 4, cost = 50 }
+        elseif chosen_goods < 40 then
+            station.comms_data.goods.gold = { quantity = 5, cost = 25 }
+        elseif chosen_goods < 60 then
+            station.comms_data.goods.cobalt = { quantity = 4, cost = 50 }
+        else
+            if station_name == "Grasberg" then
+                station.comms_data.goods.nickel =
+                    { quantity = 5, cost = math.random(40, 50) }
+            elseif station_name == "Outpost-15" then
+                station.comms_data.goods.platinum =
+                    { quantity = 5, cost = math.random(40, 50) }
+            elseif station_name == "Outpost-21" then
+                station.comms_data.goods.dilithium =
+                    { quantity = 5, cost = math.random(40, 50) }
+            else --Impala
+                station.comms_data.goods.tritanium =
+                    { quantity = 5, cost = math.random(40, 50) }
+            end
+        end
+    elseif
+        station_name == "Jabba"
+        or station_name == "Lando"
+        or station_name == "Maverick"
+        or station_name == "Okun"
+        or station_name == "Outpost-8"
+        or station_name == "Prada"
+        or station_name == "Research-11"
+        or station_name == "Research-19"
+        or station_name == "Science-2"
+        or station_name == "Science-4"
+        or station_name == "Spot"
+        or station_name == "Starnet"
+        or station_name == "Tandon"
+    then
+        if chosen_goods < 33 then
+            if station_name == "Jabba" then
+                station.comms_data.goods.cobalt =
+                    { quantity = 5, cost = math.random(68, 81) }
+            elseif station_name == "Okun" or station_name == "Spot" then
+                station.comms_data.goods.optic =
+                    { quantity = 5, cost = math.random(68, 81) }
+            elseif station_name == "Outpost-8" then
+                station.comms_data.goods.impulse =
+                    { quantity = 5, cost = math.random(68, 81) }
+            elseif station_name == "Research-11" then
+                station.comms_data.goods.warp =
+                    { quantity = 5, cost = math.random(68, 81) }
+            elseif station_name == "Research-19" then
+                station.comms_data.goods.transporter =
+                    { quantity = 5, cost = math.random(68, 81) }
+            elseif station_name == "Science-2" or station_name == "Tandon" then
+                station.comms_data.goods.autodoc =
+                    { quantity = 5, cost = math.random(68, 81) }
+            elseif station_name == "Science-4" then
+                station.comms_data.goods.software =
+                    { quantity = 5, cost = math.random(68, 81) }
+            elseif station_name == "Starnet" then
+                station.comms_data.goods.shield =
+                    { quantity = 5, cost = math.random(68, 81) }
+            else
+                station.comms_data.goods.luxury =
+                    { quantity = 5, cost = math.random(68, 81) }
+            end
+        elseif chosen_goods < 66 then
+            if station_name == "Okun" then
+                station.comms_data.goods.filament =
+                    { quantity = 5, cost = math.random(61, 77) }
+            elseif station_name == "Outpost-8" then
+                station.comms_data.goods.tractor =
+                    { quantity = 5, cost = math.random(61, 77) }
+            elseif station_name == "Prada" then
+                station.comms_data.goods.cobalt =
+                    { quantity = 5, cost = math.random(61, 77) }
+            elseif station_name == "Research-11" then
+                station.comms_data.goods.repulsor =
+                    { quantity = 5, cost = math.random(61, 77) }
+            elseif station_name == "Research-19" or station_name == "Spot" then
+                station.comms_data.goods.sensor =
+                    { quantity = 5, cost = math.random(61, 77) }
+            elseif station_name == "Science-2" or station_name == "Tandon" then
+                station.comms_data.goods.android =
+                    { quantity = 5, cost = math.random(61, 77) }
+            elseif station_name == "Science-4" then
+                station.comms_data.goods.circuit =
+                    { quantity = 5, cost = math.random(61, 77) }
+            elseif station_name == "Starnet" then
+                station.comms_data.goods.lifter =
+                    { quantity = 5, cost = math.random(61, 77) }
+            else
+                station.comms_data.goods.gold =
+                    { quantity = 5, cost = math.random(61, 77) }
+            end
+        else
+            if station_name == "Okun" then
+                station.comms_data.goods.lifter =
+                    { quantity = 5, cost = math.random(61, 77) }
+            elseif station_name == "Outpost-8" or station_name == "Starnet" then
+                station.comms_data.goods.beam =
+                    { quantity = 5, cost = math.random(61, 77) }
+            elseif station_name == "Prada" then
+                station.comms_data.goods.dilithium =
+                    { quantity = 5, cost = math.random(61, 77) }
+            elseif station_name == "Research-11" then
+                station.comms_data.goods.robotic =
+                    { quantity = 5, cost = math.random(61, 77) }
+            elseif station_name == "Research-19" then
+                station.comms_data.goods.communication =
+                    { quantity = 5, cost = math.random(61, 77) }
+            elseif station_name == "Science-2" then
+                station.comms_data.goods.nanites =
+                    { quantity = 5, cost = math.random(61, 77) }
+            elseif station_name == "Science-4" then
+                station.comms_data.goods.battery =
+                    { quantity = 5, cost = math.random(61, 77) }
+            elseif station_name == "Spot" then
+                station.comms_data.goods.software =
+                    { quantity = 5, cost = math.random(61, 77) }
+            elseif station_name == "Tandon" then
+                station.comms_data.goods.robotic =
+                    { quantity = 5, cost = math.random(61, 77) }
+            else
+                station.comms_data.goods.platinum =
+                    { quantity = 5, cost = math.random(65, 79) }
+            end
+        end
+    elseif
+        station_name == "Krak"
+        or station_name == "Kruk"
+        or station_name == "Krik"
+    then
+        if chosen_goods < 10 then
+            station.comms_data.goods.platinum =
+                { quantity = 5, cost = math.random(65, 75) }
+            station.comms_data.goods.tritanium =
+                { quantity = 5, cost = math.random(45, 55) }
+            station.comms_data.goods.dilithium =
+                { quantity = 5, cost = math.random(45, 55) }
+        elseif chosen_goods < 20 then
+            station.comms_data.goods.platinum =
+                { quantity = 5, cost = math.random(65, 75) }
+            station.comms_data.goods.tritanium =
+                { quantity = 5, cost = math.random(45, 55) }
+        elseif chosen_goods < 30 then
+            station.comms_data.goods.platinum =
+                { quantity = 5, cost = math.random(65, 75) }
+            station.comms_data.goods.dilithium =
+                { quantity = 5, cost = math.random(45, 55) }
+        elseif chosen_goods < 40 then
+            station.comms_data.goods.tritanium =
+                { quantity = 5, cost = math.random(45, 55) }
+            station.comms_data.goods.dilithium =
+                { quantity = 5, cost = math.random(45, 55) }
+        elseif chosen_goods < 50 then
+            station.comms_data.goods.dilithium =
+                { quantity = 5, cost = math.random(45, 55) }
+        elseif chosen_goods < 60 then
+            station.comms_data.goods.platinum =
+                { quantity = 5, cost = math.random(65, 75) }
+        elseif chosen_goods < 70 then
+            station.comms_data.goods.tritanium =
+                { quantity = 5, cost = math.random(45, 55) }
+        elseif chosen_goods < 80 then
+            if station_name == "Krik" then
+                station.comms_data.goods.cobalt =
+                    { quantity = 5, cost = math.random(55, 65) }
+            else
+                station.comms_data.goods.gold =
+                    { quantity = 5, cost = math.random(45, 55) }
+                station.comms_data.goods.tritanium =
+                    { quantity = 5, cost = math.random(45, 55) }
+            end
+        elseif chosen_goods < 90 then
+            if station_name == "Krik" then
+                station.comms_data.goods.cobalt =
+                    { quantity = 5, cost = math.random(55, 65) }
+                station.comms_data.goods.dilithium =
+                    { quantity = 5, cost = math.random(45, 55) }
+            else
+                station.comms_data.goods.gold =
+                    { quantity = 5, cost = math.random(45, 55) }
+                station.comms_data.goods.dilithium =
+                    { quantity = 5, cost = math.random(45, 55) }
+            end
+        else
+            if station_name == "Krik" then
+                station.comms_data.goods.cobalt =
+                    { quantity = 5, cost = math.random(55, 65) }
+                station.comms_data.goods.dilithium =
+                    { quantity = 5, cost = math.random(45, 55) }
+            else
+                station.comms_data.goods.gold =
+                    { quantity = 5, cost = math.random(45, 55) }
+            end
+        end
+        local posAxisKrak = random(0, 360)
+        local posKrak = random(10000, 60000)
+        local negKrak = random(10000, 60000)
+        local spreadKrak = random(4000, 7000)
+        local negAxisKrak = posAxisKrak + 180
+        local xPosAngleKrak, yPosAngleKrak =
+            vectorFromAngle(posAxisKrak, posKrak)
+        local posKrakEnd = random(30, 70)
+        local negKrakEnd = random(40, 80)
+        if station_name == "Krik" then
+            posKrak = random(30000, 80000)
+            negKrak = random(20000, 60000)
+            spreadKrak = random(5000, 8000)
+            posKrakEnd = random(40, 90)
+            negKrakEnd = random(30, 60)
+        end
+        options.asteroid_arc(
+            30 + posKrakEnd,
+            x + xPosAngleKrak,
+            y + yPosAngleKrak,
+            posKrak,
+            negAxisKrak,
+            negAxisKrak + posKrakEnd,
+            spreadKrak
+        )
+        local xNegAngleKrak, yNegAngleKrak =
+            vectorFromAngle(negAxisKrak, negKrak)
+        options.asteroid_arc(
+            30 + negKrakEnd,
+            x + xNegAngleKrak,
+            y + yNegAngleKrak,
+            negKrak,
+            posAxisKrak,
+            posAxisKrak + negKrakEnd,
+            spreadKrak
+        )
+    end
+    if station_name == "Tokra" or station_name == "Cavor" then
+        local what_trade = random(1, 100)
+        if what_trade < 33 then
+            station.comms_data.trade.food = true
+        elseif what_trade > 66 then
+            station.comms_data.trade.medicine = true
+        else
+            station.comms_data.trade.luxury = true
+        end
+    end
+    return station
+end
+
+function configuredStationPlacer(options)
+    return function(x, y, name, faction, size)
+        return placeConfiguredStation(x, y, name, faction, size, options)
     end
 end

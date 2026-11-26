@@ -153,89 +153,89 @@ msgctxt "Mission"
 msgid "Players may choose each individual mission in each region"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:94
+#: scripts/scenario_37_unwanted_visitors.lua:134
 msgctxt "DispatchOffice-comms"
 msgid "Survive"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:108
+#: scripts/scenario_37_unwanted_visitors.lua:148
 msgctxt "buttonGM"
 msgid "+Player ships"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:109
+#: scripts/scenario_37_unwanted_visitors.lua:149
 msgctxt "buttonGM"
 msgid "+Adjust speed"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:110
+#: scripts/scenario_37_unwanted_visitors.lua:150
 msgctxt "buttonGM"
 msgid "+End Mission"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:111
+#: scripts/scenario_37_unwanted_visitors.lua:151
 msgctxt "buttonGM"
 msgid "+Voices"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:112
+#: scripts/scenario_37_unwanted_visitors.lua:152
 msgctxt "buttonGM"
 msgid "+Spawn Ship(s)"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:113
+#: scripts/scenario_37_unwanted_visitors.lua:153
 msgctxt "buttonGM"
 msgid "+Control Codes"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:114
+#: scripts/scenario_37_unwanted_visitors.lua:154
 msgctxt "buttonGM"
 msgid "Humorous Ending"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:122
+#: scripts/scenario_37_unwanted_visitors.lua:162
 msgctxt "msgGM"
 msgid "Humorous Exuari Neutralization Division (END) ending initiated."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:128
-#: scripts/scenario_37_unwanted_visitors.lua:295
-#: scripts/scenario_37_unwanted_visitors.lua:311
-#: scripts/scenario_37_unwanted_visitors.lua:344
-#: scripts/scenario_37_unwanted_visitors.lua:377
-#: scripts/scenario_37_unwanted_visitors.lua:410
-#: scripts/scenario_37_unwanted_visitors.lua:441
-#: scripts/scenario_37_unwanted_visitors.lua:484
-#: scripts/scenario_37_unwanted_visitors.lua:527
-#: scripts/scenario_37_unwanted_visitors.lua:560
-#: scripts/scenario_37_unwanted_visitors.lua:603
-#: scripts/scenario_37_unwanted_visitors.lua:659
-#: scripts/scenario_37_unwanted_visitors.lua:672
+#: scripts/scenario_37_unwanted_visitors.lua:168
+#: scripts/scenario_37_unwanted_visitors.lua:335
+#: scripts/scenario_37_unwanted_visitors.lua:351
+#: scripts/scenario_37_unwanted_visitors.lua:384
+#: scripts/scenario_37_unwanted_visitors.lua:417
+#: scripts/scenario_37_unwanted_visitors.lua:450
+#: scripts/scenario_37_unwanted_visitors.lua:481
+#: scripts/scenario_37_unwanted_visitors.lua:524
+#: scripts/scenario_37_unwanted_visitors.lua:567
+#: scripts/scenario_37_unwanted_visitors.lua:600
+#: scripts/scenario_37_unwanted_visitors.lua:643
+#: scripts/scenario_37_unwanted_visitors.lua:699
+#: scripts/scenario_37_unwanted_visitors.lua:712
 msgctxt "buttonGM"
 msgid "-Main"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:130
+#: scripts/scenario_37_unwanted_visitors.lua:170
 msgctxt "buttonGM"
 msgid "Narsil"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:133
+#: scripts/scenario_37_unwanted_visitors.lua:173
 msgctxt "buttonGM"
 msgid "Headhunter"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:136
+#: scripts/scenario_37_unwanted_visitors.lua:176
 msgctxt "buttonGM"
 msgid "Blazon"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:139
+#: scripts/scenario_37_unwanted_visitors.lua:179
 msgctxt "buttonGM"
 msgid "Sting"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:285
+#: scripts/scenario_37_unwanted_visitors.lua:325
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -251,77 +251,77 @@ msgid ""
 "Tertius: %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:296
+#: scripts/scenario_37_unwanted_visitors.lua:336
 msgctxt "buttonGM"
 msgid "Primus"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:297
+#: scripts/scenario_37_unwanted_visitors.lua:337
 msgctxt "buttonGM"
 msgid "Primus Moon"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:298
+#: scripts/scenario_37_unwanted_visitors.lua:338
 msgctxt "buttonGM"
 msgid "Secondus"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:299
+#: scripts/scenario_37_unwanted_visitors.lua:339
 msgctxt "buttonGM"
 msgid "Secondus Station"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:300
+#: scripts/scenario_37_unwanted_visitors.lua:340
 msgctxt "buttonGM"
 msgid "Sol Belt 1"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:301
+#: scripts/scenario_37_unwanted_visitors.lua:341
 msgctxt "buttonGM"
 msgid "Sol Belt 2"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:302
+#: scripts/scenario_37_unwanted_visitors.lua:342
 msgctxt "buttonGM"
 msgid "Tertius"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:304
+#: scripts/scenario_37_unwanted_visitors.lua:344
 msgctxt "buttonGM"
 msgid "Tertius Moon Belt"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:307
+#: scripts/scenario_37_unwanted_visitors.lua:347
 msgctxt "buttonGM"
 msgid "Tertius Belt 2"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:312
+#: scripts/scenario_37_unwanted_visitors.lua:352
 msgctxt "buttonGM"
 msgid "-From Primus"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:313
-#: scripts/scenario_37_unwanted_visitors.lua:346
-#: scripts/scenario_37_unwanted_visitors.lua:379
-#: scripts/scenario_37_unwanted_visitors.lua:412
-#: scripts/scenario_37_unwanted_visitors.lua:443
-#: scripts/scenario_37_unwanted_visitors.lua:486
-#: scripts/scenario_37_unwanted_visitors.lua:529
-#: scripts/scenario_37_unwanted_visitors.lua:562
-#: scripts/scenario_37_unwanted_visitors.lua:605
+#: scripts/scenario_37_unwanted_visitors.lua:353
+#: scripts/scenario_37_unwanted_visitors.lua:386
+#: scripts/scenario_37_unwanted_visitors.lua:419
+#: scripts/scenario_37_unwanted_visitors.lua:452
+#: scripts/scenario_37_unwanted_visitors.lua:483
+#: scripts/scenario_37_unwanted_visitors.lua:526
+#: scripts/scenario_37_unwanted_visitors.lua:569
+#: scripts/scenario_37_unwanted_visitors.lua:602
+#: scripts/scenario_37_unwanted_visitors.lua:645
 msgctxt "buttonGM"
 msgid "Slower"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:315
-#: scripts/scenario_37_unwanted_visitors.lua:329
+#: scripts/scenario_37_unwanted_visitors.lua:355
+#: scripts/scenario_37_unwanted_visitors.lua:369
 #, lua-format
 msgctxt "msgGM"
 msgid "Current Primus speed: %.1f"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:321
+#: scripts/scenario_37_unwanted_visitors.lua:361
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -329,20 +329,20 @@ msgid ""
 "New slower Primus speed: %.1f"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:327
-#: scripts/scenario_37_unwanted_visitors.lua:360
-#: scripts/scenario_37_unwanted_visitors.lua:393
-#: scripts/scenario_37_unwanted_visitors.lua:425
-#: scripts/scenario_37_unwanted_visitors.lua:462
-#: scripts/scenario_37_unwanted_visitors.lua:505
-#: scripts/scenario_37_unwanted_visitors.lua:543
-#: scripts/scenario_37_unwanted_visitors.lua:581
-#: scripts/scenario_37_unwanted_visitors.lua:630
+#: scripts/scenario_37_unwanted_visitors.lua:367
+#: scripts/scenario_37_unwanted_visitors.lua:400
+#: scripts/scenario_37_unwanted_visitors.lua:433
+#: scripts/scenario_37_unwanted_visitors.lua:465
+#: scripts/scenario_37_unwanted_visitors.lua:502
+#: scripts/scenario_37_unwanted_visitors.lua:545
+#: scripts/scenario_37_unwanted_visitors.lua:583
+#: scripts/scenario_37_unwanted_visitors.lua:621
+#: scripts/scenario_37_unwanted_visitors.lua:670
 msgctxt "buttonGM"
 msgid "Faster"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:335
+#: scripts/scenario_37_unwanted_visitors.lua:375
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -350,19 +350,19 @@ msgid ""
 "New faster Primus speed: %.1f"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:345
+#: scripts/scenario_37_unwanted_visitors.lua:385
 msgctxt "buttonGM"
 msgid "-From Primus Moon"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:348
-#: scripts/scenario_37_unwanted_visitors.lua:362
+#: scripts/scenario_37_unwanted_visitors.lua:388
+#: scripts/scenario_37_unwanted_visitors.lua:402
 #, lua-format
 msgctxt "msgGM"
 msgid "Current Primus moon speed: %.1f"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:354
+#: scripts/scenario_37_unwanted_visitors.lua:394
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -370,7 +370,7 @@ msgid ""
 "New slower Primus moon speed: %.1f"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:368
+#: scripts/scenario_37_unwanted_visitors.lua:408
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -378,19 +378,19 @@ msgid ""
 "New faster Primus moon speed: %.1f"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:378
+#: scripts/scenario_37_unwanted_visitors.lua:418
 msgctxt "buttonGM"
 msgid "-From Secondus"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:381
-#: scripts/scenario_37_unwanted_visitors.lua:395
+#: scripts/scenario_37_unwanted_visitors.lua:421
+#: scripts/scenario_37_unwanted_visitors.lua:435
 #, lua-format
 msgctxt "msgGM"
 msgid "Current Secondus speed: %.1f"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:387
+#: scripts/scenario_37_unwanted_visitors.lua:427
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -398,7 +398,7 @@ msgid ""
 "New slower Secondus speed: %.1f"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:401
+#: scripts/scenario_37_unwanted_visitors.lua:441
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -406,19 +406,19 @@ msgid ""
 "New faster Secondus speed: %.1f"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:411
+#: scripts/scenario_37_unwanted_visitors.lua:451
 msgctxt "buttonGM"
 msgid "-From Secondus Stn"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:414
-#: scripts/scenario_37_unwanted_visitors.lua:427
+#: scripts/scenario_37_unwanted_visitors.lua:454
+#: scripts/scenario_37_unwanted_visitors.lua:467
 #, lua-format
 msgctxt "msgGM"
 msgid "Current Secondus station speed: %.3f"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:419
+#: scripts/scenario_37_unwanted_visitors.lua:459
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -426,7 +426,7 @@ msgid ""
 "New slower Secondus station speed: %.3f"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:432
+#: scripts/scenario_37_unwanted_visitors.lua:472
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -434,19 +434,19 @@ msgid ""
 "New faster Secondus station speed: %.3f"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:442
+#: scripts/scenario_37_unwanted_visitors.lua:482
 msgctxt "buttonGM"
 msgid "-From Sol Belt 1"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:445
-#: scripts/scenario_37_unwanted_visitors.lua:464
+#: scripts/scenario_37_unwanted_visitors.lua:485
+#: scripts/scenario_37_unwanted_visitors.lua:504
 #, lua-format
 msgctxt "msgGM"
 msgid "Current Sol Belt 1 speed: %.3f"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:456
+#: scripts/scenario_37_unwanted_visitors.lua:496
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -454,7 +454,7 @@ msgid ""
 "New slower Sol Belt 1 speed: %.3f"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:475
+#: scripts/scenario_37_unwanted_visitors.lua:515
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -462,19 +462,19 @@ msgid ""
 "New faster Sol Belt 1 speed: %.3f"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:485
+#: scripts/scenario_37_unwanted_visitors.lua:525
 msgctxt "buttonGM"
 msgid "-From Sol Belt 2"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:488
-#: scripts/scenario_37_unwanted_visitors.lua:507
+#: scripts/scenario_37_unwanted_visitors.lua:528
+#: scripts/scenario_37_unwanted_visitors.lua:547
 #, lua-format
 msgctxt "msgGM"
 msgid "Current Sol Belt 2 speed: %.3f"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:499
+#: scripts/scenario_37_unwanted_visitors.lua:539
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -482,7 +482,7 @@ msgid ""
 "New slower Sol Belt 2 speed: %.3f"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:518
+#: scripts/scenario_37_unwanted_visitors.lua:558
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -490,19 +490,19 @@ msgid ""
 "New faster Sol Belt 2 speed: %.3f"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:528
+#: scripts/scenario_37_unwanted_visitors.lua:568
 msgctxt "buttonGM"
 msgid "-From Tertius"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:531
-#: scripts/scenario_37_unwanted_visitors.lua:545
+#: scripts/scenario_37_unwanted_visitors.lua:571
+#: scripts/scenario_37_unwanted_visitors.lua:585
 #, lua-format
 msgctxt "msgGM"
 msgid "Current Tertius speed: %.1f"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:537
+#: scripts/scenario_37_unwanted_visitors.lua:577
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -510,7 +510,7 @@ msgid ""
 "New slower Tertius speed: %.1f"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:551
+#: scripts/scenario_37_unwanted_visitors.lua:591
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -518,19 +518,19 @@ msgid ""
 "New faster Tertius speed: %.1f"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:561
+#: scripts/scenario_37_unwanted_visitors.lua:601
 msgctxt "buttonGM"
 msgid "-From Tertius Moon"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:564
-#: scripts/scenario_37_unwanted_visitors.lua:583
+#: scripts/scenario_37_unwanted_visitors.lua:604
+#: scripts/scenario_37_unwanted_visitors.lua:623
 #, lua-format
 msgctxt "msgGM"
 msgid "Current Tertius Moon Belt speed: %.3f"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:575
+#: scripts/scenario_37_unwanted_visitors.lua:615
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -538,7 +538,7 @@ msgid ""
 "New slower Tertius Moon Belt speed: %.3f"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:594
+#: scripts/scenario_37_unwanted_visitors.lua:634
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -546,19 +546,19 @@ msgid ""
 "New faster Tertius Moon Belt speed: %.3f"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:604
+#: scripts/scenario_37_unwanted_visitors.lua:644
 msgctxt "buttonGM"
 msgid "-From Tertius Belt 2"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:607
-#: scripts/scenario_37_unwanted_visitors.lua:632
+#: scripts/scenario_37_unwanted_visitors.lua:647
+#: scripts/scenario_37_unwanted_visitors.lua:672
 #, lua-format
 msgctxt "msgGM"
 msgid "Current Tertius Belt 2 speed: %.3f"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:624
+#: scripts/scenario_37_unwanted_visitors.lua:664
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -566,7 +566,7 @@ msgid ""
 "New slower Tertius Belt 2 speed: %.3f"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:649
+#: scripts/scenario_37_unwanted_visitors.lua:689
 #, lua-format
 msgctxt "msgGM"
 msgid ""
@@ -574,37 +574,37 @@ msgid ""
 "New faster Tertius Belt 2 speed: %.3f"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:660
+#: scripts/scenario_37_unwanted_visitors.lua:700
 msgctxt "buttonGM"
 msgid "Human victory"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:664
+#: scripts/scenario_37_unwanted_visitors.lua:704
 msgctxt "buttonGM"
 msgid "Exuari victory"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:673
+#: scripts/scenario_37_unwanted_visitors.lua:713
 msgctxt "buttonGM"
 msgid "Voices On"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:681
+#: scripts/scenario_37_unwanted_visitors.lua:721
 msgctxt "buttonGM"
 msgid "Voices Off"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:3395
+#: scripts/scenario_37_unwanted_visitors.lua:3385
 msgctxt "scienceDescription-artifact"
 msgid "Sensor readings change as the object orbits with the asteroid belt"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:3399
+#: scripts/scenario_37_unwanted_visitors.lua:3389
 msgctxt "scienceDescription-artifact"
 msgid "Object exhibits periodic spikes of chroniton particles"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:4776
+#: scripts/scenario_37_unwanted_visitors.lua:4749
 msgctxt "characterInfo-comms"
 msgid ""
 "He dabbles in ship system innovations. He's been working on improving beam "
@@ -612,7 +612,7 @@ msgid ""
 "installed some improvements on ships that have docked here previously"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:4787
+#: scripts/scenario_37_unwanted_visitors.lua:4760
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid ""
@@ -621,7 +621,7 @@ msgid ""
 "it won't be free."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:4798
+#: scripts/scenario_37_unwanted_visitors.lua:4771
 msgctxt "characterInfo-comms"
 msgid ""
 "She tinkers with ship systems like engines and thrusters. She's consulted "
@@ -629,7 +629,7 @@ msgid ""
 "got prototypes that are awaiting formal military approval before installation"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:4809
+#: scripts/scenario_37_unwanted_visitors.lua:4782
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid ""
@@ -639,7 +639,7 @@ msgid ""
 "the navy for her improvements."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:4820
+#: scripts/scenario_37_unwanted_visitors.lua:4793
 msgctxt "characterInfo-comms"
 msgid ""
 "He specializes in miniaturization of weapons systems. He's come up with a "
@@ -647,7 +647,7 @@ msgid ""
 "or configuration"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:4831
+#: scripts/scenario_37_unwanted_visitors.lua:4804
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid ""
@@ -656,14 +656,14 @@ msgid ""
 "the new paint job: amusingly phallic"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:4842
+#: scripts/scenario_37_unwanted_visitors.lua:4815
 msgctxt "characterInfo-comms"
 msgid ""
 "She developed this technique for cooling beam systems so that they can be "
 "fired more often without burning out"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:4853
+#: scripts/scenario_37_unwanted_visitors.lua:4826
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid ""
@@ -671,12 +671,12 @@ msgid ""
 "hot, I mean she has a way of keeping your beam weapons from excessive heat."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:4864
+#: scripts/scenario_37_unwanted_visitors.lua:4837
 msgctxt "characterInfo-comms"
 msgid "He knows how to modify beam systems to extend their range"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:4875
+#: scripts/scenario_37_unwanted_visitors.lua:4848
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid ""
@@ -684,12 +684,12 @@ msgid ""
 "%s in %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:4885
+#: scripts/scenario_37_unwanted_visitors.lua:4858
 msgctxt "characterInfo-comms"
 msgid "She can make your beams hit harder"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:4895
+#: scripts/scenario_37_unwanted_visitors.lua:4868
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid ""
@@ -697,12 +697,12 @@ msgid ""
 "increase the damage done by your beams. Her name is %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:4905
+#: scripts/scenario_37_unwanted_visitors.lua:4878
 msgctxt "characterInfo-comms"
 msgid "He can fit more missiles aboard your ship"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:4915
+#: scripts/scenario_37_unwanted_visitors.lua:4888
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid ""
@@ -711,12 +711,12 @@ msgid ""
 "you will be able to store more missiles"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:4925
+#: scripts/scenario_37_unwanted_visitors.lua:4898
 msgctxt "characterInfo-comms"
 msgid "She can soup up your impulse engines"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:4935
+#: scripts/scenario_37_unwanted_visitors.lua:4908
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid ""
@@ -725,12 +725,12 @@ msgid ""
 "significant boost to their top speed"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:4945
+#: scripts/scenario_37_unwanted_visitors.lua:4918
 msgctxt "characterInfo-comms"
 msgid "He can strengthen your hull"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:4956
+#: scripts/scenario_37_unwanted_visitors.lua:4929
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid ""
@@ -738,14 +738,14 @@ msgid ""
 "hull on your ship"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:4967
+#: scripts/scenario_37_unwanted_visitors.lua:4940
 msgctxt "characterInfo-comms"
 msgid ""
 "She knows how to increase your maximum energy capacity by improving battery "
 "efficiency"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:4979
+#: scripts/scenario_37_unwanted_visitors.lua:4952
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid ""
@@ -753,12 +753,12 @@ msgid ""
 "greater energy capacity by improving your battery efficiency"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:4989
+#: scripts/scenario_37_unwanted_visitors.lua:4962
 msgctxt "characterInfo-comms"
 msgid "He can strengthen your shields"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:5000
+#: scripts/scenario_37_unwanted_visitors.lua:4973
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid ""
@@ -766,601 +766,47 @@ msgid ""
 "shields. Trust me, it's always good to have stronger shields"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:5053
-msgctxt "upgrade-comms"
-msgid "Reduce beam cycle time"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5094
-#, lua-format
-msgctxt "upgrade-comms"
-msgid "After accepting your gift, he reduced your Beam cycle time by 25%%"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5102
-#: scripts/scenario_37_unwanted_visitors.lua:5455
-#: scripts/scenario_37_unwanted_visitors.lua:5563
-#, lua-format
-msgctxt "upgrade-comms"
-msgid "%s requires %s for the upgrade"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5134
-#, lua-format
-msgctxt "upgrade-comms"
-msgid ""
-"%s reduced your Beam cycle time by 25%% at no cost in trade with the "
-"message, 'Go get those Exuari.'"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5144
-#: scripts/scenario_37_unwanted_visitors.lua:5389
-#: scripts/scenario_37_unwanted_visitors.lua:5501
-#: scripts/scenario_37_unwanted_visitors.lua:5606
-msgctxt "upgrade-comms"
-msgid "Your ship type does not support a beam weapon upgrade."
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5153
-msgctxt "upgrade-comms"
-msgid "Increase spin speed"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5178
-#, lua-format
-msgctxt "upgrade-comms"
-msgid "Ship spin speed increased by 50%% after you gave %s to %s"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5189
-#, lua-format
-msgctxt "upgrade-comms"
-msgid "%s requires %s for the spin upgrade"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5207
-#, lua-format
-msgctxt "upgrade-comms"
-msgid ""
-"%s: I increased the speed your ship spins by 50%%. Normally, I'd require %s, "
-"but seeing as you're going out to take on the Exuari, we worked it out"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5219
-msgctxt "upgrade-comms"
-msgid "Add missile tube"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5267
-#, lua-format
-msgctxt "upgrade-comms"
-msgid ""
-"%s thanks you for the %s and the luxury and installs a homing missile tube "
-"for you"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5278
-#, lua-format
-msgctxt "upgrade-comms"
-msgid "%s requires %s and luxury for the missile tube"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5305
-#, lua-format
-msgctxt "upgrade-comms"
-msgid ""
-"%s installs a homing missile tube for you. The %s required was requisitioned "
-"from emergency contingency supplies"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5317
-msgctxt "upgrade-comms"
-msgid "Reduce beam heat"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5347
-#, lua-format
-msgctxt "upgrade-comms"
-msgid "Beam heat generation reduced by 50%%"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5355
-#, lua-format
-msgctxt "upgrade-comms"
-msgid "%s says she needs %s before she can cool your beams"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5378
-#, lua-format
-msgctxt "upgrade-comms"
-msgid ""
-"%s: Beam heat generation reduced by 50%%, no %s necessary. Go shoot some "
-"Exuari for me"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5398
-msgctxt "upgrade-comms"
-msgid "Extend beam range"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5444
-#, lua-format
-msgctxt "upgrade-comms"
-msgid "%s extended your beam range by 25%% and says thanks for the %s"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5490
-#, lua-format
-msgctxt "upgrade-comms"
-msgid ""
-"%s increased your beam range by 25%% without the usual %s from your ship"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5510
-msgctxt "upgrade-comms"
-msgid "Increase beam damage"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5552
-#, lua-format
-msgctxt "upgrade-comms"
-msgid "%s increased your beam damage by 20%% and stores away the %s"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5595
-#, lua-format
-msgctxt "upgrade-comms"
-msgid "%s increased your beam damage by 20%%, waiving the usual %s requirement"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5616
-msgctxt "upgrade-comms"
-msgid "Increase missile storage capacity"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5653
-#, lua-format
-msgctxt "upgrade-comms"
-msgid "%s: You can now store at least 25%% more missiles. I appreciate the %s"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5664
-#, lua-format
-msgctxt "upgrade-comms"
-msgid "%s needs %s for the upgrade"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5692
-#, lua-format
-msgctxt "upgrade-comms"
-msgid ""
-"%s: You can now store at least 25%% more missiles. I found some spare %s on "
-"the station. Go launch those missiles at those perfidious Exuari"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5703
-msgctxt "upgrade-comms"
-msgid "Your ship type does not support a missile storage capacity upgrade."
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5713
-msgctxt "upgrade-comms"
-msgid "Speed up impulse engines"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5738
-#, lua-format
-msgctxt "upgrade-comms"
-msgid ""
-"%s: Your impulse engines now push you up to 25%% faster. Thanks for the %s"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5749
-#, lua-format
-msgctxt "upgrade-comms"
-msgid "You need to bring %s to %s for the upgrade"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5767
-#, lua-format
-msgctxt "upgrade-comms"
-msgid ""
-"%s: Your impulse engines now push you up to 25%% faster. I didn't need %s "
-"after all. Go run circles around those blinking Exuari"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5779
-msgctxt "upgrade-comms"
-msgid "Strengthen hull"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5803
-#, lua-format
-msgctxt "upgrade-comms"
-msgid "%s: Thank you for the %s. Your hull is 50%% stronger"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5814
-#, lua-format
-msgctxt "upgrade-comms"
-msgid "%s: I need %s before I can increase your hull strength"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5831
-#, lua-format
-msgctxt "upgrade-comms"
-msgid ""
-"%s: I made your hull 50%% stronger. I scrounged some %s from around here "
-"since you are on the Exuari offense team"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5844
-msgctxt "upgrade-comms"
-msgid "Increase battery efficiency"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5871
-#, lua-format
-msgctxt "upgrade-comms"
-msgid ""
-"%s: I appreciate the %s. You have a 25%% greater energy capacity due to "
-"increased battery efficiency"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5882
-#, lua-format
-msgctxt "upgrade-comms"
-msgid ""
-"%s: You need to bring me some %s before I can increase your battery "
-"efficiency"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5901
-#, lua-format
-msgctxt "upgrade-comms"
-msgid ""
-"%s increased your battery efficiency by 25%% without the need for %s due to "
-"the pressing military demands on your ship"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5914
-msgctxt "upgrade-comms"
-msgid "Strengthen shields"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5946
-#, lua-format
-msgctxt "upgrade-comms"
-msgid ""
-"%s: I've raised your shield maximum by 20%%, %s. Thanks for bringing the %s"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5958
-#, lua-format
-msgctxt "upgrade-comms"
-msgid "%s: You need to provide %s before I can raise your shield strength"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:5983
-#, lua-format
-msgctxt "upgrade-comms"
-msgid ""
-"%s: Congratulations, %s, your shields are 20%% stronger. Don't worry about "
-"the %s. Go kick those Exuari outta here"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:6022
+#: scripts/scenario_37_unwanted_visitors.lua:5052
 msgctxt "inventory-buttonRelay"
 msgid "Inventory"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6033
+#: scripts/scenario_37_unwanted_visitors.lua:5063
 msgctxt "inventory-buttonOperations"
 msgid "Inventory"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6046
+#: scripts/scenario_37_unwanted_visitors.lua:5076
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "%s Current cargo:"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6057
+#: scripts/scenario_37_unwanted_visitors.lua:5087
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "     %s: %i"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6068
+#: scripts/scenario_37_unwanted_visitors.lua:5098
 msgctxt "inventory-shipLog"
 msgid "     Empty\n"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6071
+#: scripts/scenario_37_unwanted_visitors.lua:5101
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "Available space: %i"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6140
-msgctxt "station-comms"
-msgid "We are under attack! No time for chatting!"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:6162
-#, lua-format
-msgctxt "station-comms"
-msgid ""
-"Greetings %s!\n"
-"How may we help you today?"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:6168
-msgctxt "station-comms"
-msgid ""
-"Good day, officer!\n"
-"What can we do for you today?"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:6171
-msgctxt "station-comms"
-msgid "Hello, may I help you?"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:6174
-msgctxt "station-comms"
-msgid "Welcome to our lovely station."
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:6180
-msgctxt "station-comms"
-msgid ""
-"Forgive us if we seem a little distracted. We are carefully monitoring the "
-"enemies nearby."
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:6211
-msgctxt "ammo-comms"
-msgid "I need ordnance restocked"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:6214
-msgctxt "ammo-comms"
-msgid "What type of ordnance do you need?"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:6220
-msgctxt "ammo-comms"
-msgid "Can you supply us with some nukes?"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:6222
-msgctxt "ammo-comms"
-msgid "We really need some nukes."
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:6225
-msgctxt "ammo-comms"
-msgid "Can you restock our nuclear missiles?"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:6229
-msgctxt "ammo-comms"
-msgid "Please restock our EMP missiles."
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:6230
-msgctxt "ammo-comms"
-msgid "Got any EMPs?"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:6233
-msgctxt "ammo-comms"
-msgid "We need Electro-Magnetic Pulse missiles."
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:6239
-msgctxt "ammo-comms"
-msgid "Do you have spare homing missiles for us?"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:6243
-msgctxt "ammo-comms"
-msgid "Do you have extra homing missiles?"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:6247
-msgctxt "ammo-comms"
-msgid "Please replenish our homing missiles."
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:6251
-msgctxt "ammo-comms"
-msgid "We could use some mines."
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:6252
-msgctxt "ammo-comms"
-msgid "How about mines?"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:6253
-msgctxt "ammo-comms"
-msgid "Got mines for us?"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:6256
-msgctxt "ammo-comms"
-msgid "What about HVLI?"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:6257
-msgctxt "ammo-comms"
-msgid "Could you provide HVLI?"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:6260
-msgctxt "ammo-comms"
-msgid "We need High Velocity Lead Impactors."
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:6272
-#, lua-format
-msgctxt "ammo-comms"
-msgid "%s (%d rep each)"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:6286
-#: scripts/scenario_37_unwanted_visitors.lua:6428
-#: scripts/scenario_37_unwanted_visitors.lua:6432
-#: scripts/scenario_37_unwanted_visitors.lua:6569
-#: scripts/scenario_37_unwanted_visitors.lua:6587
-#: scripts/scenario_37_unwanted_visitors.lua:6636
-#: scripts/scenario_37_unwanted_visitors.lua:6657
-#: scripts/scenario_37_unwanted_visitors.lua:6683
-#: scripts/scenario_37_unwanted_visitors.lua:6699
-#: scripts/scenario_37_unwanted_visitors.lua:6715
-#: scripts/scenario_37_unwanted_visitors.lua:6718
-#: scripts/scenario_37_unwanted_visitors.lua:6735
-#: scripts/scenario_37_unwanted_visitors.lua:6760
-#: scripts/scenario_37_unwanted_visitors.lua:6833
-#: scripts/scenario_37_unwanted_visitors.lua:6865
-#: scripts/scenario_37_unwanted_visitors.lua:6950
-#: scripts/scenario_37_unwanted_visitors.lua:6956
-#: scripts/scenario_37_unwanted_visitors.lua:6978
-#: scripts/scenario_37_unwanted_visitors.lua:7024
-#: scripts/scenario_37_unwanted_visitors.lua:7062
-#: scripts/scenario_37_unwanted_visitors.lua:7111
-#: scripts/scenario_37_unwanted_visitors.lua:7117
-#: scripts/scenario_37_unwanted_visitors.lua:7142
-#: scripts/scenario_37_unwanted_visitors.lua:7206
-#: scripts/scenario_37_unwanted_visitors.lua:7245
-#: scripts/scenario_37_unwanted_visitors.lua:7298
-#: scripts/scenario_37_unwanted_visitors.lua:7304
-#: scripts/scenario_37_unwanted_visitors.lua:7331
-#: scripts/scenario_37_unwanted_visitors.lua:7334
-#: scripts/scenario_37_unwanted_visitors.lua:7390
-#: scripts/scenario_37_unwanted_visitors.lua:7412
-#: scripts/scenario_37_unwanted_visitors.lua:7438
-#: scripts/scenario_37_unwanted_visitors.lua:7469
-#: scripts/scenario_37_unwanted_visitors.lua:7499
-#: scripts/scenario_37_unwanted_visitors.lua:7502
-#: scripts/scenario_37_unwanted_visitors.lua:7532
-#: scripts/scenario_37_unwanted_visitors.lua:7535
-#: scripts/scenario_37_unwanted_visitors.lua:7565
-#: scripts/scenario_37_unwanted_visitors.lua:7568
-#: scripts/scenario_37_unwanted_visitors.lua:7598
-#: scripts/scenario_37_unwanted_visitors.lua:7601
-#: scripts/scenario_37_unwanted_visitors.lua:7662
-#: scripts/scenario_37_unwanted_visitors.lua:7667
-#: scripts/scenario_37_unwanted_visitors.lua:7728
-#: scripts/scenario_37_unwanted_visitors.lua:7732
-#: scripts/scenario_37_unwanted_visitors.lua:7797
-#: scripts/scenario_37_unwanted_visitors.lua:7801
-#: scripts/scenario_37_unwanted_visitors.lua:7868
-#: scripts/scenario_37_unwanted_visitors.lua:7872
-#: scripts/scenario_37_unwanted_visitors.lua:7890
-#: scripts/scenario_37_unwanted_visitors.lua:7898
-#: scripts/scenario_37_unwanted_visitors.lua:7911
-#: scripts/scenario_37_unwanted_visitors.lua:8001
-#: scripts/scenario_37_unwanted_visitors.lua:8315
-#: scripts/scenario_37_unwanted_visitors.lua:8336
-#: scripts/scenario_37_unwanted_visitors.lua:8368
-#: scripts/scenario_37_unwanted_visitors.lua:8400
-#: scripts/scenario_37_unwanted_visitors.lua:8436
-#: scripts/scenario_37_unwanted_visitors.lua:8468
-#: scripts/scenario_37_unwanted_visitors.lua:8520
-#: scripts/scenario_37_unwanted_visitors.lua:8609
-#: scripts/scenario_37_unwanted_visitors.lua:8683
-#: scripts/scenario_37_unwanted_visitors.lua:8691
-#: scripts/scenario_37_unwanted_visitors.lua:8830
-#: scripts/scenario_37_unwanted_visitors.lua:8846
-#: scripts/scenario_37_unwanted_visitors.lua:8954
-#: scripts/scenario_37_unwanted_visitors.lua:8961
-#: scripts/scenario_37_unwanted_visitors.lua:8969
-#: scripts/scenario_37_unwanted_visitors.lua:8998
-#: scripts/scenario_37_unwanted_visitors.lua:9001
-#: scripts/scenario_37_unwanted_visitors.lua:9138
-#: scripts/scenario_37_unwanted_visitors.lua:9174
-#: scripts/scenario_37_unwanted_visitors.lua:9220
-#: scripts/scenario_37_unwanted_visitors.lua:9265
-#: scripts/scenario_37_unwanted_visitors.lua:9310
-#: scripts/scenario_37_unwanted_visitors.lua:9315
-#: scripts/scenario_37_unwanted_visitors.lua:9329
-#: scripts/scenario_37_unwanted_visitors.lua:9444
-#: scripts/scenario_37_unwanted_visitors.lua:9458
-#: scripts/scenario_37_unwanted_visitors.lua:9566
-#: scripts/scenario_37_unwanted_visitors.lua:9569
-#: scripts/scenario_37_unwanted_visitors.lua:9653
-#: scripts/scenario_37_unwanted_visitors.lua:9685
-#: scripts/scenario_37_unwanted_visitors.lua:9718
-#: scripts/scenario_37_unwanted_visitors.lua:9751
-#: scripts/scenario_37_unwanted_visitors.lua:9784
-#: scripts/scenario_37_unwanted_visitors.lua:9809
-#: scripts/scenario_37_unwanted_visitors.lua:9812
-#: scripts/scenario_37_unwanted_visitors.lua:9877
-#: scripts/scenario_37_unwanted_visitors.lua:9949
-#: scripts/scenario_37_unwanted_visitors.lua:9953
-#: scripts/scenario_37_unwanted_visitors.lua:9956
-#: scripts/scenario_37_unwanted_visitors.lua:10006
-#: scripts/scenario_37_unwanted_visitors.lua:10087
-#: scripts/scenario_37_unwanted_visitors.lua:10112
-#: scripts/scenario_37_unwanted_visitors.lua:10171
-#: scripts/scenario_37_unwanted_visitors.lua:10207
-#: scripts/scenario_37_unwanted_visitors.lua:10291
-#: scripts/scenario_37_unwanted_visitors.lua:10306
-#: scripts/scenario_37_unwanted_visitors.lua:10314
-#: scripts/scenario_37_unwanted_visitors.lua:10324
-#: scripts/scenario_37_unwanted_visitors.lua:10329
-#: scripts/scenario_37_unwanted_visitors.lua:10364
-#: scripts/scenario_37_unwanted_visitors.lua:10437
-#: scripts/scenario_37_unwanted_visitors.lua:10442
-#: scripts/scenario_37_unwanted_visitors.lua:10514
-#: scripts/scenario_37_unwanted_visitors.lua:10519
-#: scripts/scenario_37_unwanted_visitors.lua:10589
-#: scripts/scenario_37_unwanted_visitors.lua:10594
-#: scripts/scenario_37_unwanted_visitors.lua:10664
-#: scripts/scenario_37_unwanted_visitors.lua:10669
-#: scripts/scenario_37_unwanted_visitors.lua:11191
-#: scripts/scenario_37_unwanted_visitors.lua:11215
-#: scripts/scenario_37_unwanted_visitors.lua:11227
-#: scripts/scenario_37_unwanted_visitors.lua:11294
-#: scripts/scenario_37_unwanted_visitors.lua:11313
-#: scripts/scenario_37_unwanted_visitors.lua:11428
-#: scripts/scenario_37_unwanted_visitors.lua:11489
-#: scripts/scenario_37_unwanted_visitors.lua:11509
-#: scripts/scenario_37_unwanted_visitors.lua:11521
-#: scripts/scenario_37_unwanted_visitors.lua:11562
-#: scripts/scenario_37_unwanted_visitors.lua:11615
-#: scripts/scenario_37_unwanted_visitors.lua:11670
-#: scripts/scenario_37_unwanted_visitors.lua:11731
-#: scripts/scenario_37_unwanted_visitors.lua:11786
-#: scripts/scenario_37_unwanted_visitors.lua:11848
-#: scripts/scenario_37_unwanted_visitors.lua:11878
-#: scripts/scenario_37_unwanted_visitors.lua:12127
-#: scripts/scenario_37_unwanted_visitors.lua:12182
-#: scripts/scenario_37_unwanted_visitors.lua:12242
-#: scripts/scenario_37_unwanted_visitors.lua:12297
-#: scripts/scenario_37_unwanted_visitors.lua:12357
-msgid "Back"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:6291
-#, lua-format
-msgctxt "ammo-comms"
-msgid ""
-"%s\n"
-"We don't have ordnance for you."
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:6302
-#: scripts/scenario_37_unwanted_visitors.lua:6442
-#: scripts/scenario_37_unwanted_visitors.lua:6597
+#: scripts/scenario_37_unwanted_visitors.lua:5117
+#: scripts/scenario_37_unwanted_visitors.lua:5257
+#: scripts/scenario_37_unwanted_visitors.lua:5412
 msgctxt "DispatchOffice-comms"
 msgid "Visit dispatch office"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6308
+#: scripts/scenario_37_unwanted_visitors.lua:5123
 #, lua-format
 msgctxt "DispatchOffice-comms"
 msgid ""
@@ -1368,27 +814,27 @@ msgid ""
 "another assignment"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6315
-#: scripts/scenario_37_unwanted_visitors.lua:6574
-#: scripts/scenario_37_unwanted_visitors.lua:6722
+#: scripts/scenario_37_unwanted_visitors.lua:5130
+#: scripts/scenario_37_unwanted_visitors.lua:5389
+#: scripts/scenario_37_unwanted_visitors.lua:5537
 msgctxt "DispatchOffice-comms"
 msgid "Stand down"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6320
-#: scripts/scenario_37_unwanted_visitors.lua:6579
-#: scripts/scenario_37_unwanted_visitors.lua:6727
+#: scripts/scenario_37_unwanted_visitors.lua:5135
+#: scripts/scenario_37_unwanted_visitors.lua:5394
+#: scripts/scenario_37_unwanted_visitors.lua:5542
 msgctxt "DispatchOffice-comms"
 msgid "Congratulations and thank you"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6332
+#: scripts/scenario_37_unwanted_visitors.lua:5147
 msgctxt "DispatchOffice-comms"
 msgid "Move to next region of available missions"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6339
-#: scripts/scenario_37_unwanted_visitors.lua:6402
+#: scripts/scenario_37_unwanted_visitors.lua:5154
+#: scripts/scenario_37_unwanted_visitors.lua:5217
 #, lua-format
 msgctxt "DispatchOffice-comms"
 msgid ""
@@ -1396,24 +842,120 @@ msgid ""
 "asteroids"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6350
-#: scripts/scenario_37_unwanted_visitors.lua:6413
-#: scripts/scenario_37_unwanted_visitors.lua:6485
-#: scripts/scenario_37_unwanted_visitors.lua:6554
+#: scripts/scenario_37_unwanted_visitors.lua:5165
+#: scripts/scenario_37_unwanted_visitors.lua:5228
+#: scripts/scenario_37_unwanted_visitors.lua:5300
+#: scripts/scenario_37_unwanted_visitors.lua:5369
 #, lua-format
 msgctxt "DispatchOffice-comms"
 msgid "Dock with station %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6361
-#: scripts/scenario_37_unwanted_visitors.lua:6395
-#: scripts/scenario_37_unwanted_visitors.lua:6496
-#: scripts/scenario_37_unwanted_visitors.lua:6531
+#: scripts/scenario_37_unwanted_visitors.lua:5176
+#: scripts/scenario_37_unwanted_visitors.lua:5210
+#: scripts/scenario_37_unwanted_visitors.lua:5311
+#: scripts/scenario_37_unwanted_visitors.lua:5346
 msgctxt "DispatchOffice-comms"
 msgid "Request next assignment"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6448
+#: scripts/scenario_37_unwanted_visitors.lua:5243
+#: scripts/scenario_37_unwanted_visitors.lua:5247
+#: scripts/scenario_37_unwanted_visitors.lua:5384
+#: scripts/scenario_37_unwanted_visitors.lua:5402
+#: scripts/scenario_37_unwanted_visitors.lua:5451
+#: scripts/scenario_37_unwanted_visitors.lua:5472
+#: scripts/scenario_37_unwanted_visitors.lua:5498
+#: scripts/scenario_37_unwanted_visitors.lua:5514
+#: scripts/scenario_37_unwanted_visitors.lua:5530
+#: scripts/scenario_37_unwanted_visitors.lua:5533
+#: scripts/scenario_37_unwanted_visitors.lua:5550
+#: scripts/scenario_37_unwanted_visitors.lua:5580
+#: scripts/scenario_37_unwanted_visitors.lua:5653
+#: scripts/scenario_37_unwanted_visitors.lua:5685
+#: scripts/scenario_37_unwanted_visitors.lua:5770
+#: scripts/scenario_37_unwanted_visitors.lua:5776
+#: scripts/scenario_37_unwanted_visitors.lua:5798
+#: scripts/scenario_37_unwanted_visitors.lua:5844
+#: scripts/scenario_37_unwanted_visitors.lua:5882
+#: scripts/scenario_37_unwanted_visitors.lua:5931
+#: scripts/scenario_37_unwanted_visitors.lua:5937
+#: scripts/scenario_37_unwanted_visitors.lua:5962
+#: scripts/scenario_37_unwanted_visitors.lua:6026
+#: scripts/scenario_37_unwanted_visitors.lua:6065
+#: scripts/scenario_37_unwanted_visitors.lua:6118
+#: scripts/scenario_37_unwanted_visitors.lua:6124
+#: scripts/scenario_37_unwanted_visitors.lua:6151
+#: scripts/scenario_37_unwanted_visitors.lua:6154
+#: scripts/scenario_37_unwanted_visitors.lua:6210
+#: scripts/scenario_37_unwanted_visitors.lua:6232
+#: scripts/scenario_37_unwanted_visitors.lua:6258
+#: scripts/scenario_37_unwanted_visitors.lua:6289
+#: scripts/scenario_37_unwanted_visitors.lua:6319
+#: scripts/scenario_37_unwanted_visitors.lua:6322
+#: scripts/scenario_37_unwanted_visitors.lua:6352
+#: scripts/scenario_37_unwanted_visitors.lua:6355
+#: scripts/scenario_37_unwanted_visitors.lua:6385
+#: scripts/scenario_37_unwanted_visitors.lua:6388
+#: scripts/scenario_37_unwanted_visitors.lua:6418
+#: scripts/scenario_37_unwanted_visitors.lua:6421
+#: scripts/scenario_37_unwanted_visitors.lua:6482
+#: scripts/scenario_37_unwanted_visitors.lua:6487
+#: scripts/scenario_37_unwanted_visitors.lua:6551
+#: scripts/scenario_37_unwanted_visitors.lua:6555
+#: scripts/scenario_37_unwanted_visitors.lua:6620
+#: scripts/scenario_37_unwanted_visitors.lua:6624
+#: scripts/scenario_37_unwanted_visitors.lua:6691
+#: scripts/scenario_37_unwanted_visitors.lua:6695
+#: scripts/scenario_37_unwanted_visitors.lua:7093
+#: scripts/scenario_37_unwanted_visitors.lua:7160
+#: scripts/scenario_37_unwanted_visitors.lua:7249
+#: scripts/scenario_37_unwanted_visitors.lua:7323
+#: scripts/scenario_37_unwanted_visitors.lua:7331
+#: scripts/scenario_37_unwanted_visitors.lua:7470
+#: scripts/scenario_37_unwanted_visitors.lua:7486
+#: scripts/scenario_37_unwanted_visitors.lua:7594
+#: scripts/scenario_37_unwanted_visitors.lua:7601
+#: scripts/scenario_37_unwanted_visitors.lua:7609
+#: scripts/scenario_37_unwanted_visitors.lua:7638
+#: scripts/scenario_37_unwanted_visitors.lua:7641
+#: scripts/scenario_37_unwanted_visitors.lua:7995
+#: scripts/scenario_37_unwanted_visitors.lua:8009
+#: scripts/scenario_37_unwanted_visitors.lua:8117
+#: scripts/scenario_37_unwanted_visitors.lua:8120
+#: scripts/scenario_37_unwanted_visitors.lua:8194
+#: scripts/scenario_37_unwanted_visitors.lua:8226
+#: scripts/scenario_37_unwanted_visitors.lua:8259
+#: scripts/scenario_37_unwanted_visitors.lua:8292
+#: scripts/scenario_37_unwanted_visitors.lua:8325
+#: scripts/scenario_37_unwanted_visitors.lua:8350
+#: scripts/scenario_37_unwanted_visitors.lua:8353
+#: scripts/scenario_37_unwanted_visitors.lua:8371
+#: scripts/scenario_37_unwanted_visitors.lua:8783
+#: scripts/scenario_37_unwanted_visitors.lua:8807
+#: scripts/scenario_37_unwanted_visitors.lua:8819
+#: scripts/scenario_37_unwanted_visitors.lua:8886
+#: scripts/scenario_37_unwanted_visitors.lua:8905
+#: scripts/scenario_37_unwanted_visitors.lua:9020
+#: scripts/scenario_37_unwanted_visitors.lua:9081
+#: scripts/scenario_37_unwanted_visitors.lua:9101
+#: scripts/scenario_37_unwanted_visitors.lua:9113
+#: scripts/scenario_37_unwanted_visitors.lua:9154
+#: scripts/scenario_37_unwanted_visitors.lua:9207
+#: scripts/scenario_37_unwanted_visitors.lua:9262
+#: scripts/scenario_37_unwanted_visitors.lua:9323
+#: scripts/scenario_37_unwanted_visitors.lua:9378
+#: scripts/scenario_37_unwanted_visitors.lua:9440
+#: scripts/scenario_37_unwanted_visitors.lua:9470
+#: scripts/scenario_37_unwanted_visitors.lua:9719
+#: scripts/scenario_37_unwanted_visitors.lua:9774
+#: scripts/scenario_37_unwanted_visitors.lua:9834
+#: scripts/scenario_37_unwanted_visitors.lua:9889
+#: scripts/scenario_37_unwanted_visitors.lua:9949
+msgid "Back"
+msgstr ""
+
+#: scripts/scenario_37_unwanted_visitors.lua:5263
 #, lua-format
 msgctxt "DispatchOffice-comms"
 msgid ""
@@ -1421,20 +963,20 @@ msgid ""
 "for assignments"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6460
+#: scripts/scenario_37_unwanted_visitors.lua:5275
 #, lua-format
 msgctxt "DispatchOffice-comms"
 msgid "Move on to missions in %s area"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6469
-#: scripts/scenario_37_unwanted_visitors.lua:6538
+#: scripts/scenario_37_unwanted_visitors.lua:5284
+#: scripts/scenario_37_unwanted_visitors.lua:5353
 #, lua-format
 msgctxt "DispatchOffice-comms"
 msgid "Dock with station %s for your next assignment"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6603
+#: scripts/scenario_37_unwanted_visitors.lua:5418
 #, lua-format
 msgctxt "DispatchOffice-comms"
 msgid ""
@@ -1442,25 +984,25 @@ msgid ""
 "one of these mission options"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6611
+#: scripts/scenario_37_unwanted_visitors.lua:5426
 msgctxt "Exuari1-comms"
 msgid "Exuari Exterminates Extraterrestrials"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6616
+#: scripts/scenario_37_unwanted_visitors.lua:5431
 msgctxt "Exuari1-comms"
 msgid ""
 "The Exuari have unlimited resources and continually send more ships of "
 "greater and greater power and nastier surprises. No victory condition exists"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6621
-#: scripts/scenario_37_unwanted_visitors.lua:6650
+#: scripts/scenario_37_unwanted_visitors.lua:5436
+#: scripts/scenario_37_unwanted_visitors.lua:5465
 msgctxt "DispatchOfficeOrders-comms"
 msgid "Confirm"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6628
+#: scripts/scenario_37_unwanted_visitors.lua:5443
 #, lua-format
 msgctxt "Exuari1-comms"
 msgid ""
@@ -1468,12 +1010,12 @@ msgid ""
 "around %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6640
+#: scripts/scenario_37_unwanted_visitors.lua:5455
 msgctxt "Exuari2-comms"
 msgid "Eliminate Exuari stronghold"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6645
+#: scripts/scenario_37_unwanted_visitors.lua:5460
 msgctxt "Exuari2-comms"
 msgid ""
 "The Exuari have unlimited resources, but they are constrained to funnel them "
@@ -1481,51 +1023,51 @@ msgid ""
 "Exuari stronghold."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6653
+#: scripts/scenario_37_unwanted_visitors.lua:5468
 msgctxt "Exuari2-comms"
 msgid "Good luck"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6661
+#: scripts/scenario_37_unwanted_visitors.lua:5476
 msgctxt "Exuari3-comms"
 msgid "Survive Exuari offensive"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6666
+#: scripts/scenario_37_unwanted_visitors.lua:5481
 msgctxt "Exuari3-comms"
 msgid ""
 "The Exuari launch their invasion offensive. You must survive their attack. "
 "You will have a limited amount of time during which you must survive"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6671
+#: scripts/scenario_37_unwanted_visitors.lua:5486
 msgctxt "Exuari3-comms"
 msgid "15 minutes"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6679
-#: scripts/scenario_37_unwanted_visitors.lua:6695
-#: scripts/scenario_37_unwanted_visitors.lua:6711
+#: scripts/scenario_37_unwanted_visitors.lua:5494
+#: scripts/scenario_37_unwanted_visitors.lua:5510
+#: scripts/scenario_37_unwanted_visitors.lua:5526
 msgctxt "Exuari3-comms"
 msgid "The countdown has begun"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6687
+#: scripts/scenario_37_unwanted_visitors.lua:5502
 msgctxt "Exuari3-comms"
 msgid "30 minutes"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6703
+#: scripts/scenario_37_unwanted_visitors.lua:5518
 msgctxt "Exuari3-comms"
 msgid "45 minutes"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6745
+#: scripts/scenario_37_unwanted_visitors.lua:5565
 msgctxt "Polly-comms"
 msgid "Pick up astronomer Polly Hobbs"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6750
+#: scripts/scenario_37_unwanted_visitors.lua:5570
 msgctxt "Polly-comms"
 msgid ""
 "[Polly Hobbs] Thank you for picking me up. I found the source of the "
@@ -1535,18 +1077,18 @@ msgid ""
 "instruments"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6756
+#: scripts/scenario_37_unwanted_visitors.lua:5576
 msgctxt "Polly-comms"
 msgid ""
 "Bring astronomer Polly Hobbs close to artifact for additional sensor readings"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6770
+#: scripts/scenario_37_unwanted_visitors.lua:5590
 msgctxt "planetologist-comms"
 msgid "Pick up planetologist"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6775
+#: scripts/scenario_37_unwanted_visitors.lua:5595
 msgctxt "planetologist-comms"
 msgid ""
 "I'm not sure he's ready. He's not at the dock ready to board or in the "
@@ -1554,49 +1096,49 @@ msgid ""
 "offline"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6779
+#: scripts/scenario_37_unwanted_visitors.lua:5599
 msgctxt "planetologist-comms"
 msgid "Look for planetologist"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6784
+#: scripts/scenario_37_unwanted_visitors.lua:5604
 msgctxt "planetologist-comms"
 msgid ""
 "The likeliest places to find him are his quarters, the lab or the "
 "observation lounge"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6788
+#: scripts/scenario_37_unwanted_visitors.lua:5608
 msgctxt "planetologist-comms"
 msgid "Try his quarters"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6801
+#: scripts/scenario_37_unwanted_visitors.lua:5621
 msgctxt "planetologist-comms"
 msgid ""
 "[Enrique Flogistan] Yes? What can I do for you? Please be quick about it, "
 "I'm in a bit of a hurry"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6809
+#: scripts/scenario_37_unwanted_visitors.lua:5629
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "Ready to begin your observations of %s?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6827
+#: scripts/scenario_37_unwanted_visitors.lua:5647
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "[Enrique Flogistan] Almost. Let me grab something from %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6842
+#: scripts/scenario_37_unwanted_visitors.lua:5662
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "We are here to transport you to %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6858
+#: scripts/scenario_37_unwanted_visitors.lua:5678
 #, lua-format
 msgctxt "planetologist-comms"
 msgid ""
@@ -1606,29 +1148,29 @@ msgid ""
 "He heads off down the corridor towards %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6874
+#: scripts/scenario_37_unwanted_visitors.lua:5694
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "My ship, %s, is here to transport you"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6882
+#: scripts/scenario_37_unwanted_visitors.lua:5702
 msgctxt "planetologist-comms"
 msgid "Is your ship armed?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6889
+#: scripts/scenario_37_unwanted_visitors.lua:5709
 msgctxt "planetologist-comms"
 msgid "Yes, we can handle any Exuari in the area"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6912
-#: scripts/scenario_37_unwanted_visitors.lua:7640
+#: scripts/scenario_37_unwanted_visitors.lua:5732
+#: scripts/scenario_37_unwanted_visitors.lua:6460
 msgctxt "planetologist-comms"
 msgid "He's already boarded a ship"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6919
+#: scripts/scenario_37_unwanted_visitors.lua:5739
 msgctxt "planetologist-comms"
 msgid ""
 "Good. Let's go\n"
@@ -1636,37 +1178,37 @@ msgid ""
 "He joins you as you go back to the ship"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6932
+#: scripts/scenario_37_unwanted_visitors.lua:5752
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "Good. I still need a couple of items from %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6972
+#: scripts/scenario_37_unwanted_visitors.lua:5792
 #, lua-format
 msgctxt "planetologist-comms"
 msgid ""
 "He's not in his quarters. His digital room assistant predicts he went to %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6982
+#: scripts/scenario_37_unwanted_visitors.lua:5802
 msgctxt "planetologist-comms"
 msgid "Try the lab"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:6993
+#: scripts/scenario_37_unwanted_visitors.lua:5813
 msgctxt "planetologist-comms"
 msgid ""
 "[Enrique Flogistan] Hello, welcome to the planetology lab. Can I help you?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7001
+#: scripts/scenario_37_unwanted_visitors.lua:5821
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "Ready to go observe %s?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7017
+#: scripts/scenario_37_unwanted_visitors.lua:5837
 #, lua-format
 msgctxt "planetologist-comms"
 msgid ""
@@ -1675,13 +1217,13 @@ msgid ""
 "He leaves the lab for %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7033
+#: scripts/scenario_37_unwanted_visitors.lua:5853
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "We're ready to transport you to %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7050
+#: scripts/scenario_37_unwanted_visitors.lua:5870
 #, lua-format
 msgctxt "planetologist-comms"
 msgid ""
@@ -1692,59 +1234,59 @@ msgid ""
 "[Lab technician] I think he's going to %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7071
+#: scripts/scenario_37_unwanted_visitors.lua:5891
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "%s has docked and is waiting on you"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7079
+#: scripts/scenario_37_unwanted_visitors.lua:5899
 msgctxt "planetologist-comms"
 msgid "Are you aware of the Exuari that have been spotted in the area?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7086
+#: scripts/scenario_37_unwanted_visitors.lua:5906
 msgctxt "planetologist-comms"
 msgid "Yes, don't worry about them"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7093
+#: scripts/scenario_37_unwanted_visitors.lua:5913
 msgctxt "planetologist-comms"
 msgid ""
 "[Enrique Flogistan] Good to know. I need to finishing packing in my quarters"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7103
+#: scripts/scenario_37_unwanted_visitors.lua:5923
 msgctxt "planetologist-comms"
 msgid ""
 "[Enrique Flogistan] Good to know. I left some notes in the observation lounge"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7136
+#: scripts/scenario_37_unwanted_visitors.lua:5956
 #, lua-format
 msgctxt "planetologist-comms"
 msgid ""
 "[Lab technician] You just missed him. I think he said he was going to %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7146
+#: scripts/scenario_37_unwanted_visitors.lua:5966
 msgctxt "planetologist-comms"
 msgid "Try observation lounge"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7170
+#: scripts/scenario_37_unwanted_visitors.lua:5990
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "[Enrique Flogistan] Just take in the gorgeous view of %s from here"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7180
+#: scripts/scenario_37_unwanted_visitors.lua:6000
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "Ready for a closer view of %s?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7199
+#: scripts/scenario_37_unwanted_visitors.lua:6019
 #, lua-format
 msgctxt "planetologist-comms"
 msgid ""
@@ -1753,106 +1295,106 @@ msgid ""
 "He leaves the observation lounge to go to %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7215
+#: scripts/scenario_37_unwanted_visitors.lua:6035
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "We're ready to take you to %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7227
+#: scripts/scenario_37_unwanted_visitors.lua:6047
 msgctxt "planetologist-comms"
 msgid ""
 "[Enrique Flogistan] Well I'm not. I just need a few more items from my "
 "quarters"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7237
+#: scripts/scenario_37_unwanted_visitors.lua:6057
 msgctxt "planetologist-comms"
 msgid ""
 "[Enrique Flogistan] Well I'm not. I just need a few more items from the lab"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7254
+#: scripts/scenario_37_unwanted_visitors.lua:6074
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "%s has been ordered to get you to %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7266
+#: scripts/scenario_37_unwanted_visitors.lua:6086
 msgctxt "planetologist-comms"
 msgid ""
 "I heard about your encounter with the Exuari. You know they could come back, "
 "right?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7273
+#: scripts/scenario_37_unwanted_visitors.lua:6093
 msgctxt "planetologist-comms"
 msgid "Certainly. We'll be ready, don't worry"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7280
+#: scripts/scenario_37_unwanted_visitors.lua:6100
 msgctxt "planetologist-comms"
 msgid ""
 "[Enrique Flogistan] I admire your confidence. I'll get my things from my "
 "quarters"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7290
+#: scripts/scenario_37_unwanted_visitors.lua:6110
 msgctxt "planetologist-comms"
 msgid ""
 "[Enrique Flogistan] I admire your confidence. I'll get my research material "
 "from the lab"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7325
+#: scripts/scenario_37_unwanted_visitors.lua:6145
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "[Station repair crewman] He just left for %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7338
+#: scripts/scenario_37_unwanted_visitors.lua:6158
 msgctxt "planetologist-comms"
 msgid "Contact planetologist directly"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7343
+#: scripts/scenario_37_unwanted_visitors.lua:6163
 msgctxt "planetologist-comms"
 msgid "Repair work prevents contact with individual"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7349
+#: scripts/scenario_37_unwanted_visitors.lua:6169
 msgctxt "planetologist-comms"
 msgid "Contact Enrique Flogistan's quarters"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7356
+#: scripts/scenario_37_unwanted_visitors.lua:6176
 msgctxt "planetologist-comms"
 msgid "[Enrique Flogistan] Who is it?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7365
+#: scripts/scenario_37_unwanted_visitors.lua:6185
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "This is %s. We are your transportation to %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7384
+#: scripts/scenario_37_unwanted_visitors.lua:6204
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "I'm going to %s before we leave"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7408
+#: scripts/scenario_37_unwanted_visitors.lua:6228
 msgctxt "planetologist-comms"
 msgid "No reply from Enrique Flogistan's quarters"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7416
+#: scripts/scenario_37_unwanted_visitors.lua:6236
 msgctxt "planetologist-comms"
 msgid "Contact planetology lab"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7433
+#: scripts/scenario_37_unwanted_visitors.lua:6253
 #, lua-format
 msgctxt "planetologist-comms"
 msgid ""
@@ -1860,12 +1402,12 @@ msgid ""
 "to %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7444
+#: scripts/scenario_37_unwanted_visitors.lua:6264
 msgctxt "planetologist-comms"
 msgid "Contact observation lounge"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7464
+#: scripts/scenario_37_unwanted_visitors.lua:6284
 #, lua-format
 msgctxt "planetologist-comms"
 msgid ""
@@ -1873,126 +1415,126 @@ msgid ""
 "to %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7473
+#: scripts/scenario_37_unwanted_visitors.lua:6293
 msgctxt "planetologist-comms"
 msgid "Contact station galley"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7479
+#: scripts/scenario_37_unwanted_visitors.lua:6299
 msgctxt "planetologist-comms"
 msgid "[Cook] Hello, who's there?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7487
+#: scripts/scenario_37_unwanted_visitors.lua:6307
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "I'm from %s. I'm looking for Enrique Flogistan"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7495
+#: scripts/scenario_37_unwanted_visitors.lua:6315
 msgctxt "planetologist-comms"
 msgid ""
 "He was here about an hour ago. You might try his quarters, the observation "
 "lounge or the lab"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7508
+#: scripts/scenario_37_unwanted_visitors.lua:6328
 msgctxt "planetologist-comms"
 msgid "Contact station security office"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7515
+#: scripts/scenario_37_unwanted_visitors.lua:6335
 msgctxt "planetologist-comms"
 msgid "[Security officer] May I help you?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7522
+#: scripts/scenario_37_unwanted_visitors.lua:6342
 msgctxt "planetologist-comms"
 msgid "I'm looking for Enrique Flogistan"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7529
+#: scripts/scenario_37_unwanted_visitors.lua:6349
 msgctxt "planetologist-comms"
 msgid ""
 "He's not here in the security office. Our records show he often frequents "
 "his quarters, the observation lounge and the planetology lab"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7541
+#: scripts/scenario_37_unwanted_visitors.lua:6361
 msgctxt "planetologist-comms"
 msgid "Contact station maintenance office"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7548
+#: scripts/scenario_37_unwanted_visitors.lua:6368
 msgctxt "planetologist-comms"
 msgid "[Maintenance technician] Hi, what's broken?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7555
+#: scripts/scenario_37_unwanted_visitors.lua:6375
 msgctxt "planetologist-comms"
 msgid "Nothing. I'm looking for Enrique Flogistan"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7562
+#: scripts/scenario_37_unwanted_visitors.lua:6382
 msgctxt "planetologist-comms"
 msgid "He's not here. Good luck finding him"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7574
+#: scripts/scenario_37_unwanted_visitors.lua:6394
 msgctxt "planetologist-comms"
 msgid "Contact station operations office"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7581
+#: scripts/scenario_37_unwanted_visitors.lua:6401
 msgctxt "planetologist-comms"
 msgid "[Operations manager] Yes?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7588
+#: scripts/scenario_37_unwanted_visitors.lua:6408
 msgctxt "planetologist-comms"
 msgid "Can you help me find Enrique Flogistan?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7595
+#: scripts/scenario_37_unwanted_visitors.lua:6415
 msgctxt "planetologist-comms"
 msgid ""
 "He's not here in operations. We are short handed right now with all the "
 "repairs going on. I'm afraid you'll have to find him yourself"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7607
+#: scripts/scenario_37_unwanted_visitors.lua:6427
 msgctxt "planetologist-comms"
 msgid "Scan for planetologist"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7621
+#: scripts/scenario_37_unwanted_visitors.lua:6441
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "Sensors show him in %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7630
+#: scripts/scenario_37_unwanted_visitors.lua:6450
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "Beam him over from %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7647
+#: scripts/scenario_37_unwanted_visitors.lua:6467
 msgctxt "planetologist-comms"
 msgid "He has been beamed aboard"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7657
+#: scripts/scenario_37_unwanted_visitors.lua:6477
 msgctxt "planetologist-comms"
 msgid "Interference from station repairs prevents a transporter lock"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7676
+#: scripts/scenario_37_unwanted_visitors.lua:6499
 msgctxt "satellites-comms"
 msgid "Satellite problems?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7681
+#: scripts/scenario_37_unwanted_visitors.lua:6504
 #, lua-format
 msgctxt "satellites-comms"
 msgid ""
@@ -2002,24 +1544,24 @@ msgid ""
 "delivery cycle. I don't suppose you could bring us what we need?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7712
-#: scripts/scenario_37_unwanted_visitors.lua:7850
+#: scripts/scenario_37_unwanted_visitors.lua:6535
+#: scripts/scenario_37_unwanted_visitors.lua:6673
 #, lua-format
 msgctxt "satellites-comms"
 msgid "Provide %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7723
+#: scripts/scenario_37_unwanted_visitors.lua:6546
 msgctxt "satellites-comms"
 msgid "Thanks. With your help, we fixed the faulty relay module"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7741
+#: scripts/scenario_37_unwanted_visitors.lua:6564
 msgctxt "satellites-comms"
 msgid "Having satellite trouble?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7748
+#: scripts/scenario_37_unwanted_visitors.lua:6571
 #, lua-format
 msgctxt "satellites-comms"
 msgid ""
@@ -2028,109 +1570,66 @@ msgid ""
 "any?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7781
+#: scripts/scenario_37_unwanted_visitors.lua:6604
 #, lua-format
 msgctxt "satellites-comms"
 msgid "Give %s to %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7792
+#: scripts/scenario_37_unwanted_visitors.lua:6615
 msgctxt "satellites-comms"
 msgid "That worked. Thanks"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7811
+#: scripts/scenario_37_unwanted_visitors.lua:6634
 msgctxt "satellites-comms"
 msgid "Can we help with your satellite?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7818
+#: scripts/scenario_37_unwanted_visitors.lua:6641
 #, lua-format
 msgctxt "satellites-comms"
 msgid "Only if you've got %s aboard your ship. Otherwise, we're stuck"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7862
+#: scripts/scenario_37_unwanted_visitors.lua:6685
 msgctxt "satellites-comms"
 msgid ""
 "You have saved us a tremendous headache. We thought we'd have to wait two "
 "months before we could fix the problem. Thanks"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7881
-#: scripts/scenario_37_unwanted_visitors.lua:10296
-msgctxt "station-comms"
-msgid "Tell me more about your station"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:7884
-#: scripts/scenario_37_unwanted_visitors.lua:10300
-msgctxt "station-comms"
-msgid "What would you like to know?"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:7887
-#: scripts/scenario_37_unwanted_visitors.lua:10303
-msgctxt "stationGeneralInfo-comms"
-msgid "General information"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:7895
-#: scripts/scenario_37_unwanted_visitors.lua:10311
-msgctxt "stationStory-comms"
-msgid "Station history"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:7908
-#: scripts/scenario_37_unwanted_visitors.lua:10321
-msgctxt "gossip-comms"
-msgid "Gossip"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:7926
-#: scripts/scenario_37_unwanted_visitors.lua:10024
-#, lua-format
-msgctxt "characterInfo-comms"
-msgid "Tell me about %s"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:7936
-#: scripts/scenario_37_unwanted_visitors.lua:10036
+#: scripts/scenario_37_unwanted_visitors.lua:6704
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "Never heard of %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7942
-#: scripts/scenario_37_unwanted_visitors.lua:10043
+#: scripts/scenario_37_unwanted_visitors.lua:6708
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "%s died last week. The funeral was yesterday"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7949
-#: scripts/scenario_37_unwanted_visitors.lua:10050
+#: scripts/scenario_37_unwanted_visitors.lua:6715
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "%s? Who's %s? There's nobody here named %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7958
-#: scripts/scenario_37_unwanted_visitors.lua:10059
+#: scripts/scenario_37_unwanted_visitors.lua:6724
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "We don't talk about %s. They are gone and good riddance"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7965
-#: scripts/scenario_37_unwanted_visitors.lua:10066
+#: scripts/scenario_37_unwanted_visitors.lua:6728
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "I think %s moved away"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:7972
-#: scripts/scenario_37_unwanted_visitors.lua:10073
+#: scripts/scenario_37_unwanted_visitors.lua:6732
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid ""
@@ -2138,22 +1637,22 @@ msgid ""
 "from here."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8010
+#: scripts/scenario_37_unwanted_visitors.lua:6788
 msgctxt "station-comms"
 msgid "Request access to isolated transporter pad"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8015
+#: scripts/scenario_37_unwanted_visitors.lua:6793
 msgctxt "station-comms"
 msgid "That will damage your reputation. Do you wish to proceed?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8021
+#: scripts/scenario_37_unwanted_visitors.lua:6799
 msgctxt "station-comms"
 msgid "Proceed regardless of the reputation cost"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8031
+#: scripts/scenario_37_unwanted_visitors.lua:6809
 msgctxt "station-comms"
 msgid ""
 "You are transported to an unknown location. A small man in front of a vast "
@@ -2161,124 +1660,117 @@ msgid ""
 "planetary systems asks you what you want"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8036
-#: scripts/scenario_37_unwanted_visitors.lua:8083
-#: scripts/scenario_37_unwanted_visitors.lua:8186
+#: scripts/scenario_37_unwanted_visitors.lua:6814
+#: scripts/scenario_37_unwanted_visitors.lua:6861
+#: scripts/scenario_37_unwanted_visitors.lua:6964
 #, lua-format
 msgctxt "station-comms"
 msgid "Slow orbital speed of %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8050
+#: scripts/scenario_37_unwanted_visitors.lua:6828
 msgctxt "station-comms"
 msgid "He twists a small dial and says, 'Done.'"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8060
+#: scripts/scenario_37_unwanted_visitors.lua:6838
 #, lua-format
 msgctxt "station-comms"
 msgid "Slow orbital speed of the moon orbiting %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8075
+#: scripts/scenario_37_unwanted_visitors.lua:6853
 msgctxt "station-comms"
 msgid "He moves a slider and says, 'OK.'"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8097
+#: scripts/scenario_37_unwanted_visitors.lua:6875
 msgctxt "station-comms"
 msgid "He types in a couple of numbers and says, 'Happy?'"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8107
+#: scripts/scenario_37_unwanted_visitors.lua:6885
 #, lua-format
 msgctxt "station-comms"
 msgid "Slow orbital speed of stations orbiting %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8118
+#: scripts/scenario_37_unwanted_visitors.lua:6896
 msgctxt "station-comms"
 msgid "He flips a couple of switches and says, 'I love programmable stations'"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8128
-#: scripts/scenario_37_unwanted_visitors.lua:8210
+#: scripts/scenario_37_unwanted_visitors.lua:6906
+#: scripts/scenario_37_unwanted_visitors.lua:6988
 #, lua-format
 msgctxt "station-comms"
 msgid "Slow orbital speed of the inner belt around %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8148
+#: scripts/scenario_37_unwanted_visitors.lua:6926
 msgctxt "station-comms"
 msgid "He rubs one of the monitors a bit and says 'that should do it.'"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8158
-#: scripts/scenario_37_unwanted_visitors.lua:8241
+#: scripts/scenario_37_unwanted_visitors.lua:6936
+#: scripts/scenario_37_unwanted_visitors.lua:7019
 #, lua-format
 msgctxt "station-comms"
 msgid "Slow orbital speed of the outer belt around %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8178
+#: scripts/scenario_37_unwanted_visitors.lua:6956
 msgctxt "station-comms"
 msgid ""
 "He says, 'if you insist' and opens a small panel in the wall and enters a "
 "code on a keypad."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8200
+#: scripts/scenario_37_unwanted_visitors.lua:6978
 msgctxt "station-comms"
 msgid ""
 "He sighs, stands up, grabs a large lever and pulls it about two inches "
 "towards him then says, 'there.'"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8231
+#: scripts/scenario_37_unwanted_visitors.lua:7009
 msgctxt "station-comms"
 msgid ""
 "He pulls a keyboard out from under his desk, types a couple of things and "
 "says, 'Alright.'"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8268
+#: scripts/scenario_37_unwanted_visitors.lua:7046
 msgctxt "station-comms"
 msgid ""
 "He dons a couple of purple haptic gloves, makes a couple of arcane gestures "
 "and says, 'You asked for it.'"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8286
+#: scripts/scenario_37_unwanted_visitors.lua:7066
 #, lua-format
 msgctxt "station-comms"
 msgid "Where is %s? (cost 10 reputation)"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8294
+#: scripts/scenario_37_unwanted_visitors.lua:7074
 #, lua-format
 msgctxt "station-comms"
 msgid "%s is near %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8304
+#: scripts/scenario_37_unwanted_visitors.lua:7084
 #, lua-format
 msgctxt "station-comms"
 msgid "%s is along the inner solar asteroid belt"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8312
+#: scripts/scenario_37_unwanted_visitors.lua:7091
 msgctxt "needRep-comms"
 msgid "Not enough reputation"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8320
-#: scripts/scenario_37_unwanted_visitors.lua:10093
-msgctxt "orders-comms"
-msgid "What are my current orders?"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:8331
-#: scripts/scenario_37_unwanted_visitors.lua:10106
+#: scripts/scenario_37_unwanted_visitors.lua:7106
 #, lua-format
 msgctxt "orders-comms"
 msgid ""
@@ -2286,88 +1778,40 @@ msgid ""
 "   %i Minutes remain in game"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8351
-#: scripts/scenario_37_unwanted_visitors.lua:8419
-#, lua-format
-msgctxt "trade-comms"
-msgid "Recruit repair crew member for %i reputation"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:8358
-#: scripts/scenario_37_unwanted_visitors.lua:8390
-#: scripts/scenario_37_unwanted_visitors.lua:8426
-#: scripts/scenario_37_unwanted_visitors.lua:8458
-#: scripts/scenario_37_unwanted_visitors.lua:8605
-#: scripts/scenario_37_unwanted_visitors.lua:8679
-#: scripts/scenario_37_unwanted_visitors.lua:8688
-#: scripts/scenario_37_unwanted_visitors.lua:8966
-#: scripts/scenario_37_unwanted_visitors.lua:9572
-#: scripts/scenario_37_unwanted_visitors.lua:10433
-#: scripts/scenario_37_unwanted_visitors.lua:10510
-#: scripts/scenario_37_unwanted_visitors.lua:10585
-#: scripts/scenario_37_unwanted_visitors.lua:10660
-#: scripts/scenario_37_unwanted_visitors.lua:12123
-#: scripts/scenario_37_unwanted_visitors.lua:12178
-#: scripts/scenario_37_unwanted_visitors.lua:12238
-#: scripts/scenario_37_unwanted_visitors.lua:12293
-#: scripts/scenario_37_unwanted_visitors.lua:12353
-msgctxt "needRep-comms"
-msgid "Insufficient reputation"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:8365
-#: scripts/scenario_37_unwanted_visitors.lua:8433
-msgctxt "trade-comms"
-msgid "Repair crew member hired"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:8382
-#: scripts/scenario_37_unwanted_visitors.lua:8450
-#, lua-format
-msgctxt "trade-comms"
-msgid "Purchase coolant for %i reputation"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:8397
-#: scripts/scenario_37_unwanted_visitors.lua:8465
-msgctxt "trade-comms"
-msgid "Additional coolant purchased"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:8475
+#: scripts/scenario_37_unwanted_visitors.lua:7115
 msgctxt "cartographyOffice-comms"
 msgid "Visit cartography office"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8481
+#: scripts/scenario_37_unwanted_visitors.lua:7121
 msgctxt "cartographyOffice-comms"
 msgid ""
 "The clerk behind the desk looks up briefly at you then goes back to filing "
 "her nails."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8485
+#: scripts/scenario_37_unwanted_visitors.lua:7125
 msgctxt "cartographyOffice-comms"
 msgid ""
 "The clerk behind the desk examines you then returns to grooming her "
 "tentacles."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8489
+#: scripts/scenario_37_unwanted_visitors.lua:7129
 msgctxt "cartographyOffice-comms"
 msgid ""
 "The clerk behind the desk glances at you then returns to preening her "
 "feathers."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8493
+#: scripts/scenario_37_unwanted_visitors.lua:7133
 msgctxt "cartographyOffice-comms"
 msgid ""
 "The clerk behind the desk pauses, points a cluster of antennae at you, then "
 "continues manipulating an elaborate keyboard."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8503
+#: scripts/scenario_37_unwanted_visitors.lua:7143
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid ""
@@ -2377,12 +1821,12 @@ msgid ""
 "cartographer or talk to the master cartographer"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8511
+#: scripts/scenario_37_unwanted_visitors.lua:7151
 msgctxt "cartographyOffice-comms"
 msgid "What's the difference between the apprentice and the master?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8517
+#: scripts/scenario_37_unwanted_visitors.lua:7157
 msgctxt "cartographyOffice-comms"
 msgid ""
 "The clerk responds in a bored voice, 'The apprentice knows the local area "
@@ -2390,33 +1834,33 @@ msgid ""
 "area but can't be bothered with the local area'"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8527
+#: scripts/scenario_37_unwanted_visitors.lua:7167
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "Examine brochure (%i reputation)"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8536
+#: scripts/scenario_37_unwanted_visitors.lua:7176
 msgctxt "cartographyOffice-comms"
 msgid ""
 "The brochure has a list of nearby stations and has a list of goods nearby"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8543
+#: scripts/scenario_37_unwanted_visitors.lua:7183
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "Examine station list (%i reputation)"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8565
-#: scripts/scenario_37_unwanted_visitors.lua:8734
-#: scripts/scenario_37_unwanted_visitors.lua:8881
+#: scripts/scenario_37_unwanted_visitors.lua:7205
+#: scripts/scenario_37_unwanted_visitors.lua:7374
+#: scripts/scenario_37_unwanted_visitors.lua:7521
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "%s %s %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8576
+#: scripts/scenario_37_unwanted_visitors.lua:7216
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid ""
@@ -2424,23 +1868,41 @@ msgid ""
 "%s %s %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8591
-#: scripts/scenario_37_unwanted_visitors.lua:8748
-#: scripts/scenario_37_unwanted_visitors.lua:8891
-#: scripts/scenario_37_unwanted_visitors.lua:9365
-#: scripts/scenario_37_unwanted_visitors.lua:9494
+#: scripts/scenario_37_unwanted_visitors.lua:7231
+#: scripts/scenario_37_unwanted_visitors.lua:7388
+#: scripts/scenario_37_unwanted_visitors.lua:7531
+#: scripts/scenario_37_unwanted_visitors.lua:7916
+#: scripts/scenario_37_unwanted_visitors.lua:8045
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "%s %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8616
+#: scripts/scenario_37_unwanted_visitors.lua:7245
+#: scripts/scenario_37_unwanted_visitors.lua:7319
+#: scripts/scenario_37_unwanted_visitors.lua:7328
+#: scripts/scenario_37_unwanted_visitors.lua:7606
+#: scripts/scenario_37_unwanted_visitors.lua:7806
+#: scripts/scenario_37_unwanted_visitors.lua:7827
+#: scripts/scenario_37_unwanted_visitors.lua:7851
+#: scripts/scenario_37_unwanted_visitors.lua:7875
+#: scripts/scenario_37_unwanted_visitors.lua:8123
+#: scripts/scenario_37_unwanted_visitors.lua:9715
+#: scripts/scenario_37_unwanted_visitors.lua:9770
+#: scripts/scenario_37_unwanted_visitors.lua:9830
+#: scripts/scenario_37_unwanted_visitors.lua:9885
+#: scripts/scenario_37_unwanted_visitors.lua:9945
+msgctxt "needRep-comms"
+msgid "Insufficient reputation"
+msgstr ""
+
+#: scripts/scenario_37_unwanted_visitors.lua:7256
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "Examine goods list (%i reputation)"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8648
+#: scripts/scenario_37_unwanted_visitors.lua:7288
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid ""
@@ -2448,7 +1910,7 @@ msgid ""
 "%s, %i, %i, %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8660
+#: scripts/scenario_37_unwanted_visitors.lua:7300
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid ""
@@ -2456,31 +1918,31 @@ msgid ""
 "%s, %i, %i, %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8698
+#: scripts/scenario_37_unwanted_visitors.lua:7338
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "Talk to apprentice cartographer (%i reputation)"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8707
+#: scripts/scenario_37_unwanted_visitors.lua:7347
 msgctxt "cartographyOffice-comms"
 msgid "Hi, would you like for me to locate a station or some goods for you?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8711
+#: scripts/scenario_37_unwanted_visitors.lua:7351
 msgctxt "cartographyOffice-comms"
 msgid "Locate station"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8716
+#: scripts/scenario_37_unwanted_visitors.lua:7356
 msgctxt "cartographyOffice-comms"
 msgid "These are stations I have learned about"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8762
-#: scripts/scenario_37_unwanted_visitors.lua:8901
-#: scripts/scenario_37_unwanted_visitors.lua:9374
-#: scripts/scenario_37_unwanted_visitors.lua:9503
+#: scripts/scenario_37_unwanted_visitors.lua:7402
+#: scripts/scenario_37_unwanted_visitors.lua:7541
+#: scripts/scenario_37_unwanted_visitors.lua:7925
+#: scripts/scenario_37_unwanted_visitors.lua:8054
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid ""
@@ -2488,10 +1950,10 @@ msgid ""
 "Good, quantity, cost"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8775
-#: scripts/scenario_37_unwanted_visitors.lua:8911
-#: scripts/scenario_37_unwanted_visitors.lua:9384
-#: scripts/scenario_37_unwanted_visitors.lua:9511
+#: scripts/scenario_37_unwanted_visitors.lua:7415
+#: scripts/scenario_37_unwanted_visitors.lua:7551
+#: scripts/scenario_37_unwanted_visitors.lua:7935
+#: scripts/scenario_37_unwanted_visitors.lua:8062
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid ""
@@ -2499,10 +1961,10 @@ msgid ""
 "   %s, %i, %i"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8792
-#: scripts/scenario_37_unwanted_visitors.lua:8927
-#: scripts/scenario_37_unwanted_visitors.lua:9399
-#: scripts/scenario_37_unwanted_visitors.lua:9524
+#: scripts/scenario_37_unwanted_visitors.lua:7432
+#: scripts/scenario_37_unwanted_visitors.lua:7567
+#: scripts/scenario_37_unwanted_visitors.lua:7950
+#: scripts/scenario_37_unwanted_visitors.lua:8075
 #, lua-format
 msgctxt "stationGeneralInfo-comms"
 msgid ""
@@ -2511,10 +1973,10 @@ msgid ""
 "   %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8806
-#: scripts/scenario_37_unwanted_visitors.lua:8937
-#: scripts/scenario_37_unwanted_visitors.lua:9409
-#: scripts/scenario_37_unwanted_visitors.lua:9532
+#: scripts/scenario_37_unwanted_visitors.lua:7446
+#: scripts/scenario_37_unwanted_visitors.lua:7577
+#: scripts/scenario_37_unwanted_visitors.lua:7960
+#: scripts/scenario_37_unwanted_visitors.lua:8083
 #, lua-format
 msgctxt "stationStory-comms"
 msgid ""
@@ -2523,10 +1985,10 @@ msgid ""
 "   %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8820
-#: scripts/scenario_37_unwanted_visitors.lua:8947
-#: scripts/scenario_37_unwanted_visitors.lua:9417
-#: scripts/scenario_37_unwanted_visitors.lua:9539
+#: scripts/scenario_37_unwanted_visitors.lua:7460
+#: scripts/scenario_37_unwanted_visitors.lua:7587
+#: scripts/scenario_37_unwanted_visitors.lua:7968
+#: scripts/scenario_37_unwanted_visitors.lua:8090
 #, lua-format
 msgctxt "gossip-comms"
 msgid ""
@@ -2535,28 +1997,28 @@ msgid ""
 "   %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8842
+#: scripts/scenario_37_unwanted_visitors.lua:7482
 msgctxt "cartographyOffice-comms"
 msgid "I have learned of no stations yet"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8850
+#: scripts/scenario_37_unwanted_visitors.lua:7490
 msgctxt "cartographyOffice-comms"
 msgid "Locate goods"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8855
+#: scripts/scenario_37_unwanted_visitors.lua:7495
 msgctxt "cartographyOffice-comms"
 msgid "These are the goods I know about"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8976
+#: scripts/scenario_37_unwanted_visitors.lua:7616
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "Talk to master cartographer (%i reputation)"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8985
+#: scripts/scenario_37_unwanted_visitors.lua:7625
 msgctxt "cartographyOffice-comms"
 msgid ""
 "The clerk clears her throat:\n"
@@ -2568,209 +2030,175 @@ msgid ""
 "I just want you to get the maximum benefit for the time you spend with him"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:8991
+#: scripts/scenario_37_unwanted_visitors.lua:7631
 msgctxt "cartographyOffice-comms"
 msgid "Continue to Master Cartographer"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9009
-msgctxt "trade-comms"
-msgid "Buy, sell, trade"
+#: scripts/scenario_37_unwanted_visitors.lua:7710
+msgctxt "ammo-comms"
+msgid "What type of ordnance do you need?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9014
+#: scripts/scenario_37_unwanted_visitors.lua:7711
 #, lua-format
-msgctxt "trade-comms"
-msgid ""
-"Station %s:\n"
-"Goods or components available for sale: quantity, cost in reputation\n"
+msgctxt "ammo-comms"
+msgid "%s (%d rep each)"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9021
+#: scripts/scenario_37_unwanted_visitors.lua:7715
+msgctxt "ammo-comms"
+msgid "Can you supply us with some nukes?"
+msgstr ""
+
+#: scripts/scenario_37_unwanted_visitors.lua:7716
+msgctxt "ammo-comms"
+msgid "We really need some nukes."
+msgstr ""
+
+#: scripts/scenario_37_unwanted_visitors.lua:7717
+msgctxt "ammo-comms"
+msgid "Can you restock our nuclear missiles?"
+msgstr ""
+
+#: scripts/scenario_37_unwanted_visitors.lua:7720
+msgctxt "ammo-comms"
+msgid "Please restock our EMP missiles."
+msgstr ""
+
+#: scripts/scenario_37_unwanted_visitors.lua:7721
+msgctxt "ammo-comms"
+msgid "Got any EMPs?"
+msgstr ""
+
+#: scripts/scenario_37_unwanted_visitors.lua:7722
+msgctxt "ammo-comms"
+msgid "We need Electro-Magnetic Pulse missiles."
+msgstr ""
+
+#: scripts/scenario_37_unwanted_visitors.lua:7727
+msgctxt "ammo-comms"
+msgid "Do you have spare homing missiles for us?"
+msgstr ""
+
+#: scripts/scenario_37_unwanted_visitors.lua:7729
+msgctxt "ammo-comms"
+msgid "Do you have extra homing missiles?"
+msgstr ""
+
+#: scripts/scenario_37_unwanted_visitors.lua:7730
+msgctxt "ammo-comms"
+msgid "Please replenish our homing missiles."
+msgstr ""
+
+#: scripts/scenario_37_unwanted_visitors.lua:7733
+msgctxt "ammo-comms"
+msgid "We could use some mines."
+msgstr ""
+
+#: scripts/scenario_37_unwanted_visitors.lua:7734
+msgctxt "ammo-comms"
+msgid "How about mines?"
+msgstr ""
+
+#: scripts/scenario_37_unwanted_visitors.lua:7735
+msgctxt "ammo-comms"
+msgid "Got mines for us?"
+msgstr ""
+
+#: scripts/scenario_37_unwanted_visitors.lua:7738
+msgctxt "ammo-comms"
+msgid "What about HVLI?"
+msgstr ""
+
+#: scripts/scenario_37_unwanted_visitors.lua:7739
+msgctxt "ammo-comms"
+msgid "Could you provide HVLI?"
+msgstr ""
+
+#: scripts/scenario_37_unwanted_visitors.lua:7740
+msgctxt "ammo-comms"
+msgid "We need High Velocity Lead Impactors."
+msgstr ""
+
+#: scripts/scenario_37_unwanted_visitors.lua:7772
+msgctxt "station-comms"
+msgid "What kind of information do you need?"
+msgstr ""
+
+#: scripts/scenario_37_unwanted_visitors.lua:7797
 #, lua-format
-msgctxt "trade-comms"
-msgid "     %s: %i, %i\n"
+msgctxt "stationAssist-comms"
+msgid "Can you send a supply drop? (%s reputation)"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9031
-msgctxt "trade-comms"
-msgid "Goods or components station will buy: price in reputation\n"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:9036
-#: scripts/scenario_37_unwanted_visitors.lua:9054
+#: scripts/scenario_37_unwanted_visitors.lua:7799
+#: scripts/scenario_37_unwanted_visitors.lua:7820
+#: scripts/scenario_37_unwanted_visitors.lua:7844
+#: scripts/scenario_37_unwanted_visitors.lua:7868
 #, lua-format
-msgctxt "trade-comms"
-msgid "     %s: %i\n"
+msgctxt "stationAssist-comms"
+msgid "Waypoint %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9044
+#: scripts/scenario_37_unwanted_visitors.lua:7802
 #, lua-format
-msgctxt "trade-comms"
-msgid "Current cargo aboard %s:\n"
+msgctxt "stationAssist-comms"
+msgid "We have dispatched a supply ship toward waypoint %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9061
-msgctxt "trade-comms"
-msgid "     Empty\n"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:9067
+#: scripts/scenario_37_unwanted_visitors.lua:7815
 #, lua-format
-msgctxt "trade-comms"
-msgid "Available Space: %i, Available Reputation: %i\n"
+msgctxt "stationAssist-comms"
+msgid "Please send Adder MK5 reinforcements! (%s reputation)"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9076
-#: scripts/scenario_37_unwanted_visitors.lua:11629
-#: scripts/scenario_37_unwanted_visitors.lua:11688
-#: scripts/scenario_37_unwanted_visitors.lua:11743
-#: scripts/scenario_37_unwanted_visitors.lua:11805
-#: scripts/scenario_37_unwanted_visitors.lua:12084
-#: scripts/scenario_37_unwanted_visitors.lua:12139
-#: scripts/scenario_37_unwanted_visitors.lua:12199
-#: scripts/scenario_37_unwanted_visitors.lua:12254
-#: scripts/scenario_37_unwanted_visitors.lua:12314
+#: scripts/scenario_37_unwanted_visitors.lua:7823
+#: scripts/scenario_37_unwanted_visitors.lua:7847
+#: scripts/scenario_37_unwanted_visitors.lua:7871
 #, lua-format
-msgctxt "trade-comms"
-msgid "Buy one %s for %i reputation"
+msgctxt "stationAssist-comms"
+msgid "We have dispatched %s to assist at waypoint %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9084
+#: scripts/scenario_37_unwanted_visitors.lua:7839
 #, lua-format
-msgctxt "trade-comms"
-msgid "Type: %s, Quantity: %i, Reputation: %i"
+msgctxt "stationAssist-comms"
+msgid "Please send Phobos T3 reinforcements! (%s reputation)"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9094
-msgctxt "trade-comms"
-msgid ""
-"\n"
-"Insufficient cargo space for purchase"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:9103
-#: scripts/scenario_37_unwanted_visitors.lua:9133
-msgctxt "needRep-comms"
-msgid ""
-"\n"
-"Insufficient reputation for purchase"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:9109
-#: scripts/scenario_37_unwanted_visitors.lua:9202
-#: scripts/scenario_37_unwanted_visitors.lua:9247
-#: scripts/scenario_37_unwanted_visitors.lua:9292
-msgctxt "trade-comms"
-msgid ""
-"\n"
-"Insufficient station inventory"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:9128
-msgctxt "trade-comms"
-msgid ""
-"\n"
-"purchased"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:9153
+#: scripts/scenario_37_unwanted_visitors.lua:7863
 #, lua-format
-msgctxt "trade-comms"
-msgid "Sell one %s for %i reputation"
+msgctxt "stationAssist-comms"
+msgid "Please send Stalker Q7 reinforcements! (%s reputation)"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9162
-#, lua-format
-msgctxt "trade-comms"
-msgid "Type: %s,  Reputation price: %i"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:9171
-msgctxt "trade-comms"
-msgid ""
-"\n"
-"One sold"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:9189
-#, lua-format
-msgctxt "trade-comms"
-msgid "Trade food for %s"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:9194
-#: scripts/scenario_37_unwanted_visitors.lua:9239
-#: scripts/scenario_37_unwanted_visitors.lua:9284
-#, lua-format
-msgctxt "trade-comms"
-msgid "Type: %s,  Quantity: %i"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:9217
-#: scripts/scenario_37_unwanted_visitors.lua:9262
-#: scripts/scenario_37_unwanted_visitors.lua:9307
-msgctxt "trade-comms"
-msgid ""
-"\n"
-"Traded"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:9234
-#, lua-format
-msgctxt "trade-comms"
-msgid "Trade medicine for %s"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:9279
-#: scripts/scenario_37_unwanted_visitors.lua:11589
-#, lua-format
-msgctxt "trade-comms"
-msgid "Trade luxury for %s"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:9320
-msgctxt "explainGoods-comms"
-msgid "No tutorial covered goods or cargo. Explain"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:9326
-msgctxt "explainGoods-comms"
-msgid ""
-"Different types of cargo or goods may be obtained from stations, freighters "
-"or other sources. They go by one word descriptions such as dilithium, optic, "
-"warp, etc. Certain mission goals may require a particular type or types of "
-"cargo. Each player ship differs in cargo carrying capacity. Goods may be "
-"obtained by spending reputation points or by trading other types of cargo "
-"(typically food, medicine or luxury)"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:9339
+#: scripts/scenario_37_unwanted_visitors.lua:7890
 msgctxt "cartographyOffice-comms"
 msgid ""
 "Greetings,\n"
 "May I help you find a station or goods?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9342
+#: scripts/scenario_37_unwanted_visitors.lua:7893
 msgctxt "cartographyOffice-comms"
 msgid "Find station"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9343
+#: scripts/scenario_37_unwanted_visitors.lua:7894
 msgctxt "cartographyOffice-comms"
 msgid "What station?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9356
-#: scripts/scenario_37_unwanted_visitors.lua:9486
+#: scripts/scenario_37_unwanted_visitors.lua:7907
+#: scripts/scenario_37_unwanted_visitors.lua:8037
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid "%s %s %s Distance:%.1fU"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9427
-#: scripts/scenario_37_unwanted_visitors.lua:9549
+#: scripts/scenario_37_unwanted_visitors.lua:7978
+#: scripts/scenario_37_unwanted_visitors.lua:8100
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid ""
@@ -2778,8 +2206,8 @@ msgid ""
 "Added waypoint %i to your navigation system for %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9437
-#: scripts/scenario_37_unwanted_visitors.lua:9559
+#: scripts/scenario_37_unwanted_visitors.lua:7988
+#: scripts/scenario_37_unwanted_visitors.lua:8110
 #, lua-format
 msgctxt "cartographyOffice-comms"
 msgid ""
@@ -2787,38 +2215,38 @@ msgid ""
 "Note: this waypoint will be out of date shortly since %s is in motion"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9454
+#: scripts/scenario_37_unwanted_visitors.lua:8005
 msgctxt "cartographyOffice-comms"
 msgid "Try the apprentice, I'm tired"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9460
+#: scripts/scenario_37_unwanted_visitors.lua:8011
 msgctxt "cartographyOffice-comms"
 msgid "Find Goods"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9462
+#: scripts/scenario_37_unwanted_visitors.lua:8013
 msgctxt "cartographyOffice-comms"
 msgid "What goods are you looking for?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9620
+#: scripts/scenario_37_unwanted_visitors.lua:8161
 msgctxt "statistics-comms"
 msgid "Show me the current statistics, please"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9623
+#: scripts/scenario_37_unwanted_visitors.lua:8164
 msgctxt "statistics-comms"
 msgid "What would you like statistics on?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9630
+#: scripts/scenario_37_unwanted_visitors.lua:8171
 msgctxt "statistics-comms"
 msgid "Human Stations Destroyed"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9647
-#: scripts/scenario_37_unwanted_visitors.lua:9679
+#: scripts/scenario_37_unwanted_visitors.lua:8188
+#: scripts/scenario_37_unwanted_visitors.lua:8220
 #, lua-format
 msgctxt "statistics-comms"
 msgid ""
@@ -2826,19 +2254,19 @@ msgid ""
 "   Station Name, Strength"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9662
+#: scripts/scenario_37_unwanted_visitors.lua:8203
 msgctxt "statistics-comms"
 msgid "Neutral Stations Destroyed"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9694
+#: scripts/scenario_37_unwanted_visitors.lua:8235
 msgctxt "statistics-comms"
 msgid "Kraylor Vessels Destroyed"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9712
-#: scripts/scenario_37_unwanted_visitors.lua:9745
-#: scripts/scenario_37_unwanted_visitors.lua:9778
+#: scripts/scenario_37_unwanted_visitors.lua:8253
+#: scripts/scenario_37_unwanted_visitors.lua:8286
+#: scripts/scenario_37_unwanted_visitors.lua:8319
 #, lua-format
 msgctxt "statistics-comms"
 msgid ""
@@ -2846,127 +2274,38 @@ msgid ""
 "   Vessel Name, Type, Strength"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9727
+#: scripts/scenario_37_unwanted_visitors.lua:8268
 msgctxt "statistics-comms"
 msgid "Exuari Vessels Destroyed"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9760
+#: scripts/scenario_37_unwanted_visitors.lua:8301
 msgctxt "statistics-comms"
 msgid "Arlenian Vessels Destroyed"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9789
+#: scripts/scenario_37_unwanted_visitors.lua:8330
 msgctxt "statistics-comms"
 msgid "Missions completed"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9796
+#: scripts/scenario_37_unwanted_visitors.lua:8337
 #, lua-format
 msgctxt "statistics-comms"
 msgid "Missions completed so far: %i"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9805
+#: scripts/scenario_37_unwanted_visitors.lua:8346
 msgctxt "statistics-comms"
 msgid "No missions completed yet"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:9835
-msgctxt "station-comms"
-msgid "You need to stay docked for that action."
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:9844
-msgctxt "ammo-comms"
-msgid "We do not deal in weapons of mass destruction."
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:9849
-msgctxt "ammo-comms"
-msgid "We do not deal in weapons of mass disruption."
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:9852
-msgctxt "ammo-comms"
-msgid "We do not deal in those weapons."
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:9866
-msgctxt "ammo-comms"
-msgid "All nukes are charged and primed for destruction."
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:9873
-msgctxt "ammo-comms"
-msgid "Sorry, sir, but you are as fully stocked as I can allow."
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:9897
-#: scripts/scenario_37_unwanted_visitors.lua:9933
-msgctxt "ammo-comms"
-msgid "You are fully loaded and ready to explode things."
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:9904
-msgctxt "ammo-comms"
-msgid ""
-"We generously resupplied you with some weapon charges.\n"
-"Put them to good use."
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:9909
-#: scripts/scenario_37_unwanted_visitors.lua:9946
-#: scripts/scenario_37_unwanted_visitors.lua:9952
-msgctxt "needRep-comms"
-msgid "Not enough reputation."
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:9917
-msgctxt "ammo-comms"
-msgid "You can't afford as much as I'd like to give you"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:9920
-msgctxt "ammo-comms"
-msgid "Get just one"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:9940
-msgctxt "ammo-comms"
-msgid ""
-"We generously resupplied you with one weapon charge.\n"
-"Put it to good use."
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:9975
-msgctxt "station-comms"
-msgid ""
-"Good day, officer.\n"
-"If you need supplies, please dock with us first."
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:9980
-msgctxt "station-comms"
-msgid ""
-"Greetings.\n"
-"If you want to do business, please dock with us first."
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:9987
-msgctxt "station-comms"
-msgid ""
-"\n"
-"Be aware that if enemies in the area get much closer, we will be too busy to "
-"conduct business with you."
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:9997
+#: scripts/scenario_37_unwanted_visitors.lua:8363
 msgctxt "Polly-comms"
 msgid "Contact astronomer Polly Hobbs"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:10002
+#: scripts/scenario_37_unwanted_visitors.lua:8367
 msgctxt "Polly-comms"
 msgid ""
 "[Polly Hobbs] I've constructed a sensitive scanning device to gather "
@@ -2974,270 +2313,31 @@ msgid ""
 "transport me closer to the location of the readings?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:10010
-msgctxt "station-comms"
-msgid "I need information"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10012
-msgctxt "station-comms"
-msgid "What kind of information do you need?"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10118
-msgctxt "ammo-comms"
-msgid "What ordnance do you have available for restock?"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10126
-msgctxt "ammo-comms"
-msgid ""
-"\n"
-"   Nuke"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10131
-msgctxt "ammo-comms"
-msgid ""
-"\n"
-"   EMP"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10136
-msgctxt "ammo-comms"
-msgid ""
-"\n"
-"   Homing"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10141
-msgctxt "ammo-comms"
-msgid ""
-"\n"
-"   Mine"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10146
-msgctxt "ammo-comms"
-msgid ""
-"\n"
-"   HVLI"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10151
-msgctxt "ammo-comms"
-msgid "We have no ordnance available for restock"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10157
-#, lua-format
-msgctxt "ammo-comms"
-msgid "We have the following type of ordnance available for restock:%s"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10165
-#, lua-format
-msgctxt "ammo-comms"
-msgid "We have the following types of ordnance available for restock:%s"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10186
-msgctxt "trade-comms"
-msgid "What goods do you have available for sale or trade?"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10193
-#, lua-format
-msgctxt "trade-comms"
-msgid ""
-"Station %s:\n"
-"Goods or components available: quantity, cost in reputation"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10200
-#, lua-format
-msgctxt "trade-comms"
-msgid ""
-"\n"
-"   %14s: %2i, %3i"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10212
-msgctxt "trade-comms"
-msgid "Where can I find particular goods?"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10217
-msgctxt "trade-comms"
-msgid ""
-"Friendly stations often have food or medicine or both. Neutral stations may "
-"trade their goods for food, medicine or luxury."
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10266
-#, lua-format
-msgctxt "trade-comms"
-msgid "Station %s in sector %s has %s for %i reputation"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10281
-msgctxt "trade-comms"
-msgid ""
-"\n"
-"\n"
-"What goods are you interested in?\n"
-"I've heard about these:"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10287
-msgctxt "trade-comms"
-msgid " Beyond that, I have no knowledge of specific stations"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10333
-msgctxt "stationAssist-comms"
-msgid "Report status"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10335
-#, lua-format
-msgctxt "stationAssist-comms"
-msgid "Hull: %d%%\n"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10342
-#, lua-format
-msgctxt "stationpAssist-comms"
-msgid "Shield: %d%%\n"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10353
-#, lua-format
-msgctxt "stationAssist-comms"
-msgid "Shield %s: %d%%\n"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10372
-#, lua-format
-msgctxt "stationAssist-comms"
-msgid "Can you send a supply drop? (%s reputation)"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10381
-msgctxt "stationAssist-comms"
-msgid "You need to set a waypoint before you can request backup."
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10388
-msgctxt "stationAssist-comms"
-msgid "To which waypoint should we deliver your supplies?"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10394
-#: scripts/scenario_37_unwanted_visitors.lua:10473
-#: scripts/scenario_37_unwanted_visitors.lua:10548
-#: scripts/scenario_37_unwanted_visitors.lua:10623
-#, lua-format
-msgctxt "stationAssist-comms"
-msgid "Waypoint %s"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10424
-#, lua-format
-msgctxt "stationAssist-comms"
-msgid "We have dispatched a supply ship toward waypoint %s"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10451
-#, lua-format
-msgctxt "stationAssist-comms"
-msgid "Please send Adder MK5 reinforcements! (%s reputation)"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10460
-#: scripts/scenario_37_unwanted_visitors.lua:10535
-#: scripts/scenario_37_unwanted_visitors.lua:10610
-msgctxt "stationAssist-comms"
-msgid "You need to set a waypoint before you can request reinforcements."
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10467
-#: scripts/scenario_37_unwanted_visitors.lua:10542
-#: scripts/scenario_37_unwanted_visitors.lua:10617
-msgctxt "stationAssist-comms"
-msgid "To which waypoint should we dispatch the reinforcements?"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10500
-#: scripts/scenario_37_unwanted_visitors.lua:10575
-#: scripts/scenario_37_unwanted_visitors.lua:10650
-#, lua-format
-msgctxt "stationAssist-comms"
-msgid "We have dispatched %s to assist at waypoint %s"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10526
-#, lua-format
-msgctxt "stationAssist-comms"
-msgid "Please send Phobos T3 reinforcements! (%s reputation)"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10601
-#, lua-format
-msgctxt "stationAssist-comms"
-msgid "Please send Stalker Q7 reinforcements! (%s reputation)"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10711
-msgctxt "trade-comms"
-msgid " and will trade it for medicine"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10717
-msgctxt "trade-comms"
-msgid " or food"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10722
-msgctxt "trade-comms"
-msgid " and will trade it for food"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10730
-msgctxt "trade-comms"
-msgid " or luxury"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10735
-msgctxt "trade-comms"
-msgid " and will trade it for luxury"
-msgstr ""
-
-#: scripts/scenario_37_unwanted_visitors.lua:10759
+#: scripts/scenario_37_unwanted_visitors.lua:8377
 msgctxt "scienceDB"
 msgid "Stations"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:10769
+#: scripts/scenario_37_unwanted_visitors.lua:8387
 msgctxt "scienceDB"
 msgid "Friendly"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:10777
+#: scripts/scenario_37_unwanted_visitors.lua:8395
 msgctxt "scienceDB"
 msgid ""
 "Friendly stations share their short range telemetry with your ship on the "
 "Relay and Strategic Map consoles. These are the known friendly stations."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:10798
+#: scripts/scenario_37_unwanted_visitors.lua:8416
 msgctxt "scienceDB"
 msgid ""
 "Neutral stations don't share their short range telemetry with your ship, but "
 "they do allow for docking. These are the known neutral stations."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:10822
+#: scripts/scenario_37_unwanted_visitors.lua:8440
 #, lua-format
 msgctxt "scienceDB"
 msgid ""
@@ -3246,7 +2346,7 @@ msgid ""
 "General Information: %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:10832
+#: scripts/scenario_37_unwanted_visitors.lua:8450
 #, lua-format
 msgctxt "scienceDB"
 msgid ""
@@ -3255,370 +2355,370 @@ msgid ""
 "History: %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:10843
+#: scripts/scenario_37_unwanted_visitors.lua:8461
 msgctxt "scienceDB"
 msgid "Small Station"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:10844
+#: scripts/scenario_37_unwanted_visitors.lua:8462
 msgctxt "scienceDB"
 msgid "Medium Station"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:10845
+#: scripts/scenario_37_unwanted_visitors.lua:8463
 msgctxt "scienceDB"
 msgid "Large Station"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:10846
+#: scripts/scenario_37_unwanted_visitors.lua:8464
 msgctxt "scienceDB"
 msgid "Huge Station"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:10848
+#: scripts/scenario_37_unwanted_visitors.lua:8466
 msgctxt "scienceDB"
 msgid "Small"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:10856
+#: scripts/scenario_37_unwanted_visitors.lua:8474
 msgctxt "scienceDB"
 msgid "Medium"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:10864
+#: scripts/scenario_37_unwanted_visitors.lua:8482
 msgctxt "scienceDB"
 msgid "Large"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:10872
+#: scripts/scenario_37_unwanted_visitors.lua:8490
 msgctxt "scienceDB"
 msgid "Huge"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:10880
+#: scripts/scenario_37_unwanted_visitors.lua:8498
 msgctxt "scienceDB"
 msgid "Size"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:10908
-#: scripts/scenario_37_unwanted_visitors.lua:10919
-#: scripts/scenario_37_unwanted_visitors.lua:10930
-#: scripts/scenario_37_unwanted_visitors.lua:10950
-#: scripts/scenario_37_unwanted_visitors.lua:10974
+#: scripts/scenario_37_unwanted_visitors.lua:8526
+#: scripts/scenario_37_unwanted_visitors.lua:8537
+#: scripts/scenario_37_unwanted_visitors.lua:8548
+#: scripts/scenario_37_unwanted_visitors.lua:8568
+#: scripts/scenario_37_unwanted_visitors.lua:8592
 msgctxt "scienceDB"
 msgid "Faction"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:10910
-#: scripts/scenario_37_unwanted_visitors.lua:10921
+#: scripts/scenario_37_unwanted_visitors.lua:8528
+#: scripts/scenario_37_unwanted_visitors.lua:8539
 msgctxt "scienceDB"
 msgid "Orbit around"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:10914
+#: scripts/scenario_37_unwanted_visitors.lua:8532
 #, lua-format
 msgctxt "scienceDB"
 msgid "Star %s in inner asteroid belt"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:10925
+#: scripts/scenario_37_unwanted_visitors.lua:8543
 #, lua-format
 msgctxt "scienceDB"
 msgid "Star %s in outer asteroid belt"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:10932
-#: scripts/scenario_37_unwanted_visitors.lua:10952
-#: scripts/scenario_37_unwanted_visitors.lua:10976
+#: scripts/scenario_37_unwanted_visitors.lua:8550
+#: scripts/scenario_37_unwanted_visitors.lua:8570
+#: scripts/scenario_37_unwanted_visitors.lua:8594
 msgctxt "scienceDB"
 msgid "Primary orbit"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:10936
-#: scripts/scenario_37_unwanted_visitors.lua:10956
-#: scripts/scenario_37_unwanted_visitors.lua:10980
+#: scripts/scenario_37_unwanted_visitors.lua:8554
+#: scripts/scenario_37_unwanted_visitors.lua:8574
+#: scripts/scenario_37_unwanted_visitors.lua:8598
 #, lua-format
 msgctxt "scienceDB"
 msgid "Around planet %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:10940
-#: scripts/scenario_37_unwanted_visitors.lua:10960
-#: scripts/scenario_37_unwanted_visitors.lua:10984
+#: scripts/scenario_37_unwanted_visitors.lua:8558
+#: scripts/scenario_37_unwanted_visitors.lua:8578
+#: scripts/scenario_37_unwanted_visitors.lua:8602
 msgctxt "scienceDB"
 msgid "Secondary orbit"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:10944
-#: scripts/scenario_37_unwanted_visitors.lua:10964
-#: scripts/scenario_37_unwanted_visitors.lua:10988
+#: scripts/scenario_37_unwanted_visitors.lua:8562
+#: scripts/scenario_37_unwanted_visitors.lua:8582
+#: scripts/scenario_37_unwanted_visitors.lua:8606
 #, lua-format
 msgctxt "scienceDB"
 msgid "Planet %s orbits star %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:10994
+#: scripts/scenario_37_unwanted_visitors.lua:8612
 msgctxt "scienceDB"
 msgid "Location, Faction"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:10998
+#: scripts/scenario_37_unwanted_visitors.lua:8616
 #, lua-format
 msgctxt "scienceDB"
 msgid "%s, %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11008
+#: scripts/scenario_37_unwanted_visitors.lua:8626
 msgctxt "scienceDB"
 msgid "share energy"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11013
+#: scripts/scenario_37_unwanted_visitors.lua:8631
 msgctxt "scienceDB"
 msgid "repair hull"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11016
+#: scripts/scenario_37_unwanted_visitors.lua:8634
 #, lua-format
 msgctxt "scienceDB"
 msgid "%s, repair hull"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11022
+#: scripts/scenario_37_unwanted_visitors.lua:8640
 msgctxt "scienceDB"
 msgid "replenish probes"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11025
+#: scripts/scenario_37_unwanted_visitors.lua:8643
 #, lua-format
 msgctxt "scienceDB"
 msgid "%s, replenish probes"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11032
+#: scripts/scenario_37_unwanted_visitors.lua:8650
 msgctxt "scienceDB"
 msgid "Docking Services"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11034
+#: scripts/scenario_37_unwanted_visitors.lua:8652
 msgctxt "scienceDB"
 msgid "Docking Service"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11056
+#: scripts/scenario_37_unwanted_visitors.lua:8674
 msgctxt "scienceDB"
 msgid "Restock Homing"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11057
+#: scripts/scenario_37_unwanted_visitors.lua:8675
 msgctxt "scienceDB"
 msgid "Restock HVLI"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11058
+#: scripts/scenario_37_unwanted_visitors.lua:8676
 msgctxt "scienceDB"
 msgid "Restock Mine"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11059
+#: scripts/scenario_37_unwanted_visitors.lua:8677
 msgctxt "scienceDB"
 msgid "Restock Nuke"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11060
+#: scripts/scenario_37_unwanted_visitors.lua:8678
 msgctxt "scienceDB"
 msgid "Restock EMP"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11066
+#: scripts/scenario_37_unwanted_visitors.lua:8684
 #, lua-format
 msgctxt "scienceDB"
 msgid "%i reputation each"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11081
+#: scripts/scenario_37_unwanted_visitors.lua:8699
 msgctxt "scienceDB"
 msgid "Drop supplies"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11085
+#: scripts/scenario_37_unwanted_visitors.lua:8703
 msgctxt "scienceDB"
 msgid "Standard reinforcements"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11089
+#: scripts/scenario_37_unwanted_visitors.lua:8707
 msgctxt "scienceDB"
 msgid "Hornet reinforcements"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11093
+#: scripts/scenario_37_unwanted_visitors.lua:8711
 msgctxt "scienceDB"
 msgid "Phobos reinforcements"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11097
+#: scripts/scenario_37_unwanted_visitors.lua:8715
 msgctxt "scienceDB"
 msgid "Adder3 reinforcements"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11101
+#: scripts/scenario_37_unwanted_visitors.lua:8719
 msgctxt "scienceDB"
 msgid "Adder8 reinforcements"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11105
+#: scripts/scenario_37_unwanted_visitors.lua:8723
 msgctxt "scienceDB"
 msgid "Shield overcharge"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11112
+#: scripts/scenario_37_unwanted_visitors.lua:8730
 #, lua-format
 msgctxt "scienceDB"
 msgid "%s reputation"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11124
+#: scripts/scenario_37_unwanted_visitors.lua:8742
 #, lua-format
 msgctxt "scienceDB"
 msgid "Sells %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11126
+#: scripts/scenario_37_unwanted_visitors.lua:8744
 #, lua-format
 msgctxt "scienceDB"
 msgid "for %s reputation each"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11179
+#: scripts/scenario_37_unwanted_visitors.lua:8771
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11181
+#: scripts/scenario_37_unwanted_visitors.lua:8773
 msgctxt "shipAssist-comms"
 msgid "Sir, how can we assist?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11183
-#: scripts/scenario_37_unwanted_visitors.lua:11512
+#: scripts/scenario_37_unwanted_visitors.lua:8775
+#: scripts/scenario_37_unwanted_visitors.lua:9104
 msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11188
-#: scripts/scenario_37_unwanted_visitors.lua:11518
+#: scripts/scenario_37_unwanted_visitors.lua:8780
+#: scripts/scenario_37_unwanted_visitors.lua:9110
 msgctxt "shipAssist-comms"
 msgid "No waypoints set. Please set a waypoint first."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11194
-#: scripts/scenario_37_unwanted_visitors.lua:11526
+#: scripts/scenario_37_unwanted_visitors.lua:8786
+#: scripts/scenario_37_unwanted_visitors.lua:9118
 msgctxt "shipAssist-comms"
 msgid "Which waypoint should we defend?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11199
-#: scripts/scenario_37_unwanted_visitors.lua:11534
+#: scripts/scenario_37_unwanted_visitors.lua:8791
+#: scripts/scenario_37_unwanted_visitors.lua:9126
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend waypoint %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11210
-#: scripts/scenario_37_unwanted_visitors.lua:11557
+#: scripts/scenario_37_unwanted_visitors.lua:8802
+#: scripts/scenario_37_unwanted_visitors.lua:9149
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at waypoint %s."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11222
-#: scripts/scenario_37_unwanted_visitors.lua:11492
+#: scripts/scenario_37_unwanted_visitors.lua:8814
+#: scripts/scenario_37_unwanted_visitors.lua:9084
 msgctxt "shipAssist-comms"
 msgid "Assist me"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11224
+#: scripts/scenario_37_unwanted_visitors.lua:8816
 msgctxt "shipAssist-comms"
 msgid "Heading toward you to assist."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11230
+#: scripts/scenario_37_unwanted_visitors.lua:8822
 msgctxt "shipAssist-comms"
 msgid "Report status"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11232
+#: scripts/scenario_37_unwanted_visitors.lua:8824
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Hull: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11239
+#: scripts/scenario_37_unwanted_visitors.lua:8831
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11249
+#: scripts/scenario_37_unwanted_visitors.lua:8841
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Front Shield: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11258
+#: scripts/scenario_37_unwanted_visitors.lua:8850
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Rear Shield: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11269
+#: scripts/scenario_37_unwanted_visitors.lua:8861
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield %s: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11284
+#: scripts/scenario_37_unwanted_visitors.lua:8876
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s Missiles: %d/%d\n"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11302
+#: scripts/scenario_37_unwanted_visitors.lua:8894
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11308
+#: scripts/scenario_37_unwanted_visitors.lua:8900
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Docking at %s."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11321
+#: scripts/scenario_37_unwanted_visitors.lua:8913
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Direct %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11329
+#: scripts/scenario_37_unwanted_visitors.lua:8921
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "What command should be given to %s?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11335
+#: scripts/scenario_37_unwanted_visitors.lua:8927
 msgctxt "shipAssist-comms"
 msgid "Report hull and shield status"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11337
+#: scripts/scenario_37_unwanted_visitors.lua:8929
 msgctxt "shipAssist-comms"
 msgid "Fleet status:"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11346
-#: scripts/scenario_37_unwanted_visitors.lua:11443
+#: scripts/scenario_37_unwanted_visitors.lua:8938
+#: scripts/scenario_37_unwanted_visitors.lua:9035
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
@@ -3626,7 +2726,7 @@ msgid ""
 " %s:"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11353
+#: scripts/scenario_37_unwanted_visitors.lua:8945
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
@@ -3634,7 +2734,7 @@ msgid ""
 "    Hull: %d%%"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11367
+#: scripts/scenario_37_unwanted_visitors.lua:8959
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
@@ -3642,36 +2742,36 @@ msgid ""
 "    Shield: %d%%"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11379
+#: scripts/scenario_37_unwanted_visitors.lua:8971
 msgctxt "shipAssist-comms"
 msgid ""
 "\n"
 "    Shields: "
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11386
+#: scripts/scenario_37_unwanted_visitors.lua:8978
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Front: %d%% Rear: %d%%"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11409
+#: scripts/scenario_37_unwanted_visitors.lua:9001
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid " %d:%d%%"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11432
+#: scripts/scenario_37_unwanted_visitors.lua:9024
 msgctxt "shipAssist-comms"
 msgid "Report missile status"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11434
+#: scripts/scenario_37_unwanted_visitors.lua:9026
 msgctxt "shipAssist-comms"
 msgid "Fleet missile status:"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11460
+#: scripts/scenario_37_unwanted_visitors.lua:9052
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
@@ -3679,7 +2779,7 @@ msgid ""
 "      %s: %d/%d"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11481
+#: scripts/scenario_37_unwanted_visitors.lua:9073
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid ""
@@ -3687,84 +2787,104 @@ msgid ""
 "    Missiles: %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11504
+#: scripts/scenario_37_unwanted_visitors.lua:9096
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s heading toward you to assist"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11609
+#: scripts/scenario_37_unwanted_visitors.lua:9181
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade luxury for %s"
+msgstr ""
+
+#: scripts/scenario_37_unwanted_visitors.lua:9201
 #, lua-format
 msgctxt "trade-comms"
 msgid "Traded your luxury for %s from %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11656
-#: scripts/scenario_37_unwanted_visitors.lua:11717
-#: scripts/scenario_37_unwanted_visitors.lua:11772
-#: scripts/scenario_37_unwanted_visitors.lua:11834
-#: scripts/scenario_37_unwanted_visitors.lua:12113
-#: scripts/scenario_37_unwanted_visitors.lua:12168
-#: scripts/scenario_37_unwanted_visitors.lua:12228
-#: scripts/scenario_37_unwanted_visitors.lua:12283
-#: scripts/scenario_37_unwanted_visitors.lua:12343
+#: scripts/scenario_37_unwanted_visitors.lua:9221
+#: scripts/scenario_37_unwanted_visitors.lua:9280
+#: scripts/scenario_37_unwanted_visitors.lua:9335
+#: scripts/scenario_37_unwanted_visitors.lua:9397
+#: scripts/scenario_37_unwanted_visitors.lua:9676
+#: scripts/scenario_37_unwanted_visitors.lua:9731
+#: scripts/scenario_37_unwanted_visitors.lua:9791
+#: scripts/scenario_37_unwanted_visitors.lua:9846
+#: scripts/scenario_37_unwanted_visitors.lua:9906
+#, lua-format
+msgctxt "trade-comms"
+msgid "Buy one %s for %i reputation"
+msgstr ""
+
+#: scripts/scenario_37_unwanted_visitors.lua:9248
+#: scripts/scenario_37_unwanted_visitors.lua:9309
+#: scripts/scenario_37_unwanted_visitors.lua:9364
+#: scripts/scenario_37_unwanted_visitors.lua:9426
+#: scripts/scenario_37_unwanted_visitors.lua:9705
+#: scripts/scenario_37_unwanted_visitors.lua:9760
+#: scripts/scenario_37_unwanted_visitors.lua:9820
+#: scripts/scenario_37_unwanted_visitors.lua:9875
+#: scripts/scenario_37_unwanted_visitors.lua:9935
 #, lua-format
 msgctxt "trade-comms"
 msgid "Purchased %s from %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11666
-#: scripts/scenario_37_unwanted_visitors.lua:11727
-#: scripts/scenario_37_unwanted_visitors.lua:11782
-#: scripts/scenario_37_unwanted_visitors.lua:11844
+#: scripts/scenario_37_unwanted_visitors.lua:9258
+#: scripts/scenario_37_unwanted_visitors.lua:9319
+#: scripts/scenario_37_unwanted_visitors.lua:9374
+#: scripts/scenario_37_unwanted_visitors.lua:9436
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11858
-#: scripts/scenario_37_unwanted_visitors.lua:12049
+#: scripts/scenario_37_unwanted_visitors.lua:9450
+#: scripts/scenario_37_unwanted_visitors.lua:9641
 msgctxt "trade-comms"
 msgid "Do you have cargo you might sell?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11861
-#: scripts/scenario_37_unwanted_visitors.lua:12052
+#: scripts/scenario_37_unwanted_visitors.lua:9453
+#: scripts/scenario_37_unwanted_visitors.lua:9644
 msgctxt "trade-comms"
 msgid "We've got "
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11866
-#: scripts/scenario_37_unwanted_visitors.lua:12057
+#: scripts/scenario_37_unwanted_visitors.lua:9458
+#: scripts/scenario_37_unwanted_visitors.lua:9649
 msgctxt "trade-comms"
 msgid ", "
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11875
-#: scripts/scenario_37_unwanted_visitors.lua:12066
+#: scripts/scenario_37_unwanted_visitors.lua:9467
+#: scripts/scenario_37_unwanted_visitors.lua:9658
 msgctxt "trade-comms"
 msgid "nothing"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11891
+#: scripts/scenario_37_unwanted_visitors.lua:9483
 msgctxt "shipEnemy-comms"
 msgid ""
 "Ktzzzsss.\n"
 "You will DIEEee weaklingsss!"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11895
+#: scripts/scenario_37_unwanted_visitors.lua:9487
 msgctxt "shipEnemy-comms"
 msgid ""
 "We wish you no harm, but will harm you if we must.\n"
 "End of transmission."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11899
+#: scripts/scenario_37_unwanted_visitors.lua:9491
 msgctxt "shipEnemy-comms"
 msgid "Stay out of our way, or your death will amuse us extremely!"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11903
+#: scripts/scenario_37_unwanted_visitors.lua:9495
 msgctxt "shipEnemy-comms"
 msgid ""
 "One zero one.\n"
@@ -3775,7 +2895,7 @@ msgid ""
 "Communication halted."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11907
+#: scripts/scenario_37_unwanted_visitors.lua:9499
 msgctxt "shipEnemy-comms"
 msgid ""
 "The hive suffers no threats. Opposition to any of us is opposition to us "
@@ -3783,242 +2903,242 @@ msgid ""
 "Stand down or prepare to donate your corpses toward our nutrition."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11909
+#: scripts/scenario_37_unwanted_visitors.lua:9501
 msgctxt "shipEnemy-comms"
 msgid "State your business"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11912
+#: scripts/scenario_37_unwanted_visitors.lua:9504
 msgctxt "shipEnemy-comms"
 msgid "What do you want? (not that we care)"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11914
+#: scripts/scenario_37_unwanted_visitors.lua:9506
 msgctxt "shipEnemy-comms"
 msgid "Don't waste our time"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11915
+#: scripts/scenario_37_unwanted_visitors.lua:9507
 msgctxt "shipEnemy-comms"
 msgid "Mind your own business!"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11925
+#: scripts/scenario_37_unwanted_visitors.lua:9517
 msgctxt "shipEnemy-comms"
 msgid "We will destroy you"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11928
+#: scripts/scenario_37_unwanted_visitors.lua:9520
 msgctxt "shipEnemy-comms"
 msgid "We think not. It is you who will experience destruction!"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11932
-#: scripts/scenario_37_unwanted_visitors.lua:12021
+#: scripts/scenario_37_unwanted_visitors.lua:9524
+#: scripts/scenario_37_unwanted_visitors.lua:9613
 msgctxt "shipEnemy-comms"
 msgid "Your feeble threats are meaningless."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11936
+#: scripts/scenario_37_unwanted_visitors.lua:9528
 msgctxt "shipEnemy-comms"
 msgid "You have no honor"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11939
+#: scripts/scenario_37_unwanted_visitors.lua:9531
 msgctxt "shipEnemy-comms"
 msgid "Your insult has brought our wrath upon you. Prepare to die."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11943
+#: scripts/scenario_37_unwanted_visitors.lua:9535
 msgctxt "shipEnemy-comms"
 msgid "Your comments about honor have no meaning to us"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11947
+#: scripts/scenario_37_unwanted_visitors.lua:9539
 msgctxt "shipEnemy-comms"
 msgid "We pity your pathetic race"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11950
+#: scripts/scenario_37_unwanted_visitors.lua:9542
 msgctxt "shipEnemy-comms"
 msgid "Pathetic? You will regret your disparagement!"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11954
+#: scripts/scenario_37_unwanted_visitors.lua:9546
 msgctxt "shipEnemy-comms"
 msgid "We don't care what you think of us"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11960
+#: scripts/scenario_37_unwanted_visitors.lua:9552
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11963
+#: scripts/scenario_37_unwanted_visitors.lua:9555
 msgctxt "shipEnemy-comms"
 msgid "Rogue command received. Targeting source."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11965
+#: scripts/scenario_37_unwanted_visitors.lua:9557
 msgctxt "shipEnemy-comms"
 msgid "External command ignored."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11968
+#: scripts/scenario_37_unwanted_visitors.lua:9560
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: AUTOSHUTDOWN"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11971
+#: scripts/scenario_37_unwanted_visitors.lua:9563
 msgctxt "shipEnemy-comms"
 msgid "Target source of rogue command."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11975
+#: scripts/scenario_37_unwanted_visitors.lua:9567
 msgctxt "shipEnemy-comms"
 msgid "External command failed security check."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11983
+#: scripts/scenario_37_unwanted_visitors.lua:9575
 msgctxt "shipEnemy-comms"
 msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11987
+#: scripts/scenario_37_unwanted_visitors.lua:9579
 msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11991
+#: scripts/scenario_37_unwanted_visitors.lua:9583
 msgctxt "shipEnemy-comms"
 msgid "The hive has greater priorities than exterminating pests."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:11997
+#: scripts/scenario_37_unwanted_visitors.lua:9589
 msgctxt "shipEnemy-comms"
 msgid "Your queen tastes like elderberries"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:12001
+#: scripts/scenario_37_unwanted_visitors.lua:9593
 msgctxt "shipEnemy-comms"
 msgid "You will be destroyed for the honor of the hive."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:12005
+#: scripts/scenario_37_unwanted_visitors.lua:9597
 msgctxt "shipEnemy-comms"
 msgid "Maggots are beneath our notice."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:12013
+#: scripts/scenario_37_unwanted_visitors.lua:9605
 msgctxt "shipEnemy-comms"
 msgid "We will see to your destruction!"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:12017
+#: scripts/scenario_37_unwanted_visitors.lua:9609
 msgctxt "shipEnemy-comms"
 msgid "Your bloodline will end here!"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:12047
+#: scripts/scenario_37_unwanted_visitors.lua:9639
 msgctxt "trade-comms"
 msgid "Yes?"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:12371
+#: scripts/scenario_37_unwanted_visitors.lua:9963
 msgctxt "ship-comms"
 msgid ""
 "Sorry, we have no time to chat with you.\n"
 "We are on an important mission."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:12376
+#: scripts/scenario_37_unwanted_visitors.lua:9968
 msgctxt "ship-comms"
 msgid ""
 "We have nothing for you.\n"
 "Good day."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:12812
+#: scripts/scenario_37_unwanted_visitors.lua:10340
 msgctxt "repairCrew-msgEngineer"
 msgid "Medical team has revived one of your repair crew"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:12824
+#: scripts/scenario_37_unwanted_visitors.lua:10352
 msgctxt "repairCrew-msgEngineer+"
 msgid "Medical team has revived one of your repair crew"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:12836
+#: scripts/scenario_37_unwanted_visitors.lua:10364
 msgctxt "repairCrew-msgDamageControl"
 msgid "Medical team has revived one of your repair crew"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:12883
-#: scripts/scenario_37_unwanted_visitors.lua:12919
+#: scripts/scenario_37_unwanted_visitors.lua:10387
+#: scripts/scenario_37_unwanted_visitors.lua:10423
 msgctxt "repairCrew-msgEngineer"
 msgid "One of your repair crew has perished"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:12894
-#: scripts/scenario_37_unwanted_visitors.lua:12930
+#: scripts/scenario_37_unwanted_visitors.lua:10398
+#: scripts/scenario_37_unwanted_visitors.lua:10434
 msgctxt "repairCrew-msgEngineer+"
 msgid "One of your repair crew has perished"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:12905
-#: scripts/scenario_37_unwanted_visitors.lua:12941
+#: scripts/scenario_37_unwanted_visitors.lua:10409
+#: scripts/scenario_37_unwanted_visitors.lua:10445
 msgctxt "repairCrew-msgDamageControl"
 msgid "One of your repair crew has perished"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:12959
+#: scripts/scenario_37_unwanted_visitors.lua:10463
 msgctxt "coolant-msgEngineer"
 msgid "Damage has caused a loss of coolant"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:12970
+#: scripts/scenario_37_unwanted_visitors.lua:10474
 msgctxt "coolant-msgEngineer+"
 msgid "Damage has caused a loss of coolant"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:12981
+#: scripts/scenario_37_unwanted_visitors.lua:10485
 msgctxt "coolant-msgDamageControl"
 msgid "Damage has caused a loss of coolant"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:13011
+#: scripts/scenario_37_unwanted_visitors.lua:10515
 msgctxt "coolant-buttonEngineer"
 msgid "Get Coolant"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:13022
+#: scripts/scenario_37_unwanted_visitors.lua:10526
 msgctxt "coolant-buttonEngineer+"
 msgid "Get Coolant"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:13033
+#: scripts/scenario_37_unwanted_visitors.lua:10537
 msgctxt "coolant-buttonDamageControl"
 msgid "Get Coolant"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:13069
+#: scripts/scenario_37_unwanted_visitors.lua:10573
 #, lua-format
 msgctxt "coolant-tabEngineer"
 msgid "Configuring Collectors %i"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:13077
+#: scripts/scenario_37_unwanted_visitors.lua:10581
 #, lua-format
 msgctxt "coolant-tabEngineer"
 msgid "Deploying Collectors %i"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:13082
+#: scripts/scenario_37_unwanted_visitors.lua:10586
 msgctxt "coolant-tabEngineer"
 msgid "Gathering Coolant"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:13130
+#: scripts/scenario_37_unwanted_visitors.lua:10634
 #, lua-format
 msgctxt "marauders-shipLog"
 msgid ""
@@ -4026,13 +3146,13 @@ msgid ""
 "Exuari"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:13141
+#: scripts/scenario_37_unwanted_visitors.lua:10645
 #, lua-format
 msgctxt "marauders-comms"
 msgid "Remove Exuari near %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:13235
+#: scripts/scenario_37_unwanted_visitors.lua:10739
 #, lua-format
 msgctxt "DispatchOffice-shipLog"
 msgid ""
@@ -4040,47 +3160,47 @@ msgid ""
 "further orders"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:13244
-#: scripts/scenario_37_unwanted_visitors.lua:13527
-#: scripts/scenario_37_unwanted_visitors.lua:13719
-#: scripts/scenario_37_unwanted_visitors.lua:13963
-#: scripts/scenario_37_unwanted_visitors.lua:14312
-#: scripts/scenario_37_unwanted_visitors.lua:14403
-#: scripts/scenario_37_unwanted_visitors.lua:14559
-#: scripts/scenario_37_unwanted_visitors.lua:14802
+#: scripts/scenario_37_unwanted_visitors.lua:10748
+#: scripts/scenario_37_unwanted_visitors.lua:11031
+#: scripts/scenario_37_unwanted_visitors.lua:11223
+#: scripts/scenario_37_unwanted_visitors.lua:11467
+#: scripts/scenario_37_unwanted_visitors.lua:11816
+#: scripts/scenario_37_unwanted_visitors.lua:11907
+#: scripts/scenario_37_unwanted_visitors.lua:12063
+#: scripts/scenario_37_unwanted_visitors.lua:12306
 #, lua-format
 msgctxt "orders-comms"
 msgid "Dock with %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:13291
+#: scripts/scenario_37_unwanted_visitors.lua:10795
 msgctxt "Polly-buttonRelay"
 msgid "Polly Scan Time"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:13300
+#: scripts/scenario_37_unwanted_visitors.lua:10804
 msgctxt "Polly-shipLog"
 msgid "Scan complete"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:13309
+#: scripts/scenario_37_unwanted_visitors.lua:10813
 #, lua-format
 msgctxt "Polly-shipLog"
 msgid "%.1f seconds remain to be scanned"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:13320
+#: scripts/scenario_37_unwanted_visitors.lua:10824
 msgctxt "Polly-tabHelmTactical"
 msgid "Range"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:13323
+#: scripts/scenario_37_unwanted_visitors.lua:10827
 #, lua-format
 msgctxt "Polly-tabHelmTactical"
 msgid "In %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:13332
+#: scripts/scenario_37_unwanted_visitors.lua:10836
 #, lua-format
 msgctxt "Polly-shipLog"
 msgid ""
@@ -4089,30 +3209,30 @@ msgid ""
 "readings"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:13347
+#: scripts/scenario_37_unwanted_visitors.lua:10851
 msgctxt "Polly-shipLog"
 msgid "[Polly Hobbs] The data gathering phase is complete. Analyzing data."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:13358
+#: scripts/scenario_37_unwanted_visitors.lua:10862
 #, lua-format
 msgctxt "Polly-tabHelms&Tactical"
 msgid "Out of %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:13371
+#: scripts/scenario_37_unwanted_visitors.lua:10875
 #, lua-format
 msgctxt "Polly-shipLog"
 msgid "[Polly Hobbs] %.1f seconds remain to be scanned"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:13382
+#: scripts/scenario_37_unwanted_visitors.lua:10886
 #, lua-format
 msgctxt "Polly-tabHelms&Tactical"
 msgid "%s: %i"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:13430
+#: scripts/scenario_37_unwanted_visitors.lua:10934
 msgctxt "Polly-shipLog"
 msgid ""
 "[Polly Hobbs] Readings indicate that not only does this object not belong "
@@ -4120,7 +3240,7 @@ msgid ""
 "it are phasing in and out of our time continuum"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:13493
+#: scripts/scenario_37_unwanted_visitors.lua:10997
 msgctxt "Polly-shipLog"
 msgid ""
 "[Polly Hobbs] There was a surge of chroniton particles from the artifact "
@@ -4128,7 +3248,7 @@ msgid ""
 "released or transported by the artifact"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:13514
+#: scripts/scenario_37_unwanted_visitors.lua:11018
 msgctxt "Polly-shipLog"
 msgid ""
 "[Polly Hobbs] Those ships show time signatures from history. I'm not sure "
@@ -4136,13 +3256,13 @@ msgid ""
 "can on this phenomenon. Thank you for your assistance"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:13703
+#: scripts/scenario_37_unwanted_visitors.lua:11207
 #, lua-format
 msgctxt "planetologist-comms"
 msgid "Transport planetologist by docking with %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:13728
+#: scripts/scenario_37_unwanted_visitors.lua:11232
 msgctxt "planetologist-shipLog"
 msgid ""
 "Enrique Flogistan profusely thanked you as he dashed to his observation "
@@ -4151,56 +3271,56 @@ msgid ""
 "battery efficiency by ten percent"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:13738
+#: scripts/scenario_37_unwanted_visitors.lua:11242
 msgctxt "planetologist-msgMainscreen"
 msgid "Planetologist perished"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:13944
+#: scripts/scenario_37_unwanted_visitors.lua:11448
 msgctxt "satellites-shipLog"
 msgid ""
 "[Engineering Technician] For helping to fix their satellites, the satellite "
 "station technicians have doubled our impulse engine's top speed"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:13950
-#: scripts/scenario_37_unwanted_visitors.lua:14299
+#: scripts/scenario_37_unwanted_visitors.lua:11454
+#: scripts/scenario_37_unwanted_visitors.lua:11803
 #, lua-format
 msgctxt "orders-shipLog"
 msgid "Dock with %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14055
+#: scripts/scenario_37_unwanted_visitors.lua:11559
 #, lua-format
 msgctxt "marauders-comms"
 msgid "Protect %s from marauding Exuari"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14062
+#: scripts/scenario_37_unwanted_visitors.lua:11566
 #, lua-format
 msgctxt "marauders-comms"
 msgid "Protect %s in sector %s from marauding Exuari"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14085
-#: scripts/scenario_37_unwanted_visitors.lua:14122
-#: scripts/scenario_37_unwanted_visitors.lua:14222
-#: scripts/scenario_37_unwanted_visitors.lua:14247
-#: scripts/scenario_37_unwanted_visitors.lua:14319
+#: scripts/scenario_37_unwanted_visitors.lua:11589
+#: scripts/scenario_37_unwanted_visitors.lua:11626
+#: scripts/scenario_37_unwanted_visitors.lua:11726
+#: scripts/scenario_37_unwanted_visitors.lua:11751
+#: scripts/scenario_37_unwanted_visitors.lua:11823
 #, lua-format
 msgctxt "marauders-msgMainscreen"
 msgid "Station %s destroyed"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14147
-#: scripts/scenario_37_unwanted_visitors.lua:14180
+#: scripts/scenario_37_unwanted_visitors.lua:11651
+#: scripts/scenario_37_unwanted_visitors.lua:11684
 #, lua-format
 msgctxt "marauders-shipLog"
 msgid ""
 "[%s in %s] The Exuari are coming! We detected them on bearing %.1f from us."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14291
+#: scripts/scenario_37_unwanted_visitors.lua:11795
 #, lua-format
 msgctxt "marauders-shipLog"
 msgid ""
@@ -4208,46 +3328,46 @@ msgid ""
 "provided us details on improving our maneuvering speed."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14345
+#: scripts/scenario_37_unwanted_visitors.lua:11849
 #, lua-format
 msgctxt "pirates-shipLog"
 msgid "%s in %s reports Exuari pirates threatening them."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14356
+#: scripts/scenario_37_unwanted_visitors.lua:11860
 #, lua-format
 msgctxt "pirates-comms"
 msgid "Protect %s from Exuari pirates. Last reported in %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14370
+#: scripts/scenario_37_unwanted_visitors.lua:11874
 msgctxt "pirates-msgMainscreen"
 msgid "Transport destroyed"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14391
+#: scripts/scenario_37_unwanted_visitors.lua:11895
 #, lua-format
 msgctxt "pirates-shipLog"
 msgid "[%s] Thanks for dealing with those Exuari pirates"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14440
+#: scripts/scenario_37_unwanted_visitors.lua:11944
 #, lua-format
 msgctxt "virus-shipLog"
 msgid "[%s medical quartermaster] Anti-virus loaded aboard your ship"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14454
+#: scripts/scenario_37_unwanted_visitors.lua:11958
 msgctxt "virus-buttonRelay"
 msgid "Virus status"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14465
+#: scripts/scenario_37_unwanted_visitors.lua:11969
 msgctxt "virus-buttonOperations"
 msgid "Virus status"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14479
+#: scripts/scenario_37_unwanted_visitors.lua:11983
 #, lua-format
 msgctxt "virus-shipLog"
 msgid ""
@@ -4255,29 +3375,29 @@ msgid ""
 "Thanks %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14499
+#: scripts/scenario_37_unwanted_visitors.lua:12003
 msgctxt "virus-msgMainscreen"
 msgid "Pandemic"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14527
+#: scripts/scenario_37_unwanted_visitors.lua:12031
 msgctxt "virus-tabScience&Operations"
 msgid "Virus Fatality"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14530
+#: scripts/scenario_37_unwanted_visitors.lua:12034
 #, lua-format
 msgctxt "virus-tabScience&Operations"
 msgid "%s: %i"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14536
+#: scripts/scenario_37_unwanted_visitors.lua:12040
 #, lua-format
 msgctxt "virus-tabScience&Operations"
 msgid "%s: %i:%.2i"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14568
+#: scripts/scenario_37_unwanted_visitors.lua:12072
 #, lua-format
 msgctxt "virus-shipLog"
 msgid ""
@@ -4285,53 +3405,53 @@ msgid ""
 "orders"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14601
+#: scripts/scenario_37_unwanted_visitors.lua:12105
 msgctxt "virus-shipLog"
 msgid "First virus fatality in"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14604
+#: scripts/scenario_37_unwanted_visitors.lua:12108
 #, lua-format
 msgctxt "virus-shipLog"
 msgid "%s %.f seconds."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14610
+#: scripts/scenario_37_unwanted_visitors.lua:12114
 #, lua-format
 msgctxt "virus-shipLog"
 msgid "%s %i minutes."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14616
+#: scripts/scenario_37_unwanted_visitors.lua:12120
 msgctxt "virus-shipLog"
 msgid ". Stations needing anti-virus:"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14620
+#: scripts/scenario_37_unwanted_visitors.lua:12124
 #, lua-format
 msgctxt "virus-shipLog"
 msgid "%s %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14657
+#: scripts/scenario_37_unwanted_visitors.lua:12161
 #, lua-format
 msgctxt "targetInt-comms"
 msgid "Dock with %s in %s for Exuari intelligence"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14666
+#: scripts/scenario_37_unwanted_visitors.lua:12170
 #, lua-format
 msgctxt "targetInt-shipLog"
 msgid "Dock with %s in %s for Exuari intelligence"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14677
-#: scripts/scenario_37_unwanted_visitors.lua:14695
+#: scripts/scenario_37_unwanted_visitors.lua:12181
+#: scripts/scenario_37_unwanted_visitors.lua:12199
 msgctxt "targetInt-msgMainscreen"
 msgid "Exuari destroyed station"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14706
+#: scripts/scenario_37_unwanted_visitors.lua:12210
 #, lua-format
 msgctxt "targetInt-shipLog"
 msgid ""
@@ -4339,45 +3459,45 @@ msgid ""
 "for attack. Make sure they do not succeed"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14720
+#: scripts/scenario_37_unwanted_visitors.lua:12224
 #, lua-format
 msgctxt "targetInt-shipLog"
 msgid "Added waypoint %i to your navigation system for %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14795
+#: scripts/scenario_37_unwanted_visitors.lua:12299
 msgctxt "targetInt-shipLog"
 msgid "Looks like you thwarted that Exuari attack"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14813
+#: scripts/scenario_37_unwanted_visitors.lua:12317
 msgctxt "Exuari1-comms"
 msgid "Make a good showing for the Human Navy against the Exuari invasion"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14898
+#: scripts/scenario_37_unwanted_visitors.lua:12402
 msgctxt "Exuari2-comms"
 msgid ""
 "Find and eliminate the Exuari station that is sending all these ships after "
 "us"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14936
+#: scripts/scenario_37_unwanted_visitors.lua:12440
 msgctxt "Exuari2-msgMainscreen"
 msgid "Exuari stronghold destroyed"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:14982
+#: scripts/scenario_37_unwanted_visitors.lua:12486
 msgctxt "Exuari3-comms"
 msgid "Survive until the game time runs out"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:15007
+#: scripts/scenario_37_unwanted_visitors.lua:12511
 msgctxt "Exuari3-msgMainscreen"
 msgid "Survived Exuari Attacks"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:15060
+#: scripts/scenario_37_unwanted_visitors.lua:12564
 #, lua-format
 msgctxt "shipEnemy-incCall"
 msgid ""
@@ -4386,7 +3506,7 @@ msgid ""
 "observers. Live short and funny."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:15172
+#: scripts/scenario_37_unwanted_visitors.lua:12649
 #, lua-format
 msgctxt "satellites-comms"
 msgid ""
@@ -4394,13 +3514,13 @@ msgid ""
 "problems. See what you can do to help them out"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:15180
+#: scripts/scenario_37_unwanted_visitors.lua:12657
 #, lua-format
 msgctxt "orders-comms"
 msgid "Fix satellites orbiting %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:15190
+#: scripts/scenario_37_unwanted_visitors.lua:12667
 #, lua-format
 msgctxt "planetologist-comms"
 msgid ""
@@ -4409,13 +3529,13 @@ msgid ""
 "and transport the planetologist to %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:15197
+#: scripts/scenario_37_unwanted_visitors.lua:12674
 #, lua-format
 msgctxt "orders-comms"
 msgid "Transport planetologist from %s to %s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:15208
+#: scripts/scenario_37_unwanted_visitors.lua:12685
 #, lua-format
 msgctxt "Polly-comms"
 msgid ""
@@ -4425,35 +3545,35 @@ msgid ""
 "Solicit her assistance if she's willing"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:15215
+#: scripts/scenario_37_unwanted_visitors.lua:12692
 #, lua-format
 msgctxt "orders-comms"
 msgid "Dock with %s to investigate astronomer's unusual data"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:15225
+#: scripts/scenario_37_unwanted_visitors.lua:12702
 msgctxt "marauders-comms"
 msgid ""
 "Intelligence indicates an imminent attack by the Exuari on a station in the "
 "area. Your mission is to protect the station"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:15227
+#: scripts/scenario_37_unwanted_visitors.lua:12704
 msgctxt "orders-comms"
 msgid "Defend station from Exuari attack"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:15241
+#: scripts/scenario_37_unwanted_visitors.lua:12718
 msgctxt "pirates-comms"
 msgid "A transport reports Exuari pirates threatening them"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:15243
+#: scripts/scenario_37_unwanted_visitors.lua:12720
 msgctxt "orders-comms"
 msgid "Protect transport from Exuari pirates"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:15251
+#: scripts/scenario_37_unwanted_visitors.lua:12728
 #, lua-format
 msgctxt "virus-comms"
 msgid ""
@@ -4462,82 +3582,82 @@ msgid ""
 "needs to be delivered to all the stations quickly"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:15261
+#: scripts/scenario_37_unwanted_visitors.lua:12738
 #, lua-format
 msgctxt "orders-comms"
 msgid "Dock with %s to pick up anti-virus"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:15270
+#: scripts/scenario_37_unwanted_visitors.lua:12747
 msgctxt "targetInt-comms"
 msgid ""
 "We've picked up intelligence on the next Exuari attack. Check your ship log "
 "for details. Protect the target station."
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:15274
+#: scripts/scenario_37_unwanted_visitors.lua:12751
 msgctxt "orders-comms"
 msgid "Dock with designated station for Exuari intelligence"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:15306
+#: scripts/scenario_37_unwanted_visitors.lua:12783
 msgctxt "msgMainscreen"
 msgid "Critical station destroyed"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:15319
+#: scripts/scenario_37_unwanted_visitors.lua:12796
 msgctxt "msgMainscreen"
 msgid "Human stations destroyed: "
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:15340
-#: scripts/scenario_37_unwanted_visitors.lua:15368
-#: scripts/scenario_37_unwanted_visitors.lua:15396
-#: scripts/scenario_37_unwanted_visitors.lua:15424
-#: scripts/scenario_37_unwanted_visitors.lua:15452
+#: scripts/scenario_37_unwanted_visitors.lua:12817
+#: scripts/scenario_37_unwanted_visitors.lua:12845
+#: scripts/scenario_37_unwanted_visitors.lua:12873
+#: scripts/scenario_37_unwanted_visitors.lua:12901
+#: scripts/scenario_37_unwanted_visitors.lua:12929
 #, lua-format
 msgctxt "msgMainscreen"
 msgid " (total strength: %i)"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:15344
-#: scripts/scenario_37_unwanted_visitors.lua:15372
-#: scripts/scenario_37_unwanted_visitors.lua:15400
-#: scripts/scenario_37_unwanted_visitors.lua:15428
-#: scripts/scenario_37_unwanted_visitors.lua:15456
+#: scripts/scenario_37_unwanted_visitors.lua:12821
+#: scripts/scenario_37_unwanted_visitors.lua:12849
+#: scripts/scenario_37_unwanted_visitors.lua:12877
+#: scripts/scenario_37_unwanted_visitors.lua:12905
+#: scripts/scenario_37_unwanted_visitors.lua:12933
 msgctxt "msgMainscreen"
 msgid "none"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:15347
+#: scripts/scenario_37_unwanted_visitors.lua:12824
 msgctxt "msgMainscreen"
 msgid ""
 "\n"
 "Neutral stations destroyed: "
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:15375
+#: scripts/scenario_37_unwanted_visitors.lua:12852
 msgctxt "msgMainscreen"
 msgid ""
 "\n"
 "Kraylor vessels destroyed: "
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:15403
+#: scripts/scenario_37_unwanted_visitors.lua:12880
 msgctxt "msgMainscreen"
 msgid ""
 "\n"
 "Exuari vessels destroyed: "
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:15431
+#: scripts/scenario_37_unwanted_visitors.lua:12908
 msgctxt "msgMainscreen"
 msgid ""
 "\n"
 "Arlenian vessels destroyed: "
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:15460
+#: scripts/scenario_37_unwanted_visitors.lua:12937
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -4545,19 +3665,19 @@ msgid ""
 "Missions completed: %i"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:15469
+#: scripts/scenario_37_unwanted_visitors.lua:12946
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Optional missions completed: %s:%i"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:15475
+#: scripts/scenario_37_unwanted_visitors.lua:12952
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "%s, %s:%i"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:15485
+#: scripts/scenario_37_unwanted_visitors.lua:12962
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -4565,7 +3685,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#: scripts/scenario_37_unwanted_visitors.lua:15638
+#: scripts/scenario_37_unwanted_visitors.lua:13038
 msgctxt "centralcommand-incCall"
 msgid "Check with us or other friendly stations for mission orders."
 msgstr ""
