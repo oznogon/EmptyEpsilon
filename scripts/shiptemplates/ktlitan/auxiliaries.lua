@@ -5,7 +5,7 @@ such as construction, resource gathering, and repair.
 
 -- Ktlitan Worker
 local template = ShipTemplate()
-    :setName("Ktlitan Worker")
+    :setName(ST.KTLITAN_WORKER)
     :setLocaleName(_("ship", "Ktlitan Worker"))
     :setClass(_("class", "Auxiliary"), _("subclass", "Support"))
     :setModel("sci_fi_alien_ship_3")

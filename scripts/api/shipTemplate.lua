@@ -58,7 +58,7 @@ end
 --- Use Lua variables to apply several ShipTemplate functions to the same template.
 --- Example:
 --- -- Create a ShipTemplate for a Cruiser Frigate-class CpuShip designated Phobos T3
---- template = ShipTemplate():setName("Phobos T3"):setLocaleName(_("ship","Phobos T3")):setClass(_("class","Frigate"),_("subclass","Cruiser"))
+--- template = ShipTemplate():setName(ST.PHOBOS_T3):setLocaleName(_("ship","Phobos T3")):setClass(_("class","Frigate"),_("subclass","Cruiser"))
 --- -- Set the Phobos T3's appearance to the ModelData named "AtlasHeavyFighterYellow"
 --- template:setModel("AtlasHeavyFighterYellow")
 ShipTemplate = createClass()
@@ -81,7 +81,7 @@ end
 --- Use this value for referencing this ShipTemplate in scripts.
 --- If this value begins with "Player ", including the trailing space, EmptyEpsilon uses only what follows as the name.
 --- If this ShipTemplate lacks a localized name (ShipTemplate:setLocaleName()), it defaults to this reference name.
---- Example: template:setName("Phobos T3")
+--- Example: template:setName(ST.PHOBOS_T3)
 function ShipTemplate:setName(name)
     __ship_templates[name] = self
     self.typename = { type_name = name, localized = name }
@@ -874,8 +874,8 @@ end
 --- Example:
 --- -- Create two ShipTemplates: one with 50 hull points and one 50-point shield segment,
 --- -- and a second with 50 hull points and two 25-point shield segments.
---- template = ShipTemplate():setName("Stalker Q7"):setHull(50):setShields(50)
---- variation = template:copy("Stalker Q5"):setShields(25,25)
+--- template = ShipTemplate():setName(ST.STALKER_Q7):setHull(50):setShields(50)
+--- variation = template:copy(ST.STALKER_Q5):setShields(25,25)
 function ShipTemplate:copy(new_name)
     local copy = ShipTemplate()
     for orig_key, orig_value in next, self, nil do

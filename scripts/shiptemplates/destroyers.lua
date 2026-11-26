@@ -11,7 +11,7 @@ Destroyers have 2 or more shield sections and operate with a crew of 50 to 250.
 
 -- Atlantis X23
 local template = ShipTemplate()
-    :setName("Atlantis X23")
+    :setName(ST.ATLANTIS_X23)
     :setLocaleName(_("ship", "Atlantis X23"))
     :setClass(_("class", "Destroyer"), _("subclass", "Escort"))
     :setModel("battleship_destroyer_1_upgraded")
@@ -38,7 +38,7 @@ local template = ShipTemplate()
 
 -- Atlantis (PlayerControl variant)
 local variation = template
-    :copy("Atlantis")
+    :copy(ST.ATLANTIS)
     :setLocaleName(_("playerShip", "Atlantis"))
     :setType("playership")
     :setDescription(
@@ -97,7 +97,7 @@ The production-model Atlantis replaced its experimental X23 predecessor's large 
 
 -- Starhammer II
 template = ShipTemplate()
-    :setName("Starhammer II")
+    :setName(ST.STARHAMMER_II)
     :setLocaleName(_("ship", "Starhammer II"))
     :setClass(_("class", "Destroyer"), _("subclass", "Assault"))
     :setModel("battleship_destroyer_4_upgraded")
@@ -123,7 +123,7 @@ template = ShipTemplate()
 
 -- Crucible (PlayerControl ship)
 template = ShipTemplate()
-    :setName("Crucible")
+    :setName(ST.CRUCIBLE)
     :setLocaleName(_("playerShip", "Crucible"))
     :setClass(_("class", "Destroyer"), _("subclass", "Missile"))
     :setModel("LaserCorvetteRed")
@@ -185,7 +185,7 @@ template = ShipTemplate()
 
 -- Maverick (PlayerControl ship)
 template = ShipTemplate()
-    :setName("Maverick")
+    :setName(ST.MAVERICK)
     :setLocaleName(_("playerShip", "Maverick"))
     :setClass(_("class", "Destroyer"), _("subclass", "Gunner"))
     :setModel("LaserCorvetteGreen")

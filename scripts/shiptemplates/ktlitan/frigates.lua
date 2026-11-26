@@ -5,7 +5,7 @@ these ships fill scout, assault, and skirmish roles.
 
 -- Ktlitan Breaker
 local template = ShipTemplate()
-    :setName("Ktlitan Breaker")
+    :setName(ST.KTLITAN_BREAKER)
     :setLocaleName(_("ship", "Ktlitan Breaker"))
     :setClass(_("class", "Frigate"), _("subclass", "Assault"))
     :setModel("sci_fi_alien_ship_2")
@@ -20,7 +20,7 @@ local template = ShipTemplate()
 
 -- Ktlitan Drone
 template = ShipTemplate()
-    :setName("Ktlitan Drone")
+    :setName(ST.KTLITAN_DRONE)
     :setLocaleName(_("ship", "Ktlitan Drone"))
     :setClass(_("class", "Frigate"), _("subclass", "Scout"))
     :setModel("sci_fi_alien_ship_4")
@@ -31,7 +31,7 @@ template = ShipTemplate()
 
 -- Ktlitan Scout
 template = ShipTemplate()
-    :setName("Ktlitan Scout")
+    :setName(ST.KTLITAN_SCOUT)
     :setLocaleName(_("ship", "Ktlitan Scout"))
     :setClass(_("class", "Frigate"), _("subclass", "Scout"))
     :setModel("sci_fi_alien_ship_6")

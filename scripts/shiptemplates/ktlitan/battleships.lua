@@ -5,7 +5,7 @@ ship and a mobile hive, directing the swarm in battle.
 
 -- Ktlitan Queen
 local template = ShipTemplate()
-    :setName("Ktlitan Queen")
+    :setName(ST.KTLITAN_QUEEN)
     :setLocaleName(_("ship", "Ktlitan Queen"))
     :setClass(_("class", "Battleship"), _("subclass", "Command"))
     :setModel("sci_fi_alien_ship_8")

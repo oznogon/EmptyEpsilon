@@ -7,7 +7,7 @@ usually have no more than 2 shield segments.
 
 -- Nautilus (PlayerControl ship)
 local template = ShipTemplate()
-    :setName("Nautilus")
+    :setName(ST.NAUTILUS)
     :setLocaleName(_("playerShip", "Nautilus"))
     :setType("playership")
     :setClass(_("class", "Corvette"), _("subclass", "Mine layer"))
@@ -57,7 +57,7 @@ Point-defense beams grant it a modicum of self-defense, but a Nautilus largely r
 
 -- Karnack
 template = ShipTemplate()
-    :setName("Karnack")
+    :setName(ST.KARNACK)
     :setLocaleName(_("ship", "Karnack"))
     :setModel("small_frigate_4")
     :setClass(_("class", "Corvette"), _("subclass", "Patrol"))
@@ -77,7 +77,7 @@ Due to the design's age, most factions procure stripped-down versions, a practic
 
 -- Karnack MK2 (fka Cruiser)
 variation = template
-    :copy("Karnack MK2")
+    :copy(ST.KARNACK_MK2)
     :setLocaleName(_("ship", "Karnack MK2"))
     :setDescription(
         _(
@@ -90,7 +90,7 @@ variation = template
 
 -- Polaris (fka Missile Cruiser)
 template = ShipTemplate()
-    :setName("Polaris")
+    :setName(ST.POLARIS)
     :setLocaleName(_("ship", "Polaris"))
     :setModel("space_cruiser_4")
     :setClass(_("class", "Corvette"), _("subclass", "Missile"))
@@ -108,7 +108,7 @@ template = ShipTemplate()
 
 -- Gunship
 template = ShipTemplate()
-    :setName("Gunship")
+    :setName(ST.GUNSHIP)
     :setLocaleName(_("ship", "Gunship"))
     :setModel("battleship_destroyer_4_upgraded")
     :setClass(_("class", "Corvette"), _("subclass", "Gunship"))
@@ -128,7 +128,7 @@ template = ShipTemplate()
 
 -- Adv. Gunship
 variation = template
-    :copy("Adv. Gunship")
+    :copy(ST.ADV_GUNSHIP)
     :setLocaleName(_("ship", "Adv. Gunship"))
     :setDescription(
         _(

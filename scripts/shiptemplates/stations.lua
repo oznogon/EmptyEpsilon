@@ -1,7 +1,7 @@
 -- Space station templates
 
 local template = ShipTemplate()
-    :setName("Small Station")
+    :setName(ST.SMALL_STATION)
     :setLocaleName(_("Small Station"))
     :setModel("space_station_4")
     :setType("station")
@@ -15,7 +15,7 @@ local template = ShipTemplate()
     :setShields(300)
 
 template = ShipTemplate()
-    :setName("Medium Station")
+    :setName(ST.MEDIUM_STATION)
     :setLocaleName(_("Medium Station"))
     :setModel("space_station_3")
     :setType("station")
@@ -29,7 +29,7 @@ template = ShipTemplate()
     :setShields(800)
 
 template = ShipTemplate()
-    :setName("Large Station")
+    :setName(ST.LARGE_STATION)
     :setLocaleName(_("Large Station"))
     :setModel("space_station_2")
     :setType("station")
@@ -43,7 +43,7 @@ template = ShipTemplate()
     :setShields(1000, 1000, 1000)
 
 template = ShipTemplate()
-    :setName("Huge Station")
+    :setName(ST.HUGE_STATION)
     :setLocaleName(_("Huge Station"))
     :setModel("space_station_1")
     :setType("station")
@@ -58,7 +58,7 @@ template = ShipTemplate()
 
 -- Defense platform
 template = ShipTemplate()
-    :setName("Weapons platform")
+    :setName(ST.WEAPONS_PLATFORM)
     :setLocaleName(_("ship", "Weapons platform"))
     :setClass(_("class", "Platform"), _("subclass", "Fortification"))
     :setModel("space_station_4")
@@ -80,7 +80,7 @@ template = ShipTemplate()
 
 -- Weapons platform
 variant = template
-    :copy("Defense platform")
+    :copy(ST.DEFENSE_PLATFORM)
     :setLocaleName(_("ship", "Defense platform"))
     :setRadarTrace("smallstation.png")
     :setDescription(

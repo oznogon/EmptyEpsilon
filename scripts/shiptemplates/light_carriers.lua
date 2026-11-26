@@ -15,7 +15,7 @@ Light carriers come in the following subclasses:
 
 -- Saipan
 local template = ShipTemplate()
-    :setName("Saipan")
+    :setName(ST.SAIPAN)
     :setLocaleName(_("playerShip", "Saipan"))
     :setModel("battleship_destroyer_5_upgraded")
     :setType("playership")
@@ -98,7 +98,7 @@ local template = ShipTemplate()
 
 -- Jump Carrier
 template = ShipTemplate()
-    :setName("Jump Carrier")
+    :setName(ST.JUMP_CARRIER)
     :setLocaleName(_("ship", "Jump Carrier"))
     :setClass(_("class", "Light carrier"), _("subclass", "Support"))
     :setModel("transport_4_2")
@@ -130,7 +130,7 @@ template = ShipTemplate()
 
 -- Benedict
 local variation = template
-    :copy("Benedict")
+    :copy(ST.BENEDICT)
     :setLocaleName(_("playerShip", "Benedict"))
     :setClass(_("class", "Light carrier"), _("subclass", "Escort"))
     :setType("playership")
@@ -174,7 +174,7 @@ variation
 
 -- Kiriya
 local var2 = variation
-    :copy("Kiriya")
+    :copy(ST.KIRIYA)
     :setLocaleName(_("playerShip", "Kiriya"))
 var2
     :setDescription(

@@ -5,7 +5,7 @@ ordnance from a distance. They are larger than frigates and lack FTL capabilitie
 ]]
 
 local template = ShipTemplate()
-    :setName("Guard")
+    :setName(ST.GUARD)
     :setLocaleName(_("ship", "Guard"))
     :setClass(_("class", "Corvette"), _("subclass", "Escort"))
     :setModel("transport_1_1")
@@ -34,7 +34,7 @@ local template = ShipTemplate()
     :setWeaponTubeExclusiveFor(2, "Mine")
 
 template = ShipTemplate()
-    :setName("Sentinel")
+    :setName(ST.SENTINEL)
     :setLocaleName(_("ship", "Sentinel"))
     :setClass(_("class", "Corvette"), _("subclass", "Anti-fighter"))
     :setModel("transport_3_1")
@@ -57,7 +57,7 @@ template = ShipTemplate()
     :setSpeed(70, 15, 10)
 
 template = ShipTemplate()
-    :setName("Warden")
+    :setName(ST.WARDEN)
     :setLocaleName(_("ship", "Warden"))
     :setClass(_("class", "Corvette"), _("subclass", "Artillery"))
     :setModel("transport_4_1")
@@ -82,7 +82,7 @@ template = ShipTemplate()
     :setTubeDirection(4, 2)
 
 template = ShipTemplate()
-    :setName("Flash")
+    :setName(ST.FLASH)
     :setLocaleName(_("ship", "Flash"))
     :setClass(_("class", "Corvette"), _("subclass", "Artillery"))
     :setModel("small_frigate_2")
@@ -102,7 +102,7 @@ template = ShipTemplate()
     :setWeaponStorage("Nuke", 2)
 
 local variation = template
-    :copy("Ranger")
+    :copy(ST.RANGER)
     :setLocaleName(_("ship", "Ranger"))
     :setDescription(
         _(
@@ -116,7 +116,7 @@ local variation = template
     :setWeaponStorage("Nuke", 4)
 
 variation = template
-    :copy("Buster")
+    :copy(ST.BUSTER)
     :setLocaleName(_("ship", "Buster"))
 variation
     :setDescription(

@@ -7,7 +7,7 @@ operate.
 
 -- Odin
 local template = ShipTemplate()
-    :setName("Odin")
+    :setName(ST.ODIN)
     :setLocaleName(_("ship", "Odin"))
     :setClass(_("class", "Battleship"), _("subclass", "Dreadnought"))
     :setModel("space_station_2")
@@ -41,7 +41,7 @@ end
 
 -- Dreadnought
 template = ShipTemplate()
-    :setName("Dreadnought")
+    :setName(ST.DREADNOUGHT)
     :setLocaleName(_("ship", "Dreadnought"))
     :setModel("battleship_destroyer_1_upgraded")
     :setClass(_("class", "Battleship"), _("subclass", "Dreadnought"))

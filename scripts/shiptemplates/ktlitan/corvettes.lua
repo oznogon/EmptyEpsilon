@@ -5,7 +5,7 @@ often found in the thick of combat.
 
 -- Ktlitan Feeder
 local template = ShipTemplate()
-    :setName("Ktlitan Feeder")
+    :setName(ST.KTLITAN_FEEDER)
     :setLocaleName(_("ship", "Ktlitan Feeder"))
     :setClass(_("class", "Corvette"), _("subclass", "Assault"))
     :setModel("sci_fi_alien_ship_5")

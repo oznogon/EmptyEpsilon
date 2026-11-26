@@ -5,7 +5,7 @@ Small single-seat Exuari starfighters designed for quick strikes and swarm tacti
 
 -- Dagger
 local template = ShipTemplate()
-    :setName("Dagger")
+    :setName(ST.DAGGER)
     :setLocaleName(_("ship", "Dagger"))
     :setClass(
         _("class", "Starfighter"),
@@ -28,7 +28,7 @@ However, most Exuari fighter pilots expect their own death and don't care much a
 
 -- Blade
 local variation = template
-    :copy("Blade")
+    :copy(ST.BLADE)
     :setLocaleName(_("ship", "Blade"))
     :setModel("dark_fighter_6")
     :setDescription(
@@ -41,7 +41,7 @@ local variation = template
 
 -- Gunner
 template = ShipTemplate()
-    :setName("Gunner")
+    :setName(ST.GUNNER)
     :setLocaleName(_("ship", "Gunner"))
     :setClass(
         _("class", "Starfighter"),
@@ -67,7 +67,7 @@ Piloting a Gunner is considered a recreational, and often lethal, activity withi
 
 -- Shooter
 variation = template
-    :copy("Shooter")
+    :copy(ST.SHOOTER)
     :setLocaleName(_("ship", "Shooter"))
     :setDescription(
         _(
@@ -79,7 +79,7 @@ variation = template
 
 -- Jagger
 variation = template
-    :copy("Jagger")
+    :copy(ST.JAGGER)
     :setLocaleName(_("ship", "Jagger"))
     :setDescription(
         _(

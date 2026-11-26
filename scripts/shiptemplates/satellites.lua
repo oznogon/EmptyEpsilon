@@ -3,7 +3,7 @@
 Small unmanned craft.
 ]]
 local template = ShipTemplate()
-    :setName("ANT 615")
+    :setName(ST.ANT_615)
     :setLocaleName(_("ship", "ANT 615"))
     :setModel("combatsat")
     :setClass(_("class", "Satellite"), _("subclass", "Sentry"))

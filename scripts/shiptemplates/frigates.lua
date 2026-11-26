@@ -19,7 +19,7 @@ Frigates come in the following subclasses:
 
 -- Phobos T3
 local template = ShipTemplate()
-    :setName("Phobos T3")
+    :setName(ST.PHOBOS_T3)
     :setLocaleName(_("ship", "Phobos T3"))
     :setClass(_("class", "Frigate"), _("subclass", "Patrol"))
     :setModel("AtlasHeavyFighterYellow")
@@ -42,7 +42,7 @@ local template = ShipTemplate()
 
 -- Elara P2
 local variation = template
-    :copy("Elara P2")
+    :copy(ST.ELARA_P2)
     :setLocaleName(_("ship", "Elara P2"))
     :setDescription(
         _(
@@ -54,7 +54,7 @@ local variation = template
 
 -- Phobos M3
 variation = template
-    :copy("Phobos M3")
+    :copy(ST.PHOBOS_M3)
     :setLocaleName(_("ship", "Phobos M3"))
     :setModel("AtlasHeavyFighterRed")
     :setDescription(
@@ -74,7 +74,7 @@ variation = template
 
 -- Phobos M3P (PlayerControl variant)
 variation = variation
-    :copy("Phobos M3P")
+    :copy(ST.PHOBOS_M3P)
     :setLocaleName(_("playerShip", "Phobos M3P"))
     :setType("playership")
     :setDescription(
@@ -123,7 +123,7 @@ variation = variation
 
 -- Nirvana R5
 template = ShipTemplate()
-    :setName("Nirvana R5")
+    :setName(ST.NIRVANA_R5)
     :setLocaleName(_("ship", "Nirvana R5"))
     :setClass(_("class", "Frigate"), _("subclass", "Anti-fighter"))
     :setModel("small_frigate_5") -- TODO: Better 3D model selection
@@ -145,7 +145,7 @@ template = ShipTemplate()
 
 -- Nirvana R5A
 variation = template
-    :copy("Nirvana R5A")
+    :copy(ST.NIRVANA_R5A)
     :setLocaleName(_("ship", "Nirvana R5A"))
     :setDescription(
         _(
@@ -162,7 +162,7 @@ variation = template
 
 -- Nirvana R3
 variation = template
-    :copy("Nirvana R3")
+    :copy(ST.NIRVANA_R3)
     :setLocaleName(_("ship", "Nirvana R3"))
     :setDescription(
         _(
@@ -181,7 +181,7 @@ variation = template
 
 -- Storm
 template = ShipTemplate()
-    :setName("Storm")
+    :setName(ST.STORM)
     :setLocaleName(_("ship", "Storm"))
     :setClass(_("class", "Frigate"), _("subclass", "Artillery"))
     :setModel("HeavyCorvetteYellow")
@@ -207,7 +207,7 @@ template = ShipTemplate()
 
 -- Hathcock (PlayerControl)
 template = ShipTemplate()
-    :setName("Hathcock")
+    :setName(ST.HATHCOCK)
     :setLocaleName(_("playerShip", "Hathcock"))
     :setClass(_("class", "Frigate"), _("subclass", "Sniper"))
     :setModel("HeavyCorvetteGreen")
@@ -257,7 +257,7 @@ template = ShipTemplate()
 
 -- Piranha F12
 template = ShipTemplate()
-    :setName("Piranha F12")
+    :setName(ST.PIRANHA_F12)
     :setLocaleName(_("ship", "Piranha F12"))
     :setClass(_("class", "Frigate"), _("subclass", "Artillery"))
     :setModel("HeavyCorvetteRed")
@@ -290,7 +290,7 @@ template = ShipTemplate()
 
 -- Piranha F12.M
 variation = template
-    :copy("Piranha F12.M")
+    :copy(ST.PIRANHA_F12M)
     :setLocaleName(_("ship", "Piranha F12.M"))
     :setDescription(
         _(
@@ -303,7 +303,7 @@ variation = template
 
 -- Piranha (PlayerControl F12 variant)
 variation = template
-    :copy("Piranha")
+    :copy(ST.PIRANHA)
     :setLocaleName(_("playerShip", "Piranha"))
     :setType("playership")
     :setClass(_("class", "Frigate"), _("subclass", "Assault"))
@@ -362,7 +362,7 @@ variation = template
 
 -- Piranha F8
 variation = template
-    :copy("Piranha F8")
+    :copy(ST.PIRANHA_F8)
     :setLocaleName(_("ship", "Piranha F8"))
     :setDescription(
         _(
@@ -379,7 +379,7 @@ variation = template
 
 -- Stalker Q7
 template = ShipTemplate()
-    :setName("Stalker Q7")
+    :setName(ST.STALKER_Q7)
     :setLocaleName(_("ship", "Stalker Q7"))
     :setClass(_("class", "Frigate"), _("subclass", "Strike"))
     :setModel("small_frigate_3")
@@ -402,7 +402,7 @@ template = ShipTemplate()
 
 -- Stalker Q5
 variation = template
-    :copy("Stalker Q5")
+    :copy(ST.STALKER_Q5)
     :setLocaleName(_("ship", "Stalker Q5"))
     :setDescription(
         _(
@@ -419,7 +419,7 @@ variation = template
 
 -- Stalker R7
 variation = template
-    :copy("Stalker R7")
+    :copy(ST.STALKER_R7)
     :setLocaleName(_("ship", "Stalker R7"))
     :setDescription(
         _(
@@ -435,7 +435,7 @@ variation = template
 
 -- Stalker R5
 local var2 = variation
-    :copy("Stalker R5")
+    :copy(ST.STALKER_R5)
     :setLocaleName(_("ship", "Stalker R5"))
     :setDescription(
         _(
@@ -452,7 +452,7 @@ local var2 = variation
 
 -- Ranus U
 template = ShipTemplate()
-    :setName("Ranus U")
+    :setName(ST.RANUS_U)
     :setLocaleName(_("ship", "Ranus U"))
     :setClass(_("class", "Frigate"), _("subclass", "Sniper"))
     :setModel("MissileCorvetteGreen")
@@ -473,7 +473,7 @@ template = ShipTemplate()
 
 -- Fiend G3
 template = ShipTemplate()
-    :setName("Fiend G3")
+    :setName(ST.FIEND_G3)
     :setLocaleName(_("ship", "Fiend G3"))
     :setModel("battleship_destroyer_4_upgraded")
     :setClass(_("class", "Frigate"), _("subclass", "Strike"))
@@ -497,7 +497,7 @@ template = ShipTemplate()
 
 -- Fiend G4
 variation = template
-    :copy("Fiend G4")
+    :copy(ST.FIEND_G4)
     :setLocaleName(_("ship", "Fiend G4"))
     :setDescription(
         _(
@@ -511,7 +511,7 @@ variation = template
 
 -- Fiend G6
 variation = variation
-    :copy("Fiend G6")
+    :copy(ST.FIEND_G6)
     :setLocaleName(_("ship", "Fiend G6"))
     :setDescription(
         _(
@@ -524,7 +524,7 @@ variation = variation
 
 -- Fiend G5
 variation = template
-    :copy("Fiend G5")
+    :copy(ST.FIEND_G5)
     :setLocaleName(_("ship", "Fiend G5"))
     :setDescription(
         _(
@@ -537,7 +537,7 @@ variation = template
 
 -- Blockade runner
 template = ShipTemplate()
-    :setName("Blockade Runner")
+    :setName(ST.BLOCKADE_RUNNER)
     :setLocaleName(_("ship", "Blockade Runner"))
     :setModel("battleship_destroyer_3_upgraded")
     :setClass(_("class", "Frigate"), _("subclass", "Assault"))

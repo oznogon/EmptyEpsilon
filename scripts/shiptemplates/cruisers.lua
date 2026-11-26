@@ -7,7 +7,7 @@ What cruisers lose in agility compared to destroyers, they gain in armor and wea
 
 -- Vindicator (fka Player Cruiser)
 local template = ShipTemplate()
-    :setName("Vindicator")
+    :setName(ST.VINDICATOR)
     :setLocaleName(_("playerShip", "Vindicator"))
     :setModel("battleship_destroyer_2_upgraded")
     :setClass(_("class", "Cruiser"), _("subclass", "Assault"))
@@ -71,7 +71,7 @@ A skilled navigator and helms officer can use the Vindicator's jump drive and im
 
 -- Avalanche (fka Player Missile Cr.)
 template = ShipTemplate()
-    :setName("Avalanche")
+    :setName(ST.AVALANCHE)
     :setLocaleName(_("playerShip", "Avalanche"))
     :setModel("space_cruiser_4")
     :setClass(_("class", "Cruiser"), _("subclass", "Bombardment"))
@@ -138,7 +138,7 @@ The Avalanche earned its moniker for being unstoppable, but also for being spott
 
 -- Battlestation
 template = ShipTemplate()
-    :setName("Battlestation")
+    :setName(ST.BATTLESTATION)
     :setLocaleName(_("ship", "Battlestation"))
     :setModel("Ender Battlecruiser")
     :setClass(_("class", "Battlecruiser"), _("subclass", "Superiority"))
@@ -180,7 +180,7 @@ Battlestations are meant to join large-fleet ambushes, drop their docked vessels
 
 -- Ender (PlayerControl variant)
 variation = template
-    :copy("Ender")
+    :copy(ST.ENDER)
     :setType("playership")
     :setLocaleName(_("playerShip", "Ender"))
     :setDescription(

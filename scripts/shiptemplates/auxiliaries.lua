@@ -152,7 +152,7 @@ end
 
 -- Flavia
 template = ShipTemplate()
-    :setName("Flavia")
+    :setName(ST.FLAVIA)
     :setLocaleName(_("ship", "Flavia"))
     :setClass(_("class", "Auxiliary"), _("subclass", "Transport"))
     :setModel("LightCorvetteGrey")
@@ -169,7 +169,7 @@ template = ShipTemplate()
 
 -- Flavia Falcon
 variation = template
-    :copy("Flavia Falcon")
+    :copy(ST.FLAVIA_FALCON)
     :setLocaleName(_("ship", "Flavia Falcon"))
     :setDescription(
         _(
@@ -182,7 +182,7 @@ variation = template
 
 -- Flavia P.Falcon (PlayerControl variant)
 variation = variation
-    :copy("Flavia P.Falcon")
+    :copy(ST.FLAVIA_PFALCON)
     :setLocaleName(_("playerShip", "Flavia P.Falcon"))
     :setType("playership")
     :setDescription(
@@ -228,7 +228,7 @@ variation = variation
 
 -- Repulse (PlayerControl ship)
 template = ShipTemplate()
-    :setName("Repulse")
+    :setName(ST.REPULSE)
     :setLocaleName(_("playerShip", "Repulse"))
     :setClass(_("class", "Auxiliary"), _("subclass", "Transport"))
     :setModel("LightCorvetteRed")
@@ -280,7 +280,7 @@ template = ShipTemplate()
 -- Tugs
 -- Apis
 template = ShipTemplate()
-    :setName("Apis")
+    :setName(ST.APIS)
     :setLocaleName(_("ship", "Apis"))
     :setClass(_("class", "Auxiliary"), _("subclass", "Tug"))
     :setModel("space_tug")
@@ -296,7 +296,7 @@ template = ShipTemplate()
 
 -- Hylas
 variation = template
-    :copy("Hylas")
+    :copy(ST.HYLAS)
     :setLocaleName(_("ship", "Hylas"))
     :setClass(_("class", "Auxiliary"), _("subclass", "Tug"))
     :setDescription(
@@ -308,7 +308,7 @@ variation = template
 
 -- Heracles (PlayerControl variant)
 variation2 = variation
-    :copy("Heracles")
+    :copy(ST.HERACLES)
     :setLocaleName(_("playerShip", "Heracles"))
     :setType("playership")
     :setDescription(

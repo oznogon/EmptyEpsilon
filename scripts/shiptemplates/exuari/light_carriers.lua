@@ -7,7 +7,7 @@ drives and can dock smaller ships for refuel and repair.
 
 -- Ryder
 local template = ShipTemplate()
-    :setName("Ryder")
+    :setName(ST.RYDER)
     :setLocaleName(_("ship", "Ryder"))
     :setModel("Ender Battlecruiser")
     :setClass(_("class", "Light carrier"), _("subclass", "Escort"))
@@ -60,7 +60,7 @@ local template = ShipTemplate()
 
 -- Fortress
 local variation = template
-    :copy("Fortress")
+    :copy(ST.FORTRESS)
     :setLocaleName(_("ship", "Fortress"))
     :setDescription(
         _(

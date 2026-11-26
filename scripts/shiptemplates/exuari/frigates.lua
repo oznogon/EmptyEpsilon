@@ -6,7 +6,7 @@ raiders and skirmishers rather than front-line combatants.
 
 -- Racer
 local template = ShipTemplate()
-    :setName("Racer")
+    :setName(ST.RACER)
     :setLocaleName(_("ship", "Racer"))
     :setClass(_("class", "Frigate"), _("subclass", "Strike"))
     :setModel("small_frigate_1")
@@ -25,7 +25,7 @@ local template = ShipTemplate()
 
 -- Hunter
 local variation = template
-    :copy("Hunter")
+    :copy(ST.HUNTER)
     :setLocaleName(_("ship", "Hunter"))
 variation
     :setDescription(
@@ -42,7 +42,7 @@ variation
 
 -- Strike
 variation = template
-    :copy("Strike")
+    :copy(ST.STRIKE)
     :setLocaleName(_("ship", "Strike"))
 variation
     :setDescription(
@@ -59,7 +59,7 @@ variation
 
 -- Dash
 variation = template
-    :copy("Dash")
+    :copy(ST.DASH)
     :setLocaleName(_("ship", "Dash"))
 variation
     :setDescription(

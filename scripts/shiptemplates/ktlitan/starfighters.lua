@@ -5,7 +5,7 @@ These are not naval ships; they are starfighters.
 
 -- Ktlitan Fighter
 local template = ShipTemplate()
-    :setName("Ktlitan Fighter")
+    :setName(ST.KTLITAN_FIGHTER)
     :setLocaleName(_("ship", "Ktlitan Fighter"))
     :setClass(_("class", "Starfighter"), _("subclass", "Interceptor"))
     :setModel("sci_fi_alien_ship_1")

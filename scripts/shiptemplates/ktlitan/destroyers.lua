@@ -5,7 +5,7 @@ Heavily armored and armed with beam weapons and homing missiles.
 
 -- Ktlitan Destroyer
 local template = ShipTemplate()
-    :setName("Ktlitan Destroyer")
+    :setName(ST.KTLITAN_DESTROYER)
     :setLocaleName(_("ship", "Ktlitan Destroyer"))
     :setClass(_("class", "Destroyer"), _("subclass", "Assault"))
     :setModel("sci_fi_alien_ship_7")
