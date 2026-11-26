@@ -22,6 +22,8 @@ Some ship templates are strongly associated with certain factions and have their
 
 Player ships are generally large corvettes to small frigates.
 ]]
+require("shiptemplates/ship_template_constants.lua")
+
 require("shiptemplates/satellites.lua")
 require("shiptemplates/auxiliaries.lua")
 require("shiptemplates/starfighters.lua")
@@ -44,5 +46,3 @@ require("shiptemplates/ktlitan/corvettes.lua")
 require("shiptemplates/ktlitan/frigates.lua")
 require("shiptemplates/ktlitan/destroyers.lua")
 require("shiptemplates/ktlitan/battleships.lua")
-
-require("shiptemplates/ship_template_constants.lua")

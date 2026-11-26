@@ -167,7 +167,7 @@ function addWaveInner(list, kind, a, d)
             list,
             setCirclePos(
                 CpuShip()
-                    :setTemplate(ST_STALKER_Q7)
+                    :setTemplate(ST.STALKER_Q7)
                     :setRotation(a + 180)
                     :orderRoaming(),
                 0,
@@ -179,7 +179,7 @@ function addWaveInner(list, kind, a, d)
     elseif kind < 2.0 then
         local leader = setCirclePos(
             CpuShip()
-                :setTemplate(ST_PHOBOS_T3)
+                :setTemplate(ST.PHOBOS_T3)
                 :setRotation(a + 180)
                 :orderRoaming(),
             0,
@@ -192,7 +192,7 @@ function addWaveInner(list, kind, a, d)
             list,
             setCirclePos(
                 CpuShip()
-                    :setTemplate(ST_MT52_HORNET)
+                    :setTemplate(ST.MT52_HORNET)
                     :setRotation(a + 180)
                     :orderFlyFormation(leader, -400, 0),
                 0,
@@ -205,7 +205,7 @@ function addWaveInner(list, kind, a, d)
             list,
             setCirclePos(
                 CpuShip()
-                    :setTemplate(ST_MT52_HORNET)
+                    :setTemplate(ST.MT52_HORNET)
                     :setRotation(a + 180)
                     :orderFlyFormation(leader, 400, 0),
                 0,
@@ -218,7 +218,7 @@ function addWaveInner(list, kind, a, d)
             list,
             setCirclePos(
                 CpuShip()
-                    :setTemplate(ST_MT52_HORNET)
+                    :setTemplate(ST.MT52_HORNET)
                     :setRotation(a + 180)
                     :orderFlyFormation(leader, -400, 400),
                 0,
@@ -231,7 +231,7 @@ function addWaveInner(list, kind, a, d)
             list,
             setCirclePos(
                 CpuShip()
-                    :setTemplate(ST_MT52_HORNET)
+                    :setTemplate(ST.MT52_HORNET)
                     :setRotation(a + 180)
                     :orderFlyFormation(leader, 400, 400),
                 0,
@@ -245,7 +245,7 @@ function addWaveInner(list, kind, a, d)
             list,
             setCirclePos(
                 CpuShip()
-                    :setTemplate(ST_ADDER_MK5)
+                    :setTemplate(ST.ADDER_MK5)
                     :setRotation(a + 180)
                     :orderRoaming(),
                 0,
@@ -258,7 +258,7 @@ function addWaveInner(list, kind, a, d)
             list,
             setCirclePos(
                 CpuShip()
-                    :setTemplate(ST_ADDER_MK5)
+                    :setTemplate(ST.ADDER_MK5)
                     :setRotation(a + 180)
                     :orderRoaming(),
                 0,
@@ -272,7 +272,7 @@ function addWaveInner(list, kind, a, d)
             list,
             setCirclePos(
                 CpuShip()
-                    :setTemplate(ST_PHOBOS_T3)
+                    :setTemplate(ST.PHOBOS_T3)
                     :setRotation(a + 180)
                     :orderRoaming(),
                 0,
@@ -285,7 +285,7 @@ function addWaveInner(list, kind, a, d)
             list,
             setCirclePos(
                 CpuShip()
-                    :setTemplate(ST_PHOBOS_T3)
+                    :setTemplate(ST.PHOBOS_T3)
                     :setRotation(a + 180)
                     :orderRoaming(),
                 0,
@@ -298,7 +298,7 @@ function addWaveInner(list, kind, a, d)
             list,
             setCirclePos(
                 CpuShip()
-                    :setTemplate(ST_PHOBOS_T3)
+                    :setTemplate(ST.PHOBOS_T3)
                     :setRotation(a + 180)
                     :orderRoaming(),
                 0,
@@ -312,7 +312,7 @@ function addWaveInner(list, kind, a, d)
             list,
             setCirclePos(
                 CpuShip()
-                    :setTemplate(ST_PHOBOS_T3)
+                    :setTemplate(ST.PHOBOS_T3)
                     :setRotation(a + 180)
                     :orderRoaming(),
                 0,
@@ -324,7 +324,7 @@ function addWaveInner(list, kind, a, d)
     elseif kind < 6.0 then
         local leader = setCirclePos(
             CpuShip()
-                :setTemplate(ST_PIRANHA_F12)
+                :setTemplate(ST.PIRANHA_F12)
                 :setRotation(a + 180)
                 :orderRoaming(),
             0,
@@ -337,7 +337,7 @@ function addWaveInner(list, kind, a, d)
             list,
             setCirclePos(
                 CpuShip()
-                    :setTemplate(ST_MT52_HORNET)
+                    :setTemplate(ST.MT52_HORNET)
                     :setRotation(a + 180)
                     :orderFlyFormation(leader, -1500, 400),
                 0,
@@ -350,7 +350,7 @@ function addWaveInner(list, kind, a, d)
             list,
             setCirclePos(
                 CpuShip()
-                    :setTemplate(ST_MT52_HORNET)
+                    :setTemplate(ST.MT52_HORNET)
                     :setRotation(a + 180)
                     :orderFlyFormation(leader, 1500, 400),
                 0,
@@ -364,7 +364,7 @@ function addWaveInner(list, kind, a, d)
             list,
             setCirclePos(
                 CpuShip()
-                    :setTemplate(ST_MT52_HORNET)
+                    :setTemplate(ST.MT52_HORNET)
                     :setRotation(a + 180)
                     :orderRoaming(),
                 0,
@@ -377,7 +377,7 @@ function addWaveInner(list, kind, a, d)
             list,
             setCirclePos(
                 CpuShip()
-                    :setTemplate(ST_PHOBOS_T3)
+                    :setTemplate(ST.PHOBOS_T3)
                     :setRotation(a + 180)
                     :orderRoaming(),
                 0,
@@ -391,7 +391,7 @@ function addWaveInner(list, kind, a, d)
             list,
             setCirclePos(
                 CpuShip()
-                    :setTemplate(ST_NIRVANA_R5)
+                    :setTemplate(ST.NIRVANA_R5)
                     :setRotation(a + 180)
                     :orderRoaming(),
                 0,
@@ -405,7 +405,7 @@ function addWaveInner(list, kind, a, d)
             list,
             setCirclePos(
                 CpuShip()
-                    :setTemplate(ST_MU52_HORNET)
+                    :setTemplate(ST.MU52_HORNET)
                     :setRotation(a + 180)
                     :orderRoaming(),
                 0,
@@ -419,7 +419,7 @@ function addWaveInner(list, kind, a, d)
             list,
             setCirclePos(
                 CpuShip()
-                    :setTemplate(ST_STALKER_R7)
+                    :setTemplate(ST.STALKER_R7)
                     :setRotation(a + 180)
                     :orderRoaming(),
                 0,
@@ -432,7 +432,7 @@ function addWaveInner(list, kind, a, d)
             list,
             setCirclePos(
                 CpuShip()
-                    :setTemplate(ST_STALKER_R7)
+                    :setTemplate(ST.STALKER_R7)
                     :setRotation(a + 180)
                     :orderRoaming(),
                 0,
@@ -480,9 +480,9 @@ function gmButtons()
     -- players' spawn point is about half that of enemy waves.
     addGMFunction(_("buttonGM", "Random friendly"), function()
         local friendly_ship = {
-            ST_PHOBOS_T3,
-            ST_MU52_HORNET,
-            ST_PIRANHA_F12
+            ST.PHOBOS_T3,
+            ST.MU52_HORNET,
+            ST.PIRANHA_F12
         }
         local friendly_ship_index = math.random(#friendly_ship)
 
@@ -572,13 +572,13 @@ end
 --- Shows the "Named waves" GM submenu, which contains tools to spawn more waves.
 function namedWaves()
     local wave_names = {
-        [0] = _("buttonGM", ST_STRIX),
-        [1] = _("buttonGM", ST_RIPOSTE),
-        [2] = _("buttonGM", ST_GUNSHIP),
-        [4] = _("buttonGM", ST_DREADNOUGHT),
-        [5] = _("buttonGM", ST_POLARIS),
-        [6] = _("buttonGM", ST_KARNACK_MK2), --
-        [9] = _("buttonGM", ST_MAGPIE), --
+        [0] = _("buttonGM", ST.STRIX),
+        [1] = _("buttonGM", ST.RIPOSTE),
+        [2] = _("buttonGM", ST.GUNSHIP),
+        [4] = _("buttonGM", ST.DREADNOUGHT),
+        [5] = _("buttonGM", ST.POLARIS),
+        [6] = _("buttonGM", ST.KARNACK_MK2), --
+        [9] = _("buttonGM", ST.MAGPIE), --
     }
     clearGMFunctions()
     addGMFunction(_("buttonGM", "-From named waves"), gmButtons)
@@ -621,7 +621,7 @@ function init()
     local n = 0
     -- station_X.comms_data are not yet used, it is here for time when Defense Fleet functionality is implemented to comms_station.lua
     station_1 = SpaceStation()
-        :setTemplate("Small Station")
+        :setTemplate(ST.SMALL_STATION)
         :setRotation(random(0, 360))
         :setFaction("Human Navy")
     setCirclePos(
@@ -633,16 +633,16 @@ function init()
     )
     station_1.comms_data = {
         idle_defense_fleet = {
-            DF1 = "MT52 Hornet",
-            DF2 = "MT52 Hornet",
-            DF3 = "MT52 Hornet",
+            DF1 = ST.MT52_HORNET,
+            DF2 = ST.MT52_HORNET,
+            DF3 = ST.MT52_HORNET,
         },
     }
     table.insert(station_list, station_1)
     table.insert(friendly_list, station_1)
     n = 1
     station_2 = SpaceStation()
-        :setTemplate("Medium Station")
+        :setTemplate(ST.MEDIUM_STATION)
         :setRotation(random(0, 360))
         :setFaction("Human Navy")
     setCirclePos(
@@ -654,16 +654,16 @@ function init()
     )
     station_2.comms_data = {
         idle_defense_fleet = {
-            DF1 = ST_ADDER_MK5,
-            DF2 = ST_ADDER_MK5,
-            DF3 = ST_ADDER_MK5,
+            DF1 = ST.ADDER_MK5,
+            DF2 = ST.ADDER_MK5,
+            DF3 = ST.ADDER_MK5,
         },
     }
     table.insert(station_list, station_2)
     table.insert(friendly_list, station_2)
     n = 2
     station_3 = SpaceStation()
-        :setTemplate("Large Station")
+        :setTemplate(ST.LARGE_STATION)
         :setRotation(random(0, 360))
         :setFaction("Human Navy")
     setCirclePos(
@@ -675,9 +675,9 @@ function init()
     )
     station_3.comms_data = {
         idle_defense_fleet = {
-            DF1 = ST_PHOBOS_T3,
-            DF2 = ST_PHOBOS_T3,
-            DF3 = ST_PHOBOS_T3,
+            DF1 = ST.PHOBOS_T3,
+            DF2 = ST.PHOBOS_T3,
+            DF3 = ST.PHOBOS_T3,
         },
     }
     table.insert(station_list, station_3)

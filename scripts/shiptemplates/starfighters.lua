@@ -13,9 +13,11 @@ Starfighters come in the following subclasses:
 - Bomber: Slowest among starfighters, but packs a larger punch. While typically lacking any beam weapons, larger bombers can deliver nukes.
 ]]
 
+require("shiptemplates/ship_template_constants.lua")
+
 -- MT52 Hornet
 local template = ShipTemplate()
-    :setName("MT52 Hornet")
+    :setName(ST.MT52_HORNET)
     :setLocaleName(_("ship", "MT52 Hornet"))
     :setClass(_("class", "Starfighter"), _("subclass", "Interceptor"))
     :setModel("WespeScoutYellow")
@@ -33,7 +35,7 @@ local template = ShipTemplate()
 
 -- MU52 Hornet
 local variation = template
-    :copy("MU52 Hornet")
+    :copy(ST.MU52_HORNET)
     :setLocaleName(_("ship", "MU52 Hornet"))
     :setModel("WespeScoutRed")
     :setDescription(
@@ -48,7 +50,7 @@ local variation = template
 
 -- MP52 Hornet (PlayerControl variant)
 variation = variation
-    :copy("MP52 Hornet")
+    :copy(ST.MP52_HORNET)
     :setLocaleName(_("playerShip", "MP52 Hornet"))
     :setType("playership")
     :setDescription(
@@ -88,7 +90,7 @@ variation = variation
 
 -- Adder MK5
 template = ShipTemplate()
-    :setName("Adder MK5")
+    :setName(ST.ADDER_MK5)
     :setLocaleName(_("ship", "Adder MK5"))
     :setClass(_("class", "Starfighter"), _("subclass", "Gunship"))
     :setModel("AdlerLongRangeScoutYellow")
@@ -112,14 +114,14 @@ template = ShipTemplate()
 
 -- Adder MK4
 variation = template
-    :copy("Adder MK4")
+    :copy(ST.ADDER_MK4)
     :setLocaleName(_("ship", "Adder MK4"))
     :setModel("AdlerLongRangeScoutBlue")
     :setDescription(
         _(
             [[The Adder starfighter hull is a long-running, frequently iterated-upon design. Adders are commonly classified as gunships, with most models featuring several beam weapons and at least one weapon tube.]]
         ) .. " " .. _(
-            [[The Adder MK4 is a rare sight these days due to the success its successor, the Adder MK5, which often replaces this model. Its similar hull, however, means careless buyers are sometimes conned into buying mark 4 models disguised as the mark 5.]]
+            [[The Adder MK4 is a rare sight these days due to the success its successor, the Adder MK5, which often replaces this model. Its similar hull, however, means careless buyers are sometimes conned into buying MK4 models disguised as the MK5.]]
         )
     )
     :setHull(40)
@@ -131,13 +133,13 @@ variation = template
 
 -- Adder MK3
 local var2 = variation
-    :copy("Adder MK3")
+    :copy(ST.ADDER_MK3)
     :setLocaleName(_("ship", "Adder MK3"))
     :setDescription(
         _(
             [[The Adder starfighter hull is a long-running, frequently iterated-upon design. Adders are commonly classified as gunships, with most models featuring several beam weapons and at least one weapon tube.]]
         ) .. " " .. _(
-            [[The Adder MK3 is one of the first of the Adder line to meet with some success, and many were made before the manufacturer went through its first bankruptcy. Its low price and similarity to subsequent models has led to a resurgence of secondhand sales of the mark 3 model. Compared to the Adder MK4, the mark 3 has weaker shields and hull, but a faster turning rate.]]
+            [[The Adder MK3 is one of the first of the Adder line to meet with some success, and many were made before the manufacturer went through its first bankruptcy. Its low price and similarity to subsequent models has led to a resurgence of secondhand sales of the MK3 model. Compared to the Adder MK4, the MK3 has weaker shields and hull, but a faster turning rate.]]
         )
     )
     :setHull(35)
@@ -146,14 +148,14 @@ local var2 = variation
 
 -- Adder MK6
 variation = template
-    :copy("Adder MK6")
+    :copy(ST.ADDER_MK6)
     :setLocaleName(_("ship", "Adder MK6"))
     :setModel("AdlerLongRangeScoutRed")
     :setDescription(
         _(
             [[The Adder starfighter hull is a long-running, frequently iterated-upon design. Adders are commonly classified as gunships, with most models featuring several beam weapons and at least one weapon tube.]]
         ) .. " " .. _(
-            [[The Adder MK6 is a small upgrade compared to the highly successful Adder MK5. Since people still prefer the more familiar and reliable mark 5, the mark 6 hasn't seen the same level of success.]]
+            [[The Adder MK6 is a small upgrade compared to the highly successful Adder MK5. Since people still prefer the more familiar and reliable MK5, the MK6 hasn't seen the same level of success.]]
         )
     )
     :setBeam(3, 35, 180, 600, 6.0, 2.0)
@@ -161,14 +163,14 @@ variation = template
 
 -- Adder MK7
 var2 = variation
-    :copy("Adder MK7")
+    :copy(ST.ADDER_MK7)
     :setLocaleName(_("ship", "Adder MK7"))
     :setModel("AdlerLongRangeScoutGreen")
     :setDescription(
         _(
             [[The Adder starfighter hull is a long-running, frequently iterated-upon design. Adders are commonly classified as gunships, with most models featuring several beam weapons and at least one weapon tube.]]
         ) .. " " .. _(
-            [[The release of the Adder MK7 sent the manufacturer into a second bankruptcy. Despite stronger shields and longer beam ranges, the popularity of previous models (especially the Adder MK5) prevented them from raising the purchase price enough to recoup the mark 7's development and manufacturing costs.]]
+            [[The release of the Adder MK7 sent the manufacturer into a second bankruptcy. Despite stronger shields and longer beam ranges, the popularity of previous models (especially the Adder MK5) prevented them from raising the purchase price enough to recoup the MK7's development and manufacturing costs.]]
         )
     )
     :setShields(40)
@@ -176,14 +178,14 @@ var2 = variation
 
 -- Adder MK8
 variation = template
-    :copy("Adder MK8")
+    :copy(ST.ADDER_MK8)
     :setLocaleName(_("ship", "Adder MK8"))
     :setModel("AdlerLongRangeScoutGreen")
     :setDescription(
         _(
             [[The Adder starfighter hull is a long-running, frequently iterated-upon design. Adders are commonly classified as gunships, with most models featuring several beam weapons and at least one weapon tube.]]
         ) .. " " .. _(
-            [[After replacing its management, the Adder MK8 returned to the roots of its most popular Adder MK5 model with modernized shields, longer-ranged and stronger beam weapons, and a faster turning rate. The mark 8 targeted practical but nostalgic buyers replacing their mark 5 hardware.]]
+            [[After replacing its management, the Adder MK8 returned to the roots of its most popular Adder MK5 model with modernized shields, longer-ranged and stronger beam weapons, and a faster turning rate. The MK8 targeted practical but nostalgic buyers replacing their MK5 hardware.]]
         )
     )
     :setShields(50)
@@ -192,7 +194,7 @@ variation = template
 
 -- Adder MK9
 variation = template
-    :copy("Adder MK9")
+    :copy(ST.ADDER_MK9)
     :setLocaleName(_("ship", "Adder MK9"))
     :setModel("AdlerLongRangeScoutRed")
     :setDescription(
@@ -209,7 +211,7 @@ variation = template
 
 -- WX-Lindworm
 template = ShipTemplate()
-    :setName("WX-Lindworm")
+    :setName(ST.WX_LINDWORM)
     :setLocaleName(_("ship", "WX-Lindworm"))
     :setClass(_("class", "Starfighter"), _("subclass", "Bomber"))
     :setModel("LindwurmFighterYellow")
@@ -235,7 +237,7 @@ template = ShipTemplate()
 
 -- ZX-Lindworm (PlayerControl variant)
 variation = template
-    :copy("ZX-Lindworm")
+    :copy(ST.ZX_LINDWORM)
     :setLocaleName(_("playerShip", "ZX-Lindworm"))
     :setModel("LindwurmFighterBlue")
     :setType("playership")
@@ -281,7 +283,7 @@ variation = template
 
 -- Stingray (PlayerControl ship, fka Player Fighter)
 template = ShipTemplate()
-    :setName("Stingray")
+    :setName(ST.STINGRAY)
     :setLocaleName(_("playerShip", "Stingray"))
     :setModel("small_fighter_1")
     :setType("playership")
@@ -323,7 +325,7 @@ template = ShipTemplate()
 
 -- Riposte (fka Fighter)
 template = ShipTemplate()
-    :setName("Riposte")
+    :setName(ST.RIPOSTE)
     :setLocaleName(_("ship", "Fighter"))
     :setModel("small_fighter_1")
     :setRadarTrace("fighter.png")
@@ -341,17 +343,20 @@ template = ShipTemplate()
 
 -- Strix (fka Strikeship)
 template = ShipTemplate()
-    :setName("Strix")
+    :setName(ST.STRIX)
     :setLocaleName(_("ship", "Strix"))
     :setModel("small_frigate_3")
     :setClass(_("class", "Starfighter"), _("subclass", "Interceptor"))
     :setRadarTrace("striker.png")
     :setDescription(
         _(
+            "strix-1",
             [[The Strix is a warp-equipped interceptor built for ambush tactics.]]
         ) .. " " .. _(
+            "strix-2",
             [[For a starfighter it's slow at sublight flight and lacks manueverability, and most of its shielding is focused forward. However, thanks to its paired beam weapons and ability to strike quickly and escape, they've become a favorite of raiders that seek to catch poorly defended convoys unaware.]]
         ) .. " " .. _(
+            "strix-3",
             [[Strixes are often accompanied or complemented by Magpies, which have similar capabilities but use a jump drive for FTL travel.]]
         )
     )
@@ -364,7 +369,7 @@ template = ShipTemplate()
 
 -- Magpie (fka Adv. Striker)
 template = ShipTemplate()
-    :setName("Magpie")
+    :setName(ST.MAGPIE)
     :setLocaleName(_("ship", "Magpie"))
     :setClass(_("class", "Starfighter"), _("subclass", "Gunship"))
     :setModel("space_frigate_6")
@@ -387,7 +392,7 @@ template = ShipTemplate()
 
 -- Crow (fka Striker)
 variation = template
-    :copy("Crow")
+    :copy(ST.CROW)
     :setLocaleName(_("playerShip", "Crow"))
     :setClass(_("class", "Starfighter"), _("subclass", "Gunship"))
     :setType("playership")
