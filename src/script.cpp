@@ -2520,6 +2520,10 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// log("This is a log line") -- logs "[INFO    ]: [lua] This is a log line"
     /// See print(...) for more examples.
     env.setGlobal("log", &luaLog);
+    /// void require(...)
+    /// Require the Lua script at the given path to be loaded. Paths are relative to the script path.
+    /// Example:
+    /// require("shiptemplates/starfighters.lua") -- requires the Lua script at scripts/shiptemplates/starfighters.lua
     env.setGlobalFuncWithEnvUpvalue("require", &luaRequire);
     /// void _(...)
     /// Define a string for internationalization. The string is added to the lists of those that can be translated for a given language.
