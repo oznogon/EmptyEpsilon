@@ -285,6 +285,7 @@ variation = template
 template = ShipTemplate()
     :setName(ST.STINGRAY)
     :setLocaleName(_("playerShip", "Stingray"))
+    :setClass(_("class", "Starfighter"), _("subclass", "Interceptor"))
     :setModel("small_fighter_1")
     :setType("playership")
     :setRadarTrace("fighter.png")

@@ -208,3 +208,5 @@ dkapell:lifetimeOnExpire 20261123 -- adapt to fork API
 patch-2 20261125 -- addToShipLog color param issue, adapted to reformatted scenario scripts
 patch-3 20261125 -- addToShipLog color param issue, adapted to reformatted scenario scripts
 patch-4 20261125 -- addToShipLog color param issue, adapted to reformatted scenario scripts
+
+kzsh:issues/2950 -- previously addressed in OLD.lua ShipTemplate refactoring

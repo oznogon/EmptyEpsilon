@@ -6,7 +6,9 @@ ST = {
     CRUISER = "Karnack MK2",
     FIGHTER = "Riposte",
     MISSILE_CRUISER = "Polaris",
+    PLAYER_CRUISER = "Vindicator",
     PLAYER_FIGHTER = "Stingray",
+    PLAYER_MISSILE_CR = "Avalanche",
     STRIKER = "Crow",
     STRIKESHIP = "Strix",
     -- shipTemplates.lua templates

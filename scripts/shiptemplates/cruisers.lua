@@ -5,7 +5,7 @@ Cruisers are large capital ships, dwarfed only by battleships. Particularly larg
 What cruisers lose in agility compared to destroyers, they gain in armor and weaponry. A cruiser bristling with weapon tubes or beam weapons can cleave through even large space stations in short order if not countered by a coordinated, focused defense.
 ]]
 
--- Vindicator (Player Cruiser)
+-- Vindicator (fka Player Cruiser)
 local template = ShipTemplate()
     :setName("Vindicator")
     :setLocaleName(_("playerShip", "Vindicator"))
@@ -69,7 +69,7 @@ A skilled navigator and helms officer can use the Vindicator's jump drive and im
 --template:addDoor(2, 2, false);
 --template:addDoor(2, 5, false);
 
--- Avalanche (Player Missile Cr.)
+-- Avalanche (fka Player Missile Cr.)
 template = ShipTemplate()
     :setName("Avalanche")
     :setLocaleName(_("playerShip", "Avalanche"))
