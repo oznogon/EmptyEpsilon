@@ -577,8 +577,8 @@ function namedWaves()
         [2] = _("buttonGM", ST.GUNSHIP),
         [4] = _("buttonGM", ST.DREADNOUGHT),
         [5] = _("buttonGM", ST.POLARIS),
-        [6] = _("buttonGM", ST.KARNACK_MK2), --
-        [9] = _("buttonGM", ST.MAGPIE), --
+        [6] = _("buttonGM", ST.KARNACK_MK2),
+        [9] = _("buttonGM", ST.MAGPIE),
     }
     clearGMFunctions()
     addGMFunction(_("buttonGM", "-From named waves"), gmButtons)

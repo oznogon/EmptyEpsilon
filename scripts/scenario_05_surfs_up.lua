@@ -98,9 +98,9 @@ function setVariations()
     -- Alternative player ship
     local prototype_config = {
         ["None"] = "None",
-        ["Cruiser"] = "Vindicator",
-        ["Missile Cruiser"] = "Avalanche",
-        ["Fighter"] = "Stingray",
+        ["Cruiser"] = ST.VINDICATOR,
+        ["Missile Cruiser"] = ST.AVALANCHE,
+        ["Fighter"] = ST.STINGRAY,
     }
     if getScenarioSetting("Prototype") ~= "None" then
         local ship = PlayerSpaceship():setTemplate(
@@ -108,7 +108,7 @@ function setVariations()
         )
         if
             prototype_config[getScenarioSetting("Prototype")]
-            == "Stingray"
+            == "Fighter"
         then
             --               Arc, Dir,Range,Cycle, Dmg
             ship:setBeamWeapon(0, 65, 0, 700, 4, 4)
@@ -307,43 +307,43 @@ function setGlobals()
             create = gnat,
         },
         {
-            name = "MT52 Hornet",
+            name = ST.MT52_HORNET,
             warp_jammer = "none",
             strength = 5,
             create = stockTemplate,
         },
         {
-            name = "MU52 Hornet",
+            name = ST.MU52_HORNET,
             warp_jammer = "none",
             strength = 5,
             create = stockTemplate,
         },
         {
-            name = "Adder MK5",
+            name = ST.ADDER_MK5,
             warp_jammer = "none",
             strength = 7,
             create = stockTemplate,
         },
         {
-            name = "WX-Lindworm",
+            name = ST.WX_LINDWORM,
             warp_jammer = "none",
             strength = 7,
             create = stockTemplate,
         },
         {
-            name = "Adder MK9",
+            name = ST.ADDER_MK9,
             warp_jammer = "none",
             strength = 11,
             create = stockTemplate,
         },
         {
-            name = "Phobos T3",
+            name = ST.PHOBOS_T3,
             warp_jammer = "none",
             strength = 15,
             create = stockTemplate,
         },
         {
-            name = "Piranha F12",
+            name = ST.PIRANHA_F12,
             warp_jammer = "beam",
             strength = 15,
             create = stockTemplate,
@@ -355,19 +355,19 @@ function setGlobals()
             create = farco11,
         },
         {
-            name = "Ranus U",
+            name = ST.RANUS_U,
             warp_jammer = "beam",
             strength = 25,
             create = stockTemplate,
         },
         {
-            name = "Stalker Q7",
+            name = ST.STALKER_Q7,
             warp_jammer = "missile",
             strength = 25,
             create = stockTemplate,
         },
         {
-            name = "Stalker R7",
+            name = ST.STALKER_R7,
             warp_jammer = "missile",
             strength = 25,
             create = stockTemplate,
@@ -385,7 +385,7 @@ function setGlobals()
             create = cucaracha,
         },
         {
-            name = "Atlantis X23",
+            name = ST.ATLANTIS_X23,
             warp_jammer = "none",
             strength = 50,
             create = stockTemplate,
@@ -423,109 +423,109 @@ function setGlobals()
     }
     -- Player ship(s)
     player_ship_stats = {
-        ["Atlantis"] = {
+        [ST.ATLANTIS] = {
             strength = 52,
             cargo = 6,
             long_range_radar = 30000,
             short_range_radar = 5000,
         },
-        ["Benedict"] = {
+        [ST.BENEDICT] = {
             strength = 10,
             cargo = 9,
             long_range_radar = 30000,
             short_range_radar = 5000,
         },
-        ["Crucible"] = {
+        [ST.CRUCIBLE] = {
             strength = 45,
             cargo = 5,
             long_range_radar = 20000,
             short_range_radar = 6000,
         },
-        ["Ender"] = {
+        [ST.ENDER] = {
             strength = 100,
             cargo = 20,
             long_range_radar = 45000,
             short_range_radar = 7000,
         },
-        ["Flavia P.Falcon"] = {
+        [ST.FLAVIA_PFALCON] = {
             strength = 13,
             cargo = 15,
             long_range_radar = 40000,
             short_range_radar = 5000,
         },
-        ["Hathcock"] = {
+        [ST.HATHCOCK] = {
             strength = 30,
             cargo = 6,
             long_range_radar = 35000,
             short_range_radar = 6000,
         },
-        ["Kiriya"] = {
+        [ST.KIRIYA] = {
             strength = 10,
             cargo = 9,
             long_range_radar = 35000,
             short_range_radar = 5000,
         },
-        ["MP52 Hornet"] = {
+        [ST.MP52_HORNET] = {
             strength = 7,
             cargo = 3,
             long_range_radar = 18000,
             short_range_radar = 4000,
         },
-        ["Maverick"] = {
+        [ST.MAVERICK] = {
             strength = 45,
             cargo = 5,
             long_range_radar = 20000,
             short_range_radar = 4000,
         },
-        ["Nautilus"] = {
+        [ST.NAUTILUS] = {
             strength = 12,
             cargo = 7,
             long_range_radar = 22000,
             short_range_radar = 4000,
         },
-        ["Phobos M3P"] = {
+        [ST.PHOBOS_M3P] = {
             strength = 19,
             cargo = 10,
             long_range_radar = 25000,
             short_range_radar = 5000,
         },
-        ["Piranha"] = {
+        [ST.PIRANHA] = {
             strength = 16,
             cargo = 8,
             long_range_radar = 25000,
             short_range_radar = 6000,
         },
-        ["Vindicator"] = {
+        [ST.VINDICATOR] = {
             strength = 40,
             cargo = 6,
             long_range_radar = 30000,
             short_range_radar = 5000,
         },
-        ["Stingray"] = {
+        [ST.STINGRAY] = {
             strength = 7,
             cargo = 3,
             long_range_radar = 15000,
             short_range_radar = 4500,
         },
-        ["Avalanche"] = {
+        [ST.AVALANCHE] = {
             strength = 45,
             cargo = 8,
             long_range_radar = 35000,
             short_range_radar = 6000,
         },
-        ["Repulse"] = {
+        [ST.REPULSE] = {
             strength = 14,
             cargo = 12,
             long_range_radar = 38000,
             short_range_radar = 5000,
         },
-        ["Crow"] = {
+        [ST.CROW] = {
             strength = 8,
             cargo = 4,
             long_range_radar = 35000,
             short_range_radar = 5000,
         },
-        ["ZX-Lindworm"] = {
+        [ST.ZX_LINDWORM] = {
             strength = 8,
             cargo = 3,
             long_range_radar = 18000,
@@ -533,7 +533,7 @@ function setGlobals()
         },
     }
     player_ship_names = {
-        ["Atlantis"] = {
+        [ST.ATLANTIS] = {
             "Excaliber",
             "Thrasher",
             "Punisher",
@@ -543,7 +543,7 @@ function setGlobals()
             "Parchim",
             "Coronado",
         },
-        ["Benedict"] = {
+        [ST.BENEDICT] = {
             "Elizabeth",
             "Ford",
             "Vikramaditya",
@@ -555,7 +555,7 @@ function setGlobals()
             "Garibaldi",
             "Eisenhower",
         },
-        ["Crucible"] = {
+        [ST.CRUCIBLE] = {
             "Sling",
             "Stark",
             "Torrid",
@@ -563,7 +563,7 @@ function setGlobals()
             "Flummox",
             "3rd Charm",
         },
-        ["Ender"] = {
+        [ST.ENDER] = {
             "Mongo",
             "Godzilla",
             "Leviathan",
@@ -571,7 +571,7 @@ function setGlobals()
             "Jupiter",
             "Saturn",
         },
-        ["Flavia P.Falcon"] = {
+        [ST.FLAVIA_PFALCON] = {
             "Ladyhawke",
             "Hunter",
             "Seeker",
@@ -581,7 +581,7 @@ function setGlobals()
             "Bandit",
             "Buccaneer",
         },
-        ["Hathcock"] = {
+        [ST.HATHCOCK] = {
             "Hayha",
             "Waldron",
             "Plunkett",
@@ -594,7 +594,7 @@ function setGlobals()
             "Hawkeye",
             "Hanzo",
         },
-        ["Kiriya"] = {
+        [ST.KIRIYA] = {
             "Cavour",
             "Reagan",
             "Gaulle",
@@ -606,7 +606,7 @@ function setGlobals()
             "Vinson",
             "Old Salt",
         },
-        ["MP52 Hornet"] = {
+        [ST.MP52_HORNET] = {
             "Dragonfly",
             "Scarab",
             "Mantis",
@@ -616,14 +616,14 @@ function setGlobals()
             "Thorny",
             "Buzz",
         },
-        ["Maverick"] = {
+        [ST.MAVERICK] = {
             "Angel",
             "Thunderbird",
             "Roaster",
             "Magnifier",
             "Hedge",
         },
-        ["Nautilus"] = {
+        [ST.NAUTILUS] = {
             "October",
             "Abdiel",
             "Manxman",
@@ -635,7 +635,7 @@ function setGlobals()
             "Heinkel",
             "Dornier",
         },
-        ["Phobos M3P"] = {
+        [ST.PHOBOS_M3P] = {
             "Blinder",
             "Shadow",
             "Distortion",
@@ -645,7 +645,7 @@ function setGlobals()
             "Thebe",
             "Retrograde",
         },
-        ["Piranha"] = {
+        [ST.PIRANHA] = {
             "Razor",
             "Biter",
             "Ripper",
@@ -655,7 +655,7 @@ function setGlobals()
             "Vulture",
             "Predator",
         },
-        ["Vindicator"] = {
+        [ST.VINDICATOR] = {
             "Excelsior",
             "Velociraptor",
             "Thunder",
@@ -665,7 +665,7 @@ function setGlobals()
             "Aspern",
             "Panther",
         },
-        ["Stingray"] = {
+        [ST.STINGRAY] = {
             "Buzzer",
             "Flitter",
             "Zippiticus",
@@ -674,7 +674,7 @@ function setGlobals()
             "Stinger",
             "Stripe",
         },
-        ["Avalanche"] = {
+        [ST.AVALANCHE] = {
             "Projectus",
             "Hurlmeister",
             "Flinger",
@@ -683,7 +683,7 @@ function setGlobals()
             "Nakhimov",
             "Antigone",
         },
-        ["Repulse"] = {
+        [ST.REPULSE] = {
             "Fiddler",
             "Brinks",
             "Loomis",
@@ -694,7 +694,7 @@ function setGlobals()
             "Komatsu",
             "Eitan",
         },
-        ["Crow"] = {
+        [ST.CROW] = {
             "Sparrow",
             "Sizzle",
             "Squawk",
@@ -703,7 +703,7 @@ function setGlobals()
             "Snowbird",
             "Hawk",
         },
-        ["ZX-Lindworm"] = {
+        [ST.ZX_LINDWORM] = {
             "Seagull",
             "Catapult",
             "Blowhard",
@@ -712,7 +712,11 @@ function setGlobals()
             "Pixie",
             "Tinkerbell",
         },
-        ["Leftovers"] = { "Foregone", "Righteous", "Masher" },
+        ["Leftovers"] = {
+            "Foregone",
+            "Righteous",
+            "Masher"
+        },
     }
 end
 function constructEnvironment()
@@ -1433,7 +1437,7 @@ function earlyEnd()
                 p:addToShipLog(
                     _(
                         "shipLog",
-                        "We picked up an anomalous chroniton particle reading nearby. Encoded within the anomalous reading is a designated point along the timeline in the future. We are still working on the decoding rest of the information, but initial efforts hint at some major military action being taken by the Ghosts. We have placed countdown timers on some of your consoles indicating when this event is supposed to occur."
+                        [[We picked up an anomalous chroniton particle reading nearby. Encoded within the anomalous reading is a designated point along the timeline in the future. We are still working on the decoding rest of the information, but initial efforts hint at some major military action being taken by the Ghosts. We have placed countdown timers on some of your consoles indicating when this event is supposed to occur.]]
                     ),
                     "Magenta"
                 )
@@ -1441,7 +1445,10 @@ function earlyEnd()
             trigger_end_status = "started"
             odin_spawn_time = getScenarioTime() + 30
             addGMMessage(
-                _("msgGM", "30 second countdown to Odin spawn has begun.")
+                _(
+                    "msgGM",
+                    "30 second countdown to Odin spawn has begun."
+                )
             )
             clearGMFunctions()
         end)

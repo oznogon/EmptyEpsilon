@@ -1,30 +1,35 @@
--- CPU Ship Diversification Utility
--- Created from a desire to have a more diverse set up ships flying around out there.
--- Some of these are simple tweaks to existing ships. Some are more radically changed.
--- The intent for the armed ships is for them to be mixed in with the stock armed ships.
--- I usually end up creating a list of CPU ship templates:
--- ship_template = { --ordered by relative strength
---     ["Gnat"] = {strength = 2, create = gnat},
---     ["Lite Drone"] = {strength = 3, create = droneLite},
---     ["Jacket Drone"] = {strength = 4, create = droneJacket},
---     ["Ktlitan Drone"] = {strength = 4, create = stockTemplate},
--- }
--- I order them by relative strength. This is an arbitrary value I give each ship to
--- help create groups of ships that are a consistent degree of difficulty compared to
--- the player ship or ships in the game. It's the create portion that is more
--- interesting in this context. With the templates set up in a list like this with the
--- create function in the list, a ship can be spawned like this:
---     local ship = ship_template[selected_template].create(enemyFaction,selected_template)
--- ...where you specify selected_template and enemyFaction using whatever criteria your
--- scenario requires.
---
--- The ship creation function also adds the ship to the science database.
---
--- No global variables per se, just the function names themselves. These functions were
--- cloned from scenario to scenario until I put them in this document in an effort to
--- reduce the workload on the pull request reviewer.
---
--- Version 2.1
+--[[ CPU Ship Diversification Utility
+
+Created from a desire to have a more diverse set up ships flying around out there.
+Some of these are simple tweaks to existing ships. Some are more radically changed.
+The intent for the armed ships is for them to be mixed in with the stock armed ships.
+I usually end up creating a list of CPU ship templates:
+
+    ship_template = { --ordered by relative strength
+        ["Gnat"] = {strength = 2, create = gnat},
+        ["Lite Drone"] = {strength = 3, create = droneLite},
+        ["Jacket Drone"] = {strength = 4, create = droneJacket},
+        ["Ktlitan Drone"] = {strength = 4, create = stockTemplate},
+    }
+
+I order them by relative strength. This is an arbitrary value I give each ship to
+help create groups of ships that are a consistent degree of difficulty compared to
+the player ship or ships in the game. It's the create portion that is more
+interesting in this context. With the templates set up in a list like this with the
+create function in the list, a ship can be spawned like this:
+
+    local ship = ship_template[selected_template].create(enemyFaction,selected_template)
+
+...where you specify selected_template and enemyFaction using whatever criteria your
+scenario requires.
+
+The ship creation function also adds the ship to the science database.
+
+No global variables per se, just the function names themselves. These functions were
+cloned from scenario to scenario until I put them in this document in an effort to
+reduce the workload on the pull request reviewer.
+
+Version 2.1 --]]
 function stockTemplate(enemyFaction, template)
     local ship = CpuShip():setFaction(enemyFaction):setTemplate(template)
     ship:onTakingDamage(function(self, instigator)
@@ -40,22 +45,24 @@ end
 --------------------------------------------------------------------------------------------
 function atlantisY42(enemyFaction)
     --Relative strength reference number: 60
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Atlantis X23")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
-    ship:setTypeName("Atlantis Y42")
-    ship:setShieldsMax(300, 200, 300, 200) --stronger shields (vs 200,200,200,200)
-    ship:setShields(300, 200, 300, 200)
-    ship:setImpulseMaxSpeed(65) --faster impulse (vs 30)
-    ship:setRotationMaxSpeed(15) --faster maneuver (vs 3.5)
-    ship:setBeamWeapon(2, 80, 190, 1500, 6, 8) --narrower (vs 100)
-    ship:setBeamWeapon(3, 80, 170, 1500, 6, 8) --extra (vs 3 beams)
-    ship:setWeaponStorageMax("Homing", 16) --more (vs 4)
-    ship:setWeaponStorage("Homing", 16)
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.ATLANTIS_X23)
+        :onTakingDamage(function(self, instigator)
+            string.format("") --serious proton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName("Atlantis Y42")
+        :setShieldsMax(300, 200, 300, 200) --stronger shields (vs 200,200,200,200)
+        :setShields(300, 200, 300, 200)
+        :setImpulseMaxSpeed(65) --faster impulse (vs 30)
+        :setRotationMaxSpeed(15) --faster maneuver (vs 3.5)
+        :setBeamWeapon(2, 80, 190, 1500, 6, 8) --narrower (vs 100)
+        :setBeamWeapon(3, 80, 170, 1500, 6, 8) --extra (vs 3 beams)
+        :setWeaponStorageMax("Homing", 16) --more (vs 4)
+        :setWeaponStorage("Homing", 16)
     local ships_key = _("scienceDB", "Ships")
     local corvette_key = _("scienceDB", "Corvette")
     local y42_key = _("scienceDB", "Atlantis Y42")
@@ -79,7 +86,7 @@ function atlantisY42(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "The Atlantis Y42 improves on the Atlantis X23 with stronger shields, faster impulse and turn speeds, an extra beam in back and a larger missile stock"
+                    [[The Atlantis Y42 improves on the Atlantis X23 with stronger shields, faster impulse and turn speeds, an extra beam in back and a larger missile stock]]
                 ),
                 {
                     { key = tube_key, value = load_val }, --torpedo tube direction and load speed
@@ -95,93 +102,95 @@ function atlantisY42(enemyFaction)
     return ship
 end
 function barracuda(enemyFaction)
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Phobos T3")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
-    ship:setTypeName("Barracuda")
-    ship:setHullMax(200) --stronger hull (vs 70)
-    ship:setHull(200)
-    ship:setShieldsMax(200, 100, 100) --stronger shields (vs 50,40)
-    ship:setShields(200, 100, 100)
-    ship:setImpulseMaxSpeed(75) --faster impulse (vs 60)
-    ship:setRotationMaxSpeed(15) --faster maneuver (vs 10)
-    ship:setWeaponTubeCount(16) --more (vs 2)
-    ship:setWeaponTubeDirection(0, 5)
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.PHOBOS_T3)
+        :onTakingDamage(function(self, instigator)
+            string.format("") --serious proton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName("Barracuda")
+        :setHullMax(200) --stronger hull (vs 70)
+        :setHull(200)
+        :setShieldsMax(200, 100, 100) --stronger shields (vs 50,40)
+        :setShields(200, 100, 100)
+        :setImpulseMaxSpeed(75) --faster impulse (vs 60)
+        :setRotationMaxSpeed(15) --faster maneuver (vs 10)
+        :setWeaponTubeCount(16) --more (vs 2)
+        :setWeaponTubeDirection(0, 5)
         :setTubeSize(0, "small")
         :setTubeLoadTime(0, 8)
         :setWeaponTubeExclusiveFor(0, "Homing")
-    ship:setWeaponTubeDirection(1, -5)
+        :setWeaponTubeDirection(1, -5)
         :setTubeSize(1, "small")
         :setTubeLoadTime(1, 8)
         :setWeaponTubeExclusiveFor(1, "Homing")
-    ship:setWeaponTubeDirection(2, 0)
+        :setWeaponTubeDirection(2, 0)
         :setTubeSize(2, "small")
         :setTubeLoadTime(2, 7)
         :setWeaponTubeExclusiveFor(2, "Homing")
-    ship:setWeaponTubeDirection(3, 5)
+        :setWeaponTubeDirection(3, 5)
         :setTubeSize(3, "small")
         :setTubeLoadTime(3, 6)
         :setWeaponTubeExclusiveFor(3, "EMP")
-    ship:setWeaponTubeDirection(4, -5)
+        :setWeaponTubeDirection(4, -5)
         :setTubeSize(4, "small")
         :setTubeLoadTime(4, 6)
         :setWeaponTubeExclusiveFor(4, "EMP")
-    ship:setWeaponTubeDirection(5, 0)
+        :setWeaponTubeDirection(5, 0)
         :setTubeSize(5, "small")
         :setTubeLoadTime(5, 5)
         :setWeaponTubeExclusiveFor(5, "EMP")
-    ship:setWeaponTubeDirection(6, 5)
+        :setWeaponTubeDirection(6, 5)
         :setTubeSize(6, "small")
         :setTubeLoadTime(6, 9)
         :setWeaponTubeExclusiveFor(6, "Nuke")
-    ship:setWeaponTubeDirection(7, -5)
+        :setWeaponTubeDirection(7, -5)
         :setTubeSize(7, "small")
         :setTubeLoadTime(7, 9)
         :setWeaponTubeExclusiveFor(7, "Nuke")
-    ship:setWeaponTubeDirection(8, 0)
+        :setWeaponTubeDirection(8, 0)
         :setTubeSize(8, "small")
         :setTubeLoadTime(8, 8)
         :setWeaponTubeExclusiveFor(8, "Nuke")
-    ship:setWeaponTubeDirection(9, 5)
+        :setWeaponTubeDirection(9, 5)
         :setTubeSize(9, "small")
         :setTubeLoadTime(9, 4)
         :setWeaponTubeExclusiveFor(9, "HVLI")
-    ship:setWeaponTubeDirection(10, -5)
+        :setWeaponTubeDirection(10, -5)
         :setTubeSize(10, "small")
         :setTubeLoadTime(10, 4)
         :setWeaponTubeExclusiveFor(10, "HVLI")
-    ship:setWeaponTubeDirection(11, 0)
+        :setWeaponTubeDirection(11, 0)
         :setTubeSize(11, "small")
         :setTubeLoadTime(11, 3)
         :setWeaponTubeExclusiveFor(11, "HVLI")
-    ship:setWeaponTubeDirection(12, -10)
+        :setWeaponTubeDirection(12, -10)
         :setTubeSize(12, "small")
         :setTubeLoadTime(12, 5)
         :setWeaponTubeExclusiveFor(12, "HVLI")
-    ship:setWeaponTubeDirection(13, 10)
+        :setWeaponTubeDirection(13, 10)
         :setTubeSize(13, "small")
         :setTubeLoadTime(13, 5)
         :setWeaponTubeExclusiveFor(13, "HVLI")
-    ship:setWeaponTubeDirection(14, 0)
+        :setWeaponTubeDirection(14, 0)
         :setTubeSize(14, "medium")
         :setTubeLoadTime(14, 5)
         :setWeaponTubeExclusiveFor(14, "Homing")
-    ship:setWeaponTubeDirection(15, 0)
+        :setWeaponTubeDirection(15, 0)
         :setTubeSize(15, "medium")
         :setTubeLoadTime(15, 10)
         :setWeaponTubeExclusiveFor(15, "Nuke")
-    ship:setWeaponStorageMax("Homing", 32) --more (vs 6)
-    ship:setWeaponStorage("Homing", 32)
-    ship:setWeaponStorageMax("EMP", 20) --more (vs 0)
-    ship:setWeaponStorage("EMP", 20)
-    ship:setWeaponStorageMax("Nuke", 18) --more (vs 0)
-    ship:setWeaponStorage("Nuke", 18)
-    ship:setWeaponStorageMax("HVLI", 55) --more (vs 12)
-    ship:setWeaponStorage("HVLI", 55)
+        :setWeaponStorageMax("Homing", 32) --more (vs 6)
+        :setWeaponStorage("Homing", 32)
+        :setWeaponStorageMax("EMP", 20) --more (vs 0)
+        :setWeaponStorage("EMP", 20)
+        :setWeaponStorageMax("Nuke", 18) --more (vs 0)
+        :setWeaponStorage("Nuke", 18)
+        :setWeaponStorageMax("HVLI", 55) --more (vs 12)
+        :setWeaponStorage("HVLI", 55)
     local ships_key = _("scienceDB", "Ships")
     local frigate_key = _("scienceDB", "Frigate")
     local barracuda_key = _("scienceDB", "Barracuda")
@@ -220,7 +229,9 @@ function barracuda(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "The Barracuda started off as a Phobos T3. It was given massive upgrades to shields, hull and missile weapons. The impulse systems were also upgraded. It's designed to spray missiles forth at a prodigious rate.\n\nIt barely qualifies as a frigate, it's more like a mini-corvette."
+                    [[The Barracuda is a variant of the Phobos T3 with massive upgrades to its shields, hull, missile weapons, and impulse system. It's designed to spray missiles at a prodigious rate.
+
+It barely qualifies as a frigate and is more like a small corvette.]]
                 ),
                 {
                     { key = small_tubes_0_key, value = small_tubes_0_val }, --torpedo tube direction and load speed
@@ -243,19 +254,23 @@ end
 function cruiserdrone(enemyFaction)
     --Relative strength reference number: 23
     --courtesy of Black Wall scenario
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Karnack")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
     local cruiserdrone_key = _("scienceDB", "Cruiser Drone")
-    ship:setTypeName(cruiserdrone_key)
-    ship:setHullMax(80):setHull(80) -- stronger (vs 70)
-    ship:setShieldsMax(60, 60):setShields(60, 60) -- stronger (vs 40,40)
-    ship:setImpulseMaxSpeed(70) -- faster (vs 60)
-    ship:setRotationMaxSpeed(15) -- faster spin (vs 6)
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.KARNACK)
+        :onTakingDamage(function(self, instigator)
+            string.format("") --serious proton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName(cruiserdrone_key)
+        :setHullMax(80)
+        :setHull(80) -- stronger (vs 70)
+        :setShieldsMax(60, 60)
+        :setShields(60, 60) -- stronger (vs 40,40)
+        :setImpulseMaxSpeed(70) -- faster (vs 60)
+        :setRotationMaxSpeed(15) -- faster spin (vs 6)
     local ships_key = _("scienceDB", "Ships")
     local frigate_key = _("scienceDB", "Frigate")
     local cruiser_key = _("scienceDB", "Cruiser")
@@ -281,7 +296,7 @@ function cruiserdrone(enemyFaction)
             ship, --ship just created, long description on the next line
             _(
                 "scienceDB",
-                "A standard cruiser modifed for target practice purposes: stronger hull and shields, faster impulse and better maneuverability. Some of these may have slipped out of the automated manufacturing facility to be refurbished for actual militia use."
+                [[A Karnack cruiser modifed for target practice with stronger hull and shields, faster impulse, and better maneuverability. Some of these might have slipped out of the automated manufacturing facility to be refurbished for militia use.]]
             ),
             nil, --tube info
             nil, --jump
@@ -292,21 +307,23 @@ function cruiserdrone(enemyFaction)
 end
 function cucaracha(enemyFaction)
     --Relative strength reference number: 36
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Apis")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
-    ship:setTypeName("Cucaracha")
-    ship:setShieldsMax(200, 50, 50, 50, 50, 50) --stronger shields (vs 20)
-    ship:setShields(200, 50, 50, 50, 50, 50)
-    ship:setHullMax(100) --stronger hull (vs 50)
-    ship:setHull(100)
-    ship:setRotationMaxSpeed(20) --faster maneuver (vs 10)
-    ship:setAcceleration(30) --faster acceleration (vs 15)
-    ship:setBeamWeapon(0, 60, 0, 1500, 6, 10) --extra rear facing beam
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate("Apis")
+        :onTakingDamage(function(self, instigator)
+            string.format("") --serious proton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName("Cucaracha")
+        :setShieldsMax(200, 50, 50, 50, 50, 50) --stronger shields (vs 20)
+        :setShields(200, 50, 50, 50, 50, 50)
+        :setHullMax(100) --stronger hull (vs 50)
+        :setHull(100)
+        :setRotationMaxSpeed(20) --faster maneuver (vs 10)
+        :setAcceleration(30) --faster acceleration (vs 15)
+        :setBeamWeapon(0, 60, 0, 1500, 6, 10) --extra rear facing beam
     local ships_key = _("scienceDB", "Ships")
     local no_class_key = _("scienceDB", "No Class")
     local cucaracha_key = _("scienceDB", "Cucaracha")
@@ -325,7 +342,7 @@ function cucaracha(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "The Cucaracha is a quick ship built around the Tug model with heavy shields and a heavy beam designed to be difficult to squash"
+                    [[The Cucaracha is a tug modified for agility, with heavy shields and a heavy beam weapon. It's designed to be difficult to squash.]]
                 ),
                 nil,
                 nil, --jump range
@@ -338,22 +355,26 @@ end
 function dreadnought2(enemyFaction)
     --courtesy of Black Wall scenario
     --Relative strength reference number: 85
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Dreadnought")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
     local dreadnought2_key = _("scienceDB", "Dreadnought II")
-    ship:setTypeName(dreadnought2_key)
-    ship:setHullMax(200):setHull(200) --stronger (vs 70)
-    ship:setShieldsMax(100, 100, 100, 100, 100) --weaker (vs 300x5)
-    ship:setImpulseMaxSpeed(90) --faster (vs 30)
-    ship:setRotationMaxSpeed(4) --faster (vs 1.5)
-    ship:setWeaponTubeCount(1) --more (vs 0)
-    ship:setTubeLoadTime(0, 15)
-    ship:setWeaponStorageMax("Homing", 8):setWeaponStorage("Homing", 8)
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate("Dreadnought")
+        :onTakingDamage(function(self, instigator)
+            string.format("") --serious proton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName(dreadnought2_key)
+        :setHullMax(200)
+        :setHull(200) --stronger (vs 70)
+        :setShieldsMax(100, 100, 100, 100, 100) --weaker (vs 300x5)
+        :setImpulseMaxSpeed(90) --faster (vs 30)
+        :setRotationMaxSpeed(4) --faster (vs 1.5)
+        :setWeaponTubeCount(1) --more (vs 0)
+        :setTubeLoadTime(0, 15)
+        :setWeaponStorageMax("Homing", 8)
+        :setWeaponStorage("Homing", 8)
     local ships_key = _("scienceDB", "Ships")
     local dreadnought_class_key = _("scienceDB", "Dreadnought")
     local dreadnought_ship_key = _("scienceDB", "Dreadnought")
@@ -390,7 +411,7 @@ function dreadnought2(enemyFaction)
             ship, --ship just created, long description on the next line
             _(
                 "scienceDB",
-                "A modified Dreadnought: stronger hull, weaker shields, ~3x faster impulse and turn speeds. A tube that shoots homing missiles has been added.\n\nDon't forget to thank your science database librarian for making this information available. She likes cookies."
+                [[A Dreadnought modified to have a stronger hull, weaker shields, and impulse and turn speeds that are about three times faster. A homing missile tube has also been added.]]
             ),
             {
                 { key = tube_key, value = load_val }, --torpedo tube direction and load speed
@@ -403,12 +424,14 @@ function dreadnought2(enemyFaction)
 end
 function droneHeavy(enemyFaction)
     --Relative strength reference number: 5
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Ktlitan Drone")
-    ship:setTypeName("Heavy Drone")
-    ship:setHullMax(40) --stronger hull (vs 30)
-    ship:setHull(40)
-    ship:setImpulseMaxSpeed(110) --slower impulse (vs 120)
-    ship:setBeamWeapon(0, 40, 0, 600, 4, 8) --stronger (vs 6) beam
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.KTLITAN_DRONE)
+        :setTypeName("Heavy Drone")
+        :setHullMax(40) --stronger hull (vs 30)
+        :setHull(40)
+        :setImpulseMaxSpeed(110) --slower impulse (vs 120)
+        :setBeamWeapon(0, 40, 0, 600, 4, 8) --stronger (vs 6) beam
     local ships_key = _("scienceDB", "Ships")
     local no_class_key = _("scienceDB", "No Class")
     local heavy_drone_key = _("scienceDB", "Heavy Drone")
@@ -427,7 +450,7 @@ function droneHeavy(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "The heavy drone has a stronger hull and a stronger beam than the normal Ktlitan Drone, but it also moves slower"
+                    [[The heavy drone has a stronger hull and beam weapon than the normal Ktlitan Drone, but it also moves slower]]
                 ),
                 nil, --misc key value pairs
                 nil, --jump
@@ -439,18 +462,20 @@ function droneHeavy(enemyFaction)
 end
 function droneJacket(enemyFaction)
     --Relative strength reference number: 4
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Ktlitan Drone")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
-    ship:setTypeName("Jacket Drone")
-    ship:setShieldsMax(20) --stronger shields (vs none)
-    ship:setShields(20)
-    ship:setImpulseMaxSpeed(110) --slower impulse (vs 120)
-    ship:setBeamWeapon(0, 40, 0, 600, 4, 4) --weaker (vs 6) beam
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.KTLITAN_DRONE)
+        :onTakingDamage(function(self, instigator)
+            string.format("") --serious proton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName("Jacket Drone")
+        :setShieldsMax(20) --stronger shields (vs none)
+        :setShields(20)
+        :setImpulseMaxSpeed(110) --slower impulse (vs 120)
+        :setBeamWeapon(0, 40, 0, 600, 4, 4) --weaker (vs 6) beam
     local ships_key = _("scienceDB", "Ships")
     local no_class_key = _("scienceDB", "No Class")
     local jacket_drone_key = _("scienceDB", "Jacket Drone")
@@ -469,7 +494,7 @@ function droneJacket(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "The Jacket Drone is a Ktlitan Drone with a shield. It's also slightly slower and has a slightly weaker beam due to the energy requirements of the added shield"
+                    [[The Jacket Drone is a Ktlitan Drone with a shield. It's also slightly slower and has a slightly weaker beam due to the shield's energy requirements.]]
                 ),
                 nil, --misc key value pairs
                 nil, --jump
@@ -481,13 +506,15 @@ function droneJacket(enemyFaction)
 end
 function droneLite(enemyFaction)
     --Relative strength reference number: 3
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Ktlitan Drone")
-    ship:setTypeName("Lite Drone")
-    ship:setHullMax(20) --weaker hull (vs 30)
-    ship:setHull(20)
-    ship:setImpulseMaxSpeed(130) --faster impulse (vs 120)
-    ship:setRotationMaxSpeed(20) --faster maneuver (vs 10)
-    ship:setBeamWeapon(0, 40, 0, 600, 4, 4) --weaker (vs 6) beam
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.KTLITAN_DRONE)
+        :setTypeName("Lite Drone")
+        :setHullMax(20) --weaker hull (vs 30)
+        :setHull(20)
+        :setImpulseMaxSpeed(130) --faster impulse (vs 120)
+        :setRotationMaxSpeed(20) --faster maneuver (vs 10)
+        :setBeamWeapon(0, 40, 0, 600, 4, 4) --weaker (vs 6) beam
     local ships_key = _("scienceDB", "Ships")
     local no_class_key = _("scienceDB", "No Class")
     local lite_drone_key = _("scienceDB", "Lite Drone")
@@ -506,7 +533,7 @@ function droneLite(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "The light drone was pieced together from scavenged parts of various damaged Ktlitan drones. Compared to the Ktlitan drone, the lite drone has a weaker hull, and a weaker beam, but a faster turn and impulse speed"
+                    [[The lite drone was pieced together from scavenged parts of various damaged Ktlitan drones. Compared to a Ktlitan drone, a lite drone has a weaker hull and beam weapon, but a faster turn rate and impulse speed.]]
                 ),
                 nil, --misc key value pairs
                 nil, --jump
@@ -518,37 +545,38 @@ function droneLite(enemyFaction)
 end
 function enforcer(enemyFaction)
     --Relative strength reference number: 75
-    local ship =
-        CpuShip():setFaction(enemyFaction):setTemplate("Blockade Runner")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
-    ship:setTypeName("Enforcer")
-    ship:setRadarTrace("ktlitan_destroyer.png") --different radar trace
-    ship:setWarpDrive(true) --warp (vs none)
-    ship:setWarpSpeed(600)
-    ship:setImpulseMaxSpeed(100) --faster impulse (vs 60)
-    ship:setRotationMaxSpeed(20) --faster maneuver (vs 15)
-    ship:setShieldsMax(200, 100, 100) --stronger shields (vs 100,150)
-    ship:setShields(200, 100, 100)
-    ship:setHullMax(100) --stronger hull (vs 70)
-    ship:setHull(100)
-    ship:setBeamWeapon(0, 30, 5, 1500, 6, 10) --narrower (vs 60), longer (vs 1000), stronger (vs 8)
-    ship:setBeamWeapon(1, 30, -5, 1500, 6, 10)
-    ship:setBeamWeapon(2, 0, 0, 0, 0, 0) --fewer (vs 4)
-    ship:setBeamWeapon(3, 0, 0, 0, 0, 0)
-    ship:setWeaponTubeCount(3) --more (vs 0)
-    ship:setTubeSize(0, "large") --large (vs normal)
-    ship:setWeaponTubeDirection(1, -15)
-    ship:setWeaponTubeDirection(2, 15)
-    ship:setTubeLoadTime(0, 18)
-    ship:setTubeLoadTime(1, 12)
-    ship:setTubeLoadTime(2, 12)
-    ship:setWeaponStorageMax("Homing", 18) --more (vs 0)
-    ship:setWeaponStorage("Homing", 18)
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.BLOCKADE_RUNNER)
+        :onTakingDamage(function(self, instigator)
+            string.format("") --serious proton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName("Enforcer")
+        :setRadarTrace("ktlitan_destroyer.png") --different radar trace
+        :setWarpDrive(true) --warp (vs none)
+        :setWarpSpeed(600)
+        :setImpulseMaxSpeed(100) --faster impulse (vs 60)
+        :setRotationMaxSpeed(20) --faster maneuver (vs 15)
+        :setShieldsMax(200, 100, 100) --stronger shields (vs 100,150)
+        :setShields(200, 100, 100)
+        :setHullMax(100) --stronger hull (vs 70)
+        :setHull(100)
+        :setBeamWeapon(0, 30, 5, 1500, 6, 10) --narrower (vs 60), longer (vs 1000), stronger (vs 8)
+        :setBeamWeapon(1, 30, -5, 1500, 6, 10)
+        :setBeamWeapon(2, 0, 0, 0, 0, 0) --fewer (vs 4)
+        :setBeamWeapon(3, 0, 0, 0, 0, 0)
+        :setWeaponTubeCount(3) --more (vs 0)
+        :setTubeSize(0, "large") --large (vs normal)
+        :setWeaponTubeDirection(1, -15)
+        :setWeaponTubeDirection(2, 15)
+        :setTubeLoadTime(0, 18)
+        :setTubeLoadTime(1, 12)
+        :setTubeLoadTime(2, 12)
+        :setWeaponStorageMax("Homing", 18) --more (vs 0)
+        :setWeaponStorage("Homing", 18)
     local ships_key = _("scienceDB", "Ships")
     local frigate_key = _("scienceDB", "Frigate")
     local enforcer_key = _("scienceDB", "Enforcer")
@@ -576,7 +604,7 @@ function enforcer(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "The Enforcer is a highly modified Blockade Runner. A warp drive was added and impulse engines boosted along with turning speed. Three missile tubes were added to shoot homing missiles, large ones straight ahead. Stronger shields and hull. Removed rear facing beams and strengthened front beams."
+                    [[The Enforcer is a highly modified Blockade Runner with a warp drive, stronger shields and hull, boosted impulse engines, and improved turning speed. Three fore-facing missile tubes were also added to fire large homing missiles. This variant removes the Blockade Runner's aft-facing beams to strengthen its fore beams.]]
                 ),
                 {
                     { key = tube_key, value = load_val }, --torpedo tube direction and load speed
@@ -593,18 +621,20 @@ function enforcer(enemyFaction)
 end
 function farco3(enemyFaction)
     --Relative strength reference number: 16
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Phobos T3")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
-    ship:setTypeName("Farco 3")
-    ship:setShieldsMax(60, 40) --stronger shields (vs 50, 40)
-    ship:setShields(60, 40)
-    ship:setBeamWeapon(0, 90, -15, 1500, 5.0, 6.0) --longer (vs 1200), faster (vs 8)
-    ship:setBeamWeapon(1, 90, 15, 1500, 5.0, 6.0)
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.PHOBOS_T3)
+        :onTakingDamage(function(self, instigator)
+            string.format("") -- SeriousProton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName("Farco 3")
+        :setShieldsMax(60, 40) --stronger shields (vs 50, 40)
+        :setShields(60, 40)
+        :setBeamWeapon(0, 90, -15, 1500, 5.0, 6.0) --longer (vs 1200), faster (vs 8)
+        :setBeamWeapon(1, 90, 15, 1500, 5.0, 6.0)
     local ships_key = _("scienceDB", "Ships")
     local frigate_key = _("scienceDB", "Frigate")
     local farco_key = _("scienceDB", "Farco 3")
@@ -624,7 +654,7 @@ function farco3(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "The Farco models are evolutionary changes to the Phobos T3. In the case of the Farco 3, the beams are longer and faster and the shields are slightly stronger."
+                    [[The Farco models are evolutionary changes to the Phobos T3. In the case of the Farco 3, the beams are longer and faster and the shields are slightly stronger.]]
                 ),
                 {
                     { key = tube_key, value = load_val }, --torpedo tube direction and load speed
@@ -639,18 +669,20 @@ function farco3(enemyFaction)
 end
 function farco5(enemyFaction)
     --Relative strength reference number: 16
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Phobos T3")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
-    ship:setTypeName("Farco 5")
-    ship:setShieldsMax(60, 40) --stronger shields (vs 50, 40)
-    ship:setShields(60, 40)
-    ship:setTubeLoadTime(0, 30) --faster (vs 60)
-    ship:setTubeLoadTime(0, 30)
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.PHOBOS_T3)
+        :onTakingDamage(function(self, instigator)
+            string.format("") -- SeriousProton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName("Farco 5")
+        :setShieldsMax(60, 40) --stronger shields (vs 50, 40)
+        :setShields(60, 40)
+        :setTubeLoadTime(0, 30) --faster (vs 60)
+        :setTubeLoadTime(0, 30)
     local ships_key = _("scienceDB", "Ships")
     local frigate_key = _("scienceDB", "Frigate")
     local farco_key = _("scienceDB", "Farco 5")
@@ -670,7 +702,7 @@ function farco5(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "The Farco models are evolutionary changes to the Phobos T3. In the case of the Farco 5, the tubes load faster and the shields are slightly stronger."
+                    [[The Farco models are evolutionary changes to the Phobos T3. In the case of the Farco 5, the tubes load faster and the shields are slightly stronger.]]
                 ),
                 {
                     { key = tube_key, value = load_val }, --torpedo tube direction and load speed
@@ -685,20 +717,22 @@ function farco5(enemyFaction)
 end
 function farco8(enemyFaction)
     --Relative strength reference number: 19
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Phobos T3")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
-    ship:setTypeName("Farco 8")
-    ship:setShieldsMax(80, 50) --stronger shields (vs 50, 40)
-    ship:setShields(80, 50)
-    ship:setBeamWeapon(0, 90, -15, 1500, 5.0, 6.0) --longer (vs 1200), faster (vs 8)
-    ship:setBeamWeapon(1, 90, 15, 1500, 5.0, 6.0)
-    ship:setTubeLoadTime(0, 30) --faster (vs 60)
-    ship:setTubeLoadTime(0, 30)
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.PHOBOS_T3)
+        :onTakingDamage(function(self, instigator)
+            string.format("") --serious proton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName("Farco 8")
+        :setShieldsMax(80, 50) --stronger shields (vs 50, 40)
+        :setShields(80, 50)
+        :setBeamWeapon(0, 90, -15, 1500, 5.0, 6.0) --longer (vs 1200), faster (vs 8)
+        :setBeamWeapon(1, 90, 15, 1500, 5.0, 6.0)
+        :setTubeLoadTime(0, 30) --faster (vs 60)
+        :setTubeLoadTime(0, 30)
     local ships_key = _("scienceDB", "Ships")
     local frigate_key = _("scienceDB", "Frigate")
     local farco_key = _("scienceDB", "Farco 8")
@@ -718,7 +752,7 @@ function farco8(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "The Farco models are evolutionary changes to the Phobos T3. In the case of the Farco 8, the beams are longer and faster, the tubes load faster and the shields are stronger."
+                    [[The Farco models are evolutionary changes to the Phobos T3. In the case of the Farco 8, the beams are longer and faster, the tubes load faster and the shields are stronger.]]
                 ),
                 {
                     { key = tube_key, value = load_val }, --torpedo tube direction and load speed
@@ -733,20 +767,22 @@ function farco8(enemyFaction)
 end
 function farco11(enemyFaction)
     --Relative strength reference number: 21
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Phobos T3")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
-    ship:setTypeName("Farco 11")
-    ship:setShieldsMax(80, 50) --stronger shields (vs 50, 40)
-    ship:setShields(80, 50)
-    ship:setRotationMaxSpeed(15) --faster maneuver (vs 10)
-    ship:setBeamWeapon(0, 90, -15, 1500, 5.0, 6.0) --longer (vs 1200), faster (vs 8)
-    ship:setBeamWeapon(1, 90, 15, 1500, 5.0, 6.0)
-    ship:setBeamWeapon(2, 20, 0, 1800, 5.0, 4.0) --additional sniping beam
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.PHOBOS_T3)
+        :onTakingDamage(function(self, instigator)
+            string.format("") --serious proton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName("Farco 11")
+        :setShieldsMax(80, 50) --stronger shields (vs 50, 40)
+        :setShields(80, 50)
+        :setRotationMaxSpeed(15) --faster maneuver (vs 10)
+        :setBeamWeapon(0, 90, -15, 1500, 5.0, 6.0) --longer (vs 1200), faster (vs 8)
+        :setBeamWeapon(1, 90, 15, 1500, 5.0, 6.0)
+        :setBeamWeapon(2, 20, 0, 1800, 5.0, 4.0) --additional sniping beam
     local ships_key = _("scienceDB", "Ships")
     local frigate_key = _("scienceDB", "Frigate")
     local farco_key = _("scienceDB", "Farco 11")
@@ -767,7 +803,7 @@ function farco11(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "The Farco models are evolutionary changes to the Phobos T3. In the case of the Farco 11, the maneuver speed is faster, the beams are longer and faster, there's an added longer sniping beam and the shields are stronger."
+                    [[The Farco models are evolutionary changes to the Phobos T3. In the case of the Farco 11, the maneuver speed is faster, the beams are longer and faster, there's an added longer sniping beam and the shields are stronger.]]
                 ),
                 {
                     { key = tube_key, value = load_val }, --torpedo tube direction and load speed
@@ -782,26 +818,28 @@ function farco11(enemyFaction)
 end
 function farco13(enemyFaction)
     --Relative strength reference number: 24
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Phobos T3")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
-    ship:setTypeName("Farco 13")
-    ship:setShieldsMax(90, 70) --stronger shields (vs 50, 40)
-    ship:setShields(90, 70)
-    ship:setRotationMaxSpeed(15) --faster maneuver (vs 10)
-    ship:setBeamWeapon(0, 90, -15, 1500, 5.0, 6.0) --longer (vs 1200), faster (vs 8)
-    ship:setBeamWeapon(1, 90, 15, 1500, 5.0, 6.0)
-    ship:setBeamWeapon(2, 20, 0, 1800, 5.0, 4.0) --additional sniping beam
-    ship:setTubeLoadTime(0, 30) --faster (vs 60)
-    ship:setTubeLoadTime(0, 30)
-    ship:setWeaponStorageMax("Homing", 16) --more (vs 6)
-    ship:setWeaponStorage("Homing", 16)
-    ship:setWeaponStorageMax("HVLI", 30) --more (vs 20)
-    ship:setWeaponStorage("HVLI", 30)
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.PHOBOS_T3)
+        :onTakingDamage(function(self, instigator)
+            string.format("") --serious proton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName("Farco 13")
+        :setShieldsMax(90, 70) --stronger shields (vs 50, 40)
+        :setShields(90, 70)
+        :setRotationMaxSpeed(15) --faster maneuver (vs 10)
+        :setBeamWeapon(0, 90, -15, 1500, 5.0, 6.0) --longer (vs 1200), faster (vs 8)
+        :setBeamWeapon(1, 90, 15, 1500, 5.0, 6.0)
+        :setBeamWeapon(2, 20, 0, 1800, 5.0, 4.0) --additional sniping beam
+        :setTubeLoadTime(0, 30) --faster (vs 60)
+        :setTubeLoadTime(0, 30)
+        :setWeaponStorageMax("Homing", 16) --more (vs 6)
+        :setWeaponStorage("Homing", 16)
+        :setWeaponStorageMax("HVLI", 30) --more (vs 20)
+        :setWeaponStorage("HVLI", 30)
     local ships_key = _("scienceDB", "Ships")
     local frigate_key = _("scienceDB", "Frigate")
     local farco_key = _("scienceDB", "Farco 13")
@@ -822,7 +860,7 @@ function farco13(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "The Farco models are evolutionary changes to the Phobos T3. In the case of the Farco 13, the maneuver speed is faster, the beams are longer and faster, there's an added longer sniping beam, the tubes load faster, there are more missiles and the shields are stronger."
+                    [[The Farco models are evolutionary changes to the Phobos T3. In the case of the Farco 13, the maneuver speed is faster, the beams are longer and faster, there's an added longer sniping beam, the tubes load faster, there are more missiles and the shields are stronger.]]
                 ),
                 {
                     { key = tube_key, value = load_val }, --torpedo tube direction and load speed
@@ -838,22 +876,27 @@ end
 function fighter2(enemyFaction)
     --courtesy of Black Wall scenario
     --Relative strength reference number: 9
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Riposte")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
-    local fighter2_key = _("scienceDB", "Fighter II")
-    ship:setTypeName(fighter2_key)
-    ship:setBeamWeapon(0, 60, 0, 1000.0, 4.0, 6) --more damage (vs 4)
-    ship:setHullMax(60):setHull(60) --stronger hull (vs 30)
-    ship:setShieldsMax(50):setShields(50) --stronger shields (vs 30)
-    ship:setImpulseMaxSpeed(100) --slower impulse (vs 120)
-    ship:setWeaponTubeCount(1) --more tubes (vs 0)
-    ship:setTubeLoadTime(0, 8)
-    ship:setWeaponStorageMax("Homing", 2):setWeaponStorage("Homing", 2)
+    local fighter2_key = _("scienceDB", "Riposte II")
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.RIPOSTE)
+        :onTakingDamage(function(self, instigator)
+            string.format("") --serious proton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName(fighter2_key)
+        :setBeamWeapon(0, 60, 0, 1000.0, 4.0, 6) --more damage (vs 4)
+        :setHullMax(60)
+        :setHull(60) --stronger hull (vs 30)
+        :setShieldsMax(50)
+        :setShields(50) --stronger shields (vs 30)
+        :setImpulseMaxSpeed(100) --slower impulse (vs 120)
+        :setWeaponTubeCount(1) --more tubes (vs 0)
+        :setTubeLoadTime(0, 8)
+        :setWeaponStorageMax("Homing", 2)
+        :setWeaponStorage("Homing", 2)
     local ships_key = _("scienceDB", "Ships")
     local starfighter_key = _("scienceDB", "Starfighter")
     local fighter_key = _("scienceDB", "Riposte")
@@ -881,7 +924,9 @@ function fighter2(enemyFaction)
             ship, --ship just created, long description on the next line
             _(
                 "scienceDB",
-                "Fighters are quick, agile ships that do not do a lot of damage, but usually come in larger groups. They are easy to take out, but should not be underestimated. The Fighter II is a more powerful version with stronger beams, hull and shields and an added homing missile tube. All those additions make it a bit slower, though.\n\nGive your science database librarian a big smile. She works hard for you."
+                [[Ripostes are weak, nimble interceptors with a single beam weapon that become a greater threat when they engage in larger groups. They're often deployed in reconnaissance, patrol, and outpost-defense roles.]]
+            ) .. _(
+                [[The Riposte II is a more powerful version with stronger beams, hull, and shields and an added homing missile tube. These additions reduce its speed, however.]]
             ),
             {
                 { key = tube_key, value = load_val }, --torpedo tube direction and load speed
@@ -894,13 +939,15 @@ function fighter2(enemyFaction)
 end
 function gnat(enemyFaction)
     --Relative strength reference number: 2
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Ktlitan Drone")
-    ship:setTypeName("Gnat")
-    ship:setHullMax(15) --weaker hull (vs 30)
-    ship:setHull(15)
-    ship:setImpulseMaxSpeed(140) --faster impulse (vs 120)
-    ship:setRotationMaxSpeed(25) --faster maneuver (vs 10)
-    ship:setBeamWeapon(0, 40, 0, 600, 4, 3) --weaker (vs 6) beam
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate("Ktlitan Drone")
+        :setTypeName("Gnat")
+        :setHullMax(15) --weaker hull (vs 30)
+        :setHull(15)
+        :setImpulseMaxSpeed(140) --faster impulse (vs 120)
+        :setRotationMaxSpeed(25) --faster maneuver (vs 10)
+        :setBeamWeapon(0, 40, 0, 600, 4, 3) --weaker (vs 6) beam
     local ships_key = _("scienceDB", "Ships")
     local no_class_key = _("scienceDB", "No Class")
     local gnat_key = _("scienceDB", "Gnat")
@@ -917,7 +964,7 @@ function gnat(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "The Gnat is a nimbler version of the Ktlitan Drone. It's got half the hull, but it moves and turns faster"
+                    [[The Gnat is a nimbler version of the Ktlitan Drone. It has half the hull strength, but it moves and turns faster.]]
                 ),
                 nil, --misc key value pairs
                 nil, --jump range
@@ -930,20 +977,23 @@ end
 function gunship2(enemyFaction)
     --courtesy of Black Wall scenario
     --Relative strength reference number: 20
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Adv. Gunship")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
     local gunship2_key = _("scienceDB", "Gunship II")
-    ship:setTypeName(gunship2_key)
-    ship:setBeamWeapon(0, 50, -15, 1000.0, 6.0, 10) --more damage (vs 8)
-    ship:setBeamWeapon(1, 50, 15, 1000.0, 6.0, 10)
-    ship:setHullMax(90):setHull(90) --weaker hull (vs 100)
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.ADV_GUNSHIP)
+        :onTakingDamage(function(self, instigator)
+            string.format("") -- SeriousProton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName(gunship2_key)
+        :setBeamWeapon(0, 50, -15, 1000.0, 6.0, 10) --more damage (vs 8)
+        :setBeamWeapon(1, 50, 15, 1000.0, 6.0, 10)
+        :setHullMax(90)
+        :setHull(90) --weaker hull (vs 100)
     local ships_key = _("scienceDB", "Ships")
-    local frigate_key = _("scienceDB", "Frigate")
+    local frigate_key = _("scienceDB", "Corvette")
     local adv_gunship_key = _("scienceDB", "Adv. Gunship")
     local gunship2_db =
         queryScienceDatabase(ships_key, frigate_key, gunship2_key)
@@ -968,8 +1018,9 @@ function gunship2(enemyFaction)
             gunship2_db, --modified ship database entry
             ship, --ship just created, long description on the next line
             _(
-                "scienceDB",
-                "The advanced gunship is a ship equiped with 2 homing missiles to do initial damage and then take out the enemy with 2 front firing beams. It's designed to quickly take out the enemies weaker then itself. Version II has stronger beams, but a weaker hull.\n\nDon't forget to tip your science database librarian."
+                [[The Advanced Gunship corvette adds a second homing missile tube to damage targets at range, and dual front-firing beams to finish its foes off. It's designed to quickly take out enemies weaker then itself.]]
+            ) .. _(
+                [[Version II has stronger beams but a weaker hull.]]                
             ),
             {
                 { key = tube_key, value = load_val }, --torpedo tube direction and load speed
@@ -983,19 +1034,21 @@ function gunship2(enemyFaction)
 end
 function hornetFX64(enemyFaction)
     --Relative strength reference number: 8
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("MT52 Hornet")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
-    ship:setTypeName("FX64 Hornet")
-    ship:setBeamWeapon(0, 15, 0, 1500.0, 4.0, 6.0) --longer and stronger beam (vs 700 & 2)
-    ship:setRotationMaxSpeed(43) --faster maneuver (vs 30)
-    ship:setImpulseMaxSpeed(180) --faster impulse (vs 120)
-    ship:setHullMax(20) --weaker hull (vs 30)
-    ship:setHull(20)
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.MT52_HORNET)
+        :onTakingDamage(function(self, instigator)
+            string.format("") --serious proton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName("FX64 Hornet")
+        :setBeamWeapon(0, 15, 0, 1500.0, 4.0, 6.0) --longer and stronger beam (vs 700 & 2)
+        :setRotationMaxSpeed(43) --faster maneuver (vs 30)
+        :setImpulseMaxSpeed(180) --faster impulse (vs 120)
+        :setHullMax(20) --weaker hull (vs 30)
+        :setHull(20)
     local ships_key = _("scienceDB", "Ships")
     local starfighter_key = _("scienceDB", "Starfighter")
     local fx64_hornet_key = _("scienceDB", "FX64 Hornet")
@@ -1017,7 +1070,7 @@ function hornetFX64(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "The FX64 Hornet is somewhat similar to the MT52 and MU52 models. The beam is longer, narrower and does more damage than both of the other Hornet models. It's max impulse speed and turn speed is faster than both of the other Hornet models. It's hull is weaker"
+                    [[The FX64 Hornet is similar to the MT52 and MU52 models. Compared to other Hornet models, its beam weapon has a longer but narrower range and does more damage, its maximum impulse speed and turn rate are faster, and its hull is weaker.]]
                 ),
                 nil, --misc key value pairs
                 nil, --jump
@@ -1031,18 +1084,18 @@ function hornetMT55(enemyFaction)
     --Relative strength reference number: 6
     local ship = CpuShip()
         :setFaction(enemyFaction)
-        :setTemplate("MT52 Hornet")
+        :setTemplate(ST.MT52_HORNET)
         :orderRoaming()
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
-    ship:setTypeName("MT55 Hornet")
-    ship:setRotationMaxSpeed(29) --slower maneuver (vs 30)
-    ship:setImpulseMaxSpeed(135) --faster impulse (vs 120)
-    ship:setAcceleration(40) --faster acceleration (vs 25)
+        :onTakingDamage(function(self, instigator)
+            string.format("") -- SeriousProton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName("MT55 Hornet")
+        :setRotationMaxSpeed(29) --slower maneuver (vs 30)
+        :setImpulseMaxSpeed(135) --faster impulse (vs 120)
+        :setAcceleration(40) --faster acceleration (vs 25)
     local ships_key = _("scienceDB", "Ships")
     local starfighter_key = _("scienceDB", "Starfighter")
     local mt55_hornet_key = _("scienceDB", "MT55 Hornet")
@@ -1064,7 +1117,7 @@ function hornetMT55(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "The MT55 Hornet is similar to the 52 series Hornet models. Its speed is faster but it turns more slowly"
+                    [[The MT55 Hornet is similar to the other Hornet models. Its impulse speed is faster but is slower to turn.]]
                 ),
                 nil,
                 nil,
@@ -1076,17 +1129,19 @@ function hornetMT55(enemyFaction)
 end
 function hornetMV52(enemyFaction)
     --Relative strength reference number: 6
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("MT52 Hornet")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
-    ship:setTypeName("MV52 Hornet")
-    ship:setBeamWeapon(0, 30, 0, 1000.0, 4.0, 3.0) --longer and stronger beam (vs 700 & 2)
-    ship:setRotationMaxSpeed(31) --faster maneuver (vs 30)
-    ship:setImpulseMaxSpeed(130) --faster impulse (vs 120)
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.MT52_HORNET)
+        :onTakingDamage(function(self, instigator)
+            string.format("") -- SeriousProton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName("MV52 Hornet")
+        :setBeamWeapon(0, 30, 0, 1000.0, 4.0, 3.0) --longer and stronger beam (vs 700 & 2)
+        :setRotationMaxSpeed(31) --faster maneuver (vs 30)
+        :setImpulseMaxSpeed(130) --faster impulse (vs 120)
     local ships_key = _("scienceDB", "Ships")
     local starfighter_key = _("scienceDB", "Starfighter")
     local mv52_hornet_key = _("scienceDB", "MV52 Hornet")
@@ -1108,7 +1163,7 @@ function hornetMV52(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "The MV52 Hornet is very similar to the MT52 and MU52 models. The beam does more damage than both of the other Hornet models, it's max impulse speed is faster than both of the other Hornet models, it turns faster than the MT52, but slower than the MU52"
+                    [[The MV52 Hornet is similar to the MT52 and MU52 models. Compared to other Hornet models, the beam does more damage, its maximum impulse speed is faster, it turns faster than the MT52, but it's slower than the MU52.]]
                 ),
                 nil, --misc key value pairs
                 nil, --jump
@@ -1120,33 +1175,35 @@ function hornetMV52(enemyFaction)
 end
 function hurricane(enemyFaction)
     --Relative strength reference number: 46
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Piranha F8")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
-    ship:setTypeName("Hurricane")
-    ship:setJumpDrive(true)
-    ship:setJumpDriveRange(5000, 40000)
-    ship:setWeaponTubeCount(8) --more (vs 3)
-    ship:setWeaponTubeExclusiveFor(1, "HVLI") --only HVLI (vs any)
-    ship:setWeaponTubeDirection(1, 0) --forward (vs -90)
-    ship:setTubeSize(3, "large")
-    ship:setWeaponTubeDirection(3, -90)
-    ship:setTubeSize(4, "small")
-    ship:setWeaponTubeExclusiveFor(4, "Homing")
-    ship:setWeaponTubeDirection(4, -15)
-    ship:setTubeSize(5, "small")
-    ship:setWeaponTubeExclusiveFor(5, "Homing")
-    ship:setWeaponTubeDirection(5, 15)
-    ship:setWeaponTubeExclusiveFor(6, "Homing")
-    ship:setWeaponTubeDirection(6, -30)
-    ship:setWeaponTubeExclusiveFor(7, "Homing")
-    ship:setWeaponTubeDirection(7, 30)
-    ship:setWeaponStorageMax("Homing", 24) --more (vs 5)
-    ship:setWeaponStorage("Homing", 24)
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.PIRANHA_F8)
+        :onTakingDamage(function(self, instigator)
+            string.format("") --serious proton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName("Hurricane")
+        :setJumpDrive(true)
+        :setJumpDriveRange(5000, 40000)
+        :setWeaponTubeCount(8) --more (vs 3)
+        :setWeaponTubeExclusiveFor(1, "HVLI") --only HVLI (vs any)
+        :setWeaponTubeDirection(1, 0) --forward (vs -90)
+        :setTubeSize(3, "large")
+        :setWeaponTubeDirection(3, -90)
+        :setTubeSize(4, "small")
+        :setWeaponTubeExclusiveFor(4, "Homing")
+        :setWeaponTubeDirection(4, -15)
+        :setTubeSize(5, "small")
+        :setWeaponTubeExclusiveFor(5, "Homing")
+        :setWeaponTubeDirection(5, 15)
+        :setWeaponTubeExclusiveFor(6, "Homing")
+        :setWeaponTubeDirection(6, -30)
+        :setWeaponTubeExclusiveFor(7, "Homing")
+        :setWeaponTubeDirection(7, 30)
+        :setWeaponStorageMax("Homing", 24) --more (vs 5)
+        :setWeaponStorage("Homing", 24)
     local ships_key = _("scienceDB", "Ships")
     local frigate_key = _("scienceDB", "Frigate")
     local hurricane_key = _("scienceDB", "Hurricane")
@@ -1174,7 +1231,7 @@ function hurricane(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "The Hurricane is designed to jump in and shower the target with missiles. It is based on the Piranha F8, but with a jump drive, five more tubes in various directions and sizes and lots more missiles to shoot"
+                    [[The Hurricane is designed to jump in and shower the target with missiles. It is based on the Piranha F8, but with a jump drive, five more weapon tubes mounted in various directions and sizes, and lots more missiles to shoot.]]
                 ),
                 {
                     { key = tube_key, value = load_val }, --torpedo tube direction and load speed
@@ -1195,17 +1252,19 @@ function hurricane(enemyFaction)
 end
 function jade5(enemyFaction)
     --Relative strength reference number: 15
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Adder MK5")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
-    ship:setTypeName("Jade 5")
-    ship:setJumpDrive(true)
-    ship:setJumpDriveRange(5000, 35000)
-    ship:setBeamWeapon(2, 70, -30, 600, 5.0, 2.0) --adjust beam direction to match starboard side (vs -35)
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.ADDER_MK5)
+        :onTakingDamage(function(self, instigator)
+            string.format("") --serious proton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName("Jade 5")
+        :setJumpDrive(true)
+        :setJumpDriveRange(5000, 35000)
+        :setBeamWeapon(2, 70, -30, 600, 5.0, 2.0) --adjust beam direction to match starboard side (vs -35)
     local ships_key = _("scienceDB", "Ships")
     local starfighter_key = _("scienceDB", "Starfighter")
     local jade5_key = _("scienceDB", "Jade 5")
@@ -1226,7 +1285,7 @@ function jade5(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "Conversions R Us purchased a number of Adder MK 5 ships at auction and added jump drives to them to produce the Jade 5"
+                    [[Conversions R Us purchased a number of Adder MK 5 ships at auction and added jump drives to them to produce the Jade 5]]
                 ),
                 {
                     { key = tube_key, value = load_val }, --torpedo tube direction and load speed
@@ -1240,26 +1299,27 @@ function jade5(enemyFaction)
 end
 function k2breaker(enemyFaction)
     --Relative strength reference number: 55
-    local ship =
-        CpuShip():setFaction(enemyFaction):setTemplate("Ktlitan Breaker")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
-    ship:setTypeName("K2 Breaker")
-    ship:setHullMax(200) --stronger hull (vs 120)
-    ship:setHull(200)
-    ship:setWeaponTubeCount(3) --more (vs 1)
-    ship:setTubeSize(0, "large") --large (vs normal)
-    ship:setWeaponTubeDirection(1, -30)
-    ship:setWeaponTubeDirection(2, 30)
-    ship:setWeaponTubeExclusiveFor(0, "HVLI") --only HVLI (vs any)
-    ship:setWeaponStorageMax("Homing", 16) --more (vs 0)
-    ship:setWeaponStorage("Homing", 16)
-    ship:setWeaponStorageMax("HVLI", 8) --more (vs 5)
-    ship:setWeaponStorage("HVLI", 8)
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate("Ktlitan Breaker")
+        :onTakingDamage(function(self, instigator)
+            string.format("") --serious proton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName("K2 Breaker")
+        :setHullMax(200) --stronger hull (vs 120)
+        :setHull(200)
+        :setWeaponTubeCount(3) --more (vs 1)
+        :setTubeSize(0, "large") --large (vs normal)
+        :setWeaponTubeDirection(1, -30)
+        :setWeaponTubeDirection(2, 30)
+        :setWeaponTubeExclusiveFor(0, "HVLI") --only HVLI (vs any)
+        :setWeaponStorageMax("Homing", 16) --more (vs 0)
+        :setWeaponStorage("Homing", 16)
+        :setWeaponStorageMax("HVLI", 8) --more (vs 5)
+        :setWeaponStorage("HVLI", 8)
     local ships_key = _("scienceDB", "Ships")
     local no_class_key = _("scienceDB", "No Class")
     local k2_key = _("scienceDB", "K2 Breaker")
@@ -1281,7 +1341,7 @@ function k2breaker(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "The K2 Breaker designers took the Ktlitan Breaker and beefed up the hull, added two bracketing tubes, enlarged the center tube and added more missiles to shoot. Should be good for a couple of enemy ships"
+                    [[The K2 Breaker designers took the Ktlitan Breaker and beefed up the hull, added two bracketing tubes, enlarged the center tube and added more missiles to shoot. Should be good for a couple of enemy ships]]
                 ),
                 {
                     { key = tube_key, value = load_val }, --torpedo tube direction and load speed
@@ -1298,12 +1358,13 @@ end
 function k2fighter(enemyFaction)
     --Relative strength reference number: 7
     local k2_key = _("scienceDB", "K2 Fighter")
-    local ship =
-        CpuShip():setFaction(enemyFaction):setTemplate("Ktlitan Fighter")
-    ship:setTypeName(k2_key)
-    ship:setBeamWeapon(0, 60, 0, 1200.0, 2.5, 6) --beams cycle faster (vs 4.0)
-    ship:setHullMax(65) --weaker hull (vs 70)
-    ship:setHull(65)
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.KTLITAN_FIGHTER)
+        :setTypeName(k2_key)
+        :setBeamWeapon(0, 60, 0, 1200.0, 2.5, 6) --beams cycle faster (vs 4.0)
+        :setHullMax(65) --weaker hull (vs 70)
+        :setHull(65)
     local ships_key = _("scienceDB", "Ships")
     local no_class_key = _("scienceDB", "No Class")
     local ktlitan_key = _("scienceDB", "Ktlitan Fighter")
@@ -1320,7 +1381,7 @@ function k2fighter(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "Enterprising designers published this design specification based on salvaged Ktlitan Fighters. Comparatively, it's got beams that cycle faster, but the hull is a bit weaker."
+                    [[Enterprising designers published this design specification based on salvaged Ktlitan Fighters. Comparatively, it's got beams that cycle faster, but the hull is a bit weaker.]]
                 ),
                 nil, --misc key value pairs
                 nil, --jump range
@@ -1332,12 +1393,13 @@ function k2fighter(enemyFaction)
 end
 function k3fighter(enemyFaction)
     --Relative strength reference number: 8
-    local ship =
-        CpuShip():setFaction(enemyFaction):setTemplate("Ktlitan Fighter")
-    ship:setTypeName("K3 Fighter")
-    ship:setBeamWeapon(0, 60, 0, 1200.0, 2.5, 9) --beams cycle faster and damage more (vs 4.0 & 6)
-    ship:setHullMax(60) --weaker hull (vs 70)
-    ship:setHull(60)
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.KTLITAN_FIGHTER)
+        :setTypeName("K3 Fighter")
+        :setBeamWeapon(0, 60, 0, 1200.0, 2.5, 9) --beams cycle faster and damage more (vs 4.0 & 6)
+        :setHullMax(60) --weaker hull (vs 70)
+        :setHull(60)
     local ships_key = _("scienceDB", "Ships")
     local no_class_key = _("scienceDB", "No Class")
     local k3_key = _("scienceDB", "K3 Fighter")
@@ -1355,7 +1417,7 @@ function k3fighter(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "Enterprising designers published this design specification based on salvaged Ktlitan Fighters. Comparatively, it's got beams that are stronger and that cycle faster, but the hull is weaker."
+                    [[Enterprising designers published this design specification based on salvaged Ktlitan Fighters. Comparatively, it's got beams that are stronger and that cycle faster, but the hull is weaker.]]
                 ),
                 nil, --misc key value pairs
                 nil, --jump range
@@ -1367,49 +1429,51 @@ function k3fighter(enemyFaction)
 end
 function maniapak(enemyFaction)
     --Relative strength reference number: 34
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Adder MK5")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
-    ship:setTypeName("Maniapak")
-    ship:setRadarTrace("exuari_fighter.png") --different radar trace
-    ship:setImpulseMaxSpeed(70) --slower impulse (vs 80)
-    ship:setWeaponTubeCount(9) --more (vs 1)
-    ship:setWeaponTubeDirection(0, 0)
-    ship:setWeaponTubeDirection(1, -10)
-    ship:setWeaponTubeDirection(2, 10)
-    ship:setWeaponTubeDirection(3, 0)
-    ship:setWeaponTubeDirection(4, -12)
-    ship:setWeaponTubeDirection(5, 12)
-    ship:setWeaponTubeDirection(6, 0)
-    ship:setWeaponTubeDirection(7, -15)
-    ship:setWeaponTubeDirection(8, 15)
-    ship:setTubeSize(0, "small")
-    ship:setTubeSize(1, "small")
-    ship:setTubeSize(2, "small")
-    ship:setTubeSize(6, "large")
-    ship:setTubeSize(7, "large")
-    ship:setTubeSize(8, "large")
-    ship:setTubeLoadTime(0, 15)
-    ship:setTubeLoadTime(1, 16)
-    ship:setTubeLoadTime(2, 17)
-    ship:setTubeLoadTime(3, 18)
-    ship:setTubeLoadTime(4, 19)
-    ship:setTubeLoadTime(5, 20)
-    ship:setTubeLoadTime(6, 21)
-    ship:setTubeLoadTime(7, 22)
-    ship:setTubeLoadTime(8, 23)
-    ship:setWeaponStorageMax("Homing", 27) --more (vs 0)
-    ship:setWeaponStorage("Homing", 27)
-    ship:setWeaponStorageMax("EMP", 18) --more (vs 0)
-    ship:setWeaponStorage("EMP", 18)
-    ship:setWeaponStorageMax("Nuke", 27) --more (vs 0)
-    ship:setWeaponStorage("Nuke", 27)
-    ship:setWeaponStorageMax("HVLI", 36) --more (vs 4)
-    ship:setWeaponStorage("HVLI", 36)
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.ADDER_MK5)
+        :onTakingDamage(function(self, instigator)
+            string.format("") --serious proton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName("Maniapak")
+        :setRadarTrace("exuari_fighter.png") --different radar trace
+        :setImpulseMaxSpeed(70) --slower impulse (vs 80)
+        :setWeaponTubeCount(9) --more (vs 1)
+        :setWeaponTubeDirection(0, 0)
+        :setWeaponTubeDirection(1, -10)
+        :setWeaponTubeDirection(2, 10)
+        :setWeaponTubeDirection(3, 0)
+        :setWeaponTubeDirection(4, -12)
+        :setWeaponTubeDirection(5, 12)
+        :setWeaponTubeDirection(6, 0)
+        :setWeaponTubeDirection(7, -15)
+        :setWeaponTubeDirection(8, 15)
+        :setTubeSize(0, "small")
+        :setTubeSize(1, "small")
+        :setTubeSize(2, "small")
+        :setTubeSize(6, "large")
+        :setTubeSize(7, "large")
+        :setTubeSize(8, "large")
+        :setTubeLoadTime(0, 15)
+        :setTubeLoadTime(1, 16)
+        :setTubeLoadTime(2, 17)
+        :setTubeLoadTime(3, 18)
+        :setTubeLoadTime(4, 19)
+        :setTubeLoadTime(5, 20)
+        :setTubeLoadTime(6, 21)
+        :setTubeLoadTime(7, 22)
+        :setTubeLoadTime(8, 23)
+        :setWeaponStorageMax("Homing", 27) --more (vs 0)
+        :setWeaponStorage("Homing", 27)
+        :setWeaponStorageMax("EMP", 18) --more (vs 0)
+        :setWeaponStorage("EMP", 18)
+        :setWeaponStorageMax("Nuke", 27) --more (vs 0)
+        :setWeaponStorage("Nuke", 27)
+        :setWeaponStorageMax("HVLI", 36) --more (vs 4)
+        :setWeaponStorage("HVLI", 36)
     local ships_key = _("scienceDB", "Ships")
     local starfighter_key = _("scienceDB", "Starfighter")
     local maniapak_key = _("scienceDB", "Maniapak")
@@ -1448,7 +1512,7 @@ function maniapak(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "The Maniapak is an extreme modification of an Adder MK5 and a Blade. A maniacal designer was tasked with packing as many missiles as possible in this tiny starfighter frame. This record has yet to be beaten. Unfortunately, this ship is often a danger to friends as well as foes."
+                    [[The Maniapak is an extreme modification of an Adder MK5 and a Blade. A maniacal designer was tasked with packing as many missiles as possible in this tiny starfighter frame. This record has yet to be beaten. Unfortunately, this ship is often a danger to friends as well as foes.]]
                 ),
                 {
                     { key = tube_key, value = load_val }, --torpedo tube size, direction and load speed
@@ -1472,18 +1536,20 @@ function maniapak(enemyFaction)
 end
 function phobosR2(enemyFaction)
     --Relative strength reference number: 13
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Phobos T3")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
-    ship:setTypeName("Phobos R2")
-    ship:setWeaponTubeCount(1) --one tube (vs 2)
-    ship:setWeaponTubeDirection(0, 0)
-    ship:setImpulseMaxSpeed(55) --slower impulse (vs 60)
-    ship:setRotationMaxSpeed(15) --faster maneuver (vs 10)
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.PHOBOS_T3)
+        :onTakingDamage(function(self, instigator)
+            string.format("") --serious proton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName("Phobos R2")
+        :setWeaponTubeCount(1) --one tube (vs 2)
+        :setWeaponTubeDirection(0, 0)
+        :setImpulseMaxSpeed(55) --slower impulse (vs 60)
+        :setRotationMaxSpeed(15) --faster maneuver (vs 10)
     local ships_key = _("scienceDB", "Ships")
     local frigate_key = _("scienceDB", "Frigate")
     local phobos_r2_key = _("scienceDB", "Phobos R2")
@@ -1504,7 +1570,7 @@ function phobosR2(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "The Phobos R2 model is very similar to the Phobos T3. It's got a faster turn speed, but only one missile tube"
+                    [[The Phobos R2 model is similar to the Phobos T3. It's got a faster turn speed, but only one missile tube]]
                 ),
                 {
                     { key = tube_key, value = load_val }, --torpedo tube direction and load speed
@@ -1518,19 +1584,21 @@ function phobosR2(enemyFaction)
 end
 function phobosT4(enemyFaction)
     --Relative strength reference number: 18
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Phobos T3")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
-    ship:setTypeName("Phobos T4")
-    ship:setRotationMaxSpeed(20) --faster maneuver (vs 10)
-    ship:setShieldsMax(80, 30) --stronger shields (vs 50,40)
-    ship:setShields(80, 30)
-    ship:setBeamWeapon(0, 90, -15, 1500, 6, 6) --longer (vs 1200), faster (vs 8)
-    ship:setBeamWeapon(1, 90, 15, 1500, 6, 6)
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.PHOBOS_T3)
+        :onTakingDamage(function(self, instigator)
+            string.format("") --serious proton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName("Phobos T4")
+        :setRotationMaxSpeed(20) --faster maneuver (vs 10)
+        :setShieldsMax(80, 30) --stronger shields (vs 50,40)
+        :setShields(80, 30)
+        :setBeamWeapon(0, 90, -15, 1500, 6, 6) --longer (vs 1200), faster (vs 8)
+        :setBeamWeapon(1, 90, 15, 1500, 6, 6)
     local ships_key = _("scienceDB", "Ships")
     local frigate_key = _("scienceDB", "Frigate")
     local t4_key = _("scienceDB", "Phobos T4")
@@ -1550,7 +1618,7 @@ function phobosT4(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "The Phobos T4 makes some simple improvements on the Phobos T3: faster maneuver, stronger front shields, though weaker rear shields and longer and faster beam weapons"
+                    [[The Phobos T4 makes some simple improvements on the Phobos T3: faster maneuver, stronger front shields, though weaker rear shields and longer and faster beam weapons]]
                 ),
                 {
                     { key = tube_key, value = load_val }, --torpedo tube direction and load speed
@@ -1565,46 +1633,48 @@ function phobosT4(enemyFaction)
 end
 function predator(enemyFaction)
     --Relative strength reference number: 42
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Piranha F8")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
-    ship:setTypeName("Predator")
-    ship:setShieldsMax(100, 100) --stronger shields (vs 30,30)
-    ship:setShields(100, 100)
-    ship:setHullMax(80) --stronger hull (vs 70)
-    ship:setHull(80)
-    ship:setImpulseMaxSpeed(65) --faster impulse (vs 40)
-    ship:setRotationMaxSpeed(15) --faster maneuver (vs 6)
-    ship:setJumpDrive(true)
-    ship:setJumpDriveRange(5000, 35000)
-    ship:setBeamWeapon(0, 90, 0, 1000, 6, 4) --more (vs 0)
-    ship:setBeamWeapon(1, 90, 180, 1000, 6, 4)
-    ship:setWeaponTubeCount(8) --more (vs 3)
-    ship:setWeaponTubeDirection(0, -60)
-    ship:setWeaponTubeDirection(1, -90)
-    ship:setWeaponTubeDirection(2, -90)
-    ship:setWeaponTubeDirection(3, 60)
-    ship:setWeaponTubeDirection(4, 90)
-    ship:setWeaponTubeDirection(5, 90)
-    ship:setWeaponTubeDirection(6, -120)
-    ship:setWeaponTubeDirection(7, 120)
-    ship:setWeaponTubeExclusiveFor(0, "Homing")
-    ship:setWeaponTubeExclusiveFor(1, "Homing")
-    ship:setWeaponTubeExclusiveFor(2, "Homing")
-    ship:setWeaponTubeExclusiveFor(3, "Homing")
-    ship:setWeaponTubeExclusiveFor(4, "Homing")
-    ship:setWeaponTubeExclusiveFor(5, "Homing")
-    ship:setWeaponTubeExclusiveFor(6, "Homing")
-    ship:setWeaponTubeExclusiveFor(7, "Homing")
-    ship:setWeaponStorageMax("Homing", 32) --more (vs 5)
-    ship:setWeaponStorage("Homing", 32)
-    ship:setWeaponStorageMax("HVLI", 0) --less (vs 10)
-    ship:setWeaponStorage("HVLI", 0)
-    ship:setRadarTrace("missile_cruiser.png") --different radar trace
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.PIRANHA_F8)
+        :onTakingDamage(function(self, instigator)
+            string.format("") -- SeriousProton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName("Predator")
+        :setShieldsMax(100, 100) --stronger shields (vs 30,30)
+        :setShields(100, 100)
+        :setHullMax(80) --stronger hull (vs 70)
+        :setHull(80)
+        :setImpulseMaxSpeed(65) --faster impulse (vs 40)
+        :setRotationMaxSpeed(15) --faster maneuver (vs 6)
+        :setJumpDrive(true)
+        :setJumpDriveRange(5000, 35000)
+        :setBeamWeapon(0, 90, 0, 1000, 6, 4) --more (vs 0)
+        :setBeamWeapon(1, 90, 180, 1000, 6, 4)
+        :setWeaponTubeCount(8) --more (vs 3)
+        :setWeaponTubeDirection(0, -60)
+        :setWeaponTubeDirection(1, -90)
+        :setWeaponTubeDirection(2, -90)
+        :setWeaponTubeDirection(3, 60)
+        :setWeaponTubeDirection(4, 90)
+        :setWeaponTubeDirection(5, 90)
+        :setWeaponTubeDirection(6, -120)
+        :setWeaponTubeDirection(7, 120)
+        :setWeaponTubeExclusiveFor(0, "Homing")
+        :setWeaponTubeExclusiveFor(1, "Homing")
+        :setWeaponTubeExclusiveFor(2, "Homing")
+        :setWeaponTubeExclusiveFor(3, "Homing")
+        :setWeaponTubeExclusiveFor(4, "Homing")
+        :setWeaponTubeExclusiveFor(5, "Homing")
+        :setWeaponTubeExclusiveFor(6, "Homing")
+        :setWeaponTubeExclusiveFor(7, "Homing")
+        :setWeaponStorageMax("Homing", 32) --more (vs 5)
+        :setWeaponStorage("Homing", 32)
+        :setWeaponStorageMax("HVLI", 0) --less (vs 10)
+        :setWeaponStorage("HVLI", 0)
+        :setRadarTrace("missile_cruiser.png") --different radar trace
     local ships_key = _("scienceDB", "Ships")
     local frigate_key = _("scienceDB", "Frigate")
     local predator_key = _("scienceDB", "Predator")
@@ -1632,7 +1702,7 @@ function predator(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "The Predator is a significantly improved Piranha F8. Stronger shields and hull, faster impulse and turning speeds, a jump drive, beam weapons, eight missile tubes pointing in six directions and a large number of homing missiles to shoot."
+                    [[The Predator is a significantly improved Piranha F8. Stronger shields and hull, faster impulse and turning speeds, a jump drive, beam weapons, eight missile tubes pointing in six directions and a large number of homing missiles to shoot.]]
                 ),
                 {
                     { key = tube_key, value = load_val }, --torpedo tube direction and load speed
@@ -1654,15 +1724,17 @@ function predator(enemyFaction)
 end
 function shepherd(enemyFaction)
     --Relative strength reference number: 6
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Riposte")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
-    ship:setTypeName("Shepherd")
-    ship:setBeamWeapon(0, 10, 0, 3000, 4, 4) --narrower (vs 60), longer (vs 1000)
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate("Riposte")
+        :onTakingDamage(function(self, instigator)
+            string.format("") -- SeriousProton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName("Shepherd")
+        :setBeamWeapon(0, 10, 0, 3000, 4, 4) --narrower (vs 60), longer (vs 1000)
     local ships_key = _("scienceDB", "Ships")
     local starfighter_key = _("scienceDB", "Starfighter")
     local shepherd_key = _("scienceDB", "Shepherd")
@@ -1683,7 +1755,7 @@ function shepherd(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "The Shepherd is a Fighter with a long narrow beam. Tactical recommendation: hack the impulse engines"
+                    [[The Shepherd is a Fighter with a long narrow beam. Tactical recommendation: hack the impulse engines]]
                 ),
                 nil, --misc key value pairs
                 nil, --jump range
@@ -1695,20 +1767,22 @@ function shepherd(enemyFaction)
 end
 function starhammerIII(enemyFaction)
     --Relative strength reference number: 85
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Starhammer II")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
-    ship:setTypeName("Starhammer III")
-    ship:setBeamWeapon(4, 60, 180, 1500, 8, 11) --extra rear facing beam
-    ship:setTubeSize(0, "large")
-    ship:setWeaponStorageMax("Homing", 16) --more (vs 4)
-    ship:setWeaponStorage("Homing", 16)
-    ship:setWeaponStorageMax("HVLI", 36) --more (vs 20)
-    ship:setWeaponStorage("HVLI", 36)
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.STARHAMMER_II)
+        :onTakingDamage(function(self, instigator)
+            string.format("") --serious proton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName("Starhammer III")
+        :setBeamWeapon(4, 60, 180, 1500, 8, 11) --extra rear facing beam
+        :setTubeSize(0, "large")
+        :setWeaponStorageMax("Homing", 16) --more (vs 4)
+        :setWeaponStorage("Homing", 16)
+        :setWeaponStorageMax("HVLI", 36) --more (vs 20)
+        :setWeaponStorage("HVLI", 36)
     local ships_key = _("scienceDB", "Ships")
     local corvette_key = _("scienceDB", "Corvette")
     local starhammer3_key = _("scienceDB", "Starhammer III")
@@ -1730,7 +1804,7 @@ function starhammerIII(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "The designers of the Starhammer III took the Starhammer II and added a rear facing beam, enlarged one of the missile tubes and added more missiles to fire"
+                    [[The designers of the Starhammer III modified the Starhammer II to add a rear-facing beam, enlarge one of the missile tubes, and increase its missile stocks.]]
                 ),
                 {
                     { key = tube_key, value = load_val }, --torpedo tube direction and load speed
@@ -1745,23 +1819,25 @@ function starhammerIII(enemyFaction)
 end
 function starhammerV(enemyFaction)
     --Relative strength reference number: 90
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Starhammer II")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
-    ship:setTypeName("Starhammer V")
-    ship:setImpulseMaxSpeed(65) --faster impulse (vs 35)
-    ship:setRotationMaxSpeed(15) --faster maneuver (vs 6)
-    ship:setShieldsMax(450, 350, 250, 250, 350) --stronger shields (vs 450, 350, 150, 150, 350)
-    ship:setShields(450, 350, 250, 250, 350)
-    ship:setBeamWeapon(4, 60, 180, 1500, 8, 11) --extra rear facing beam
-    ship:setWeaponStorageMax("Homing", 16) --more (vs 4)
-    ship:setWeaponStorage("Homing", 16)
-    ship:setWeaponStorageMax("HVLI", 36) --more (vs 20)
-    ship:setWeaponStorage("HVLI", 36)
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.STARHAMMER_II)
+        :onTakingDamage(function(self, instigator)
+            string.format("") -- SeriousProton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName("Starhammer V")
+        :setImpulseMaxSpeed(65) --faster impulse (vs 35)
+        :setRotationMaxSpeed(15) --faster maneuver (vs 6)
+        :setShieldsMax(450, 350, 250, 250, 350) --stronger shields (vs 450, 350, 150, 150, 350)
+        :setShields(450, 350, 250, 250, 350)
+        :setBeamWeapon(4, 60, 180, 1500, 8, 11) --extra rear facing beam
+        :setWeaponStorageMax("Homing", 16) --more (vs 4)
+        :setWeaponStorage("Homing", 16)
+        :setWeaponStorageMax("HVLI", 36) --more (vs 20)
+        :setWeaponStorage("HVLI", 36)
     local ships_key = _("scienceDB", "Ships")
     local corvette_key = _("scienceDB", "Corvette")
     local starhammerV_key = _("scienceDB", "Starhammer V")
@@ -1783,7 +1859,7 @@ function starhammerV(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "The Starhammer V recognizes common modifications made in the field to the Starhammer II: stronger shields, faster impulse and turning speeds, additional rear beam and more missiles to shoot. These changes make the Starhammer V a force to be reckoned with."
+                    [[The Starhammer V recognizes common modifications made in the field to the Starhammer II: stronger shields, faster impulse and turning speeds, additional rear beam and more missiles to shoot. These changes make the Starhammer V a force to be reckoned with.]]
                 ),
                 {
                     { key = tube_key, value = load_val }, --torpedo tube direction and load speed
@@ -1798,31 +1874,33 @@ function starhammerV(enemyFaction)
 end
 function tempest(enemyFaction)
     --Relative strength reference number: 30
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Piranha F12")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
-    ship:setTypeName("Tempest")
-    ship:setWeaponTubeCount(10) --four more tubes (vs 6)
-    ship:setWeaponTubeDirection(0, -88) --5 per side
-    ship:setWeaponTubeDirection(1, -89) --slight angle spread
-    ship:setWeaponTubeDirection(3, 88) --3 for HVLI each side
-    ship:setWeaponTubeDirection(4, 89) --2 for homing and nuke each side
-    ship:setWeaponTubeDirection(6, -91)
-    ship:setWeaponTubeDirection(7, -92)
-    ship:setWeaponTubeDirection(8, 91)
-    ship:setWeaponTubeDirection(9, 92)
-    ship:setWeaponTubeExclusiveFor(7, "HVLI")
-    ship:setWeaponTubeExclusiveFor(9, "HVLI")
-    ship:setWeaponStorageMax("Homing", 16) --more (vs 6)
-    ship:setWeaponStorage("Homing", 16)
-    ship:setWeaponStorageMax("Nuke", 8) --more (vs 0)
-    ship:setWeaponStorage("Nuke", 8)
-    ship:setWeaponStorageMax("HVLI", 34) --more (vs 20)
-    ship:setWeaponStorage("HVLI", 34)
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.PIRANHA_F12)
+        :onTakingDamage(function(self, instigator)
+            string.format("") -- SeriousProton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName("Tempest")
+        :setWeaponTubeCount(10) --four more tubes (vs 6)
+        :setWeaponTubeDirection(0, -88) --5 per side
+        :setWeaponTubeDirection(1, -89) --slight angle spread
+        :setWeaponTubeDirection(3, 88) --3 for HVLI each side
+        :setWeaponTubeDirection(4, 89) --2 for homing and nuke each side
+        :setWeaponTubeDirection(6, -91)
+        :setWeaponTubeDirection(7, -92)
+        :setWeaponTubeDirection(8, 91)
+        :setWeaponTubeDirection(9, 92)
+        :setWeaponTubeExclusiveFor(7, "HVLI")
+        :setWeaponTubeExclusiveFor(9, "HVLI")
+        :setWeaponStorageMax("Homing", 16) --more (vs 6)
+        :setWeaponStorage("Homing", 16)
+        :setWeaponStorageMax("Nuke", 8) --more (vs 0)
+        :setWeaponStorage("Nuke", 8)
+        :setWeaponStorageMax("HVLI", 34) --more (vs 20)
+        :setWeaponStorage("HVLI", 34)
     local ships_key = _("scienceDB", "Ships")
     local frigate_key = _("scienceDB", "Frigate")
     local tempest_key = _("scienceDB", "Tempest")
@@ -1851,7 +1929,7 @@ function tempest(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "Loosely based on the Piranha F12 model, the Tempest adds four more broadside tubes (two on each side), more HVLIs, more Homing missiles and 8 Nukes. The Tempest can strike fear into the hearts of your enemies. Get yourself one today!"
+                    [[Loosely based on the Piranha F12, the Tempest adds four more broadside tubes (two on each side), more HVLIs, more homing missiles and 8 nukes.]]
                 ),
                 {
                     { key = tube_key, value = load_val }, --torpedo tube direction and load speed
@@ -1874,15 +1952,17 @@ function tempest(enemyFaction)
 end
 function touchy(enemyFaction)
     --Relative strength reference number: 7
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Riposte")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
-    ship:setTypeName("Touchy")
-    ship:setBeamWeapon(0, 12, 0, 2200, 9.0, 9.0) --narrower (vs 60), longer (vs 1000), slower (vs 4),  stronger (vs 4)
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.RIPOSTE)
+        :onTakingDamage(function(self, instigator)
+            string.format("") --serious proton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName("Touchy")
+        :setBeamWeapon(0, 12, 0, 2200, 9.0, 9.0) --narrower (vs 60), longer (vs 1000), slower (vs 4),  stronger (vs 4)
     local ships_key = _("scienceDB", "Ships")
     local starfighter_key = _("scienceDB", "Starfighter")
     local touchy_key = _("scienceDB", "Touchy")
@@ -1902,7 +1982,7 @@ function touchy(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "Touchy is a fighter with a highly modified beam weapon: narrower, longer, slower and stronger"
+                    [[Touchy is a Riposte-model fighter with a highly modified beam weapon made narrower, longer, slower, and stronger.]]
                 ),
                 nil, --misc key value pairs
                 nil, --jump range
@@ -1914,32 +1994,34 @@ function touchy(enemyFaction)
 end
 function tyr(enemyFaction)
     --Relative strength reference number: 150
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Battlestation")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
-    ship:setTypeName("Tyr")
-    ship:setImpulseMaxSpeed(50) --faster impulse (vs 30)
-    ship:setRotationMaxSpeed(10) --faster maneuver (vs 1.5)
-    ship:setShieldsMax(400, 300, 300, 400, 300, 300) --stronger shields (vs 300, 300, 300, 300, 300)
-    ship:setShields(400, 300, 300, 400, 300, 300)
-    ship:setHullMax(100) --stronger hull (vs 70)
-    ship:setHull(100)
-    ship:setBeamWeapon(0, 90, -60, 2500, 6, 8) --stronger beams, broader coverage
-    ship:setBeamWeapon(1, 90, -120, 2500, 6, 8)
-    ship:setBeamWeapon(2, 90, 60, 2500, 6, 8)
-    ship:setBeamWeapon(3, 90, 120, 2500, 6, 8)
-    ship:setBeamWeapon(4, 90, -60, 2500, 6, 8)
-    ship:setBeamWeapon(5, 90, -120, 2500, 6, 8)
-    ship:setBeamWeapon(6, 90, 60, 2500, 6, 8)
-    ship:setBeamWeapon(7, 90, 120, 2500, 6, 8)
-    ship:setBeamWeapon(8, 90, -60, 2500, 6, 8)
-    ship:setBeamWeapon(9, 90, -120, 2500, 6, 8)
-    ship:setBeamWeapon(10, 90, 60, 2500, 6, 8)
-    ship:setBeamWeapon(11, 90, 120, 2500, 6, 8)
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.BATTLESTATION)
+        :onTakingDamage(function(self, instigator)
+            string.format("") -- SeriousProton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName("Tyr")
+        :setImpulseMaxSpeed(50) --faster impulse (vs 30)
+        :setRotationMaxSpeed(10) --faster maneuver (vs 1.5)
+        :setShieldsMax(400, 300, 300, 400, 300, 300) --stronger shields (vs 300, 300, 300, 300, 300)
+        :setShields(400, 300, 300, 400, 300, 300)
+        :setHullMax(100) --stronger hull (vs 70)
+        :setHull(100)
+        :setBeamWeapon(0, 90, -60, 2500, 6, 8) --stronger beams, broader coverage
+        :setBeamWeapon(1, 90, -120, 2500, 6, 8)
+        :setBeamWeapon(2, 90, 60, 2500, 6, 8)
+        :setBeamWeapon(3, 90, 120, 2500, 6, 8)
+        :setBeamWeapon(4, 90, -60, 2500, 6, 8)
+        :setBeamWeapon(5, 90, -120, 2500, 6, 8)
+        :setBeamWeapon(6, 90, 60, 2500, 6, 8)
+        :setBeamWeapon(7, 90, 120, 2500, 6, 8)
+        :setBeamWeapon(8, 90, -60, 2500, 6, 8)
+        :setBeamWeapon(9, 90, -120, 2500, 6, 8)
+        :setBeamWeapon(10, 90, 60, 2500, 6, 8)
+        :setBeamWeapon(11, 90, 120, 2500, 6, 8)
     local ships_key = _("scienceDB", "Ships")
     local dreadnought_key = _("scienceDB", "Dreadnought")
     local tyr_key = _("scienceDB", "Tyr")
@@ -1960,7 +2042,7 @@ function tyr(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "The Tyr is the shipyard's answer to admiral Konstatz' casual statement that the Battlestation model was too slow to be effective. The shipyards improved on the Battlestation by fitting the Tyr with more than twice the impulse speed and more than six times the turn speed. They threw in stronger shields and hull and wider beam coverage just to show that they could"
+                    [[The Tyr is the shipyard's answer to Admiral Konstatz's casual statement that the Battlestation model was too slow to be effective. The shipyards improved on the Battlestation by fitting the Tyr with more than twice the impulse speed and more than six times the turn speed. They threw in stronger shields and hull and wider beam coverage just to show that they could.]]
                 ),
                 nil,
                 "5 - 50 U", --jump range
@@ -1972,16 +2054,18 @@ function tyr(enemyFaction)
 end
 function waddle5(enemyFaction)
     --Relative strength reference number: 15
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Adder MK5")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
-    ship:setTypeName("Waddle 5")
-    ship:setWarpDrive(true)
-    ship:setBeamWeapon(2, 70, -30, 600, 5.0, 2.0) --adjust beam direction to match starboard side (vs -35)
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.ADDER_MK5)
+        :onTakingDamage(function(self, instigator)
+            string.format("") -- SeriousProton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName("Waddle 5")
+        :setWarpDrive(true)
+        :setBeamWeapon(2, 70, -30, 600, 5.0, 2.0) --adjust beam direction to match starboard side (vs -35)
     local ships_key = _("scienceDB", "Ships")
     local starfighter_key = _("scienceDB", "Starfighter")
     local waddle5_key = _("scienceDB", "Waddle 5")
@@ -2002,7 +2086,7 @@ function waddle5(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "Conversions R Us purchased a number of Adder MK 5 ships at auction and added warp drives to them to produce the Waddle 5"
+                    [[Conversions R Us purchased a number of Adder MK 5 ships at auction and added warp drives to them to produce the Waddle 5.]]
                 ),
                 {
                     { key = tube_key, value = load_val }, --torpedo tube direction and load speed
@@ -2017,23 +2101,25 @@ end
 function weaponsplatform2(enemyFaction)
     --courtesy of Black Wall scenario
     --Relative strength reference number: 50
-    local ship =
-        CpuShip():setFaction(enemyFaction):setTemplate("Weapons platform")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
     local platform2_key = _("scienceDB", "Weapons platform II")
-    ship:setTypeName(platform2_key)
-    ship:setBeamWeapon(0, 30, 0, 4000.0, 3.5, 10) --slower cycle (vs 1.5), less damage (vs 20)
-    ship:setBeamWeapon(1, 30, 60, 4000.0, 3.5, 10)
-    ship:setBeamWeapon(2, 30, 120, 4000.0, 3.5, 10)
-    ship:setBeamWeapon(3, 30, 180, 4000.0, 3.5, 10)
-    ship:setBeamWeapon(4, 30, 240, 4000.0, 3.5, 10)
-    ship:setBeamWeapon(5, 30, 300, 4000.0, 3.5, 10)
-    ship:setHullMax(170):setHull(170) --stronger hull (vs 70)
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.WEAPONS_PLATFORM)
+        :onTakingDamage(function(self, instigator)
+            string.format("") -- SeriousProton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName(platform2_key)
+        :setBeamWeapon(0, 30, 0, 4000.0, 3.5, 10) --slower cycle (vs 1.5), less damage (vs 20)
+        :setBeamWeapon(1, 30, 60, 4000.0, 3.5, 10)
+        :setBeamWeapon(2, 30, 120, 4000.0, 3.5, 10)
+        :setBeamWeapon(3, 30, 180, 4000.0, 3.5, 10)
+        :setBeamWeapon(4, 30, 240, 4000.0, 3.5, 10)
+        :setBeamWeapon(5, 30, 300, 4000.0, 3.5, 10)
+        :setHullMax(170)
+        :setHull(170) --stronger hull (vs 70)
     local ships_key = _("scienceDB", "Ships")
     local no_class_key = _("scienceDB", "No Class")
     local platform_key = _("scienceDB", "Weapons platform")
@@ -2059,7 +2145,7 @@ function weaponsplatform2(enemyFaction)
             ship, --ship just created, long description on the next line
             _(
                 "scienceDB",
-                "The weapons-platform is a stationary platform with beam-weapons. It's extremely slow to turn, but it's beam weapons do a huge amount of damage. The weapons platform II is a modification of this design with a stronger hull, but slower and weaker beams.\n\nDid you know it's hug your science database librarian day?"
+                [[The weapons platform is a stationary platform with beam weapons. It's extremely slow to turn, but its beam weapons deal significant damage. The weapons platform II is a modification of the original design with a stronger hull, but moves slower and has weaker beams.]]
             ),
             nil, --tube info
             nil, --jump
@@ -2070,28 +2156,30 @@ function weaponsplatform2(enemyFaction)
 end
 function whirlwind(enemyFaction)
     --Relative strength reference number: 26
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Storm")
-    ship:onTakingDamage(function(self, instigator)
-        string.format("") --serious proton needs a global context
-        if instigator ~= nil then
-            self.damage_instigator = instigator
-        end
-    end)
-    ship:setTypeName("Whirlwind")
-    ship:setWeaponTubeCount(9) --more (vs 5)
-    ship:setWeaponTubeDirection(0, -90) --3 left, 3 right, 3 front (vs 5 front)
-    ship:setWeaponTubeDirection(1, -92)
-    ship:setWeaponTubeDirection(2, -88)
-    ship:setWeaponTubeDirection(3, 90)
-    ship:setWeaponTubeDirection(4, 92)
-    ship:setWeaponTubeDirection(5, 88)
-    ship:setWeaponTubeDirection(6, 0)
-    ship:setWeaponTubeDirection(7, 2)
-    ship:setWeaponTubeDirection(8, -2)
-    ship:setWeaponStorageMax("Homing", 36) --more (vs 15)
-    ship:setWeaponStorage("Homing", 36)
-    ship:setWeaponStorageMax("HVLI", 36) --more (vs 15)
-    ship:setWeaponStorage("HVLI", 36)
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.STORM)
+        :onTakingDamage(function(self, instigator)
+            string.format("") -- SeriousProton needs a global context
+            if instigator ~= nil then
+                self.damage_instigator = instigator
+            end
+        end)
+        :setTypeName("Whirlwind")
+        :setWeaponTubeCount(9) --more (vs 5)
+        :setWeaponTubeDirection(0, -90) --3 left, 3 right, 3 front (vs 5 front)
+        :setWeaponTubeDirection(1, -92)
+        :setWeaponTubeDirection(2, -88)
+        :setWeaponTubeDirection(3, 90)
+        :setWeaponTubeDirection(4, 92)
+        :setWeaponTubeDirection(5, 88)
+        :setWeaponTubeDirection(6, 0)
+        :setWeaponTubeDirection(7, 2)
+        :setWeaponTubeDirection(8, -2)
+        :setWeaponStorageMax("Homing", 36) --more (vs 15)
+        :setWeaponStorage("Homing", 36)
+        :setWeaponStorageMax("HVLI", 36) --more (vs 15)
+        :setWeaponStorage("HVLI", 36)
     local ships_key = _("scienceDB", "Ships")
     local frigate_key = _("scienceDB", "Frigate")
     local whirlwind_key = _("scienceDB", "Whirlwind")
@@ -2120,7 +2208,7 @@ function whirlwind(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "The Whirlwind, another heavy artillery cruiser, takes the Storm and adds tubes and missiles. It's as if the Storm swallowed a Pirahna and grew gills. Expect to see missiles, lots of missiles"
+                    [[The Whirlwind is a heavy artillery cruiser that adds tubes and missiles to the Storm hull. Expect to see lots of missiles.]]
                 ),
                 {
                     { key = tube_key, value = load_val }, --torpedo tube direction and load speed
@@ -2142,17 +2230,19 @@ function whirlwind(enemyFaction)
 end
 function wzLindworm(enemyFaction)
     --Relative strength reference number: 9
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("WX-Lindworm")
-    ship:setTypeName("WZ-Lindworm")
-    ship:setWeaponStorageMax("Nuke", 2) --more nukes (vs 0)
-    ship:setWeaponStorage("Nuke", 2)
-    ship:setWeaponStorageMax("Homing", 4) --more homing (vs 1)
-    ship:setWeaponStorage("Homing", 4)
-    ship:setWeaponStorageMax("HVLI", 12) --more HVLI (vs 6)
-    ship:setWeaponStorage("HVLI", 12)
-    ship:setRotationMaxSpeed(12) --slower maneuver (vs 15)
-    ship:setHullMax(45) --weaker hull (vs 50)
-    ship:setHull(45)
+    local ship = CpuShip()
+        :setFaction(enemyFaction)
+        :setTemplate(ST.WX_LINDWORM)
+        :setTypeName("WZ-Lindworm")
+        :setWeaponStorageMax("Nuke", 2) --more nukes (vs 0)
+        :setWeaponStorage("Nuke", 2)
+        :setWeaponStorageMax("Homing", 4) --more homing (vs 1)
+        :setWeaponStorage("Homing", 4)
+        :setWeaponStorageMax("HVLI", 12) --more HVLI (vs 6)
+        :setWeaponStorage("HVLI", 12)
+        :setRotationMaxSpeed(12) --slower maneuver (vs 15)
+        :setHullMax(45) --weaker hull (vs 50)
+        :setHull(45)
     local ships_key = _("scienceDB", "Ships")
     local starfighter_key = _("scienceDB", "Starfighter")
     local wzlindworm_key = _("scienceDB", "WZ-Lindworm")
@@ -2175,7 +2265,7 @@ function wzLindworm(enemyFaction)
                 ship, --ship just created, long description on the next line
                 _(
                     "scienceDB",
-                    "The WZ-Lindworm is essentially the stock WX-Lindworm with more HVLIs, more homing missiles and added nukes. They had to remove some of the armor to get the additional missiles to fit, so the hull is weaker. Also, the WZ turns a little more slowly than the WX. This little bomber packs quite a whallop."
+                    [[The WZ-Lindworm is essentially the stock WX-Lindworm with additional HVLIs, homing missiles, and nukes. They had to remove some of the armor to fit the additional missiles, so the hull is weaker. Also, the WZ turns a little more slowly than the WX.]]
                 ),
                 {
                     { key = tube_key, value = load_val }, --torpedo tube direction and load speed
@@ -2192,84 +2282,103 @@ end
 -- unarmed ships
 function spaceSedan(enemyFaction)
     --Relative strength reference number: 1
-    local ship = CpuShip():setTemplate("Personnel Jump Freighter 3")
+    local ship = CpuShip()
+        :setTemplate(ST.PERSONNEL_JUMP_FREIGHTER_3)
     if enemyFaction ~= nil then
         ship:setFaction(enemyFaction)
     end
     local sedan_key = _("scienceDB", "Space Sedan")
-    ship:setTypeName(sedan_key):setCommsScript(""):setCommsFunction(commsShip)
+    ship:setTypeName(sedan_key)
+        :setCommsScript("")
+        :setCommsFunction(commsShip)
     addFreighter(sedan_key, ship) --update science database if applicable
     return ship
 end
 function courier(enemyFaction)
     --Relative strength reference number: 1
-    local ship = CpuShip():setTemplate("Personnel Freighter 1")
+    local ship = CpuShip()
+        :setTemplate(ST.PERSONNEL_FREIGHTER_1)
     if enemyFaction ~= nil then
         ship:setFaction(enemyFaction)
     end
     local courier_key = _("scienceDB", "Courier")
-    ship:setTypeName(courier_key):setCommsScript(""):setCommsFunction(commsShip)
-    ship:setWarpDrive(true)
-    ship:setWarpSpeed(1500)
-    ship:setRotationMaxSpeed(20)
+    ship:setTypeName(courier_key)
+        :setCommsScript("")
+        :setCommsFunction(commsShip)
+        :setWarpDrive(true)
+        :setWarpSpeed(1500)
+        :setRotationMaxSpeed(20)
     addFreighter(courier_key, ship) --update science database if applicable
     return ship
 end
 function workWagon(enemyFaction)
     --Relative strength reference number: 1
-    local ship = CpuShip():setTemplate("Equipment Freighter 2")
+    local ship = CpuShip()
+        :setTemplate(ST.EQUIPMENT_FREIGHTER_2)
     if enemyFaction ~= nil then
         ship:setFaction(enemyFaction)
     end
     local wagon_key = _("scienceDB", "Work Wagon")
-    ship:setTypeName(wagon_key):setCommsScript(""):setCommsFunction(commsShip)
-    ship:setWarpDrive(true)
-    ship:setWarpSpeed(200)
+    ship:setTypeName(wagon_key)
+        :setCommsScript("")
+        :setCommsFunction(commsShip)
+        :setWarpDrive(true)
+        :setWarpSpeed(200)
     addFreighter(wagon_key, ship) --update science database if applicable
     return ship
 end
 function omnibus(enemyFaction)
     --Relative strength reference number: 1
-    local ship = CpuShip():setTemplate("Personnel Jump Freighter 5")
+    local ship = CpuShip()
+        :setTemplate(ST.PERSONNEL_JUMP_FREIGHTER_5)
     if enemyFaction ~= nil then
         ship:setFaction(enemyFaction)
     end
     local omnibus_key = _("scienceDB", "Omnibus")
-    ship:setTypeName(omnibus_key):setCommsScript(""):setCommsFunction(commsShip)
+    ship:setTypeName(omnibus_key)
+        :setCommsScript("")
+        :setCommsFunction(commsShip)
     addFreighter(omnibus_key, ship) --update science database if applicable
     return ship
 end
 function ladenLorry(enemyFaction)
     --Relative strength reference number: 1
-    local ship = CpuShip():setTemplate("Goods Freighter 3")
+    local ship = CpuShip()
+        :setTemplate(ST.GOODS_FREIGHTER_2)
     if enemyFaction ~= nil then
         ship:setFaction(enemyFaction)
     end
     local lorry_key = _("scienceDB", "Laden Lorry")
-    ship:setTypeName(lorry_key):setCommsScript(""):setCommsFunction(commsShip)
-    ship:setWarpDrive(true)
-    ship:setWarpSpeed(150)
+    ship:setTypeName(lorry_key)
+        :setCommsScript("")
+        :setCommsFunction(commsShip)
+        :setWarpDrive(true)
+        :setWarpSpeed(150)
     addFreighter(lorry_key, ship) --update science database if applicable
     return ship
 end
 function physicsResearch(enemyFaction)
     --Relative strength reference number: 1
-    local ship = CpuShip():setTemplate("Garbage Freighter 3")
+    local ship = CpuShip()
+        :setTemplate(ST.GARBAGE_FREIGHTER_3)
     if enemyFaction ~= nil then
         ship:setFaction(enemyFaction)
     end
     local physics_key = _("scienceDB", "Physics Research")
-    ship:setTypeName(physics_key):setCommsScript(""):setCommsFunction(commsShip)
-    ship:setImpulseMaxSpeed(65) --faster impulse (vs 45)
-    ship:setRotationMaxSpeed(10) --faster maneuver (vs 6)
-    ship:setShieldsMax(80, 80) --stronger shields (vs 50, 50)
-    ship:setShields(80, 80)
+    ship:setTypeName(physics_key)
+        :setCommsScript("")
+        :setCommsFunction(commsShip)
+        :setImpulseMaxSpeed(65) --faster impulse (vs 45)
+        :setRotationMaxSpeed(10) --faster maneuver (vs 6)
+        :setShieldsMax(80, 80) --stronger shields (vs 50, 50)
+        :setShields(80, 80)
     addFreighter(physics_key, ship) --update science database if applicable
     return ship
 end
 function serviceJonque(enemyFaction)
     --Relative strength reference number: 1
-    local ship = CpuShip():setTemplate("Garbage Jump Freighter 4")
+    local ship = CpuShip()
+        :setTemplate(ST.GARBAGE_JUMP_FREIGHTER_4)
     if enemyFaction ~= nil then
         ship:setFaction(enemyFaction)
     end
@@ -2344,7 +2453,7 @@ function addFreighters()
         freighter_db:setLongDescription(
             _(
                 "scienceDB",
-                "Small, medium and large scale transport ships. These are the working ships that keep commerce going in any sector. They may carry personnel, goods, cargo, equipment, garbage, fuel, research material, etc."
+                [[Small, medium, and large scale transport ships. These are the working ships that keep commerce going in any sector. They might carry personnel, goods, cargo, equipment, garbage, fuel, research material, etc.]]
             )
         )
     end
@@ -2380,7 +2489,7 @@ function addFreighter(freighter_type, ship)
                 space_sedan_db:setLongDescription(
                     _(
                         "scienceDB",
-                        "The Space Sedan was built around a surplus Personnel Jump Freighter 3. It's designed to provide relatively low cost transportation primarily for people, but there is also a limited amount of cargo space available"
+                        [[The Space Sedan was built around a surplus Personnel Jump Freighter 3. It's modified to provide relatively low-cost transportation primarily for people, but also has a limited amount of cargo space.]]
                     )
                 )
             end
@@ -2401,7 +2510,7 @@ function addFreighter(freighter_type, ship)
                 omnibus_db:setLongDescription(
                     _(
                         "scienceDB",
-                        "The Omnibus was designed from the Personnel Jump Freighter 5. It's made to transport large numbers of passengers of various types along with their luggage and any associated cargo"
+                        [[The Omnibus is a Personnel Jump Freighter 5 modified to transport large numbers of passengers of various types along with their luggage and any associated cargo.]]
                     )
                 )
             end
@@ -2426,7 +2535,7 @@ function addFreighter(freighter_type, ship)
                 service_jonque_db:setLongDescription(
                     _(
                         "scienceDB",
-                        "The Service Jonque is a modified Equipment Jump Freighter 4. It's designed to carry spare parts and equipment as well as the necessary repair personnel to where it's needed to repair stations and ships"
+                        [[The Service Jonque is an Equipment Jump Freighter 4 modified to carry spare parts and equipment as well as the necessary repair personnel. It operates wherever it's needed in order to repair stations and ships.]]
                     )
                 )
             end
@@ -2447,7 +2556,7 @@ function addFreighter(freighter_type, ship)
                 courier_db:setLongDescription(
                     _(
                         "scienceDB",
-                        "The Courier is a souped up Personnel Freighter 1. It's made to deliver people and messages fast. Very fast"
+                        [[The Courier is a souped-up Personnel Freighter 1 designed to deliver people and messages very quickly.]]
                     )
                 )
             end
@@ -2468,7 +2577,7 @@ function addFreighter(freighter_type, ship)
                 work_wagon_db:setLongDescription(
                     _(
                         "scienceDB",
-                        "The Work Wagon is a conversion of an Equipment Freighter 2 designed to carry equipment and parts where they are needed for repair or construction."
+                        [[The Work Wagon is a conversion of an Equipment Freighter 2 designed to carry equipment and parts where they are needed for repair or construction.]]
                     )
                 )
             end
@@ -2489,7 +2598,7 @@ function addFreighter(freighter_type, ship)
                 laden_lorry_db:setLongDescription(
                     _(
                         "scienceDB",
-                        "As a side contract, Conversion R Us put together the Laden Lorry from some recently acquired Goods Freighter 3 hulls. The added warp drive makes for a more versatile goods carrying vessel."
+                        [[As a side contract, Conversion R Us put together the Laden Lorry from some recently acquired Goods Freighter 3 hulls. The added warp drive makes for a more versatile goods carrying vessel.]]
                     )
                 )
             end
@@ -2510,7 +2619,7 @@ function addFreighter(freighter_type, ship)
                 physics_research_db:setLongDescription(
                     _(
                         "scienceDB",
-                        "Conversion R Us cleaned up and converted excess freighter hulls into Physics Research vessels. The reduced weight improved the impulse speed and maneuverability."
+                        [[Conversion R Us cleaned up and converted excess freighter hulls into Physics Research vessels. The reduced weight improved the impulse speed and maneuverability.]]
                     )
                 )
             end
