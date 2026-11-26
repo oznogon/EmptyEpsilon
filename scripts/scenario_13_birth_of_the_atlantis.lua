@@ -186,7 +186,7 @@ function init()
     Nebula():setPosition(37574, 112457)
     transport_f1 = CpuShip()
         :setFaction("Human Navy")
-        :setTemplate("Flavia")
+        :setTemplate(ST.FLAVIA)
         :setCallSign("F-1")
         :setScanned(true)
         :setPosition(28521, 114945)
@@ -222,7 +222,7 @@ function init()
 
     jc88 = CpuShip()
         :setFaction("Human Navy")
-        :setTemplate("Jump Carrier")
+        :setTemplate(ST.JUMP_CARRIER)
         :setCallSign("JC-88")
         :setScanned(true)
         :setPosition(18972, 135882)
@@ -232,7 +232,7 @@ function init()
     -- Set up sector B20
     CpuShip()
         :setFaction("Kraylor")
-        :setTemplate("WX-Lindworm")
+        :setTemplate(ST.WX_LINDWORM)
         :setCallSign("S11")
         :setPosition(304666, -75558)
         :orderDefendLocation(304666, -75558)
@@ -349,7 +349,7 @@ Doppler instability: %i]]
     CpuShip()
         :setFaction("Ghosts")
         :setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
-        :setTemplate("Starhammer II")
+        :setTemplate(ST.STARHAMMER_II)
         :orderDefendLocation(x, y)
 
     -- Set up the Kraylor defense line.
@@ -457,7 +457,7 @@ Doppler instability: %i]]
         elseif random(0, 100) < 50 then
             ship:setTemplate(ST.ATLANTIS_X23)
         else
-            ship:setTemplate("Starhammer II")
+            ship:setTemplate(ST.STARHAMMER_II)
         end
         table.insert(kraylor_defense_line_ships, ship)
         for n = 1, 3 do
@@ -525,7 +525,7 @@ Doppler instability: %i]]
         elseif random(0, 100) < 50 then
             ship:setTemplate(ST.ATLANTIS_X23)
         else
-            ship:setTemplate("Starhammer II")
+            ship:setTemplate(ST.STARHAMMER_II)
         end
 
         table.insert(kraylor_defense_line_ships, ship)
@@ -954,7 +954,7 @@ However, do NOT engage any of the Kraylor bases directly. You are not equipped t
         )
         kraylor_transport = CpuShip()
             :setFaction("Kraylor")
-            :setTemplate("Flavia")
+            :setTemplate(ST.FLAVIA)
             :setCallSign("KHVT")
             :orderIdle()
         kraylor_transport:setCommsScript(""):setImpulseMaxSpeed(60)
@@ -1188,7 +1188,7 @@ All hands on deck! Man all combat stations and evacuate all non-essential person
         )
         odin = CpuShip()
             :setFaction("Kraylor")
-            :setTemplate("Odin")
+            :setTemplate(ST.ODIN)
             :setCallSign("Odin")
             :setScanned(true)
             :setPosition(26900, 132872)

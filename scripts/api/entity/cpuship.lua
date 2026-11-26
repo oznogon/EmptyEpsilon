@@ -23,7 +23,7 @@ local cpuShipPrefab = Prefab("CpuShip", SpaceObjectPrefab, {
 --- They also rank prospective targets by their type, distance, and capabilities.
 --- Example:
 --- -- Place a Fighter-class Human Navy CpuShip, order it to roam, and if it engages in combat it will fight evasively
---- ship = CpuShip():setTemplate("Riposte"):setPosition(10000,3000):setFaction("Human Navy"):orderRoaming():setAI("evasive"):setScanned(true)
+--- ship = CpuShip():setTemplate(ST.RIPOSTE):setPosition(10000,3000):setFaction("Human Navy"):orderRoaming():setAI("evasive"):setScanned(true)
 --- @type creation
 function CpuShip()
     local e = cpuShipPrefab:spawn()

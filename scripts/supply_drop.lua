@@ -7,7 +7,7 @@ function init()
         :setCommsScript("comms_supply_drop.lua")
         :setFactionId(faction_id)
         :setPosition(position_x, position_y)
-        :setTemplate("Flavia")
+        :setTemplate(ST.FLAVIA)
         :setScanned(true)
         :orderFlyTowardsBlind(target_x, target_y)
     if jump_freighter ~= nil and jump_freighter == "yes" then

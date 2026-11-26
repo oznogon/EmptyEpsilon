@@ -3312,7 +3312,7 @@ function constructEnvironment()
     center_x = dev_x
     center_y = dev_y
     devourer = CpuShip()
-        :setTemplate("Odin")
+        :setTemplate(ST.ODIN)
         :setFaction("Kraylor")
         :setPosition(dev_x, dev_y)
     devourer:setTypeName(_("scienceDB", "Planet Devourer"))

@@ -11,7 +11,7 @@
 function init()
     player = PlayerSpaceship()
         :setFaction("Human Navy")
-        :setTemplate("Saipan")
+        :setTemplate(ST.SAIPAN)
         :setPosition(0, 0)
 
     player.components.drone_controller = {

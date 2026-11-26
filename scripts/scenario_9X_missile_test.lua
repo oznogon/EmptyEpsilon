@@ -179,7 +179,7 @@ function init()
     -- Create a ship with missile tubes using the standard API
     local ship = CpuShip()
         :setFaction("Human Navy")
-        :setTemplate("Flavia")
+        :setTemplate(ST.FLAVIA)
         :setCallSign("TestShip")
         :setWeaponTubeCount(2)
         :setWeaponStorageMax("Homing", 20)

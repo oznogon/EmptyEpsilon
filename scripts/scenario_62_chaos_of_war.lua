@@ -8856,7 +8856,7 @@ function customPlayerShip(custom_template, p)
         p = PlayerSpaceship()
     end
     if custom_template == "Striker LX" then
-        p:setTemplate("Crow")
+        p:setTemplate(ST.CROW)
         p:setTypeName("Striker LX")
         p:setRepairCrewCount(3) --more (vs 2)
         p:setShieldsMax(100, 100) --stronger shields (vs 50, 30)
@@ -8886,7 +8886,7 @@ function customPlayerShip(custom_template, p)
         p:setWeaponStorageMax("HVLI", 6)
         p:setWeaponStorage("HVLI", 6)
     elseif custom_template == "Focus" then
-        p:setTemplate("Crucible")
+        p:setTemplate(ST.CRUCIBLE)
         p:setTypeName("Focus")
         p:setImpulseMaxSpeed(70) --slower (vs 80)
         p:setRotationMaxSpeed(20) --faster spin (vs 15)
@@ -8909,7 +8909,7 @@ function customPlayerShip(custom_template, p)
         p:setWeaponStorageMax("Nuke", 1) --fewer (vs 4)
         p:setWeaponStorage("Nuke", 1)
     elseif custom_template == "Holmes" then
-        p:setTemplate("Crucible")
+        p:setTemplate(ST.CRUCIBLE)
         p:setTypeName("Holmes")
         p:setImpulseMaxSpeed(70) --slower (vs 80)
         --   Arc, Dir, Range, CycleTime, Dmg
@@ -8932,7 +8932,7 @@ function customPlayerShip(custom_template, p)
         p:setWeaponStorageMax("Nuke", 0) --fewer
         p:setWeaponStorage("Nuke", 0)
     elseif custom_template == "Maverick XP" then
-        p:setTemplate("Maverick")
+        p:setTemplate(ST.MAVERICK)
         p:setTypeName("Maverick XP")
         p:setImpulseMaxSpeed(65) --slower impulse max (vs 80)
         p:setWarpDrive(false) --no warp
@@ -8948,7 +8948,7 @@ function customPlayerShip(custom_template, p)
         p:setBeamWeapon(4, 0, 0, 0, 0, 0)
         p:setBeamWeapon(5, 0, 0, 0, 0, 0)
     elseif custom_template == "Phobos T2" then
-        p:setTemplate("Phobos M3P")
+        p:setTemplate(ST.PHOBOS_M3P)
         p:setTypeName("Phobos T2")
         p:setRepairCrewCount(4) --more repair crew (vs 3)
         p:setRotationMaxSpeed(20) --faster spin (vs 10)
@@ -9127,7 +9127,7 @@ function playerDestroyed(self, instigator)
     local p = PlayerSpaceship()
     if p ~= nil and p:isValid() then
         if respawn_type == "lindworm" then
-            p:setTemplate("ZX-Lindworm")
+            p:setTemplate(ST.ZX_LINDWORM)
         elseif respawn_type == "self" then
             p:setTemplate(old_template)
             death_penalty[faction] = death_penalty[faction] + self.shipScore
@@ -9204,7 +9204,7 @@ function delayedRespawn(name)
         local p = PlayerSpaceship()
         if p ~= nil and p:isValid() then
             if respawn_type == "lindworm" then
-                p:setTemplate("ZX-Lindworm")
+                p:setTemplate(ST.ZX_LINDWORM)
             elseif respawn_type == "self" then
                 p:setTemplate(old_template)
                 death_penalty[faction] = death_penalty[faction] + self.shipScore

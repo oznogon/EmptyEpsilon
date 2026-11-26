@@ -25,7 +25,7 @@ function init()
     -- Create a test ship
     local player = PlayerSpaceship()
     player
-        :setTemplate("Phobos M3")
+        :setTemplate(ST.PHOBOS_M3)
         :setFaction("Independent")
         :setPosition(0, 0)
 
@@ -85,7 +85,7 @@ function init()
 
         -- A turreted beam defined by a ship template
         local turret_ship = PlayerSpaceship()
-        turret_ship:setTemplate("Nautilus")
+        turret_ship:setTemplate(ST.NAUTILUS)
         turret_ship:setFaction("Independent")
         turret_ship:setPosition(2000, 0)
         local turret_mounts = turret_ship.components.mounts
@@ -135,7 +135,7 @@ function init()
     -- Test utility beam: create a ship and add a utility beam mount
     local util_ship = PlayerSpaceship()
     util_ship
-        :setTemplate("Heracles")
+        :setTemplate(ST.HERACLES)
         :setFaction("Independent")
         :setPosition(1000, 0)
         :setCallSign("UTIL")

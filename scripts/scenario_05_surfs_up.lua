@@ -1476,19 +1476,19 @@ function earlyEnd()
                         local ox = (fx + sx) / 2
                         local oy = (fy + sy) / 2
                         endOdin =
-                            CpuShip():setTemplate("Odin"):setFaction("Ghosts")
+                            CpuShip():setTemplate(ST.ODIN):setFaction("Ghosts")
                         endOdin:setPosition(ox, oy):orderRoaming()
                     else
                         if #station_pool > 0 then
                             local fx, fy = station_pool[1]:getPosition()
                             local ox, oy = vectorFromAngle(random(0, 360), 4000)
                             endOdin = CpuShip()
-                                :setTemplate("Odin")
+                                :setTemplate(ST.ODIN)
                                 :setFaction("Ghosts")
                             endOdin:setPosition(fx + ox, fy + oy):orderRoaming()
                         else
                             endOdin = CpuShip()
-                                :setTemplate("Odin")
+                                :setTemplate(ST.ODIN)
                                 :setFaction("Ghosts")
                                 :orderRoaming()
                         end
@@ -1743,13 +1743,14 @@ function spawnDefense()
     local fleet_prefix = string.format("DP%s", generateCallSignPrefix())
     for i = 1, defense_count do
         local def_x, def_y = vectorFromAngle(defense_angle, 4000)
-        local dp =
-            CpuShip():setTemplate(ST.DEFENSE_PLATFORM):setFaction("Ghosts")
-        dp:setRotationMaxSpeed(dp:getRotationMaxSpeed() * speed_factor)
-        dp:setAcceleration(dp:getAcceleration() * speed_factor)
-        dp:setPosition(base_spawn_x + def_x, base_spawn_y + def_y)
+        local dp = CpuShip()
+            :setTemplate(ST.DEFENSE_PLATFORM)
+            :setFaction("Ghosts")
+            :setRotationMaxSpeed(dp:getRotationMaxSpeed() * speed_factor)
+            :setAcceleration(dp:getAcceleration() * speed_factor)
+            :setPosition(base_spawn_x + def_x, base_spawn_y + def_y)
             :orderStandGround()
-        dp:setCallSign(generateCallSign(fleet_prefix))
+            :setCallSign(generateCallSign(fleet_prefix))
         table.insert(enemy_list, dp)
         defense_angle = defense_angle + (360 / defense_count)
     end
@@ -1763,7 +1764,7 @@ function baseDestroyed(self, instigator)
         if
             enemy ~= nil
             and enemy:isValid()
-            and enemy:getTypeName() == "Defense platform"
+            and enemy:getTypeName() == ST.DEFENSE_PLATFORM
         then
             destruct_warning = true
             break

@@ -33,7 +33,7 @@ function init()
     playerCallSign = "Damocles"
     player = PlayerSpaceship()
         :setFaction("Human Navy")
-        :setTemplate("Flavia P.Falcon")
+        :setTemplate(ST.FLAVIA_PFALCON)
     player:setPosition(22400, 18200):setCallSign(playerCallSign):setHeading(90)
     player.location_help = {}
     player.report_help = {}
@@ -54,13 +54,17 @@ function init()
             )
         )
     table.insert(stationList, outpost41)
-    outpost17 =
-        SpaceStation():setTemplate(ST.SMALL_STATION):setFaction("Independent")
-    outpost17:setPosition(52400, -26150):setCallSign("Outpost-17")
+    outpost17 = SpaceStation()
+        :setTemplate(ST.SMALL_STATION)
+        :setFaction("Independent")
+        :setPosition(52400, -26150)
+        :setCallSign("Outpost-17")
     table.insert(stationList, outpost17)
-    outpost26 =
-        SpaceStation():setTemplate(ST.SMALL_STATION):setFaction("Independent")
-    outpost26:setPosition(-42400, -32150):setCallSign("Outpost-26")
+    outpost26 = SpaceStation()
+        :setTemplate(ST.SMALL_STATION)
+        :setFaction("Independent")
+        :setPosition(-42400, -32150)
+        :setCallSign("Outpost-26")
     table.insert(stationList, outpost26)
     outpost13 = SpaceStation()
         :setTemplate(ST.SMALL_STATION)
@@ -77,20 +81,23 @@ function init()
             )
         )
     table.insert(stationList, outpost13)
-    outpost57 =
-        SpaceStation():setTemplate(ST.SMALL_STATION):setFaction("Kraylor")
-    outpost57:setPosition(63630, 47554):setCallSign("Outpost-57")
+    outpost57 = SpaceStation()
+        :setTemplate(ST.SMALL_STATION)
+        :setFaction("Kraylor")
+        :setPosition(63630, 47554)
+        :setCallSign("Outpost-57")
     table.insert(stationList, outpost57)
-    science22 =
-        SpaceStation():setTemplate(ST.SMALL_STATION):setFaction("Independent")
-    science22:setPosition(11200, 67554):setCallSign("Science-22")
+    science22 = SpaceStation()
+        :setTemplate(ST.SMALL_STATION)
+        :setFaction("Independent")
+        :setPosition(11200, 67554)
+        :setCallSign("Science-22")
     table.insert(stationList, science22)
     science37 = SpaceStation()
         :setTemplate(ST.SMALL_STATION)
         :setFaction("Human Navy")
         :setCommsScript("")
         :setCommsFunction(commsStation)
-    science37
         :setPosition(-18200, -32554)
         :setCallSign("Science-37")
         :setDescription(_("scienceDescription-station", "Observatory"))
@@ -100,7 +107,6 @@ function init()
         :setFaction("Independent")
         :setCommsScript("")
         :setCommsFunction(commsStation)
-    bpcommnex
         :setPosition(-53500, 84000)
         :setCallSign("BP Comm Nex")
         :setDescription(
@@ -110,16 +116,17 @@ function init()
             )
         )
     table.insert(stationList, bpcommnex)
-    goltincomms =
-        SpaceStation():setTemplate(ST.SMALL_STATION):setFaction("Independent")
-    goltincomms:setPosition(93150, 24387):setCallSign("Goltin Comms")
+    goltincomms = SpaceStation()
+        :setTemplate(ST.SMALL_STATION)
+        :setFaction("Independent")
+        :setPosition(93150, 24387)
+        :setCallSign("Goltin Comms")
     table.insert(stationList, goltincomms)
     stationOrdinkal = SpaceStation()
         :setTemplate(ST.MEDIUM_STATION)
         :setFaction("Independent")
         :setCommsScript("")
         :setCommsFunction(commsStation)
-    stationOrdinkal
         :setPosition(-14600, 47554)
         :setCallSign("Ordinkal")
         :setDescription(_("scienceDescription-station", "Trading Post"))
@@ -129,16 +136,17 @@ function init()
         :setFaction("Independent")
         :setCommsScript("")
         :setCommsFunction(commsStation)
-    stationNakor
         :setPosition(-34310, -37554)
         :setCallSign("Nakor")
         :setDescription(
             _("scienceDescription-station", "Science and trading hub")
         )
     table.insert(stationList, stationNakor)
-    stationKelfist =
-        SpaceStation():setTemplate(ST.MEDIUM_STATION):setFaction("Kraylor")
-    stationKelfist:setPosition(44640, 13554):setCallSign("Kelfist")
+    stationKelfist = SpaceStation()
+        :setTemplate(ST.MEDIUM_STATION)
+        :setFaction("Kraylor")
+        :setPosition(44640, 13554)
+        :setCallSign("Kelfist")
     table.insert(stationList, stationKelfist)
     stationFranklin = SpaceStation()
         :setTemplate(ST.LARGE_STATION)
@@ -152,16 +160,16 @@ function init()
             _("scienceDescription-station", "Civilian and military station")
         )
     table.insert(stationList, stationFranklin)
-    stationBroad =
-        SpaceStation():setTemplate(ST.LARGE_STATION):setFaction("Independent")
-    stationBroad
+    stationBroad = SpaceStation()
+        :setTemplate(ST.LARGE_STATION)
+        :setFaction("Independent")
         :setPosition(44340, 63554)
         :setCallSign("Broad")
         :setDescription(_("scienceDescription-station", "Trading Post"))
     table.insert(stationList, stationBroad)
-    stationBazamoana =
-        SpaceStation():setTemplate(ST.LARGE_STATION):setFaction("Independent")
-    stationBazamoana
+    stationBazamoana = SpaceStation()
+        :setTemplate(ST.LARGE_STATION)
+        :setFaction("Independent")
         :setPosition(35, 87)
         :setCallSign("Bazamoana")
         :setDescription(_("scienceDescription-station", "Trading Nexus"))
@@ -171,7 +179,6 @@ function init()
         :setFaction("Human Navy")
         :setCommsScript("")
         :setCommsFunction(commsStation)
-    stationPangora
         :setPosition(72340, -23554)
         :setCallSign("Pangora")
         :setDescription(
@@ -269,10 +276,9 @@ function init()
         :setFaction("Kraylor")
         :setPosition(24000, 18200)
         :setHeading(270)
-    kraylorChaser1
-        :orderAttack(player)
         :setScanned(true)
         :setCallSign(generateCallSign(nil, "Kraylor"))
+        :orderAttack(player)
     table.insert(kraylorChaserList, kraylorChaser1)
     if difficulty_variation ~= "Easy" then
         kraylorChaser2 = CpuShip()
@@ -280,10 +286,9 @@ function init()
             :setFaction("Kraylor")
             :setPosition(24000, 18600)
             :setHeading(270)
-        kraylorChaser2
-            :orderFlyFormation(kraylorChaser1, 0, 400)
             :setScanned(true)
             :setCallSign(generateCallSign(nil, "Kraylor"))
+            :orderFlyFormation(kraylorChaser1, 0, 400)
         table.insert(kraylorChaserList, kraylorChaser2)
     end
     if difficulty_variation == "Hard" then
@@ -292,10 +297,9 @@ function init()
             :setFaction("Kraylor")
             :setPosition(24000, 17800)
             :setHeading(270)
-        kraylorChaser3
-            :orderFlyFormation(kraylorChaser1, 0, -400)
             :setScanned(true)
             :setCallSign(generateCallSign(nil, "Kraylor"))
+            :orderFlyFormation(kraylorChaser1, 0, -400)
         table.insert(kraylorChaserList, kraylorChaser3)
     end
     -- Take station and transport generation script and use with modifications
@@ -398,9 +402,9 @@ function randomTransports()
                         math.random(3, 5)
                     )
                 end
-                local transport =
-                    CpuShip():setTemplate(name):setFaction("Independent")
-                transport
+                local transport = CpuShip()
+                    :setTemplate(name)
+                    :setFaction("Independent")
                     :setCommsScript("")
                     :setCommsFunction(commsShip)
                     :setCallSign(generateCallSign(nil, "Independent"))
@@ -599,13 +603,14 @@ function getAmbassador(delta) --1st Gremus mission, create planet, and set fomen
         :setPlanetAtmosphereTexture("planets/atmosphere.png")
         :setPlanetAtmosphereColor(0.2, 0.2, 1.0)
         :setAxialRotationTime(400.0)
-    balindorPrime:setCallSign("Balindor Prime")
+        :setCallSign("Balindor Prime")
     balindorMoon = Planet()
         :setPlanetRadius(1000)
         :setDistanceFromMovementPlane(-500)
         :setPlanetSurfaceTexture("planets/moon-1.png")
         :setAxialRotationTime(450)
-    balindorMoon:setPosition(-42500, 84000):setOrbit(balindorPrime, 1500)
+        :setPosition(-42500, 84000)
+        :setOrbit(balindorPrime, 1500)
     bpcommnex.bp_angle = 270
     local bcn_x, bcn_y = bpcommnex:getPosition()
     bpcommnex.bp_distance = distance(-50500, 84000, bcn_x, bcn_y)
@@ -652,7 +657,8 @@ function ambassadorAboard(delta) --Take Gremus to Ningling msg, create Ningling,
             :setFaction("Human Navy")
             :setCommsScript("")
             :setCommsFunction(commsStation)
-        ningling:setPosition(12200, -62600):setCallSign("Ningling")
+            :setPosition(12200, -62600)
+            :setCallSign("Ningling")
         table.insert(stationList, ningling)
         player:addReputationPoints(25.0)
         if difficulty_variation ~= "Hard" then
@@ -713,7 +719,9 @@ function waitForAmbassador(delta) --When meeting completes, request dock for nex
         globalMessage(
             _(
                 "msgMainscreen",
-                "Ningling destroyed.\nCritical information fails to reach Ambassador Gremus.\nMission fails."
+                [[Ningling destroyed.
+Critical information fails to reach Ambassador Gremus.
+Mission fails.]]
             )
         )
         victory("Kraylor")
@@ -758,7 +766,9 @@ function getFromNingling(delta) --Goltin 7 goal, create planet, start sub-plots
         globalMessage(
             _(
                 "msgMainscreen",
-                "Ningling destroyed.\nCritical information fails to reach Ambassador Gremus.\nMission fails."
+                [[Ningling destroyed.
+Critical information fails to reach Ambassador Gremus.
+Mission fails.]]
             )
         )
         victory("Kraylor")
@@ -807,16 +817,17 @@ function getFromNingling(delta) --Goltin 7 goal, create planet, start sub-plots
                 end
             )
         end
-        player:setTypeName("Flavia P. Falcon MK2")
-        player:setBeamWeapon(0, 40, 180, 1200.0, 6.0, 6)
-        player:setBeamWeapon(1, 20, 0, 1600.0, 6.0, 6)
+        player
+            :setTypeName("Flavia P. Falcon MK2")
+            :setBeamWeapon(0, 40, 180, 1200.0, 6.0, 6)
+            :setBeamWeapon(1, 20, 0, 1600.0, 6.0, 6)
         goltin = Planet()
             :setPosition(93150, 21387)
             :setPlanetRadius(3000)
             :setDistanceFromMovementPlane(-2000)
             :setPlanetSurfaceTexture("planets/gas-1.png")
             :setAxialRotationTime(80.0)
-        goltin:setCallSign("Goltin 7")
+            :setCallSign("Goltin 7")
         artifact_research_count = 0
         plot1 = travelGoltin
         plot2 = lastSabotage
@@ -1060,27 +1071,24 @@ function lastSabotage(delta) --Last ditch attempt to sabotage mission, the big g
             :setFaction("Kraylor")
             :setPosition(x + ao, y + ao)
             :setHeading(315)
-        goltin1
-            :orderAttack(player)
             :setCallSign(generateCallSign(nil, "Kraylor"))
+            :orderAttack(player)
         table.insert(goltinList, goltin1)
         goltin2 = CpuShip()
-            :setTemplate("Starhammer II")
+            :setTemplate(ST.STARHAMMER_II)
             :setFaction("Kraylor")
             :setPosition(x, y + ao)
             :setHeading(0)
-        goltin2
-            :orderAttack(player)
             :setCallSign(generateCallSign(nil, "Kraylor"))
+            :orderAttack(player)
         table.insert(goltinList, goltin2)
         goltin3 = CpuShip()
             :setTemplate(ST.STALKER_Q7)
             :setFaction("Kraylor")
             :setPosition(x + ao, y)
             :setHeading(270)
-        goltin3
-            :orderAttack(player)
             :setCallSign(generateCallSign(nil, "Kraylor"))
+            :orderAttack(player)
         table.insert(goltinList, goltin3)
         if difficulty_variation ~= "Easy" then
             goltin4 = CpuShip()
@@ -1088,56 +1096,50 @@ function lastSabotage(delta) --Last ditch attempt to sabotage mission, the big g
                 :setFaction("Kraylor")
                 :setPosition(x + ao + fo, y + ao - fo)
                 :setHeading(315)
-            goltin4
-                :orderAttack(player)
                 :setCallSign(generateCallSign(nil, "Kraylor"))
+                :orderAttack(player)
             table.insert(goltinList, goltin4)
             goltin5 = CpuShip()
-                :setTemplate("Ranus U")
+                :setTemplate(ST.RANUS_U)
                 :setFaction("Kraylor")
                 :setPosition(x + fo, y + ao)
                 :setHeading(0)
-            goltin5
-                :orderAttack(player)
                 :setCallSign(generateCallSign(nil, "Kraylor"))
+                :orderAttack(player)
             table.insert(goltinList, goltin5)
             goltin6 = CpuShip()
                 :setTemplate(ST.PHOBOS_T3)
                 :setFaction("Kraylor")
                 :setPosition(x + ao, y - fo)
                 :setHeading(270)
-            goltin6
-                :orderAttack(player)
                 :setCallSign(generateCallSign(nil, "Kraylor"))
+                :orderAttack(player)
             table.insert(goltinList, goltin6)
         end
         if difficulty_variation == "Hard" then
             goltin7 = CpuShip()
-                :setTemplate("Nirvana R5")
+                :setTemplate(ST.NIRVANA_R5)
                 :setFaction("Kraylor")
                 :setPosition(x + ao - fo, y + ao + fo)
                 :setHeading(315)
-            goltin7
-                :orderAttack(player)
                 :setCallSign(generateCallSign(nil, "Kraylor"))
+                :orderAttack(player)
             table.insert(goltinList, goltin7)
             goltin8 = CpuShip()
                 :setTemplate(ST.PIRANHA_F12)
                 :setFaction("Kraylor")
                 :setPosition(x - fo, y + ao)
                 :setHeading(0)
-            goltin8
-                :orderAttack(player)
                 :setCallSign(generateCallSign(nil, "Kraylor"))
+                :orderAttack(player)
             table.insert(goltinList, goltin8)
             goltin9 = CpuShip()
-                :setTemplate("Nirvana R5A")
+                :setTemplate(ST.NIRVANA_R5A)
                 :setFaction("Kraylor")
                 :setPosition(x + ao, y + fo)
                 :setHeading(270)
-            goltin9
-                :orderAttack(player)
                 :setCallSign(generateCallSign(nil, "Kraylor"))
+                :orderAttack(player)
             table.insert(goltinList, goltin9)
         end
         plot2 = nil
@@ -1156,9 +1158,8 @@ function balindorInterceptor(delta) --Mission prevention enemies
             :setFaction("Kraylor")
             :setPosition(x - ao, y + ao)
             :setHeading(45)
-        kraylorBalindorInterceptor1
-            :orderAttack(player)
             :setCallSign(generateCallSign(nil, "Kraylor"))
+            :orderAttack(player)
         table.insert(
             kraylorBalindorInterceptorList,
             kraylorBalindorInterceptor1
@@ -1168,9 +1169,8 @@ function balindorInterceptor(delta) --Mission prevention enemies
             :setFaction("Kraylor")
             :setPosition(x - (ao + fo), y + ao)
             :setHeading(45)
-        kraylorBalindorInterceptor2
-            :orderFlyFormation(kraylorBalindorInterceptor1, fo, 0)
             :setCallSign(generateCallSign(nil, "Kraylor"))
+            :orderFlyFormation(kraylorBalindorInterceptor1, fo, 0)
         table.insert(
             kraylorBalindorInterceptorList,
             kraylorBalindorInterceptor2
@@ -1180,9 +1180,8 @@ function balindorInterceptor(delta) --Mission prevention enemies
             :setFaction("Kraylor")
             :setPosition(x + ao, y - ao)
             :setHeading(225)
-        kraylorBalindorInterceptor3
-            :orderAttack(player)
             :setCallSign(generateCallSign(nil, "Kraylor"))
+            :orderAttack(player)
         table.insert(
             kraylorBalindorInterceptorList,
             kraylorBalindorInterceptor3
@@ -1192,9 +1191,8 @@ function balindorInterceptor(delta) --Mission prevention enemies
             :setFaction("Kraylor")
             :setPosition(x + ao + fo, y - ao)
             :setHeading(225)
-        kraylorBalindorInterceptor4
-            :orderFlyFormation(kraylorBalindorInterceptor3, -fo, 0)
             :setCallSign(generateCallSign(nil, "Kraylor"))
+            :orderFlyFormation(kraylorBalindorInterceptor3, -fo, 0)
         table.insert(
             kraylorBalindorInterceptorList,
             kraylorBalindorInterceptor4
@@ -1205,9 +1203,8 @@ function balindorInterceptor(delta) --Mission prevention enemies
                 :setFaction("Kraylor")
                 :setPosition(x - ao, y + ao + fo)
                 :setHeading(45)
-            kraylorBalindorInterceptor5
-                :orderFlyFormation(kraylorBalindorInterceptor1, 0, fo)
                 :setCallSign(generateCallSign(nil, "Kraylor"))
+                :orderFlyFormation(kraylorBalindorInterceptor1, 0, fo)
             table.insert(
                 kraylorBalindorInterceptorList,
                 kraylorBalindorInterceptor5
@@ -1217,9 +1214,8 @@ function balindorInterceptor(delta) --Mission prevention enemies
                 :setFaction("Kraylor")
                 :setPosition(x - (ao + fo), y + ao + fo)
                 :setHeading(45)
-            kraylorBalindorInterceptor6
-                :orderFlyFormation(kraylorBalindorInterceptor1, fo, fo)
                 :setCallSign(generateCallSign(nil, "Kraylor"))
+                :orderFlyFormation(kraylorBalindorInterceptor1, fo, fo)
             table.insert(
                 kraylorBalindorInterceptorList,
                 kraylorBalindorInterceptor6
@@ -1229,9 +1225,8 @@ function balindorInterceptor(delta) --Mission prevention enemies
                 :setFaction("Kraylor")
                 :setPosition(x + ao, y - (ao + fo))
                 :setHeading(225)
-            kraylorBalindorInterceptor7
-                :orderFlyFormation(kraylorBalindorInterceptor3, 0, -fo)
                 :setCallSign(generateCallSign(nil, "Kraylor"))
+                :orderFlyFormation(kraylorBalindorInterceptor3, 0, -fo)
             table.insert(
                 kraylorBalindorInterceptorList,
                 kraylorBalindorInterceptor7
@@ -1241,9 +1236,8 @@ function balindorInterceptor(delta) --Mission prevention enemies
                 :setFaction("Kraylor")
                 :setPosition(x + ao + fo, y - (ao + fo))
                 :setHeading(225)
-            kraylorBalindorInterceptor8
-                :orderFlyFormation(kraylorBalindorInterceptor3, -fo, -fo)
                 :setCallSign(generateCallSign(nil, "Kraylor"))
+                :orderFlyFormation(kraylorBalindorInterceptor3, -fo, -fo)
             table.insert(
                 kraylorBalindorInterceptorList,
                 kraylorBalindorInterceptor8
@@ -1255,9 +1249,8 @@ function balindorInterceptor(delta) --Mission prevention enemies
                 :setFaction("Kraylor")
                 :setPosition(x - ao, y + ao + fo * 2)
                 :setHeading(45)
-            kraylorBalindorInterceptor9
-                :orderFlyFormation(kraylorBalindorInterceptor1, 0, fo * 2)
                 :setCallSign(generateCallSign(nil, "Kraylor"))
+                :orderFlyFormation(kraylorBalindorInterceptor1, 0, fo * 2)
             table.insert(
                 kraylorBalindorInterceptorList,
                 kraylorBalindorInterceptor9
@@ -1267,9 +1260,8 @@ function balindorInterceptor(delta) --Mission prevention enemies
                 :setFaction("Kraylor")
                 :setPosition(x - (ao + fo * 2), y + ao)
                 :setHeading(45)
-            kraylorBalindorInterceptor10
-                :orderFlyFormation(kraylorBalindorInterceptor1, fo * 2, 0)
                 :setCallSign(generateCallSign(nil, "Kraylor"))
+                :orderFlyFormation(kraylorBalindorInterceptor1, fo * 2, 0)
             table.insert(
                 kraylorBalindorInterceptorList,
                 kraylorBalindorInterceptor10
@@ -1279,9 +1271,8 @@ function balindorInterceptor(delta) --Mission prevention enemies
                 :setFaction("Kraylor")
                 :setPosition(x + ao, y - (ao + fo * 2))
                 :setHeading(225)
-            kraylorBalindorInterceptor11
-                :orderFlyFormation(kraylorBalindorInterceptor3, 0, -fo * 2)
                 :setCallSign(generateCallSign(nil, "Kraylor"))
+                :orderFlyFormation(kraylorBalindorInterceptor3, 0, -fo * 2)
             table.insert(
                 kraylorBalindorInterceptorList,
                 kraylorBalindorInterceptor11
@@ -1291,9 +1282,8 @@ function balindorInterceptor(delta) --Mission prevention enemies
                 :setFaction("Kraylor")
                 :setPosition(x + ao + fo * 2, y - ao)
                 :setHeading(225)
-            kraylorBalindorInterceptor12
-                :orderFlyFormation(kraylorBalindorInterceptor3, -fo * 2, 0)
                 :setCallSign(generateCallSign(nil, "Kraylor"))
+                :orderFlyFormation(kraylorBalindorInterceptor3, -fo * 2, 0)
             table.insert(
                 kraylorBalindorInterceptorList,
                 kraylorBalindorInterceptor12
@@ -1314,18 +1304,16 @@ function ningAttack(delta) --More enemies to stop mission
             :setFaction("Kraylor")
             :setPosition(x, y - ao)
             :setHeading(180)
-        kraylorNing1
-            :orderAttack(player)
             :setCallSign(generateCallSign(nil, "Kraylor"))
+            :orderAttack(player)
         table.insert(kraylorNingList, kraylorNing1)
         kraylorNing4 = CpuShip()
             :setTemplate(ST.STALKER_Q7)
             :setFaction("Kraylor")
             :setPosition(x, y + ao)
             :setHeading(0)
-        kraylorNing4
-            :orderAttack(player)
             :setCallSign(generateCallSign(nil, "Kraylor"))
+            :orderAttack(player)
         table.insert(kraylorNingList, kraylorNing4)
         if difficulty_variation ~= "Easy" then
             kraylorNing7 = CpuShip()
@@ -1333,18 +1321,16 @@ function ningAttack(delta) --More enemies to stop mission
                 :setFaction("Kraylor")
                 :setPosition(x - fo, y - ao - fo * 2)
                 :setHeading(180)
-            kraylorNing7
-                :orderFlyFormation(kraylorNing1, -fo, -fo * 2)
                 :setCallSign(generateCallSign(nil, "Kraylor"))
+                :orderFlyFormation(kraylorNing1, -fo, -fo * 2)
             table.insert(kraylorNingList, kraylorNing7)
             kraylorNing9 = CpuShip()
                 :setTemplate(ST.STALKER_Q7)
                 :setFaction("Kraylor")
                 :setPosition(x - fo, y + ao + fo * 2)
                 :setHeading(0)
-            kraylorNing9
-                :orderFlyFormation(kraylorNing4, -fo, fo * 2)
                 :setCallSign(generateCallSign(nil, "Kraylor"))
+                :orderFlyFormation(kraylorNing4, -fo, fo * 2)
             table.insert(kraylorNingList, kraylorNing9)
         end
         if difficulty_variation == "Hard" then
@@ -1353,18 +1339,16 @@ function ningAttack(delta) --More enemies to stop mission
                 :setFaction("Kraylor")
                 :setPosition(x - fo, y - ao + fo * 2)
                 :setHeading(180)
-            kraylorNing11
-                :orderFlyFormation(kraylorNing1, -fo, fo * 2)
                 :setCallSign(generateCallSign(nil, "Kraylor"))
+                :orderFlyFormation(kraylorNing1, -fo, fo * 2)
             table.insert(kraylorNingList, kraylorNing11)
             kraylorNing13 = CpuShip()
                 :setTemplate(ST.STALKER_Q7)
                 :setFaction("Kraylor")
                 :setPosition(x - fo, y + ao - fo * 2)
                 :setHeading(0)
-            kraylorNing13
-                :orderFlyFormation(kraylorNing4, -fo, -fo * 2)
                 :setCallSign(generateCallSign(nil, "Kraylor"))
+                :orderFlyFormation(kraylorNing4, -fo, -fo * 2)
             table.insert(kraylorNingList, kraylorNing13)
         end
         plot3 = nil
@@ -1389,18 +1373,16 @@ function ningWait(delta) --While waiting, more enemies arrive to try to stop mis
             :setFaction("Kraylor")
             :setPosition(x + ao + fo, y + ao)
             :setHeading(315)
-        waitNing2
-            :orderFlyFormation(waitNing1, fo, 0)
             :setCallSign(generateCallSign(nil, "Kraylor"))
+            :orderFlyFormation(waitNing1, fo, 0)
         table.insert(waitNingList, waitNing2)
         waitNing3 = CpuShip()
             :setTemplate(ST.ADDER_MK4)
             :setFaction("Kraylor")
             :setPosition(x + ao, y + ao + fo)
             :setHeading(315)
-        waitNing3
-            :orderFlyFormation(waitNing1, 0, fo)
             :setCallSign(generateCallSign(nil, "Kraylor"))
+            :orderFlyFormation(waitNing1, 0, fo)
         table.insert(waitNingList, waitNing3)
     end
     if difficulty_variation == "Hard" then
@@ -1409,18 +1391,16 @@ function ningWait(delta) --While waiting, more enemies arrive to try to stop mis
             :setFaction("Kraylor")
             :setPosition(x + ao + fo * 2, y + ao)
             :setHeading(315)
-        waitNing4
-            :orderFlyFormation(waitNing1, fo * 2, 0)
             :setCallSign(generateCallSign(nil, "Kraylor"))
+            :orderFlyFormation(waitNing1, fo * 2, 0)
         table.insert(waitNingList, waitNing4)
         waitNing5 = CpuShip()
             :setTemplate(ST.ADDER_MK5)
             :setFaction("Kraylor")
             :setPosition(x + ao, y + ao + fo * 2)
             :setHeading(315)
-        waitNing5
-            :orderFlyFormation(waitNing1, 0, fo * 2)
             :setCallSign(generateCallSign(nil, "Kraylor"))
+            :orderFlyFormation(waitNing1, 0, fo * 2)
         table.insert(waitNingList, waitNing5)
     end
     plot3 = nil
@@ -1476,7 +1456,8 @@ function artifactByStation(delta) --When player docks, create nearby artifact. E
                 :setPosition(x + 35000, y + 38000)
                 :setScanningParameters(3, 2)
                 :setRadarSignatureInfo(random(0.2, 0.8), random(0.2, 0.8), random(0.2, 0.8))
-            nPangora:setModel("artifact3"):allowPickup(false)
+                :setModel("artifact3")
+                :allowPickup(false)
             nPangora.beta_radiation = irandom(3, 15)
             nPangora.gravity_disruption = irandom(1, 21)
             nPangora.ionic_phase_shift = irandom(5, 32)
@@ -1512,7 +1493,8 @@ Doppler instability: %i]]
                 :setPosition(x - 35000, y - 36000)
                 :setScanningParameters(2, 3)
                 :setRadarSignatureInfo(random(0.2, 0.5), random(0.2, 0.5), random(0.2, 0.8))
-            nNakor:setModel("artifact5"):allowPickup(false)
+                :setModel("artifact5")
+                :allowPickup(false)
             nNakor.gamma_radiation = irandom(1, 9)
             nNakor.organic_decay = irandom(3, 43)
             nNakor.gravity_disruption = irandom(2, 13)
@@ -1545,7 +1527,8 @@ Gravity disruption: %i]]
                 :setPosition(x + 1000, y - 40000)
                 :setScanningParameters(4, 1)
                 :setRadarSignatureInfo(random(0.3, 0.9), random(0.1, 0.5), random(0.2, 0.4))
-            nScience37:setModel("artifact6"):allowPickup(true)
+                :setModel("artifact6")
+                :allowPickup(true)
             nScience37.ionic_phase_shift = irandom(1, 9)
             nScience37.organic_decay = irandom(3, 13)
             nScience37.theta_particle_emission = irandom(1, 15)

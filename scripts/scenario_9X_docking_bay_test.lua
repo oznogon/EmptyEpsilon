@@ -23,7 +23,7 @@ elapsed = 0.0
 
 carrier = PlayerSpaceship()
     :setFaction("Human Navy")
-    :setTemplate("Saipan")
+    :setTemplate(ST.SAIPAN)
     :setRepairDocked(false)
     :setRestocksMissilesDocked(false)
 fighter_classes = {
@@ -68,7 +68,7 @@ end
 
 player_fighter = PlayerSpaceship()
     :setFaction("Human Navy")
-    :setTemplate("Crow")
+    :setTemplate(ST.CROW)
     :setCallSign("Crow")
     :setWeaponTubeCount(7)
     :weaponTubeAllowMissle(0, "Homing")
@@ -123,7 +123,7 @@ for i=1,10 do
   local fighter = CpuShip()
     :setFaction("Kraylor")
     :setPosition(2000,2000)
-    :setTemplate("Crow")
+    :setTemplate(ST.CROW)
     :setScannedByFaction("Human Navy", true)
 end
 

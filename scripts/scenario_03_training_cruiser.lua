@@ -17,14 +17,14 @@ require("utils.lua")
 function createExuariWeakInterceptor()
     return CpuShip()
         :setFaction("Exuari")
-        :setTemplate("Dagger")
+        :setTemplate(ST.DAGGER)
         :setBeamWeapon(0, 0, 0, 0, 0.1, 0.1)
 end
 
 function createExuariWeakBomber()
     return CpuShip()
         :setFaction("Exuari")
-        :setTemplate("Gunner")
+        :setTemplate(ST.GUNNER)
         :setWeaponTubeCount(0)
         :setWeaponStorageMax("HVLI", 0)
         :setWeaponStorage("HVLI", 0)
@@ -32,20 +32,20 @@ function createExuariWeakBomber()
 end
 
 function createExuariInterceptor()
-    return CpuShip():setFaction("Exuari"):setTemplate("Dagger")
+    return CpuShip():setFaction("Exuari"):setTemplate(ST.DAGGER)
 end
 
 function createExuariBomber()
     return CpuShip()
         :setFaction("Exuari")
-        :setTemplate("Gunner")
+        :setTemplate(ST.GUNNER)
         :setBeamWeapon(0, 0, 0, 0, 0.1, 0.1)
 end
 
 function createExuariTransport()
     return CpuShip()
         :setFaction("Exuari")
-        :setTemplate("Personnel Freighter 1")
+        :setTemplate(ST.PERSONNEL_FREIGHTER_1)
         :setDescriptionForScanState(
             "simple",
             _("scienceDescription-shipname", "Exuari transport")
@@ -55,7 +55,7 @@ end
 function createExuariFreighter()
     return CpuShip()
         :setFaction("Exuari")
-        :setTemplate("Goods Freighter 5")
+        :setTemplate(ST.GOODS_FREIGHTER_5)
         :setDescriptionForScanState(
             "simple",
             _("scienceDescription-shipname", "Exuari freighter")
@@ -65,7 +65,7 @@ end
 function createExuariShuttle()
     return CpuShip()
         :setFaction("Exuari")
-        :setTemplate("Racer")
+        :setTemplate(ST.RACER)
         :setDescriptionForScanState(
             "simple",
             _("scienceDescription-shipname", "Exuari shuttle")
@@ -183,14 +183,14 @@ function init()
     )
 
     player = PlayerSpaceship()
-        :setTemplate("Phobos M3P")
+        :setTemplate(ST.PHOBOS_M3P)
         :setPosition(18, -48)
         :setCallSign("Rookie 1")
         :setJumpDrive(false)
         :setLongRangeRadarRange(20000)
     command = CpuShip()
         :setFaction("Human Navy")
-        :setTemplate("Phobos M3")
+        :setTemplate(ST.PHOBOS_M3)
         :setCallSign("Command")
         :setPosition(-100000, -100000)
         :orderIdle()

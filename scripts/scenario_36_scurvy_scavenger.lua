@@ -47,7 +47,7 @@ function init()
     setConstants() --missle type names, template names and scores, deployment directions, player ship names, etc.
     player = PlayerSpaceship()
         :setFaction("Independent")
-        :setTemplate("Crow")
+        :setTemplate(ST.CROW)
         :setJumpDrive(false)
         :setWarpDrive(false)
         :setLongRangeRadarRange(25000)

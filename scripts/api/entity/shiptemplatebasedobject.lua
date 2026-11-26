@@ -11,7 +11,7 @@ local Entity = getLuaEntityFunctionTable()
 --- ShipTemplate string names are case-sensitive.
 --- Examples:
 --- CpuShip():setTemplate(ST.PHOBOS_T3)
---- PlayerSpaceship():setTemplate("Phobos M3P")
+--- PlayerSpaceship():setTemplate(ST.PHOBOS_M3P)
 --- SpaceStation():setTemplate(ST.LARGE_STATION)
 function Entity:setTemplate(template_name)
     local template = __ship_templates[template_name]

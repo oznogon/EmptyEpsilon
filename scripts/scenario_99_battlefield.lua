@@ -35,7 +35,7 @@ function init()
     for n = 1, 5 do
         setCirclePos(
             CpuShip()
-                :setTemplate("Flavia")
+                :setTemplate(ST.FLAVIA)
                 :setFaction("Independent")
                 :setScanned(true),
             0,
