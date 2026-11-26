@@ -754,7 +754,7 @@ function setConstants()
             short_range_radar = 5000,
             create = droneJacket,
         },
-        ["Ktlitan Drone"] = {
+        [ST.KTLITAN_DRONE] = {
             strength = 4,
             short_range_radar = 5000,
             create = stockTemplate,
@@ -764,17 +764,17 @@ function setConstants()
             short_range_radar = 5500,
             create = droneHeavy,
         },
-        ["Adder MK3"] = {
+        [ST.ADDER_MK3] = {
             strength = 5,
             short_range_radar = 5000,
             create = stockTemplate,
         },
-        ["MT52 Hornet"] = {
+        [ST.MT52_HORNET] = {
             strength = 5,
             short_range_radar = 5000,
             create = stockTemplate,
         },
-        ["MU52 Hornet"] = {
+        [ST.MU52_HORNET] = {
             strength = 5,
             short_range_radar = 5000,
             create = stockTemplate,
@@ -794,7 +794,7 @@ function setConstants()
             short_range_radar = 5000,
             create = hornetMT55,
         },
-        ["Adder MK4"] = {
+        [ST.ADDER_MK4] = {
             strength = 6,
             short_range_radar = 5000,
             create = stockTemplate,
@@ -804,7 +804,7 @@ function setConstants()
             short_range_radar = 5000,
             create = stockTemplate,
         },
-        ["Ktlitan Fighter"] = {
+        [ST.KTLITAN_FIGHTER] = {
             strength = 6,
             short_range_radar = 5000,
             create = stockTemplate,
@@ -829,7 +829,7 @@ function setConstants()
             short_range_radar = 5000,
             create = k2fighter,
         },
-        ["Adder MK5"] = {
+        [ST.ADDER_MK5] = {
             strength = 7,
             short_range_radar = 5000,
             create = stockTemplate,
@@ -854,12 +854,12 @@ function setConstants()
             short_range_radar = 5000,
             create = stockTemplate,
         },
-        ["Adder MK6"] = {
+        [ST.ADDER_MK6] = {
             strength = 8,
             short_range_radar = 5000,
             create = stockTemplate,
         },
-        ["Ktlitan Scout"] = {
+        [ST.KTLITAN_SCOUT] = {
             strength = 8,
             short_range_radar = 7000,
             create = stockTemplate,
@@ -869,22 +869,22 @@ function setConstants()
             short_range_radar = 5500,
             create = wzLindworm,
         },
-        ["Adder MK7"] = {
+        [ST.ADDER_MK7] = {
             strength = 9,
             short_range_radar = 5000,
             create = stockTemplate,
         },
-        ["Adder MK8"] = {
+        [ST.ADDER_MK8] = {
             strength = 10,
             short_range_radar = 5500,
             create = stockTemplate,
         },
-        ["Adder MK9"] = {
+        [ST.ADDER_MK9] = {
             strength = 11,
             short_range_radar = 6000,
             create = stockTemplate,
         },
-        ["Nirvana R3"] = {
+        [ST.NIRVANA_R3] = {
             strength = 12,
             short_range_radar = 5000,
             create = stockTemplate,
@@ -905,7 +905,7 @@ function setConstants()
             create = waddle5,
         },
         ["Jade 5"] = { strength = 15, short_range_radar = 5000, create = jade5 },
-        ["Phobos T3"] = {
+        [ST.PHOBOS_T3] = {
             strength = 15,
             short_range_radar = 5000,
             create = stockTemplate,
@@ -915,22 +915,22 @@ function setConstants()
             short_range_radar = 5000,
             create = stockTemplate,
         },
-        ["Piranha F8"] = {
+        [ST.PIRANHA_F8] = {
             strength = 15,
             short_range_radar = 6000,
             create = stockTemplate,
         },
-        ["Piranha F12"] = {
+        [ST.PIRANHA_F12] = {
             strength = 15,
             short_range_radar = 6000,
             create = stockTemplate,
         },
-        ["Piranha F12.M"] = {
+        [ST.PIRANHA_F12M] = {
             strength = 16,
             short_range_radar = 6000,
             create = stockTemplate,
         },
-        ["Phobos M3"] = {
+        [ST.PHOBOS_M3] = {
             strength = 16,
             short_range_radar = 5500,
             create = stockTemplate,
@@ -965,7 +965,7 @@ function setConstants()
             short_range_radar = 6000,
             create = stockTemplate,
         },
-        ["Nirvana R5"] = {
+        [ST.NIRVANA_R5] = {
             strength = 19,
             short_range_radar = 5000,
             create = stockTemplate,
@@ -975,17 +975,17 @@ function setConstants()
             short_range_radar = 8000,
             create = farco8,
         },
-        ["Nirvana R5A"] = {
+        [ST.NIRVANA_R5A] = {
             strength = 20,
             short_range_radar = 5000,
             create = stockTemplate,
         },
-        ["Adv. Gunship"] = {
+        [ST.ADV_GUNSHIP] = {
             strength = 20,
             short_range_radar = 7000,
             create = stockTemplate,
         },
-        ["Ktlitan Worker"] = {
+        [ST.KTLITAN_WORKER] = {
             strength = 20,
             short_range_radar = 5000,
             create = stockTemplate,
@@ -1030,7 +1030,7 @@ function setConstants()
             short_range_radar = 5000,
             create = stockTemplate,
         },
-        ["Ranus U"] = {
+        [ST.RANUS_U] = {
             strength = 25,
             short_range_radar = 6000,
             create = stockTemplate,
@@ -1050,12 +1050,12 @@ function setConstants()
             short_range_radar = 6000,
             create = stockTemplate,
         },
-        ["Stalker Q7"] = {
+        [ST.STALKER_Q7] = {
             strength = 25,
             short_range_radar = 5000,
             create = stockTemplate,
         },
-        ["Stalker R7"] = {
+        [ST.STALKER_R7] = {
             strength = 25,
             short_range_radar = 5000,
             create = stockTemplate,
@@ -1090,7 +1090,7 @@ function setConstants()
             short_range_radar = 6000,
             create = maniapak,
         },
-        ["Fiend G4"] = {
+        [ST.FIEND_G4] = {
             strength = 35,
             short_range_radar = 6500,
             create = stockTemplate,
@@ -1100,7 +1100,7 @@ function setConstants()
             short_range_radar = 5000,
             create = cucaracha,
         },
-        ["Fiend G6"] = {
+        [ST.FIEND_G6] = {
             strength = 39,
             short_range_radar = 6500,
             create = stockTemplate,
@@ -1110,7 +1110,7 @@ function setConstants()
             short_range_radar = 7500,
             create = predator,
         },
-        ["Ktlitan Breaker"] = {
+        [ST.KTLITAN_BREAKER] = {
             strength = 45,
             short_range_radar = 5000,
             create = stockTemplate,
@@ -1120,17 +1120,17 @@ function setConstants()
             short_range_radar = 6000,
             create = hurricane,
         },
-        ["Ktlitan Feeder"] = {
+        [ST.KTLITAN_FEEDER] = {
             strength = 48,
             short_range_radar = 5000,
             create = stockTemplate,
         },
-        ["Atlantis X23"] = {
+        [ST.ATLANTIS_X23] = {
             strength = 50,
             short_range_radar = 10000,
             create = stockTemplate,
         },
-        ["Ktlitan Destroyer"] = {
+        [ST.KTLITAN_DESTROYER] = {
             strength = 50,
             short_range_radar = 9000,
             create = stockTemplate,
@@ -1145,12 +1145,12 @@ function setConstants()
             short_range_radar = 10000,
             create = atlantisY42,
         },
-        ["Blockade Runner"] = {
+        [ST.BLOCKADE_RUNNER] = {
             strength = 63,
             short_range_radar = 5500,
             create = stockTemplate,
         },
-        ["Starhammer II"] = {
+        [ST.STARHAMMER_II] = {
             strength = 70,
             short_range_radar = 10000,
             create = stockTemplate,
@@ -1880,7 +1880,7 @@ function setConstants()
             "Jupiter",
             "Saturn",
         },
-        ["Flavia P.Falcon"] = {
+        [ST.FLAVIA_PFALCON] = {
             "Ladyhawke",
             "Hunter",
             "Seeker",
@@ -1922,7 +1922,7 @@ function setConstants()
             "Magnifier",
             "Hedge",
         },
-        ["MP52 Hornet"] = {
+        [ST.MP52_HORNET] = {
             "Dragonfly",
             "Scarab",
             "Mantis",
@@ -1944,7 +1944,7 @@ function setConstants()
             "Heinkel",
             "Dornier",
         },
-        ["Phobos M3P"] = {
+        [ST.PHOBOS_M3P] = {
             "Blinder",
             "Shadow",
             "Distortion",
@@ -2034,7 +2034,7 @@ function setConstants()
         ["Leftovers"] = { "Foregone", "Righteous", "" },
     }
     player_ship_stats = {
-        ["MP52 Hornet"] = {
+        [ST.MP52_HORNET] = {
             strength = 7,
             cargo = 3,
             distance = 100,
@@ -2056,7 +2056,7 @@ function setConstants()
             cm_boost = 200,
             cm_strafe = 150,
         },
-        ["Flavia P.Falcon"] = {
+        [ST.FLAVIA_PFALCON] = {
             strength = 13,
             cargo = 15,
             distance = 200,
@@ -2067,7 +2067,7 @@ function setConstants()
             cm_boost = 250,
             cm_strafe = 150,
         },
-        ["Phobos M3P"] = {
+        [ST.PHOBOS_M3P] = {
             strength = 19,
             cargo = 10,
             distance = 200,
@@ -2481,10 +2481,10 @@ function setConstants()
         }
     end
     station_sizes = {
-        ["Huge Station"] = { strength = 10, short_lo = 150, short_hi = 500 },
-        ["Large Station"] = { strength = 5, short_lo = 90, short_hi = 300 },
-        ["Medium Station"] = { strength = 3, short_lo = 60, short_hi = 200 },
-        ["Small Station"] = { strength = 1, short_lo = 35, short_hi = 100 },
+        [ST.HUGE_STATION] = { strength = 10, short_lo = 150, short_hi = 500 },
+        [ST.LARGE_STATION] = { strength = 5, short_lo = 90, short_hi = 300 },
+        [ST.MEDIUM_STATION] = { strength = 3, short_lo = 60, short_hi = 200 },
+        [ST.SMALL_STATION] = { strength = 1, short_lo = 35, short_hi = 100 },
     }
     commonGoods = {
         "food",

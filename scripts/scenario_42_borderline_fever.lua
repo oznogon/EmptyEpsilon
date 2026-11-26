@@ -381,10 +381,10 @@ function setConstants()
     urr5 = 540
     --station placement setup values
     station_sizes = {
-        ["Huge Station"] = { strength = 10, short_lo = 150, short_hi = 500 },
-        ["Large Station"] = { strength = 5, short_lo = 90, short_hi = 300 },
-        ["Medium Station"] = { strength = 3, short_lo = 60, short_hi = 200 },
-        ["Small Station"] = { strength = 1, short_lo = 35, short_hi = 100 },
+        [ST.HUGE_STATION] = { strength = 10, short_lo = 150, short_hi = 500 },
+        [ST.LARGE_STATION] = { strength = 5, short_lo = 90, short_hi = 300 },
+        [ST.MEDIUM_STATION] = { strength = 3, short_lo = 60, short_hi = 200 },
+        [ST.SMALL_STATION] = { strength = 1, short_lo = 35, short_hi = 100 },
     }
     --enemy strength evaluation; ratio of stations to ships. Must add up to 1
     enemyStationComponentWeight = 0.65
@@ -412,47 +412,47 @@ function setConstants()
         ["Gnat"] = { strength = 2, create = gnat },
         ["Lite Drone"] = { strength = 3, create = droneLite },
         ["Jacket Drone"] = { strength = 4, create = droneJacket },
-        ["Ktlitan Drone"] = { strength = 4, create = stockTemplate },
+        [ST.KTLITAN_DRONE] = { strength = 4, create = stockTemplate },
         ["Heavy Drone"] = { strength = 5, create = droneHeavy },
-        ["MT52 Hornet"] = { strength = 5, create = stockTemplate },
-        ["MU52 Hornet"] = { strength = 5, create = stockTemplate },
+        [ST.MT52_HORNET] = { strength = 5, create = stockTemplate },
+        [ST.MU52_HORNET] = { strength = 5, create = stockTemplate },
         ["MV52 Hornet"] = { strength = 6, create = hornetMV52 },
-        ["Adder MK4"] = { strength = 6, create = stockTemplate },
+        [ST.ADDER_MK4] = { strength = 6, create = stockTemplate },
         ["Fighter"] = { strength = 6, create = stockTemplate },
-        ["Ktlitan Fighter"] = { strength = 6, create = stockTemplate },
+        [ST.KTLITAN_FIGHTER] = { strength = 6, create = stockTemplate },
         ["K2 Fighter"] = { strength = 7, create = k2fighter },
-        ["Adder MK5"] = { strength = 7, create = stockTemplate },
+        [ST.ADDER_MK5] = { strength = 7, create = stockTemplate },
         ["WX-Lindworm"] = { strength = 7, create = stockTemplate },
         ["K3 Fighter"] = { strength = 8, create = k3fighter },
-        ["Adder MK6"] = { strength = 8, create = stockTemplate },
-        ["Ktlitan Scout"] = { strength = 8, create = stockTemplate },
+        [ST.ADDER_MK6] = { strength = 8, create = stockTemplate },
+        [ST.KTLITAN_SCOUT] = { strength = 8, create = stockTemplate },
         ["WZ-Lindworm"] = { strength = 9, create = wzLindworm },
         ["Phobos R2"] = { strength = 13, create = phobosR2 },
         ["Missile Cruiser"] = { strength = 14, create = stockTemplate },
         ["Waddle 5"] = { strength = 15, create = waddle5 },
         ["Jade 5"] = { strength = 15, create = jade5 },
-        ["Phobos T3"] = { strength = 15, create = stockTemplate },
-        ["Piranha F8"] = { strength = 15, create = stockTemplate },
-        ["Piranha F12"] = { strength = 15, create = stockTemplate },
+        [ST.PHOBOS_T3] = { strength = 15, create = stockTemplate },
+        [ST.PIRANHA_F8] = { strength = 15, create = stockTemplate },
+        [ST.PIRANHA_F12] = { strength = 15, create = stockTemplate },
         ["Farco 3"] = { strength = 16, create = farco3 },
         ["Farco 5"] = { strength = 16, create = farco5 },
-        ["Piranha F12.M"] = { strength = 16, create = stockTemplate },
-        ["Phobos M3"] = { strength = 16, create = stockTemplate },
+        [ST.PIRANHA_F12M] = { strength = 16, create = stockTemplate },
+        [ST.PHOBOS_M3] = { strength = 16, create = stockTemplate },
         [ST.KARNACK] = { strength = 17, create = stockTemplate },
         [ST.GUNSHIP] = { strength = 17, create = stockTemplate },
         ["Cruiser"] = { strength = 18, create = stockTemplate },
         ["Phobos T4"] = { strength = 18, create = phobosT4 },
         ["Farco 8"] = { strength = 19, create = farco8 },
-        ["Nirvana R5"] = { strength = 19, create = stockTemplate },
-        ["Nirvana R5A"] = { strength = 20, create = stockTemplate },
-        ["Adv. Gunship"] = { strength = 20, create = stockTemplate },
+        [ST.NIRVANA_R5] = { strength = 19, create = stockTemplate },
+        [ST.NIRVANA_R5A] = { strength = 20, create = stockTemplate },
+        [ST.ADV_GUNSHIP] = { strength = 20, create = stockTemplate },
         ["Farco 11"] = { strength = 21, create = farco11 },
-        ["Ktlitan Worker"] = { strength = 21, create = stockTemplate },
+        [ST.KTLITAN_WORKER] = { strength = 21, create = stockTemplate },
         [ST.STORM] = { strength = 22, create = stockTemplate },
         ["Farco 13"] = { strength = 24, create = farco13 },
-        ["Ranus U"] = { strength = 25, create = stockTemplate },
-        ["Stalker Q7"] = { strength = 25, create = stockTemplate },
-        ["Stalker R7"] = { strength = 25, create = stockTemplate },
+        [ST.RANUS_U] = { strength = 25, create = stockTemplate },
+        [ST.STALKER_Q7] = { strength = 25, create = stockTemplate },
+        [ST.STALKER_R7] = { strength = 25, create = stockTemplate },
         ["Whirlwind"] = { strength = 26, create = whirlwind },
         [ST.MAGPIE] = { strength = 27, create = stockTemplate },
         ["Tempest"] = { strength = 30, create = tempest },
@@ -460,15 +460,15 @@ function setConstants()
         ["Maniapak"] = { strength = 34, create = maniapak },
         ["Cucaracha"] = { strength = 36, create = cucaracha },
         ["Predator"] = { strength = 42, create = predator },
-        ["Ktlitan Breaker"] = { strength = 45, create = stockTemplate },
+        [ST.KTLITAN_BREAKER] = { strength = 45, create = stockTemplate },
         ["Hurricane"] = { strength = 46, create = hurricane },
-        ["Ktlitan Feeder"] = { strength = 48, create = stockTemplate },
-        ["Atlantis X23"] = { strength = 50, create = stockTemplate },
+        [ST.KTLITAN_FEEDER] = { strength = 48, create = stockTemplate },
+        [ST.ATLANTIS_X23] = { strength = 50, create = stockTemplate },
         ["K2 Breaker"] = { strength = 55, create = k2breaker },
-        ["Ktlitan Destroyer"] = { strength = 50, create = stockTemplate },
+        [ST.KTLITAN_DESTROYER] = { strength = 50, create = stockTemplate },
         ["Atlantis Y42"] = { strength = 60, create = atlantisY42 },
-        ["Blockade Runner"] = { strength = 65, create = stockTemplate },
-        ["Starhammer II"] = { strength = 70, create = stockTemplate },
+        [ST.BLOCKADE_RUNNER] = { strength = 65, create = stockTemplate },
+        [ST.STARHAMMER_II] = { strength = 70, create = stockTemplate },
         ["Enforcer"] = { strength = 75, create = enforcer },
         [ST.DREADNOUGHT] = { strength = 80, create = stockTemplate },
         ["Starhammer III"] = { strength = 85, create = starhammerIII },
@@ -1141,7 +1141,7 @@ function setConstants()
     }
     max_pyramid_tier = 15
     playerShipStats = {
-        ["MP52 Hornet"] = {
+        [ST.MP52_HORNET] = {
             strength = 7,
             cargo = 3,
             distance = 100,
@@ -1163,7 +1163,7 @@ function setConstants()
             cm_boost = 200,
             cm_strafe = 150,
         },
-        ["Flavia P.Falcon"] = {
+        [ST.FLAVIA_PFALCON] = {
             strength = 13,
             cargo = 15,
             distance = 200,
@@ -1174,7 +1174,7 @@ function setConstants()
             cm_boost = 250,
             cm_strafe = 150,
         },
-        ["Phobos M3P"] = {
+        [ST.PHOBOS_M3P] = {
             strength = 19,
             cargo = 10,
             distance = 200,
@@ -1540,7 +1540,7 @@ function setConstants()
     }
     --Player ship name lists to supplant standard randomized call sign generation
     playerShipNamesFor = {}
-    playerShipNamesFor["MP52 Hornet"] = {
+    playerShipNamesFor[ST.MP52_HORNET] = {
         "Dragonfly",
         "Scarab",
         "Mantis",
@@ -1560,7 +1560,7 @@ function setConstants()
         "Vulture",
         "Predator",
     }
-    playerShipNamesFor["Flavia P.Falcon"] = {
+    playerShipNamesFor[ST.FLAVIA_PFALCON] = {
         "Ladyhawke",
         "Hunter",
         "Seeker",
@@ -1570,7 +1570,7 @@ function setConstants()
         "Bandit",
         "Buccaneer",
     }
-    playerShipNamesFor["Phobos M3P"] = {
+    playerShipNamesFor[ST.PHOBOS_M3P] = {
         "Blinder",
         "Shadow",
         "Distortion",
@@ -11812,10 +11812,10 @@ function placeBFStation(x, y, name, faction, size)
         end
     end
     station_template_chance = {
-        ["Small Station"] = 0,
-        ["Medium Station"] = 20,
-        ["Large Station"] = 30,
-        ["Huge Station"] = 40,
+        [ST.SMALL_STATION] = 0,
+        [ST.MEDIUM_STATION] = 20,
+        [ST.LARGE_STATION] = 30,
+        [ST.HUGE_STATION] = 40,
     }
     faction_station_service_chance = {
         ["Human Navy"] = 20,

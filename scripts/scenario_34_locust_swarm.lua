@@ -294,7 +294,7 @@ function setConstants()
         { "Trebuchet", "Pitcher", "Mutant", "Gronk", "Methuselah" }
     player_ship_names_for[ST.ENDER] =
         { "Mongo", "Godzilla", "Leviathan", "Kraken", "Jupiter", "Saturn" }
-    player_ship_names_for["Flavia P.Falcon"] = {
+    player_ship_names_for[ST.FLAVIA_PFALCON] = {
         "Ladyhawke",
         "Hunter",
         "Seeker",
@@ -329,7 +329,7 @@ function setConstants()
         "Vinson",
         "Old Salt",
     }
-    player_ship_names_for["MP52 Hornet"] = {
+    player_ship_names_for[ST.MP52_HORNET] = {
         "Dragonfly",
         "Scarab",
         "Mantis",
@@ -355,7 +355,7 @@ function setConstants()
         "Heinkel",
         "Dornier",
     }
-    player_ship_names_for["Phobos M3P"] = {
+    player_ship_names_for[ST.PHOBOS_M3P] = {
         "Blinder",
         "Shadow",
         "Distortion",
@@ -500,7 +500,7 @@ function setConstants()
                 prox_scan = 2,
                 epjam = 0,
             },
-            ["Flavia P.Falcon"] = {
+            [ST.FLAVIA_PFALCON] = {
                 strength = 13,
                 cargo = 15,
                 distance = 200,
@@ -560,7 +560,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["MP52 Hornet"] = {
+            [ST.MP52_HORNET] = {
                 strength = 7,
                 cargo = 3,
                 distance = 100,
@@ -590,7 +590,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["Phobos M3P"] = {
+            [ST.PHOBOS_M3P] = {
                 strength = 19,
                 cargo = 10,
                 distance = 200,
@@ -1613,32 +1613,32 @@ function setConstants()
             },
         }
     defense_platforms = {
-        ["Small Station"] = {
+        [ST.SMALL_STATION] = {
             count = math.random(3, 4),
             dist = 2500,
             chance = 15,
         },
-        ["Medium Station"] = {
+        [ST.MEDIUM_STATION] = {
             count = math.random(3, 5),
             dist = 3300,
             chance = 25,
         },
-        ["Large Station"] = {
+        [ST.LARGE_STATION] = {
             count = math.random(4, 6),
             dist = 4000,
             chance = 40,
         },
-        ["Huge Station"] = {
+        [ST.HUGE_STATION] = {
             count = math.random(4, 7),
             dist = 4500,
             chance = 65,
         },
     }
     station_defend_dist = {
-        ["Small Station"] = 2800, --2620
-        ["Medium Station"] = 4200, --4000
-        ["Large Station"] = 4800, --4590
-        ["Huge Station"] = 5200, --4985
+        [ST.SMALL_STATION] = 2800, --2620
+        [ST.MEDIUM_STATION] = 4200, --4000
+        [ST.LARGE_STATION] = 4800, --4590
+        [ST.HUGE_STATION] = 5200, --4985
     }
     faction_letter = {
         ["Human Navy"] = "H",

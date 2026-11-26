@@ -130,7 +130,7 @@ function init()
     player_count = 0
     player_start_list = {}
     player_ship_stats = {
-        ["MP52 Hornet"] = {
+        [ST.MP52_HORNET] = {
             strength = 7,
             cargo = 3,
             distance = 100,
@@ -146,7 +146,7 @@ function init()
             short_range_radar = 6000,
             probes = 15,
         },
-        ["Flavia P.Falcon"] = {
+        [ST.FLAVIA_PFALCON] = {
             strength = 13,
             cargo = 15,
             distance = 200,
@@ -154,7 +154,7 @@ function init()
             short_range_radar = 5000,
             probes = 27,
         },
-        ["Phobos M3P"] = {
+        [ST.PHOBOS_M3P] = {
             strength = 19,
             cargo = 10,
             distance = 200,
@@ -277,7 +277,7 @@ function init()
     }
     --Player ship name lists to supplant standard randomized call sign generation
     playerShipNamesFor = {}
-    playerShipNamesFor["MP52 Hornet"] = {
+    playerShipNamesFor[ST.MP52_HORNET] = {
         "Dragonfly",
         "Scarab",
         "Mantis",
@@ -297,7 +297,7 @@ function init()
         "Vulture",
         "Predator",
     }
-    playerShipNamesFor["Flavia P.Falcon"] = {
+    playerShipNamesFor[ST.FLAVIA_PFALCON] = {
         "Ladyhawke",
         "Hunter",
         "Seeker",
@@ -307,7 +307,7 @@ function init()
         "Bandit",
         "Buccaneer",
     }
-    playerShipNamesFor["Phobos M3P"] = {
+    playerShipNamesFor[ST.PHOBOS_M3P] = {
         "Blinder",
         "Shadow",
         "Distortion",

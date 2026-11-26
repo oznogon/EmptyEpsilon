@@ -9572,16 +9572,16 @@ function setStations()
     transport_station_list = {}
     place_space = {}
     station_dist = {
-        ["Small Station"] = 300,
-        ["Medium Station"] = 1000,
-        ["Large Station"] = 1300,
-        ["Huge Station"] = 1500,
+        [ST.SMALL_STATION] = 300,
+        [ST.MEDIUM_STATION] = 1000,
+        [ST.LARGE_STATION] = 1300,
+        [ST.HUGE_STATION] = 1500,
     }
     station_defend_dist = {
-        ["Small Station"] = 2800,
-        ["Medium Station"] = 4200,
-        ["Large Station"] = 4800,
-        ["Huge Station"] = 5200,
+        [ST.SMALL_STATION] = 2800,
+        [ST.MEDIUM_STATION] = 4200,
+        [ST.LARGE_STATION] = 4800,
+        [ST.HUGE_STATION] = 5200,
     }
     totalStations = 0
     friendlyStations = 0

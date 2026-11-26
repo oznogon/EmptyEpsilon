@@ -455,7 +455,7 @@ function setConstants()
             "Jupiter",
             "Saturn",
         },
-        ["Flavia P.Falcon"] = {
+        [ST.FLAVIA_PFALCON] = {
             "Ladyhawke",
             "Hunter",
             "Seeker",
@@ -497,7 +497,7 @@ function setConstants()
             "Magnifier",
             "Hedge",
         },
-        ["MP52 Hornet"] = {
+        [ST.MP52_HORNET] = {
             "Dragonfly",
             "Scarab",
             "Mantis",
@@ -519,7 +519,7 @@ function setConstants()
             "Heinkel",
             "Dornier",
         },
-        ["Phobos M3P"] = {
+        [ST.PHOBOS_M3P] = {
             "Blinder",
             "Shadow",
             "Distortion",
@@ -694,7 +694,7 @@ function setConstants()
                 prox_scan = 2,
                 epjam = 0,
             },
-            ["Flavia P.Falcon"] = {
+            [ST.FLAVIA_PFALCON] = {
                 strength = 13,
                 cargo = 15,
                 distance = 200,
@@ -754,7 +754,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["MP52 Hornet"] = {
+            [ST.MP52_HORNET] = {
                 strength = 7,
                 cargo = 3,
                 distance = 100,
@@ -784,7 +784,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["Phobos M3P"] = {
+            [ST.PHOBOS_M3P] = {
                 strength = 19,
                 cargo = 10,
                 distance = 200,
@@ -11872,10 +11872,10 @@ function listStatuses()
 end
 function stationStatus()
     local strengths = {
-        ["Huge Station"] = 10,
-        ["Large Station"] = 5,
-        ["Medium Station"] = 3,
-        ["Small Station"] = 1,
+        [ST.HUGE_STATION] = 10,
+        [ST.LARGE_STATION] = 5,
+        [ST.MEDIUM_STATION] = 3,
+        [ST.SMALL_STATION] = 1,
     }
     local counts = {
         ["Human Navy"] = 0,

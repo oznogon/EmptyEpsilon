@@ -531,7 +531,7 @@ function setConstants()
         },
     }
     player_ship_stats = {
-        ["MP52 Hornet"] = {
+        [ST.MP52_HORNET] = {
             strength = 7,
             cargo = 3,
             distance = 100,
@@ -547,7 +547,7 @@ function setConstants()
             short_range_radar = 6000,
             probes = 15,
         },
-        ["Flavia P.Falcon"] = {
+        [ST.FLAVIA_PFALCON] = {
             strength = 13,
             cargo = 15,
             distance = 200,
@@ -555,7 +555,7 @@ function setConstants()
             short_range_radar = 5000,
             probes = 27,
         },
-        ["Phobos M3P"] = {
+        [ST.PHOBOS_M3P] = {
             strength = 19,
             cargo = 10,
             distance = 200,
@@ -677,53 +677,53 @@ function setConstants()
         },
     }
     ship_template = { --ordered by relative strength
-        ["Ktlitan Drone"] = { strength = 4, create = stockTemplate },
-        ["MT52 Hornet"] = { strength = 5, create = stockTemplate },
-        ["MU52 Hornet"] = { strength = 5, create = stockTemplate },
-        ["Adder MK3"] = { strength = 5, create = stockTemplate },
-        ["Adder MK4"] = { strength = 6, create = stockTemplate },
+        [ST.KTLITAN_DRONE] = { strength = 4, create = stockTemplate },
+        [ST.MT52_HORNET] = { strength = 5, create = stockTemplate },
+        [ST.MU52_HORNET] = { strength = 5, create = stockTemplate },
+        [ST.ADDER_MK3] = { strength = 5, create = stockTemplate },
+        [ST.ADDER_MK4] = { strength = 6, create = stockTemplate },
         ["Fighter"] = { strength = 6, create = stockTemplate },
-        ["Ktlitan Fighter"] = { strength = 6, create = stockTemplate },
-        ["Adder MK5"] = { strength = 7, create = stockTemplate },
+        [ST.KTLITAN_FIGHTER] = { strength = 6, create = stockTemplate },
+        [ST.ADDER_MK5] = { strength = 7, create = stockTemplate },
         ["WX-Lindworm"] = { strength = 7, create = stockTemplate },
-        ["Adder MK6"] = { strength = 8, create = stockTemplate },
-        ["Ktlitan Scout"] = { strength = 8, create = stockTemplate },
-        ["Adder MK7"] = { strength = 9, create = stockTemplate },
-        ["Adder MK8"] = { strength = 10, create = stockTemplate },
-        ["Adder MK9"] = { strength = 11, create = stockTemplate },
-        ["Nirvana R3"] = { strength = 12, create = stockTemplate },
+        [ST.ADDER_MK6] = { strength = 8, create = stockTemplate },
+        [ST.KTLITAN_SCOUT] = { strength = 8, create = stockTemplate },
+        [ST.ADDER_MK7] = { strength = 9, create = stockTemplate },
+        [ST.ADDER_MK8] = { strength = 10, create = stockTemplate },
+        [ST.ADDER_MK9] = { strength = 11, create = stockTemplate },
+        [ST.NIRVANA_R3] = { strength = 12, create = stockTemplate },
         ["Missile Cruiser"] = { strength = 14, create = stockTemplate },
-        ["Phobos T3"] = { strength = 15, create = stockTemplate },
-        ["Piranha F8"] = { strength = 15, create = stockTemplate },
-        ["Piranha F12"] = { strength = 15, create = stockTemplate },
-        ["Piranha F12.M"] = { strength = 16, create = stockTemplate },
-        ["Phobos M3"] = { strength = 16, create = stockTemplate },
+        [ST.PHOBOS_T3] = { strength = 15, create = stockTemplate },
+        [ST.PIRANHA_F8] = { strength = 15, create = stockTemplate },
+        [ST.PIRANHA_F12] = { strength = 15, create = stockTemplate },
+        [ST.PIRANHA_F12M] = { strength = 16, create = stockTemplate },
+        [ST.PHOBOS_M3] = { strength = 16, create = stockTemplate },
         [ST.KARNACK] = { strength = 17, create = stockTemplate },
         [ST.GUNSHIP] = { strength = 17, create = stockTemplate },
         ["Cruiser"] = { strength = 18, create = stockTemplate },
-        ["Nirvana R5"] = { strength = 19, create = stockTemplate },
-        ["Nirvana R5A"] = { strength = 20, create = stockTemplate },
-        ["Adv. Gunship"] = { strength = 20, create = stockTemplate },
-        ["Ktlitan Worker"] = { strength = 21, create = stockTemplate },
+        [ST.NIRVANA_R5] = { strength = 19, create = stockTemplate },
+        [ST.NIRVANA_R5A] = { strength = 20, create = stockTemplate },
+        [ST.ADV_GUNSHIP] = { strength = 20, create = stockTemplate },
+        [ST.KTLITAN_WORKER] = { strength = 21, create = stockTemplate },
         [ST.STORM] = { strength = 22, create = stockTemplate },
-        ["Stalker R5"] = { strength = 22, create = stockTemplate },
-        ["Stalker Q5"] = { strength = 22, create = stockTemplate },
-        ["Ranus U"] = { strength = 25, create = stockTemplate },
-        ["Stalker Q7"] = { strength = 25, create = stockTemplate },
-        ["Stalker R7"] = { strength = 25, create = stockTemplate },
+        [ST.STALKER_R5] = { strength = 22, create = stockTemplate },
+        [ST.STALKER_Q5] = { strength = 22, create = stockTemplate },
+        [ST.RANUS_U] = { strength = 25, create = stockTemplate },
+        [ST.STALKER_Q7] = { strength = 25, create = stockTemplate },
+        [ST.STALKER_R7] = { strength = 25, create = stockTemplate },
         [ST.MAGPIE] = { strength = 27, create = stockTemplate },
-        ["Elara P2"] = { strength = 28, create = stockTemplate },
+        [ST.ELARA_P2] = { strength = 28, create = stockTemplate },
         [ST.STRIX] = { strength = 30, create = stockTemplate },
-        ["Fiend G3"] = { strength = 33, create = stockTemplate },
-        ["Fiend G4"] = { strength = 35, create = stockTemplate },
-        ["Fiend G5"] = { strength = 37, create = stockTemplate },
-        ["Fiend G6"] = { strength = 39, create = stockTemplate },
-        ["Ktlitan Breaker"] = { strength = 45, create = stockTemplate },
-        ["Ktlitan Feeder"] = { strength = 48, create = stockTemplate },
-        ["Atlantis X23"] = { strength = 50, create = stockTemplate },
-        ["Ktlitan Destroyer"] = { strength = 50, create = stockTemplate },
-        ["Blockade Runner"] = { strength = 65, create = stockTemplate },
-        ["Starhammer II"] = { strength = 70, create = stockTemplate },
+        [ST.FIEND_G3] = { strength = 33, create = stockTemplate },
+        [ST.FIEND_G4] = { strength = 35, create = stockTemplate },
+        [ST.FIEND_G5] = { strength = 37, create = stockTemplate },
+        [ST.FIEND_G6] = { strength = 39, create = stockTemplate },
+        [ST.KTLITAN_BREAKER] = { strength = 45, create = stockTemplate },
+        [ST.KTLITAN_FEEDER] = { strength = 48, create = stockTemplate },
+        [ST.ATLANTIS_X23] = { strength = 50, create = stockTemplate },
+        [ST.KTLITAN_DESTROYER] = { strength = 50, create = stockTemplate },
+        [ST.BLOCKADE_RUNNER] = { strength = 65, create = stockTemplate },
+        [ST.STARHAMMER_II] = { strength = 70, create = stockTemplate },
         [ST.DREADNOUGHT] = { strength = 80, create = stockTemplate },
     }
     boundary_beam_string = {
@@ -7684,7 +7684,7 @@ function setupTailoredShipAttributes()
     -- part of Xansta's larger overall script core for randomized stations and NPC ships;
     playerShipNamesFor = {}
     -- TODO switch to spelling with space or dash matching the type name
-    playerShipNamesFor["MP52 Hornet"] = {
+    playerShipNamesFor[ST.MP52_HORNET] = {
         "Dragonfly",
         "Scarab",
         "Mantis",
@@ -7704,7 +7704,7 @@ function setupTailoredShipAttributes()
         "Vulture",
         "Predator",
     }
-    playerShipNamesFor["Flavia P.Falcon"] = {
+    playerShipNamesFor[ST.FLAVIA_PFALCON] = {
         "Ladyhawke",
         "Hunter",
         "Seeker",
@@ -7714,7 +7714,7 @@ function setupTailoredShipAttributes()
         "Bandit",
         "Buccaneer",
     }
-    playerShipNamesFor["Phobos M3P"] = {
+    playerShipNamesFor[ST.PHOBOS_M3P] = {
         "Blinder",
         "Shadow",
         "Distortion",

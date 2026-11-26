@@ -9,7 +9,7 @@ I usually end up creating a list of CPU ship templates:
         ["Gnat"] = {strength = 2, create = gnat},
         ["Lite Drone"] = {strength = 3, create = droneLite},
         ["Jacket Drone"] = {strength = 4, create = droneJacket},
-        ["Ktlitan Drone"] = {strength = 4, create = stockTemplate},
+        [ST.KTLITAN_DRONE] = {strength = 4, create = stockTemplate},
     }
 
 I order them by relative strength. This is an arbitrary value I give each ship to

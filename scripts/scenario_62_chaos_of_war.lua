@@ -235,7 +235,7 @@ function setConstants()
         trade = {},
     }
     defense_fleet_list = {
-        ["Small Station"] = {
+        [ST.SMALL_STATION] = {
             {
                 DF1 = "MT52 Hornet",
                 DF2 = "MU52 Hornet",
@@ -255,7 +255,7 @@ function setConstants()
                 DF4 = "Nirvana R5A",
             },
         },
-        ["Medium Station"] = {
+        [ST.MEDIUM_STATION] = {
             {
                 DF1 = "Adder MK5",
                 DF2 = "MU52 Hornet",
@@ -278,7 +278,7 @@ function setConstants()
                 DF5 = "Adder MK6",
             },
         },
-        ["Large Station"] = {
+        [ST.LARGE_STATION] = {
             {
                 DF1 = "Adder MK5",
                 DF2 = "MU52 Hornet",
@@ -310,7 +310,7 @@ function setConstants()
                 DF8 = "Adder MK8",
             },
         },
-        ["Huge Station"] = {
+        [ST.HUGE_STATION] = {
             {
                 DF1 = "Adder MK5",
                 DF2 = "MU52 Hornet",
@@ -1313,7 +1313,7 @@ function setConstants()
             "Jupiter",
             "Saturn",
         },
-        ["Flavia P.Falcon"] = {
+        [ST.FLAVIA_PFALCON] = {
             "Ladyhawke",
             "Hunter",
             "Seeker",
@@ -1347,7 +1347,7 @@ function setConstants()
             "Vinson",
             "Old Salt",
         },
-        ["MP52 Hornet"] = {
+        [ST.MP52_HORNET] = {
             "Dragonfly",
             "Scarab",
             "Mantis",
@@ -1376,7 +1376,7 @@ function setConstants()
             "Heinkel",
             "Dornier",
         },
-        ["Phobos M3P"] = {
+        [ST.PHOBOS_M3P] = {
             "Blinder",
             "Shadow",
             "Distortion",
@@ -1693,7 +1693,7 @@ function setConstants()
             warp = 0,
             stock = true,
         },
-        ["Flavia P.Falcon"] = {
+        [ST.FLAVIA_PFALCON] = {
             strength = 13,
             cargo = 15,
             distance = 200,
@@ -1741,7 +1741,7 @@ function setConstants()
             warp = 800,
             stock = true,
         },
-        ["MP52 Hornet"] = {
+        [ST.MP52_HORNET] = {
             strength = 7,
             cargo = 3,
             distance = 100,
@@ -1765,7 +1765,7 @@ function setConstants()
             warp = 0,
             stock = true,
         },
-        ["Phobos M3P"] = {
+        [ST.PHOBOS_M3P] = {
             strength = 19,
             cargo = 10,
             distance = 200,
@@ -2601,7 +2601,7 @@ function setConstants()
             base = false,
             create = droneJacket,
         },
-        ["Ktlitan Drone"] = {
+        [ST.KTLITAN_DRONE] = {
             strength = 4,
             adder = false,
             missiler = false,
@@ -2627,7 +2627,7 @@ function setConstants()
             base = false,
             create = droneHeavy,
         },
-        ["Adder MK3"] = {
+        [ST.ADDER_MK3] = {
             strength = 5,
             adder = true,
             missiler = false,
@@ -2640,7 +2640,7 @@ function setConstants()
             base = false,
             create = stockTemplate,
         },
-        ["MT52 Hornet"] = {
+        [ST.MT52_HORNET] = {
             strength = 5,
             adder = false,
             missiler = false,
@@ -2653,7 +2653,7 @@ function setConstants()
             base = false,
             create = stockTemplate,
         },
-        ["MU52 Hornet"] = {
+        [ST.MU52_HORNET] = {
             strength = 5,
             adder = false,
             missiler = false,
@@ -2679,7 +2679,7 @@ function setConstants()
             base = false,
             create = hornetMV52,
         },
-        ["Adder MK4"] = {
+        [ST.ADDER_MK4] = {
             strength = 6,
             adder = true,
             missiler = false,
@@ -2705,7 +2705,7 @@ function setConstants()
             base = false,
             create = stockTemplate,
         },
-        ["Ktlitan Fighter"] = {
+        [ST.KTLITAN_FIGHTER] = {
             strength = 6,
             adder = false,
             missiler = false,
@@ -2731,7 +2731,7 @@ function setConstants()
             base = false,
             create = k2fighter,
         },
-        ["Adder MK5"] = {
+        [ST.ADDER_MK5] = {
             strength = 7,
             adder = true,
             missiler = false,
@@ -2770,7 +2770,7 @@ function setConstants()
             base = false,
             create = k3fighter,
         },
-        ["Adder MK6"] = {
+        [ST.ADDER_MK6] = {
             strength = 8,
             adder = true,
             missiler = false,
@@ -2783,7 +2783,7 @@ function setConstants()
             base = false,
             create = stockTemplate,
         },
-        ["Ktlitan Scout"] = {
+        [ST.KTLITAN_SCOUT] = {
             strength = 8,
             adder = false,
             missiler = false,
@@ -2809,7 +2809,7 @@ function setConstants()
             base = false,
             create = wzLindworm,
         },
-        ["Adder MK7"] = {
+        [ST.ADDER_MK7] = {
             strength = 9,
             adder = true,
             missiler = false,
@@ -2822,7 +2822,7 @@ function setConstants()
             base = false,
             create = stockTemplate,
         },
-        ["Adder MK8"] = {
+        [ST.ADDER_MK8] = {
             strength = 10,
             adder = true,
             missiler = false,
@@ -2835,7 +2835,7 @@ function setConstants()
             base = false,
             create = stockTemplate,
         },
-        ["Adder MK9"] = {
+        [ST.ADDER_MK9] = {
             strength = 11,
             adder = true,
             missiler = false,
@@ -2848,7 +2848,7 @@ function setConstants()
             base = false,
             create = stockTemplate,
         },
-        ["Nirvana R3"] = {
+        [ST.NIRVANA_R3] = {
             strength = 12,
             adder = false,
             missiler = false,
@@ -2913,7 +2913,7 @@ function setConstants()
             base = false,
             create = jade5,
         },
-        ["Phobos T3"] = {
+        [ST.PHOBOS_T3] = {
             strength = 15,
             adder = false,
             missiler = false,
@@ -2926,7 +2926,7 @@ function setConstants()
             base = false,
             create = stockTemplate,
         },
-        ["Piranha F8"] = {
+        [ST.PIRANHA_F8] = {
             strength = 15,
             adder = false,
             missiler = true,
@@ -2939,7 +2939,7 @@ function setConstants()
             base = false,
             create = stockTemplate,
         },
-        ["Piranha F12"] = {
+        [ST.PIRANHA_F12] = {
             strength = 15,
             adder = false,
             missiler = true,
@@ -2952,7 +2952,7 @@ function setConstants()
             base = false,
             create = stockTemplate,
         },
-        ["Piranha F12.M"] = {
+        [ST.PIRANHA_F12M] = {
             strength = 16,
             adder = false,
             missiler = true,
@@ -2965,7 +2965,7 @@ function setConstants()
             base = false,
             create = stockTemplate,
         },
-        ["Phobos M3"] = {
+        [ST.PHOBOS_M3] = {
             strength = 16,
             adder = false,
             missiler = false,
@@ -3056,7 +3056,7 @@ function setConstants()
             base = false,
             create = stockTemplate,
         },
-        ["Nirvana R5"] = {
+        [ST.NIRVANA_R5] = {
             strength = 19,
             adder = false,
             missiler = false,
@@ -3082,7 +3082,7 @@ function setConstants()
             base = false,
             create = farco8,
         },
-        ["Ktlitan Worker"] = {
+        [ST.KTLITAN_WORKER] = {
             strength = 20,
             adder = false,
             missiler = false,
@@ -3095,7 +3095,7 @@ function setConstants()
             base = false,
             create = stockTemplate,
         },
-        ["Nirvana R5A"] = {
+        [ST.NIRVANA_R5A] = {
             strength = 20,
             adder = false,
             missiler = false,
@@ -3108,7 +3108,7 @@ function setConstants()
             base = false,
             create = stockTemplate,
         },
-        ["Adv. Gunship"] = {
+        [ST.ADV_GUNSHIP] = {
             strength = 20,
             adder = false,
             missiler = false,
@@ -3147,7 +3147,7 @@ function setConstants()
             base = false,
             create = stockTemplate,
         },
-        ["Stalker R5"] = {
+        [ST.STALKER_R5] = {
             strength = 22,
             adder = false,
             missiler = false,
@@ -3160,7 +3160,7 @@ function setConstants()
             base = false,
             create = stockTemplate,
         },
-        ["Stalker Q5"] = {
+        [ST.STALKER_Q5] = {
             strength = 22,
             adder = false,
             missiler = false,
@@ -3186,7 +3186,7 @@ function setConstants()
             base = false,
             create = farco13,
         },
-        ["Ranus U"] = {
+        [ST.RANUS_U] = {
             strength = 25,
             adder = false,
             missiler = true,
@@ -3199,7 +3199,7 @@ function setConstants()
             base = false,
             create = stockTemplate,
         },
-        ["Stalker Q7"] = {
+        [ST.STALKER_Q7] = {
             strength = 25,
             adder = false,
             missiler = false,
@@ -3212,7 +3212,7 @@ function setConstants()
             base = false,
             create = stockTemplate,
         },
-        ["Stalker R7"] = {
+        [ST.STALKER_R7] = {
             strength = 25,
             adder = false,
             missiler = false,
@@ -3251,7 +3251,7 @@ function setConstants()
             base = false,
             create = stockTemplate,
         },
-        ["Elara P2"] = {
+        [ST.ELARA_P2] = {
             strength = 28,
             adder = false,
             missiler = false,
@@ -3290,7 +3290,7 @@ function setConstants()
             base = false,
             create = stockTemplate,
         },
-        ["Fiend G3"] = {
+        [ST.FIEND_G3] = {
             strength = 33,
             adder = false,
             missiler = false,
@@ -3303,7 +3303,7 @@ function setConstants()
             base = false,
             create = stockTemplate,
         },
-        ["Fiend G4"] = {
+        [ST.FIEND_G4] = {
             strength = 35,
             adder = false,
             missiler = false,
@@ -3329,7 +3329,7 @@ function setConstants()
             base = false,
             create = cucaracha,
         },
-        ["Fiend G5"] = {
+        [ST.FIEND_G5] = {
             strength = 37,
             adder = false,
             missiler = false,
@@ -3342,7 +3342,7 @@ function setConstants()
             base = false,
             create = stockTemplate,
         },
-        ["Fiend G6"] = {
+        [ST.FIEND_G6] = {
             strength = 39,
             adder = false,
             missiler = false,
@@ -3368,7 +3368,7 @@ function setConstants()
             base = false,
             create = predator,
         },
-        ["Ktlitan Breaker"] = {
+        [ST.KTLITAN_BREAKER] = {
             strength = 45,
             adder = false,
             missiler = false,
@@ -3394,7 +3394,7 @@ function setConstants()
             base = false,
             create = hurricane,
         },
-        ["Ktlitan Feeder"] = {
+        [ST.KTLITAN_FEEDER] = {
             strength = 48,
             adder = false,
             missiler = false,
@@ -3407,7 +3407,7 @@ function setConstants()
             base = false,
             create = stockTemplate,
         },
-        ["Atlantis X23"] = {
+        [ST.ATLANTIS_X23] = {
             strength = 50,
             adder = false,
             missiler = false,
@@ -3433,7 +3433,7 @@ function setConstants()
             base = false,
             create = k2breaker,
         },
-        ["Ktlitan Destroyer"] = {
+        [ST.KTLITAN_DESTROYER] = {
             strength = 50,
             adder = false,
             missiler = false,
@@ -3459,7 +3459,7 @@ function setConstants()
             base = false,
             create = atlantisY42,
         },
-        ["Blockade Runner"] = {
+        [ST.BLOCKADE_RUNNER] = {
             strength = 65,
             adder = false,
             missiler = false,
@@ -3472,7 +3472,7 @@ function setConstants()
             base = false,
             create = stockTemplate,
         },
-        ["Starhammer II"] = {
+        [ST.STARHAMMER_II] = {
             strength = 70,
             adder = false,
             missiler = false,
@@ -6358,10 +6358,10 @@ function generateTerrain()
         primary_station_size = szt()
     end
     base_station_value_list = {
-        ["Huge Station"] = 10,
-        ["Large Station"] = 5,
-        ["Medium Station"] = 3,
-        ["Small Station"] = 1,
+        [ST.HUGE_STATION] = 10,
+        [ST.LARGE_STATION] = 5,
+        [ST.MEDIUM_STATION] = 3,
+        [ST.SMALL_STATION] = 1,
     }
     faction_primary_station = {}
     local psx, psy = vectorFromAngleNorth(human_angle, primary_station_distance)
@@ -9510,10 +9510,10 @@ function commsDefensePlatform()
                             comms_target.primary_station:getPosition()
                         local angle = comms_source:getHeading()
                         local station_dock_radius = {
-                            ["Small Station"] = 300,
-                            ["Medium Station"] = 1000,
-                            ["Large Station"] = 1300,
-                            ["Huge Station"] = 1500,
+                            [ST.SMALL_STATION] = 300,
+                            [ST.MEDIUM_STATION] = 1000,
+                            [ST.LARGE_STATION] = 1300,
+                            [ST.HUGE_STATION] = 1500,
                         }
                         local dock_distance =
                             station_dock_radius[comms_target.primary_station:getTypeName()]
@@ -11469,7 +11469,7 @@ function requestReinforcements(return_function)
                                                 ship:setCommsScript("")
                                                     :setCommsFunction(commsShip)
                                                 ship.score_value =
-                                                    ship_template["Adder MK5"].strength
+                                                    ship_template[ST.ADDER_MK5].strength
                                                 table.insert(
                                                     npc_fleet[comms_target:getFaction()],
                                                     ship
@@ -11564,7 +11564,7 @@ function requestReinforcements(return_function)
                                                             commsShip
                                                         )
                                                     ship.score_value =
-                                                        ship_template["MU52 Hornet"].strength
+                                                        ship_template[ST.MU52_HORNET].strength
                                                     table.insert(
                                                         npc_fleet[comms_target:getFaction()],
                                                         ship
@@ -11660,7 +11660,7 @@ function requestReinforcements(return_function)
                                                             commsShip
                                                         )
                                                     ship.score_value =
-                                                        ship_template["Phobos T3"].strength
+                                                        ship_template[ST.PHOBOS_T3].strength
                                                     table.insert(
                                                         npc_fleet[comms_target:getFaction()],
                                                         ship

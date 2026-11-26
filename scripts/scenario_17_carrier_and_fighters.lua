@@ -588,7 +588,7 @@ function setConstants()
                 prox_scan = 2,
                 epjam = 0,
             },
-            ["Flavia P.Falcon"] = {
+            [ST.FLAVIA_PFALCON] = {
                 strength = 13,
                 cargo = 15,
                 distance = 200,
@@ -678,7 +678,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["MP52 Hornet"] = {
+            [ST.MP52_HORNET] = {
                 strength = 7,
                 cargo = 3,
                 distance = 100,
@@ -708,7 +708,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["Phobos M3P"] = {
+            [ST.PHOBOS_M3P] = {
                 strength = 19,
                 cargo = 10,
                 distance = 200,
@@ -1894,7 +1894,7 @@ function setGlobals()
             "Jupiter",
             "Saturn",
         },
-        ["Flavia P.Falcon"] = {
+        [ST.FLAVIA_PFALCON] = {
             "Ladyhawke",
             "Hunter",
             "Seeker",
@@ -1955,7 +1955,7 @@ function setGlobals()
             "Magnifier",
             "Hedge",
         },
-        ["MP52 Hornet"] = {
+        [ST.MP52_HORNET] = {
             "Dragonfly",
             "Scarab",
             "Mantis",
@@ -1977,7 +1977,7 @@ function setGlobals()
             "Heinkel",
             "Dornier",
         },
-        ["Phobos M3P"] = {
+        [ST.PHOBOS_M3P] = {
             "Blinder",
             "Shadow",
             "Distortion",
@@ -3121,10 +3121,10 @@ function placeCTStation(x, y, name, faction, size)
         end
     end
     station_template_chance = {
-        ["Small Station"] = 0,
-        ["Medium Station"] = 20,
-        ["Large Station"] = 30,
-        ["Huge Station"] = 40,
+        [ST.SMALL_STATION] = 0,
+        [ST.MEDIUM_STATION] = 20,
+        [ST.LARGE_STATION] = 30,
+        [ST.HUGE_STATION] = 40,
     }
     faction_station_service_chance = {
         ["Human Navy"] = 20,

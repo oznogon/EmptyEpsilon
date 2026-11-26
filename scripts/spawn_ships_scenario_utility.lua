@@ -817,7 +817,7 @@ function setSpawnShipGlobals()
                 dist = 300,
                 create = droneJacket,
             },
-            ["Ktlitan Drone"] = {
+            [ST.KTLITAN_DRONE] = {
                 strength = 4,
                 adder = false,
                 missiler = false,
@@ -851,7 +851,7 @@ function setSpawnShipGlobals()
                 dist = 300,
                 create = droneHeavy,
             },
-            ["Adder MK3"] = {
+            [ST.ADDER_MK3] = {
                 strength = 5,
                 adder = true,
                 missiler = false,
@@ -868,7 +868,7 @@ function setSpawnShipGlobals()
                 dist = 100,
                 create = stockTemplate,
             },
-            ["MT52 Hornet"] = {
+            [ST.MT52_HORNET] = {
                 strength = 5,
                 adder = false,
                 missiler = false,
@@ -885,7 +885,7 @@ function setSpawnShipGlobals()
                 dist = 100,
                 create = stockTemplate,
             },
-            ["MU52 Hornet"] = {
+            [ST.MU52_HORNET] = {
                 strength = 5,
                 adder = false,
                 missiler = false,
@@ -953,7 +953,7 @@ function setSpawnShipGlobals()
                 dist = 100,
                 create = hornetMT55,
             },
-            ["Adder MK4"] = {
+            [ST.ADDER_MK4] = {
                 strength = 6,
                 adder = true,
                 missiler = false,
@@ -987,7 +987,7 @@ function setSpawnShipGlobals()
                 dist = 100,
                 create = stockTemplate,
             },
-            ["Ktlitan Fighter"] = {
+            [ST.KTLITAN_FIGHTER] = {
                 strength = 6,
                 adder = false,
                 missiler = false,
@@ -1106,7 +1106,7 @@ function setSpawnShipGlobals()
                 dist = 300,
                 create = k2fighter,
             },
-            ["Adder MK5"] = {
+            [ST.ADDER_MK5] = {
                 strength = 7,
                 adder = true,
                 missiler = false,
@@ -1191,7 +1191,7 @@ function setSpawnShipGlobals()
                 dist = 100,
                 create = stockTemplate,
             },
-            ["Adder MK6"] = {
+            [ST.ADDER_MK6] = {
                 strength = 8,
                 adder = true,
                 missiler = false,
@@ -1208,7 +1208,7 @@ function setSpawnShipGlobals()
                 dist = 100,
                 create = stockTemplate,
             },
-            ["Ktlitan Scout"] = {
+            [ST.KTLITAN_SCOUT] = {
                 strength = 8,
                 adder = false,
                 missiler = false,
@@ -1242,7 +1242,7 @@ function setSpawnShipGlobals()
                 dist = 100,
                 create = wzLindworm,
             },
-            ["Adder MK7"] = {
+            [ST.ADDER_MK7] = {
                 strength = 9,
                 adder = true,
                 missiler = false,
@@ -1259,7 +1259,7 @@ function setSpawnShipGlobals()
                 dist = 100,
                 create = stockTemplate,
             },
-            ["Adder MK8"] = {
+            [ST.ADDER_MK8] = {
                 strength = 10,
                 adder = true,
                 missiler = false,
@@ -1276,7 +1276,7 @@ function setSpawnShipGlobals()
                 dist = 100,
                 create = stockTemplate,
             },
-            ["Adder MK9"] = {
+            [ST.ADDER_MK9] = {
                 strength = 11,
                 adder = true,
                 missiler = false,
@@ -1293,7 +1293,7 @@ function setSpawnShipGlobals()
                 dist = 100,
                 create = stockTemplate,
             },
-            ["Nirvana R3"] = {
+            [ST.NIRVANA_R3] = {
                 strength = 12,
                 adder = false,
                 missiler = false,
@@ -1378,7 +1378,7 @@ function setSpawnShipGlobals()
                 dist = 100,
                 create = jade5,
             },
-            ["Phobos T3"] = {
+            [ST.PHOBOS_T3] = {
                 strength = 15,
                 adder = false,
                 missiler = false,
@@ -1412,7 +1412,7 @@ function setSpawnShipGlobals()
                 dist = 600,
                 create = stockTemplate,
             },
-            ["Piranha F8"] = {
+            [ST.PIRANHA_F8] = {
                 strength = 15,
                 adder = false,
                 missiler = true,
@@ -1429,7 +1429,7 @@ function setSpawnShipGlobals()
                 dist = 200,
                 create = stockTemplate,
             },
-            ["Piranha F12"] = {
+            [ST.PIRANHA_F12] = {
                 strength = 15,
                 adder = false,
                 missiler = true,
@@ -1446,7 +1446,7 @@ function setSpawnShipGlobals()
                 dist = 200,
                 create = stockTemplate,
             },
-            ["Piranha F12.M"] = {
+            [ST.PIRANHA_F12M] = {
                 strength = 16,
                 adder = false,
                 missiler = true,
@@ -1463,7 +1463,7 @@ function setSpawnShipGlobals()
                 dist = 200,
                 create = stockTemplate,
             },
-            ["Phobos M3"] = {
+            [ST.PHOBOS_M3] = {
                 strength = 16,
                 adder = false,
                 missiler = false,
@@ -1582,7 +1582,7 @@ function setSpawnShipGlobals()
                 dist = 200,
                 create = stockTemplate,
             },
-            ["Nirvana R5"] = {
+            [ST.NIRVANA_R5] = {
                 strength = 19,
                 adder = false,
                 missiler = false,
@@ -1616,7 +1616,7 @@ function setSpawnShipGlobals()
                 dist = 200,
                 create = farco8,
             },
-            ["Nirvana R5A"] = {
+            [ST.NIRVANA_R5A] = {
                 strength = 20,
                 adder = false,
                 missiler = false,
@@ -1633,7 +1633,7 @@ function setSpawnShipGlobals()
                 dist = 200,
                 create = stockTemplate,
             },
-            ["Adv. Gunship"] = {
+            [ST.ADV_GUNSHIP] = {
                 strength = 20,
                 adder = false,
                 missiler = false,
@@ -1650,7 +1650,7 @@ function setSpawnShipGlobals()
                 dist = 400,
                 create = stockTemplate,
             },
-            ["Ktlitan Worker"] = {
+            [ST.KTLITAN_WORKER] = {
                 strength = 20,
                 adder = false,
                 missiler = false,
@@ -1684,7 +1684,7 @@ function setSpawnShipGlobals()
                 dist = 200,
                 create = farco11,
             },
-            ["Stalker R5"] = {
+            [ST.STALKER_R5] = {
                 strength = 22,
                 adder = false,
                 missiler = false,
@@ -1701,7 +1701,7 @@ function setSpawnShipGlobals()
                 dist = 200,
                 create = stockTemplate,
             },
-            ["Stalker Q5"] = {
+            [ST.STALKER_Q5] = {
                 strength = 22,
                 adder = false,
                 missiler = false,
@@ -1837,7 +1837,7 @@ function setSpawnShipGlobals()
                 dist = 600,
                 create = stockTemplate,
             },
-            ["Ranus U"] = {
+            [ST.RANUS_U] = {
                 strength = 25,
                 adder = false,
                 missiler = true,
@@ -1905,7 +1905,7 @@ function setSpawnShipGlobals()
                 dist = 100,
                 create = stockTemplate,
             },
-            ["Stalker Q7"] = {
+            [ST.STALKER_Q7] = {
                 strength = 25,
                 adder = false,
                 missiler = false,
@@ -1922,7 +1922,7 @@ function setSpawnShipGlobals()
                 dist = 200,
                 create = stockTemplate,
             },
-            ["Stalker R7"] = {
+            [ST.STALKER_R7] = {
                 strength = 25,
                 adder = false,
                 missiler = false,
@@ -2024,7 +2024,7 @@ function setSpawnShipGlobals()
                 dist = 200,
                 create = stockTemplate,
             },
-            ["Fiend G3"] = {
+            [ST.FIEND_G3] = {
                 strength = 33,
                 adder = false,
                 missiler = false,
@@ -2058,7 +2058,7 @@ function setSpawnShipGlobals()
                 dist = 100,
                 create = maniapak,
             },
-            ["Fiend G4"] = {
+            [ST.FIEND_G4] = {
                 strength = 35,
                 adder = false,
                 missiler = false,
@@ -2092,7 +2092,7 @@ function setSpawnShipGlobals()
                 dist = 200,
                 create = cucaracha,
             },
-            ["Fiend G5"] = {
+            [ST.FIEND_G5] = {
                 strength = 37,
                 adder = false,
                 missiler = false,
@@ -2109,7 +2109,7 @@ function setSpawnShipGlobals()
                 dist = 400,
                 create = stockTemplate,
             },
-            ["Fiend G6"] = {
+            [ST.FIEND_G6] = {
                 strength = 39,
                 adder = false,
                 missiler = false,
@@ -2177,7 +2177,7 @@ function setSpawnShipGlobals()
                 dist = 200,
                 create = predator,
             },
-            ["Ktlitan Breaker"] = {
+            [ST.KTLITAN_BREAKER] = {
                 strength = 45,
                 adder = false,
                 missiler = false,
@@ -2211,7 +2211,7 @@ function setSpawnShipGlobals()
                 dist = 200,
                 create = hurricane,
             },
-            ["Ktlitan Feeder"] = {
+            [ST.KTLITAN_FEEDER] = {
                 strength = 48,
                 adder = false,
                 missiler = false,
@@ -2228,7 +2228,7 @@ function setSpawnShipGlobals()
                 dist = 300,
                 create = stockTemplate,
             },
-            ["Atlantis X23"] = {
+            [ST.ATLANTIS_X23] = {
                 strength = 50,
                 adder = false,
                 missiler = false,
@@ -2245,7 +2245,7 @@ function setSpawnShipGlobals()
                 dist = 400,
                 create = stockTemplate,
             },
-            ["Ktlitan Destroyer"] = {
+            [ST.KTLITAN_DESTROYER] = {
                 strength = 50,
                 adder = false,
                 missiler = false,
@@ -2296,7 +2296,7 @@ function setSpawnShipGlobals()
                 dist = 400,
                 create = atlantisY42,
             },
-            ["Blockade Runner"] = {
+            [ST.BLOCKADE_RUNNER] = {
                 strength = 63,
                 adder = false,
                 missiler = false,
@@ -2313,7 +2313,7 @@ function setSpawnShipGlobals()
                 dist = 400,
                 create = stockTemplate,
             },
-            ["Starhammer II"] = {
+            [ST.STARHAMMER_II] = {
                 strength = 70,
                 adder = false,
                 missiler = false,
@@ -2606,7 +2606,7 @@ function setSpawnShipGlobals()
                 "Nirvana R5",
                 "Nirvana R5A",
             },
-            ["MT52 Hornet"] = {
+            [ST.MT52_HORNET] = {
                 "Lite Drone",
                 "Gnat",
                 "MU52 Hornet",
@@ -2618,7 +2618,7 @@ function setSpawnShipGlobals()
                 "MU52 Hornet",
                 "Ktlitan Scout",
             },
-            ["Nirvana R3"] = {
+            [ST.NIRVANA_R3] = {
                 "Lite Drone",
                 "Gnat",
                 "MT52 Hornet",
@@ -2630,7 +2630,7 @@ function setSpawnShipGlobals()
                 "Ktlitan Scout",
                 "Cucaracha",
             },
-            ["Nirvana R5"] = {
+            [ST.NIRVANA_R5] = {
                 "Lite Drone",
                 "Gnat",
                 "MT52 Hornet",
@@ -2642,7 +2642,7 @@ function setSpawnShipGlobals()
                 "Ktlitan Scout",
                 "Cucaracha",
             },
-            ["Nirvana R5A"] = {
+            [ST.NIRVANA_R5A] = {
                 "Lite Drone",
                 "Gnat",
                 "MT52 Hornet",
@@ -2654,7 +2654,7 @@ function setSpawnShipGlobals()
                 "Ktlitan Scout",
                 "Cucaracha",
             },
-            ["Blockade Runner"] = {
+            [ST.BLOCKADE_RUNNER] = {
                 "Lite Drone",
                 "Gnat",
                 "MT52 Hornet",
@@ -2706,7 +2706,7 @@ function setSpawnShipGlobals()
                 "Ktlitan Scout",
                 "Cucaracha",
             },
-            ["Phobos T3"] = {
+            [ST.PHOBOS_T3] = {
                 "Lite Drone",
                 "Gnat",
                 "MT52 Hornet",
@@ -2832,7 +2832,7 @@ function setSpawnShipGlobals()
                 "Nirvana R5",
                 "Nirvana R5A",
             },
-            ["Adv. Gunship"] = {
+            [ST.ADV_GUNSHIP] = {
                 "Lite Drone",
                 "Gnat",
                 "MT52 Hornet",
@@ -2846,7 +2846,7 @@ function setSpawnShipGlobals()
                 "Nirvana R5",
                 "Nirvana R5A",
             },
-            ["Adder MK4"] = {
+            [ST.ADDER_MK4] = {
                 "Lite Drone",
                 "Gnat",
                 "MT52 Hornet",
@@ -2860,7 +2860,7 @@ function setSpawnShipGlobals()
                 "Nirvana R5",
                 "Nirvana R5A",
             },
-            ["Adder MK5"] = {
+            [ST.ADDER_MK5] = {
                 "Lite Drone",
                 "Gnat",
                 "MT52 Hornet",
@@ -2872,7 +2872,7 @@ function setSpawnShipGlobals()
                 "Ktlitan Scout",
                 "Cucaracha",
             },
-            ["Adder MK6"] = {
+            [ST.ADDER_MK6] = {
                 "Lite Drone",
                 "Gnat",
                 "MT52 Hornet",
@@ -2884,7 +2884,7 @@ function setSpawnShipGlobals()
                 "Ktlitan Scout",
                 "Cucaracha",
             },
-            ["Adder MK7"] = {
+            [ST.ADDER_MK7] = {
                 "Lite Drone",
                 "Gnat",
                 "MT52 Hornet",
@@ -2918,7 +2918,7 @@ function setSpawnShipGlobals()
         end
         local spawn_utility_prebuilt_followers = {
             --100, 30, 65, 60, 60, 70, 70, 50, 75, 70, 60, 60, 60, 60, 60, 60, 60, 55, 60, 60, 60, 80, 80, 80, 120
-            ["MT52 Hornet"] = {
+            [ST.MT52_HORNET] = {
                 "Cucaracha",
                 "Dreadnought",
                 "Nirvana R3",
@@ -2945,7 +2945,7 @@ function setSpawnShipGlobals()
                 "Adder MK7",
                 "Heavy Drone",
             },
-            ["MU52 Hornet"] = {
+            [ST.MU52_HORNET] = {
                 "Cucaracha",
                 "Dreadnought",
                 "Nirvana R3",
@@ -2998,7 +2998,7 @@ function setSpawnShipGlobals()
                 "Adder MK6",
                 "Adder MK7",
             },
-            ["Ktlitan Fighter"] = {
+            [ST.KTLITAN_FIGHTER] = {
                 "Cucaracha",
                 "Dreadnought",
                 "Nirvana R3",
@@ -3076,7 +3076,7 @@ function setSpawnShipGlobals()
                 "Adder MK6",
                 "Adder MK7",
             },
-            ["Ktlitan Scout"] = {
+            [ST.KTLITAN_SCOUT] = {
                 "Cucaracha",
                 "Dreadnought",
                 "Nirvana R3",
@@ -3185,7 +3185,7 @@ function setSpawnShipGlobals()
                 "MT52 Hornet",
                 "Heavy Drone",
             },
-            ["Nirvana R5"] = {
+            [ST.NIRVANA_R5] = {
                 "Dreadnought",
                 "Blockade Runner",
                 "Supervisor",
@@ -3202,7 +3202,7 @@ function setSpawnShipGlobals()
                 "Adv. Gunship",
                 "Adder MK4",
             },
-            ["Nirvana R5A"] = {
+            [ST.NIRVANA_R5A] = {
                 "Dreadnought",
                 "Blockade Runner",
                 "Supervisor",
@@ -3219,7 +3219,7 @@ function setSpawnShipGlobals()
                 "Adv. Gunship",
                 "Adder MK4",
             },
-            ["Equipment Freighter 3"] = { "Dreadnought" },
+            [ST.EQUIPMENT_FREIGHTER_3] = { "Dreadnought" },
         }
         if prebuilt_followers == nil then
             prebuilt_followers = {}
@@ -4936,13 +4936,13 @@ function playerPower()
                 [ST.BENEDICT] = 10,
                 [ST.CRUCIBLE] = 45,
                 [ST.ENDER] = 100,
-                ["Flavia P.Falcon"] = 13,
+                [ST.FLAVIA_PFALCON] = 13,
                 [ST.HATHCOCK] = 30,
                 [ST.KIRIYA] = 10,
-                ["MP52 Hornet"] = 7,
+                [ST.MP52_HORNET] = 7,
                 [ST.MAVERICK] = 45,
                 [ST.NAUTILUS] = 12,
-                ["Phobos M3P"] = 19,
+                [ST.PHOBOS_M3P] = 19,
                 [ST.PIRANHA] = 16,
                 [ST.REPULSE] = 14,
                 [ST.CROW] = 8,
