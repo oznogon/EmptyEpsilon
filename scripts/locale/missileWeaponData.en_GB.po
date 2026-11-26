@@ -13,12 +13,12 @@ msgctxt "missile"
 msgid "Mine"
 msgstr "Mine"
 
-#: scripts/missileWeaponData.lua:66
+#: scripts/missileWeaponData.lua:67
 msgctxt "missile"
 msgid "EMP"
 msgstr "EMP"
 
-#: scripts/missileWeaponData.lua:86
+#: scripts/missileWeaponData.lua:87
 msgctxt "missile"
 msgid "HVLI"
 msgstr "HVLI"

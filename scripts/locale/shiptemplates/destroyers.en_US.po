@@ -4,9 +4,9 @@ msgid "Atlantis X23"
 msgstr ""
 
 #: scripts/shiptemplates/destroyers.lua:16
-#: scripts/shiptemplates/destroyers.lua:103
-#: scripts/shiptemplates/destroyers.lua:129
-#: scripts/shiptemplates/destroyers.lua:191
+#: scripts/shiptemplates/destroyers.lua:102
+#: scripts/shiptemplates/destroyers.lua:128
+#: scripts/shiptemplates/destroyers.lua:190
 msgctxt "class"
 msgid "Destroyer"
 msgstr ""
@@ -28,7 +28,7 @@ msgctxt "playerShip"
 msgid "Atlantis"
 msgstr ""
 
-#: scripts/shiptemplates/destroyers.lua:47
+#: scripts/shiptemplates/destroyers.lua:46
 msgid ""
 "The Atlantis is the smallest model of destroyer, and its combination of "
 "frigate-like size and destroyer-like power makes it an excellent escort for "
@@ -41,17 +41,17 @@ msgid ""
 "EMP missiles, and a dedicated mine-laying tube."
 msgstr ""
 
-#: scripts/shiptemplates/destroyers.lua:102
+#: scripts/shiptemplates/destroyers.lua:101
 msgctxt "ship"
 msgid "Starhammer II"
 msgstr ""
 
-#: scripts/shiptemplates/destroyers.lua:103
+#: scripts/shiptemplates/destroyers.lua:102
 msgctxt "subclass"
 msgid "Assault"
 msgstr ""
 
-#: scripts/shiptemplates/destroyers.lua:107
+#: scripts/shiptemplates/destroyers.lua:106
 msgid ""
 "Contrary to its predecessor, the Starhammer II lives up to its name. By "
 "resolving the original Starhammer's power and heat management issues, the "
@@ -61,34 +61,34 @@ msgid ""
 "long."
 msgstr ""
 
-#: scripts/shiptemplates/destroyers.lua:128
+#: scripts/shiptemplates/destroyers.lua:127
 msgctxt "playerShip"
 msgid "Crucible"
 msgstr ""
 
-#: scripts/shiptemplates/destroyers.lua:129
+#: scripts/shiptemplates/destroyers.lua:128
 msgctxt "subclass"
 msgid "Missile"
 msgstr ""
 
-#: scripts/shiptemplates/destroyers.lua:134
+#: scripts/shiptemplates/destroyers.lua:133
 msgid ""
 "The Crucible has several missile tubes positioned around its hull. Beams "
 "were deemed lower priority, though they are still present. It has stronger "
 "defenses than a frigate, but not as strong as the Atlantis."
 msgstr ""
 
-#: scripts/shiptemplates/destroyers.lua:190
+#: scripts/shiptemplates/destroyers.lua:189
 msgctxt "playerShip"
 msgid "Maverick"
 msgstr ""
 
-#: scripts/shiptemplates/destroyers.lua:191
+#: scripts/shiptemplates/destroyers.lua:190
 msgctxt "subclass"
 msgid "Gunner"
 msgstr ""
 
-#: scripts/shiptemplates/destroyers.lua:196
+#: scripts/shiptemplates/destroyers.lua:195
 msgid ""
 "The Maverick has several beam weapons positioned around its hull, including "
 "a rear-facing turret to deter pursuers. Weapon tubes were deemed lower "

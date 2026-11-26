@@ -2902,7 +2902,7 @@ msgstr ""
 #: scripts/scenario_42_borderline_fever.lua:11354
 msgctxt "msgGM"
 msgid ""
-"Player Fighter:   Hull:60   Shield:40   Size:100   Repair Crew:3   Cargo:3   "
+"Stingray:   Hull:60   Shield:40   Size:100   Repair Crew:3   Cargo:3   "
 "R.Strength:7\n"
 "Default advanced engine:None   Speeds: Impulse:110   Spin:20   "
 "Accelerate:40   C.Maneuver: Boost:600   Energy:400\n"
@@ -2968,7 +2968,7 @@ msgstr ""
 
 #: scripts/scenario_42_borderline_fever.lua:11374
 msgctxt "buttonGM"
-msgid "Striker"
+msgid "Crow"
 msgstr ""
 
 #: scripts/scenario_42_borderline_fever.lua:11378

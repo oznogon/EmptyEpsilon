@@ -495,7 +495,7 @@ msgstr ""
 
 #: scripts/scenario_06_early_evaluation_exercise.lua:2687
 msgctxt "buttonGM"
-msgid "Strikeship wave"
+msgid "Strix wave"
 msgstr ""
 
 #: scripts/scenario_06_early_evaluation_exercise.lua:2696
@@ -1891,61 +1891,61 @@ msgid "What type of ship is %s?"
 msgstr ""
 
 #: scripts/scenario_06_early_evaluation_exercise.lua:6984
-#: scripts/scenario_06_early_evaluation_exercise.lua:10970
+#: scripts/scenario_06_early_evaluation_exercise.lua:11012
 msgctxt "station-comms"
 msgid "Personnel Freighter 5"
 msgstr ""
 
 #: scripts/scenario_06_early_evaluation_exercise.lua:6988
-#: scripts/scenario_06_early_evaluation_exercise.lua:10971
+#: scripts/scenario_06_early_evaluation_exercise.lua:11013
 msgctxt "station-comms"
 msgid "Goods Freighter 5"
 msgstr ""
 
 #: scripts/scenario_06_early_evaluation_exercise.lua:6992
-#: scripts/scenario_06_early_evaluation_exercise.lua:10972
+#: scripts/scenario_06_early_evaluation_exercise.lua:11014
 msgctxt "station-comms"
 msgid "Garbage Freighter 5"
 msgstr ""
 
 #: scripts/scenario_06_early_evaluation_exercise.lua:6996
-#: scripts/scenario_06_early_evaluation_exercise.lua:10973
+#: scripts/scenario_06_early_evaluation_exercise.lua:11015
 msgctxt "station-comms"
 msgid "Equipment Freighter 5"
 msgstr ""
 
 #: scripts/scenario_06_early_evaluation_exercise.lua:7000
-#: scripts/scenario_06_early_evaluation_exercise.lua:10974
+#: scripts/scenario_06_early_evaluation_exercise.lua:11016
 msgctxt "station-comms"
 msgid "Fuel Freighter 5"
 msgstr ""
 
 #: scripts/scenario_06_early_evaluation_exercise.lua:7004
-#: scripts/scenario_06_early_evaluation_exercise.lua:10975
+#: scripts/scenario_06_early_evaluation_exercise.lua:11017
 msgctxt "station-comms"
 msgid "Transport1x5"
 msgstr ""
 
 #: scripts/scenario_06_early_evaluation_exercise.lua:7008
-#: scripts/scenario_06_early_evaluation_exercise.lua:10976
+#: scripts/scenario_06_early_evaluation_exercise.lua:11018
 msgctxt "station-comms"
 msgid "Transport2x5"
 msgstr ""
 
 #: scripts/scenario_06_early_evaluation_exercise.lua:7012
-#: scripts/scenario_06_early_evaluation_exercise.lua:10977
+#: scripts/scenario_06_early_evaluation_exercise.lua:11019
 msgctxt "station-comms"
 msgid "Transport3x5"
 msgstr ""
 
 #: scripts/scenario_06_early_evaluation_exercise.lua:7016
-#: scripts/scenario_06_early_evaluation_exercise.lua:10978
+#: scripts/scenario_06_early_evaluation_exercise.lua:11020
 msgctxt "station-comms"
 msgid "Transport4x5"
 msgstr ""
 
 #: scripts/scenario_06_early_evaluation_exercise.lua:7020
-#: scripts/scenario_06_early_evaluation_exercise.lua:10979
+#: scripts/scenario_06_early_evaluation_exercise.lua:11021
 msgctxt "station-comms"
 msgid "Transport5x5"
 msgstr ""
@@ -3341,26 +3341,26 @@ msgid ""
 "at a station is more efficient."
 msgstr ""
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:11599
+#: scripts/scenario_06_early_evaluation_exercise.lua:11641
 #, lua-format
 msgctxt "human-incCall"
 msgid "You completed the research task. Destroy any Kraylor headed for %s"
 msgstr ""
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:11608
+#: scripts/scenario_06_early_evaluation_exercise.lua:11650
 msgctxt "goal-shipLog"
 msgid ""
 "You completed the research task. Destroy any Kraylor that were headed for "
 "your home base"
 msgstr ""
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:11801
+#: scripts/scenario_06_early_evaluation_exercise.lua:11843
 #, lua-format
 msgctxt "msgRelay&Operations"
 msgid "%s   Scan started at %.1f"
 msgstr ""
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:11815
+#: scripts/scenario_06_early_evaluation_exercise.lua:11857
 #, lua-format
 msgctxt "msgRelay&Operations"
 msgid ""
@@ -3369,18 +3369,18 @@ msgid ""
 "%s"
 msgstr ""
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:11823
+#: scripts/scenario_06_early_evaluation_exercise.lua:11865
 msgctxt "msgRelay&Operations"
 msgid "Enemy ships hunting"
 msgstr ""
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:11826
+#: scripts/scenario_06_early_evaluation_exercise.lua:11868
 #, lua-format
 msgctxt "msgRelay&Operations"
 msgid "%s for %s:"
 msgstr ""
 
-#: scripts/scenario_06_early_evaluation_exercise.lua:11836
+#: scripts/scenario_06_early_evaluation_exercise.lua:11878
 #, lua-format
 msgctxt "msgRelay&Operations"
 msgid ""

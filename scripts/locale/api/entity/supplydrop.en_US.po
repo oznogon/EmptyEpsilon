@@ -1,4 +1,4 @@
-#: scripts/api/entity/supplydrop.lua:22
+#: scripts/api/entity/supplydrop.lua:13
 msgctxt "class"
 msgid "Cargo"
 msgstr ""

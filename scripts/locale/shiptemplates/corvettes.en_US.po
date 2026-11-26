@@ -101,12 +101,12 @@ msgid ""
 "off. It's designed to quickly take out enemies weaker then itself."
 msgstr ""
 
-#: scripts/shiptemplates/corvettes.lua:133
+#: scripts/shiptemplates/corvettes.lua:132
 msgctxt "ship"
 msgid "Adv. Gunship"
 msgstr ""
 
-#: scripts/shiptemplates/corvettes.lua:136
+#: scripts/shiptemplates/corvettes.lua:135
 msgid ""
 "The Advanced Gunship corvette adds a second homing missile tube to damage "
 "targets at range, and dual front-firing beams to finish its foes off. It's "

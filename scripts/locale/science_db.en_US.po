@@ -377,107 +377,106 @@ msgid ""
 "but what good is a missile if it does not hit its target?"
 msgstr ""
 
-#: scripts/science_db.lua:200 scripts/science_db.lua:210
+#: scripts/science_db.lua:201 scripts/science_db.lua:211
 msgid "Damage type"
 msgstr ""
 
-#: scripts/science_db.lua:201 scripts/science_db.lua:211
-#: scripts/science_db.lua:246
+#: scripts/science_db.lua:202 scripts/science_db.lua:212
+#: scripts/science_db.lua:290
 msgid "Damage at center"
 msgstr ""
 
-#: scripts/science_db.lua:202 scripts/science_db.lua:212
-#: scripts/science_db.lua:247
+#: scripts/science_db.lua:203 scripts/science_db.lua:213
+#: scripts/science_db.lua:291
 msgid "Damage at edge"
 msgstr ""
 
-#: scripts/science_db.lua:203 scripts/science_db.lua:213
-#: scripts/science_db.lua:248
+#: scripts/science_db.lua:204 scripts/science_db.lua:214
+#: scripts/science_db.lua:292
 msgid "Blast radius (u)"
 msgstr ""
 
-#: scripts/science_db.lua:204 scripts/science_db.lua:266
+#: scripts/science_db.lua:205 scripts/science_db.lua:311
 msgid "Speed (u/sec.)"
 msgstr ""
 
-#: scripts/science_db.lua:205 scripts/science_db.lua:215
-#: scripts/science_db.lua:268
+#: scripts/science_db.lua:206 scripts/science_db.lua:216
+#: scripts/science_db.lua:313
 msgid "Turn rate (deg./sec.)"
 msgstr ""
 
-#: scripts/science_db.lua:206 scripts/science_db.lua:249
+#: scripts/science_db.lua:207 scripts/science_db.lua:293
 msgid "Lifetime (sec.)"
 msgstr ""
 
-#: scripts/science_db.lua:207
+#: scripts/science_db.lua:208
 msgid "Homing range (u)"
 msgstr ""
 
-#: scripts/science_db.lua:214 scripts/science_db.lua:267
+#: scripts/science_db.lua:215 scripts/science_db.lua:312
 msgid "Launch speed (u/sec.)"
 msgstr ""
 
-#: scripts/science_db.lua:216
+#: scripts/science_db.lua:217
 msgid "Arming delay (sec.)"
 msgstr ""
 
-#: scripts/science_db.lua:217
+#: scripts/science_db.lua:218 scripts/science_db.lua:294
 msgid "Trigger distance (u)"
 msgstr ""
 
-#: scripts/science_db.lua:222 scripts/science_db.lua:224
-#: scripts/science_db.lua:227 scripts/science_db.lua:229
-msgid "Kinetic"
-msgstr ""
-
-#: scripts/science_db.lua:226 scripts/science_db.lua:319
-msgid "EMP"
-msgstr ""
-
-#: scripts/science_db.lua:234
+#: scripts/science_db.lua:223
 msgctxt "size_abbreviation"
 msgid "S"
 msgstr ""
 
-#: scripts/science_db.lua:235
+#: scripts/science_db.lua:224
 msgctxt "size_abbreviation"
 msgid "M"
 msgstr ""
 
-#: scripts/science_db.lua:236 scripts/science_db.lua:258
-#: scripts/science_db.lua:277
+#: scripts/science_db.lua:225 scripts/science_db.lua:303
+#: scripts/science_db.lua:322
 msgctxt "size_abbreviation"
 msgid "L"
 msgstr ""
 
-#: scripts/science_db.lua:288
+#: scripts/science_db.lua:239 scripts/science_db.lua:364
+msgid "EMP"
+msgstr ""
+
+#: scripts/science_db.lua:241
+msgid "Kinetic"
+msgstr ""
+
+#: scripts/science_db.lua:333
 msgid "Homing missile"
 msgstr ""
 
-#: scripts/science_db.lua:289 scripts/science_db.lua:298
-#: scripts/science_db.lua:309 scripts/science_db.lua:320
-#: scripts/science_db.lua:329
+#: scripts/science_db.lua:334 scripts/science_db.lua:343
+#: scripts/science_db.lua:354 scripts/science_db.lua:365
+#: scripts/science_db.lua:374
 msgid "Sizes"
 msgstr ""
 
-#: scripts/science_db.lua:289 scripts/science_db.lua:298
-#: scripts/science_db.lua:309 scripts/science_db.lua:320
-#: scripts/science_db.lua:329
+#: scripts/science_db.lua:334 scripts/science_db.lua:343
+#: scripts/science_db.lua:354 scripts/science_db.lua:365
+#: scripts/science_db.lua:374
 msgid "Small (S) / Medium (M) / Large (L)"
 msgstr ""
 
-#: scripts/science_db.lua:293
+#: scripts/science_db.lua:338
 msgid ""
 "This target-seeking missile is the workhorse of many space combat arsenals. "
 "It's compact enough to be fitted on frigates, and packs enough punch to be "
 "used on larger ships, though usually in more than a single missile tube."
 msgstr ""
 
-#: scripts/science_db.lua:297
+#: scripts/science_db.lua:342
 msgid "Nuke"
 msgstr ""
 
-#: scripts/science_db.lua:302
+#: scripts/science_db.lua:347
 msgid ""
 "A nuclear missile is similar to a homing missile in that it can seek a "
 "target, but it moves and turns more slowly and explodes a greatly increased "
@@ -491,11 +490,11 @@ msgid ""
 "or shields can provide enough protection."
 msgstr ""
 
-#: scripts/science_db.lua:308
+#: scripts/science_db.lua:353
 msgid "Mine"
 msgstr ""
 
-#: scripts/science_db.lua:313
+#: scripts/science_db.lua:358
 msgid ""
 "Mines are often placed in defensive perimeters around stations. There are "
 "also old minefields scattered around the galaxy from older wars.\n"
@@ -504,7 +503,7 @@ msgid ""
 "detonation and blast radius make this use risky at best."
 msgstr ""
 
-#: scripts/science_db.lua:324
+#: scripts/science_db.lua:369
 msgid ""
 "The electromagnetic pulse missile (EMP) reproduces the disruptive effects of "
 "a nuclear explosion, but without the destructive properties. This causes it "
@@ -515,11 +514,11 @@ msgid ""
 "focused beam fire."
 msgstr ""
 
-#: scripts/science_db.lua:328
+#: scripts/science_db.lua:373
 msgid "HVLI"
 msgstr ""
 
-#: scripts/science_db.lua:333
+#: scripts/science_db.lua:378
 msgid ""
 "A high-velocity lead impactor (HVLI) fires a simple slug of lead at a high "
 "velocity. This weapon is usually found in simpler ships since it does not "
@@ -531,164 +530,164 @@ msgid ""
 "full damage potential at a range of 2u."
 msgstr ""
 
-#: scripts/science_db.lua:353
+#: scripts/science_db.lua:398
 msgctxt "database direction"
 msgid "Front"
 msgstr ""
 
-#: scripts/science_db.lua:356
+#: scripts/science_db.lua:401
 msgctxt "database direction"
 msgid "Right"
 msgstr ""
 
-#: scripts/science_db.lua:359
+#: scripts/science_db.lua:404
 msgctxt "database direction"
 msgid "Left"
 msgstr ""
 
-#: scripts/science_db.lua:362
+#: scripts/science_db.lua:407
 msgctxt "database direction"
 msgid "Rear"
 msgstr ""
 
-#: scripts/science_db.lua:371
+#: scripts/science_db.lua:416
 msgctxt "database"
 msgid "Factions"
 msgstr ""
 
-#: scripts/science_db.lua:403 scripts/science_db.lua:407
+#: scripts/science_db.lua:448 scripts/science_db.lua:452
 msgctxt "stance"
 msgid "Neutral"
 msgstr ""
 
-#: scripts/science_db.lua:410
+#: scripts/science_db.lua:455
 msgctxt "stance"
 msgid "Enemy"
 msgstr ""
 
-#: scripts/science_db.lua:413
+#: scripts/science_db.lua:458
 msgctxt "stance"
 msgid "Friendly"
 msgstr ""
 
-#: scripts/science_db.lua:424
+#: scripts/science_db.lua:469
 msgctxt "database"
 msgid "Ships"
 msgstr ""
 
-#: scripts/science_db.lua:427
+#: scripts/science_db.lua:472
 msgid ""
 "Spaceships are vessels capable of withstanding the dangers of travel through "
 "deep space. They can fill many functions and vary broadly in size, from "
 "small tugs to massive dreadnoughts."
 msgstr ""
 
-#: scripts/science_db.lua:432
+#: scripts/science_db.lua:477
 msgctxt "database"
 msgid "Stations"
 msgstr ""
 
-#: scripts/science_db.lua:435
+#: scripts/science_db.lua:480
 msgid ""
 "Space stations are permanent, immobile structures ranging in scale from "
 "small outposts to city-sized communities. Many provide restocking and repair "
 "services to neutral and friendly ships."
 msgstr ""
 
-#: scripts/science_db.lua:447 scripts/science_db.lua:474
+#: scripts/science_db.lua:492 scripts/science_db.lua:519
 msgid "No class"
 msgstr ""
 
-#: scripts/science_db.lua:475
+#: scripts/science_db.lua:520
 msgid "No sub-class"
 msgstr ""
 
-#: scripts/science_db.lua:490
+#: scripts/science_db.lua:535
 msgctxt "database"
 msgid "Class"
 msgstr ""
 
-#: scripts/science_db.lua:491
+#: scripts/science_db.lua:536
 msgctxt "database"
 msgid "Sub-class"
 msgstr ""
 
-#: scripts/science_db.lua:504 scripts/science_db.lua:509
+#: scripts/science_db.lua:549 scripts/science_db.lua:554
 msgctxt "database"
 msgid "Size"
 msgstr ""
 
-#: scripts/science_db.lua:523
+#: scripts/science_db.lua:568
 msgctxt "database"
 msgid "Shield"
 msgstr ""
 
-#: scripts/science_db.lua:527
+#: scripts/science_db.lua:572
 msgid "Hull"
 msgstr ""
 
-#: scripts/science_db.lua:532
+#: scripts/science_db.lua:577
 msgctxt "database"
 msgid "Move speed"
 msgstr ""
 
-#: scripts/science_db.lua:541
+#: scripts/science_db.lua:586
 msgctxt "database"
 msgid "Reverse move speed"
 msgstr ""
 
-#: scripts/science_db.lua:552
+#: scripts/science_db.lua:597
 msgctxt "database"
 msgid "Turn speed"
 msgstr ""
 
-#: scripts/science_db.lua:561
+#: scripts/science_db.lua:606
 msgctxt "database"
 msgid "Warp speed"
 msgstr ""
 
-#: scripts/science_db.lua:570
+#: scripts/science_db.lua:615
 msgctxt "database"
 msgid "Jump range"
 msgstr ""
 
-#: scripts/science_db.lua:584
+#: scripts/science_db.lua:629
 #, lua-format
 msgctxt "database"
 msgid "%s beam weapon"
 msgstr ""
 
-#: scripts/science_db.lua:588
+#: scripts/science_db.lua:633
 #, lua-format
 msgctxt "database"
 msgid "%.1f dmg. / %.1f sec."
 msgstr ""
 
-#: scripts/science_db.lua:600
+#: scripts/science_db.lua:645
 #, lua-format
 msgctxt "database"
 msgid "%s tube"
 msgstr ""
 
-#: scripts/science_db.lua:602
+#: scripts/science_db.lua:647
 #, lua-format
 msgctxt "database"
 msgid "%s small tube"
 msgstr ""
 
-#: scripts/science_db.lua:605
+#: scripts/science_db.lua:650
 #, lua-format
 msgctxt "database"
 msgid "%s large tube"
 msgstr ""
 
-#: scripts/science_db.lua:610
+#: scripts/science_db.lua:655
 #, lua-format
 msgctxt "database"
 msgid "%.1f sec."
 msgstr ""
 
-#: scripts/science_db.lua:632
+#: scripts/science_db.lua:677
 #, lua-format
 msgctxt "database"
 msgid "%s capacity"

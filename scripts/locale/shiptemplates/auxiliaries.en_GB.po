@@ -5,24 +5,24 @@ msgid "Personnel Freighter %d"
 msgstr "Personnel Freighter %d"
 
 #: scripts/shiptemplates/auxiliaries.lua:13
-#: scripts/shiptemplates/auxiliaries.lua:38
-#: scripts/shiptemplates/auxiliaries.lua:63
-#: scripts/shiptemplates/auxiliaries.lua:88
-#: scripts/shiptemplates/auxiliaries.lua:113
-#: scripts/shiptemplates/auxiliaries.lua:146
-#: scripts/shiptemplates/auxiliaries.lua:162
-#: scripts/shiptemplates/auxiliaries.lua:240
-#: scripts/shiptemplates/auxiliaries.lua:292
-#: scripts/shiptemplates/auxiliaries.lua:308
+#: scripts/shiptemplates/auxiliaries.lua:37
+#: scripts/shiptemplates/auxiliaries.lua:61
+#: scripts/shiptemplates/auxiliaries.lua:85
+#: scripts/shiptemplates/auxiliaries.lua:109
+#: scripts/shiptemplates/auxiliaries.lua:141
+#: scripts/shiptemplates/auxiliaries.lua:157
+#: scripts/shiptemplates/auxiliaries.lua:233
+#: scripts/shiptemplates/auxiliaries.lua:285
+#: scripts/shiptemplates/auxiliaries.lua:301
 msgctxt "class"
 msgid "Auxiliary"
 msgstr "Auxiliary"
 
 #: scripts/shiptemplates/auxiliaries.lua:13
-#: scripts/shiptemplates/auxiliaries.lua:38
-#: scripts/shiptemplates/auxiliaries.lua:63
-#: scripts/shiptemplates/auxiliaries.lua:88
-#: scripts/shiptemplates/auxiliaries.lua:113
+#: scripts/shiptemplates/auxiliaries.lua:37
+#: scripts/shiptemplates/auxiliaries.lua:61
+#: scripts/shiptemplates/auxiliaries.lua:85
+#: scripts/shiptemplates/auxiliaries.lua:109
 msgctxt "subclass"
 msgid "Freighter"
 msgstr "Freighter"
@@ -34,12 +34,12 @@ msgid ""
 msgstr "These freighters are designed to transport armed troops, military support personnel, and combat gear."
 
 #: scripts/shiptemplates/auxiliaries.lua:25
-#: scripts/shiptemplates/auxiliaries.lua:50
-#: scripts/shiptemplates/auxiliaries.lua:75
-#: scripts/shiptemplates/auxiliaries.lua:100
-#: scripts/shiptemplates/auxiliaries.lua:125
-#: scripts/shiptemplates/auxiliaries.lua:173
-#: scripts/shiptemplates/auxiliaries.lua:252
+#: scripts/shiptemplates/auxiliaries.lua:49
+#: scripts/shiptemplates/auxiliaries.lua:73
+#: scripts/shiptemplates/auxiliaries.lua:97
+#: scripts/shiptemplates/auxiliaries.lua:121
+#: scripts/shiptemplates/auxiliaries.lua:168
+#: scripts/shiptemplates/auxiliaries.lua:245
 msgctxt "class"
 msgid "Cargo"
 msgstr "Cargo"
@@ -50,136 +50,136 @@ msgctxt "ship"
 msgid "Personnel Jump Freighter %d"
 msgstr "Personnel Jump Freighter %d"
 
-#: scripts/shiptemplates/auxiliaries.lua:37
+#: scripts/shiptemplates/auxiliaries.lua:36
 #, lua-format
 msgctxt "ship"
 msgid "Goods Freighter %d"
 msgstr "Goods Freighter %d"
 
-#: scripts/shiptemplates/auxiliaries.lua:42
+#: scripts/shiptemplates/auxiliaries.lua:41
 msgid ""
 "Cargo freighters haul large loads across long distances on impulse power. "
 "Their cargo bays include climate control and stabilization systems that keep "
 "the cargo in good condition."
 msgstr "Cargo freighters haul large loads across long distances on impulse power. Their cargo bays include climate control and stabilization systems that keep the cargo in good condition."
 
-#: scripts/shiptemplates/auxiliaries.lua:55
+#: scripts/shiptemplates/auxiliaries.lua:54
 #, lua-format
 msgctxt "ship"
 msgid "Goods Jump Freighter %d"
 msgstr "Goods Jump Freighter %d"
 
-#: scripts/shiptemplates/auxiliaries.lua:62
+#: scripts/shiptemplates/auxiliaries.lua:60
 #, lua-format
 msgctxt "ship"
 msgid "Garbage Freighter %d"
 msgstr "Garbage Freighter %d"
 
-#: scripts/shiptemplates/auxiliaries.lua:67
+#: scripts/shiptemplates/auxiliaries.lua:65
 msgid ""
 "These freighters are specially designed to haul garbage and waste. They are "
 "fitted with a trash compactor and fewer stabilzation systems than cargo "
 "freighters."
 msgstr "These freighters are specially designed to haul garbage and waste. They are fitted with a trash compactor and fewer stabilzation systems than cargo freighters."
 
-#: scripts/shiptemplates/auxiliaries.lua:80
+#: scripts/shiptemplates/auxiliaries.lua:78
 #, lua-format
 msgctxt "ship"
 msgid "Garbage Jump Freighter %d"
 msgstr "Garbage Jump Freighter %d"
 
-#: scripts/shiptemplates/auxiliaries.lua:87
+#: scripts/shiptemplates/auxiliaries.lua:84
 #, lua-format
 msgctxt "ship"
 msgid "Equipment Freighter %d"
 msgstr "Equipment Freighter %d"
 
-#: scripts/shiptemplates/auxiliaries.lua:92
+#: scripts/shiptemplates/auxiliaries.lua:89
 msgid ""
 "Equipment freighters have specialized environmental and stabilization "
 "systems to safely carry delicate machinery and complex instruments."
 msgstr "Equipment freighters have specialised environmental and stabilization systems to safely carry delicate machinery and complex instruments."
 
-#: scripts/shiptemplates/auxiliaries.lua:105
+#: scripts/shiptemplates/auxiliaries.lua:102
 #, lua-format
 msgctxt "ship"
 msgid "Equipment Jump Freighter %d"
 msgstr "Equipment Jump Freighter %d"
 
-#: scripts/shiptemplates/auxiliaries.lua:112
+#: scripts/shiptemplates/auxiliaries.lua:108
 #, lua-format
 msgctxt "ship"
 msgid "Fuel Freighter %d"
 msgstr "Fuel Freighter %d"
 
-#: scripts/shiptemplates/auxiliaries.lua:117
+#: scripts/shiptemplates/auxiliaries.lua:113
 msgid ""
 "Fuel freighters have massive tanks for hauling fuel, and delicate internal "
 "sensors that watch for any changes to their cargo's potentially volatile "
 "state."
 msgstr "Fuel freighters have massive tanks for hauling fuel, and delicate internal sensors that watch for any changes to their cargo's potentially volatile state."
 
-#: scripts/shiptemplates/auxiliaries.lua:130
+#: scripts/shiptemplates/auxiliaries.lua:126
 #, lua-format
 msgctxt "ship"
 msgid "Fuel Jump Freighter %d"
 msgstr "Fuel Jump Freighter %d"
 
-#: scripts/shiptemplates/auxiliaries.lua:144
+#: scripts/shiptemplates/auxiliaries.lua:139
 #, lua-format
 msgctxt "ship"
 msgid "Transport %dx%d"
 msgstr "Transport %dx%d"
 
-#: scripts/shiptemplates/auxiliaries.lua:146
-#: scripts/shiptemplates/auxiliaries.lua:162
-#: scripts/shiptemplates/auxiliaries.lua:240
+#: scripts/shiptemplates/auxiliaries.lua:141
+#: scripts/shiptemplates/auxiliaries.lua:157
+#: scripts/shiptemplates/auxiliaries.lua:233
 msgctxt "subclass"
 msgid "Transport"
 msgstr "Transport"
 
-#: scripts/shiptemplates/auxiliaries.lua:161
+#: scripts/shiptemplates/auxiliaries.lua:156
 msgctxt "ship"
 msgid "Flavia"
 msgstr "Flavia"
 
-#: scripts/shiptemplates/auxiliaries.lua:167
+#: scripts/shiptemplates/auxiliaries.lua:162
 msgid ""
 "Popular among traders and smugglers, the Flavia is a small cargo and "
 "passenger transport. It's cheaper than a freighter for small loads and short "
 "distances, and is often used to carry high-value cargo discreetly."
 msgstr "Popular among traders and smugglers, the Flavia is a small cargo and passenger transport. It's cheaper than a freighter for small loads and short distances, and is often used to carry high-value cargo discreetly."
 
-#: scripts/shiptemplates/auxiliaries.lua:178
+#: scripts/shiptemplates/auxiliaries.lua:173
 msgctxt "ship"
 msgid "Flavia Falcon"
 msgstr "Flavia Falcon"
 
-#: scripts/shiptemplates/auxiliaries.lua:182
+#: scripts/shiptemplates/auxiliaries.lua:176
 msgid ""
 "The Flavia Falcon is a variant of the Flavia small transport modified for "
 "faster flight, and adds rear-mounted beam weapons to keep enemies off its "
 "back."
 msgstr "The Flavia Falcon is a variant of the Flavia small transport modified for faster flight, and adds rear-mounted beam weapons to keep enemies off its back."
 
-#: scripts/shiptemplates/auxiliaries.lua:192
+#: scripts/shiptemplates/auxiliaries.lua:186
 msgctxt "playerShip"
 msgid "Flavia P.Falcon"
 msgstr "Flavia P.Falcon"
 
-#: scripts/shiptemplates/auxiliaries.lua:197
+#: scripts/shiptemplates/auxiliaries.lua:190
 msgid ""
 "The Flavia P.Falcon is a variant of the Flavia Falcon, and adds a nuclear-"
 "capable rear-facing weapon tube and warp drive to its improved impulse "
 "engine and rear-facing beam weapons."
 msgstr "The Flavia P.Falcon is a variant of the Flavia Falcon, and adds a nuclear-capable rear-facing weapon tube and warp drive to its improved impulse engine and rear-facing beam weapons."
 
-#: scripts/shiptemplates/auxiliaries.lua:239
+#: scripts/shiptemplates/auxiliaries.lua:232
 msgctxt "playerShip"
 msgid "Repulse"
 msgstr "Repulse"
 
-#: scripts/shiptemplates/auxiliaries.lua:246
+#: scripts/shiptemplates/auxiliaries.lua:239
 msgid ""
 "The Repulse is an armed and armored transport ship based on the popular "
 "Flavia design. Despite its bolstered shields and hull, it remains faster "
@@ -187,30 +187,30 @@ msgid ""
 "the Flavia P.Falcon variant."
 msgstr "The Repulse is an armed and armoured transport ship based on the popular Flavia design. Despite its bolstered shields and hull, it remains faster than a stock Flavia, or even the Flavia Falcon, but is slightly slower than the Flavia P.Falcon variant."
 
-#: scripts/shiptemplates/auxiliaries.lua:291
+#: scripts/shiptemplates/auxiliaries.lua:284
 msgctxt "ship"
 msgid "Apis"
 msgstr "Apis"
 
-#: scripts/shiptemplates/auxiliaries.lua:292
-#: scripts/shiptemplates/auxiliaries.lua:308
+#: scripts/shiptemplates/auxiliaries.lua:285
+#: scripts/shiptemplates/auxiliaries.lua:301
 msgctxt "subclass"
 msgid "Tug"
 msgstr "Tug"
 
-#: scripts/shiptemplates/auxiliaries.lua:297
+#: scripts/shiptemplates/auxiliaries.lua:290
 msgid ""
 "The unarmed Apis tugboat, named for the genus of honeybees, is a reliable "
 "but small transport. Due to its low cost, it's commonly used to train "
 "fledgling captains and crews without risking friendly fire."
 msgstr "The unarmed Apis tugboat, named for the genus of honeybees, is a reliable but small transport. Due to its low cost, it's commonly used to train fledgling captains and crews without risking friendly fire."
 
-#: scripts/shiptemplates/auxiliaries.lua:307
+#: scripts/shiptemplates/auxiliaries.lua:300
 msgctxt "ship"
 msgid "Hylas"
 msgstr "Hylas"
 
-#: scripts/shiptemplates/auxiliaries.lua:311
+#: scripts/shiptemplates/auxiliaries.lua:304
 msgid ""
 "The Hylas is an unarmed tugboat with a powerful short-range tractor beam "
 "capable of moving much larger ships through gravity-field manipulation. It's "
@@ -218,12 +218,12 @@ msgid ""
 "collisions with larger ships, but it's otherwise defenseless."
 msgstr "The Hylas is an unarmed tugboat with a powerful short-range tractor beam capable of moving much larger ships through gravity-field manipulation. It's nimble on its own and lightly shielded to avoid taking damage from collisions with larger ships, but it's otherwise defenseless."
 
-#: scripts/shiptemplates/auxiliaries.lua:319
+#: scripts/shiptemplates/auxiliaries.lua:312
 msgctxt "playerShip"
 msgid "Heracles"
 msgstr "Heracles"
 
-#: scripts/shiptemplates/auxiliaries.lua:323
+#: scripts/shiptemplates/auxiliaries.lua:316
 msgid ""
 "The Heracles tug model is a Hylas suited for carrier use in deep-space "
 "operations. Improvements include a stronger hull, bolstered shield, full "
