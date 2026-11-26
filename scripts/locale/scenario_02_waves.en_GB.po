@@ -48,7 +48,7 @@ msgid ""
 "each wave. Players are overwhelmed more quickly, leading to shorter games."
 msgstr "Difficulty starts at wave 5 and increases by 1.5 after the players defeat each wave. Players are overwhelmed more quickly, leading to shorter games."
 
-#: scripts/scenario_02_waves.lua:47
+#: scripts/scenario_02_waves.lua:49
 msgctxt "goal-shipLog"
 msgid ""
 "At least one friendly base must survive.\n"
@@ -59,24 +59,24 @@ msgid ""
 "How many waves can you destroy?"
 msgstr "At least one friendly base must survive.\n\nDestroy all enemy ships. After a short delay, the next wave will appear. And so on ...\n\nHow many waves can you destroy?"
 
-#: scripts/scenario_02_waves.lua:136
+#: scripts/scenario_02_waves.lua:138
 #, lua-format
 msgctxt "shipLog"
 msgid "Wave %d"
 msgstr "Wave %d"
 
-#: scripts/scenario_02_waves.lua:238
+#: scripts/scenario_02_waves.lua:240
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Wave %d"
 msgstr "Wave %d"
 
-#: scripts/scenario_02_waves.lua:271
+#: scripts/scenario_02_waves.lua:273
 msgctxt "msgMainscreen"
 msgid "Wave cleared!"
 msgstr "Wave cleared!"
 
-#: scripts/scenario_02_waves.lua:273
+#: scripts/scenario_02_waves.lua:275
 #, lua-format
 msgctxt "shipLog"
 msgid "Wave %d cleared."

@@ -142,7 +142,7 @@ msgstr ""
 #: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:150
 msgctxt "scienceDB"
 msgid ""
-"The Striker is the predecessor to the advanced striker, slow but agile, but "
+"The Crow is the predecessor to the advanced striker, slow but agile, but "
 "does not do an extreme amount of damage, and lacks in shields."
 msgstr ""
 

@@ -6,17 +6,19 @@ msgstr "MT52 Hornet"
 #: scripts/shiptemplates/starfighters.lua:22
 #: scripts/shiptemplates/starfighters.lua:95
 #: scripts/shiptemplates/starfighters.lua:216
-#: scripts/shiptemplates/starfighters.lua:332
-#: scripts/shiptemplates/starfighters.lua:349
-#: scripts/shiptemplates/starfighters.lua:374
-#: scripts/shiptemplates/starfighters.lua:397
+#: scripts/shiptemplates/starfighters.lua:288
+#: scripts/shiptemplates/starfighters.lua:333
+#: scripts/shiptemplates/starfighters.lua:350
+#: scripts/shiptemplates/starfighters.lua:375
+#: scripts/shiptemplates/starfighters.lua:398
 msgctxt "class"
 msgid "Starfighter"
 msgstr "Starfighter"
 
 #: scripts/shiptemplates/starfighters.lua:22
-#: scripts/shiptemplates/starfighters.lua:332
-#: scripts/shiptemplates/starfighters.lua:349
+#: scripts/shiptemplates/starfighters.lua:288
+#: scripts/shiptemplates/starfighters.lua:333
+#: scripts/shiptemplates/starfighters.lua:350
 msgctxt "subclass"
 msgid "Interceptor"
 msgstr "Interceptor"
@@ -59,8 +61,8 @@ msgid "Adder MK5"
 msgstr "Adder MK5"
 
 #: scripts/shiptemplates/starfighters.lua:95
-#: scripts/shiptemplates/starfighters.lua:374
-#: scripts/shiptemplates/starfighters.lua:397
+#: scripts/shiptemplates/starfighters.lua:375
+#: scripts/shiptemplates/starfighters.lua:398
 msgctxt "subclass"
 msgid "Gunship"
 msgstr "Gunship"
@@ -197,36 +199,36 @@ msgctxt "playerShip"
 msgid "Stingray"
 msgstr "Stingray"
 
-#: scripts/shiptemplates/starfighters.lua:293
+#: scripts/shiptemplates/starfighters.lua:294
 msgid ""
 "The Stingray is a little-known predecessor to the MU52 Hornet. Once "
 "commonplace, most of the few remaining Stingrays have been converted to "
 "couriers and illegal racers due to their (frankly unsafe) impulse engines."
 msgstr "The Stingray is a little-known predecessor to the MU52 Hornet. Once commonplace, most of the few remaining Stingrays have been converted to couriers and illegal racers due to their (frankly unsafe) impulse engines."
 
-#: scripts/shiptemplates/starfighters.lua:329
+#: scripts/shiptemplates/starfighters.lua:330
 msgctxt "ship"
 msgid "Fighter"
 msgstr "Fighter"
 
-#: scripts/shiptemplates/starfighters.lua:335
+#: scripts/shiptemplates/starfighters.lua:336
 msgid ""
 "Ripostes are weak, nimble interceptors with a single beam weapon that become "
 "a greater threat when they engage in larger groups. They're often deployed "
 "in reconnaissance, patrol, and outpost-defense roles."
 msgstr "Ripostes are weak, nimble interceptors with a single beam weapon that become a greater threat when they engage in larger groups. They're often deployed in reconnaissance, patrol, and outpost-defence roles."
 
-#: scripts/shiptemplates/starfighters.lua:347
+#: scripts/shiptemplates/starfighters.lua:348
 msgctxt "ship"
 msgid "Strix"
 msgstr "Strix"
 
-#: scripts/shiptemplates/starfighters.lua:354
+#: scripts/shiptemplates/starfighters.lua:355
 msgctxt "strix-1"
 msgid "The Strix is a warp-equipped interceptor built for ambush tactics."
 msgstr "The Strix is a warp-equipped interceptor built for ambush tactics."
 
-#: scripts/shiptemplates/starfighters.lua:357
+#: scripts/shiptemplates/starfighters.lua:358
 msgctxt "strix-2"
 msgid ""
 "For a starfighter it's slow at sublight flight and lacks manueverability, "
@@ -235,23 +237,23 @@ msgid ""
 "favorite of raiders that seek to catch poorly defended convoys unaware."
 msgstr "For a starfighter it's slow at sublight flight and lacks manueverability, and most of its shielding is focused forward. However, thanks to its paired beam weapons and ability to strike quickly and escape, they've become a favourite of raiders that seek to catch poorly defended convoys unaware."
 
-#: scripts/shiptemplates/starfighters.lua:360
+#: scripts/shiptemplates/starfighters.lua:361
 msgctxt "strix-3"
 msgid ""
 "Strixes are often accompanied or complemented by Magpies, which have similar "
 "capabilities but use a jump drive for FTL travel."
 msgstr "Strixes are often accompanied or complemented by Magpies, which have similar capabilities but use a jump drive for FTL travel."
 
-#: scripts/shiptemplates/starfighters.lua:373
+#: scripts/shiptemplates/starfighters.lua:374
 msgctxt "ship"
 msgid "Magpie"
 msgstr "Magpie"
 
-#: scripts/shiptemplates/starfighters.lua:379
+#: scripts/shiptemplates/starfighters.lua:380
 msgid "The Magpie is a jump-equipped gunship built for ambush tactics."
 msgstr "The Magpie is a jump-equipped gunship built for ambush tactics."
 
-#: scripts/shiptemplates/starfighters.lua:381
+#: scripts/shiptemplates/starfighters.lua:382
 msgid ""
 "For a starfighter it's slow at sublight flight and lacks manueverability, "
 "and most of its shielding is focused forward. However, thanks to its paired "
@@ -259,18 +261,18 @@ msgid ""
 "favorite of raiders that seek to catch poorly defended convoys unaware."
 msgstr "For a starfighter it's slow at sublight flight and lacks manueverability, and most of its shielding is focused forward. However, thanks to its paired beam weapons and ability to strike quickly and escape, they've become a favourite of raiders that seek to catch poorly defended convoys unaware."
 
-#: scripts/shiptemplates/starfighters.lua:383
+#: scripts/shiptemplates/starfighters.lua:384
 msgid ""
 "Magpies are often accompanied or complemented by Strixes, which have similar "
 "capabilities but use a warp drive for FTL travel."
 msgstr "Magpies are often accompanied or complemented by Strixes, which have similar capabilities but use a warp drive for FTL travel."
 
-#: scripts/shiptemplates/starfighters.lua:396
+#: scripts/shiptemplates/starfighters.lua:397
 msgctxt "playerShip"
 msgid "Crow"
 msgstr "Crow"
 
-#: scripts/shiptemplates/starfighters.lua:401
+#: scripts/shiptemplates/starfighters.lua:402
 msgid ""
 "The Crow gunship is the predecessor to the Magpie starfighter. Slow, weakly "
 "armed, and lacking in shields, it's at least relatively agile."

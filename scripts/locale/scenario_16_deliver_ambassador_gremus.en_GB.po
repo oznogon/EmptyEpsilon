@@ -62,70 +62,70 @@ msgctxt "scienceDescription-station"
 msgid "Strategically located human station"
 msgstr "Strategically located human station"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:76
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:80
 msgctxt "scienceDescription-station"
 msgid "Gathering point for asteroid miners"
 msgstr "Gathering point for asteroid miners"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:96
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:103
 msgctxt "scienceDescription-station"
 msgid "Observatory"
 msgstr "Observatory"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:109
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:115
 msgctxt "scienceDescription-station"
 msgid "Balindor Prime Communications Nexus"
 msgstr "Balindor Prime Communications Nexus"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:125
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:160
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:132
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:168
 msgctxt "scienceDescription-station"
 msgid "Trading Post"
 msgstr "Trading Post"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:136
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:142
 msgctxt "scienceDescription-station"
 msgid "Science and trading hub"
 msgstr "Science and trading hub"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:152
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:160
 msgctxt "scienceDescription-station"
 msgid "Civilian and military station"
 msgstr "Civilian and military station"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:167
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:175
 msgctxt "scienceDescription-station"
 msgid "Trading Nexus"
 msgstr "Trading Nexus"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:178
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:185
 msgctxt "scienceDescription-station"
 msgid "Major military installation"
 msgstr "Major military installation"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:311
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:315
 msgctxt "buttonGM"
 msgid "+Spawn Ship(s)"
 msgstr "+Spawn Ship(s)"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:312
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:316
 msgctxt "buttonGM"
 msgid "+Control Codes"
 msgstr "+Control Codes"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:313
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:317
 msgctxt "buttonGM"
 msgid "Terrorist End"
 msgstr "Terrorist End"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:567
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:571
 msgctxt "audio-incCall"
 msgid ""
 "Audio message received. Auto-transcribed into log. Stored for playback: "
 "CMDMICHL012"
 msgstr "Audio message received. Auto-transcribed into log. Stored for playback: CMDMICHL012"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:574
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:578
 #, lua-format
 msgctxt "audio-shipLog"
 msgid ""
@@ -133,33 +133,33 @@ msgid ""
 "ambassador Gremus at Balindor Prime"
 msgstr "[CMDMICHL012](Commander Michael) %s, avoid contact where possible. Get ambassador Gremus at Balindor Prime"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:585
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:589
 msgctxt "audio-buttonRelay"
 msgid "|> CMDMICHL012"
 msgstr "|> CMDMICHL012"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:627
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:632
 msgctxt "audio-incCall"
 msgid ""
 "Audio message received. Auto-transcribed into log. Stored for playback: "
 "AMBGREMUS004"
 msgstr "Audio message received. Auto-transcribed into log. Stored for playback: AMBGREMUS004"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:633
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:638
 msgctxt "audio-shipLog"
 msgid ""
 "[AMBGREMUS004](Ambassador Gremus) Thanks for bringing me aboard. Please "
 "transport me to Ningling."
 msgstr "[AMBGREMUS004](Ambassador Gremus) Thanks for bringing me aboard. Please transport me to Ningling."
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:642
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:647
 msgctxt "audio-buttonRelay"
 msgid "|> AMBGREMUS004"
 msgstr "|> AMBGREMUS004"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:672
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:716
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:761
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:678
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:722
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:769
 msgctxt "msgMainscreen"
 msgid ""
 "Ningling destroyed.\n"
@@ -167,14 +167,14 @@ msgid ""
 "Mission fails."
 msgstr "Ningling destroyed.\nCritical information fails to reach Ambassador Gremus.\nMission fails."
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:682
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:688
 msgctxt "audio-incCall"
 msgid ""
 "Audio message received. Auto-transcribed into log. Stored for playback: "
 "NINGPCLO002"
 msgstr "Audio message received. Auto-transcribed into log. Stored for playback: NINGPCLO002"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:688
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:694
 msgctxt "audio-shipLog"
 msgid ""
 "[NINGPCLO002](Ningling Protocol Officer) Ambassador Gremus arrived. The "
@@ -183,19 +183,19 @@ msgid ""
 "contact you after the meeting."
 msgstr "[NINGPCLO002](Ningling Protocol Officer) Ambassador Gremus arrived. The ambassador is scheduled for a brief meeting with liaison Fordina. After that meeting, you will be asked to transport the ambassador to Goltin 7. We will contact you after the meeting."
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:697
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:703
 msgctxt "audio-buttonRelay"
 msgid "|> NINGPCLO002"
 msgstr "|> NINGPCLO002"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:726
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:734
 msgctxt "audio-incCall"
 msgid ""
 "Audio message received. Auto-transcribed into log. Stored for playback: "
 "AMBGREMUS007"
 msgstr "Audio message received. Auto-transcribed into log. Stored for playback: AMBGREMUS007"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:733
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:741
 #, lua-format
 msgctxt "audio-shipLog"
 msgid ""
@@ -203,19 +203,19 @@ msgid ""
 "7. Please dock with Ningling"
 msgstr "[AMBGREMUS007](Ambassador Gremus) %s, I am ready to be transported to Goltin 7. Please dock with Ningling"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:744
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:752
 msgctxt "audio-buttonRelay"
 msgid "|> AMBGREMUS007"
 msgstr "|> AMBGREMUS007"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:771
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:781
 msgctxt "audio-incCall"
 msgid ""
 "Audio message received. Auto-transcribed into log. Stored for playback: "
 "AMBGREMUS021"
 msgstr "Audio message received. Auto-transcribed into log. Stored for playback: AMBGREMUS021"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:777
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:787
 msgctxt "audio-shipLog"
 msgid ""
 "[AMBGREMUS021](Ambassador Gremus) Thank you for waiting and then for coming "
@@ -223,31 +223,31 @@ msgid ""
 "facilitate negotiations at Goltin 7. Let us away!"
 msgstr "[AMBGREMUS021](Ambassador Gremus) Thank you for waiting and then for coming back and getting me. I needed the information provided by liaison Fordina to facilitate negotiations at Goltin 7. Let us away!"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:784
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:794
 msgctxt "upgrade-shipLog"
 msgid ""
 "Reconfigured beam weapons: pointed one forward and increased its range and "
 "narrowed its focus"
 msgstr "Reconfigured beam weapons: pointed one forward and increased its range and narrowed its focus"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:793
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:803
 msgctxt "upgrade-shipLog"
 msgid "Also increased the top speed of your impulse engine"
 msgstr "Also increased the top speed of your impulse engine"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:803
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:872
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:813
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:883
 msgctxt "audio-buttonRelay"
 msgid "|> AMBGREMUS021"
 msgstr "|> AMBGREMUS021"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:832
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:895
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:843
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:906
 msgctxt "msgMainscreen"
 msgid "Goltin 7 welcomes ambassador Gremus"
 msgstr "Goltin 7 welcomes ambassador Gremus"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:839
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:850
 #, lua-format
 msgctxt "audio-incCall"
 msgid ""
@@ -256,14 +256,14 @@ msgid ""
 "In the meantime, be careful of hostile ships."
 msgstr "(Ambassador Gremus) Thanks for transporting me, %s. Tensions are high, but I think negotiations will succeed.\nIn the meantime, be careful of hostile ships."
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:854
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:865
 msgctxt "audio-incCall"
 msgid ""
 "Audio message received. Auto-transcribed into log. Stored for playback: "
 "AMBGREMUS032"
 msgstr "Audio message received. Auto-transcribed into log. Stored for playback: AMBGREMUS032"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:861
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:872
 #, lua-format
 msgctxt "audio-shipLog"
 msgid ""
@@ -272,7 +272,7 @@ msgid ""
 "research when you can."
 msgstr "[AMBGREMUS032](Ambassador Gremus) Thanks for transporting me, %s. I will need artifact research for successful negotiation. Please return with that research when you can."
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:902
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:913
 #, lua-format
 msgctxt "audio-incCall"
 msgid ""
@@ -281,14 +281,14 @@ msgid ""
 "hostile ships."
 msgstr "(Ambassador Gremus) Thanks for researching the artifacts, %s. Tensions are high, but I think negotiations will succeed. In the meantime, be careful of hostile ships."
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:927
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:938
 msgctxt "audio-incCall"
 msgid ""
 "Audio message received. Auto-transcribed into log. Stored for playback: "
 "AMBGREMUS001"
 msgstr "Audio message received. Auto-transcribed into log. Stored for playback: AMBGREMUS001"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:933
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:944
 msgctxt "audio-shipLog"
 msgid ""
 "[AMBGREMUS001](Ambassador Gremus) I am glad you are coming to get me. There "
@@ -296,19 +296,19 @@ msgid ""
 "to survive. Please hurry, I can hear a mob outside my compound."
 msgstr "[AMBGREMUS001](Ambassador Gremus) I am glad you are coming to get me. There is serious unrest here on Balindor Prime. I am not sure how long I am going to survive. Please hurry, I can hear a mob outside my compound."
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:942
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:953
 msgctxt "audio-buttonRelay"
 msgid "|> AMBGREMUS001"
 msgstr "|> AMBGREMUS001"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:962
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:973
 msgctxt "audio-incCall"
 msgid ""
 "Audio message received. Auto-transcribed into log. Stored for playback: "
 "GREMUSGRD003"
 msgstr "Audio message received. Auto-transcribed into log. Stored for playback: GREMUSGRD003"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:968
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:979
 msgctxt "audio-shipLog"
 msgid ""
 "[GREMUSGRD003](Compound Sentry) You got ambassador Gremus just in time. We "
@@ -316,48 +316,48 @@ msgid ""
 "ambassador back anytime soon."
 msgstr "[GREMUSGRD003](Compound Sentry) You got ambassador Gremus just in time. We barely escaped the mob with our lives. I don't recommend bringing the ambassador back anytime soon."
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:977
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:988
 msgctxt "audio-buttonRelay"
 msgid "|> GREMUSGRD003"
 msgstr "|> GREMUSGRD003"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:990
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1001
 msgctxt "audio-msgMainscreen"
 msgid "Ambassador lost to hostile mob. The Kraylors are victorious"
 msgstr "Ambassador lost to hostile mob. The Kraylors are victorious"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:997
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1008
 msgctxt "audio-incCall"
 msgid ""
 "(Compound Sentry) I'm sad to report the loss of ambassador Gremus to a "
 "hostile mob."
 msgstr "(Compound Sentry) I'm sad to report the loss of ambassador Gremus to a hostile mob."
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1013
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1024
 msgctxt "audio-tabRelay&Operations"
 msgid "Mob Action"
 msgstr "Mob Action"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1019
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1030
 #, lua-format
 msgctxt "audio-tabRelay&Operations"
 msgid "%s %i"
 msgstr "%s %i"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1025
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1036
 #, lua-format
 msgctxt "audio-tabRelay&Operations"
 msgid "%s %i:%.2i"
 msgstr "%s %i:%.2i"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1435
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1415
 msgctxt "audio-incCall"
 msgid ""
 "Audio message received. Auto-transcribed into log. Stored for playback: "
 "LSNFRDNA009"
 msgstr "Audio message received. Auto-transcribed into log. Stored for playback: LSNFRDNA009"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1441
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1421
 msgctxt "audio-shipLog"
 msgid ""
 "[LSNFRDNA009](Liaison Fordina) Ambassador Gremus, we just received that "
@@ -366,19 +366,19 @@ msgid ""
 "reported by stations in the area: Pangora, Nakor and Science-37."
 msgstr "[LSNFRDNA009](Liaison Fordina) Ambassador Gremus, we just received that follow-up information from Goltin 7 we spoke of. It seems they want additional information about several artifacts. Some of these have been reported by stations in the area: Pangora, Nakor and Science-37."
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1450
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1430
 msgctxt "audio-buttonRelay"
 msgid "|> LSNFRDNA009"
 msgstr "|> LSNFRDNA009"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1487
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1585
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1468
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1568
 msgctxt "scienceDescription-artifact"
 msgid "Unusual object floating in space"
 msgstr "Unusual object floating in space"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1492
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1590
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1473
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1573
 #, lua-format
 msgctxt "scienceDescription-artifact"
 msgid ""
@@ -389,12 +389,12 @@ msgid ""
 "Doppler instability: %i"
 msgstr "Object gives off unusual readings:\nBeta radiation: %i\nGravity disruption: %i\nIonic phase shift: %i\nDoppler instability: %i"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1522
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1504
 msgctxt "scienceDescription-artifact"
 msgid "Object with unusual visual properties"
 msgstr "Object with unusual visual properties"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1527
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1509
 #, lua-format
 msgctxt "scienceDescription-artifact"
 msgid ""
@@ -404,12 +404,12 @@ msgid ""
 "Gravity disruption: %i"
 msgstr "Sensor readings of interest:\nGamma radiation: %i\nOrganic decay: %i\nGravity disruption: %i"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1555
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1538
 msgctxt "scienceDescription-artifact"
 msgid "Small object floating in space"
 msgstr "Small object floating in space"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1560
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1543
 #, lua-format
 msgctxt "scienceDescription-artifact"
 msgid ""
@@ -419,174 +419,174 @@ msgid ""
 "Theta particle emission: %i"
 msgstr "Sensors show:\nIonic pase shift: %i\nOrganic decay: %i\nTheta particle emission: %i"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1627
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1610
 msgctxt "artifact-msgScience"
 msgid "Warning"
 msgstr "Warning"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1630
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1613
 msgctxt "artifact-msgScience"
 msgid "The readings on the Pangora artifact have changed"
 msgstr "The readings on the Pangora artifact have changed"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1685
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1668
 msgctxt "msgGM"
 msgid "Terrorist ending initiated"
 msgstr "Terrorist ending initiated"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1714
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1697
 msgctxt "KraylorEndline-incCall"
 msgid ""
 "We apologize for the imminent destruction of your ship, but you are "
 "harboring Ambassador Gremus aboard, a known menace to polite society."
 msgstr "We apologise for the imminent destruction of your ship, but you are harboring Ambassador Gremus aboard, a known menace to polite society."
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1784
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1767
 msgctxt "station-comms"
 msgid "We are under attack! No time for chatting!"
 msgstr "We are under attack! No time for chatting!"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1800
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1783
 msgctxt "station-comms"
 msgid ""
 "Good day, officer!\n"
 "What can we do for you today?"
 msgstr "Good day, officer!\nWhat can we do for you today?"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1804
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1787
 msgctxt "station-comms"
 msgid "Welcome to our lovely station."
 msgstr "Welcome to our lovely station."
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1811
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1794
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? (%d rep each)"
 msgstr "Do you have spare homing missiles for us? (%d rep each)"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1818
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1801
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Do you have extra homing missiles? (%d rep each)"
 msgstr "Do you have extra homing missiles? (%d rep each)"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1825
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1808
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We could use some homing missiles. (%d rep each)"
 msgstr "We could use some homing missiles. (%d rep each)"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1832
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1815
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Can you restock us with HVLI? (%d rep each)"
 msgstr "Can you restock us with HVLI? (%d rep each)"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1836
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1819
 #, lua-format
 msgctxt "ammo-comms"
 msgid "What about HVLI? (%d rep each)"
 msgstr "What about HVLI? (%d rep each)"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1842
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1825
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We need some High Velocity Lead Impactors. (%d rep each)"
 msgstr "We need some High Velocity Lead Impactors. (%d rep each)"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1849
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1832
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Please restock our mines. (%d rep each)"
 msgstr "Please restock our mines. (%d rep each)"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1853
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1836
 #, lua-format
 msgctxt "ammo-comms"
 msgid "How about mines? (%d rep each)"
 msgstr "How about mines? (%d rep each)"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1857
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1840
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We are running low on mines. (%d rep each)"
 msgstr "We are running low on mines. (%d rep each)"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1865
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1848
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Please restock our EMP missiles. (%d rep each)"
 msgstr "Please restock our EMP missiles. (%d rep each)"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1870
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1853
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Got any EMPs? (%d rep each)"
 msgstr "Got any EMPs? (%d rep each)"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1876
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1859
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We need Electro-Magnetic Pulse missiles. (%d rep each)"
 msgstr "We need Electro-Magnetic Pulse missiles. (%d rep each)"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1885
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1868
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Can you supply us with some nukes? (%d rep each)"
 msgstr "Can you supply us with some nukes? (%d rep each)"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1890
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1873
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We really need some nukes. (%d rep each)"
 msgstr "We really need some nukes. (%d rep each)"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1896
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1879
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We could use some nuclear missiles. (%d rep each)"
 msgstr "We could use some nuclear missiles. (%d rep each)"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1914
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1897
 msgctxt "orders-comms"
 msgid "What are my current orders?"
 msgstr "What are my current orders?"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1917
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1900
 msgctxt "orders-comms"
 msgid "Whatever ambassador Gremus says. "
 msgstr "Whatever ambassador Gremus says. "
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1925
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1908
 msgctxt "orders-comms"
 msgid ""
 "Current Orders: Get ambassador Gremus from Balindor Prime. Avoid contact if "
 "possible. "
 msgstr "Current Orders: Get ambassador Gremus from Balindor Prime. Avoid contact if possible. "
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1930
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1913
 msgctxt "orders-comms"
 msgid "Current Orders: Transport ambassador Gremus to Ningling. "
 msgstr "Current Orders: Transport ambassador Gremus to Ningling. "
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1935
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1918
 msgctxt "orders-comms"
 msgid ""
 "Current Orders: Wait for ambassador Gremus to complete business at Ningling. "
 msgstr "Current Orders: Wait for ambassador Gremus to complete business at Ningling. "
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1940
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1923
 msgctxt "orders-comms"
 msgid "Current Orders: Dock with Ningling to get ambassador Gremus. "
 msgstr "Current Orders: Dock with Ningling to get ambassador Gremus. "
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1945
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1928
 msgctxt "orders-comms"
 msgid "Current Orders: Transport ambassador Gremus to Goltin 7. "
 msgstr "Current Orders: Transport ambassador Gremus to Goltin 7. "
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1952
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1935
 #, lua-format
 msgctxt "artifactOrders-comms"
 msgid ""
@@ -594,202 +594,202 @@ msgid ""
 "Pangora, Nakor and Science-37. "
 msgstr "%sAdditional Orders: Research artifacts. Some artifacts reported near Pangora, Nakor and Science-37. "
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1963
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1946
 #, lua-format
 msgctxt "artifactOrders-comms"
 msgid "%sProvide artifact research to ambassador Gremus on Goltin 7. "
 msgstr "%sProvide artifact research to ambassador Gremus on Goltin 7. "
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1970
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2048
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2134
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2139
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2204
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2209
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2287
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2329
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1953
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2031
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2117
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2122
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2187
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2192
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2270
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2312
 msgid "Back"
 msgstr "Back"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1978
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1961
 msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr "You need to stay docked for that action."
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1987
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1970
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
 msgstr "We do not deal in weapons of mass destruction."
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1992
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1975
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
 msgstr "We do not deal in weapons of mass disruption."
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:1995
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1978
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
 msgstr "We do not deal in those weapons."
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2009
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1992
 msgctxt "ammo-comms"
 msgid "All nukes are charged and primed for destruction."
 msgstr "All nukes are charged and primed for destruction."
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2016
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:1999
 msgctxt "ammo-comms"
 msgid "Sorry, sir, but you are as fully stocked as I can allow."
 msgstr "Sorry, sir, but you are as fully stocked as I can allow."
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2022
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2005
 msgctxt "needRep-comms"
 msgid "Not enough reputation."
 msgstr "Not enough reputation."
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2036
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2019
 msgctxt "ammo-comms"
 msgid "You are fully loaded and ready to explode things."
 msgstr "You are fully loaded and ready to explode things."
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2043
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2026
 msgctxt "ammo-comms"
 msgid ""
 "We generously resupplied you with some weapon charges.\n"
 "Put them to good use."
 msgstr "We generously resupplied you with some weapon charges.\nPut them to good use."
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2056
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2039
 msgctxt "station-comms"
 msgid ""
 "Good day, officer.\n"
 "If you need supplies, please dock with us first."
 msgstr "Good day, officer.\nIf you need supplies, please dock with us first."
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2063
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2046
 msgctxt "station-comms"
 msgid ""
 "Greetings.\n"
 "If you want to do business, please dock with us first."
 msgstr "Greetings.\nIf you want to do business, please dock with us first."
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2070
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2053
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%s rep)"
 msgstr "Can you send a supply drop? (%s rep)"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2078
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2061
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request backup."
 msgstr "You need to set a waypoint before you can request backup."
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2085
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2068
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we deliver your supplies?"
 msgstr "To which waypoint should we deliver your supplies?"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2091
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2167
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2074
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2150
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Waypoint %s"
 msgstr "Waypoint %s"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2121
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2104
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched a supply ship toward waypoint %s"
 msgstr "We have dispatched a supply ship toward waypoint %s"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2130
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2200
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2113
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2183
 msgctxt "needRep-comms"
 msgid "Not enough reputation!"
 msgstr "Not enough reputation!"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2146
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2129
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send reinforcements! (rep %s)"
 msgstr "Please send reinforcements! (rep %s)"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2154
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2137
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request reinforcements."
 msgstr "You need to set a waypoint before you can request reinforcements."
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2161
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2144
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we dispatch the reinforcements?"
 msgstr "To which waypoint should we dispatch the reinforcements?"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2190
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2173
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched %s to assist at waypoint %s"
 msgstr "We have dispatched %s to assist at waypoint %s"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2220
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2203
 msgctxt "path-comms"
 msgid "Where is Balindor Prime?"
 msgstr "Where is Balindor Prime?"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2221
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2204
 msgctxt "path-comms"
 msgid "planet Balindor Prime"
 msgstr "planet Balindor Prime"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2226
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2209
 msgctxt "path-comms"
 msgid "Where is Ningling?"
 msgstr "Where is Ningling?"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2227
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2210
 msgctxt "path-comms"
 msgid "Ningling station"
 msgstr "Ningling station"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2232
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2215
 msgctxt "path-comms"
 msgid "Where is Goltin 7?"
 msgstr "Where is Goltin 7?"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2233
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2216
 msgctxt "path-comms"
 msgid "planet Goltin 7"
 msgstr "planet Goltin 7"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2238
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2221
 msgctxt "path-comms"
 msgid "Where is Pangora?"
 msgstr "Where is Pangora?"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2239
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2222
 msgctxt "path-comms"
 msgid "Pangora station"
 msgstr "Pangora station"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2244
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2227
 msgctxt "path-comms"
 msgid "Where is Nakor?"
 msgstr "Where is Nakor?"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2245
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2228
 msgctxt "path-comms"
 msgid "Nakor station"
 msgstr "Nakor station"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2250
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2233
 msgctxt "path-comms"
 msgid "Where is Science-37?"
 msgstr "Where is Science-37?"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2251
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2234
 msgctxt "path-comms"
 msgid "station Science-37"
 msgstr "station Science-37"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2270
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2253
 #, lua-format
 msgctxt "path-comms"
 msgid ""
@@ -797,49 +797,49 @@ msgid ""
 "You reached the 9 waypoint maximum."
 msgstr "Replaced former waypoint 9 with new waypoint 9 for %s.\nYou reached the 9 waypoint maximum."
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2280
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2263
 #, lua-format
 msgctxt "path-comms"
 msgid "Added a waypoint to your navigation system for %s"
 msgstr "Added a waypoint to your navigation system for %s"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2297
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2280
 msgctxt "artifact-comms"
 msgid "Any reports of artifacts near Pangora?"
 msgstr "Any reports of artifacts near Pangora?"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2301
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2284
 msgctxt "artifact-comms"
 msgid ""
 "Some freighters report seeing an artifact on approximate heading 135 from "
 "Pangora."
 msgstr "Some freighters report seeing an artifact on approximate heading 135 from Pangora."
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2306
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2289
 msgctxt "artifact-comms"
 msgid "Heard of any artifacts near Nakor?"
 msgstr "Heard of any artifacts near Nakor?"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2309
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2292
 msgctxt "artifact-comms"
 msgid ""
 "Some have reported seeing object on approximate heading of 315 from Nakor "
 "station."
 msgstr "Some have reported seeing object on approximate heading of 315 from Nakor station."
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2316
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2299
 msgctxt "artifact-comms"
 msgid "Has anyone reported seeing artifacts near Science-37?"
 msgstr "Has anyone reported seeing artifacts near Science-37?"
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2320
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2303
 msgctxt "artifact-comms"
 msgid ""
 "Freighters doing business here occasionally report an objecton approximate "
 "heading zero from Science-37 station."
 msgstr "Freighters doing business here occasionally report an objecton approximate heading zero from Science-37 station."
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2398
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2381
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -847,7 +847,7 @@ msgid ""
 "War begins on Goltin 7. Disgrace abounds."
 msgstr "%s destroyed. Ambassador Gremus killed.\nWar begins on Goltin 7. Disgrace abounds."
 
-#: scripts/scenario_16_deliver_ambassador_gremus.lua:2410
+#: scripts/scenario_16_deliver_ambassador_gremus.lua:2393
 msgctxt "msgMainscreen"
 msgid ""
 "Congratulations! You delivered ambassador Gremus\n"

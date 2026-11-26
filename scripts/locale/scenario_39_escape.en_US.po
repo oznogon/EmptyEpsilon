@@ -164,8 +164,8 @@ msgctxt "repair-msgEngineer&+"
 msgid "Reached maximum repair on shields"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:676 scripts/scenario_39_escape.lua:5718
-#: scripts/scenario_39_escape.lua:5748
+#: scripts/scenario_39_escape.lua:676 scripts/scenario_39_escape.lua:5721
+#: scripts/scenario_39_escape.lua:5751
 msgctxt "defeat-msgMainscreen"
 msgid "You were destroyed. The Human Navy did not receive your Kraylor intel."
 msgstr ""
@@ -478,184 +478,184 @@ msgctxt "scienceDescription-planet"
 msgid "Mining and heavy industry"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:1428
+#: scripts/scenario_39_escape.lua:1429
 msgctxt "scienceDescription-station"
 msgid "Baldwin Observatory"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:1471
+#: scripts/scenario_39_escape.lua:1472
 msgctxt "scienceDescription-planet"
 msgid "M class planet"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:1480
+#: scripts/scenario_39_escape.lua:1483
 msgctxt "scienceDescription-station"
 msgid "Malastare communications network hub"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2307
+#: scripts/scenario_39_escape.lua:2310
 msgctxt "station-comms"
 msgid "We are under attack! No time for chatting!"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2323
+#: scripts/scenario_39_escape.lua:2326
 msgctxt "station-comms"
 msgid ""
 "Good day, officer!\n"
 "What can we do for you today?\n"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2326
+#: scripts/scenario_39_escape.lua:2329
 msgctxt "station-comms"
 msgid "Welcome to our lovely station.\n"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2332
+#: scripts/scenario_39_escape.lua:2335
 msgctxt "station-comms"
 msgid ""
 "Forgive us if we seem a little distracted. We are carefully monitoring the "
 "enemies nearby."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2364
+#: scripts/scenario_39_escape.lua:2367
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2367
+#: scripts/scenario_39_escape.lua:2370
 msgctxt "ammo-comms"
 msgid "What type of ordnance do you need?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2373
+#: scripts/scenario_39_escape.lua:2376
 msgctxt "ammo-comms"
 msgid "Can you supply us with some nukes?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2375
+#: scripts/scenario_39_escape.lua:2378
 msgctxt "ammo-comms"
 msgid "We really need some nukes."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2378
+#: scripts/scenario_39_escape.lua:2381
 msgctxt "ammo-comms"
 msgid "Can you restock our nuclear missiles?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2382
+#: scripts/scenario_39_escape.lua:2385
 msgctxt "ammo-comms"
 msgid "Please restock our EMP missiles."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2383
+#: scripts/scenario_39_escape.lua:2386
 msgctxt "ammo-comms"
 msgid "Got any EMPs?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2386
+#: scripts/scenario_39_escape.lua:2389
 msgctxt "ammo-comms"
 msgid "We need Electro-Magnetic Pulse missiles."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2392
+#: scripts/scenario_39_escape.lua:2395
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2396
+#: scripts/scenario_39_escape.lua:2399
 msgctxt "ammo-comms"
 msgid "Do you have extra homing missiles?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2400
+#: scripts/scenario_39_escape.lua:2403
 msgctxt "ammo-comms"
 msgid "Please replenish our homing missiles."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2404
+#: scripts/scenario_39_escape.lua:2407
 msgctxt "ammo-comms"
 msgid "We could use some mines."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2405
+#: scripts/scenario_39_escape.lua:2408
 msgctxt "ammo-comms"
 msgid "How about mines?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2406
+#: scripts/scenario_39_escape.lua:2409
 msgctxt "ammo-comms"
 msgid "Got mines for us?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2409
+#: scripts/scenario_39_escape.lua:2412
 msgctxt "ammo-comms"
 msgid "What about HVLI?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2410
+#: scripts/scenario_39_escape.lua:2413
 msgctxt "ammo-comms"
 msgid "Could you provide HVLI?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2413
+#: scripts/scenario_39_escape.lua:2416
 msgctxt "ammo-comms"
 msgid "We need High Velocity Lead Impactors."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2425
+#: scripts/scenario_39_escape.lua:2428
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%s (%d rep each)"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2439 scripts/scenario_39_escape.lua:2507
-#: scripts/scenario_39_escape.lua:2512 scripts/scenario_39_escape.lua:2515
-#: scripts/scenario_39_escape.lua:2518 scripts/scenario_39_escape.lua:2558
-#: scripts/scenario_39_escape.lua:2561 scripts/scenario_39_escape.lua:2564
-#: scripts/scenario_39_escape.lua:2656 scripts/scenario_39_escape.lua:2686
-#: scripts/scenario_39_escape.lua:2690 scripts/scenario_39_escape.lua:2693
-#: scripts/scenario_39_escape.lua:2795 scripts/scenario_39_escape.lua:2830
-#: scripts/scenario_39_escape.lua:2834 scripts/scenario_39_escape.lua:2837
-#: scripts/scenario_39_escape.lua:2880 scripts/scenario_39_escape.lua:2883
-#: scripts/scenario_39_escape.lua:2886 scripts/scenario_39_escape.lua:3052
-#: scripts/scenario_39_escape.lua:3057 scripts/scenario_39_escape.lua:3069
-#: scripts/scenario_39_escape.lua:3072 scripts/scenario_39_escape.lua:3075
-#: scripts/scenario_39_escape.lua:3181 scripts/scenario_39_escape.lua:3186
-#: scripts/scenario_39_escape.lua:3261 scripts/scenario_39_escape.lua:3266
-#: scripts/scenario_39_escape.lua:3269 scripts/scenario_39_escape.lua:3272
-#: scripts/scenario_39_escape.lua:3338 scripts/scenario_39_escape.lua:3351
-#: scripts/scenario_39_escape.lua:3355 scripts/scenario_39_escape.lua:3371
-#: scripts/scenario_39_escape.lua:3379 scripts/scenario_39_escape.lua:3392
-#: scripts/scenario_39_escape.lua:3533 scripts/scenario_39_escape.lua:3569
-#: scripts/scenario_39_escape.lua:3615 scripts/scenario_39_escape.lua:3660
-#: scripts/scenario_39_escape.lua:3705 scripts/scenario_39_escape.lua:3710
-#: scripts/scenario_39_escape.lua:3741 scripts/scenario_39_escape.lua:3745
-#: scripts/scenario_39_escape.lua:3760 scripts/scenario_39_escape.lua:3942
-#: scripts/scenario_39_escape.lua:3999 scripts/scenario_39_escape.lua:4073
-#: scripts/scenario_39_escape.lua:4190 scripts/scenario_39_escape.lua:4226
-#: scripts/scenario_39_escape.lua:4298 scripts/scenario_39_escape.lua:4315
-#: scripts/scenario_39_escape.lua:4329 scripts/scenario_39_escape.lua:4337
-#: scripts/scenario_39_escape.lua:4412 scripts/scenario_39_escape.lua:4417
-#: scripts/scenario_39_escape.lua:4482 scripts/scenario_39_escape.lua:4487
-#: scripts/scenario_39_escape.lua:4686 scripts/scenario_39_escape.lua:4690
-#: scripts/scenario_39_escape.lua:4722 scripts/scenario_39_escape.lua:4785
-#: scripts/scenario_39_escape.lua:4800 scripts/scenario_39_escape.lua:4824
-#: scripts/scenario_39_escape.lua:4836 scripts/scenario_39_escape.lua:4905
-#: scripts/scenario_39_escape.lua:4924 scripts/scenario_39_escape.lua:5039
-#: scripts/scenario_39_escape.lua:5075 scripts/scenario_39_escape.lua:5079
-#: scripts/scenario_39_escape.lua:5113 scripts/scenario_39_escape.lua:5181
-#: scripts/scenario_39_escape.lua:5207 scripts/scenario_39_escape.lua:5244
-#: scripts/scenario_39_escape.lua:5248 scripts/scenario_39_escape.lua:5312
-#: scripts/scenario_39_escape.lua:5388
+#: scripts/scenario_39_escape.lua:2442 scripts/scenario_39_escape.lua:2510
+#: scripts/scenario_39_escape.lua:2515 scripts/scenario_39_escape.lua:2518
+#: scripts/scenario_39_escape.lua:2521 scripts/scenario_39_escape.lua:2561
+#: scripts/scenario_39_escape.lua:2564 scripts/scenario_39_escape.lua:2567
+#: scripts/scenario_39_escape.lua:2659 scripts/scenario_39_escape.lua:2689
+#: scripts/scenario_39_escape.lua:2693 scripts/scenario_39_escape.lua:2696
+#: scripts/scenario_39_escape.lua:2798 scripts/scenario_39_escape.lua:2833
+#: scripts/scenario_39_escape.lua:2837 scripts/scenario_39_escape.lua:2840
+#: scripts/scenario_39_escape.lua:2883 scripts/scenario_39_escape.lua:2886
+#: scripts/scenario_39_escape.lua:2889 scripts/scenario_39_escape.lua:3055
+#: scripts/scenario_39_escape.lua:3060 scripts/scenario_39_escape.lua:3072
+#: scripts/scenario_39_escape.lua:3075 scripts/scenario_39_escape.lua:3078
+#: scripts/scenario_39_escape.lua:3184 scripts/scenario_39_escape.lua:3189
+#: scripts/scenario_39_escape.lua:3264 scripts/scenario_39_escape.lua:3269
+#: scripts/scenario_39_escape.lua:3272 scripts/scenario_39_escape.lua:3275
+#: scripts/scenario_39_escape.lua:3341 scripts/scenario_39_escape.lua:3354
+#: scripts/scenario_39_escape.lua:3358 scripts/scenario_39_escape.lua:3374
+#: scripts/scenario_39_escape.lua:3382 scripts/scenario_39_escape.lua:3395
+#: scripts/scenario_39_escape.lua:3536 scripts/scenario_39_escape.lua:3572
+#: scripts/scenario_39_escape.lua:3618 scripts/scenario_39_escape.lua:3663
+#: scripts/scenario_39_escape.lua:3708 scripts/scenario_39_escape.lua:3713
+#: scripts/scenario_39_escape.lua:3744 scripts/scenario_39_escape.lua:3748
+#: scripts/scenario_39_escape.lua:3763 scripts/scenario_39_escape.lua:3945
+#: scripts/scenario_39_escape.lua:4002 scripts/scenario_39_escape.lua:4076
+#: scripts/scenario_39_escape.lua:4193 scripts/scenario_39_escape.lua:4229
+#: scripts/scenario_39_escape.lua:4301 scripts/scenario_39_escape.lua:4318
+#: scripts/scenario_39_escape.lua:4332 scripts/scenario_39_escape.lua:4340
+#: scripts/scenario_39_escape.lua:4415 scripts/scenario_39_escape.lua:4420
+#: scripts/scenario_39_escape.lua:4485 scripts/scenario_39_escape.lua:4490
+#: scripts/scenario_39_escape.lua:4689 scripts/scenario_39_escape.lua:4693
+#: scripts/scenario_39_escape.lua:4725 scripts/scenario_39_escape.lua:4788
+#: scripts/scenario_39_escape.lua:4803 scripts/scenario_39_escape.lua:4827
+#: scripts/scenario_39_escape.lua:4839 scripts/scenario_39_escape.lua:4908
+#: scripts/scenario_39_escape.lua:4927 scripts/scenario_39_escape.lua:5042
+#: scripts/scenario_39_escape.lua:5078 scripts/scenario_39_escape.lua:5082
+#: scripts/scenario_39_escape.lua:5116 scripts/scenario_39_escape.lua:5184
+#: scripts/scenario_39_escape.lua:5210 scripts/scenario_39_escape.lua:5247
+#: scripts/scenario_39_escape.lua:5251 scripts/scenario_39_escape.lua:5315
+#: scripts/scenario_39_escape.lua:5391
 msgid "Back"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2447
+#: scripts/scenario_39_escape.lua:2450
 msgctxt "crewFriends-comms"
 msgid "Talk to Kent's brother"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2452
+#: scripts/scenario_39_escape.lua:2455
 msgctxt "crewFriends-comms"
 msgid ""
 "Kent? You made it out of the Kraylor base? We thought you were going to "
@@ -663,115 +663,115 @@ msgid ""
 "out of there."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2458
+#: scripts/scenario_39_escape.lua:2461
 msgctxt "crewFriends-comms"
 msgid "Can you help us with beam weapon repair?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2464
+#: scripts/scenario_39_escape.lua:2467
 msgctxt "crewFriends-comms"
 msgid ""
 "For the Repulse class? Absolutely. I used to work on those all the time."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2479 scripts/scenario_39_escape.lua:2549
-#: scripts/scenario_39_escape.lua:3040 scripts/scenario_39_escape.lua:3124
-#: scripts/scenario_39_escape.lua:3204
+#: scripts/scenario_39_escape.lua:2482 scripts/scenario_39_escape.lua:2552
+#: scripts/scenario_39_escape.lua:3043 scripts/scenario_39_escape.lua:3127
+#: scripts/scenario_39_escape.lua:3207
 msgctxt "crewFriends-comms"
 msgid "Thanks"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2484
+#: scripts/scenario_39_escape.lua:2487
 msgctxt "crewFriends-comms"
 msgid ""
 "You're quite welcome. While I was in there, I fixed up your beams so they "
 "could function at maximum potential."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2494
+#: scripts/scenario_39_escape.lua:2497
 msgctxt "crewFriends-comms"
 msgid "Then double thanks!"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2503
+#: scripts/scenario_39_escape.lua:2506
 msgctxt "crewFriends-comms"
 msgid "Thank *you* for getting my brother out of that Kraylor prison."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2526
+#: scripts/scenario_39_escape.lua:2529
 msgctxt "crewFriends-comms"
 msgid "Talk to Edwina's father"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2531
+#: scripts/scenario_39_escape.lua:2534
 msgctxt "crewFriends-comms"
 msgid ""
 "I am glad to hear that Edwina escaped that prison. We were worried about her."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2537
+#: scripts/scenario_39_escape.lua:2540
 msgctxt "crewFriends-comms"
 msgid "Edwina says you do missile systems repair work"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2543
+#: scripts/scenario_39_escape.lua:2546
 msgctxt "crewFriends-comms"
 msgid "Should be easy enough. I'm grateful to you for helping Edwina escape."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2554
+#: scripts/scenario_39_escape.lua:2557
 msgctxt "crewFriends-comms"
 msgid "You're quite welcome."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2571
+#: scripts/scenario_39_escape.lua:2574
 msgctxt "crewFriends-comms"
 msgid "Talk to Johnny"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2575
+#: scripts/scenario_39_escape.lua:2578
 msgctxt "crewFriends-comms"
 msgid "Mom? Wow, I thought you were toast. Good to hear your voice."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2581
+#: scripts/scenario_39_escape.lua:2584
 msgctxt "crewFriends-comms"
 msgid "Can you get our impulse drive working better?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2636
+#: scripts/scenario_39_escape.lua:2639
 #, lua-format
 msgctxt "crewFriends-comms"
 msgid "Piece of cake. Thanks for the %s."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2647 scripts/scenario_39_escape.lua:2677
+#: scripts/scenario_39_escape.lua:2650 scripts/scenario_39_escape.lua:2680
 msgctxt "crewFriends-comms"
 msgid "Thank you"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2652 scripts/scenario_39_escape.lua:2682
+#: scripts/scenario_39_escape.lua:2655 scripts/scenario_39_escape.lua:2685
 msgctxt "crewFriends-comms"
 msgid "Sure, Mom. I'll see you at Christmas."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2664
+#: scripts/scenario_39_escape.lua:2667
 #, lua-format
 msgctxt "crewFriends-comms"
 msgid "Piece of cake, but I'll need %s."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2672
+#: scripts/scenario_39_escape.lua:2675
 msgctxt "crewFriends-comms"
 msgid "Piece of cake."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2700
+#: scripts/scenario_39_escape.lua:2703
 msgctxt "crewFriends-comms"
 msgid "Talk to Nancy's brother"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2705
+#: scripts/scenario_39_escape.lua:2708
 msgctxt "crewFriends-comms"
 msgid ""
 "Nancy! Last I heard, your ship had been captured by Kraylors and you were "
@@ -779,12 +779,12 @@ msgid ""
 "here?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2711
+#: scripts/scenario_39_escape.lua:2714
 msgctxt "crewFriends-comms"
 msgid "Our jump drive needs some tuning"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2769
+#: scripts/scenario_39_escape.lua:2772
 #, lua-format
 msgctxt "crewFriends-comms"
 msgid ""
@@ -792,18 +792,18 @@ msgid ""
 "for bringing %s."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2783 scripts/scenario_39_escape.lua:2821
+#: scripts/scenario_39_escape.lua:2786 scripts/scenario_39_escape.lua:2824
 msgctxt "crewFriends-comms"
 msgid "Thanks, bro"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2788 scripts/scenario_39_escape.lua:2826
+#: scripts/scenario_39_escape.lua:2791 scripts/scenario_39_escape.lua:2829
 msgctxt "crewFriends-comms"
 msgid ""
 "No problem. Treat your jump drive right and it'll always bring you home."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2805
+#: scripts/scenario_39_escape.lua:2808
 #, lua-format
 msgctxt "crewFriends-comms"
 msgid ""
@@ -811,127 +811,127 @@ msgid ""
 "I'll need some %s."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2815
+#: scripts/scenario_39_escape.lua:2818
 msgctxt "crewFriends-comms"
 msgid "That should not be hard to do. I could probably do that in my sleep."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2845
+#: scripts/scenario_39_escape.lua:2848
 msgctxt "crewFriends-comms"
 msgid "Talk to Manuel's cousin"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2850
+#: scripts/scenario_39_escape.lua:2853
 msgctxt "crewFriends-comms"
 msgid ""
 "Yo Manuel, why you want to scare us by getting captured, man? At least you "
 "escaped. Why you here?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2856
+#: scripts/scenario_39_escape.lua:2859
 msgctxt "crewFriends-comms"
 msgid "The reactor is weak... real weak"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2862
+#: scripts/scenario_39_escape.lua:2865
 msgctxt "crewFriends-comms"
 msgid "Lemme see if I can get it to charge up right."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2870
+#: scripts/scenario_39_escape.lua:2873
 msgctxt "crewFriends-comms"
 msgid "The captain would appreciate it"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2876
+#: scripts/scenario_39_escape.lua:2879
 msgctxt "crewFriends-comms"
 msgid ""
 "You're all set. Don't overheat the reactor or you'll get a nasty surprise."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2894
+#: scripts/scenario_39_escape.lua:2897
 msgctxt "crewFriends-comms"
 msgid "Talk to Fred's wife"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2899
+#: scripts/scenario_39_escape.lua:2902
 msgctxt "crewFriends-comms"
 msgid "Fred! You escaped! We were worried sick."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2905
+#: scripts/scenario_39_escape.lua:2908
 msgctxt "crewFriends-comms"
 msgid "We need to connect to the Human Navy network"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2911
+#: scripts/scenario_39_escape.lua:2914
 msgctxt "crewFriends-comms"
 msgid ""
 "I can do that for you. However, that means you'll go from being Independent "
 "to being in the Human Navy."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:2917
+#: scripts/scenario_39_escape.lua:2920
 msgctxt "crewFriends-comms"
 msgid "I understand the consequences. Please proceed"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3036
+#: scripts/scenario_39_escape.lua:3039
 msgctxt "crewFriends-comms"
 msgid "You're all fixed up."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3045
+#: scripts/scenario_39_escape.lua:3048
 msgctxt "crewFriends-comms"
 msgid "You're welcome. Fred, honey, I'll see you after you get off work."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3063
+#: scripts/scenario_39_escape.lua:3066
 msgctxt "crewFriends-comms"
 msgid "I'll check with the captain and get back to you"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3067
+#: scripts/scenario_39_escape.lua:3070
 msgctxt "crewFriends-comms"
 msgid "OK."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3086 scripts/scenario_39_escape.lua:3280
+#: scripts/scenario_39_escape.lua:3089 scripts/scenario_39_escape.lua:3283
 msgctxt "crewFriends-comms"
 msgid "Talk to Amir's sister"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3092
+#: scripts/scenario_39_escape.lua:3095
 #, lua-format
 msgctxt "crewFriends-comms"
 msgid "Welcome to %s! Any friend of Amir's is a friend of mine."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3100
+#: scripts/scenario_39_escape.lua:3103
 msgctxt "crewFriends-comms"
 msgid "Can you help us with our shields?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3106
+#: scripts/scenario_39_escape.lua:3109
 msgctxt "crewFriends-comms"
 msgid ""
 "Yes, I can. However, I can only help with one: front or rear. I need more "
 "parts to do both."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3110
+#: scripts/scenario_39_escape.lua:3113
 msgctxt "crewFriends-comms"
 msgid "Repair front shield"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3115
+#: scripts/scenario_39_escape.lua:3118
 msgctxt "crewFriends-comms"
 msgid ""
 "Your front shields are now fully operational. Your repair crew can finish "
 "the rest."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3171
+#: scripts/scenario_39_escape.lua:3174
 #, lua-format
 msgctxt "crewFriends-comms"
 msgid ""
@@ -939,19 +939,19 @@ msgid ""
 "at %s."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3190
+#: scripts/scenario_39_escape.lua:3193
 msgctxt "crewFriends-comms"
 msgid "Repair rear shield"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3195
+#: scripts/scenario_39_escape.lua:3198
 msgctxt "crewFriends-comms"
 msgid ""
 "Your rear shields are now fully operational. Your repair crew can finish the "
 "rest."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3251
+#: scripts/scenario_39_escape.lua:3254
 #, lua-format
 msgctxt "crewFriends-comms"
 msgid ""
@@ -959,71 +959,71 @@ msgid ""
 "at %s."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3286
+#: scripts/scenario_39_escape.lua:3289
 #, lua-format
 msgctxt "crewFriends-comms"
 msgid ""
 "Welcome back. Did you bring some %s for me to finish fixing up your shields?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3304
+#: scripts/scenario_39_escape.lua:3307
 #, lua-format
 msgctxt "crewFriends-comms"
 msgid "Yes, please take the %s and fix the shields"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3321
+#: scripts/scenario_39_escape.lua:3324
 msgctxt "crewFriends-comms"
 msgid "Front shield fully functional."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3333
+#: scripts/scenario_39_escape.lua:3336
 msgctxt "crewFriends-comms"
 msgid "Rear shield fully functional."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3344
+#: scripts/scenario_39_escape.lua:3347
 #, lua-format
 msgctxt "crewFriends-comms"
 msgid "Oops, no %s aboard"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3349
+#: scripts/scenario_39_escape.lua:3352
 msgctxt "crewFriends-comms"
 msgid "OK, good luck."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3362 scripts/scenario_39_escape.lua:4320
+#: scripts/scenario_39_escape.lua:3365 scripts/scenario_39_escape.lua:4323
 msgctxt "station-comms"
 msgid "Tell me more about your station"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3365 scripts/scenario_39_escape.lua:4323
+#: scripts/scenario_39_escape.lua:3368 scripts/scenario_39_escape.lua:4326
 msgctxt "station-comms"
 msgid "What would you like to know?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3368 scripts/scenario_39_escape.lua:4326
+#: scripts/scenario_39_escape.lua:3371 scripts/scenario_39_escape.lua:4329
 msgctxt "stationGeneralInfo-comms"
 msgid "General information"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3376 scripts/scenario_39_escape.lua:4334
+#: scripts/scenario_39_escape.lua:3379 scripts/scenario_39_escape.lua:4337
 msgctxt "stationStory-comms"
 msgid "Station history"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3389
+#: scripts/scenario_39_escape.lua:3392
 msgctxt "gossip-comms"
 msgid "Gossip"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3406
+#: scripts/scenario_39_escape.lua:3409
 msgctxt "trade-comms"
 msgid "Buy, sell, trade"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3411
+#: scripts/scenario_39_escape.lua:3414
 #, lua-format
 msgctxt "forSaleTrade-comms"
 msgid ""
@@ -1031,150 +1031,150 @@ msgid ""
 "Goods or components available for sale: quantity, cost in reputation\n"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3418
+#: scripts/scenario_39_escape.lua:3421
 #, lua-format
 msgctxt "forSaleTrade-comms"
 msgid "     %s: %i, %i\n"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3428
+#: scripts/scenario_39_escape.lua:3431
 msgctxt "willBuyTrade-comms"
 msgid "Goods or components station will buy: price in reputation\n"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3433
+#: scripts/scenario_39_escape.lua:3436
 #, lua-format
 msgctxt "willBuyTrade-comms"
 msgid "     %s: %i\n"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3441
+#: scripts/scenario_39_escape.lua:3444
 #, lua-format
 msgctxt "onBoardTrade-comms"
 msgid "Current cargo aboard %s:\n"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3451
+#: scripts/scenario_39_escape.lua:3454
 #, lua-format
 msgctxt "onBoardTrade-comms"
 msgid "     %s: %i\n"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3459
+#: scripts/scenario_39_escape.lua:3462
 msgctxt "onBoardTrade-comms"
 msgid "     Empty\n"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3465
+#: scripts/scenario_39_escape.lua:3468
 #, lua-format
 msgctxt "trade-comms"
 msgid "Available Space: %i, Available Reputation: %i\n"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3474 scripts/scenario_39_escape.lua:4741
-#: scripts/scenario_39_escape.lua:5132 scripts/scenario_39_escape.lua:5263
-#: scripts/scenario_39_escape.lua:5333
+#: scripts/scenario_39_escape.lua:3477 scripts/scenario_39_escape.lua:4744
+#: scripts/scenario_39_escape.lua:5135 scripts/scenario_39_escape.lua:5266
+#: scripts/scenario_39_escape.lua:5336
 #, lua-format
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3480
+#: scripts/scenario_39_escape.lua:3483
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s, Quantity: %i, Rep: %i"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3489
+#: scripts/scenario_39_escape.lua:3492
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "Insufficient cargo space for purchase"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3498 scripts/scenario_39_escape.lua:3528
+#: scripts/scenario_39_escape.lua:3501 scripts/scenario_39_escape.lua:3531
 msgctxt "needRep-comms"
 msgid ""
 "\n"
 "Insufficient reputation for purchase"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3504 scripts/scenario_39_escape.lua:3597
-#: scripts/scenario_39_escape.lua:3642 scripts/scenario_39_escape.lua:3687
+#: scripts/scenario_39_escape.lua:3507 scripts/scenario_39_escape.lua:3600
+#: scripts/scenario_39_escape.lua:3645 scripts/scenario_39_escape.lua:3690
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "Insufficient station inventory"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3523
+#: scripts/scenario_39_escape.lua:3526
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "purchased"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3548
+#: scripts/scenario_39_escape.lua:3551
 #, lua-format
 msgctxt "trade-comms"
 msgid "Sell one %s for %i reputation"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3557
+#: scripts/scenario_39_escape.lua:3560
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Reputation price: %i"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3566
+#: scripts/scenario_39_escape.lua:3569
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "One sold"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3584
+#: scripts/scenario_39_escape.lua:3587
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade food for %s"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3589 scripts/scenario_39_escape.lua:3634
-#: scripts/scenario_39_escape.lua:3679
+#: scripts/scenario_39_escape.lua:3592 scripts/scenario_39_escape.lua:3637
+#: scripts/scenario_39_escape.lua:3682
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Quantity: %i"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3612 scripts/scenario_39_escape.lua:3657
-#: scripts/scenario_39_escape.lua:3702
+#: scripts/scenario_39_escape.lua:3615 scripts/scenario_39_escape.lua:3660
+#: scripts/scenario_39_escape.lua:3705
 msgctxt "trade-comms"
 msgid ""
 "\n"
 "Traded"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3629
+#: scripts/scenario_39_escape.lua:3632
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade medicine for %s"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3674 scripts/scenario_39_escape.lua:4710
-#: scripts/scenario_39_escape.lua:5099
+#: scripts/scenario_39_escape.lua:3677 scripts/scenario_39_escape.lua:4713
+#: scripts/scenario_39_escape.lua:5102
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade luxury for %s"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3719 scripts/scenario_39_escape.lua:4664
-#: scripts/scenario_39_escape.lua:5050 scripts/scenario_39_escape.lua:5219
+#: scripts/scenario_39_escape.lua:3722 scripts/scenario_39_escape.lua:4667
+#: scripts/scenario_39_escape.lua:5053 scripts/scenario_39_escape.lua:5222
 msgctxt "trade-comms"
 msgid "Jettison cargo"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3724 scripts/scenario_39_escape.lua:4669
-#: scripts/scenario_39_escape.lua:5055 scripts/scenario_39_escape.lua:5224
+#: scripts/scenario_39_escape.lua:3727 scripts/scenario_39_escape.lua:4672
+#: scripts/scenario_39_escape.lua:5058 scripts/scenario_39_escape.lua:5227
 #, lua-format
 msgctxt "trade-comms"
 msgid ""
@@ -1182,19 +1182,19 @@ msgid ""
 "What would you like to jettison?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3737 scripts/scenario_39_escape.lua:4682
-#: scripts/scenario_39_escape.lua:5070 scripts/scenario_39_escape.lua:5239
+#: scripts/scenario_39_escape.lua:3740 scripts/scenario_39_escape.lua:4685
+#: scripts/scenario_39_escape.lua:5073 scripts/scenario_39_escape.lua:5242
 #, lua-format
 msgctxt "trade-comms"
 msgid "One %s jettisoned"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3751
+#: scripts/scenario_39_escape.lua:3754
 msgctxt "explainGoods-comms"
 msgid "No tutorial covered goods or cargo. Explain"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3757
+#: scripts/scenario_39_escape.lua:3760
 msgctxt "explainGoods-comms"
 msgid ""
 "Different types of cargo or goods may be obtained from stations, freighters "
@@ -1205,18 +1205,18 @@ msgid ""
 "(typically food, medicine or luxury)"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3766
+#: scripts/scenario_39_escape.lua:3769
 msgctxt "stationAssist-comms"
 msgid "Report status"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3768
+#: scripts/scenario_39_escape.lua:3771
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Hull:%s"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3774
+#: scripts/scenario_39_escape.lua:3777
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid ""
@@ -1224,7 +1224,7 @@ msgid ""
 "Shield:%s"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3785
+#: scripts/scenario_39_escape.lua:3788
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid ""
@@ -1232,7 +1232,7 @@ msgid ""
 "Shield %s:%s"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3801
+#: scripts/scenario_39_escape.lua:3804
 #, lua-format
 msgctxt "stationServices-comms"
 msgid ""
@@ -1240,25 +1240,25 @@ msgid ""
 "Replenish scan probes: nominal."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3810
+#: scripts/scenario_39_escape.lua:3813
 msgctxt "stationServices-comms"
 msgid "Cannot replenish scan probes due to fabrication unit failure."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3814
+#: scripts/scenario_39_escape.lua:3817
 msgctxt "stationServices-comms"
 msgid "Parts shortage prevents scan probe replenishment."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3818
+#: scripts/scenario_39_escape.lua:3821
 msgctxt "stationServices-comms"
 msgid ""
 "Station management has curtailed scan probe replenishment for cost cutting "
 "reasons."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3825 scripts/scenario_39_escape.lua:3856
-#: scripts/scenario_39_escape.lua:3890
+#: scripts/scenario_39_escape.lua:3828 scripts/scenario_39_escape.lua:3859
+#: scripts/scenario_39_escape.lua:3893
 #, lua-format
 msgctxt "stationServices-comms"
 msgid ""
@@ -1266,7 +1266,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3833
+#: scripts/scenario_39_escape.lua:3836
 #, lua-format
 msgctxt "stationServices-comms"
 msgid ""
@@ -1274,22 +1274,22 @@ msgid ""
 "Repair ship hull: nominal."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3841
+#: scripts/scenario_39_escape.lua:3844
 msgctxt "stationServices-comms"
 msgid "We're out of the necessary materials and supplies for hull repair."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3845
+#: scripts/scenario_39_escape.lua:3848
 msgctxt "stationServices-comms"
 msgid "Hull repair automation unavailable while it is undergoing maintenance."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3849
+#: scripts/scenario_39_escape.lua:3852
 msgctxt "stationServices-comms"
 msgid "All hull repair technicians quarantined to quarters due to illness."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3866
+#: scripts/scenario_39_escape.lua:3869
 #, lua-format
 msgctxt "stationServices-comms"
 msgid ""
@@ -1297,69 +1297,69 @@ msgid ""
 "Recharge ship energy stores: nominal."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3875
+#: scripts/scenario_39_escape.lua:3878
 msgctxt "stationServices-comms"
 msgid ""
 "A recent reactor failure has put us on auxiliary power, so we cannot "
 "recharge ships."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3879
+#: scripts/scenario_39_escape.lua:3882
 msgctxt "stationServices-comms"
 msgid "A damaged power coupling makes it too dangerous to recharge ships."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3883
+#: scripts/scenario_39_escape.lua:3886
 msgctxt "stationServices-comms"
 msgid ""
 "An asteroid strike damaged our solar cells and we are short on power, so we "
 "can't recharge ships right now."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3897 scripts/scenario_39_escape.lua:3909
-#: scripts/scenario_39_escape.lua:3929
+#: scripts/scenario_39_escape.lua:3900 scripts/scenario_39_escape.lua:3912
+#: scripts/scenario_39_escape.lua:3932
 msgctxt "ammo-comms"
 msgid "Ordnance available:"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3899
+#: scripts/scenario_39_escape.lua:3902
 msgctxt "ammo-comms"
 msgid "nukes"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3900
+#: scripts/scenario_39_escape.lua:3903
 msgctxt "ammo-comms"
 msgid "EMPs"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3901
+#: scripts/scenario_39_escape.lua:3904
 msgctxt "ammo-comms"
 msgid "homings"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3902
+#: scripts/scenario_39_escape.lua:3905
 msgctxt "ammo-comms"
 msgid "mines"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3903
+#: scripts/scenario_39_escape.lua:3906
 msgctxt "ammo-comms"
 msgid "HVLIs"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3912
+#: scripts/scenario_39_escape.lua:3915
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%s %s@%i rep"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3919
+#: scripts/scenario_39_escape.lua:3922
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%s, %s@%i rep"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3931
+#: scripts/scenario_39_escape.lua:3934
 #, lua-format
 msgctxt "ammo-comms"
 msgid ""
@@ -1367,7 +1367,7 @@ msgid ""
 "No ordnance available."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3936
+#: scripts/scenario_39_escape.lua:3939
 #, lua-format
 msgctxt "ammo-comms"
 msgid ""
@@ -1375,86 +1375,86 @@ msgid ""
 "%s."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3957
+#: scripts/scenario_39_escape.lua:3960
 msgctxt "station-comms"
 msgid "You need to stay docked for that action."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3966
+#: scripts/scenario_39_escape.lua:3969
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3971
+#: scripts/scenario_39_escape.lua:3974
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3974
+#: scripts/scenario_39_escape.lua:3977
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3988
+#: scripts/scenario_39_escape.lua:3991
 msgctxt "ammo-comms"
 msgid "All nukes are charged and primed for destruction."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:3995
+#: scripts/scenario_39_escape.lua:3998
 msgctxt "ammo-comms"
 msgid "Sorry, sir, but you are as fully stocked as I can allow."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4014 scripts/scenario_39_escape.lua:4050
+#: scripts/scenario_39_escape.lua:4017 scripts/scenario_39_escape.lua:4053
 msgctxt "ammo-comms"
 msgid "You are fully loaded and ready to explode things."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4021
+#: scripts/scenario_39_escape.lua:4024
 msgctxt "ammo-comms"
 msgid ""
 "We generously resupplied you with some weapon charges.\n"
 "Put them to good use."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4026 scripts/scenario_39_escape.lua:4063
-#: scripts/scenario_39_escape.lua:4069
+#: scripts/scenario_39_escape.lua:4029 scripts/scenario_39_escape.lua:4066
+#: scripts/scenario_39_escape.lua:4072
 msgctxt "needRep-comms"
 msgid "Not enough reputation."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4034
+#: scripts/scenario_39_escape.lua:4037
 msgctxt "ammo-comms"
 msgid "You can't afford as much as I'd like to give you"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4037
+#: scripts/scenario_39_escape.lua:4040
 msgctxt "ammo-comms"
 msgid "Get just one"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4057
+#: scripts/scenario_39_escape.lua:4060
 msgctxt "ammo-comms"
 msgid ""
 "We generously resupplied you with one weapon charge.\n"
 "Put it to good use."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4088
+#: scripts/scenario_39_escape.lua:4091
 msgctxt "station-comms"
 msgid ""
 "Good day, officer.\n"
 "If you need supplies, please dock with us first."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4093
+#: scripts/scenario_39_escape.lua:4096
 msgctxt "station-comms"
 msgid ""
 "Greetings.\n"
 "If you want to do business, please dock with us first."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4100
+#: scripts/scenario_39_escape.lua:4103
 msgctxt "station-comms"
 msgid ""
 "\n"
@@ -1462,79 +1462,79 @@ msgid ""
 "conduct business with you."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4131
+#: scripts/scenario_39_escape.lua:4134
 msgctxt "station-comms"
 msgid "I need information"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4133
+#: scripts/scenario_39_escape.lua:4136
 msgctxt "station-comms"
 msgid "What kind of information do you need?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4137
+#: scripts/scenario_39_escape.lua:4140
 msgctxt "ammo-comms"
 msgid "What ordnance do you have available for restock?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4145
+#: scripts/scenario_39_escape.lua:4148
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   Nuke"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4150
+#: scripts/scenario_39_escape.lua:4153
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   EMP"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4155
+#: scripts/scenario_39_escape.lua:4158
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   Homing"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4160
+#: scripts/scenario_39_escape.lua:4163
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   Mine"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4165
+#: scripts/scenario_39_escape.lua:4168
 msgctxt "ammo-comms"
 msgid ""
 "\n"
 "   HVLI"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4170
+#: scripts/scenario_39_escape.lua:4173
 msgctxt "ammo-comms"
 msgid "We have no ordnance available for restock"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4176
+#: scripts/scenario_39_escape.lua:4179
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following type of ordnance available for restock:%s"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4184
+#: scripts/scenario_39_escape.lua:4187
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following types of ordnance available for restock:%s"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4205
+#: scripts/scenario_39_escape.lua:4208
 msgctxt "trade-comms"
 msgid "What goods do you have available for sale or trade?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4212
+#: scripts/scenario_39_escape.lua:4215
 #, lua-format
 msgctxt "trade-comms"
 msgid ""
@@ -1542,7 +1542,7 @@ msgid ""
 "Goods or components available: quantity, cost in reputation"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4219
+#: scripts/scenario_39_escape.lua:4222
 #, lua-format
 msgctxt "trade-comms"
 msgid ""
@@ -1550,25 +1550,25 @@ msgid ""
 "   %14s: %2i, %3i"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4231
+#: scripts/scenario_39_escape.lua:4234
 msgctxt "trade-comms"
 msgid "Where can I find particular goods?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4236
+#: scripts/scenario_39_escape.lua:4239
 msgctxt "trade-comms"
 msgid ""
 "Friendly stations often have food or medicine or both. Neutral stations may "
 "trade their goods for food, medicine or luxury."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4290
+#: scripts/scenario_39_escape.lua:4293
 #, lua-format
 msgctxt "trade-comms"
 msgid "Station %s in sector %s has %s for %i reputation"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4305
+#: scripts/scenario_39_escape.lua:4308
 msgctxt "trade-comms"
 msgid ""
 "\n"
@@ -1577,270 +1577,270 @@ msgid ""
 "I've heard about these:"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4311
+#: scripts/scenario_39_escape.lua:4314
 msgctxt "trade-comms"
 msgid " Beyond that, I have no knowledge of specific stations"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4348
+#: scripts/scenario_39_escape.lua:4351
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%d rep)"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4356
+#: scripts/scenario_39_escape.lua:4359
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request backup."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4363
+#: scripts/scenario_39_escape.lua:4366
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we deliver your supplies?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4369 scripts/scenario_39_escape.lua:4445
+#: scripts/scenario_39_escape.lua:4372 scripts/scenario_39_escape.lua:4448
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "WP %d"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4399
+#: scripts/scenario_39_escape.lua:4402
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched a supply ship toward WP %d"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4408 scripts/scenario_39_escape.lua:4478
+#: scripts/scenario_39_escape.lua:4411 scripts/scenario_39_escape.lua:4481
 msgctxt "needRep-comms"
 msgid "Not enough reputation!"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4424
+#: scripts/scenario_39_escape.lua:4427
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send reinforcements! (%d rep)"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4432
+#: scripts/scenario_39_escape.lua:4435
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request reinforcements."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4439
+#: scripts/scenario_39_escape.lua:4442
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we dispatch the reinforcements?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4468
+#: scripts/scenario_39_escape.lua:4471
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched %s to assist at WP %d"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4529
+#: scripts/scenario_39_escape.lua:4532
 msgctxt "trade-comms"
 msgid " and will trade it for medicine"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4535
+#: scripts/scenario_39_escape.lua:4538
 msgctxt "trade-comms"
 msgid " or food"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4540
+#: scripts/scenario_39_escape.lua:4543
 msgctxt "trade-comms"
 msgid " and will trade it for food"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4548
+#: scripts/scenario_39_escape.lua:4551
 msgctxt "trade-comms"
 msgid " or luxury"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4553
+#: scripts/scenario_39_escape.lua:4556
 msgctxt "trade-comms"
 msgid " and will trade it for luxury"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4626 scripts/scenario_39_escape.lua:5188
+#: scripts/scenario_39_escape.lua:4629 scripts/scenario_39_escape.lua:5191
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4628
+#: scripts/scenario_39_escape.lua:4631
 msgctxt "shipAssist-comms"
 msgid "Sir, how can we assist?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4634 scripts/scenario_39_escape.lua:5011
+#: scripts/scenario_39_escape.lua:4637 scripts/scenario_39_escape.lua:5014
 msgctxt "trade-comms"
 msgid "Do you have cargo you might sell?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4637 scripts/scenario_39_escape.lua:5014
+#: scripts/scenario_39_escape.lua:4640 scripts/scenario_39_escape.lua:5017
 msgctxt "trade-comms"
 msgid "We've got "
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4642 scripts/scenario_39_escape.lua:5019
+#: scripts/scenario_39_escape.lua:4645 scripts/scenario_39_escape.lua:5022
 msgctxt "trade-comms"
 msgid ", "
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4651 scripts/scenario_39_escape.lua:5028
+#: scripts/scenario_39_escape.lua:4654 scripts/scenario_39_escape.lua:5031
 msgctxt "trade-comms"
 msgid "nothing"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4721 scripts/scenario_39_escape.lua:5111
+#: scripts/scenario_39_escape.lua:4724 scripts/scenario_39_escape.lua:5114
 msgctxt "trade-comms"
 msgid "Traded"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4766 scripts/scenario_39_escape.lua:5159
-#: scripts/scenario_39_escape.lua:5290 scripts/scenario_39_escape.lua:5366
+#: scripts/scenario_39_escape.lua:4769 scripts/scenario_39_escape.lua:5162
+#: scripts/scenario_39_escape.lua:5293 scripts/scenario_39_escape.lua:5369
 #, lua-format
 msgctxt "trade-comms"
 msgid "Purchased %s from %s"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4776 scripts/scenario_39_escape.lua:5169
-#: scripts/scenario_39_escape.lua:5300 scripts/scenario_39_escape.lua:5376
+#: scripts/scenario_39_escape.lua:4779 scripts/scenario_39_escape.lua:5172
+#: scripts/scenario_39_escape.lua:5303 scripts/scenario_39_escape.lua:5379
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4782 scripts/scenario_39_escape.lua:5177
-#: scripts/scenario_39_escape.lua:5308 scripts/scenario_39_escape.lua:5384
+#: scripts/scenario_39_escape.lua:4785 scripts/scenario_39_escape.lua:5180
+#: scripts/scenario_39_escape.lua:5311 scripts/scenario_39_escape.lua:5387
 msgctxt "trade-comms"
 msgid "Insufficient cargo space"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4792
+#: scripts/scenario_39_escape.lua:4795
 msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4797
+#: scripts/scenario_39_escape.lua:4800
 msgctxt "shipAssist-comms"
 msgid "No waypoints set. Please set a waypoint first."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4803
+#: scripts/scenario_39_escape.lua:4806
 msgctxt "shipAssist-comms"
 msgid "Which waypoint should we defend?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4808
+#: scripts/scenario_39_escape.lua:4811
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend WP %d"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4819
+#: scripts/scenario_39_escape.lua:4822
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at WP %d."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4831
+#: scripts/scenario_39_escape.lua:4834
 msgctxt "shipAssist-comms"
 msgid "Assist me"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4833
+#: scripts/scenario_39_escape.lua:4836
 msgctxt "shipAssist-comms"
 msgid "Heading toward you to assist."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4839
+#: scripts/scenario_39_escape.lua:4842
 msgctxt "shipAssist-comms"
 msgid "Report status"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4841
+#: scripts/scenario_39_escape.lua:4844
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Hull: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4848
+#: scripts/scenario_39_escape.lua:4851
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4858
+#: scripts/scenario_39_escape.lua:4861
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Front Shield: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4867
+#: scripts/scenario_39_escape.lua:4870
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Rear Shield: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4878
+#: scripts/scenario_39_escape.lua:4881
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield %s: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4894
+#: scripts/scenario_39_escape.lua:4897
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s Missiles: %d/%d\n"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4913
+#: scripts/scenario_39_escape.lua:4916
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4919
+#: scripts/scenario_39_escape.lua:4922
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Docking at %s."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4934
+#: scripts/scenario_39_escape.lua:4937
 msgctxt "shipEnemy-comms"
 msgid "We will see to your destruction!"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4936
+#: scripts/scenario_39_escape.lua:4939
 msgctxt "shipEnemy-comms"
 msgid "Your bloodline will end here!"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4938
+#: scripts/scenario_39_escape.lua:4941
 msgctxt "shipEnemy-comms"
 msgid "Your feeble threats are meaningless."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4941
+#: scripts/scenario_39_escape.lua:4944
 msgctxt "shipEnemy-comms"
 msgid ""
 "Ktzzzsss.\n"
 "You will DIEEee weaklingsss!"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4947
+#: scripts/scenario_39_escape.lua:4950
 msgctxt "shipEnemy-comms"
 msgid ""
 "We wish you no harm, but will harm you if we must.\n"
 "End of transmission."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4954
+#: scripts/scenario_39_escape.lua:4957
 msgctxt "shipEnemy-comms"
 msgid "Stay out of our way, or your death will amuse us extremely!"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4961
+#: scripts/scenario_39_escape.lua:4964
 msgctxt "shipEnemy-comms"
 msgid ""
 "One zero one.\n"
@@ -1851,22 +1851,22 @@ msgid ""
 "Communication halted."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4964
+#: scripts/scenario_39_escape.lua:4967
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4967
+#: scripts/scenario_39_escape.lua:4970
 msgctxt "shipEnemy-comms"
 msgid "Rogue command received. Targeting source."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4970
+#: scripts/scenario_39_escape.lua:4973
 msgctxt "shipEnemy-comms"
 msgid "External command ignored."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4975
+#: scripts/scenario_39_escape.lua:4978
 msgctxt "shipEnemy-comms"
 msgid ""
 "The hive suffers no threats. Opposition to any of us is opposition to us "
@@ -1874,67 +1874,67 @@ msgid ""
 "Stand down or prepare to donate your corpses toward our nutrition."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4980
+#: scripts/scenario_39_escape.lua:4983
 msgctxt "shipEnemy-comms"
 msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4984
+#: scripts/scenario_39_escape.lua:4987
 msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4988
+#: scripts/scenario_39_escape.lua:4991
 msgctxt "shipEnemy-comms"
 msgid "The hive has greater priorities than exterminating pests."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:4991
+#: scripts/scenario_39_escape.lua:4994
 msgctxt "shipEnemy-comms"
 msgid "Mind your own business!"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5009 scripts/scenario_39_escape.lua:5035
+#: scripts/scenario_39_escape.lua:5012 scripts/scenario_39_escape.lua:5038
 msgctxt "trade-comms"
 msgid "Yes?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5037
+#: scripts/scenario_39_escape.lua:5040
 msgctxt "trade-comms"
 msgid "Where are you headed?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5195
+#: scripts/scenario_39_escape.lua:5198
 #, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %f reputation)"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5202
+#: scripts/scenario_39_escape.lua:5205
 msgctxt "needRep-comms"
 msgid "Insufficient reputation"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5319
+#: scripts/scenario_39_escape.lua:5322
 msgctxt "trade-comms"
 msgid "Why are you bothering me?"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5401
+#: scripts/scenario_39_escape.lua:5404
 msgctxt "ship-comms"
 msgid ""
 "Sorry, we have no time to chat with you.\n"
 "We are on an important mission."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5406
+#: scripts/scenario_39_escape.lua:5409
 msgctxt "ship-comms"
 msgid ""
 "We have nothing for you.\n"
 "Good day."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5458
+#: scripts/scenario_39_escape.lua:5461
 #, lua-format
 msgctxt "air-msgEngineer"
 msgid ""
@@ -1942,7 +1942,7 @@ msgid ""
 "the science officer to scan it again to check the state of its engines."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5472
+#: scripts/scenario_39_escape.lua:5475
 #, lua-format
 msgctxt "air-msgEngineer+"
 msgid ""
@@ -1950,54 +1950,54 @@ msgid ""
 "the science officer to scan it again to check the state of its engines."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5482
+#: scripts/scenario_39_escape.lua:5485
 msgctxt "airTimer-tabScience&Eng&Eng+&Ops"
 msgid "Suffocation"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5487
+#: scripts/scenario_39_escape.lua:5490
 #, lua-format
 msgctxt "airTimer-tabScience&Eng&Eng+&Ops"
 msgid "%s %i"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5493
+#: scripts/scenario_39_escape.lua:5496
 #, lua-format
 msgctxt "airTimer-tabScience&Eng&Eng+&Ops"
 msgid "%s %i:%.2i"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5507
+#: scripts/scenario_39_escape.lua:5510
 msgctxt "air-msgEngineer"
 msgid "Environmental systems show limited air remaining"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5527
+#: scripts/scenario_39_escape.lua:5530
 msgctxt "air-msgEngineer+"
 msgid "Environmental systems show limited air remaining"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5548
+#: scripts/scenario_39_escape.lua:5551
 msgctxt "air-msgDamageControl"
 msgid "Environmental systems show limited air remaining"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5569
+#: scripts/scenario_39_escape.lua:5572
 msgctxt "air-msgScience"
 msgid "Environmental systems show limited air remaining"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5590
+#: scripts/scenario_39_escape.lua:5593
 msgctxt "air-msgOperations"
 msgid "Environmental systems show limited air remaining"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5605
+#: scripts/scenario_39_escape.lua:5608
 msgctxt "defeat-msgMainscreen"
 msgid "You suffocated while aboard the fighter hulk"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5653
+#: scripts/scenario_39_escape.lua:5656
 #, lua-format
 msgctxt "transfer-msgEngineer"
 msgid ""
@@ -2007,7 +2007,7 @@ msgid ""
 "remaining in the transporters."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5668
+#: scripts/scenario_39_escape.lua:5671
 #, lua-format
 msgctxt "transfer-msgEngineer+"
 msgid ""
@@ -2017,29 +2017,29 @@ msgid ""
 "remaining in the transporters."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5690
+#: scripts/scenario_39_escape.lua:5693
 msgctxt "crewTransfer-buttonEngineer"
 msgid "Transfer to Repulse"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5699
+#: scripts/scenario_39_escape.lua:5702
 msgctxt "crewTransfer-buttonEngineer+"
 msgid "Transfer to Repulse"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5708
+#: scripts/scenario_39_escape.lua:5711
 msgctxt "crewTransfer-buttonDamageControl"
 msgid "Transfer to Repulse"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5807
+#: scripts/scenario_39_escape.lua:5810
 msgctxt "transfer-shipLog"
 msgid ""
 "Welcome aboard the Repulse class ship, rechristened HMS Plunder, currently "
 "registered as Independent"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5822
+#: scripts/scenario_39_escape.lua:5825
 msgctxt "crewImport-incCall"
 msgid ""
 "Need a repair crew? We used to be posted on that ship. We would be happy to "
@@ -2048,24 +2048,24 @@ msgid ""
 "You should find an activation switch at the weapons console"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5832
+#: scripts/scenario_39_escape.lua:5835
 msgctxt "crewTransfer-buttonWeapons"
 msgid "Return Transport"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5843
+#: scripts/scenario_39_escape.lua:5846
 msgctxt "crewTransfer-buttonTactical"
 msgid "Return Transport"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5871
+#: scripts/scenario_39_escape.lua:5874
 msgctxt "crewRepair-shipLog"
 msgid ""
 "Repair crew reports that the port beam weapon emplacement is currently non-"
 "functional. No applicable spare parts found aboard"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5888
+#: scripts/scenario_39_escape.lua:5891
 msgctxt "crewRepair-shipLog"
 msgid ""
 "Repair crew reports the jump drive not operational. However, they may be "
@@ -2073,28 +2073,28 @@ msgid ""
 "replacement parts. They are starting the fabrication process now"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5898
+#: scripts/scenario_39_escape.lua:5901
 msgctxt "crewRepair-shipLog"
 msgid ""
 "Repair crew reports the jump drive inoperative. Additional parts are "
 "necessary"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5915
+#: scripts/scenario_39_escape.lua:5918
 msgctxt "crewRepair-shipLog"
 msgid ""
 "Repair crew says the missle weapons systems are not repairable with "
 "available components"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5932
+#: scripts/scenario_39_escape.lua:5935
 msgctxt "crewRepair-shipLog"
 msgid ""
 "Repair crew applied some of the parts picked up to make some repairs on the "
 "hull"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5963
+#: scripts/scenario_39_escape.lua:5966
 msgctxt "crewRepair-shipLog"
 msgid ""
 "Repair crew reports they have repaired as much as they can. Additional parts "
@@ -2103,7 +2103,7 @@ msgid ""
 "Human Navy stations."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:5994
+#: scripts/scenario_39_escape.lua:5997
 #, lua-format
 msgctxt "crewFriends-shipLog"
 msgid ""
@@ -2111,7 +2111,7 @@ msgid ""
 "years of experience. He's on %s"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6024
+#: scripts/scenario_39_escape.lua:6027
 #, lua-format
 msgctxt "crewFriends-shipLog"
 msgid ""
@@ -2119,7 +2119,7 @@ msgid ""
 "easily get our shields working. She works at a shop on %s"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6055
+#: scripts/scenario_39_escape.lua:6058
 #, lua-format
 msgctxt "crewFriends-shipLog"
 msgid ""
@@ -2128,7 +2128,7 @@ msgid ""
 "full capacity"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6087
+#: scripts/scenario_39_escape.lua:6090
 #, lua-format
 msgctxt "crewFriends-shipLog"
 msgid ""
@@ -2137,7 +2137,7 @@ msgid ""
 "back up to the Human Navy communication network"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6120
+#: scripts/scenario_39_escape.lua:6123
 #, lua-format
 msgctxt "crewFriends-shipLog"
 msgid ""
@@ -2145,7 +2145,7 @@ msgid ""
 "fixes jump drives and he could get ours working"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6154
+#: scripts/scenario_39_escape.lua:6157
 #, lua-format
 msgctxt "crewFriends-shipLog"
 msgid ""
@@ -2153,58 +2153,58 @@ msgid ""
 "can fix us up. He does work on reactors on %s"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6167
+#: scripts/scenario_39_escape.lua:6170
 msgctxt "crewRepairStatut-buttonRelay"
 msgid "crew fixers"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6180
+#: scripts/scenario_39_escape.lua:6183
 msgctxt "crewRepairStatut-buttonOperations"
 msgid "crew fixers"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6232
+#: scripts/scenario_39_escape.lua:6235
 #, lua-format
 msgctxt "crewRepairStatut-msgRelay&Operations"
 msgid " Missiles:%s(%s) "
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6240
+#: scripts/scenario_39_escape.lua:6243
 #, lua-format
 msgctxt "crewRepairStatut-msgRelay&Operations"
 msgid " Shields:%s(%s) "
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6248
+#: scripts/scenario_39_escape.lua:6251
 #, lua-format
 msgctxt "crewRepairStatut-msgRelay&Operations"
 msgid " Impulse:%s(%s) "
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6258
+#: scripts/scenario_39_escape.lua:6261
 #, lua-format
 msgctxt "crewRepairStatut-msgRelay&Operations"
 msgid " Communications:%s(%s) "
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6267
+#: scripts/scenario_39_escape.lua:6270
 #, lua-format
 msgctxt "crewRepairStatut-msgRelay&Operations"
 msgid " Jump:%s(%s) "
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6275
+#: scripts/scenario_39_escape.lua:6278
 #, lua-format
 msgctxt "crewRepairStatut-msgRelay&Operations"
 msgid " Reactor:%s(%s) "
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6291
+#: scripts/scenario_39_escape.lua:6294
 msgctxt "crewRepair-shipLog"
 msgid "Repair crew suggested locations for ship fixes:"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6326
+#: scripts/scenario_39_escape.lua:6329
 #, lua-format
 msgctxt "crewFriends-shipLog"
 msgid ""
@@ -2212,7 +2212,7 @@ msgid ""
 "beam weapon"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6388
+#: scripts/scenario_39_escape.lua:6391
 #, lua-format
 msgctxt "Boris-shipLog"
 msgid ""
@@ -2220,90 +2220,90 @@ msgid ""
 "us."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6399
+#: scripts/scenario_39_escape.lua:6402
 #, lua-format
 msgctxt "Boris-shipLog"
 msgid "[Engineering tech] With our hull at %i, we better hope our shields hold"
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6422
+#: scripts/scenario_39_escape.lua:6425
 #, lua-format
 msgctxt "Boris-shipLog"
 msgid "[%s] You won't get away so easily."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6426
+#: scripts/scenario_39_escape.lua:6429
 #, lua-format
 msgctxt "Boris-shipLog"
 msgid "[%s] You can run, but you can't hide."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6428
+#: scripts/scenario_39_escape.lua:6431
 #, lua-format
 msgctxt "Boris-shipLog"
 msgid "[%s] I will get you yet."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6431
+#: scripts/scenario_39_escape.lua:6434
 #, lua-format
 msgctxt "Boris-shipLog"
 msgid "[%s] I will hunt you down and destroy you like vermin."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6435
+#: scripts/scenario_39_escape.lua:6438
 #, lua-format
 msgctxt "Boris-shipLog"
 msgid "[%s] Slow down, I promise not to destroy you immediately."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6475
+#: scripts/scenario_39_escape.lua:6478
 msgctxt "Boris-incCall"
 msgid ""
 "You don't steal from Boris Junk Yard without consequences. I'm coming for "
 "you."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6479
+#: scripts/scenario_39_escape.lua:6482
 msgctxt "Boris-incCall"
 msgid "I saw you steal that ship. You'll rue the day."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6483
+#: scripts/scenario_39_escape.lua:6486
 msgctxt "Boris-incCall"
 msgid "Stealing a ship, eh? We'll just see about that."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6487
+#: scripts/scenario_39_escape.lua:6490
 msgctxt "Boris-incCall"
 msgid ""
 "You must pay for the ship you stole from Boris Junk Yard... with your life."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6504
+#: scripts/scenario_39_escape.lua:6507
 #, lua-format
 msgctxt "Boris-shipLog"
 msgid "[%s] You can't get rid of me that easily."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6505
+#: scripts/scenario_39_escape.lua:6508
 #, lua-format
 msgctxt "Boris-shipLog"
 msgid "[%s] I'll be back."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6506
+#: scripts/scenario_39_escape.lua:6509
 #, lua-format
 msgctxt "Boris-shipLog"
 msgid "[%s] I've got plenty of ships."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6507
+#: scripts/scenario_39_escape.lua:6510
 #, lua-format
 msgctxt "Boris-shipLog"
 msgid "[%s] This is merely a temporary setback."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6532
+#: scripts/scenario_39_escape.lua:6535
 msgctxt "crewRepair-shipLog"
 msgid ""
 "Repair crew thinks they can use the space debris recently acquired to make "
@@ -2311,21 +2311,21 @@ msgid ""
 "now."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6547
+#: scripts/scenario_39_escape.lua:6550
 msgctxt "crewRepair-shipLog"
 msgid ""
 "Repair crew finished jump drive part fabrication. They believe the jump "
 "drive should be functional soon."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6567
+#: scripts/scenario_39_escape.lua:6570
 msgctxt "victory-msgMainscreen"
 msgid ""
 "Congratulations! You escaped the Kraylor clutches and returned all your "
 "gathered data on the Kraylor to the Human Navy."
 msgstr ""
 
-#: scripts/scenario_39_escape.lua:6957
+#: scripts/scenario_39_escape.lua:6960
 msgctxt "ZoneLabelDescription-junk"
 msgid "Boris Junk Yard"
 msgstr ""

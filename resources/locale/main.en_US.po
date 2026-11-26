@@ -7242,7 +7242,6 @@ msgstr ""
 
 #: src/screenComponents/frequencyCurve.cpp:74
 #: src/screenComponents/frequencyCurve.cpp:81
-#, c-format
 msgid "{freq} {percent}% dmg"
 msgstr ""
 
