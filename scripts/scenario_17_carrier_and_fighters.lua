@@ -498,7 +498,7 @@ function setConstants()
     }
     player_ship_stats =
         { --taken from sandbox. Not all are used. Not all characteristics are used.
-            ["Atlantis"] = {
+            [ST.ATLANTIS] = {
                 strength = 52,
                 cargo = 6,
                 distance = 400,
@@ -543,7 +543,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["Benedict"] = {
+            [ST.BENEDICT] = {
                 strength = 10,
                 cargo = 9,
                 distance = 400,
@@ -558,7 +558,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["Crucible"] = {
+            [ST.CRUCIBLE] = {
                 strength = 45,
                 cargo = 5,
                 distance = 200,
@@ -573,7 +573,7 @@ function setConstants()
                 prox_scan = 1,
                 epjam = 0,
             },
-            ["Ender"] = {
+            [ST.ENDER] = {
                 strength = 100,
                 cargo = 20,
                 distance = 2000,
@@ -633,7 +633,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["Hathcock"] = {
+            [ST.HATHCOCK] = {
                 strength = 30,
                 cargo = 6,
                 distance = 200,
@@ -648,7 +648,7 @@ function setConstants()
                 prox_scan = 1,
                 epjam = 0,
             },
-            ["Kiriya"] = {
+            [ST.KIRIYA] = {
                 strength = 10,
                 cargo = 9,
                 distance = 400,
@@ -663,7 +663,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["Maverick"] = {
+            [ST.MAVERICK] = {
                 strength = 45,
                 cargo = 5,
                 distance = 200,
@@ -693,7 +693,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["Nautilus"] = {
+            [ST.NAUTILUS] = {
                 strength = 12,
                 cargo = 7,
                 distance = 200,
@@ -723,7 +723,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["Piranha"] = {
+            [ST.PIRANHA] = {
                 strength = 16,
                 cargo = 8,
                 distance = 200,
@@ -738,7 +738,7 @@ function setConstants()
                 prox_scan = 1,
                 epjam = 0,
             },
-            ["Vindicator"] = {
+            [ST.VINDICATOR] = {
                 strength = 40,
                 cargo = 6,
                 distance = 400,
@@ -753,7 +753,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["Avalanche"] = {
+            [ST.AVALANCHE] = {
                 strength = 45,
                 cargo = 8,
                 distance = 200,
@@ -768,7 +768,7 @@ function setConstants()
                 prox_scan = 1,
                 epjam = 0,
             },
-            ["Stingray"] = {
+            [ST.STINGRAY] = {
                 strength = 7,
                 cargo = 3,
                 distance = 100,
@@ -798,7 +798,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["Repulse"] = {
+            [ST.REPULSE] = {
                 strength = 14,
                 cargo = 12,
                 distance = 200,
@@ -813,7 +813,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["Saipan"] = {
+            [ST.SAIPAN] = {
                 strength = 35,
                 cargo = 6,
                 distance = 400,
@@ -828,7 +828,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["Crow"] = {
+            [ST.CROW] = {
                 strength = 8,
                 cargo = 4,
                 distance = 200,
@@ -1856,7 +1856,7 @@ function setGlobals()
     tradeMedicine = {}
     --Player ship name lists to supplant standard randomized call sign generation
     player_ship_names_for = {
-        ["Atlantis"] = {
+        [ST.ATLANTIS] = {
             "Excaliber",
             "Thrasher",
             "Punisher",
@@ -1873,7 +1873,7 @@ function setGlobals()
             "Aragog",
             "Charlotte",
         },
-        ["Benedict"] = {
+        [ST.BENEDICT] = {
             "Elizabeth",
             "Ford",
             "Vikramaditya",
@@ -1885,8 +1885,8 @@ function setGlobals()
             "Garibaldi",
             "Eisenhower",
         },
-        ["Crucible"] = { "Sling", "Stark", "Torrid", "Kicker", "Flummox" },
-        ["Ender"] = {
+        [ST.CRUCIBLE] = { "Sling", "Stark", "Torrid", "Kicker", "Flummox" },
+        [ST.ENDER] = {
             "Mongo",
             "Godzilla",
             "Leviathan",
@@ -1923,7 +1923,7 @@ function setGlobals()
             "Leverage",
             "Intrepid",
         },
-        ["Hathcock"] = {
+        [ST.HATHCOCK] = {
             "Hayha",
             "Waldron",
             "Plunkett",
@@ -1936,7 +1936,7 @@ function setGlobals()
             "Hawkeye",
             "Hanzo",
         },
-        ["Kiriya"] = {
+        [ST.KIRIYA] = {
             "Cavour",
             "Reagan",
             "Gaulle",
@@ -1948,7 +1948,7 @@ function setGlobals()
             "Vinson",
             "Old Salt",
         },
-        ["Maverick"] = {
+        [ST.MAVERICK] = {
             "Angel",
             "Thunderbird",
             "Roaster",
@@ -1965,7 +1965,7 @@ function setGlobals()
             "Thorny",
             "Buzz",
         },
-        ["Nautilus"] = {
+        [ST.NAUTILUS] = {
             "October",
             "Abdiel",
             "Manxman",
@@ -1987,7 +1987,7 @@ function setGlobals()
             "Thebe",
             "Retrograde",
         },
-        ["Piranha"] = {
+        [ST.PIRANHA] = {
             "Razor",
             "Biter",
             "Ripper",
@@ -1997,7 +1997,7 @@ function setGlobals()
             "Vulture",
             "Predator",
         },
-        ["Vindicator"] = {
+        [ST.VINDICATOR] = {
             "Excelsior",
             "Velociraptor",
             "Thunder",
@@ -2007,7 +2007,7 @@ function setGlobals()
             "Aspern",
             "Panther",
         },
-        ["Stingray"] = {
+        [ST.STINGRAY] = {
             "Buzzer",
             "Flitter",
             "Zippiticus",
@@ -2016,7 +2016,7 @@ function setGlobals()
             "Stinger",
             "Stripe",
         },
-        ["Avalanche"] = {
+        [ST.AVALANCHE] = {
             "Projectus",
             "Hurlmeister",
             "Flinger",
@@ -2044,7 +2044,7 @@ function setGlobals()
             "Slit",
         },
         ["Redhook"] = { "Headhunter", "Thud", "Troll", "Scalper", "Shark" },
-        ["Repulse"] = {
+        [ST.REPULSE] = {
             "Fiddler",
             "Brinks",
             "Loomis",
@@ -2055,7 +2055,7 @@ function setGlobals()
             "Komatsu",
             "Eitan",
         },
-        ["Saipan"] = {
+        [ST.SAIPAN] = {
             "Atlas",
             "Bernard",
             "Alexander",
@@ -2066,7 +2066,7 @@ function setGlobals()
             "Pegasus",
         },
         ["Stricken"] = { "Blazon", "Streaker", "Pinto", "Spear", "Javelin" },
-        ["Crow"] = {
+        [ST.CROW] = {
             "Sparrow",
             "Sizzle",
             "Squawk",

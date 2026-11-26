@@ -310,7 +310,7 @@ function setGlobals()
     ) --11
     --Player ship name lists to supplant standard randomized call sign generation
     player_ship_names = {
-        ["Atlantis"] = {
+        [ST.ATLANTIS] = {
             "Excaliber",
             "Thrasher",
             "Punisher",
@@ -320,7 +320,7 @@ function setGlobals()
             "Parchim",
             "Coronado",
         },
-        ["Benedict"] = {
+        [ST.BENEDICT] = {
             "Elizabeth",
             "Ford",
             "Vikramaditya",
@@ -332,8 +332,8 @@ function setGlobals()
             "Garibaldi",
             "Eisenhower",
         },
-        ["Crucible"] = { "Sling", "Stark", "Torrid", "Kicker", "Flummox" },
-        ["Ender"] = {
+        [ST.CRUCIBLE] = { "Sling", "Stark", "Torrid", "Kicker", "Flummox" },
+        [ST.ENDER] = {
             "Mongo",
             "Godzilla",
             "Leviathan",
@@ -351,7 +351,7 @@ function setGlobals()
             "Bandit",
             "Buccaneer",
         },
-        ["Hathcock"] = {
+        [ST.HATHCOCK] = {
             "Hayha",
             "Waldron",
             "Plunkett",
@@ -364,7 +364,7 @@ function setGlobals()
             "Hawkeye",
             "Hanzo",
         },
-        ["Kiriya"] = {
+        [ST.KIRIYA] = {
             "Cavour",
             "Reagan",
             "Gaulle",
@@ -386,7 +386,7 @@ function setGlobals()
             "Thorny",
             "Buzz",
         },
-        ["Maverick"] = {
+        [ST.MAVERICK] = {
             "Festoon",
             "Earp",
             "Schwartz",
@@ -399,7 +399,7 @@ function setGlobals()
             "Holliday",
             "Sundance",
         },
-        ["Nautilus"] = {
+        [ST.NAUTILUS] = {
             "October",
             "Abdiel",
             "Manxman",
@@ -421,7 +421,7 @@ function setGlobals()
             "Thebe",
             "Retrograde",
         },
-        ["Piranha"] = {
+        [ST.PIRANHA] = {
             "Razor",
             "Biter",
             "Ripper",
@@ -431,7 +431,7 @@ function setGlobals()
             "Vulture",
             "Predator",
         },
-        ["Repulse"] = {
+        [ST.REPULSE] = {
             "Fiddler",
             "Brinks",
             "Loomis",
@@ -442,7 +442,7 @@ function setGlobals()
             "Komatsu",
             "Eitan",
         },
-        ["Saipan"] = {
+        [ST.SAIPAN] = {
             "Atlas",
             "Bernard",
             "Alexander",
@@ -452,7 +452,7 @@ function setGlobals()
             "Saratoga",
             "Pegasus",
         },
-        ["Crow"] = {
+        [ST.CROW] = {
             "Sparrow",
             "Sizzle",
             "Squawk",
@@ -470,7 +470,7 @@ function setGlobals()
             "Pixie",
             "Tinkerbell",
         },
-        ["Vindicator"] = {
+        [ST.VINDICATOR] = {
             "Excelsior",
             "Velociraptor",
             "Thunder",
@@ -480,7 +480,7 @@ function setGlobals()
             "Aspern",
             "Panther",
         },
-        ["Avalanche"] = {
+        [ST.AVALANCHE] = {
             "Projectus",
             "Hurlmeister",
             "Flinger",
@@ -489,7 +489,7 @@ function setGlobals()
             "Nakhimov",
             "Antigone",
         },
-        ["Stingray"] = {
+        [ST.STINGRAY] = {
             "Buzzer",
             "Flitter",
             "Zippiticus",
@@ -527,28 +527,28 @@ function setGlobals()
 end
 function setConstants()
     player_ship_stats = { --ordered by name
-        ["Atlantis"] = {
+        [ST.ATLANTIS] = {
             strength = 52,
             cargo = 6,
             distance = 400,
             long_range_radar = 30000,
             short_range_radar = 5000,
         },
-        ["Benedict"] = {
+        [ST.BENEDICT] = {
             strength = 10,
             cargo = 9,
             distance = 400,
             long_range_radar = 30000,
             short_range_radar = 5000,
         },
-        ["Crucible"] = {
+        [ST.CRUCIBLE] = {
             strength = 45,
             cargo = 5,
             distance = 200,
             long_range_radar = 20000,
             short_range_radar = 6000,
         },
-        ["Ender"] = {
+        [ST.ENDER] = {
             strength = 100,
             cargo = 20,
             distance = 2000,
@@ -562,21 +562,21 @@ function setConstants()
             long_range_radar = 40000,
             short_range_radar = 5000,
         },
-        ["Hathcock"] = {
+        [ST.HATHCOCK] = {
             strength = 30,
             cargo = 6,
             distance = 200,
             long_range_radar = 35000,
             short_range_radar = 6000,
         },
-        ["Kiriya"] = {
+        [ST.KIRIYA] = {
             strength = 10,
             cargo = 9,
             distance = 400,
             long_range_radar = 35000,
             short_range_radar = 5000,
         },
-        ["Maverick"] = {
+        [ST.MAVERICK] = {
             strength = 45,
             cargo = 5,
             distance = 200,
@@ -590,7 +590,7 @@ function setConstants()
             long_range_radar = 18000,
             short_range_radar = 4000,
         },
-        ["Nautilus"] = {
+        [ST.NAUTILUS] = {
             strength = 12,
             cargo = 7,
             distance = 200,
@@ -604,42 +604,42 @@ function setConstants()
             long_range_radar = 25000,
             short_range_radar = 5000,
         },
-        ["Piranha"] = {
+        [ST.PIRANHA] = {
             strength = 16,
             cargo = 8,
             distance = 200,
             long_range_radar = 25000,
             short_range_radar = 6000,
         },
-        ["Vindicator"] = {
+        [ST.VINDICATOR] = {
             strength = 40,
             cargo = 6,
             distance = 400,
             long_range_radar = 30000,
             short_range_radar = 5000,
         },
-        ["Stingray"] = {
+        [ST.STINGRAY] = {
             strength = 7,
             cargo = 3,
             distance = 100,
             long_range_radar = 15000,
             short_range_radar = 4500,
         },
-        ["Avalanche"] = {
+        [ST.AVALANCHE] = {
             strength = 45,
             cargo = 8,
             distance = 200,
             long_range_radar = 35000,
             short_range_radar = 6000,
         },
-        ["Repulse"] = {
+        [ST.REPULSE] = {
             strength = 14,
             cargo = 12,
             distance = 200,
             long_range_radar = 38000,
             short_range_radar = 5000,
         },
-        ["Crow"] = {
+        [ST.CROW] = {
             strength = 8,
             cargo = 4,
             distance = 200,
@@ -689,16 +689,16 @@ function setConstants()
         ["Cruiser"] = { strength = 18, create = stockTemplate },
         ["Nirvana R5A"] = { strength = 20, create = stockTemplate },
         ["Ktlitan Worker"] = { strength = 21, create = stockTemplate },
-        ["Storm"] = { strength = 22, create = stockTemplate },
+        [ST.STORM] = { strength = 22, create = stockTemplate },
         ["Stalker R5"] = { strength = 22, create = stockTemplate },
         ["Stalker Q5"] = { strength = 22, create = stockTemplate },
         ["Ranus U"] = { strength = 25, create = stockTemplate },
         ["Stalker Q7"] = { strength = 25, create = stockTemplate },
         ["Stalker R7"] = { strength = 25, create = stockTemplate },
-        ["Magpie"] = { strength = 27, create = stockTemplate },
+        [ST.MAGPIE] = { strength = 27, create = stockTemplate },
         ["Elara P2"] = { strength = 28, create = stockTemplate },
         ["Tempest"] = { strength = 30, create = tempest },
-        ["Strix"] = { strength = 30, create = stockTemplate },
+        [ST.STRIX] = { strength = 30, create = stockTemplate },
         ["Fiend G3"] = { strength = 33, create = stockTemplate },
         ["Fiend G4"] = { strength = 35, create = stockTemplate },
         ["Fiend G5"] = { strength = 37, create = stockTemplate },
@@ -712,11 +712,11 @@ function setConstants()
         ["Blockade Runner"] = { strength = 65, create = stockTemplate },
         ["Starhammer II"] = { strength = 70, create = stockTemplate },
         ["Enforcer"] = { strength = 75, create = enforcer },
-        ["Dreadnought"] = { strength = 80, create = stockTemplate },
+        [ST.DREADNOUGHT] = { strength = 80, create = stockTemplate },
         ["Starhammer V"] = { strength = 90, create = starhammerV },
-        ["Battlestation"] = { strength = 100, create = stockTemplate },
+        [ST.BATTLESTATION] = { strength = 100, create = stockTemplate },
         ["Tyr"] = { strength = 150, create = tyr },
-        ["Odin"] = { strength = 250, create = stockTemplate },
+        [ST.ODIN] = { strength = 250, create = stockTemplate },
     }
     formation_delta = {
         ["square"] = {

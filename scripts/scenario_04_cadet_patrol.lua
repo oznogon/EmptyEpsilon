@@ -510,7 +510,7 @@ function setConstants()
             hop_range = 880,
             create = stockTemplate,
         },
-        ["Dagger"] = {
+        [ST.DAGGER] = {
             strength = 6,
             adder = false,
             missiler = false,
@@ -638,7 +638,7 @@ function setConstants()
             hop_range = 2000,
             create = touchy,
         },
-        ["Blade"] = {
+        [ST.BLADE] = {
             strength = 7,
             adder = false,
             missiler = false,
@@ -654,7 +654,7 @@ function setConstants()
             hop_range = 980,
             create = stockTemplate,
         },
-        ["Gunner"] = {
+        [ST.GUNNER] = {
             strength = 7,
             adder = false,
             missiler = false,
@@ -734,7 +734,7 @@ function setConstants()
             hop_range = 1180,
             create = k3fighter,
         },
-        ["Shooter"] = {
+        [ST.SHOOTER] = {
             strength = 8,
             adder = false,
             missiler = false,
@@ -750,7 +750,7 @@ function setConstants()
             hop_range = 980,
             create = stockTemplate,
         },
-        ["Jagger"] = {
+        [ST.JAGGER] = {
             strength = 8,
             adder = false,
             missiler = false,
@@ -958,7 +958,7 @@ function setConstants()
             hop_range = 1180,
             create = stockTemplate,
         },
-        ["Guard"] = {
+        [ST.GUARD] = {
             strength = 15,
             adder = false,
             missiler = false,
@@ -1070,7 +1070,7 @@ function setConstants()
             hop_range = 1180,
             create = farco5,
         },
-        ["Karnack"] = {
+        [ST.KARNACK] = {
             strength = 17,
             adder = false,
             missiler = false,
@@ -1086,7 +1086,7 @@ function setConstants()
             hop_range = 980,
             create = stockTemplate,
         },
-        ["Gunship"] = {
+        [ST.GUNSHIP] = {
             strength = 17,
             adder = false,
             missiler = false,
@@ -1230,7 +1230,7 @@ function setConstants()
             hop_range = 1480,
             create = farco11,
         },
-        ["Storm"] = {
+        [ST.STORM] = {
             strength = 22,
             adder = false,
             missiler = true,
@@ -1246,7 +1246,7 @@ function setConstants()
             hop_range = 1180,
             create = stockTemplate,
         },
-        ["Warden"] = {
+        [ST.WARDEN] = {
             strength = 22,
             adder = false,
             missiler = false,
@@ -1262,7 +1262,7 @@ function setConstants()
             hop_range = 1180,
             create = stockTemplate,
         },
-        ["Racer"] = {
+        [ST.RACER] = {
             strength = 22,
             adder = false,
             missiler = false,
@@ -1310,7 +1310,7 @@ function setConstants()
             hop_range = 980,
             create = stalkerQ5,
         },
-        ["Strike"] = {
+        [ST.STRIKE] = {
             strength = 23,
             adder = false,
             missiler = false,
@@ -1326,7 +1326,7 @@ function setConstants()
             hop_range = 980,
             create = stockTemplate,
         },
-        ["Dash"] = {
+        [ST.DASH] = {
             strength = 23,
             adder = false,
             missiler = false,
@@ -1358,7 +1358,7 @@ function setConstants()
             hop_range = 1480,
             create = farco13,
         },
-        ["Sentinel"] = {
+        [ST.SENTINEL] = {
             strength = 24,
             adder = false,
             missiler = false,
@@ -1390,7 +1390,7 @@ function setConstants()
             hop_range = 2500,
             create = stockTemplate,
         },
-        ["Flash"] = {
+        [ST.FLASH] = {
             strength = 25,
             adder = false,
             missiler = true,
@@ -1406,7 +1406,7 @@ function setConstants()
             hop_range = 2500,
             create = stockTemplate,
         },
-        ["Ranger"] = {
+        [ST.RANGER] = {
             strength = 25,
             adder = false,
             missiler = true,
@@ -1422,7 +1422,7 @@ function setConstants()
             hop_range = 2500,
             create = stockTemplate,
         },
-        ["Buster"] = {
+        [ST.BUSTER] = {
             strength = 25,
             adder = false,
             missiler = true,
@@ -1486,7 +1486,7 @@ function setConstants()
             hop_range = 2500,
             create = whirlwind,
         },
-        ["Hunter"] = {
+        [ST.HUNTER] = {
             strength = 26,
             adder = false,
             missiler = false,
@@ -1502,7 +1502,7 @@ function setConstants()
             hop_range = 980,
             create = stockTemplate,
         },
-        ["Magpie"] = {
+        [ST.MAGPIE] = {
             strength = 27,
             adder = false,
             missiler = false,
@@ -1550,7 +1550,7 @@ function setConstants()
             hop_range = 2500,
             create = tempest,
         },
-        ["Strix"] = {
+        [ST.STRIX] = {
             strength = 30,
             adder = false,
             missiler = false,
@@ -1678,7 +1678,7 @@ function setConstants()
             hop_range = 1180,
             create = barracuda,
         },
-        ["Ryder"] = {
+        [ST.RYDER] = {
             strength = 41,
             adder = false,
             missiler = false,
@@ -1870,7 +1870,7 @@ function setConstants()
             hop_range = 1480,
             create = enforcer,
         },
-        ["Dreadnought"] = {
+        [ST.DREADNOUGHT] = {
             strength = 80,
             adder = false,
             missiler = false,
@@ -1918,7 +1918,7 @@ function setConstants()
             hop_range = 1480,
             create = starhammerV,
         },
-        ["Battlestation"] = {
+        [ST.BATTLESTATION] = {
             strength = 100,
             adder = false,
             missiler = false,
@@ -1934,7 +1934,7 @@ function setConstants()
             hop_range = 2480,
             create = stockTemplate,
         },
-        ["Fortress"] = {
+        [ST.FORTRESS] = {
             strength = 130,
             adder = false,
             missiler = false,
@@ -1966,7 +1966,7 @@ function setConstants()
             hop_range = 2480,
             create = tyr,
         },
-        ["Odin"] = {
+        [ST.ODIN] = {
             strength = 250,
             adder = false,
             missiler = false,
@@ -2681,7 +2681,7 @@ function setGlobals()
     build_defense_platforms = {}
     sensor_impact = 1 --normal
     player_ship_names_for = {
-        ["Atlantis"] = {
+        [ST.ATLANTIS] = {
             "Excaliber",
             "Thrasher",
             "Punisher",
@@ -2698,7 +2698,7 @@ function setGlobals()
             "Aragog",
             "Charlotte",
         },
-        ["Benedict"] = {
+        [ST.BENEDICT] = {
             "Elizabeth",
             "Ford",
             "Vikramaditya",
@@ -2710,8 +2710,8 @@ function setGlobals()
             "Garibaldi",
             "Eisenhower",
         },
-        ["Crucible"] = { "Sling", "Stark", "Torrid", "Kicker", "Flummox" },
-        ["Ender"] = {
+        [ST.CRUCIBLE] = { "Sling", "Stark", "Torrid", "Kicker", "Flummox" },
+        [ST.ENDER] = {
             "Mongo",
             "Godzilla",
             "Leviathan",
@@ -2729,7 +2729,7 @@ function setGlobals()
             "Bandit",
             "Buccaneer",
         },
-        ["Hathcock"] = {
+        [ST.HATHCOCK] = {
             "Hayha",
             "Waldron",
             "Plunkett",
@@ -2742,7 +2742,7 @@ function setGlobals()
             "Hawkeye",
             "Hanzo",
         },
-        ["Kiriya"] = {
+        [ST.KIRIYA] = {
             "Cavour",
             "Reagan",
             "Gaulle",
@@ -2754,7 +2754,7 @@ function setGlobals()
             "Vinson",
             "Old Salt",
         },
-        ["Maverick"] = {
+        [ST.MAVERICK] = {
             "Angel",
             "Thunderbird",
             "Roaster",
@@ -2771,7 +2771,7 @@ function setGlobals()
             "Thorny",
             "Buzz",
         },
-        ["Nautilus"] = {
+        [ST.NAUTILUS] = {
             "October",
             "Abdiel",
             "Manxman",
@@ -2807,7 +2807,7 @@ function setGlobals()
             "Thrust",
             "Coyote",
         },
-        ["Piranha"] = {
+        [ST.PIRANHA] = {
             "Razor",
             "Biter",
             "Ripper",
@@ -2817,7 +2817,7 @@ function setGlobals()
             "Vulture",
             "Predator",
         },
-        ["Vindicator"] = {
+        [ST.VINDICATOR] = {
             "Excelsior",
             "Velociraptor",
             "Thunder",
@@ -2827,7 +2827,7 @@ function setGlobals()
             "Aspern",
             "Panther",
         },
-        ["Stingray"] = {
+        [ST.STINGRAY] = {
             "Buzzer",
             "Flitter",
             "Zippiticus",
@@ -2836,7 +2836,7 @@ function setGlobals()
             "Stinger",
             "Stripe",
         },
-        ["Avalanche"] = {
+        [ST.AVALANCHE] = {
             "Projectus",
             "Hurlmeister",
             "Flinger",
@@ -2853,7 +2853,7 @@ function setGlobals()
             "Sabre",
         },
         ["Redhook"] = { "Headhunter", "Thud", "Troll", "Scalper", "Shark" },
-        ["Repulse"] = {
+        [ST.REPULSE] = {
             "Fiddler",
             "Brinks",
             "Loomis",
@@ -2864,7 +2864,7 @@ function setGlobals()
             "Komatsu",
             "Eitan",
         },
-        ["Saipan"] = {
+        [ST.SAIPAN] = {
             "Atlas",
             "Bernard",
             "Alexander",
@@ -2875,7 +2875,7 @@ function setGlobals()
             "Pegasus",
         },
         ["Stricken"] = { "Blazon", "Streaker", "Pinto", "Spear", "Javelin" },
-        ["Crow"] = {
+        [ST.CROW] = {
             "Sparrow",
             "Sizzle",
             "Squawk",

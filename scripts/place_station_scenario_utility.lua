@@ -1282,7 +1282,7 @@ function populateStationPool()
                     "The station was established by a group of engineers who believed that synthetic lifeforms should be accessible to all. Their open-source designs have been adapted for everything from domestic service to hazardous environment exploration."
                 ),
             }),
-            ["Sentinel"] = stationBuild({
+            [ST.SENTINEL] = stationBuild({
                 reputation_neutral = 3.0,
                 goods = { software = stationGood(140) },
                 description = _(
@@ -1710,7 +1710,7 @@ function populateStationPool()
                 general = "",
                 history = "",
             }),
-            ["Maverick"] = stationBuild({
+            [ST.MAVERICK] = stationBuild({
                 goods = { luxury = stationGood(math.random(30, 80)) },
                 description = _(
                     "scienceDescription-station",

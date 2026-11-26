@@ -224,7 +224,7 @@ function setConstants()
     --Player ship name lists to supplant standard randomized call sign generation
     player_ship_names_for = {}
     player_ship_names_for["Amalgam"] = { "Mixer", "Igor", "Ronco", "Ginsu" }
-    player_ship_names_for["Atlantis"] = {
+    player_ship_names_for[ST.ATLANTIS] = {
         "Excaliber",
         "Thrasher",
         "Punisher",
@@ -236,7 +236,7 @@ function setConstants()
     }
     player_ship_names_for["Atlantis II"] =
         { "Spyder", "Shelob", "Tarantula", "Aragog", "Charlotte" }
-    player_ship_names_for["Benedict"] = {
+    player_ship_names_for[ST.BENEDICT] = {
         "Elizabeth",
         "Ford",
         "Vikramaditya",
@@ -248,13 +248,13 @@ function setConstants()
         "Garibaldi",
         "Eisenhower",
     }
-    player_ship_names_for["Crucible"] =
+    player_ship_names_for[ST.CRUCIBLE] =
         { "Sling", "Stark", "Torrid", "Kicker", "Flummox" }
     player_ship_names_for["Cruzeiro"] =
         { "Vamanos", "Cougar", "Parthos", "Trifecta", "Light Mind" }
     player_ship_names_for["Destroyer III"] =
         { "Trebuchet", "Pitcher", "Mutant", "Gronk", "Methuselah" }
-    player_ship_names_for["Ender"] =
+    player_ship_names_for[ST.ENDER] =
         { "Mongo", "Godzilla", "Leviathan", "Kraken", "Jupiter", "Saturn" }
     player_ship_names_for["Flavia P.Falcon"] = {
         "Ladyhawke",
@@ -266,7 +266,7 @@ function setConstants()
         "Bandit",
         "Buccaneer",
     }
-    player_ship_names_for["Hathcock"] = {
+    player_ship_names_for[ST.HATHCOCK] = {
         "Hayha",
         "Waldron",
         "Plunkett",
@@ -279,7 +279,7 @@ function setConstants()
         "Hawkeye",
         "Hanzo",
     }
-    player_ship_names_for["Kiriya"] = {
+    player_ship_names_for[ST.KIRIYA] = {
         "Cavour",
         "Reagan",
         "Gaulle",
@@ -301,11 +301,11 @@ function setConstants()
         "Thorny",
         "Buzz",
     }
-    player_ship_names_for["Maverick"] =
+    player_ship_names_for[ST.MAVERICK] =
         { "Angel", "Thunderbird", "Roaster", "Magnifier", "Hedge" }
     player_ship_names_for["Midian"] =
         { "Flipper", "Feint", "Dolphin", "Joker", "Trickster" }
-    player_ship_names_for["Nautilus"] = {
+    player_ship_names_for[ST.NAUTILUS] = {
         "October",
         "Abdiel",
         "Manxman",
@@ -327,7 +327,7 @@ function setConstants()
         "Thebe",
         "Retrograde",
     }
-    player_ship_names_for["Piranha"] = {
+    player_ship_names_for[ST.PIRANHA] = {
         "Razor",
         "Biter",
         "Ripper",
@@ -337,7 +337,7 @@ function setConstants()
         "Vulture",
         "Predator",
     }
-    player_ship_names_for["Vindicator"] = {
+    player_ship_names_for[ST.VINDICATOR] = {
         "Excelsior",
         "Velociraptor",
         "Thunder",
@@ -347,7 +347,7 @@ function setConstants()
         "Aspern",
         "Panther",
     }
-    player_ship_names_for["Stingray"] = {
+    player_ship_names_for[ST.STINGRAY] = {
         "Buzzer",
         "Flitter",
         "Zippiticus",
@@ -356,7 +356,7 @@ function setConstants()
         "Stinger",
         "Stripe",
     }
-    player_ship_names_for["Avalanche"] = {
+    player_ship_names_for[ST.AVALANCHE] = {
         "Projectus",
         "Hurlmeister",
         "Flinger",
@@ -371,7 +371,7 @@ function setConstants()
         { "Claw", "Bethel", "Cicero", "Da Vinci", "Skaats" }
     player_ship_names_for["Redhook"] =
         { "Headhunter", "Thud", "Troll", "Scalper", "Shark" }
-    player_ship_names_for["Repulse"] = {
+    player_ship_names_for[ST.REPULSE] = {
         "Fiddler",
         "Brinks",
         "Loomis",
@@ -386,7 +386,7 @@ function setConstants()
         { "Ink", "Tentacle", "Pierce", "Writhe", "Bogey" }
     player_ship_names_for["Stricken"] =
         { "Blazon", "Streaker", "Pinto", "Spear", "Javelin" }
-    player_ship_names_for["Crow"] =
+    player_ship_names_for[ST.CROW] =
         { "Sparrow", "Sizzle", "Squawk", "Crow", "Phoenix", "Snowbird", "Hawk" }
     player_ship_names_for["Surkov"] =
         { "Sting", "Sneak", "Bingo", "Thrill", "Vivisect" }
@@ -438,8 +438,8 @@ function setConstants()
         ["Phobos M3"] = { strength = 16, create = stockTemplate },
         ["Farco 3"] = { strength = 16, create = farco3 },
         ["Farco 5"] = { strength = 16, create = farco5 },
-        ["Karnack"] = { strength = 17, create = stockTemplate },
-        ["Gunship"] = { strength = 17, create = stockTemplate },
+        [ST.KARNACK] = { strength = 17, create = stockTemplate },
+        [ST.GUNSHIP] = { strength = 17, create = stockTemplate },
         ["Phobos T4"] = { strength = 18, create = phobosT4 },
         ["Cruiser"] = { strength = 18, create = stockTemplate },
         ["Nirvana R5"] = { strength = 19, create = stockTemplate },
@@ -448,7 +448,7 @@ function setConstants()
         ["Adv. Gunship"] = { strength = 20, create = stockTemplate },
         ["Ktlitan Worker"] = { strength = 21, create = stockTemplate },
         ["Farco 11"] = { strength = 21, create = farco11 },
-        ["Storm"] = { strength = 22, create = stockTemplate },
+        [ST.STORM] = { strength = 22, create = stockTemplate },
         ["Stalker R5"] = { strength = 22, create = stockTemplate },
         ["Stalker Q5"] = { strength = 22, create = stockTemplate },
         ["Farco 13"] = { strength = 24, create = farco13 },
@@ -456,10 +456,10 @@ function setConstants()
         ["Stalker Q7"] = { strength = 25, create = stockTemplate },
         ["Stalker R7"] = { strength = 25, create = stockTemplate },
         ["Whirlwind"] = { strength = 26, create = whirlwind },
-        ["Magpie"] = { strength = 27, create = stockTemplate },
+        [ST.MAGPIE] = { strength = 27, create = stockTemplate },
         ["Elara P2"] = { strength = 28, create = stockTemplate },
         ["Tempest"] = { strength = 30, create = tempest },
-        ["Strix"] = { strength = 30, create = stockTemplate },
+        [ST.STRIX] = { strength = 30, create = stockTemplate },
         ["Fiend G3"] = { strength = 33, create = stockTemplate },
         ["Fiend G4"] = { strength = 35, create = stockTemplate },
         ["Cucaracha"] = { strength = 36, create = cucaracha },
@@ -476,12 +476,12 @@ function setConstants()
         ["Blockade Runner"] = { strength = 65, create = stockTemplate },
         ["Starhammer II"] = { strength = 70, create = stockTemplate },
         ["Enforcer"] = { strength = 75, create = enforcer },
-        ["Dreadnought"] = { strength = 80, create = stockTemplate },
+        [ST.DREADNOUGHT] = { strength = 80, create = stockTemplate },
         ["Starhammer III"] = { strength = 85, create = starhammerIII },
         ["Starhammer V"] = { strength = 90, create = starhammerV },
-        ["Battlestation"] = { strength = 100, create = stockTemplate },
+        [ST.BATTLESTATION] = { strength = 100, create = stockTemplate },
         ["Tyr"] = { strength = 150, create = tyr },
-        ["Odin"] = { strength = 250, create = stockTemplate },
+        [ST.ODIN] = { strength = 250, create = stockTemplate },
     }
     shipTemplateDistance = {
         ["Adder MK3"] = 100,
@@ -492,22 +492,22 @@ function setConstants()
         ["Adder MK8"] = 100,
         ["Adder MK9"] = 100,
         ["Adv. Gunship"] = 400,
-        ["Magpie"] = 300,
+        [ST.MAGPIE] = 300,
         ["Atlantis X23"] = 400,
         ["Atlantis Y42"] = 400,
-        ["Battlestation"] = 2000,
+        [ST.BATTLESTATION] = 2000,
         ["Blockade Runner"] = 400,
-        ["Blade"] = 300,
-        ["Buster"] = 100,
+        [ST.BLADE] = 300,
+        [ST.BUSTER] = 100,
         ["Courier"] = 600,
         ["Cruiser"] = 200,
         ["Cucaracha"] = 200,
-        ["Dagger"] = 100,
-        ["Dash"] = 200,
+        [ST.DAGGER] = 100,
+        [ST.DASH] = 200,
         ["Defense platform"] = 800,
         ["Diva"] = 350,
         ["Dread No More"] = 400,
-        ["Dreadnought"] = 400,
+        [ST.DREADNOUGHT] = 400,
         ["Elara P2"] = 200,
         ["Enforcer"] = 400,
         ["Enforcer V2"] = 400,
@@ -529,10 +529,10 @@ function setConstants()
         ["Fiend G5"] = 400,
         ["Fiend G6"] = 400,
         ["Fighter"] = 100,
-        ["Flash"] = 100,
-        ["Flavia"] = 200,
+        [ST.FLASH] = 100,
+        [ST.FLAVIA] = 200,
         ["Flavia Falcon"] = 200,
-        ["Fortress"] = 2000,
+        [ST.FORTRESS] = 2000,
         ["Fuel Freighter 1"] = 600,
         ["Fuel Freighter 2"] = 600,
         ["Fuel Freighter 3"] = 600,
@@ -558,17 +558,17 @@ function setConstants()
         ["Goods Jump Freighter 3"] = 600,
         ["Goods Jump Freighter 4"] = 800,
         ["Goods Jump Freighter 5"] = 800,
-        ["Guard"] = 600, --transport_1_1
+        [ST.GUARD] = 600, --transport_1_1
         ["Gulper"] = 400,
-        ["Gunner"] = 100,
-        ["Gunship"] = 400,
+        [ST.GUNNER] = 100,
+        [ST.GUNSHIP] = 400,
         ["Heavy Drone"] = 300,
-        ["Hunter"] = 200,
+        [ST.HUNTER] = 200,
         ["Jacket Drone"] = 300,
         ["Jade 5"] = 100,
-        ["Jagger"] = 100,
+        [ST.JAGGER] = 100,
         ["Jump Carrier"] = 800,
-        ["Karnack"] = 200,
+        [ST.KARNACK] = 200,
         ["K2 Fighter"] = 300,
         ["K3 Fighter"] = 300,
         ["Ktlitan Breaker"] = 300,
@@ -593,7 +593,7 @@ function setConstants()
         ["Nirvana R3"] = 200,
         ["Nirvana R5"] = 200,
         ["Nirvana R5A"] = 200,
-        ["Odin"] = 1500,
+        [ST.ODIN] = 1500,
         ["Omnibus"] = 800,
         ["Personnel Freighter 1"] = 600,
         ["Personnel Freighter 2"] = 600,
@@ -615,14 +615,14 @@ function setConstants()
         ["Prador"] = 2000,
         ["Predator"] = 200,
         ["Predator V2"] = 200,
-        ["Racer"] = 200,
-        ["Ranger"] = 100,
+        [ST.RACER] = 200,
+        [ST.RANGER] = 100,
         ["Ranus U"] = 200,
         ["Roc"] = 200,
-        ["Ryder"] = 2000,
-        ["Sentinel"] = 600,
+        [ST.RYDER] = 2000,
+        [ST.SENTINEL] = 600,
         ["Service Jonque"] = 800,
-        ["Shooter"] = 100,
+        [ST.SHOOTER] = 100,
         ["Sloop"] = 200,
         ["Space Sedan"] = 600,
         ["Stalker Q5"] = 200,
@@ -631,39 +631,39 @@ function setConstants()
         ["Stalker R7"] = 200,
         ["Starhammer II"] = 400,
         ["Starhammer V"] = 400,
-        ["Storm"] = 200,
-        ["Strike"] = 200,
-        ["Strix"] = 200,
+        [ST.STORM] = 200,
+        [ST.STRIKE] = 200,
+        [ST.STRIX] = 200,
         ["Tempest"] = 200,
-        ["Transport1x1"] = 600,
-        ["Transport1x2"] = 600,
-        ["Transport1x3"] = 600,
-        ["Transport1x4"] = 800,
-        ["Transport1x5"] = 800,
-        ["Transport2x1"] = 600,
-        ["Transport2x2"] = 600,
-        ["Transport2x3"] = 600,
-        ["Transport2x4"] = 800,
-        ["Transport2x5"] = 800,
-        ["Transport3x1"] = 600,
-        ["Transport3x2"] = 600,
-        ["Transport3x3"] = 600,
-        ["Transport3x4"] = 800,
-        ["Transport3x5"] = 800,
-        ["Transport4x1"] = 600,
-        ["Transport4x2"] = 600,
-        ["Transport4x3"] = 600,
-        ["Transport4x4"] = 800,
-        ["Transport4x5"] = 800,
-        ["Transport5x1"] = 600,
-        ["Transport5x2"] = 600,
-        ["Transport5x3"] = 600,
-        ["Transport5x4"] = 800,
-        ["Transport5x5"] = 800,
+        [ST.TRANSPORT1X1] = 600,
+        [ST.TRANSPORT1X2] = 600,
+        [ST.TRANSPORT1X3] = 600,
+        [ST.TRANSPORT1X4] = 800,
+        [ST.TRANSPORT1X5] = 800,
+        [ST.TRANSPORT2X1] = 600,
+        [ST.TRANSPORT2X2] = 600,
+        [ST.TRANSPORT2X3] = 600,
+        [ST.TRANSPORT2X4] = 800,
+        [ST.TRANSPORT2X5] = 800,
+        [ST.TRANSPORT3X1] = 600,
+        [ST.TRANSPORT3X2] = 600,
+        [ST.TRANSPORT3X3] = 600,
+        [ST.TRANSPORT3X4] = 800,
+        [ST.TRANSPORT3X5] = 800,
+        [ST.TRANSPORT4X1] = 600,
+        [ST.TRANSPORT4X2] = 600,
+        [ST.TRANSPORT4X3] = 600,
+        [ST.TRANSPORT4X4] = 800,
+        [ST.TRANSPORT4X5] = 800,
+        [ST.TRANSPORT5X1] = 600,
+        [ST.TRANSPORT5X2] = 600,
+        [ST.TRANSPORT5X3] = 600,
+        [ST.TRANSPORT5X4] = 800,
+        [ST.TRANSPORT5X5] = 800,
         ["Tug"] = 200,
         ["Tyr"] = 2000,
         ["Waddle 5"] = 100,
-        ["Warden"] = 600,
+        [ST.WARDEN] = 600,
         ["Weapons platform"] = 200,
         ["Work Wagon"] = 600,
         ["WX-Lindworm"] = 100,
@@ -1500,7 +1500,7 @@ function setConstants()
     max_pyramid_tier = 15
     -- patrol_probe value should be between 0 and 5 not inclusive (0 = no patrol probes). The higher the value, the faster the patrol probe and the fewer patrol probes available
     playerShipStats = {
-        ["Atlantis"] = {
+        [ST.ATLANTIS] = {
             strength = 52,
             cargo = 6,
             distance = 400,
@@ -1515,7 +1515,7 @@ function setConstants()
             prox_scan = 0,
             epjam = 0,
         },
-        ["Benedict"] = {
+        [ST.BENEDICT] = {
             strength = 10,
             cargo = 9,
             distance = 400,
@@ -1530,7 +1530,7 @@ function setConstants()
             prox_scan = 0,
             epjam = 0,
         },
-        ["Crucible"] = {
+        [ST.CRUCIBLE] = {
             strength = 45,
             cargo = 5,
             distance = 200,
@@ -1545,7 +1545,7 @@ function setConstants()
             prox_scan = 1,
             epjam = 0,
         },
-        ["Ender"] = {
+        [ST.ENDER] = {
             strength = 100,
             cargo = 20,
             distance = 2000,
@@ -1575,7 +1575,7 @@ function setConstants()
             prox_scan = 0,
             epjam = 0,
         },
-        ["Hathcock"] = {
+        [ST.HATHCOCK] = {
             strength = 30,
             cargo = 6,
             distance = 200,
@@ -1590,7 +1590,7 @@ function setConstants()
             prox_scan = 1,
             epjam = 0,
         },
-        ["Kiriya"] = {
+        [ST.KIRIYA] = {
             strength = 10,
             cargo = 9,
             distance = 400,
@@ -1605,7 +1605,7 @@ function setConstants()
             prox_scan = 0,
             epjam = 0,
         },
-        ["Maverick"] = {
+        [ST.MAVERICK] = {
             strength = 45,
             cargo = 5,
             distance = 200,
@@ -1635,7 +1635,7 @@ function setConstants()
             prox_scan = 0,
             epjam = 0,
         },
-        ["Nautilus"] = {
+        [ST.NAUTILUS] = {
             strength = 12,
             cargo = 7,
             distance = 200,
@@ -1665,7 +1665,7 @@ function setConstants()
             prox_scan = 0,
             epjam = 0,
         },
-        ["Piranha"] = {
+        [ST.PIRANHA] = {
             strength = 16,
             cargo = 8,
             distance = 200,
@@ -1680,7 +1680,7 @@ function setConstants()
             prox_scan = 1,
             epjam = 0,
         },
-        ["Vindicator"] = {
+        [ST.VINDICATOR] = {
             strength = 40,
             cargo = 6,
             distance = 400,
@@ -1695,7 +1695,7 @@ function setConstants()
             prox_scan = 0,
             epjam = 0,
         },
-        ["Avalanche"] = {
+        [ST.AVALANCHE] = {
             strength = 45,
             cargo = 8,
             distance = 200,
@@ -1710,7 +1710,7 @@ function setConstants()
             prox_scan = 1,
             epjam = 0,
         },
-        ["Stingray"] = {
+        [ST.STINGRAY] = {
             strength = 7,
             cargo = 3,
             distance = 100,
@@ -1725,7 +1725,7 @@ function setConstants()
             prox_scan = 0,
             epjam = 0,
         },
-        ["Repulse"] = {
+        [ST.REPULSE] = {
             strength = 14,
             cargo = 12,
             distance = 200,
@@ -1740,7 +1740,7 @@ function setConstants()
             prox_scan = 0,
             epjam = 0,
         },
-        ["Crow"] = {
+        [ST.CROW] = {
             strength = 8,
             cargo = 4,
             distance = 200,

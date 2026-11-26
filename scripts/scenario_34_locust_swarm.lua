@@ -262,7 +262,7 @@ function setConstants()
     }
     player_ship_names_for = {}
     player_ship_names_for["Amalgam"] = { "Mixer", "Igor", "Ronco", "Ginsu" }
-    player_ship_names_for["Atlantis"] = {
+    player_ship_names_for[ST.ATLANTIS] = {
         "Excaliber",
         "Thrasher",
         "Punisher",
@@ -274,7 +274,7 @@ function setConstants()
     }
     player_ship_names_for["Atlantis II"] =
         { "Spyder", "Shelob", "Tarantula", "Aragog", "Charlotte" }
-    player_ship_names_for["Benedict"] = {
+    player_ship_names_for[ST.BENEDICT] = {
         "Elizabeth",
         "Ford",
         "Vikramaditya",
@@ -286,13 +286,13 @@ function setConstants()
         "Garibaldi",
         "Eisenhower",
     }
-    player_ship_names_for["Crucible"] =
+    player_ship_names_for[ST.CRUCIBLE] =
         { "Sling", "Stark", "Torrid", "Kicker", "Flummox" }
     player_ship_names_for["Cruzeiro"] =
         { "Vamanos", "Cougar", "Parthos", "Trifecta", "Light Mind" }
     player_ship_names_for["Destroyer III"] =
         { "Trebuchet", "Pitcher", "Mutant", "Gronk", "Methuselah" }
-    player_ship_names_for["Ender"] =
+    player_ship_names_for[ST.ENDER] =
         { "Mongo", "Godzilla", "Leviathan", "Kraken", "Jupiter", "Saturn" }
     player_ship_names_for["Flavia P.Falcon"] = {
         "Ladyhawke",
@@ -304,7 +304,7 @@ function setConstants()
         "Bandit",
         "Buccaneer",
     }
-    player_ship_names_for["Hathcock"] = {
+    player_ship_names_for[ST.HATHCOCK] = {
         "Hayha",
         "Waldron",
         "Plunkett",
@@ -317,7 +317,7 @@ function setConstants()
         "Hawkeye",
         "Hanzo",
     }
-    player_ship_names_for["Kiriya"] = {
+    player_ship_names_for[ST.KIRIYA] = {
         "Cavour",
         "Reagan",
         "Gaulle",
@@ -339,11 +339,11 @@ function setConstants()
         "Thorny",
         "Buzz",
     }
-    player_ship_names_for["Maverick"] =
+    player_ship_names_for[ST.MAVERICK] =
         { "Angel", "Thunderbird", "Roaster", "Magnifier", "Hedge" }
     player_ship_names_for["Midian"] =
         { "Flipper", "Feint", "Dolphin", "Joker", "Trickster" }
-    player_ship_names_for["Nautilus"] = {
+    player_ship_names_for[ST.NAUTILUS] = {
         "October",
         "Abdiel",
         "Manxman",
@@ -365,7 +365,7 @@ function setConstants()
         "Thebe",
         "Retrograde",
     }
-    player_ship_names_for["Piranha"] = {
+    player_ship_names_for[ST.PIRANHA] = {
         "Razor",
         "Biter",
         "Ripper",
@@ -375,7 +375,7 @@ function setConstants()
         "Vulture",
         "Predator",
     }
-    player_ship_names_for["Vindicator"] = {
+    player_ship_names_for[ST.VINDICATOR] = {
         "Excelsior",
         "Velociraptor",
         "Thunder",
@@ -385,7 +385,7 @@ function setConstants()
         "Aspern",
         "Panther",
     }
-    player_ship_names_for["Stingray"] = {
+    player_ship_names_for[ST.STINGRAY] = {
         "Buzzer",
         "Flitter",
         "Zippiticus",
@@ -394,7 +394,7 @@ function setConstants()
         "Stinger",
         "Stripe",
     }
-    player_ship_names_for["Avalanche"] = {
+    player_ship_names_for[ST.AVALANCHE] = {
         "Projectus",
         "Hurlmeister",
         "Flinger",
@@ -409,7 +409,7 @@ function setConstants()
         { "Claw", "Bethel", "Cicero", "Da Vinci", "Skaats" }
     player_ship_names_for["Redhook"] =
         { "Headhunter", "Thud", "Troll", "Scalper", "Shark" }
-    player_ship_names_for["Repulse"] = {
+    player_ship_names_for[ST.REPULSE] = {
         "Fiddler",
         "Brinks",
         "Loomis",
@@ -424,7 +424,7 @@ function setConstants()
         { "Ink", "Tentacle", "Pierce", "Writhe", "Bogey" }
     player_ship_names_for["Stricken"] =
         { "Blazon", "Streaker", "Pinto", "Spear", "Javelin" }
-    player_ship_names_for["Crow"] =
+    player_ship_names_for[ST.CROW] =
         { "Sparrow", "Sizzle", "Squawk", "Crow", "Phoenix", "Snowbird", "Hawk" }
     player_ship_names_for["Surkov"] =
         { "Sting", "Sneak", "Bingo", "Thrill", "Vivisect" }
@@ -440,7 +440,7 @@ function setConstants()
     player_ship_names_for["Leftovers"] = { "Foregone", "Righteous", "Masher" }
     playerShipStats =
         { --taken from sandbox. Not all are used. Not all characteristics are used.
-            ["Atlantis"] = {
+            [ST.ATLANTIS] = {
                 strength = 52,
                 cargo = 6,
                 distance = 400,
@@ -455,7 +455,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["Benedict"] = {
+            [ST.BENEDICT] = {
                 strength = 10,
                 cargo = 9,
                 distance = 400,
@@ -470,7 +470,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["Crucible"] = {
+            [ST.CRUCIBLE] = {
                 strength = 45,
                 cargo = 5,
                 distance = 200,
@@ -485,7 +485,7 @@ function setConstants()
                 prox_scan = 1,
                 epjam = 0,
             },
-            ["Ender"] = {
+            [ST.ENDER] = {
                 strength = 100,
                 cargo = 20,
                 distance = 2000,
@@ -515,7 +515,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["Hathcock"] = {
+            [ST.HATHCOCK] = {
                 strength = 30,
                 cargo = 6,
                 distance = 200,
@@ -530,7 +530,7 @@ function setConstants()
                 prox_scan = 1,
                 epjam = 0,
             },
-            ["Kiriya"] = {
+            [ST.KIRIYA] = {
                 strength = 10,
                 cargo = 9,
                 distance = 400,
@@ -545,7 +545,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["Maverick"] = {
+            [ST.MAVERICK] = {
                 strength = 45,
                 cargo = 5,
                 distance = 200,
@@ -575,7 +575,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["Nautilus"] = {
+            [ST.NAUTILUS] = {
                 strength = 12,
                 cargo = 7,
                 distance = 200,
@@ -605,7 +605,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["Piranha"] = {
+            [ST.PIRANHA] = {
                 strength = 16,
                 cargo = 8,
                 distance = 200,
@@ -620,7 +620,7 @@ function setConstants()
                 prox_scan = 1,
                 epjam = 0,
             },
-            ["Vindicator"] = {
+            [ST.VINDICATOR] = {
                 strength = 40,
                 cargo = 6,
                 distance = 400,
@@ -635,7 +635,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["Avalanche"] = {
+            [ST.AVALANCHE] = {
                 strength = 45,
                 cargo = 8,
                 distance = 200,
@@ -650,7 +650,7 @@ function setConstants()
                 prox_scan = 1,
                 epjam = 0,
             },
-            ["Stingray"] = {
+            [ST.STINGRAY] = {
                 strength = 7,
                 cargo = 3,
                 distance = 100,
@@ -665,7 +665,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["Repulse"] = {
+            [ST.REPULSE] = {
                 strength = 14,
                 cargo = 12,
                 distance = 200,
@@ -680,7 +680,7 @@ function setConstants()
                 prox_scan = 0,
                 epjam = 0,
             },
-            ["Crow"] = {
+            [ST.CROW] = {
                 strength = 8,
                 cargo = 4,
                 distance = 200,

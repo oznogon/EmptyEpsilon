@@ -902,7 +902,7 @@ function setSpawnShipGlobals()
                 dist = 100,
                 create = stockTemplate,
             },
-            ["Dagger"] = {
+            [ST.DAGGER] = {
                 strength = 6,
                 adder = false,
                 missiler = false,
@@ -1055,7 +1055,7 @@ function setSpawnShipGlobals()
                 dist = 100,
                 create = hornetFX64,
             },
-            ["Blade"] = {
+            [ST.BLADE] = {
                 strength = 7,
                 adder = false,
                 missiler = false,
@@ -1072,7 +1072,7 @@ function setSpawnShipGlobals()
                 dist = 300,
                 create = stockTemplate,
             },
-            ["Gunner"] = {
+            [ST.GUNNER] = {
                 strength = 7,
                 adder = false,
                 missiler = false,
@@ -1157,7 +1157,7 @@ function setSpawnShipGlobals()
                 dist = 300,
                 create = k3fighter,
             },
-            ["Shooter"] = {
+            [ST.SHOOTER] = {
                 strength = 8,
                 adder = false,
                 missiler = false,
@@ -1174,7 +1174,7 @@ function setSpawnShipGlobals()
                 dist = 100,
                 create = stockTemplate,
             },
-            ["Jagger"] = {
+            [ST.JAGGER] = {
                 strength = 8,
                 adder = false,
                 missiler = false,
@@ -1395,7 +1395,7 @@ function setSpawnShipGlobals()
                 dist = 200,
                 create = stockTemplate,
             },
-            ["Guard"] = {
+            [ST.GUARD] = {
                 strength = 15,
                 adder = false,
                 missiler = false,
@@ -1514,7 +1514,7 @@ function setSpawnShipGlobals()
                 dist = 200,
                 create = farco5,
             },
-            ["Karnack"] = {
+            [ST.KARNACK] = {
                 strength = 17,
                 adder = false,
                 missiler = false,
@@ -1531,7 +1531,7 @@ function setSpawnShipGlobals()
                 dist = 200,
                 create = stockTemplate,
             },
-            ["Gunship"] = {
+            [ST.GUNSHIP] = {
                 strength = 17,
                 adder = false,
                 missiler = false,
@@ -1718,7 +1718,7 @@ function setSpawnShipGlobals()
                 dist = 200,
                 create = stockTemplate,
             },
-            ["Storm"] = {
+            [ST.STORM] = {
                 strength = 22,
                 adder = false,
                 missiler = true,
@@ -1735,7 +1735,7 @@ function setSpawnShipGlobals()
                 dist = 200,
                 create = stockTemplate,
             },
-            ["Warden"] = {
+            [ST.WARDEN] = {
                 strength = 22,
                 adder = false,
                 missiler = false,
@@ -1752,7 +1752,7 @@ function setSpawnShipGlobals()
                 dist = 600,
                 create = stockTemplate,
             },
-            ["Racer"] = {
+            [ST.RACER] = {
                 strength = 22,
                 adder = false,
                 missiler = false,
@@ -1769,7 +1769,7 @@ function setSpawnShipGlobals()
                 dist = 200,
                 create = stockTemplate,
             },
-            ["Strike"] = {
+            [ST.STRIKE] = {
                 strength = 23,
                 adder = false,
                 missiler = false,
@@ -1786,7 +1786,7 @@ function setSpawnShipGlobals()
                 dist = 200,
                 create = stockTemplate,
             },
-            ["Dash"] = {
+            [ST.DASH] = {
                 strength = 23,
                 adder = false,
                 missiler = false,
@@ -1820,7 +1820,7 @@ function setSpawnShipGlobals()
                 dist = 200,
                 create = farco13,
             },
-            ["Sentinel"] = {
+            [ST.SENTINEL] = {
                 strength = 24,
                 adder = false,
                 missiler = false,
@@ -1854,7 +1854,7 @@ function setSpawnShipGlobals()
                 dist = 200,
                 create = stockTemplate,
             },
-            ["Flash"] = {
+            [ST.FLASH] = {
                 strength = 25,
                 adder = false,
                 missiler = true,
@@ -1871,7 +1871,7 @@ function setSpawnShipGlobals()
                 dist = 100,
                 create = stockTemplate,
             },
-            ["Ranger"] = {
+            [ST.RANGER] = {
                 strength = 25,
                 adder = false,
                 missiler = true,
@@ -1888,7 +1888,7 @@ function setSpawnShipGlobals()
                 dist = 100,
                 create = stockTemplate,
             },
-            ["Buster"] = {
+            [ST.BUSTER] = {
                 strength = 25,
                 adder = false,
                 missiler = true,
@@ -1956,7 +1956,7 @@ function setSpawnShipGlobals()
                 dist = 200,
                 create = whirlwind,
             },
-            ["Hunter"] = {
+            [ST.HUNTER] = {
                 strength = 26,
                 adder = false,
                 missiler = false,
@@ -1973,7 +1973,7 @@ function setSpawnShipGlobals()
                 dist = 200,
                 create = stockTemplate,
             },
-            ["Magpie"] = {
+            [ST.MAGPIE] = {
                 strength = 27,
                 adder = false,
                 missiler = false,
@@ -2007,7 +2007,7 @@ function setSpawnShipGlobals()
                 dist = 200,
                 create = tempest,
             },
-            ["Strix"] = {
+            [ST.STRIX] = {
                 strength = 30,
                 adder = false,
                 missiler = false,
@@ -2143,7 +2143,7 @@ function setSpawnShipGlobals()
                 dist = 200,
                 create = barracuda,
             },
-            ["Ryder"] = {
+            [ST.RYDER] = {
                 strength = 41,
                 adder = false,
                 missiler = false,
@@ -2347,7 +2347,7 @@ function setSpawnShipGlobals()
                 dist = 400,
                 create = enforcer,
             },
-            ["Dreadnought"] = {
+            [ST.DREADNOUGHT] = {
                 strength = 80,
                 adder = false,
                 missiler = false,
@@ -2398,7 +2398,7 @@ function setSpawnShipGlobals()
                 dist = 400,
                 create = starhammerV,
             },
-            ["Battlestation"] = {
+            [ST.BATTLESTATION] = {
                 strength = 100,
                 adder = false,
                 missiler = false,
@@ -2415,7 +2415,7 @@ function setSpawnShipGlobals()
                 dist = 2000,
                 create = stockTemplate,
             },
-            ["Fortress"] = {
+            [ST.FORTRESS] = {
                 strength = 130,
                 adder = false,
                 missiler = false,
@@ -2449,7 +2449,7 @@ function setSpawnShipGlobals()
                 dist = 2000,
                 create = tyr,
             },
-            ["Odin"] = {
+            [ST.ODIN] = {
                 strength = 250,
                 adder = false,
                 missiler = false,
@@ -2577,7 +2577,7 @@ function setSpawnShipGlobals()
                 "K3 Fighter",
                 "Ktlitan Scout",
             },
-            ["Dreadnought"] = {
+            [ST.DREADNOUGHT] = {
                 "Lite Drone",
                 "Gnat",
                 "MT52 Hornet",
@@ -2682,7 +2682,7 @@ function setSpawnShipGlobals()
                 "Nirvana R5",
                 "Nirvana R5A",
             },
-            ["Sentinel"] = {
+            [ST.SENTINEL] = {
                 "Lite Drone",
                 "Gnat",
                 "MT52 Hornet",
@@ -2818,7 +2818,7 @@ function setSpawnShipGlobals()
                 "Nirvana R5",
                 "Nirvana R5A",
             },
-            ["Gunship"] = {
+            [ST.GUNSHIP] = {
                 "Lite Drone",
                 "Gnat",
                 "MT52 Hornet",
@@ -4932,24 +4932,24 @@ function playerPower()
     for i, p in ipairs(getActivePlayerShips()) do
         if p.shipScore == nil then
             local spawn_player_score = {
-                ["Atlantis"] = 52,
-                ["Benedict"] = 10,
-                ["Crucible"] = 45,
-                ["Ender"] = 100,
+                [ST.ATLANTIS] = 52,
+                [ST.BENEDICT] = 10,
+                [ST.CRUCIBLE] = 45,
+                [ST.ENDER] = 100,
                 ["Flavia P.Falcon"] = 13,
-                ["Hathcock"] = 30,
-                ["Kiriya"] = 10,
+                [ST.HATHCOCK] = 30,
+                [ST.KIRIYA] = 10,
                 ["MP52 Hornet"] = 7,
-                ["Maverick"] = 45,
-                ["Nautilus"] = 12,
+                [ST.MAVERICK] = 45,
+                [ST.NAUTILUS] = 12,
                 ["Phobos M3P"] = 19,
-                ["Piranha"] = 16,
-                ["Repulse"] = 14,
-                ["Crow"] = 8,
+                [ST.PIRANHA] = 16,
+                [ST.REPULSE] = 14,
+                [ST.CROW] = 8,
                 ["ZX-Lindworm"] = 8,
-                ["Vindicator"] = 40,
-                ["Avalanche"] = 45,
-                ["Stingray"] = 7,
+                [ST.VINDICATOR] = 40,
+                [ST.AVALANCHE] = 45,
+                [ST.STINGRAY] = 7,
             }
             if spawn_player_score[p:getTypeName()] ~= nil then
                 player_ship_score = player_ship_score

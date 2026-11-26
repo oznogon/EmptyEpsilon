@@ -356,7 +356,7 @@ function setConstants()
             short_range_radar = 5000,
             create = stockTemplate,
         },
-        ["Dagger"] = {
+        [ST.DAGGER] = {
             strength = 6,
             short_range_radar = 5000,
             create = stockTemplate,
@@ -391,12 +391,12 @@ function setConstants()
             short_range_radar = 5000,
             create = hornetFX64,
         },
-        ["Blade"] = {
+        [ST.BLADE] = {
             strength = 7,
             short_range_radar = 5000,
             create = stockTemplate,
         },
-        ["Gunner"] = {
+        [ST.GUNNER] = {
             strength = 7,
             short_range_radar = 5000,
             create = stockTemplate,
@@ -421,12 +421,12 @@ function setConstants()
             short_range_radar = 5000,
             create = k3fighter,
         },
-        ["Shooter"] = {
+        [ST.SHOOTER] = {
             strength = 8,
             short_range_radar = 5000,
             create = stockTemplate,
         },
-        ["Jagger"] = {
+        [ST.JAGGER] = {
             strength = 8,
             short_range_radar = 5000,
             create = stockTemplate,
@@ -487,7 +487,7 @@ function setConstants()
             short_range_radar = 5000,
             create = stockTemplate,
         },
-        ["Guard"] = {
+        [ST.GUARD] = {
             strength = 15,
             short_range_radar = 5000,
             create = stockTemplate,
@@ -522,12 +522,12 @@ function setConstants()
             short_range_radar = 8000,
             create = farco5,
         },
-        ["Karnack"] = {
+        [ST.KARNACK] = {
             strength = 17,
             short_range_radar = 5000,
             create = stockTemplate,
         },
-        ["Gunship"] = {
+        [ST.GUNSHIP] = {
             strength = 17,
             short_range_radar = 5000,
             create = stockTemplate,
@@ -572,27 +572,27 @@ function setConstants()
             short_range_radar = 8000,
             create = farco11,
         },
-        ["Storm"] = {
+        [ST.STORM] = {
             strength = 22,
             short_range_radar = 6000,
             create = stockTemplate,
         },
-        ["Warden"] = {
+        [ST.WARDEN] = {
             strength = 22,
             short_range_radar = 6000,
             create = stockTemplate,
         },
-        ["Racer"] = {
+        [ST.RACER] = {
             strength = 22,
             short_range_radar = 5000,
             create = stockTemplate,
         },
-        ["Strike"] = {
+        [ST.STRIKE] = {
             strength = 23,
             short_range_radar = 5500,
             create = stockTemplate,
         },
-        ["Dash"] = {
+        [ST.DASH] = {
             strength = 23,
             short_range_radar = 5500,
             create = stockTemplate,
@@ -602,7 +602,7 @@ function setConstants()
             short_range_radar = 5000,
             create = farco13,
         },
-        ["Sentinel"] = {
+        [ST.SENTINEL] = {
             strength = 24,
             short_range_radar = 5000,
             create = stockTemplate,
@@ -612,17 +612,17 @@ function setConstants()
             short_range_radar = 6000,
             create = stockTemplate,
         },
-        ["Flash"] = {
+        [ST.FLASH] = {
             strength = 25,
             short_range_radar = 6000,
             create = stockTemplate,
         },
-        ["Ranger"] = {
+        [ST.RANGER] = {
             strength = 25,
             short_range_radar = 6000,
             create = stockTemplate,
         },
-        ["Buster"] = {
+        [ST.BUSTER] = {
             strength = 25,
             short_range_radar = 6000,
             create = stockTemplate,
@@ -642,12 +642,12 @@ function setConstants()
             short_range_radar = 6000,
             create = whirlwind,
         },
-        ["Hunter"] = {
+        [ST.HUNTER] = {
             strength = 26,
             short_range_radar = 5500,
             create = stockTemplate,
         },
-        ["Magpie"] = {
+        [ST.MAGPIE] = {
             strength = 27,
             short_range_radar = 5000,
             create = stockTemplate,
@@ -657,7 +657,7 @@ function setConstants()
             short_range_radar = 6000,
             create = tempest,
         },
-        ["Strix"] = {
+        [ST.STRIX] = {
             strength = 30,
             short_range_radar = 5000,
             create = stockTemplate,
@@ -737,7 +737,7 @@ function setConstants()
             short_range_radar = 9000,
             create = enforcer,
         },
-        ["Dreadnought"] = {
+        [ST.DREADNOUGHT] = {
             strength = 80,
             short_range_radar = 9000,
             create = stockTemplate,

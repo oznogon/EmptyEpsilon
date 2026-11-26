@@ -1336,9 +1336,9 @@ function setConstants()
         { "Headhunter", "Thud", "Troll", "Scalper", "Shark" }
     playerShipNamesForLeftovers = { "Foregone", "Righteous", "Masher" }
     playerShipNamesFor = {}
-    playerShipNamesFor["Crucible"] =
+    playerShipNamesFor[ST.CRUCIBLE] =
         { "Sling", "Stark", "Torrid", "Kicker", "Flummox" }
-    playerShipNamesFor["Maverick"] =
+    playerShipNamesFor[ST.MAVERICK] =
         { "Angel", "Thunderbird", "Roaster", "Magnifier", "Hedge" }
     commonGoods = {
         "food",
@@ -1507,17 +1507,17 @@ function setPlayers()
                     pobj.shipScore = 10
                     pobj.maxCargo = 9
                 elseif tempPlayerType == "Crucible" then
-                    if #playerShipNamesFor["Crucible"] > 0 then
+                    if #playerShipNamesFor[ST.CRUCIBLE] > 0 then
                         pobj:setCallSign(
-                            tableRemoveRandom(playerShipNamesFor["Crucible"])
+                            tableRemoveRandom(playerShipNamesFor[ST.CRUCIBLE])
                         )
                     end
                     pobj.shipScore = 45
                     pobj.maxCargo = 5
                 elseif tempPlayerType == "Maverick" then
-                    if #playerShipNamesFor["Maverick"] > 0 then
+                    if #playerShipNamesFor[ST.MAVERICK] > 0 then
                         pobj:setCallSign(
-                            tableRemoveRandom(playerShipNamesFor["Maverick"])
+                            tableRemoveRandom(playerShipNamesFor[ST.MAVERICK])
                         )
                     end
                     pobj.shipScore = 45
@@ -7294,7 +7294,7 @@ function populateStationPool()
                 general = "",
                 history = "",
             },
-            ["Maverick"] = {
+            [ST.MAVERICK] = {
                 weapon_available = {
                     Homing = random(1, 13) <= (8 - difficulty),
                     HVLI = random(1, 13) <= (9 - difficulty),

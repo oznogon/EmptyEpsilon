@@ -138,7 +138,7 @@ function init()
             short_range_radar = 4000,
             probes = 10,
         },
-        ["Piranha"] = {
+        [ST.PIRANHA] = {
             strength = 16,
             cargo = 8,
             distance = 200,
@@ -162,7 +162,7 @@ function init()
             short_range_radar = 5000,
             probes = 15,
         },
-        ["Atlantis"] = {
+        [ST.ATLANTIS] = {
             strength = 52,
             cargo = 6,
             distance = 400,
@@ -170,7 +170,7 @@ function init()
             short_range_radar = 5000,
             probes = 25,
         },
-        ["Vindicator"] = {
+        [ST.VINDICATOR] = {
             strength = 40,
             cargo = 6,
             distance = 400,
@@ -178,7 +178,7 @@ function init()
             short_range_radar = 5000,
             probes = 22,
         },
-        ["Avalanche"] = {
+        [ST.AVALANCHE] = {
             strength = 45,
             cargo = 8,
             distance = 200,
@@ -186,7 +186,7 @@ function init()
             short_range_radar = 6000,
             probes = 26,
         },
-        ["Stingray"] = {
+        [ST.STINGRAY] = {
             strength = 7,
             cargo = 3,
             distance = 100,
@@ -194,7 +194,7 @@ function init()
             short_range_radar = 4500,
             probes = 11,
         },
-        ["Benedict"] = {
+        [ST.BENEDICT] = {
             strength = 10,
             cargo = 9,
             distance = 400,
@@ -202,7 +202,7 @@ function init()
             short_range_radar = 5000,
             probes = 20,
         },
-        ["Kiriya"] = {
+        [ST.KIRIYA] = {
             strength = 10,
             cargo = 9,
             distance = 400,
@@ -210,7 +210,7 @@ function init()
             short_range_radar = 5000,
             probes = 20,
         },
-        ["Crow"] = {
+        [ST.CROW] = {
             strength = 8,
             cargo = 4,
             distance = 200,
@@ -226,7 +226,7 @@ function init()
             short_range_radar = 5500,
             probes = 12,
         },
-        ["Repulse"] = {
+        [ST.REPULSE] = {
             strength = 14,
             cargo = 12,
             distance = 200,
@@ -234,7 +234,7 @@ function init()
             short_range_radar = 5000,
             probes = 35,
         },
-        ["Ender"] = {
+        [ST.ENDER] = {
             strength = 100,
             cargo = 20,
             distance = 2000,
@@ -242,7 +242,7 @@ function init()
             short_range_radar = 7000,
             probes = 24,
         },
-        ["Nautilus"] = {
+        [ST.NAUTILUS] = {
             strength = 12,
             cargo = 7,
             distance = 200,
@@ -250,7 +250,7 @@ function init()
             short_range_radar = 4000,
             probes = 23,
         },
-        ["Hathcock"] = {
+        [ST.HATHCOCK] = {
             strength = 30,
             cargo = 6,
             distance = 200,
@@ -258,7 +258,7 @@ function init()
             short_range_radar = 6000,
             probes = 20,
         },
-        ["Maverick"] = {
+        [ST.MAVERICK] = {
             strength = 45,
             cargo = 5,
             distance = 200,
@@ -266,7 +266,7 @@ function init()
             short_range_radar = 4000,
             probes = 18,
         },
-        ["Crucible"] = {
+        [ST.CRUCIBLE] = {
             strength = 45,
             cargo = 5,
             distance = 200,
@@ -287,7 +287,7 @@ function init()
         "Thorny",
         "Buzz",
     }
-    playerShipNamesFor["Piranha"] = {
+    playerShipNamesFor[ST.PIRANHA] = {
         "Razor",
         "Biter",
         "Ripper",
@@ -317,7 +317,7 @@ function init()
         "Thebe",
         "Retrograde",
     }
-    playerShipNamesFor["Atlantis"] = {
+    playerShipNamesFor[ST.ATLANTIS] = {
         "Excalibur",
         "Thrasher",
         "Punisher",
@@ -327,7 +327,7 @@ function init()
         "Parchim",
         "Coronado",
     }
-    playerShipNamesFor["Vindicator"] = {
+    playerShipNamesFor[ST.VINDICATOR] = {
         "Excelsior",
         "Velociraptor",
         "Thunder",
@@ -337,7 +337,7 @@ function init()
         "Aspern",
         "Panther",
     }
-    playerShipNamesFor["Avalanche"] = {
+    playerShipNamesFor[ST.AVALANCHE] = {
         "Projectus",
         "Hurlmeister",
         "Flinger",
@@ -346,7 +346,7 @@ function init()
         "Nakhimov",
         "Antigone",
     }
-    playerShipNamesFor["Stingray"] = {
+    playerShipNamesFor[ST.STINGRAY] = {
         "Buzzer",
         "Flitter",
         "Zippiticus",
@@ -355,7 +355,7 @@ function init()
         "Stinger",
         "Stripe",
     }
-    playerShipNamesFor["Benedict"] = {
+    playerShipNamesFor[ST.BENEDICT] = {
         "Elizabeth",
         "Ford",
         "Vikramaditya",
@@ -367,7 +367,7 @@ function init()
         "Garibaldi",
         "Eisenhower",
     }
-    playerShipNamesFor["Kiriya"] = {
+    playerShipNamesFor[ST.KIRIYA] = {
         "Cavour",
         "Reagan",
         "Gaulle",
@@ -379,7 +379,7 @@ function init()
         "Vinson",
         "Old Salt",
     }
-    playerShipNamesFor["Crow"] =
+    playerShipNamesFor[ST.CROW] =
         { "Sparrow", "Sizzle", "Squawk", "Crow", "Snowbird", "Hawk" }
     playerShipNamesFor["ZX-Lindworm"] = {
         "Seagull",
@@ -390,7 +390,7 @@ function init()
         "Pixie",
         "Tinkerbell",
     }
-    playerShipNamesFor["Repulse"] = {
+    playerShipNamesFor[ST.REPULSE] = {
         "Fiddler",
         "Brinks",
         "Loomis",
@@ -401,9 +401,9 @@ function init()
         "Komatsu",
         "Eitan",
     }
-    playerShipNamesFor["Ender"] =
+    playerShipNamesFor[ST.ENDER] =
         { "Mongo", "Godzilla", "Leviathan", "Kraken", "Jupiter", "Saturn" }
-    playerShipNamesFor["Nautilus"] = {
+    playerShipNamesFor[ST.NAUTILUS] = {
         "October",
         "Abdiel",
         "Manxman",
@@ -415,7 +415,7 @@ function init()
         "Heinkel",
         "Dornier",
     }
-    playerShipNamesFor["Hathcock"] = {
+    playerShipNamesFor[ST.HATHCOCK] = {
         "Hayha",
         "Waldron",
         "Plunkett",
@@ -427,9 +427,9 @@ function init()
         "Hawkeye",
         "Hanzo",
     }
-    playerShipNamesFor["Maverick"] =
+    playerShipNamesFor[ST.MAVERICK] =
         { "Angel", "Thunderbird", "Roaster", "Magnifier", "Hedge" }
-    playerShipNamesFor["Crucible"] =
+    playerShipNamesFor[ST.CRUCIBLE] =
         { "Sling", "Stark", "Torrid", "Kicker", "Flummox" }
     playerShipNamesFor["Leftovers"] = {
         "Adelphi",

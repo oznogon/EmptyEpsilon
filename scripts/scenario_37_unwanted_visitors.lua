@@ -779,7 +779,7 @@ function setConstants()
             short_range_radar = 5000,
             create = stockTemplate,
         },
-        ["Dagger"] = {
+        [ST.DAGGER] = {
             strength = 6,
             short_range_radar = 5000,
             create = stockTemplate,
@@ -814,12 +814,12 @@ function setConstants()
             short_range_radar = 5000,
             create = hornetFX64,
         },
-        ["Blade"] = {
+        [ST.BLADE] = {
             strength = 7,
             short_range_radar = 5000,
             create = stockTemplate,
         },
-        ["Gunner"] = {
+        [ST.GUNNER] = {
             strength = 7,
             short_range_radar = 5000,
             create = stockTemplate,
@@ -844,12 +844,12 @@ function setConstants()
             short_range_radar = 5000,
             create = k3fighter,
         },
-        ["Shooter"] = {
+        [ST.SHOOTER] = {
             strength = 8,
             short_range_radar = 5000,
             create = stockTemplate,
         },
-        ["Jagger"] = {
+        [ST.JAGGER] = {
             strength = 8,
             short_range_radar = 5000,
             create = stockTemplate,
@@ -910,7 +910,7 @@ function setConstants()
             short_range_radar = 5000,
             create = stockTemplate,
         },
-        ["Guard"] = {
+        [ST.GUARD] = {
             strength = 15,
             short_range_radar = 5000,
             create = stockTemplate,
@@ -945,12 +945,12 @@ function setConstants()
             short_range_radar = 8000,
             create = farco5,
         },
-        ["Karnack"] = {
+        [ST.KARNACK] = {
             strength = 17,
             short_range_radar = 5000,
             create = stockTemplate,
         },
-        ["Gunship"] = {
+        [ST.GUNSHIP] = {
             strength = 17,
             short_range_radar = 5000,
             create = stockTemplate,
@@ -995,27 +995,27 @@ function setConstants()
             short_range_radar = 8000,
             create = farco11,
         },
-        ["Storm"] = {
+        [ST.STORM] = {
             strength = 22,
             short_range_radar = 6000,
             create = stockTemplate,
         },
-        ["Warden"] = {
+        [ST.WARDEN] = {
             strength = 22,
             short_range_radar = 6000,
             create = stockTemplate,
         },
-        ["Racer"] = {
+        [ST.RACER] = {
             strength = 22,
             short_range_radar = 5000,
             create = stockTemplate,
         },
-        ["Strike"] = {
+        [ST.STRIKE] = {
             strength = 23,
             short_range_radar = 5500,
             create = stockTemplate,
         },
-        ["Dash"] = {
+        [ST.DASH] = {
             strength = 23,
             short_range_radar = 5500,
             create = stockTemplate,
@@ -1025,7 +1025,7 @@ function setConstants()
             short_range_radar = 5000,
             create = farco13,
         },
-        ["Sentinel"] = {
+        [ST.SENTINEL] = {
             strength = 24,
             short_range_radar = 5000,
             create = stockTemplate,
@@ -1035,17 +1035,17 @@ function setConstants()
             short_range_radar = 6000,
             create = stockTemplate,
         },
-        ["Flash"] = {
+        [ST.FLASH] = {
             strength = 25,
             short_range_radar = 6000,
             create = stockTemplate,
         },
-        ["Ranger"] = {
+        [ST.RANGER] = {
             strength = 25,
             short_range_radar = 6000,
             create = stockTemplate,
         },
-        ["Buster"] = {
+        [ST.BUSTER] = {
             strength = 25,
             short_range_radar = 6000,
             create = stockTemplate,
@@ -1065,12 +1065,12 @@ function setConstants()
             short_range_radar = 6000,
             create = whirlwind,
         },
-        ["Hunter"] = {
+        [ST.HUNTER] = {
             strength = 26,
             short_range_radar = 5500,
             create = stockTemplate,
         },
-        ["Magpie"] = {
+        [ST.MAGPIE] = {
             strength = 27,
             short_range_radar = 5000,
             create = stockTemplate,
@@ -1080,7 +1080,7 @@ function setConstants()
             short_range_radar = 6000,
             create = tempest,
         },
-        ["Strix"] = {
+        [ST.STRIX] = {
             strength = 30,
             short_range_radar = 5000,
             create = stockTemplate,
@@ -1160,7 +1160,7 @@ function setConstants()
             short_range_radar = 9000,
             create = enforcer,
         },
-        ["Dreadnought"] = {
+        [ST.DREADNOUGHT] = {
             strength = 80,
             short_range_radar = 9000,
             create = stockTemplate,
@@ -1842,7 +1842,7 @@ function setConstants()
     max_pyramid_tier = 15
     --Player ship name lists to supplant standard randomized call sign generation
     playerShipNamesFor = {
-        ["Atlantis"] = {
+        [ST.ATLANTIS] = {
             "Excaliber",
             "Thrasher",
             "Punisher",
@@ -1859,7 +1859,7 @@ function setConstants()
             "Aragog",
             "Charlotte",
         },
-        ["Benedict"] = {
+        [ST.BENEDICT] = {
             "Elizabeth",
             "Ford",
             "Vikramaditya",
@@ -1871,8 +1871,8 @@ function setConstants()
             "Garibaldi",
             "Eisenhower",
         },
-        ["Crucible"] = { "Sling", "Stark", "Torrid", "Kicker", "Flummox" },
-        ["Ender"] = {
+        [ST.CRUCIBLE] = { "Sling", "Stark", "Torrid", "Kicker", "Flummox" },
+        [ST.ENDER] = {
             "Mongo",
             "Godzilla",
             "Leviathan",
@@ -1890,7 +1890,7 @@ function setConstants()
             "Bandit",
             "Buccaneer",
         },
-        ["Hathcock"] = {
+        [ST.HATHCOCK] = {
             "Hayha",
             "Waldron",
             "Plunkett",
@@ -1903,7 +1903,7 @@ function setConstants()
             "Hawkeye",
             "Hanzo",
         },
-        ["Kiriya"] = {
+        [ST.KIRIYA] = {
             "Cavour",
             "Reagan",
             "Gaulle",
@@ -1915,7 +1915,7 @@ function setConstants()
             "Vinson",
             "Old Salt",
         },
-        ["Maverick"] = {
+        [ST.MAVERICK] = {
             "Angel",
             "Thunderbird",
             "Roaster",
@@ -1932,7 +1932,7 @@ function setConstants()
             "Thorny",
             "Buzz",
         },
-        ["Nautilus"] = {
+        [ST.NAUTILUS] = {
             "October",
             "Abdiel",
             "Manxman",
@@ -1954,7 +1954,7 @@ function setConstants()
             "Thebe",
             "Retrograde",
         },
-        ["Piranha"] = {
+        [ST.PIRANHA] = {
             "Razor",
             "Biter",
             "Ripper",
@@ -1964,7 +1964,7 @@ function setConstants()
             "Vulture",
             "Predator",
         },
-        ["Vindicator"] = {
+        [ST.VINDICATOR] = {
             "Excelsior",
             "Velociraptor",
             "Thunder",
@@ -1974,7 +1974,7 @@ function setConstants()
             "Aspern",
             "Panther",
         },
-        ["Stingray"] = {
+        [ST.STINGRAY] = {
             "Buzzer",
             "Flitter",
             "Zippiticus",
@@ -1983,7 +1983,7 @@ function setConstants()
             "Stinger",
             "Stripe",
         },
-        ["Avalanche"] = {
+        [ST.AVALANCHE] = {
             "Projectus",
             "Hurlmeister",
             "Flinger",
@@ -2000,7 +2000,7 @@ function setConstants()
             "Sabre",
         },
         ["Redhook"] = { "Headhunter", "Thud", "Troll", "Scalper", "Shark" },
-        ["Repulse"] = {
+        [ST.REPULSE] = {
             "Fiddler",
             "Brinks",
             "Loomis",
@@ -2012,7 +2012,7 @@ function setConstants()
             "Eitan",
         },
         ["Stricken"] = { "Blazon", "Streaker", "Pinto", "Spear", "Javelin" },
-        ["Crow"] = {
+        [ST.CROW] = {
             "Sparrow",
             "Sizzle",
             "Squawk",
@@ -2045,7 +2045,7 @@ function setConstants()
             cm_boost = 600,
             cm_strafe = 0,
         },
-        ["Piranha"] = {
+        [ST.PIRANHA] = {
             strength = 16,
             cargo = 8,
             distance = 200,
@@ -2078,7 +2078,7 @@ function setConstants()
             cm_boost = 400,
             cm_strafe = 250,
         },
-        ["Atlantis"] = {
+        [ST.ATLANTIS] = {
             strength = 52,
             cargo = 6,
             distance = 400,
@@ -2089,7 +2089,7 @@ function setConstants()
             cm_boost = 400,
             cm_strafe = 250,
         },
-        ["Vindicator"] = {
+        [ST.VINDICATOR] = {
             strength = 40,
             cargo = 6,
             distance = 400,
@@ -2100,7 +2100,7 @@ function setConstants()
             cm_boost = 400,
             cm_strafe = 250,
         },
-        ["Avalanche"] = {
+        [ST.AVALANCHE] = {
             strength = 45,
             cargo = 8,
             distance = 200,
@@ -2111,7 +2111,7 @@ function setConstants()
             cm_boost = 450,
             cm_strafe = 150,
         },
-        ["Stingray"] = {
+        [ST.STINGRAY] = {
             strength = 7,
             cargo = 3,
             distance = 100,
@@ -2122,7 +2122,7 @@ function setConstants()
             cm_boost = 600,
             cm_strafe = 0,
         },
-        ["Benedict"] = {
+        [ST.BENEDICT] = {
             strength = 10,
             cargo = 9,
             distance = 400,
@@ -2133,7 +2133,7 @@ function setConstants()
             cm_boost = 400,
             cm_strafe = 250,
         },
-        ["Kiriya"] = {
+        [ST.KIRIYA] = {
             strength = 10,
             cargo = 9,
             distance = 400,
@@ -2144,7 +2144,7 @@ function setConstants()
             cm_boost = 400,
             cm_strafe = 250,
         },
-        ["Crow"] = {
+        [ST.CROW] = {
             strength = 8,
             cargo = 4,
             distance = 200,
@@ -2166,7 +2166,7 @@ function setConstants()
             cm_boost = 250,
             cm_strafe = 150,
         },
-        ["Repulse"] = {
+        [ST.REPULSE] = {
             strength = 14,
             cargo = 12,
             distance = 200,
@@ -2177,7 +2177,7 @@ function setConstants()
             cm_boost = 250,
             cm_strafe = 150,
         },
-        ["Ender"] = {
+        [ST.ENDER] = {
             strength = 100,
             cargo = 20,
             distance = 2000,
@@ -2188,7 +2188,7 @@ function setConstants()
             cm_boost = 800,
             cm_strafe = 500,
         },
-        ["Nautilus"] = {
+        [ST.NAUTILUS] = {
             strength = 12,
             cargo = 7,
             distance = 200,
@@ -2199,7 +2199,7 @@ function setConstants()
             cm_boost = 250,
             cm_strafe = 150,
         },
-        ["Hathcock"] = {
+        [ST.HATHCOCK] = {
             strength = 30,
             cargo = 6,
             distance = 200,
@@ -2210,7 +2210,7 @@ function setConstants()
             cm_boost = 200,
             cm_strafe = 150,
         },
-        ["Maverick"] = {
+        [ST.MAVERICK] = {
             strength = 45,
             cargo = 5,
             distance = 200,
@@ -2221,7 +2221,7 @@ function setConstants()
             cm_boost = 400,
             cm_strafe = 250,
         },
-        ["Crucible"] = {
+        [ST.CRUCIBLE] = {
             strength = 45,
             cargo = 5,
             distance = 200,

@@ -539,7 +539,7 @@ function setConstants()
             short_range_radar = 4000,
             probes = 10,
         },
-        ["Piranha"] = {
+        [ST.PIRANHA] = {
             strength = 16,
             cargo = 8,
             distance = 200,
@@ -563,7 +563,7 @@ function setConstants()
             short_range_radar = 5000,
             probes = 15,
         },
-        ["Atlantis"] = {
+        [ST.ATLANTIS] = {
             strength = 52,
             cargo = 6,
             distance = 400,
@@ -571,7 +571,7 @@ function setConstants()
             short_range_radar = 5000,
             probes = 25,
         },
-        ["Vindicator"] = {
+        [ST.VINDICATOR] = {
             strength = 40,
             cargo = 6,
             distance = 400,
@@ -579,7 +579,7 @@ function setConstants()
             short_range_radar = 5000,
             probes = 22,
         },
-        ["Avalanche"] = {
+        [ST.AVALANCHE] = {
             strength = 45,
             cargo = 8,
             distance = 200,
@@ -587,7 +587,7 @@ function setConstants()
             short_range_radar = 6000,
             probes = 26,
         },
-        ["Stingray"] = {
+        [ST.STINGRAY] = {
             strength = 7,
             cargo = 3,
             distance = 100,
@@ -595,7 +595,7 @@ function setConstants()
             short_range_radar = 4500,
             probes = 11,
         },
-        ["Benedict"] = {
+        [ST.BENEDICT] = {
             strength = 10,
             cargo = 9,
             distance = 400,
@@ -603,7 +603,7 @@ function setConstants()
             short_range_radar = 5000,
             probes = 20,
         },
-        ["Kiriya"] = {
+        [ST.KIRIYA] = {
             strength = 10,
             cargo = 9,
             distance = 400,
@@ -611,7 +611,7 @@ function setConstants()
             short_range_radar = 5000,
             probes = 20,
         },
-        ["Crow"] = {
+        [ST.CROW] = {
             strength = 8,
             cargo = 4,
             distance = 200,
@@ -627,7 +627,7 @@ function setConstants()
             short_range_radar = 5500,
             probes = 12,
         },
-        ["Repulse"] = {
+        [ST.REPULSE] = {
             strength = 14,
             cargo = 12,
             distance = 200,
@@ -635,7 +635,7 @@ function setConstants()
             short_range_radar = 5000,
             probes = 35,
         },
-        ["Ender"] = {
+        [ST.ENDER] = {
             strength = 100,
             cargo = 20,
             distance = 2000,
@@ -643,7 +643,7 @@ function setConstants()
             short_range_radar = 7000,
             probes = 24,
         },
-        ["Nautilus"] = {
+        [ST.NAUTILUS] = {
             strength = 12,
             cargo = 7,
             distance = 200,
@@ -651,7 +651,7 @@ function setConstants()
             short_range_radar = 4000,
             probes = 23,
         },
-        ["Hathcock"] = {
+        [ST.HATHCOCK] = {
             strength = 30,
             cargo = 6,
             distance = 200,
@@ -659,7 +659,7 @@ function setConstants()
             short_range_radar = 6000,
             probes = 20,
         },
-        ["Maverick"] = {
+        [ST.MAVERICK] = {
             strength = 45,
             cargo = 5,
             distance = 200,
@@ -667,7 +667,7 @@ function setConstants()
             short_range_radar = 4000,
             probes = 18,
         },
-        ["Crucible"] = {
+        [ST.CRUCIBLE] = {
             strength = 45,
             cargo = 5,
             distance = 200,
@@ -698,22 +698,22 @@ function setConstants()
         ["Piranha F12"] = { strength = 15, create = stockTemplate },
         ["Piranha F12.M"] = { strength = 16, create = stockTemplate },
         ["Phobos M3"] = { strength = 16, create = stockTemplate },
-        ["Karnack"] = { strength = 17, create = stockTemplate },
-        ["Gunship"] = { strength = 17, create = stockTemplate },
+        [ST.KARNACK] = { strength = 17, create = stockTemplate },
+        [ST.GUNSHIP] = { strength = 17, create = stockTemplate },
         ["Cruiser"] = { strength = 18, create = stockTemplate },
         ["Nirvana R5"] = { strength = 19, create = stockTemplate },
         ["Nirvana R5A"] = { strength = 20, create = stockTemplate },
         ["Adv. Gunship"] = { strength = 20, create = stockTemplate },
         ["Ktlitan Worker"] = { strength = 21, create = stockTemplate },
-        ["Storm"] = { strength = 22, create = stockTemplate },
+        [ST.STORM] = { strength = 22, create = stockTemplate },
         ["Stalker R5"] = { strength = 22, create = stockTemplate },
         ["Stalker Q5"] = { strength = 22, create = stockTemplate },
         ["Ranus U"] = { strength = 25, create = stockTemplate },
         ["Stalker Q7"] = { strength = 25, create = stockTemplate },
         ["Stalker R7"] = { strength = 25, create = stockTemplate },
-        ["Magpie"] = { strength = 27, create = stockTemplate },
+        [ST.MAGPIE] = { strength = 27, create = stockTemplate },
         ["Elara P2"] = { strength = 28, create = stockTemplate },
-        ["Strix"] = { strength = 30, create = stockTemplate },
+        [ST.STRIX] = { strength = 30, create = stockTemplate },
         ["Fiend G3"] = { strength = 33, create = stockTemplate },
         ["Fiend G4"] = { strength = 35, create = stockTemplate },
         ["Fiend G5"] = { strength = 37, create = stockTemplate },
@@ -724,7 +724,7 @@ function setConstants()
         ["Ktlitan Destroyer"] = { strength = 50, create = stockTemplate },
         ["Blockade Runner"] = { strength = 65, create = stockTemplate },
         ["Starhammer II"] = { strength = 70, create = stockTemplate },
-        ["Dreadnought"] = { strength = 80, create = stockTemplate },
+        [ST.DREADNOUGHT] = { strength = 80, create = stockTemplate },
     }
     boundary_beam_string = {
         "texture/beam_blue.png",
@@ -7694,7 +7694,7 @@ function setupTailoredShipAttributes()
         "Thorny",
         "Buzz",
     }
-    playerShipNamesFor["Piranha"] = {
+    playerShipNamesFor[ST.PIRANHA] = {
         "Razor",
         "Biter",
         "Ripper",
@@ -7724,7 +7724,7 @@ function setupTailoredShipAttributes()
         "Thebe",
         "Retrograde",
     }
-    playerShipNamesFor["Atlantis"] = {
+    playerShipNamesFor[ST.ATLANTIS] = {
         "Excalibur",
         "Thrasher",
         "Punisher",
@@ -7734,7 +7734,7 @@ function setupTailoredShipAttributes()
         "Parchim",
         "Coronado",
     }
-    playerShipNamesFor["Vindicator"] = {
+    playerShipNamesFor[ST.VINDICATOR] = {
         "Excelsior",
         "Velociraptor",
         "Thunder",
@@ -7744,7 +7744,7 @@ function setupTailoredShipAttributes()
         "Aspern",
         "Panther",
     }
-    playerShipNamesFor["Avalanche"] = {
+    playerShipNamesFor[ST.AVALANCHE] = {
         "Projectus",
         "Hurlmeister",
         "Flinger",
@@ -7753,7 +7753,7 @@ function setupTailoredShipAttributes()
         "Nakhimov",
         "Antigone",
     }
-    playerShipNamesFor["Stingray"] = {
+    playerShipNamesFor[ST.STINGRAY] = {
         "Buzzer",
         "Flitter",
         "Zippiticus",
@@ -7762,7 +7762,7 @@ function setupTailoredShipAttributes()
         "Stinger",
         "Stripe",
     }
-    playerShipNamesFor["Benedict"] = {
+    playerShipNamesFor[ST.BENEDICT] = {
         "Elizabeth",
         "Ford",
         "Vikramaditya",
@@ -7774,7 +7774,7 @@ function setupTailoredShipAttributes()
         "Garibaldi",
         "Eisenhower",
     }
-    playerShipNamesFor["Kiriya"] = {
+    playerShipNamesFor[ST.KIRIYA] = {
         "Cavour",
         "Reagan",
         "Gaulle",
@@ -7786,7 +7786,7 @@ function setupTailoredShipAttributes()
         "Vinson",
         "Old Salt",
     }
-    playerShipNamesFor["Crow"] =
+    playerShipNamesFor[ST.CROW] =
         { "Sparrow", "Sizzle", "Squawk", "Crow", "Snowbird", "Hawk" }
     playerShipNamesFor["ZX-Lindworm"] = {
         "Seagull",
@@ -7797,7 +7797,7 @@ function setupTailoredShipAttributes()
         "Pixie",
         "Tinkerbell",
     }
-    playerShipNamesFor["Repulse"] = {
+    playerShipNamesFor[ST.REPULSE] = {
         "Fiddler",
         "Brinks",
         "Loomis",
@@ -7808,9 +7808,9 @@ function setupTailoredShipAttributes()
         "Komatsu",
         "Eitan",
     }
-    playerShipNamesFor["Ender"] =
+    playerShipNamesFor[ST.ENDER] =
         { "Mongo", "Godzilla", "Leviathan", "Kraken", "Jupiter", "Saturn" }
-    playerShipNamesFor["Nautilus"] = {
+    playerShipNamesFor[ST.NAUTILUS] = {
         "October",
         "Abdiel",
         "Manxman",
@@ -7822,7 +7822,7 @@ function setupTailoredShipAttributes()
         "Heinkel",
         "Dornier",
     }
-    playerShipNamesFor["Hathcock"] = {
+    playerShipNamesFor[ST.HATHCOCK] = {
         "Hayha",
         "Waldron",
         "Plunkett",
@@ -7836,9 +7836,9 @@ function setupTailoredShipAttributes()
     }
     playerShipNamesFor["ProtoAtlantis"] =
         { "Narsil", "Blade", "Decapitator", "Trisect", "Sabre" }
-    playerShipNamesFor["Maverick"] =
+    playerShipNamesFor[ST.MAVERICK] =
         { "Angel", "Thunderbird", "Roaster", "Magnifier", "Hedge" }
-    playerShipNamesFor["Crucible"] =
+    playerShipNamesFor[ST.CRUCIBLE] =
         { "Sling", "Stark", "Torrid", "Kicker", "Flummox" }
     playerShipNamesFor["Surkov"] =
         { "Sting", "Sneak", "Bingo", "Thrill", "Vivisect" }

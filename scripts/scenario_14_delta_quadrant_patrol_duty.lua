@@ -605,7 +605,7 @@ function setConstants()
         "Thorny",
         "Buzz",
     }
-    playerShipNamesFor["Piranha"] = {
+    playerShipNamesFor[ST.PIRANHA] = {
         "Razor",
         "Biter",
         "Ripper",
@@ -635,7 +635,7 @@ function setConstants()
         "Thebe",
         "Retrograde",
     }
-    playerShipNamesFor["Atlantis"] = {
+    playerShipNamesFor[ST.ATLANTIS] = {
         "Excaliber",
         "Thrasher",
         "Punisher",
@@ -673,7 +673,7 @@ function setConstants()
         "Stinger",
         "Stripe",
     }
-    playerShipNamesFor["Benedict"] = {
+    playerShipNamesFor[ST.BENEDICT] = {
         "Elizabeth",
         "Ford",
         "Vikramaditya",
@@ -685,7 +685,7 @@ function setConstants()
         "Garibaldi",
         "Eisenhower",
     }
-    playerShipNamesFor["Kiriya"] = {
+    playerShipNamesFor[ST.KIRIYA] = {
         "Cavour",
         "Reagan",
         "Gaulle",
@@ -697,7 +697,7 @@ function setConstants()
         "Vinson",
         "Old Salt",
     }
-    playerShipNamesFor["Crow"] =
+    playerShipNamesFor[ST.CROW] =
         { "Sparrow", "Sizzle", "Squawk", "Crow", "Phoenix", "Snowbird", "Hawk" }
     playerShipNamesFor["Lindworm"] = {
         "Seagull",
@@ -708,7 +708,7 @@ function setConstants()
         "Pixie",
         "Tinkerbell",
     }
-    playerShipNamesFor["Repulse"] = {
+    playerShipNamesFor[ST.REPULSE] = {
         "Fiddler",
         "Brinks",
         "Loomis",
@@ -719,9 +719,9 @@ function setConstants()
         "Komatsu",
         "Eitan",
     }
-    playerShipNamesFor["Ender"] =
+    playerShipNamesFor[ST.ENDER] =
         { "Mongo", "Godzilla", "Leviathan", "Kraken", "Jupiter", "Saturn" }
-    playerShipNamesFor["Nautilus"] = {
+    playerShipNamesFor[ST.NAUTILUS] = {
         "October",
         "Abdiel",
         "Manxman",
@@ -733,7 +733,7 @@ function setConstants()
         "Heinkel",
         "Dornier",
     }
-    playerShipNamesFor["Hathcock"] = {
+    playerShipNamesFor[ST.HATHCOCK] = {
         "Hayha",
         "Waldron",
         "Plunkett",
@@ -746,9 +746,9 @@ function setConstants()
         "Hawkeye",
         "Hanzo",
     }
-    playerShipNamesFor["Crucible"] =
+    playerShipNamesFor[ST.CRUCIBLE] =
         { "Sling", "Stark", "Torrid", "Kicker", "Flummox" }
-    playerShipNamesFor["Maverick"] =
+    playerShipNamesFor[ST.MAVERICK] =
         { "Angel", "Thunderbird", "Roaster", "Magnifier", "Hedge" }
     playerShipNamesFor["Leftovers"] = { "Foregone", "Righteous", "Masher" }
     posseShipNames = {
@@ -828,9 +828,9 @@ function setPlayers()
                     pobj.max_cargo = 3
                     pobj:setWarpDrive(true)
                 elseif tempPlayerType == "Piranha" then
-                    if #playerShipNamesFor["Piranha"] > 0 then
+                    if #playerShipNamesFor[ST.PIRANHA] > 0 then
                         pobj:setCallSign(
-                            tableRemoveRandom(playerShipNamesFor["Piranha"])
+                            tableRemoveRandom(playerShipNamesFor[ST.PIRANHA])
                         )
                     end
                     pobj.ship_score = 16
@@ -855,9 +855,9 @@ function setPlayers()
                     pobj.max_cargo = 10
                     pobj:setWarpDrive(true)
                 elseif tempPlayerType == "Atlantis" then
-                    if #playerShipNamesFor["Atlantis"] > 0 then
+                    if #playerShipNamesFor[ST.ATLANTIS] > 0 then
                         pobj:setCallSign(
-                            tableRemoveRandom(playerShipNamesFor["Atlantis"])
+                            tableRemoveRandom(playerShipNamesFor[ST.ATLANTIS])
                         )
                     end
                     pobj.ship_score = 52
@@ -891,25 +891,25 @@ function setPlayers()
                     pobj:setJumpDrive(true)
                     pobj:setJumpDriveRange(3000, 40000)
                 elseif tempPlayerType == "Benedict" then
-                    if #playerShipNamesFor["Benedict"] > 0 then
+                    if #playerShipNamesFor[ST.BENEDICT] > 0 then
                         pobj:setCallSign(
-                            tableRemoveRandom(playerShipNamesFor["Benedict"])
+                            tableRemoveRandom(playerShipNamesFor[ST.BENEDICT])
                         )
                     end
                     pobj.ship_score = 10
                     pobj.max_cargo = 9
                 elseif tempPlayerType == "Kiriya" then
-                    if #playerShipNamesFor["Kiriya"] > 0 then
+                    if #playerShipNamesFor[ST.KIRIYA] > 0 then
                         pobj:setCallSign(
-                            tableRemoveRandom(playerShipNamesFor["Kiriya"])
+                            tableRemoveRandom(playerShipNamesFor[ST.KIRIYA])
                         )
                     end
                     pobj.ship_score = 10
                     pobj.max_cargo = 9
                 elseif tempPlayerType == "Crow" then
-                    if #playerShipNamesFor["Crow"] > 0 then
+                    if #playerShipNamesFor[ST.CROW] > 0 then
                         pobj:setCallSign(
-                            tableRemoveRandom(playerShipNamesFor["Crow"])
+                            tableRemoveRandom(playerShipNamesFor[ST.CROW])
                         )
                     end
                     if pobj:getImpulseMaxSpeed() == 45 then
@@ -948,49 +948,49 @@ function setPlayers()
                     pobj.auto_coolant = false
                     pobj:setWarpDrive(true)
                 elseif tempPlayerType == "Repulse" then
-                    if #playerShipNamesFor["Repulse"] > 0 then
+                    if #playerShipNamesFor[ST.REPULSE] > 0 then
                         pobj:setCallSign(
-                            tableRemoveRandom(playerShipNamesFor["Repulse"])
+                            tableRemoveRandom(playerShipNamesFor[ST.REPULSE])
                         )
                     end
                     pobj.ship_score = 14
                     pobj.max_cargo = 12
                 elseif tempPlayerType == "Ender" then
-                    if #playerShipNamesFor["Ender"] > 0 then
+                    if #playerShipNamesFor[ST.ENDER] > 0 then
                         pobj:setCallSign(
-                            tableRemoveRandom(playerShipNamesFor["Ender"])
+                            tableRemoveRandom(playerShipNamesFor[ST.ENDER])
                         )
                     end
                     pobj.ship_score = 100
                     pobj.max_cargo = 20
                 elseif tempPlayerType == "Nautilus" then
-                    if #playerShipNamesFor["Nautilus"] > 0 then
+                    if #playerShipNamesFor[ST.NAUTILUS] > 0 then
                         pobj:setCallSign(
-                            tableRemoveRandom(playerShipNamesFor["Nautilus"])
+                            tableRemoveRandom(playerShipNamesFor[ST.NAUTILUS])
                         )
                     end
                     pobj.ship_score = 12
                     pobj.max_cargo = 7
                 elseif tempPlayerType == "Hathcock" then
-                    if #playerShipNamesFor["Hathcock"] > 0 then
+                    if #playerShipNamesFor[ST.HATHCOCK] > 0 then
                         pobj:setCallSign(
-                            tableRemoveRandom(playerShipNamesFor["Hathcock"])
+                            tableRemoveRandom(playerShipNamesFor[ST.HATHCOCK])
                         )
                     end
                     pobj.ship_score = 30
                     pobj.max_cargo = 6
                 elseif tempPlayerType == "Maverick" then
-                    if #playerShipNamesFor["Maverick"] > 0 then
+                    if #playerShipNamesFor[ST.MAVERICK] > 0 then
                         pobj:setCallSign(
-                            tableRemoveRandom(playerShipNamesFor["Maverick"])
+                            tableRemoveRandom(playerShipNamesFor[ST.MAVERICK])
                         )
                     end
                     pobj.ship_score = 45
                     pobj.max_cargo = 5
                 elseif tempPlayerType == "Crucible" then
-                    if #playerShipNamesFor["Crucible"] > 0 then
+                    if #playerShipNamesFor[ST.CRUCIBLE] > 0 then
                         pobj:setCallSign(
-                            tableRemoveRandom(playerShipNamesFor["Crucible"])
+                            tableRemoveRandom(playerShipNamesFor[ST.CRUCIBLE])
                         )
                     end
                     pobj.ship_score = 45

@@ -41,7 +41,7 @@ function setControlCodeGlobals()
     --         ["Phoenix"] = "BURN265",
     --         ["Callisto"] = "MOON558",
     --         ["Charybdis"] = "JACKPOT777",
-    --         ["Sentinel"] = "FERENGI432",
+    --         ["Guardian"] = "FERENGI432",
     --         ["Omnivore"] = "EQUILATERAL180",
     --         ["Tarquin"] = "TIME909",
     --     }
