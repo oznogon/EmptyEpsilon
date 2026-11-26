@@ -1744,7 +1744,7 @@ function spawnDefense()
     for i = 1, defense_count do
         local def_x, def_y = vectorFromAngle(defense_angle, 4000)
         local dp =
-            CpuShip():setTemplate("Defense platform"):setFaction("Ghosts")
+            CpuShip():setTemplate(ST.DEFENSE_PLATFORM):setFaction("Ghosts")
         dp:setRotationMaxSpeed(dp:getRotationMaxSpeed() * speed_factor)
         dp:setAcceleration(dp:getAcceleration() * speed_factor)
         dp:setPosition(base_spawn_x + def_x, base_spawn_y + def_y)

@@ -4652,7 +4652,7 @@ function constructMinorEnemyTrap()
     table.insert(outer_space, { obj = bwj, dist = 200, shape = "circle" })
     minor_enemy_ambush = {}
     local center_guard =
-        CpuShip():setTemplate("Adder MK5"):setFaction(minor_enemy)
+        CpuShip():setTemplate(ST.ADDER_MK5):setFaction(minor_enemy)
     local cg_x, cg_y = vectorFromAngleNorth(minor_enemy_angle, 35700)
     cg_x = cg_x + doomed_system_x
     cg_y = cg_y + doomed_system_y
@@ -4673,7 +4673,7 @@ function constructMinorEnemyTrap()
         { angle = 270, dist = 800 },
     }
     for i, gp in ipairs(guard_positions) do
-        local ship = CpuShip():setTemplate("Adder MK5"):setFaction(minor_enemy)
+        local ship = CpuShip():setTemplate(ST.ADDER_MK5):setFaction(minor_enemy)
         local g_x, g_y =
             vectorFromAngleNorth((minor_enemy_angle + gp.angle) % 360, gp.dist)
         g_x = g_x + cg_x
@@ -4980,7 +4980,7 @@ function constructNemesisStation()
         dx = dx + nemesis_x
         dy = dy + nemesis_y
         ship = CpuShip()
-            :setTemplate("Defense platform")
+            :setTemplate(ST.DEFENSE_PLATFORM)
             :setPosition(dx, dy)
             :setFaction("Exuari")
         ship:orderStandGround():setCallSign(string.format("DP%i", i))

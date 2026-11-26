@@ -33,7 +33,7 @@ local playerSpaceshipPrefab = Prefab("PlayerSpaceship", SpaceObjectPrefab, {
 --- Such commands can be limited by the ship's capabilities, including systems damage, lack of power, or insufficient weapons stocks.
 --- Example:
 --- -- Creates a player Atlantis of the Human Navy faction
---- player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
+--- player = PlayerSpaceship():setFaction("Human Navy"):setTemplate(ST.ATLANTIS)
 --- @type creation
 function PlayerSpaceship()
     local e = playerSpaceshipPrefab:spawn()

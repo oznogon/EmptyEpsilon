@@ -4,31 +4,31 @@
 
 function init()
     -- Create a player ship at the origin
-    player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
+    player = PlayerSpaceship():setFaction("Human Navy"):setTemplate(ST.ATLANTIS)
     player:setPosition(0, 0)
 
     -- Create some visual references in the scene
     -- Station ahead
     SpaceStation()
-        :setTemplate("Small Station")
+        :setTemplate(ST.SMALL_STATION)
         :setFaction("Human Navy")
         :setPosition(5000, 0)
 
     -- Enemy ships to the left
     CpuShip()
-        :setTemplate("Adder MK5")
+        :setTemplate(ST.ADDER_MK5)
         :setFaction("Kraylor")
         :setPosition(-3000, 2000)
         :orderIdle()
     CpuShip()
-        :setTemplate("Adder MK5")
+        :setTemplate(ST.ADDER_MK5)
         :setFaction("Kraylor")
         :setPosition(-3000, 2500)
         :orderIdle()
 
     -- Friendly patrol to the right
     CpuShip()
-        :setTemplate("MT52 Hornet")
+        :setTemplate(ST.MT52_HORNET)
         :setFaction("Human Navy")
         :setPosition(3000, -2000)
         :orderIdle()

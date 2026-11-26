@@ -9341,7 +9341,7 @@ function probeObservatory(self, x, y)
     local ox, oy = vectorFromAngle(random(0, 360), 500, true)
     ox = ox + x
     oy = oy + y
-    local obs = SpaceStation():setPosition(ox, oy):setTemplate("Small Station")
+    local obs = SpaceStation():setPosition(ox, oy):setTemplate(ST.SMALL_STATION)
     obs:setShortRangeRadarRange(self.range * 1000):setShieldsMax(self.shield)
     obs:setHullMax(self.hull)
         :setRepairDocked(false)

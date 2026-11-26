@@ -64,7 +64,7 @@ Rundown of the mission:
 -- Init is run when the scenario is started. Create your initial world.
 function init()
     -- Create the main ship for the players.
-    player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
+    player = PlayerSpaceship():setFaction("Human Navy"):setTemplate(ST.ATLANTIS)
     allowNewPlayerShips(false)
     player
         :setPosition(25276, 133850)
@@ -97,7 +97,7 @@ function init()
 
     -- Set up the starting area.
     shipyard_gamma = SpaceStation()
-        :setTemplate("Medium Station")
+        :setTemplate(ST.MEDIUM_STATION)
         :setFaction("Human Navy")
         :setCallSign("Shipyard-Gamma")
         :setPosition(25276, 134550)
@@ -105,7 +105,7 @@ function init()
     player:commandDock(shipyard_gamma)
     player:addReputationPoints(50) -- Initial reputation
     supply_station_6 = SpaceStation()
-        :setTemplate("Small Station")
+        :setTemplate(ST.SMALL_STATION)
         :setFaction("Human Navy")
         :setCallSign("Supply-6")
         :setPosition(14491, 126412)
@@ -121,7 +121,7 @@ function init()
     createObjectsOnLine(37351, 125310, 39870, 137224, 1000, Mine, 2, 90)
     CpuShip()
         :setFaction("Human Navy")
-        :setTemplate("Phobos T3")
+        :setTemplate(ST.PHOBOS_T3)
         :setCallSign("D-2")
         :setScanned(true)
         :setPosition(12419, 124184)
@@ -129,7 +129,7 @@ function init()
         :setCommsScript("")
     CpuShip()
         :setFaction("Human Navy")
-        :setTemplate("Phobos T3")
+        :setTemplate(ST.PHOBOS_T3)
         :setCallSign("D-3")
         :setScanned(true)
         :setPosition(16104, 127943)
@@ -195,14 +195,14 @@ function init()
 
     target_dummy_1 = CpuShip()
         :setFaction("Kraylor")
-        :setTemplate("MT52 Hornet")
+        :setTemplate(ST.MT52_HORNET)
         :setCallSign("Dummy-1")
         :setPosition(29269, 109499)
         :orderIdle()
         :setRotation(random(0, 360))
     target_dummy_2 = CpuShip()
         :setFaction("Kraylor")
-        :setTemplate("MT52 Hornet")
+        :setTemplate(ST.MT52_HORNET)
         :setCallSign("Dummy-2")
         :setPosition(31032, 109822)
         :orderIdle()
@@ -240,13 +240,13 @@ function init()
         :setWeaponStorage("HVLI", 4)
     CpuShip()
         :setFaction("Kraylor")
-        :setTemplate("MU52 Hornet")
+        :setTemplate(ST.MU52_HORNET)
         :setCallSign("S10")
         :setPosition(306010, -74718)
         :orderDefendLocation(306010, -74718)
     CpuShip()
         :setFaction("Kraylor")
-        :setTemplate("Adder MK5")
+        :setTemplate(ST.ADDER_MK5)
         :setCallSign("CCN8")
         :setPosition(304364, -74222)
         :orderDefendLocation(304364, -74222)
@@ -331,7 +331,7 @@ Doppler instability: %i]]
     CpuShip()
         :setFaction("Ghosts")
         :setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
-        :setTemplate("Phobos T3")
+        :setTemplate(ST.PHOBOS_T3)
         :orderDefendLocation(x, y)
 
     x, y = table
@@ -340,7 +340,7 @@ Doppler instability: %i]]
     CpuShip()
         :setFaction("Ghosts")
         :setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
-        :setTemplate("Piranha F12")
+        :setTemplate(ST.PIRANHA_F12)
         :orderDefendLocation(x, y)
 
     x, y = table
@@ -453,9 +453,9 @@ Doppler instability: %i]]
             :setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
             :orderDefendLocation(x, y)
         if random(0, 100) < 20 then
-            ship:setTemplate("Defense platform")
+            ship:setTemplate(ST.DEFENSE_PLATFORM)
         elseif random(0, 100) < 50 then
-            ship:setTemplate("Atlantis X23")
+            ship:setTemplate(ST.ATLANTIS_X23)
         else
             ship:setTemplate("Starhammer II")
         end
@@ -466,45 +466,45 @@ Doppler instability: %i]]
                 :setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
                 :orderDefendTarget(ship)
             if random(0, 100) < 50 then
-                ship2:setTemplate("Phobos T3")
+                ship2:setTemplate(ST.PHOBOS_T3)
             elseif random(0, 100) < 20 then
-                ship2:setTemplate("Piranha F12.M")
+                ship2:setTemplate(ST.PIRANHA_F12M)
             else
-                ship2:setTemplate("Piranha F12")
+                ship2:setTemplate(ST.PIRANHA_F12)
             end
             table.insert(kraylor_defense_line_ships, ship2)
         end
     end
 
     SpaceStation()
-        :setTemplate("Huge Station")
+        :setTemplate(ST.HUGE_STATION)
         :setFaction("Kraylor")
         :setPosition(32099, -291152)
     SpaceStation()
-        :setTemplate("Huge Station")
+        :setTemplate(ST.HUGE_STATION)
         :setFaction("Kraylor")
         :setPosition(-4252, -297462)
     SpaceStation()
-        :setTemplate("Huge Station")
+        :setTemplate(ST.HUGE_STATION)
         :setFaction("Kraylor")
         :setPosition(-27984, -262071)
 
     -- Setup the Kraylor forward line.
     kraylor_forward_line = {
         SpaceStation()
-            :setTemplate("Small Station")
+            :setTemplate(ST.SMALL_STATION)
             :setFaction("Kraylor")
             :setPosition(-7278, -197898),
         SpaceStation()
-            :setTemplate("Large Station")
+            :setTemplate(ST.LARGE_STATION)
             :setFaction("Kraylor")
             :setPosition(-13839, -233328),
         SpaceStation()
-            :setTemplate("Large Station")
+            :setTemplate(ST.LARGE_STATION)
             :setFaction("Kraylor")
             :setPosition(29333, -240151),
         SpaceStation()
-            :setTemplate("Small Station")
+            :setTemplate(ST.SMALL_STATION)
             :setFaction("Kraylor")
             :setPosition(36681, -200260),
     }
@@ -521,9 +521,9 @@ Doppler instability: %i]]
             :orderDefendLocation(x, y)
 
         if random(0, 100) < 20 then
-            ship:setTemplate("Defense platform")
+            ship:setTemplate(ST.DEFENSE_PLATFORM)
         elseif random(0, 100) < 50 then
-            ship:setTemplate("Atlantis X23")
+            ship:setTemplate(ST.ATLANTIS_X23)
         else
             ship:setTemplate("Starhammer II")
         end
@@ -537,11 +537,11 @@ Doppler instability: %i]]
                 :orderDefendTarget(ship)
 
             if random(0, 100) < 50 then
-                ship2:setTemplate("Phobos T3")
+                ship2:setTemplate(ST.PHOBOS_T3)
             elseif random(0, 100) < 20 then
-                ship2:setTemplate("Piranha F12.M")
+                ship2:setTemplate(ST.PIRANHA_F12M)
             else
-                ship2:setTemplate("Piranha F12")
+                ship2:setTemplate(ST.PIRANHA_F12)
             end
 
             table.insert(kraylor_defense_line_ships, ship2)

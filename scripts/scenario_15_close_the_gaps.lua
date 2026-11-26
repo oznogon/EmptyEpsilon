@@ -3232,7 +3232,7 @@ function handleUndockedState()
                                             comms_target:getFactionId()
                                         )
                                         :setPosition(comms_target:getPosition())
-                                        :setTemplate("Adder MK5")
+                                        :setTemplate(ST.ADDER_MK5)
                                         :setScanned(true)
                                         :orderDefendLocation(
                                             comms_source:getWaypoint(n)

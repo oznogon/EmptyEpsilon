@@ -4,7 +4,7 @@
 
 function init()
     -- Spawn a player ship so the briefing screen is accessible
-    player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
+    player = PlayerSpaceship():setFaction("Human Navy"):setTemplate(ST.ATLANTIS)
     player:setPosition(0, 0)
 
     -- Populate 5 briefing pages on the player ship using images from resources/images/

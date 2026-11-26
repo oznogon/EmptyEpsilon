@@ -166,9 +166,9 @@ end
 --
 -- Example:
 --   To create a space station 10000 units from coordinates 100, -100 at a rotation vector of 45 degrees, run:
---     setCirclePos(SpaceStation():setTemplate("Small Station"):setFaction("Independent"), 100, -100, 45, 10000)
+--     setCirclePos(SpaceStation():setTemplate(ST.SMALL_STATION):setFaction("Independent"), 100, -100, 45, 10000)
 --   To create a space station 10000 units from coordinates 100, -100 at a heading of 45 degrees, run:
---     setCirclePos(SpaceStation():setTemplate("Small Station"):setFaction("Independent"), 100, -100, 45, 10000, true)
+--     setCirclePos(SpaceStation():setTemplate(ST.SMALL_STATION):setFaction("Independent"), 100, -100, 45, 10000, true)
 function setCirclePos(obj, x, y, angle, distance, angle_is_heading)
     local dx, dy = vectorFromAngle(angle, distance, angle_is_heading)
     return obj:setPosition(x + dx, y + dy)

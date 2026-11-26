@@ -1744,7 +1744,7 @@ function beamDamageGM()
 end
 --additional ad hoc ship definitions
 function phobosR2(enemyFaction)
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Phobos T3")
+    local ship = CpuShip():setFaction(enemyFaction):setTemplate(ST.PHOBOS_T3)
     local p = getPlayerShip(-1)
     if p ~= nil and p:isValid() and p:isFriendly(ship) then
         local temp_faction = ship:getFaction()
@@ -1762,7 +1762,7 @@ function phobosR2(enemyFaction)
     return ship
 end
 function adderMk8(enemyFaction)
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Adder MK5")
+    local ship = CpuShip():setFaction(enemyFaction):setTemplate(ST.ADDER_MK5)
     local p = getPlayerShip(-1)
     if p ~= nil and p:isValid() and p:isFriendly(ship) then
         local temp_faction = ship:getFaction()
@@ -1780,7 +1780,7 @@ function adderMk8(enemyFaction)
     return ship
 end
 function adderMk7(enemyFaction)
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Adder MK6")
+    local ship = CpuShip():setFaction(enemyFaction):setTemplate(ST.ADDER_MK6)
     local p = getPlayerShip(-1)
     if p ~= nil and p:isValid() and p:isFriendly(ship) then
         local temp_faction = ship:getFaction()
@@ -1797,7 +1797,7 @@ function adderMk7(enemyFaction)
     return ship
 end
 function adderMk3(enemyFaction)
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Adder MK4")
+    local ship = CpuShip():setFaction(enemyFaction):setTemplate(ST.ADDER_MK4)
     local p = getPlayerShip(-1)
     if p ~= nil and p:isValid() and p:isFriendly(ship) then
         local temp_faction = ship:getFaction()
@@ -8757,7 +8757,7 @@ function addPatrol(delta)
         table.insert(
             patrol_fleet,
             CpuShip()
-                :setTemplate("MU52 Hornet")
+                :setTemplate(ST.MU52_HORNET)
                 :setFaction(selected_faction)
                 :setPosition(ps_x, ps_y)
                 :setCommsScript("")
@@ -8767,7 +8767,7 @@ function addPatrol(delta)
             table.insert(
                 patrol_fleet,
                 CpuShip()
-                    :setTemplate("MU52 Hornet")
+                    :setTemplate(ST.MU52_HORNET)
                     :setFaction(selected_faction)
                     :setPosition(ps_x, ps_y)
                     :setCommsScript("")
@@ -12355,7 +12355,7 @@ function handleUndockedState()
                                             comms_target:getFactionId()
                                         )
                                         :setPosition(comms_target:getPosition())
-                                        :setTemplate("Adder MK5")
+                                        :setTemplate(ST.ADDER_MK5)
                                         :setScanned(true)
                                     local p = getPlayerShip(-1)
                                     if

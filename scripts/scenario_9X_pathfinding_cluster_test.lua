@@ -5,7 +5,7 @@
 function init()
     player = PlayerSpaceship()
         :setFaction("Human Navy")
-        :setTemplate("Atlantis X23")
+        :setTemplate(ST.ATLANTIS_X23)
         :setPosition(-3000, 0)
         :setCallSign("Player")
 
@@ -14,12 +14,12 @@ function init()
     -- SpaceStation at (0, 600) with radius ~800 means it covers down to y=-200.
     -- These overlap slightly and create a narrow passable corridor.
     SpaceStation()
-        :setTemplate("Medium Station")
+        :setTemplate(ST.MEDIUM_STATION)
         :setFaction("Independent")
         :setPosition(0, -400)
         :setRotation(0)
     SpaceStation()
-        :setTemplate("Medium Station")
+        :setTemplate(ST.MEDIUM_STATION)
         :setFaction("Independent")
         :setPosition(0, 600)
         :setRotation(0)
@@ -32,7 +32,7 @@ function init()
     -- CPU ally on the left side (y=300), ordered to fly to the right side
     -- The direct line passes between the two stations.
     ally = CpuShip()
-        :setTemplate("Phobos T3")
+        :setTemplate(ST.PHOBOS_T3)
         :setFaction("Human Navy")
         :setPosition(-3000, 300)
         :setRotation(0)

@@ -4,7 +4,7 @@
 
 function init()
     -- Create a player ship
-    player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
+    player = PlayerSpaceship():setFaction("Human Navy"):setTemplate(ST.ATLANTIS)
     player:setPosition(0, 0)
 
     -- Create a static camera at (5000, 0)

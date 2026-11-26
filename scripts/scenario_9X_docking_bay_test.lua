@@ -3,7 +3,7 @@
 -- Type: Development
 
 --[[
-entity = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
+entity = PlayerSpaceship():setFaction("Human Navy"):setTemplate(ST.ATLANTIS)
 entity.components.docking_bay = {
     berths = {
         {type = "storage", move_time = 5.0, transfer_rate = 1.0},

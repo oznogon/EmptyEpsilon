@@ -1506,7 +1506,7 @@ function setStations()
     neutralStations = 0
     --Timer
     stationTimer = SpaceStation()
-        :setTemplate("Small Station")
+        :setTemplate(ST.SMALL_STATION)
         :setFaction("Human Navy")
         :setCommsScript("")
         :setCommsFunction(commsStation)
@@ -4772,7 +4772,7 @@ function handleUndockedState()
                                             comms_target:getFactionId()
                                         )
                                         :setPosition(comms_target:getPosition())
-                                        :setTemplate("Adder MK5")
+                                        :setTemplate(ST.ADDER_MK5)
                                         :setScanned(true)
                                         :orderDefendLocation(
                                             comms_source:getWaypoint(n)
@@ -6433,7 +6433,7 @@ function update(delta)
                                     random(5000, 8000)
                                 )
                                 p5.c1 = CpuShip()
-                                    :setTemplate("Stalker Q7")
+                                    :setTemplate(ST.STALKER_Q7)
                                     :setPosition(
                                         racePoint1x + cx,
                                         racePoint1y + cy
@@ -6444,7 +6444,7 @@ function update(delta)
                                     random(5000, 8000)
                                 )
                                 p5.c2 = CpuShip()
-                                    :setTemplate("Stalker R7")
+                                    :setTemplate(ST.STALKER_R7)
                                     :setPosition(
                                         racePoint1x + cx,
                                         racePoint1y + cy
@@ -6455,7 +6455,7 @@ function update(delta)
                                     random(1000, 3000)
                                 )
                                 p5.c3 = CpuShip()
-                                    :setTemplate("Piranha F12")
+                                    :setTemplate(ST.PIRANHA_F12)
                                     :setPosition(
                                         racePoint1x + cx,
                                         racePoint1y + cy

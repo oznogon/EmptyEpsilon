@@ -5,7 +5,7 @@
 function init()
     player = PlayerSpaceship()
         :setFaction("Human Navy")
-        :setTemplate("Atlantis X23")
+        :setTemplate(ST.ATLANTIS_X23)
         :setPosition(-3000, -2000)
         :setCallSign("Player")
 
@@ -30,7 +30,7 @@ function init()
 
     -- Ship ordered to fly directly through the hazard field
     ally = CpuShip()
-        :setTemplate("Phobos T3")
+        :setTemplate(ST.PHOBOS_T3)
         :setFaction("Human Navy")
         :setPosition(-3000, 0)
         :setRotation(0)

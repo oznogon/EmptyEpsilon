@@ -5,7 +5,7 @@
 function init()
     player = PlayerSpaceship()
         :setFaction("Human Navy")
-        :setTemplate("Atlantis X23")
+        :setTemplate(ST.ATLANTIS_X23)
         :setPosition(-5000, -2000)
         :setCallSign("Player")
 
@@ -13,7 +13,7 @@ function init()
     target_pos_x = 3000
     target_pos_y = 0
     CpuShip()
-        :setTemplate("Adder MK5")
+        :setTemplate(ST.ADDER_MK5)
         :setFaction("Kraylor")
         :setPosition(target_pos_x, target_pos_y)
         :setRotation(180)
@@ -31,7 +31,7 @@ function init()
 
     -- Fighter ordered to attack the target
     fighter = CpuShip()
-        :setTemplate("MT52 Hornet")
+        :setTemplate(ST.MT52_HORNET)
         :setFaction("Human Navy")
         :setPosition(-4000, 0)
         :setRotation(0)

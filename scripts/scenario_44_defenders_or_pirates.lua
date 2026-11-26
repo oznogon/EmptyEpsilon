@@ -90,7 +90,7 @@ function init()
     mainGMButtons()
     onNewPlayerShip(setPlayers)
     constructEnvironment()
-    PlayerSpaceship():setTemplate("Atlantis")
+    PlayerSpaceship():setTemplate(ST.ATLANTIS)
 end
 function setConstants()
     ordnance_types = { "Homing", "Nuke", "Mine", "EMP", "HVLI" }

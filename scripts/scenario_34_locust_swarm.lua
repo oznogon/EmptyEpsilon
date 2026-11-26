@@ -2004,7 +2004,7 @@ function constructEnvironment()
                                     defense_platforms[station_size].dist
                                 )
                                 local dp = CpuShip()
-                                    :setTemplate("Defense platform")
+                                    :setTemplate(ST.DEFENSE_PLATFORM)
                                     :setFaction(selected_faction)
                                     :setPosition(ox + dp_x, oy + dp_y)
                                     :orderStandGround()
@@ -2434,7 +2434,7 @@ end
 function testFormation()
     swarm_x = 0
     swarm_y = 0
-    leader = CpuShip():setTemplate("MT52 Hornet"):setPosition(swarm_x, swarm_y)
+    leader = CpuShip():setTemplate(ST.MT52_HORNET):setPosition(swarm_x, swarm_y)
     first_ring = {}
     second_ring = {}
     second_interspersed_ring = {}
@@ -2448,7 +2448,7 @@ function testFormation()
         local rx, ry = vectorFromAngleNorth(60 * i, ship_spacing)
         rx = rx + swarm_x
         ry = ry + swarm_y
-        local ship = CpuShip():setTemplate("MT52 Hornet"):setPosition(rx, ry)
+        local ship = CpuShip():setTemplate(ST.MT52_HORNET):setPosition(rx, ry)
         table.insert(
             first_ring,
             { ship = ship, x = rx, y = ry, dist = ship_spacing, angle = 60 * i }
@@ -2456,7 +2456,7 @@ function testFormation()
         local r2x, r2y = vectorFromAngleNorth(60 * i, ship_spacing * 2)
         r2x = r2x + swarm_x
         r2y = r2y + swarm_y
-        ship = CpuShip():setTemplate("MT52 Hornet"):setPosition(r2x, r2y)
+        ship = CpuShip():setTemplate(ST.MT52_HORNET):setPosition(r2x, r2y)
         table.insert(second_ring, {
             ship = ship,
             x = r2x,
@@ -2467,7 +2467,7 @@ function testFormation()
         local r4x, r4y = vectorFromAngleNorth(60 * i, ship_spacing * 3)
         r4x = r4x + swarm_x
         r4y = r4y + swarm_y
-        ship = CpuShip():setTemplate("MT52 Hornet"):setPosition(r4x, r4y)
+        ship = CpuShip():setTemplate(ST.MT52_HORNET):setPosition(r4x, r4y)
         table.insert(third_ring, {
             ship = ship,
             x = r4x,
@@ -2478,7 +2478,7 @@ function testFormation()
         local r5x, r5y = vectorFromAngleNorth(60 * i + 120, ship_spacing)
         r5x = r5x + r4x
         r5y = r5y + r4y
-        ship = CpuShip():setTemplate("MT52 Hornet"):setPosition(r5x, r5y)
+        ship = CpuShip():setTemplate(ST.MT52_HORNET):setPosition(r5x, r5y)
         local angle = angleFromVectorNorth(r5x, r5y, swarm_x, swarm_y)
         local dist = distance(r5x, r5y, swarm_x, swarm_y)
         table.insert(
@@ -2488,7 +2488,7 @@ function testFormation()
         r5x, r5y = vectorFromAngleNorth(60 * i + 120, ship_spacing * 2)
         r5x = r5x + r4x
         r5y = r5y + r4y
-        ship = CpuShip():setTemplate("MT52 Hornet"):setPosition(r5x, r5y)
+        ship = CpuShip():setTemplate(ST.MT52_HORNET):setPosition(r5x, r5y)
         angle = angleFromVectorNorth(r5x, r5y, swarm_x, swarm_y)
         dist = distance(r5x, r5y, swarm_x, swarm_y)
         table.insert(
@@ -2498,7 +2498,7 @@ function testFormation()
         local r6x, r6y = vectorFromAngleNorth(60 * i, ship_spacing * 4)
         r6x = r6x + swarm_x
         r6y = r6y + swarm_y
-        ship = CpuShip():setTemplate("MT52 Hornet"):setPosition(r6x, r6y)
+        ship = CpuShip():setTemplate(ST.MT52_HORNET):setPosition(r6x, r6y)
         table.insert(fourth_ring, {
             ship = ship,
             x = r6x,
@@ -2510,7 +2510,7 @@ function testFormation()
         local r7x, r7y = vectorFromAngleNorth(60 * i + 120, ship_spacing)
         r7x = r7x + r6x
         r7y = r7y + r6y
-        ship = CpuShip():setTemplate("MT52 Hornet"):setPosition(r7x, r7y)
+        ship = CpuShip():setTemplate(ST.MT52_HORNET):setPosition(r7x, r7y)
         angle = angleFromVectorNorth(r7x, r7y, swarm_x, swarm_y)
         dist = distance(r7x, r7y, swarm_x, swarm_y)
         table.insert(
@@ -2520,7 +2520,7 @@ function testFormation()
         r7x, r7y = vectorFromAngleNorth(60 * i + 120, ship_spacing * 2)
         r7x = r7x + r6x
         r7y = r7y + r6y
-        ship = CpuShip():setTemplate("MT52 Hornet"):setPosition(r7x, r7y)
+        ship = CpuShip():setTemplate(ST.MT52_HORNET):setPosition(r7x, r7y)
         angle = angleFromVectorNorth(r7x, r7y, swarm_x, swarm_y)
         dist = distance(r7x, r7y, swarm_x, swarm_y)
         table.insert(
@@ -2530,7 +2530,7 @@ function testFormation()
         r7x, r7y = vectorFromAngleNorth(60 * i + 120, ship_spacing * 3)
         r7x = r7x + r6x
         r7y = r7y + r6y
-        ship = CpuShip():setTemplate("MT52 Hornet"):setPosition(r7x, r7y)
+        ship = CpuShip():setTemplate(ST.MT52_HORNET):setPosition(r7x, r7y)
         angle = angleFromVectorNorth(r7x, r7y, swarm_x, swarm_y)
         dist = distance(r7x, r7y, swarm_x, swarm_y)
         table.insert(
@@ -2541,7 +2541,7 @@ function testFormation()
         local r8x, r8y = vectorFromAngleNorth(60 * i, ship_spacing * 5)
         r8x = r8x + swarm_x
         r8y = r8y + swarm_y
-        ship = CpuShip():setTemplate("MT52 Hornet"):setPosition(r8x, r8y)
+        ship = CpuShip():setTemplate(ST.MT52_HORNET):setPosition(r8x, r8y)
         table.insert(fifth_ring, {
             ship = ship,
             x = r8x,
@@ -2554,7 +2554,7 @@ function testFormation()
                 vectorFromAngleNorth(60 * i + 120, ship_spacing * j)
             r9x = r9x + r8x
             r9y = r9y + r8y
-            ship = CpuShip():setTemplate("MT52 Hornet"):setPosition(r9x, r9y)
+            ship = CpuShip():setTemplate(ST.MT52_HORNET):setPosition(r9x, r9y)
             angle = angleFromVectorNorth(r9x, r9y, swarm_x, swarm_y)
             dist = distance(r9x, r9y, swarm_x, swarm_y)
             table.insert(
@@ -2565,7 +2565,7 @@ function testFormation()
         r8x, r8y = vectorFromAngleNorth(60 * i, ship_spacing * 6)
         r8x = r8x + swarm_x
         r8y = r8y + swarm_y
-        ship = CpuShip():setTemplate("MT52 Hornet"):setPosition(r8x, r8y)
+        ship = CpuShip():setTemplate(ST.MT52_HORNET):setPosition(r8x, r8y)
         table.insert(sixth_ring, {
             ship = ship,
             x = r8x,
@@ -2578,7 +2578,7 @@ function testFormation()
                 vectorFromAngleNorth(60 * i + 120, ship_spacing * j)
             r9x = r9x + r8x
             r9y = r9y + r8y
-            ship = CpuShip():setTemplate("MT52 Hornet"):setPosition(r9x, r9y)
+            ship = CpuShip():setTemplate(ST.MT52_HORNET):setPosition(r9x, r9y)
             angle = angleFromVectorNorth(r9x, r9y, swarm_x, swarm_y)
             dist = distance(r9x, r9y, swarm_x, swarm_y)
             table.insert(
@@ -2589,7 +2589,7 @@ function testFormation()
         r8x, r8y = vectorFromAngleNorth(60 * i, ship_spacing * 7)
         r8x = r8x + swarm_x
         r8y = r8y + swarm_y
-        ship = CpuShip():setTemplate("MT52 Hornet"):setPosition(r8x, r8y)
+        ship = CpuShip():setTemplate(ST.MT52_HORNET):setPosition(r8x, r8y)
         table.insert(seventh_ring, {
             ship = ship,
             x = r8x,
@@ -2602,7 +2602,7 @@ function testFormation()
                 vectorFromAngleNorth(60 * i + 120, ship_spacing * j)
             r9x = r9x + r8x
             r9y = r9y + r8y
-            ship = CpuShip():setTemplate("MT52 Hornet"):setPosition(r9x, r9y)
+            ship = CpuShip():setTemplate(ST.MT52_HORNET):setPosition(r9x, r9y)
             angle = angleFromVectorNorth(r9x, r9y, swarm_x, swarm_y)
             dist = distance(r9x, r9y, swarm_x, swarm_y)
             table.insert(
@@ -2613,7 +2613,7 @@ function testFormation()
         if i > 0 then
             local r3x = (r2x + second_ring[i].x) / 2
             local r3y = (r2y + second_ring[i].y) / 2
-            ship = CpuShip():setTemplate("MT52 Hornet"):setPosition(r3x, r3y)
+            ship = CpuShip():setTemplate(ST.MT52_HORNET):setPosition(r3x, r3y)
             local angle = angleFromVectorNorth(r3x, r3y, swarm_x, swarm_y)
             local dist = distance(r3x, r3y, swarm_x, swarm_y)
             table.insert(
@@ -2731,7 +2731,7 @@ function testFormation()
     local flight_angle = 135
     local spawn_distance = 1000
     local ship = CpuShip()
-        :setTemplate("MT52 Hornet")
+        :setTemplate(ST.MT52_HORNET)
         :setPosition(swarm_x, swarm_y)
         :setHeading(flight_angle)
     local leader_ship = ship
@@ -2743,7 +2743,7 @@ function testFormation()
         local form_prime_x, form_prime_y =
             vectorFromAngle(form.angle, form.dist * spawn_distance)
         ship = CpuShip()
-            :setTemplate("MT52 Hornet")
+            :setTemplate(ST.MT52_HORNET)
             :setPosition(swarm_x + form_x, swarm_y + form_y)
             :setHeading(flight_angle)
             :orderFlyFormation(leader_ship, form_prime_x, form_prime_y)

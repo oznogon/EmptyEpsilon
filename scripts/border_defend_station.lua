@@ -1,7 +1,7 @@
 -- Supporting script for a station's defensive fleet in Borderline Fever scenario.
 -- In the main script, the station will need a defensive fleet attached/defined.
 -- For example:
--- station_1 = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy")
+-- station_1 = SpaceStation():setTemplate(ST.MEDIUM_STATION):setFaction("Human Navy")
 -- station_1.comms_data = {
 --     idle_defense_fleet = {
 --         DF1 = "MT52 Hornet",

@@ -6315,7 +6315,7 @@ function buildDefensePlatforms()
                     if getScenarioTime() > def.freighter.delay_time then
                         def.freighter.delay_time = nil
                         CpuShip()
-                            :setTemplate("Defense platform")
+                            :setTemplate(ST.DEFENSE_PLATFORM)
                             :setFaction(def.station:getFaction())
                             :setPosition(cx, cy)
                             :orderStandGround()

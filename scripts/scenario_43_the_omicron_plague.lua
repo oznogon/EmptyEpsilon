@@ -3463,7 +3463,7 @@ function constructEnvironment()
     for i = 1, 6 do
         local dp_x, dp_y = vectorFromAngle(defense_platform_angle, 4000)
         local dp = CpuShip()
-            :setTemplate("Defense platform")
+            :setTemplate(ST.DEFENSE_PLATFORM)
             :setFaction(player_faction)
             :setPosition(center_x + dp_x, center_y + dp_y)
             :setScanState("fullscan")
@@ -3526,7 +3526,7 @@ function constructEnvironment()
             local dp_x, dp_y =
                 vectorFromAngle(dp_angle, defense_platforms[station_size].dist)
             local dp = CpuShip()
-                :setTemplate("Defense platform")
+                :setTemplate(ST.DEFENSE_PLATFORM)
                 :setFaction(faction_circle[i])
                 :setPosition(center_x + ps_x + dp_x, center_y + ps_y + dp_y)
                 :orderStandGround()
@@ -4032,7 +4032,7 @@ function constructEnvironment()
                     barrier_patrols = {}
                 end
                 local ship = CpuShip()
-                    :setTemplate("Phobos T3")
+                    :setTemplate(ST.PHOBOS_T3)
                     :setPosition(start_point_right_x, start_point_right_y)
                     :setFaction(station:getFaction())
                 ship:setCallSign(generateCallSign(nil, station:getFaction()))
@@ -4048,7 +4048,7 @@ function constructEnvironment()
                 ship:onDestruction(refreshBarrierPatrol)
                 table.insert(barrier_patrols, ship)
                 ship = CpuShip()
-                    :setTemplate("Phobos T3")
+                    :setTemplate(ST.PHOBOS_T3)
                     :setPosition(finish_point_right_x, finish_point_right_y)
                     :setFaction(station_b:getFaction())
                 ship:setCallSign(generateCallSign(nil, station_b:getFaction()))
@@ -4169,7 +4169,7 @@ function constructEnvironment()
     local attack_angle = initial_angle + 180
     local l1_x, l1_y = vectorFromAngleNorth(initial_angle, 25000)
     local leader_1 = CpuShip()
-        :setTemplate("Adder MK5")
+        :setTemplate(ST.ADDER_MK5)
         :setPosition(center_x + l1_x, center_y + l1_y)
         :setFaction("Exuari")
         :setHeading(attack_angle)
@@ -4177,7 +4177,7 @@ function constructEnvironment()
     table.insert(place_space, { obj = leader_1, dist = 200, shape = "circle" })
     local l2_x, l2_y = vectorFromAngleNorth(initial_angle + 90, 5000)
     local leader_2 = CpuShip()
-        :setTemplate("Adder MK5")
+        :setTemplate(ST.ADDER_MK5)
         :setPosition(center_x + l1_x + l2_x, center_y + l1_y + l2_y)
         :setFaction("Exuari")
         :setHeading(attack_angle)
@@ -4185,7 +4185,7 @@ function constructEnvironment()
     table.insert(place_space, { obj = leader_2, dist = 200, shape = "circle" })
     local l3_x, l3_y = vectorFromAngleNorth(initial_angle + 270, 5000)
     local leader_3 = CpuShip()
-        :setTemplate("Adder MK5")
+        :setTemplate(ST.ADDER_MK5)
         :setPosition(center_x + l1_x + l3_x, center_y + l1_y + l3_y)
         :setFaction("Exuari")
         :setHeading(attack_angle)
@@ -9378,7 +9378,7 @@ function handleUndockedState()
                                 then
                                     ship = CpuShip()
                                         :setPosition(comms_target:getPosition())
-                                        :setTemplate("Adder MK5")
+                                        :setTemplate(ST.ADDER_MK5)
                                         :setCallSign(
                                             generateCallSign(nil, "Human Navy")
                                         )
@@ -15195,7 +15195,7 @@ end
 --  Additional enemy ships with some modifications from the original template parameters  --
 --------------------------------------------------------------------------------------------
 function farco3(enemyFaction)
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Phobos T3")
+    local ship = CpuShip():setFaction(enemyFaction):setTemplate(ST.PHOBOS_T3)
     ship:onTakingDamage(function(self, instigator)
         string.format("") --serious proton needs a global context
         if instigator ~= nil then
@@ -15232,7 +15232,7 @@ function farco3(enemyFaction)
     return ship
 end
 function farco5(enemyFaction)
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Phobos T3")
+    local ship = CpuShip():setFaction(enemyFaction):setTemplate(ST.PHOBOS_T3)
     ship:onTakingDamage(function(self, instigator)
         string.format("") --serious proton needs a global context
         if instigator ~= nil then
@@ -15269,7 +15269,7 @@ function farco5(enemyFaction)
     return ship
 end
 function farco8(enemyFaction)
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Phobos T3")
+    local ship = CpuShip():setFaction(enemyFaction):setTemplate(ST.PHOBOS_T3)
     ship:onTakingDamage(function(self, instigator)
         string.format("") --serious proton needs a global context
         if instigator ~= nil then
@@ -15308,7 +15308,7 @@ function farco8(enemyFaction)
     return ship
 end
 function farco11(enemyFaction)
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Phobos T3")
+    local ship = CpuShip():setFaction(enemyFaction):setTemplate(ST.PHOBOS_T3)
     ship:onTakingDamage(function(self, instigator)
         string.format("") --serious proton needs a global context
         if instigator ~= nil then
@@ -15347,7 +15347,7 @@ function farco11(enemyFaction)
     return ship
 end
 function farco13(enemyFaction)
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Phobos T3")
+    local ship = CpuShip():setFaction(enemyFaction):setTemplate(ST.PHOBOS_T3)
     ship:onTakingDamage(function(self, instigator)
         string.format("") --serious proton needs a global context
         if instigator ~= nil then
@@ -15446,7 +15446,7 @@ function whirlwind(enemyFaction)
     return ship
 end
 function phobosR2(enemyFaction)
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Phobos T3")
+    local ship = CpuShip():setFaction(enemyFaction):setTemplate(ST.PHOBOS_T3)
     ship:onTakingDamage(function(self, instigator)
         string.format("") --serious proton needs a global context
         if instigator ~= nil then
@@ -15482,7 +15482,7 @@ function phobosR2(enemyFaction)
     return ship
 end
 function hornetMV52(enemyFaction)
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("MT52 Hornet")
+    local ship = CpuShip():setFaction(enemyFaction):setTemplate(ST.MT52_HORNET)
     ship:onTakingDamage(function(self, instigator)
         string.format("") --serious proton needs a global context
         if instigator ~= nil then
@@ -15518,7 +15518,7 @@ function hornetMV52(enemyFaction)
 end
 function k2fighter(enemyFaction)
     local ship =
-        CpuShip():setFaction(enemyFaction):setTemplate("Ktlitan Fighter")
+        CpuShip():setFaction(enemyFaction):setTemplate(ST.KTLITAN_FIGHTER")
     ship:setTypeName("K2 Fighter")
     ship:setBeamWeapon(0, 60, 0, 1200.0, 2.5, 6) --beams cycle faster (vs 4.0)
     ship:setHullMax(65) --weaker hull (vs 70)
@@ -15548,7 +15548,7 @@ function k2fighter(enemyFaction)
 end
 function k3fighter(enemyFaction)
     local ship =
-        CpuShip():setFaction(enemyFaction):setTemplate("Ktlitan Fighter")
+        CpuShip():setFaction(enemyFaction):setTemplate(ST.KTLITAN_FIGHTER")
     ship:setTypeName("K3 Fighter")
     ship:setBeamWeapon(0, 60, 0, 1200.0, 2.5, 9) --beams cycle faster and damage more (vs 4.0 & 6)
     ship:setHullMax(60) --weaker hull (vs 70)
@@ -15577,7 +15577,7 @@ function k3fighter(enemyFaction)
     return ship
 end
 function waddle5(enemyFaction)
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Adder MK5")
+    local ship = CpuShip():setFaction(enemyFaction):setTemplate(ST.ADDER_MK5)
     ship:onTakingDamage(function(self, instigator)
         string.format("") --serious proton needs a global context
         if instigator ~= nil then
@@ -15612,7 +15612,7 @@ function waddle5(enemyFaction)
     return ship
 end
 function jade5(enemyFaction)
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Adder MK5")
+    local ship = CpuShip():setFaction(enemyFaction):setTemplate(ST.ADDER_MK5)
     ship:onTakingDamage(function(self, instigator)
         string.format("") --serious proton needs a global context
         if instigator ~= nil then
@@ -15647,7 +15647,7 @@ function jade5(enemyFaction)
     return ship
 end
 function droneLite(enemyFaction)
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Ktlitan Drone")
+    local ship = CpuShip():setFaction(enemyFaction):setTemplate(ST.KTLITAN_DRONE")
     ship:setTypeName("Lite Drone")
     ship:setHullMax(20) --weaker hull (vs 30)
     ship:setHull(20)
@@ -15678,7 +15678,7 @@ function droneLite(enemyFaction)
     return ship
 end
 function droneHeavy(enemyFaction)
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Ktlitan Drone")
+    local ship = CpuShip():setFaction(enemyFaction):setTemplate(ST.KTLITAN_DRONE")
     ship:setTypeName("Heavy Drone")
     ship:setHullMax(40) --stronger hull (vs 30)
     ship:setHull(40)
@@ -15708,7 +15708,7 @@ function droneHeavy(enemyFaction)
     return ship
 end
 function droneJacket(enemyFaction)
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Ktlitan Drone")
+    local ship = CpuShip():setFaction(enemyFaction):setTemplate(ST.KTLITAN_DRONE")
     ship:onTakingDamage(function(self, instigator)
         string.format("") --serious proton needs a global context
         if instigator ~= nil then
@@ -15783,7 +15783,7 @@ function wzLindworm(enemyFaction)
     return ship
 end
 function tempest(enemyFaction)
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Piranha F12")
+    local ship = CpuShip():setFaction(enemyFaction):setTemplate(ST.PIRANHA_F12)
     ship:onTakingDamage(function(self, instigator)
         string.format("") --serious proton needs a global context
         if instigator ~= nil then
@@ -15899,7 +15899,7 @@ function enforcer(enemyFaction)
     return ship
 end
 function predator(enemyFaction)
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Piranha F8")
+    local ship = CpuShip():setFaction(enemyFaction):setTemplate(ST.PIRANHA_F8)
     ship:onTakingDamage(function(self, instigator)
         string.format("") --serious proton needs a global context
         if instigator ~= nil then
@@ -15972,7 +15972,7 @@ function predator(enemyFaction)
     return ship
 end
 function atlantisY42(enemyFaction)
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Atlantis X23")
+    local ship = CpuShip():setFaction(enemyFaction):setTemplate(ST.ATLANTIS_X23)
     ship:onTakingDamage(function(self, instigator)
         string.format("") --serious proton needs a global context
         if instigator ~= nil then
@@ -16109,7 +16109,7 @@ function tyr(enemyFaction)
     return ship
 end
 function gnat(enemyFaction)
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Ktlitan Drone")
+    local ship = CpuShip():setFaction(enemyFaction):setTemplate(ST.KTLITAN_DRONE")
     ship:setTypeName("Gnat")
     ship:setHullMax(15) --weaker hull (vs 30)
     ship:setHull(15)
@@ -16218,7 +16218,7 @@ function starhammerIII(enemyFaction)
 end
 function k2breaker(enemyFaction)
     local ship =
-        CpuShip():setFaction(enemyFaction):setTemplate("Ktlitan Breaker")
+        CpuShip():setFaction(enemyFaction):setTemplate(ST.KTLITAN_BREAKER")
     ship:onTakingDamage(function(self, instigator)
         string.format("") --serious proton needs a global context
         if instigator ~= nil then
@@ -16265,7 +16265,7 @@ function k2breaker(enemyFaction)
     return ship
 end
 function hurricane(enemyFaction)
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Piranha F8")
+    local ship = CpuShip():setFaction(enemyFaction):setTemplate(ST.PIRANHA_F8)
     ship:onTakingDamage(function(self, instigator)
         string.format("") --serious proton needs a global context
         if instigator ~= nil then
@@ -16323,7 +16323,7 @@ function hurricane(enemyFaction)
     return ship
 end
 function phobosT4(enemyFaction)
-    local ship = CpuShip():setFaction(enemyFaction):setTemplate("Phobos T3")
+    local ship = CpuShip():setFaction(enemyFaction):setTemplate(ST.PHOBOS_T3)
     ship:onTakingDamage(function(self, instigator)
         string.format("") --serious proton needs a global context
         if instigator ~= nil then
@@ -16718,7 +16718,7 @@ end
 ----------------------------------------------------------------------------------------
 function createPlayerShipMixer()
     playerAmalgam = PlayerSpaceship()
-        :setTemplate("Atlantis")
+        :setTemplate(ST.ATLANTIS)
         :setFaction("Human Navy")
         :setCallSign("Mixer")
     playerAmalgam:setTypeName("Amalgam")
@@ -16810,7 +16810,7 @@ function createPlayerShipFlipper()
 end
 function createPlayerShipInk()
     playerInk = PlayerSpaceship()
-        :setTemplate("Piranha")
+        :setTemplate(ST.PIRANHA)
         :setFaction("Human Navy")
         :setCallSign("Ink")
     playerInk:setTypeName("Squid")

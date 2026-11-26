@@ -4,7 +4,7 @@
 
 function init()
     -- Create a player ship at the origin
-    player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
+    player = PlayerSpaceship():setFaction("Human Navy"):setTemplate(ST.ATLANTIS)
     player:setPosition(0, 0)
 
     -- Create a static camera looking at origin from the right

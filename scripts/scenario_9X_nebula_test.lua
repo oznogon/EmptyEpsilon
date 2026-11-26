@@ -4,7 +4,7 @@
 
 Nebula():setPosition(-2500, 0):setRotation(22)
 PlayerSpaceship()
-    :setTemplate("Atlantis")
+    :setTemplate(ST.ATLANTIS)
     :setPosition(-1763, -5922)
     :setRotation(97)
     :setFaction("Human Navy")

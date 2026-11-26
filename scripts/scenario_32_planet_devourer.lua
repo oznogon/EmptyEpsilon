@@ -8208,7 +8208,7 @@ function handleUndockedState()
                                 then
                                     ship = CpuShip()
                                         :setPosition(comms_target:getPosition())
-                                        :setTemplate("Adder MK5")
+                                        :setTemplate(ST.ADDER_MK5)
                                         :setCallSign(
                                             generateCallSign(nil, "Human Navy")
                                         )

@@ -55,7 +55,7 @@ function init()
 
     -- Create the faction stations
     FactionStation = SpaceStation()
-        :setTemplate("Large Station")
+        :setTemplate(ST.LARGE_STATION)
         :setFaction("Human Navy")
         :setPosition(0, 0)
         :setCallSign(_("mission", "Your Stn"))
@@ -68,7 +68,7 @@ function init()
         kx, ky = RandPositionInRadius(0, 0, FieldSize, FieldSize, 0, 360)
     end
     KraylorStation = SpaceStation()
-        :setTemplate("Large Station")
+        :setTemplate(ST.LARGE_STATION)
         :setFaction("Kraylor")
         :setPosition(kx, ky)
         :setCallSign(_("mission", "Kraylor Stn"))
@@ -945,7 +945,7 @@ function SpawnWave(faction)
 end
 
 function StationFactory(weaponType, price)
-    local ss = SpaceStation():setTemplate("Medium Station")
+    local ss = SpaceStation():setTemplate(ST.MEDIUM_STATION)
     CommsFactory(ss, weaponType, price)
     return ss
 end

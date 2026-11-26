@@ -13,7 +13,7 @@
 
 function init()
     neutral_station = SpaceStation()
-        :setTemplate("Large Station")
+        :setTemplate(ST.LARGE_STATION)
         :setPosition(0, -15000)
         :setRotation(random(0, 360))
         :setFaction("Independent")
@@ -21,7 +21,7 @@ function init()
     neutral_station.comms_data =
         { supplydrop = "neutral", weapons = { Mine = "friend" } }
     friendly_station = SpaceStation()
-        :setTemplate("Large Station")
+        :setTemplate(ST.LARGE_STATION)
         :setPosition(-10000, -25000)
         :setRotation(random(0, 360))
         :setFaction("Human Navy")
@@ -63,7 +63,7 @@ function init()
 
     for n = 1, 20 * battle_scale do
         CpuShip()
-            :setTemplate("MT52 Hornet")
+            :setTemplate(ST.MT52_HORNET)
             :setPosition(
                 random(-10000 * location_scale, 10000 * location_scale),
                 random(0, 3000)
@@ -76,7 +76,7 @@ function init()
 
     for n = 1, 10 * battle_scale do
         CpuShip()
-            :setTemplate("Phobos T3")
+            :setTemplate(ST.PHOBOS_T3)
             :setPosition(
                 random(-10000 * location_scale, 10000 * location_scale),
                 random(0, 2000)
@@ -92,7 +92,7 @@ function init()
 
     for n = 1, 20 * battle_scale do
         CpuShip()
-            :setTemplate("MT52 Hornet")
+            :setTemplate(ST.MT52_HORNET)
             :setPosition(
                 random(-13000 * location_scale, 13000 * location_scale),
                 random(5000, 8000)
@@ -105,7 +105,7 @@ function init()
 
     for n = 1, 10 * battle_scale do
         CpuShip()
-            :setTemplate("Phobos T3")
+            :setTemplate(ST.PHOBOS_T3)
             :setPosition(
                 random(-13000 * location_scale, 13000 * location_scale),
                 random(5000, 8000)
@@ -117,7 +117,7 @@ function init()
 
     for n = 1, 3 * battle_scale do
         CpuShip()
-            :setTemplate("Piranha F12")
+            :setTemplate(ST.PIRANHA_F12)
             :setPosition(
                 random(-13000 * location_scale, 13000 * location_scale),
                 5000
@@ -129,7 +129,7 @@ function init()
 
     for n = 1, 1 * battle_scale do
         CpuShip()
-            :setTemplate("Atlantis X23")
+            :setTemplate(ST.ATLANTIS_X23)
             :setPosition(
                 random(-3000 * location_scale, 3000 * location_scale),
                 7000

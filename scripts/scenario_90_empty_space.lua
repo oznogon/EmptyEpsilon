@@ -25,31 +25,31 @@ function init()
 
     SpaceStation()
         :setPosition(2000, 2000)
-        :setTemplate("Small Station")
+        :setTemplate(ST.SMALL_STATION)
         :setFaction("Human Navy")
         :setRotation(random(0, 360))
     ]]
     --
-    --SpaceStation():setPosition(-2000, 2000):setTemplate("Medium Station"):setFaction("Human Navy"):setRotation(random(0, 360))
-    --SpaceStation():setPosition(2000, -2000):setTemplate("Large Station"):setFaction("Human Navy"):setRotation(random(0, 360))
-    --SpaceStation():setPosition(-2000, -2000):setTemplate("Huge Station"):setFaction("Human Navy"):setRotation(random(0, 360))
+    --SpaceStation():setPosition(-2000, 2000):setTemplate(ST.MEDIUM_STATION):setFaction("Human Navy"):setRotation(random(0, 360))
+    --SpaceStation():setPosition(2000, -2000):setTemplate(ST.LARGE_STATION):setFaction("Human Navy"):setRotation(random(0, 360))
+    --SpaceStation():setPosition(-2000, -2000):setTemplate(ST.HUGE_STATION):setFaction("Human Navy"):setRotation(random(0, 360))
 
     --[[ Create a player Atlantis ship of the Human Navy faction. Place it at coordinates 100, 100 with a heading of 270 (facing west). Set its callsign to "Player 1". Assign it to the Lua variable player1.
 
     player1 = PlayerSpaceship()
-        :setTemplate("Atlantis")
+        :setTemplate(ST.ATLANTIS)
         :setFaction("Human Navy")
         :setPosition(-250, 100)
         :setHeading(270)
         :setCallSign(_("Player 1"))
     ]]
     --
-    --player2 = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis"):setPosition(250, 100):setHeading(0):setCallSign(_("Player 2"))
+    --player2 = PlayerSpaceship():setFaction("Human Navy"):setTemplate(ST.ATLANTIS):setPosition(250, 100):setHeading(0):setCallSign(_("Player 2"))
 
     --[[ Create an AI-controlled Adder MK5 ship of the Human Navy faction. Place it at coordinates 0, 0 with a heading of 90 (facing east). Set its callsign to "Friendly 1" and its orders to "Defend location" at coordinates 0, 0. Assign it to the Lua variable defender.
 
     defender = CpuShip()
-        :setTemplate("Adder MK5")
+        :setTemplate(ST.ADDER_MK5)
         :setFaction("Human Navy")
         :setPosition(0, -100)
         :setHeading(90)
@@ -57,7 +57,7 @@ function init()
     defender:orderDefendLocation(0, 0)
     ]]
     --
-    --CpuShip():setTemplate("Piranha F12"):setFaction("Kraylor"):setPosition(10000, 0):setHeading(270):setCallSign(_("Hostile 1")):orderFlyTowards(0, 0)
+    --CpuShip():setTemplate(ST.PIRANHA_F12):setFaction("Kraylor"):setPosition(10000, 0):setHeading(270):setCallSign(_("Hostile 1")):orderFlyTowards(0, 0)
 
     --[[ Create a wormhole that teleports entities that enter its center to coordinates within 0.1U^2 of 0, 0.
 

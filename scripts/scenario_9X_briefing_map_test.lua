@@ -3,7 +3,7 @@
 -- Type: Development
 
 function init()
-    player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
+    player = PlayerSpaceship():setFaction("Human Navy"):setTemplate(ST.ATLANTIS)
     player:setPosition(0, 0)
 
     -- Page 1: Static image page (no map)
