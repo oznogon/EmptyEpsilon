@@ -1934,7 +1934,7 @@ msgctxt "UPlanitia1Audio-shipLog"
 msgid ""
 "[UTPLNT441](Utopia Planitia) Our long range sensors show a number of enemy "
 "ships approaching. Cease patrolling other stations and defend station Utopia "
-"Planitia"
+"Planitia."
 msgstr ""
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6795
@@ -1986,7 +1986,7 @@ msgstr ""
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6931
 msgctxt "UPlanitia2Audio-shipLog"
-msgid "Nearest ships cleared. More to come shortly"
+msgid "Nearest ships cleared. More to come shortly."
 msgstr ""
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7106
@@ -2279,7 +2279,7 @@ msgctxt "Nabbit3Audio-shipLog"
 msgid ""
 "[ASTGDN038](Dan McNabbit) Thanks for the ride. I've tuned your impulse "
 "engines en route. I transmitted my engine tuning parameters to Utopia "
-"Planitia. Expect faster impulse speeds"
+"Planitia. Expect faster impulse speeds."
 msgstr ""
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7912

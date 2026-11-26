@@ -204,3 +204,7 @@ aBlueShadow:patch-12 20261122 -- address differently by pulling missileWeaponDat
 
 dkapell:hvli_delay 20261123 -- overloaded LifeTimeSystem from upstream split from this branch
 dkapell:lifetimeOnExpire 20261123 -- adapt to fork API
+
+patch-2 20261125 -- addToShipLog color param issue, adapted to reformatted scenario scripts
+patch-3 20261125 -- addToShipLog color param issue, adapted to reformatted scenario scripts
+patch-4 20261125 -- addToShipLog color param issue, adapted to reformatted scenario scripts

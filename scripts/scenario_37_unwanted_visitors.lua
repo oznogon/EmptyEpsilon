@@ -13297,9 +13297,9 @@ function checkOrbitingArtifactEvents(delta)
                                 p:addToShipLog(
                                     _(
                                         "Polly-shipLog",
-                                        "Scan complete",
-                                        "Yellow"
-                                    )
+                                        "Scan complete"
+                                    ),
+                                    "Yellow"
                                 )
                             else
                                 p:addToShipLog(

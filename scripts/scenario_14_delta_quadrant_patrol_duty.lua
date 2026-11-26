@@ -6783,9 +6783,9 @@ function afterPatrol(delta)
                 closestUtopiaPlayer:addToShipLog(
                     _(
                         "UPlanitia1Audio-shipLog",
-                        "[UTPLNT441](Utopia Planitia) Our long range sensors show a number of enemy ships approaching. Cease patrolling other stations and defend station Utopia Planitia",
-                        "Yellow"
-                    )
+                        "[UTPLNT441](Utopia Planitia) Our long range sensors show a number of enemy ships approaching. Cease patrolling other stations and defend station Utopia Planitia."
+                    ),
+                    "Yellow"
                 )
                 if defendUtopiaMsgButton == nil then
                     defendUtopiaMsgButton = "defendUtopiaMsgButton"
@@ -6928,9 +6928,9 @@ function defendUtopia(delta)
                         p:addToShipLog(
                             _(
                                 "UPlanitia2Audio-shipLog",
-                                "Nearest ships cleared. More to come shortly",
-                                "Magenta"
-                            )
+                                "Nearest ships cleared. More to come shortly."
+                            ),
+                            "Magenta"
                         )
                     end
                 end
@@ -7694,9 +7694,9 @@ function minerWeaponsDecide(delta)
             closestBethesdaPlayer:addToShipLog(
                 _(
                     "Kojak8UP-shipLog",
-                    "[Utopia Planitia] Thanks for the information. We can upgrade you next time you dock",
-                    "Magenta"
-                )
+                    "[Utopia Planitia] Thanks for the information. We can upgrade you next time you dock"
+                ),
+                "Magenta"
             )
         end
         plot2 = nil
@@ -7893,9 +7893,9 @@ function dropNabbit(delta)
             nabbitShip:addToShipLog(
                 _(
                     "Nabbit3Audio-shipLog",
-                    "[ASTGDN038](Dan McNabbit) Thanks for the ride. I've tuned your impulse engines en route. I transmitted my engine tuning parameters to Utopia Planitia. Expect faster impulse speeds",
-                    "Yellow"
-                )
+                    "[ASTGDN038](Dan McNabbit) Thanks for the ride. I've tuned your impulse engines en route. I transmitted my engine tuning parameters to Utopia Planitia. Expect faster impulse speeds."
+                ),
+                "Yellow"
             )
             nabbitShip:setImpulseMaxSpeed(nabbitShip:getImpulseMaxSpeed() * 1.2)
             nabbitShip.nabbit_upgrade = true

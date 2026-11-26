@@ -10512,7 +10512,13 @@ function cargoInventoryGivenShip(p)
         end
     end
     if cargoHoldEmpty then
-        p:addToShipLog(_("inventory-shipLog", "     Empty\n", "Yellow"))
+        p:addToShipLog(
+            _(
+                "inventory-shipLog",
+                "     Empty\n"
+            ),
+            "Yellow"
+        )
     end
     p:addToShipLog(
         string.format(_("inventory-shipLog", "Available space: %i"), p.cargo),

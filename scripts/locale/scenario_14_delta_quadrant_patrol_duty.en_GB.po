@@ -1934,8 +1934,8 @@ msgctxt "UPlanitia1Audio-shipLog"
 msgid ""
 "[UTPLNT441](Utopia Planitia) Our long range sensors show a number of enemy "
 "ships approaching. Cease patrolling other stations and defend station Utopia "
-"Planitia"
-msgstr "[UTPLNT441](Utopia Planitia) Our long range sensors show a number of enemy ships approaching. Cease patrolling other stations and defend station Utopia Planitia"
+"Planitia."
+msgstr "[UTPLNT441](Utopia Planitia) Our long range sensors show a number of enemy ships approaching. Cease patrolling other stations and defend station Utopia Planitia."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6795
 msgctxt "UPlanitia1Audio-buttonRelay"
@@ -1986,8 +1986,8 @@ msgstr "|> UTPLNT477"
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:6931
 msgctxt "UPlanitia2Audio-shipLog"
-msgid "Nearest ships cleared. More to come shortly"
-msgstr "Nearest ships cleared. More to come shortly"
+msgid "Nearest ships cleared. More to come shortly."
+msgstr "Nearest ships cleared. More to come shortly."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7106
 #, lua-format
@@ -2279,8 +2279,8 @@ msgctxt "Nabbit3Audio-shipLog"
 msgid ""
 "[ASTGDN038](Dan McNabbit) Thanks for the ride. I've tuned your impulse "
 "engines en route. I transmitted my engine tuning parameters to Utopia "
-"Planitia. Expect faster impulse speeds"
-msgstr "[ASTGDN038](Dan McNabbit) Thanks for the ride. I've tuned your impulse engines en route. I transmitted my engine tuning parameters to Utopia Planitia. Expect faster impulse speeds"
+"Planitia. Expect faster impulse speeds."
+msgstr "[ASTGDN038](Dan McNabbit) Thanks for the ride. I've tuned your impulse engines en route. I transmitted my engine tuning parameters to Utopia Planitia. Expect faster impulse speeds."
 
 #: scripts/scenario_14_delta_quadrant_patrol_duty.lua:7912
 msgctxt "Nabbit3Audio-buttonRelay"
@@ -2587,3 +2587,27 @@ msgstr "Asimov S:%i%% H:%i%%"
 msgctxt "-tabRelay&Operations"
 msgid "U.P. WS:%i%% H:%i%%"
 msgstr "U.P. WS:%i%% H:%i%%"
+
+#~ msgctxt "UPlanitia1Audio-shipLog"
+#~ msgid ""
+#~ "[UTPLNT441](Utopia Planitia) Our long range sensors show a number of "
+#~ "enemy ships approaching. Cease patrolling other stations and defend "
+#~ "station Utopia Planitia"
+#~ msgstr ""
+#~ "[UTPLNT441](Utopia Planitia) Our long range sensors show a number of "
+#~ "enemy ships approaching. Cease patrolling other stations and defend "
+#~ "station Utopia Planitia"
+
+#~ msgctxt "UPlanitia2Audio-shipLog"
+#~ msgid "Nearest ships cleared. More to come shortly"
+#~ msgstr "Nearest ships cleared. More to come shortly"
+
+#~ msgctxt "Nabbit3Audio-shipLog"
+#~ msgid ""
+#~ "[ASTGDN038](Dan McNabbit) Thanks for the ride. I've tuned your impulse "
+#~ "engines en route. I transmitted my engine tuning parameters to Utopia "
+#~ "Planitia. Expect faster impulse speeds"
+#~ msgstr ""
+#~ "[ASTGDN038](Dan McNabbit) Thanks for the ride. I've tuned your impulse "
+#~ "engines en route. I transmitted my engine tuning parameters to Utopia "
+#~ "Planitia. Expect faster impulse speeds"
