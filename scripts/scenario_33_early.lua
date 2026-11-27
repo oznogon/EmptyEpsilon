@@ -5574,7 +5574,7 @@ function sendCrutch(p,task)
 			p.crutch_dock_eng = "crutch_dock_eng"
 			p:addCustomMessage("Engineering",p.crutch_dock_eng,p.crutch_dock_eng_msg)
 			--	engineering plus
-			p.crutch_dock_epl_msg = string.format(_("msgEngineer+","%s The docking protocol also calls for shield calibration. Listen for the shield frequency. Adjust the shield frequency with the frequency selector along the left edge of your console in the middle. Click the Calibrate button after you have set the frequency."),p.crush_dock_eng_msg)
+			p.crutch_dock_epl_msg = string.format(_("msgEngineer+","%s The docking protocol also calls for shield calibration. Listen for the shield frequency. Adjust the shield frequency with the frequency selector along the left edge of your console in the middle. Click the Calibrate button after you have set the frequency."),p.crutch_dock_eng_msg)
 			p.crutch_dock_epl = "crutch_dock_epl"
 			p:addCustomMessage("Engineering+",p.crutch_dock_epl,p.crutch_dock_epl_msg)
 			--	relay
