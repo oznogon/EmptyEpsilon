@@ -394,7 +394,7 @@ function M.addOrdnanceRestock(profile)
                 and commsSource(profile):getWeaponStorageMax(missile_type) > 0
                 and inStock(missile_type)
             then
-                if options.label ~= nil then
+                if type(options.label) == "function" then
                     addCommsReply(options.label(missile_type), function()
                         handle_restock(missile_type)
                     end)
