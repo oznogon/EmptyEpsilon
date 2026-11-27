@@ -55,6 +55,7 @@
 #include "components/shiplog.h"
 #include "components/spin.h"
 #include "components/target.h"
+#include "components/teleporter.h"
 #include "components/utilityBeam.h"
 #include "components/warpdrive.h"
 #include "components/zone.h"
@@ -909,8 +910,17 @@ void initComponentScriptBindings()
     BIND_MEMBER(Gravity, range);
     BIND_MEMBER(Gravity, force);
     BIND_MEMBER(Gravity, damage);
+    BIND_MEMBER(Gravity, on_singularity);
+    // Deprecated: use teleporter.target_coordinates and
+    // teleporter.on_teleportation instead.
     BIND_MEMBER(Gravity, wormhole_target);
     BIND_MEMBER(Gravity, on_teleportation);
+
+    sp::script::ComponentHandler<Teleporter>::name("teleporter");
+    BIND_MEMBER(Teleporter, target_coordinates);
+    BIND_MEMBER(Teleporter, on_teleportation);
+    BIND_MEMBER(Teleporter, teleport_on_collision);
+    BIND_MEMBER(Teleporter, is_single_use);
 
     sp::script::ComponentHandler<InternalRooms>::name("internal_rooms");
     BIND_MEMBER(InternalRooms, auto_repair_enabled);

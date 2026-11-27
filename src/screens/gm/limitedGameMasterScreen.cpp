@@ -14,7 +14,6 @@
 #include "components/radar.h"
 #include "components/faction.h"
 #include "components/collision.h"
-#include "components/gravity.h"
 #include "components/hull.h"
 #include "components/shields.h"
 #include "components/comms.h"
@@ -35,6 +34,7 @@
 #include "components/selfdestruct.h"
 #include "components/spin.h"
 #include "components/target.h"
+#include "components/teleporter.h"
 #include "components/rendering.h"
 
 #include "systems/collision.h"
@@ -1506,6 +1506,7 @@ void LimitedGameMasterScreen::update(float delta)
 
     has_cpu_ship = false;
     has_player_ship = false;
+    has_teleporter = false;
 
     for (auto [entity, pc] : sp::ecs::Query<PlayerControl>())
     {
@@ -1540,6 +1541,8 @@ void LimitedGameMasterScreen::update(float delta)
     {
         if (entity.hasComponent<AIController>()) has_cpu_ship = true;
         if (entity.hasComponent<PlayerControl>()) has_player_ship = true;
+        if (entity.hasComponent<Teleporter>() && !entity.hasComponent<AIController>())
+            has_teleporter = true;
     }
 
     player_ship_selector->setVisible(player_ship_selector->entryCount() > 0);
@@ -1779,7 +1782,9 @@ void LimitedGameMasterScreen::onMouseDown(sp::io::Pointer::Button button, glm::v
 
     if (button == sp::io::Pointer::Button::Right)
     {
-        if (has_cpu_ship) click_and_drag_state = ClickAndDragState::DragViewOrOrder;
+        // Right-clicking sets a selected Teleporter's target, or gives a
+        // selected CPU ship an order. Right-click dragging only pans the view.
+        if (has_cpu_ship || has_teleporter) click_and_drag_state = ClickAndDragState::DragViewOrOrder;
         else click_and_drag_state = ClickAndDragState::DragView;
     }
     else
@@ -1926,44 +1931,46 @@ void LimitedGameMasterScreen::onMouseUp(glm::vec2 position)
 
             for (auto entity : targets.getTargets())
             {
-                if (target_entity && target_entity != entity && target_entity.hasComponent<Hull>())
+                if (entity.hasComponent<AIController>())
                 {
-                    if (Faction::getRelation(entity, target_entity) == FactionRelation::Enemy)
+                    if (target_entity && target_entity != entity && target_entity.hasComponent<Hull>())
                     {
-                        if (my_player_info)
-                            my_player_info->commandSetAIOrder(entity, AIOrder::Attack, target_entity);
-                    }
-                    else
-                    {
-                        auto port = entity.getComponent<DockingPort>();
-                        auto bay = target_entity.getComponent<DockingBay>();
-                        if (!shift_down && port && bay && port->canDockOn(*bay) != DockingStyle::None)
+                        if (Faction::getRelation(entity, target_entity) == FactionRelation::Enemy)
                         {
                             if (my_player_info)
-                                my_player_info->commandSetAIOrder(entity, AIOrder::Dock, target_entity);
+                                my_player_info->commandSetAIOrder(entity, AIOrder::Attack, target_entity);
                         }
                         else
                         {
-                            if (my_player_info)
-                                my_player_info->commandSetAIOrder(entity, AIOrder::DefendTarget, target_entity);
+                            auto port = entity.getComponent<DockingPort>();
+                            auto bay = target_entity.getComponent<DockingBay>();
+                            if (!shift_down && port && bay && port->canDockOn(*bay) != DockingStyle::None)
+                            {
+                                if (my_player_info)
+                                    my_player_info->commandSetAIOrder(entity, AIOrder::Dock, target_entity);
+                            }
+                            else
+                            {
+                                if (my_player_info)
+                                    my_player_info->commandSetAIOrder(entity, AIOrder::DefendTarget, target_entity);
+                            }
                         }
                     }
-                }
-                else
-                {
-                    glm::vec2 target_loc;
-                    if (auto transform = entity.getComponent<sp::Transform>())
-                        target_loc = position + transform->getPosition() - objects_center;
                     else
-                        target_loc = position;
+                    {
+                        glm::vec2 target_loc;
+                        if (auto transform = entity.getComponent<sp::Transform>())
+                            target_loc = position + transform->getPosition() - objects_center;
+                        else
+                            target_loc = position;
 
-                    string order_str = shift_down ? "Fly towards (ignore all)" : "Fly towards";
-                    runScriptForEntity(getEntityStringForLua(entity), ".components.ai_controller.orders = '" + order_str + "'; " + getEntityStringForLua(entity) + ".components.ai_controller.order_target_location = {" + string(target_loc.x) + ", " + string(target_loc.y) + "}");
+                        string order_str = shift_down ? "Fly towards (ignore all)" : "Fly towards";
+                        runScriptForEntity(getEntityStringForLua(entity), ".components.ai_controller.orders = '" + order_str + "'; " + getEntityStringForLua(entity) + ".components.ai_controller.order_target_location = {" + string(target_loc.x) + ", " + string(target_loc.y) + "}");
+                    }
                 }
-                if (auto gravity = entity.getComponent<Gravity>())
+                else if (entity.hasComponent<Teleporter>())
                 {
-                    if (gravity->wormhole_target.x || gravity->wormhole_target.y)
-                        runScriptForEntity(getEntityStringForLua(entity), ".components.gravity.wormhole_target = {" + string(position.x) + ", " + string(position.y) + "}");
+                    runScriptForEntity(getEntityStringForLua(entity), ".components.teleporter.target_coordinates = {" + string(position.x) + ", " + string(position.y) + "}");
                 }
             }
         }

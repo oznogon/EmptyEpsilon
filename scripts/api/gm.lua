@@ -307,16 +307,14 @@ function getEntityExportString(entity)
     then
         return "BlackHole()" .. __exportBasics(entity)
     end
-    -- WormHole has gravity with damage=false and a non-zero wormhole_target
+    -- WormHole has gravity with damage=false and a Teleporter component
     if
         entity.components.gravity
         and entity.components.billboard_render
         and not entity.components.gravity.damage
+        and entity.components.teleporter
     then
-        local wt = entity.components.gravity.wormhole_target
-        if wt and (wt[1] ~= 0 or wt[2] ~= 0) then
-            return "WormHole()" .. __exportWormHole(entity)
-        end
+        return "WormHole()" .. __exportWormHole(entity)
     end
     -- SupplyDrop has pickup with at least one supply > 0
     if entity.components.pickup then
@@ -979,9 +977,9 @@ end
 
 function __exportWormHole(entity)
     local extras = __exportBasics(entity)
-    local g = entity.components.gravity
-    if g and g.wormhole_target then
-        local tx, ty = g.wormhole_target[1], g.wormhole_target[2]
+    local t = entity.components.teleporter
+    if t and t.target_coordinates then
+        local tx, ty = t.target_coordinates[1], t.target_coordinates[2]
         if tx ~= 0 or ty ~= 0 then
             extras = extras
                 .. string.format(":setTargetPosition(%.0f, %.0f)", tx, ty)

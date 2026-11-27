@@ -17,7 +17,6 @@
 #include "components/database.h"
 #include "components/docking.h"
 #include "components/faction.h"
-#include "components/gravity.h"
 #include "components/hull.h"
 #include "components/missileWeaponData.h"
 #include "components/name.h"
@@ -26,6 +25,7 @@
 #include "components/radar.h"
 #include "components/rendering.h"
 #include "components/shields.h"
+#include "components/teleporter.h"
 
 #include "systems/collision.h"
 
@@ -849,6 +849,7 @@ void GameMasterScreen::update(float delta)
     bool has_object = false;
     has_cpu_ship = false;
     has_player_ship = false;
+    has_teleporter = false;
 
     // Add and remove entries from the player ship list.
     for (auto [entity, pc] : sp::ecs::Query<PlayerControl>())
@@ -885,6 +886,8 @@ void GameMasterScreen::update(float delta)
     {
         if (entity.hasComponent<AIController>()) has_cpu_ship = true;
         if (entity.hasComponent<PlayerControl>()) has_player_ship = true;
+        if (entity.hasComponent<Teleporter>() && !entity.hasComponent<AIController>())
+            has_teleporter = true;
         has_object = true;
     }
 
@@ -1180,7 +1183,9 @@ void GameMasterScreen::onMouseDown(sp::io::Pointer::Button button, glm::vec2 pos
 
     if (button == sp::io::Pointer::Button::Right)
     {
-        if (has_cpu_ship) click_and_drag_state = ClickAndDragState::DragViewOrOrder;
+        // Right-clicking sets a selected Teleporter's target, or gives a
+        // selected CPU ship an order. Right-click dragging only pans the view.
+        if (has_cpu_ship || has_teleporter) click_and_drag_state = ClickAndDragState::DragViewOrOrder;
         else click_and_drag_state = ClickAndDragState::DragView;
     }
     else
@@ -1364,10 +1369,9 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
                             ai->order_target_location = position;
                     }
                 }
-                if (auto gravity = entity.getComponent<Gravity>())
+                else if (auto teleporter = entity.getComponent<Teleporter>())
                 {
-                    if (gravity->wormhole_target.x || gravity->wormhole_target.y)
-                        gravity->wormhole_target = position;
+                    teleporter->target_coordinates = position;
                 }
             }
 

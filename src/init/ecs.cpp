@@ -47,6 +47,7 @@
 #include "multiplayer/shiplog.h"
 #include "multiplayer/spin.h"
 #include "multiplayer/target.h"
+#include "multiplayer/teleporter.h"
 #include "multiplayer/utilityBeam.h"
 #include "multiplayer/warp.h"
 #include "multiplayer/zone.h"
@@ -83,6 +84,7 @@
 #include "systems/sfx.h"
 #include "systems/shieldsystem.h"
 #include "systems/shipsystemssystem.h"
+#include "systems/teleporter.h"
 #include "systems/utilityBeam.h"
 #include "systems/warpsystem.h"
 #include "systems/zone.h"
@@ -151,6 +153,7 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<BriefingReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<SpinReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<TargetReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<TeleporterReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<BeamWeaponTargetReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<MissileWeaponTargetReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<HackTargetReplication>();
@@ -190,6 +193,7 @@ void initSystemsAndComponents()
     engine->registerSystem<SfxSystem>();
     engine->registerSystem<BasicMovementSystem>();
     engine->registerSystem<GravitySystem>();
+    engine->registerSystem<TeleporterSystem>();
     engine->registerSystem<InternalCrewSystem>();
     engine->registerSystem<PathFindingSystem>();
     engine->registerSystem<NebulaRenderSystem>();

@@ -530,18 +530,14 @@ function isObjectType(obj, typ)
         result = obj.components.gravity
             and obj.components.billboard_render
             and obj.components.gravity.damage
-    -- All Gravity components have a default wormhole_target of {0,0}, so
-    -- wormholes are distinguished from black holes primarily by not dealing
-    -- damage or pointing to {0,0}. A wormhole pointing to {0,0} therefore won't
-    -- be detected as a wormhole.
+    -- Wormholes are distinguished from black holes by dealing no damage and
+    -- having a Teleporter component. A wormhole with a {0,0} target is still
+    -- a wormhole; the target is simply unset.
     elseif typ == "WormHole" then
         result = obj.components.gravity
             and obj.components.billboard_render
             and not obj.components.gravity.damage
-            and (
-                obj.components.gravity.wormhole_target[1] ~= 0
-                or obj.components.gravity.wormhole_target[2] ~= 0
-            )
+            and obj.components.teleporter
     --- Items
     -- Artifact check is fragile because its mesh filename doesn't need to
     -- contain `mesh/Artifact`.

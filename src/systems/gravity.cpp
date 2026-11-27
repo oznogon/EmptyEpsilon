@@ -6,7 +6,6 @@
 #include "systems/damage.h"
 #include "multiplayer_server.h"
 #include "ecs/query.h"
-#include "random.h"
 #include "menus/luaConsole.h"
 #include <glm/gtx/norm.hpp>
 
@@ -14,7 +13,6 @@
 void GravitySystem::update(float delta)
 {
     static constexpr float max_force = 10000.0f;
-    static constexpr float wormhole_target_spread = 500.0f;
     if (delta <= 0.0f) return;
 
     for(auto [source, grav, source_transform] : sp::ecs::Query<Gravity, sp::Transform>()) {
@@ -31,26 +29,14 @@ void GravitySystem::update(float delta)
                 force = max_force;
             tt->setPosition(tt->getPosition() + diff / std::sqrt(dist2) * delta * force);
 
-            if (grav.wormhole_target.x || grav.wormhole_target.y) {
-                /*TODO
-                // Warp postprocessor-alpha is calculated using alpha = (1 - (delay/10))
-                if (spaceship)
-                    spaceship->wormhole_alpha = ((distance / grav.range) * ALPHA_MULTIPLIER);
-                */
-
-                if (force >= max_force)
-                {
-                    if (game_server.isAlive()) {
-                        tt->setPosition( (grav.wormhole_target + glm::vec2(random(-wormhole_target_spread, wormhole_target_spread), random(-wormhole_target_spread, wormhole_target_spread))));
-                        if (grav.on_teleportation)
-                        {
-                            LuaConsole::checkResult(grav.on_teleportation.call<void>(source, target));
-                            continue; //callback could destroy the entity, so do no extra processing.
-                        }
-                        //if (spaceship)
-                        //    spaceship->wormhole_alpha = 0.0;
-                    }
-                }
+            // Trigger at the center of the gravity well. The callback can
+            // teleport, destroy, or otherwise modify the target, so stop
+            // processing if either entity is gone.
+            if (force >= max_force && grav.on_singularity && game_server.isAlive())
+            {
+                LuaConsole::checkResult(grav.on_singularity.call<void>(source, target));
+                if (!source) break;
+                if (!target) continue;
             }
 
             // Damage at center
@@ -75,11 +61,5 @@ void GravitySystem::update(float delta)
 
 void GravitySystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e, glm::vec2 screen_position, float scale, float rotation, Gravity& component)
 {
-    // womrhole_target isn't replicated, so show only on the server.
-    if (game_server && (component.wormhole_target.x != 0.0f || component.wormhole_target.y != 0.0f))
-    {
-        if (auto transform = e.getComponent<sp::Transform>())
-            renderer.drawLine(screen_position, screen_position + (component.wormhole_target - transform->getPosition()) * scale, 1.0f, glm::u8vec4(255, 255, 255, 32));
-    }
     renderer.drawCircleOutline(screen_position, component.range * scale, 2.0, glm::u8vec4(255, 255, 255, 32));
 }

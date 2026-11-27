@@ -49,6 +49,7 @@
 #include "components/spin.h"
 #include "components/utilityBeam.h"
 #include "components/target.h"
+#include "components/teleporter.h"
 #include "components/warpdrive.h"
 #include "components/zone.h"
 
@@ -4930,11 +4931,17 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     addPageToGroup(sensors_group);
 
     ADD_PAGE(tr("tweak-tab", "Gravity"), Gravity);
-    new_page->description = tr("tweak-gravity", "Defines this entity's gravitational attraction, which pulls nearby entities toward this one. Can optionally deal damage like a black hole.\n\nCallback member on_teleportation can't be tweaked via this dialog.");
+    new_page->description = tr("tweak-gravity", "Defines this entity's gravitational attraction, which pulls nearby entities toward this one. Can optionally deal damage like a black hole.\n\nThe on_singularity callback fires when an entity reaches the center of the gravity well and can be defined through Lua scripting. The deprecated wormhole_target and on_teleportation fields are no longer used by the engine; use a Teleporter component instead.");
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Radius:"), Gravity, range);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Attraction force:"), Gravity, force);
     ADD_BOOL_TWEAK(tr("tweak-text", "Proximity damage"), Gravity, damage);
-    ADD_VEC2_TWEAK(tr("tweak-text", "Wormhole target:"), Gravity, wormhole_target);
+    addPageToGroup(world_group);
+
+    ADD_PAGE(tr("tweak-tab", "Teleporter"), Teleporter);
+    new_page->description = tr("tweak-teleporter", "Defines a destination and callback for teleporting entities. The on_teleportation callback receives the target coordinates, whether the teleporter is single-use, and the entity to teleport, and is responsible for moving or otherwise handling that entity. The callback can't be tweaked via this dialog.\n\nIf this entity also has a Zone component, the callback fires when an entity enters the zone. Otherwise, if Teleport on collision is enabled, this entity must have a Physics component. If Single use is enabled, this component is removed after the callback runs.");
+    ADD_VEC2_TWEAK(tr("tweak-text", "Target coordinates:"), Teleporter, target_coordinates);
+    ADD_BOOL_TWEAK(tr("tweak-text", "Teleport on collision"), Teleporter, teleport_on_collision);
+    ADD_BOOL_TWEAK(tr("tweak-text", "Single use"), Teleporter, is_single_use);
     addPageToGroup(world_group);
 
     ADD_PAGE(tr("tweak-tab", "Radar trace"), RadarTrace);

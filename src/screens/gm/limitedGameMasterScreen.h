@@ -97,6 +97,7 @@ private:
 
     bool has_cpu_ship = false;
     bool has_player_ship = false;
+    bool has_teleporter = false;
 
     bool gm_add_waypoint_mode = false;
     bool gm_delete_waypoint_mode = false;

@@ -407,6 +407,7 @@ set(MAIN_SOURCES
     src/components/ai.h
     src/components/radarblock.h
     src/components/gravity.h
+    src/components/teleporter.h
     src/components/avoidobject.h
     src/components/sfx.h
     src/components/missile.h
@@ -460,6 +461,8 @@ set(MAIN_SOURCES
     src/systems/basicmovement.cpp
     src/systems/gravity.h
     src/systems/gravity.cpp
+    src/systems/teleporter.h
+    src/systems/teleporter.cpp
     src/systems/comms.h
     src/systems/comms.cpp
     src/systems/radarblock.h
@@ -554,6 +557,8 @@ set(MAIN_SOURCES
     src/multiplayer/customshipfunction.cpp
     src/multiplayer/gravity.h
     src/multiplayer/gravity.cpp
+    src/multiplayer/teleporter.h
+    src/multiplayer/teleporter.cpp
     src/multiplayer/scanning.h
     src/multiplayer/scanning.cpp
     src/multiplayer/missile.h
