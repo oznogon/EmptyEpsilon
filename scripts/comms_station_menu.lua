@@ -14,7 +14,7 @@ local RESTOCK_ORDER = {
     "EMP",
     "Homing",
     "Mine",
-    "HVLI"
+    "HVLI",
 }
 local ORDNANCE_LABELS = {
     Nuke = _("ammo-comms", "\n   Nuke"),
@@ -1021,15 +1021,16 @@ local function repairAvailable(profile, system)
     if system.key ~= nil and not comms_target.comms_data[system.key] then
         return false
     end
+    local source = commsSource(profile)
     if type(system.available) == "function" then
-        return system.available(commsSource(profile), profile)
+        return system.available(source, profile)
     end
     if system.requires_capability and profile.combat_maneuver_capable then
-        if not commsSource(profile).combat_maneuver_capable then
+        if not source.combat_maneuver_capable then
             return false
         end
     end
-    return not commsSource(profile)[system.available]()
+    return not source[system.available](source)
 end
 
 local function repairCost(profile, system)
@@ -1227,11 +1228,12 @@ function M.addRepairShipSystem(profile)
                     if not ensureDocked(profile) then
                         return
                     end
-                    if commsSource(profile):takeReputationPoints(cost) then
+                    local source = commsSource(profile)
+                    if source:takeReputationPoints(cost) then
                         if type(system.repair) == "function" then
-                            system.repair(commsSource(profile), profile)
+                            system.repair(source, profile)
                         else
-                            commsSource(profile)[system.repair](true)
+                            source[system.repair](source, true)
                         end
                         setCommsMessage(repairSuccess(system))
                     else
