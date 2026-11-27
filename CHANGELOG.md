@@ -4,6 +4,16 @@
 
 ### New features
 
+- New `Teleporter` component that stores destination coordinates, a script callback, and options for triggering on collision and single-use behavior
+  - If no custom callback is set, the entity is moved directly to the destination coordinates by default
+  - If a Physics component is also assigned to an entity, the callback fires on collision by default
+  - If a Zone entity is assigned to an entity that has a Teleporter and lacks a Physics component, the callback fires upon entering the zone by default
+  - New `Teleporter()` Lua entity with target, collision, single-use flag, callback, and manual trigger functions
+    - If an entity lacks either Zone or Physics components, the Teleporter callback can still be triggered against a given target entity via the Lua API function `Entity:teleport(entity)`
+  - New GM tweak dialog page for Teleporter parameter configuration
+  - Wormholes now use the Teleporter component by default
+- New `Gravity.on_singularity` script callback, which fires when an entity reaches the center of a gravity well
+  - Wormholes (Teleporter) and Blackholes (destruction) now use `on_singularity` to trigger their behaviors when an entity reaches their centers
 - New scenarios
   - "Rescue" (#2597): rescue a research scientist from the Kraylor with any number of player ships; terrain and difficulty are configurable
   - "Defenders or Pirates" (#2485): replayable scenario about amassing reputation by destroying enemies or trading cargo, featuring many non-standard player ships
@@ -28,6 +38,8 @@
 
 ### Changed
 
+- Large tables and functions copied and pasted across multiple scenarios have been moved to `..._scenario_utility.lua` modules, reducing scenario code complexity and centralizing changes and fixes to several scenarios' comms, ship spawning, difficulty scaling, stats collection and reporting, and cargo/inventory functionalities
+- Gravity component `wormhole_target` and `on_teleportation` fields are deprecated. Wormhole destination and teleportation behavior now use the Teleporter component and Lua API
 - Server creation screen displays an error when the server fails to start, such as when the port is in use, instead of only logging it
 - New scenarios use current ship template names, renamed from their previous names
 - New scenarios cleaned up and reformatted with StyLua: line endings normalized, tabs converted to spaces, typos fixed, and typographic characters replaced
@@ -38,6 +50,7 @@
   - Selection reverted to the closest entity center instead of the closest by collision shape edge
   - Selection now adds a 10-pixel click tolerance to make selecting small/zoomed-out entities easier
   - Entities without physics radii now use their mesh scale as a fallback, allowing single-click selection of non-colliding entities
+- GM screens now display Zone outlines and fill at half opacity when zoom levels are 5x and closer, instead of hiding them completely
 - Science database missile and mine stats are now derived from the Lua `MissileWeaponData` definitions instead of being duplicated as hardcoded values
 - Redundant `isObjectType()` implementations in scenarios and `comms_scenario_utility.lua` have been removed in favor of the `utils.lua` version
 - Entity lifetime countdowns are now handled by a dedicated `LifeTimeSystem` instead of the missile system. The `LifeTime` component now tracks `maximum` and `alive_for` instead of a decrementing `lifetime` field, so scripts that define `lifetime` components directly must use `maximum` instead. Upstream 2855
@@ -45,6 +58,7 @@
 
 ### Fixed
 
+- When a Wormhole is selected, right-clicking on the GM Screen retargets the selected wormhole. (upstream 2962)
 - Engineering screen custom ship functions no longer overlap the system effects panel
 - Fullscreen multimonitor mode no longer attempts to create more windows than there are connected displays
 - Crash bugs in "Defenders or Pirates" and "Iris Siege", including entity type checks in `findClearSpot()` that rejected userdata, the Iris warp jammer's missing faction, and `nil` comparisons on `getDockedWith()` results
