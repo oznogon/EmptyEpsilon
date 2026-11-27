@@ -393,7 +393,7 @@ function assignControlCode(ship, code)
 end
 
 function resetControlCodes()
-    for _, ship in ipairs(getActivePlayerShips()) do
+    for index, ship in ipairs(getActivePlayerShips()) do
         assignControlCode(ship)
     end
     showControlCodes()
@@ -401,7 +401,7 @@ end
 
 function showControlCodes(faction_filter)
     local code_list = {}
-    for _, ship in ipairs(getActivePlayerShips()) do
+    for index, ship in ipairs(getActivePlayerShips()) do
         if faction_filter == nil or ship:getFaction() == faction_filter then
             code_list[ship:getCallSign()] = {
                 code = ship.control_code,
@@ -420,7 +420,7 @@ function showControlCodes(faction_filter)
         Exuari = _("msgGM", " (Exuari)"),
     }
     local output = ""
-    for _, name in ipairs(sorted_names) do
+    for index, name in ipairs(sorted_names) do
         local faction = faction_labels[code_list[name].faction] or ""
         output = output
             .. string.format(

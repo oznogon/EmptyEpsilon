@@ -3727,7 +3727,7 @@ ship_profile = {
     end,
     inventory_format = "array",
     waypoint_labels = {
-        defend = function(_, index)
+        defend = function(waypoint_index, index)
             return string.format(
                 _("shipAssist-comms", "Defend waypoint %d"),
                 index

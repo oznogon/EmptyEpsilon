@@ -781,7 +781,7 @@ function M.dockingStatusDetailed(profile, options)
         status
     )
     local line_item_count = 0
-    for _, system in ipairs(systems) do
+    for index, system in ipairs(systems) do
         if comms_data.system_repair[system] then
             if line_item_count == 0 or line_item_count >= 3 then
                 status = status .. _("stationServices-comms", "\n    ")
@@ -805,7 +805,7 @@ function M.dockingStatusDetailed(profile, options)
     end
     status = string.format(coolant_header, status)
     line_item_count = 0
-    for _, system in ipairs(systems) do
+    for index, system in ipairs(systems) do
         if comms_data.coolant_pump_repair[system] then
             if line_item_count == 0 or line_item_count >= 3 then
                 status = status .. _("stationServices-comms", "\n    ")
@@ -1086,7 +1086,7 @@ function M.addRepairShipSystem(profile)
     local coolant_repair = comms_target.comms_data.coolant_pump_repair or {}
     local normal_coolant = comms_source.normal_coolant_rate or {}
     local function primary_needs_repair()
-        for _, system in ipairs(primary_systems) do
+        for index, system in ipairs(primary_systems) do
             if
                 primary_repair[system]
                 and comms_source:getSystemHealthMax(system) < 1
@@ -1128,7 +1128,7 @@ function M.addRepairShipSystem(profile)
             )
         )
         if primary_options ~= nil then
-            for _, system in ipairs(primary_systems) do
+            for index, system in ipairs(primary_systems) do
                 if repair_system_diagnostic then
                     print("offer repair system:", system)
                 end

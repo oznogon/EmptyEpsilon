@@ -11624,7 +11624,7 @@ ship_profile = {
             end,
         },
         waypoint_labels = {
-            defend = function(_, waypoint_id)
+            defend = function(waypoint_index, waypoint_id)
                 return string.format(
                     _("shipAssist-comms", "Defend WP %d"),
                     waypoint_id
