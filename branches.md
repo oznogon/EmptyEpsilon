@@ -210,3 +210,5 @@ patch-3 20261125 -- addToShipLog color param issue, adapted to reformatted scena
 patch-4 20261125 -- addToShipLog color param issue, adapted to reformatted scenario scripts
 
 kzsh:issues/2950 -- previously addressed in OLD.lua ShipTemplate refactoring
+
+patch-2 20261127 -- fix varname typo in string formatting

@@ -6270,7 +6270,11 @@ function dockTaskEvaluation()
     out = string.format(
         _(
             "evaluation-comms",
-            "We only have objective evaluation data. Subjective evaluation must come from a different source. The entire crew contributes to the success of a task. Certain members are measured on part of the task.\n----- First Task: Dock -----\n%s"
+            [[We have only objective evaluation data. Subjective evaluation must come from a different source. The entire crew contributes to the success of a task. Certain members are measured on part of the task.]]
+        ) .. "\n\n" .. _(
+            "evaluation-comms",
+            [[----- First task: Docking -----
+%s]]
         ),
         out
     )
@@ -6308,7 +6312,10 @@ function dockTaskEvaluationOutput(p, gm)
         grade_total = grade_total + 1
     end
     local out = string.format(
-        _("evaluation-comms", "Overall time to complete the task: %s"),
+        _(
+            "evaluation-comms",
+            "- Overall time to complete the task: %s"
+        ),
         colonTime(overall_speed)
     )
     if gm == "gm" then
@@ -6330,7 +6337,8 @@ function dockTaskEvaluationOutput(p, gm)
     out = string.format(
         _(
             "evaluation-comms",
-            "%s\nRelay time taken to request dock protocol: %s"
+            [[%s
+- Relay time taken to request dock protocol: %s sec.]]
         ),
         out,
         colonTime(relay_time)
@@ -6352,7 +6360,11 @@ function dockTaskEvaluationOutput(p, gm)
         grade_total = grade_total + 1
     end
     out = string.format(
-        _("evaluation-comms", "%s\nWeapons time taken to calibrate beams: %s"),
+        _(
+            "evaluation-comms",
+            [[%s
+- Weapons time taken to calibrate beams: %s sec.]]
+        ),
         out,
         colonTime(beam_speed)
     )
@@ -6375,7 +6387,11 @@ function dockTaskEvaluationOutput(p, gm)
         grade_total = grade_total + 1
     end
     out = string.format(
-        _("evaluation-comms", "%s\nWeapons time taken to calibrate shields: %s"),
+        _(
+            "evaluation-comms",
+            [[%s
+- Weapons time taken to calibrate shields: %s sec.]]
+        ),
         out,
         colonTime(shield_speed)
     )
@@ -6403,7 +6419,8 @@ function dockTaskEvaluationOutput(p, gm)
     out = string.format(
         _(
             "evaluation-comms",
-            "%s\nEngineering time taken to power down missile system: %s"
+            [[%s
+- Engineering time taken to power down missile system: %s sec.]]
         ),
         out,
         colonTime(missile_time)
@@ -6426,7 +6443,8 @@ function dockTaskEvaluationOutput(p, gm)
     out = string.format(
         _(
             "evaluation-comms",
-            "%s\nHelm/Engineering maximum velocity reached: %.1f units per minute"
+            [[%s
+- Helm/Engineering maximum velocity: %.1f units/min.]]
         ),
         out,
         p.dock_max_velocity
@@ -6448,7 +6466,9 @@ function dockTaskEvaluationOutput(p, gm)
         out = string.format(
             _(
                 "evaluation-comms",
-                "%s\n\nWith a score of %i points out of 18, the system gives a rating of %s"
+                [[%s
+
+With a score of %i points out of 18, the system's rating for this task is %s.]]
             ),
             out,
             grade_total,
@@ -6457,7 +6477,13 @@ function dockTaskEvaluationOutput(p, gm)
         out = string.format(
             _(
                 "evaluation-comms",
-                "%s\n\nFor each subtask, the single letter evaluations are:\n    N = Needs improvement\n    C = Competent\n    E = Exceeds expectations\n    S = Superior"
+                [[%s
+
+For each subtask, the single-letter evaluation grades are:
+- N = Needs improvement
+- C = Competent
+- E = Exceeds expectations
+- S = Superior]]
             ),
             out
         )
@@ -6475,7 +6501,11 @@ function scanTaskEvaluation()
     out = string.format(
         _(
             "evaluation-comms",
-            "We only have objective evaluation data. Subjective evaluation must come from a different source. The entire crew contributes to the success of a task. Certain members are measured on part of the task.\n----- Second Task: Scan -----\n%s"
+            [[We have only objective evaluation data. Subjective evaluation must come from a different source. The entire crew contributes to the success of a task. Certain members are measured on part of the task.]]
+        ) .. "\n\n" .. _(
+            "evaluation-comms",
+            [[----- Second task: Scanning -----
+%s]]
         ),
         out
     )
@@ -6515,13 +6545,6 @@ function scanTaskEvaluationOutput(p, gm)
     if gm == "gm" then
         out = string.format("%s %s", out, overall)
     end
-    out = string.format(
-        _(
-            "evaluation-comms",
-            "%s\nReport line per scan ship: faction name: SS = Simple Scan time in seconds, DS = Deep Scan time in seconds, RT = Reported Type time in seconds (yes/no), RF = Reported Frequency time in seconds (yes/no)"
-        ),
-        out
-    )
     local task_time = nil
     for i, scan_target in ipairs(p.scan_targets) do
         local ss = "--"
@@ -6548,10 +6571,10 @@ function scanTaskEvaluationOutput(p, gm)
         else
             table.insert(timeline, 9999)
         end
-        local rta = _("evaluation-comms", "(no)")
+        local rta = _("evaluation-comms", "(incorrect)")
         --note: scan_target is not a class, it just happens to have a typeName entry
         if scan_target.typeName == scan_target.identified_type then
-            rta = _("evaluation-comms", "(yes)")
+            rta = _("evaluation-comms", "(correct)")
             evaluation_score = evaluation_score + 2
         end
         local rf = "--"
@@ -6562,13 +6585,19 @@ function scanTaskEvaluationOutput(p, gm)
         else
             table.insert(timeline, 9999)
         end
-        local rfa = _("evaluation-comms", "(no)")
+        local rfa = _("evaluation-comms", "(incorrect)")
         if scan_target.shield_frequency == scan_target.identified_frequency then
-            rfa = _("evaluation-comms", "(yes)")
+            rfa = _("evaluation-comms", "(correct)")
             evaluation_score = evaluation_score + 2
         end
         out = string.format(
-            _("evaluation-comms", "%s\n%s %s: SS:%s, DS:%s, RT:%s %s, RF:%s %s"),
+            _("evaluation-comms", [[%s
+----
+%s ship %s
+- Time to simple scan: %s sec.
+- Time to deep scan: %s sec.
+- Time to type report: %s sec. %s
+- Time to frequency report: %s sec. %s]]),
             out,
             scan_target.faction,
             scan_target.name,
@@ -6605,7 +6634,9 @@ function scanTaskEvaluationOutput(p, gm)
         out = string.format(
             _(
                 "evaluation-comms",
-                "%s\n\nWith a score of %i points out of 54, the system gives a rating of %s"
+                [[%s
+
+With a score of %i points out of 54, the system's rating for this task is %s.]]
             ),
             out,
             evaluation_score,
@@ -6614,7 +6645,13 @@ function scanTaskEvaluationOutput(p, gm)
         out = string.format(
             _(
                 "evaluation-comms",
-                "%s\n\nFor each subtask, the single letter evaluations are:\n    N = Needs improvement\n    C = Competent\n    E = Exceeds expectations\n    S = Superior"
+                [[%s
+
+For each subtask, the single-letter evaluation grades are:
+- N = Needs improvement
+- C = Competent
+- E = Exceeds expectations
+- S = Superior]]
             ),
             out
         )
@@ -6632,7 +6669,11 @@ function destroyFreighterTaskEvaluation()
     out = string.format(
         _(
             "evaluation-comms",
-            "We only have objective evaluation data. Subjective evaluation must come from a different source. The entire crew contributes to the success of a task. Certain members are measured on part of the task.\n----- Third Task: Destroy Freighter -----\n%s"
+            [[We have only objective evaluation data. Subjective evaluation must come from a different source. The entire crew contributes to the success of a task. Certain members are measured on part of the task.]]
+        ) .. "\n\n" .. _(
+            "evaluation-comms",
+            [[----- Third task: Destroy hostile freighter -----
+%s]]
         ),
         out
     )
@@ -6666,14 +6707,20 @@ function destroyFreighterTaskEvaluationOutput(p, gm)
         evaluation_score = evaluation_score + 1
     end
     local out = string.format(
-        _("evaluation-comms", "Overall time to complete the task: %s"),
+        _(
+            "evaluation-comms",
+            "- Overall time to complete the task: %s"
+        ),
         colonTime(overall_time)
     )
     if gm == "gm" then
         out = string.format("%s %s", out, overall)
     end
     out = string.format(
-        _("evaluation-comms", "%s\nHelm/Weapons HVLI in storage: %i"),
+        _(
+            "evaluation-comms",
+            [[%s
+- Helm/Weapons HVLI in storage: %i]]),
         out,
         p.destroy_freighter_remaining_HVLI
     )
@@ -6706,7 +6753,9 @@ function destroyFreighterTaskEvaluationOutput(p, gm)
         out = string.format(
             _(
                 "evaluation-comms",
-                "%s\n\nWith a score of %i points out of 6, the system gives a rating of %s"
+                [[%s
+
+With a score of %i points out of 6, the system's rating for this task is %s.]]
             ),
             out,
             evaluation_score,
@@ -6715,7 +6764,13 @@ function destroyFreighterTaskEvaluationOutput(p, gm)
         out = string.format(
             _(
                 "evaluation-comms",
-                "%s\n\nFor each subtask, the single letter evaluations are:\n    N = Needs improvement\n    C = Competent\n    E = Exceeds expectations\n    S = Superior"
+                [[%s
+
+For each subtask, the single-letter evaluation grades are:
+- N = Needs improvement
+- C = Competent
+- E = Exceeds expectations
+- S = Superior]]
             ),
             out
         )
@@ -6733,7 +6788,11 @@ function assistFreighterTaskEvaluation()
     out = string.format(
         _(
             "evaluation-comms",
-            "We only have objective evaluation data. Subjective evaluation must come from a different source. The entire crew contributes to the success of a task. Certain members are measured on part of the task.\n----- Fourth Task: Assist Freighter -----\n%s"
+            [[We only have objective evaluation data. Subjective evaluation must come from a different source. The entire crew contributes to the success of a task. Certain members are measured on part of the task.]]
+        ) .. "\n\n" .. _(
+            "evaluation-comms",
+            [[----- Fourth task: Assist freighter -----
+%s]]
         ),
         out
     )
@@ -6801,7 +6860,10 @@ function assistFreighterTaskEvaluationOutput(p, gm)
             evaluation_score = evaluation_score + 1
         end
         out = string.format(
-            _("evaluation-comms", "%s\nRelay time taken to contact %s: %s"),
+            _(
+                "evaluation-comms",
+                [[%s
+- Relay time taken to contact %s: %s]]),
             out,
             freighter_name,
             colonTime(contact_time)
@@ -6811,11 +6873,21 @@ function assistFreighterTaskEvaluationOutput(p, gm)
         end
     else
         out = string.format(
-            _("evaluation-comms", "%s\nFailed to contact Arlenian freighter"),
+            _(
+                "evaluation-comms",
+                [[%s
+- Failed to contact Arlenian freighter.]]
+            ),
             out
         )
         if gm == "gm" then
-            out = string.format(_("evaluation-comms", "%s N"), out)
+            out = string.format(
+                _(
+                    "evaluation-comms",
+                    "%s N"
+                ),
+                out
+            )
         end
     end
     local report = _("evaluation-comms", "N")
@@ -6838,7 +6910,8 @@ function assistFreighterTaskEvaluationOutput(p, gm)
         out = string.format(
             _(
                 "evaluation-comms",
-                "%s\nRelay time taken to report damage to %s's engines: %s"
+                [[%s
+- Relay time taken to report damage to %s's engines: %s]]
             ),
             out,
             freighter_name,
@@ -6851,12 +6924,19 @@ function assistFreighterTaskEvaluationOutput(p, gm)
         out = string.format(
             _(
                 "evaluation-comms",
-                "%s\nFailed to report damage to Arlenian freighter"
+                [[%s
+- Failed to report damage to Arlenian freighter.]]
             ),
             out
         )
         if gm == "gm" then
-            out = string.format(_("evaluation-comms", "%s N"), out)
+            out = string.format(
+                _(
+                    "evaluation-comms",
+                    "%s N"
+                ),
+                out
+            )
         end
     end
     local obtain = _("evaluation-comms", "N")
@@ -6888,12 +6968,19 @@ function assistFreighterTaskEvaluationOutput(p, gm)
         out = string.format(
             _(
                 "evaluation-comms",
-                "%s\nFailed to get parts for Arlenian freighter"
+                [[%s
+Failed to get parts for Arlenian freighter.]]
             ),
             out
         )
         if gm == "gm" then
-            out = string.format(_("evaluation-comms", "%s N"), out)
+            out = string.format(
+                _(
+                    "evaluation-comms",
+                    "%s N"
+                ),
+                out
+            )
         end
     end
     local deliver = _("evaluation-comms", "N")
@@ -6915,25 +7002,37 @@ function assistFreighterTaskEvaluationOutput(p, gm)
         out = string.format(
             _(
                 "evaluation-comms",
-                "%s\nHelm/Relay time taken to provide parts for %s: %s"
+                [[%s
+- Helm/Relay time taken to provide parts for %s: %s]]
             ),
             out,
             freighter_name,
             colonTime(engine_repair_time)
         )
         if gm == "gm" then
-            out = string.format("%s %s", out, deliver)
+            out = string.format(
+                "%s %s",
+                out,
+                deliver
+            )
         end
     else
         out = string.format(
             _(
                 "evaluation-comms",
-                "%s\nFailed to provide parts to Arlenian freighter"
+                [[%s
+Failed to provide parts to Arlenian freighter.]]
             ),
             out
         )
         if gm == "gm" then
-            out = string.format(_("evaluation-comms", "%s N"), out)
+            out = string.format(
+                _(
+                    "evaluation-comms",
+                    "%s N"
+                ),
+                out
+            )
         end
     end
     local scan = _("evaluation-comms", "N")
@@ -6952,7 +7051,11 @@ function assistFreighterTaskEvaluationOutput(p, gm)
             evaluation_score = evaluation_score + 1
         end
         out = string.format(
-            _("evaluation-comms", "%s\nScience time taken to scan %s: %s"),
+            _(
+                "evaluation-comms",
+                [[%s
+- Science time taken to scan %s: %s]]
+            ),
             out,
             freighter_name,
             colonTime(scan_time)
@@ -6962,11 +7065,20 @@ function assistFreighterTaskEvaluationOutput(p, gm)
         end
     else
         out = string.format(
-            _("evaluation-comms", "%s\nFailed to scan Arlenian freighter"),
+            _(
+                "evaluation-comms",
+                [[%s
+- Failed to scan Arlenian freighter.]]),
             out
         )
         if gm == "gm" then
-            out = string.format(_("evaluation-comms", "%s N"), out)
+            out = string.format(
+                _(
+                    "evaluation-comms",
+                    "%s N"
+                ),
+                out
+            )
         end
     end
     local deepscan = _("evaluation-comms", "N")
@@ -6986,27 +7098,46 @@ function assistFreighterTaskEvaluationOutput(p, gm)
             evaluation_score = evaluation_score + 1
         end
         out = string.format(
-            _("evaluation-comms", "%s\nScience time taken to fully scan %s: %s"),
+            _(
+                "evaluation-comms",
+                [[%s
+- Science time taken to fully scan %s: %s]]
+            ),
             out,
             freighter_name,
             colonTime(fully_scanned_time)
         )
         if gm == "gm" then
-            out = string.format("%s %s", out, deepscan)
+            out = string.format(
+                "%s %s",
+                out,
+                deepscan
+            )
         end
     else
         out = string.format(
-            _("evaluation-comms", "%s\nFailed to deep scan Arlenian freighter"),
+            _(
+                "evaluation-comms",
+                [[%s
+- Failed to deep scan Arlenian freighter.]]
+            ),
             out
         )
         if gm == "gm" then
-            out = string.format(_("evaluation-comms", "%s N"), out)
+            out = string.format(
+                _(
+                    "evaluation-comms",
+                    "%s N"
+                ),
+                out
+            )
         end
     end
     out = string.format(
         _(
             "evaluation-comms",
-            "%s\nWeapons/Helm/Engineering time to destroy each marauder in seconds:\n"
+            [[%s
+- Weapons/Helm/Engineering time to destroy each Marauder in seconds: ]]
         ),
         out
     )
@@ -7056,7 +7187,11 @@ function assistFreighterTaskEvaluationOutput(p, gm)
     if p.assist_freighter:isValid() then
         if p.assist_freighter_fixed_clock ~= nil then
             out = string.format(
-                _("evaluation-comms", "%s\nTask status: complete"),
+                _(
+                    "evaluation-comms",
+                    [[%s
+Task status: SUCCESS]]
+                ),
                 out
             )
             evaluation_score = evaluation_score + 10
@@ -7066,14 +7201,19 @@ function assistFreighterTaskEvaluationOutput(p, gm)
             out = string.format(
                 _(
                     "evaluation-comms",
-                    "%s\nTask status: failed (partial success in providing repair parts)"
+                    [[%s
+- Task status: PARTIAL FAILURE (provided repair parts)]]
                 ),
                 out
             )
             evaluation_score = evaluation_score + 5
         else
             out = string.format(
-                _("evaluation-comms", "%s\nTask status: failed"),
+                _(
+                    "evaluation-comms",
+                    [[%s
+- Task status: FAILURE]]
+                ),
                 out
             )
         end
@@ -7092,7 +7232,9 @@ function assistFreighterTaskEvaluationOutput(p, gm)
         out = string.format(
             _(
                 "evaluation-comms",
-                "%s\n\nWith a score of %i points out of 43, the system gives a rating of %s"
+                [[%s
+
+With a score of %i points out of 43, the system's rating for this task is %s]]
             ),
             out,
             evaluation_score,
@@ -7101,7 +7243,13 @@ function assistFreighterTaskEvaluationOutput(p, gm)
         out = string.format(
             _(
                 "evaluation-comms",
-                "%s\n\nFor each subtask, the single letter evaluations are:\n    N = Needs improvement\n    C = Competent\n    E = Exceeds expectations\n    S = Superior"
+                [[%s
+
+For each subtask, the single-letter evaluation grades are:
+- N = Needs improvement
+- C = Competent
+- E = Exceeds expectations
+- S = Superior]]
             ),
             out
         )
@@ -7119,7 +7267,11 @@ function researchTaskEvaluation()
     out = string.format(
         _(
             "evaluation-comms",
-            "We only have objective evaluation data. Subjective evaluation must come from a different source. The entire crew contributes to the success of a task. Certain members are measured on part of the task.\n----- Fifth Task: Research -----\n%s"
+            [[We have only objective evaluation data. Subjective evaluation must come from a different source. The entire crew contributes to the success of a task. Certain members are measured on part of the task.]]
+        ) .. "\n\n" .. _(
+            "evaluation-comms",
+            [[----- Fifth task: Research -----
+%s]]
         ),
         out
     )
@@ -7205,13 +7357,18 @@ function researchTaskEvaluationOutput(p, gm)
             end
             total = total + length
             out = string.format(
-                "%s\n%s %s",
+                [[%s
+%s %s]],
                 out,
                 colonTime(length),
                 orbit.body:getCallSign()
             )
             if gm == "gm" then
-                out = string.format("%s %s", out, length_grade)
+                out = string.format(
+                    "%s %s",
+                    out,
+                    length_grade
+                )
             end
         end
     end
@@ -7246,7 +7403,8 @@ function researchTaskEvaluationOutput(p, gm)
     end
     if gm == "gm" then
         out = string.format(
-            "%s\nAverage: %s %s    Median: %s %s",
+            [[%s
+Average: %s %s    Median: %s %s]],
             out,
             colonTime(average),
             average_grade,
@@ -7255,7 +7413,8 @@ function researchTaskEvaluationOutput(p, gm)
         )
     else
         out = string.format(
-            "%s\nAverage: %s     Median: %s",
+            [[%s
+Average: %s     Median: %s]],
             out,
             colonTime(average),
             colonTime(median)
@@ -7275,7 +7434,9 @@ function researchTaskEvaluationOutput(p, gm)
         out = string.format(
             _(
                 "evaluation-comms",
-                "%s\n\nWith a score of %i points out of 48, the system gives a rating of %s"
+                [[%s
+
+With a score of %i points out of 48, the system's rating for this task is %s]]
             ),
             out,
             evaluation_score,
@@ -7284,7 +7445,13 @@ function researchTaskEvaluationOutput(p, gm)
         out = string.format(
             _(
                 "evaluation-comms",
-                "%s\n\nFor each subtask, the single letter evaluations are:\n    N = Needs improvement\n    C = Competent\n    E = Exceeds expectations\n    S = Superior"
+                [[%s
+
+For each subtask, the single-letter evaluation grades are:
+- N = Needs improvement
+- C = Competent
+- E = Exceeds expectations
+- S = Superior]]
             ),
             out
         )
@@ -7302,7 +7469,11 @@ function bonusTaskEvaluation()
     out = string.format(
         _(
             "evaluation-comms",
-            "We only have objective evaluation data. Subjective evaluation must come from a different source. The entire crew contributes to the success of a task. Certain members are measured on part of the task.\n----- Bonus Task -----\n%s"
+            [[We have only objective evaluation data. Subjective evaluation must come from a different source. The entire crew contributes to the success of a task. Certain members are measured on part of the task.]]
+        ) .. "\n\n" .. _(
+            "evaluation-comms",
+            [[----- Bonus task -----
+%s]]
         ),
         out
     )
@@ -7340,7 +7511,10 @@ function bonusTaskEvaluationOutput(p, gm)
             bonus_task_time = bonus_task_end_clock - p.research_end_clock
         else
             my_nemesis_state = string.format(
-                _("evaluation-comms", "%s time: %s"),
+                _(
+                    "evaluation-comms",
+                    "%s time: %s"
+                ),
                 my_nemesis_state,
                 colonTime(p.complete_my_nemesis_clock - p.research_end_clock)
             )
@@ -7348,12 +7522,19 @@ function bonusTaskEvaluationOutput(p, gm)
         end
     end
     out = string.format(
-        _("evaluation-comms", "Bonus task length: %s     Status: %s"),
+        _(
+            "evaluation-comms",
+            "Bonus task length: %s     Status: %s"
+        ),
         colonTime(bonus_task_time),
         status_desc[bonus_task_status]
     )
     out = string.format(
-        _("evaluation-comms", "%s\nStation %s %s"),
+        _(
+            "evaluation-comms",
+            [[%s
+Station %s %s]]
+        ),
         out,
         nem.name,
         my_nemesis_state
@@ -7361,7 +7542,8 @@ function bonusTaskEvaluationOutput(p, gm)
     out = string.format(
         _(
             "evaluation-comms",
-            "%s\n     Ships spawned: count: %i, strength: %.1f"
+            [[%s
+Ships spawned: count: %i, strength: %.1f]]
         ),
         out,
         nem.defense_ship_spawn_count,
@@ -7370,7 +7552,8 @@ function bonusTaskEvaluationOutput(p, gm)
     out = string.format(
         _(
             "evaluation-comms",
-            "%s\n     Ships destroyed: count: %i, strength: %.1f"
+            [[%s
+Ships destroyed: count: %i, strength: %.1f]]
         ),
         out,
         nem.defense_ship_destroyed_count,
@@ -7382,12 +7565,19 @@ function bonusTaskEvaluationOutput(p, gm)
     then
         for i, nemesis in ipairs(nemesis_stations) do
             if i ~= my_nemesis_index then
-                local nemesis_state = _("evaluation-comms", "(destroyed)")
+                local nemesis_state = _(
+                    "evaluation-comms",
+                    "(destroyed)"
+                )
                 if nemesis.station:isValid() then
                     nemesis_state = ""
                 end
                 out = string.format(
-                    _("evaluation-comms", "%s\nStation %s %s"),
+                    _(
+                        "evaluation-comms",
+                        [[%s
+Station %s %s]]
+                    ),
                     out,
                     nemesis.name,
                     nemesis_state
@@ -7395,7 +7585,8 @@ function bonusTaskEvaluationOutput(p, gm)
                 out = string.format(
                     _(
                         "evaluation-comms",
-                        "%s\n     Ships spawned: count: %i, strength: %.1f"
+                        [[%s
+Ships spawned: count: %i, strength: %.1f]]
                     ),
                     out,
                     nemesis.defense_ship_spawn_count,
@@ -7404,7 +7595,8 @@ function bonusTaskEvaluationOutput(p, gm)
                 out = string.format(
                     _(
                         "evaluation-comms",
-                        "%s\n     Ships destroyed: count: %i, strength: %.1f"
+                        [[%s
+Ships destroyed: count: %i, strength: %.1f]]
                     ),
                     out,
                     nemesis.defense_ship_destroyed_count,
@@ -7421,7 +7613,17 @@ function playerPosthumousEvaluations()
     end
     local out = _(
         "evaluation-comms",
-        "Posthumous evaluations are intended for those times when you want the evaluation information, but the player ship has been destroyed. A copy is made in the posthumous list at the time the task is completed. So, just because they are on the posthumous list does not mean the player ship has been destroyed. Only the first instance of a task is recorded. If the player ship does a task again, the posthumous table only keeps their first attempt. If they are destroyed a second time, no new record is made of any tasks they had already completed the first time. Of course if they live, their current evaluation information is attached to their ship and thus is available.\n\nSingle letter evaluation decode:\nN = Needs improvement\nC = Competent\nE = Exceeds expectations\nS = Superior"
+        [[Posthumous evaluations are intended for when you want the evaluation information, but the player ship has been destroyed. The evaluation is copied to the posthumous list when a task is completed, so a player ship's presence on the posthumous list doesn't mean it's been destroyed.
+
+Only the first instance of a task is recorded. If the player ship completes a task again, the posthumous table keeps only their first attempt. If they're destroyed a second time, no new record is made of any tasks they completed the first time.
+
+If the player survives, their current evaluation information is attached to their ship and thus is available.
+
+Single-letter evaluation grades:
+- N = Needs improvement
+- C = Competent
+- E = Exceeds expectations
+- S = Superior]]
     )
     local count = 0
     for i, eval in ipairs(posthumous) do
@@ -7429,7 +7631,10 @@ function playerPosthumousEvaluations()
         addCommsReply(string.format("%s %s", eval.name, eval.task), function()
             setCommsMessage(
                 string.format(
-                    _("evaluation-comms", "%s     %s     Clock: %.1f\n%s"),
+                    _(
+                        "evaluation-comms",
+                        [[%s     %s     Clock: %.1f
+%s]]),
                     eval.name,
                     eval.task,
                     colonTime(eval.clock),
@@ -7443,32 +7648,46 @@ function playerPosthumousEvaluations()
         out = string.format(
             _(
                 "evaluation-comms",
-                "%s\n\nNo tasks completed, so no tasks recorded in the posthumous table"
+                [[%s
+
+No tasks completed, so no tasks recorded in the posthumous table.]]
             ),
             out
         )
     end
     setCommsMessage(out)
-    addCommsReply(_("evaluation-comms", "Current Evaluations"), function()
+    addCommsReply(_("evaluation-comms", "Current evaluations"), function()
         setCommsMessage(
-            _("station-comms", "Which task evaluation would you like to view?")
+            _(
+                "station-comms",
+                "Which task evaluation would you like to view?"
+            )
         )
         addCommsReply(
-            _("station-comms", "View docking task evalutation"),
+            _(
+                "station-comms",
+                "1: View docking task evalutation"
+            ),
             function()
                 setCommsMessage(dockTaskEvaluationOutput(comms_source, "gm"))
                 addCommsReply(_("Back"), commsStation)
             end
         )
         addCommsReply(
-            _("station-comms", "View scanning task evalutation"),
+            _(
+                "station-comms",
+                "2: View scanning task evalutation"
+            ),
             function()
                 setCommsMessage(scanTaskEvaluationOutput(comms_source, "gm"))
                 addCommsReply(_("Back"), commsStation)
             end
         )
         addCommsReply(
-            _("station-comms", "View destroy freighter task evalutation"),
+            _(
+                "station-comms",
+                "3: View destroy freighter task evalutation"
+            ),
             function()
                 setCommsMessage(
                     destroyFreighterTaskEvaluationOutput(comms_source, "gm")
@@ -7477,7 +7696,10 @@ function playerPosthumousEvaluations()
             end
         )
         addCommsReply(
-            _("station-comms", "View assist freighter task evalutation"),
+            _(
+                "station-comms",
+                "4: View assist freighter task evalutation"
+            ),
             function()
                 setCommsMessage(
                     assistFreighterTaskEvaluationOutput(comms_source, "gm")
@@ -7486,7 +7708,10 @@ function playerPosthumousEvaluations()
             end
         )
         addCommsReply(
-            _("station-comms", "View research task evalutation"),
+            _(
+                "station-comms",
+                "5: View research task evalutation"
+            ),
             function()
                 setCommsMessage(
                     researchTaskEvaluationOutput(comms_source, "gm")
@@ -7506,9 +7731,15 @@ local function assistFreighterComms()
         return
     end
     if comms_source.assist_freighter_contacted == nil then
-        setCommsMessage(_("ship-comms", "We are in need of some assistance."))
+        setCommsMessage(_(
+            "ship-comms",
+            "We are in need of some assistance."
+        ))
         addCommsReply(
-            _("ship-comms", "What kind of assistance do you need?"),
+            _(
+                "ship-comms",
+                "What kind of assistance do you need?"
+            ),
             function()
                 comms_source.assist_freighter_contacted = true
                 comms_source.assist_freighter_contacted_clock =
@@ -7516,7 +7747,7 @@ local function assistFreighterComms()
                 setCommsMessage(
                     _(
                         "ship-comms",
-                        "We're not exactly sure. We just know our engines are not working"
+                        "We're not exactly sure. We just know our engines aren't working."
                     )
                 )
                 addCommsReply(
@@ -7525,14 +7756,14 @@ local function assistFreighterComms()
                         setCommsMessage(
                             _(
                                 "ship-comms",
-                                "If that helps you figure out what's wrong with the engines, go right ahead"
+                                "If that helps you figure out what's wrong with the engines, go right ahead."
                             )
                         )
                         addCommsReply(
                             string.format(
                                 _(
                                     "ship-comms",
-                                    "We'll provide %s with your ship data and get back to you"
+                                    "We'll provide %s with your ship data and get back to you."
                                 ),
                                 comms_source.home_station:getCallSign()
                             ),
@@ -7540,7 +7771,7 @@ local function assistFreighterComms()
                                 setCommsMessage(
                                     _(
                                         "ship-comms",
-                                        "We'll be here. We're not going enywhere. We are worried about Kraylor in the area, so don't take too long"
+                                        "We'll be here. We're not going enywhere. We are worried about Kraylor in the area, so don't take too long."
                                     )
                                 )
                                 addCommsReply(_("Back"), commsShip)
@@ -7562,7 +7793,7 @@ local function assistFreighterComms()
                     setCommsMessage(
                         _(
                             "ship-comms",
-                            "These match exactly what we need. We will fully restore our engines shortly"
+                            "These are exactly the parts we need. We'll fully restore our engines shortly."
                         )
                     )
                     comms_target:setSystemHealthMax("impulse", 1)
@@ -7572,7 +7803,7 @@ local function assistFreighterComms()
                     setCommsMessage(
                         _(
                             "ship-comms",
-                            "These parts don't look like they solve our problem. You may want to double check the information you provided to the parts supplier"
+                            "These parts don't look like they solve our problem. You might want to double-check the information you provided to the parts supplier."
                         )
                     )
                     comms_source.assist_freighter_parts = nil
@@ -7617,7 +7848,7 @@ ship_profile = {
     end,
     friendly_status_destination = true,
     can_dock = function()
-        return comms_target:getTypeName() ~= "Defense platform"
+        return comms_target:getTypeName() ~= ST.DEFENSE_PLATFORM
     end,
     neutral_destination_query = true,
     neutral_after_message = assistFreighterComms,
@@ -7888,7 +8119,9 @@ function sendCrutch(p, task)
             p.crutch_dock_hlm_msg = string.format(
                 _(
                     "msgHelms",
-                    "The most direct route to dock with station %s is to put the ship in full reverse impulse. The engines start at minimal power, so you may have to ask engineering to put more power in the impulse engines. You get a better evaluation score the higher your speed. You won't be able to dock until the docking protocols are satisfied."
+                    [[The most direct route to dock with station %s is to put the ship in full reverse impulse. The engines start at minimal power, so you might need to request that engineering increase power to the impulse engines.
+
+Completing the task quickly and achieving a high speed improves your evaluation score. You won't be able to dock until the docking protocols are satisfied.]]
                 ),
                 p.home_station:getCallSign()
             )
@@ -7902,7 +8135,11 @@ function sendCrutch(p, task)
             p.crutch_dock_wea_msg = string.format(
                 _(
                     "msgWeapons",
-                    "Get the docking protocol shield and beam frequency from %s. Calibrate the shields by adjusting the frequency in the lower right of your console then click the calibrate button. Set the beam weapons frequency by adjusting the frequency above the shield frequency in the lower right of your console."
+                    [[Acquire the docking protocol shield and beam frequencies by communicating with %s.
+
+Calibrate the shield frequency by selecting the docking frequency from the frequency selector next to the Calibrate button at the bottom right of your screen. The current frequency is listed on the Shields toggle button.
+
+Calibrate the beam weapons frequency by selecting the docking frequency from the frequency selector next to the Beams label at the bottom center of your screen. Unlike Shields, this immediately recalibrates the beam frequency.]]
                 ),
                 p.protocol_source
             )
@@ -7916,7 +8153,11 @@ function sendCrutch(p, task)
             p.crutch_dock_tac_msg = string.format(
                 _(
                     "msgTactical",
-                    "%s Get the docking protocol beam frequency from %s. Calibrate the beams using the frequency shown along the bottom edge of your console in the middle of your console."
+                    [[%s
+
+Acquire the docking protocol beam frequency by communicating with %s.
+
+Calibrate the beam weapons frequency by selecting the docking frequency from the frequency selector next to the Beams label at the bottom center of your screen. Unlike Shields, this immediately recalibrates the beam frequency.]]
                 ),
                 p.crutch_dock_hlm_msg,
                 p.protocol_source
@@ -7931,7 +8172,9 @@ function sendCrutch(p, task)
             p.crutch_dock_eng_msg = string.format(
                 _(
                     "msgEngineer",
-                    "All systems start at a low power level. You'll want to put power in the impulse engines based on the first task requirement. Be prepared to run the impulse engines up to 300%% with max coolant at Helm's request until you reach the station. You'll hear from %s that the docking protocol calls for zero power in the missile systems, so take the power all the way out of missile systems."
+                    [[All systems start at a low power level. Increase power to the impulse engines for the first task requirement. Be prepared to run the impulse engines up to 300%% with maximum coolant at Helm's request until you reach the station.
+
+You'll hear from %s that the docking protocol calls for zero power in the missile weapons system, so reduce that system's power to 0%%.]]
                 ),
                 p.protocol_source
             )
@@ -7945,9 +8188,11 @@ function sendCrutch(p, task)
             p.crutch_dock_epl_msg = string.format(
                 _(
                     "msgEngineer+",
-                    "%s The docking protocol also calls for shield calibration. Listen for the shield frequency. Adjust the shield frequency with the frequency selector along the left edge of your console in the middle. Click the Calibrate button after you have set the frequency."
+                    [[%s
+
+The docking protocol also calls for shield calibration. Calibrate the shield frequency by selecting the docking frequency from the frequency selector next to the Calibrate button at the left edge of your screen. The current frequency is listed on the Shields toggle button.]]
                 ),
-                p.crush_dock_eng_msg
+                p.crutch_dock_eng_msg
             )
             p.crutch_dock_epl = "crutch_dock_epl"
             p:addCustomMessage(
@@ -7959,7 +8204,9 @@ function sendCrutch(p, task)
             p.crutch_dock_rel_msg = string.format(
                 _(
                     "msgRelay",
-                    "To contact station %s for the docking protocol, click %s then click the Open Comms button in the upper left of your console. Once communications are open, click the Check with docking port authority button to determine the docking protocol. Report the protocol to your crew."
+                    [[To contact station %s for the docking protocol, click %s, then click the Open Comms button in the upper left of your console.
+
+Once communications are open, respond with "Check with docking port authority" to determine the docking protocol. Report the protocol to your crew.]]
                 ),
                 p.home_station:getCallSign(),
                 p.home_station:getCallSign()
@@ -7974,7 +8221,9 @@ function sendCrutch(p, task)
             p.crutch_dock_ops_msg = string.format(
                 _(
                     "msgOperations",
-                    "To contact station %s for the docking protocol, click %s then click the Open Comms button along the bottom edge of your console to the right. Once communications are open, click the Check with docking port authority button to determine the docking protocol. Report the protocol to your crew."
+                    [[To contact station %s for the docking protocol, click %s, then click the Open Comms button along the bottom edge of your console to the right.
+
+Once communications are open, respond with "Check with docking port authority" to determine the docking protocol. Report the protocol to your crew.]]
                 ),
                 p.home_station:getCallSign(),
                 p.home_station:getCallSign()
@@ -7991,7 +8240,7 @@ function sendCrutch(p, task)
             -- helm
             p.crutch_scan_hlm_msg = _(
                 "msgHelms",
-                "You might be asked to jump into the nearby nebula so that a freighter can be scanned."
+                [[You might be asked to jump into the nearby nebula to scan a freighter that isn't visible on your long-range scanners.]]
             )
             p.crutch_scan_hlm = "crutch_scan_hlm"
             p:addCustomMessage(
@@ -8012,7 +8261,11 @@ function sendCrutch(p, task)
         p.crutch_scan_sci_msg = string.format(
             _(
                 "msgScience",
-                "Start scanning the target at bearing %.1f right away. Report the type of ship as soon as you finish the simple scan. Then start the deep scan. The default keyboard shortcut is S to start the scan. After completing the deep scan, get the scanned ship's strongest shield deflection frequency by hovering over the lowest, reddest point on the bar graph. Report that frequency."
+                [[Scan the target at bearing %.1f. There are likely more targets in the nebula, so you should ask Helms or Tactical to move your ship closer to the nebula, or Relay to launch a probe into it.
+
+Report the type of ship as soon as you finish the first simple scan, then start the second deep scan.
+
+After completing the deep scan, click the sidebar selector on the right edge of the screen, then select Tactical. Identify the scanned ship's strongest shield deflection frequency by hovering over the lowest, reddest point on the bar graph, then reading the text at the top of the graph. Report that frequency.]]
             ),
             p.home_station.heading_angle
         )
@@ -8021,7 +8274,9 @@ function sendCrutch(p, task)
         -- relay
         p.crutch_scan_rel_msg = _(
             "msgRelay",
-            "Send a probe to the middle of the nearest nebula: click the launch probe button, then click the middle of the nebula. Once it's there, link it to science. Be ready to report the ship type and the frequency as soon as Science completes each scan."
+            [[Send a probe to the middle of the nearest nebula. Click the launch probe button, then click the middle of the nebula. Click the probe, then click Link to Science to allow your crewmate to scan targets near the probe.
+
+Be ready to report the ship type and frequency to the station as soon as Science completes each scan.]]
         )
         p.crutch_scan_rel = "crutch_scan_rel"
         p:addCustomMessage("Relay", p.crutch_scan_rel, p.crutch_scan_rel_msg)
@@ -8029,10 +8284,13 @@ function sendCrutch(p, task)
         p.crutch_scan_ops_msg = string.format(
             _(
                 "msgOperations",
-                "Start scanning the target at bearing %.1f right away. There are likely more targets in the nebula, so you should request that helm or tactical take you closer to the nebula. Report the type of ship as soon as you finish the simple scan. Then start the deep scan. The default keyboard shortcut is S to start the scan. After completing the deep scan, get the scanned ship's strongest shield deflection frequency by hovering over the lowest, reddest point on the bar graph. Report that frequency. Once you scan the other targets that are likely in the nebula, you will need to exit the nebula to report their characteristics to %s."
+                [[Scan the target at bearing %.1f. There are likely more targets in the nebula, so you should ask Helms or Tactical to move your ship closer to the nebula, or Relay to launch a probe into it.
+
+Report the type of ship as soon as you finish the first simple scan, then start the second deep scan.
+
+After completing the deep scan, click the sidebar selector on the right edge of the screen, then select Tactical. Identify the scanned ship's strongest shield deflection frequency by hovering over the lowest, reddest point on the bar graph, then reading the text at the top of the graph. Report that frequency.]]
             ),
-            p.home_station.heading_angle,
-            p.home_station:getCallSign()
+            p.home_station.heading_angle
         )
         p.crutch_scan_ops = "crutch_scan_ops"
         p:addCustomMessage(
@@ -8044,7 +8302,11 @@ function sendCrutch(p, task)
         -- helm
         p.crutch_destroy_hlm_msg = _(
             "msgHelms",
-            "Jump to the enemy freighter if it's farther than 5 units away. Get the bearing and distance from Science or Operations, subtract 2 units to place you in optimal firing range. Once you're near, rotate to point the left or right tube to the enemy. He'll try to run away, so be ready to angle the tube to lead the HVLIs in front of the enemy freighter."
+            [[Jump to the hostile freighter if it's more than 5U away from your ship. Request the bearing and distance from Science or Operations, then subtract 2U to determine the optimal jump distance to place your ship in firing range.
+
+After the jump, you should see the hostile freighter. Rotate your ship to point either the left or right weapons tube to the enemy, indicated by a white line extending from the side of your ship.
+
+The freighter will try to escape. Be ready to rotate your ship in order to aim the HVLIs in front of the hostile freighter's path. Otherwise, the target might move out of the path of your shots.]]
         )
         p.crutch_destroy_hlm = "crutch_destroy_hlm"
         p:addCustomMessage(
@@ -8055,7 +8317,9 @@ function sendCrutch(p, task)
         -- weapons
         p.crutch_destroy_wea_msg = _(
             "msgWeapons",
-            "Load up HVLIs on both sides. You may have to ask Engineering for power to missile systems."
+            [[Load HVLIs into weapon tubes on both sides of your ship. You might have to ask Engineering to restore power to the missile weapons system if it was powered down for docking.
+
+HVLIs are unguided, so you must coordinate your firing angle and timing with the Helms officer.]]
         )
         p.crutch_destroy_wea = "crutch_destroy_wea"
         p:addCustomMessage(
@@ -8078,7 +8342,9 @@ function sendCrutch(p, task)
         -- engineering
         p.crutch_destroy_eng_msg = _(
             "msgEngineer",
-            "Raise power to missile systems to 100%. Put even more in along with coolant to make them load faster. Be ready to add power to impulse and/or maneuvering as requested."
+            [[Increase the missile weapons system's power to at least 100%. Overpowering the system decreases missile reloading time but generates heat, so also distribute coolant to the system.
+
+Also, be prepared to increase power to impulse and maneuvering systems as requested by Helms. Monitor the heat in both systems and assign coolant to them if necessary.]]
         )
         p.crutch_destroy_eng = "crutch_destroy_eng"
         p:addCustomMessage(
@@ -8097,7 +8363,9 @@ function sendCrutch(p, task)
         -- science
         p.crutch_destroy_sci_msg = _(
             "msgScience",
-            "Select the enemy freighter. Use radar or probe view as applicable. Provide bearing and distance to freighter to crew. You can find it along the right of your console screen."
+            [[Select the hostile freighter by clicking it. Use your radar or probe view as applicable.
+
+Once selected, the info display at the top right provides the freighter's bearing and distance. Provide this information to your crew.]]
         )
         p.crutch_destroy_sci = "crutch_destroy_sci"
         p:addCustomMessage(
@@ -8108,7 +8376,7 @@ function sendCrutch(p, task)
         -- operations
         p.crutch_destroy_ops_msg = _(
             "msgOperations",
-            "Provide bearing and range to enemy freighter. If nebula obscures your view, estimate based on recent scans, otherwise click the enemy freighter and read the bearing and distance from your console."
+            [[Provide the hostile freighter's bearing and range to your crew. If a nebula obscures your view, estimate it based on recent scans. Otherwise, click the hostile freighter and read the bearing and distance from the top right of your screen.]]
         )
         p.crutch_destroy_ops = "crutch_destroy_ops"
         p:addCustomMessage(
@@ -8119,7 +8387,7 @@ function sendCrutch(p, task)
         -- relay
         p.crutch_destroy_rel_msg = _(
             "msgRelay",
-            "Hack enemy ships once they are in range either via probe or your ship. Impulse engines for the fighter types is a good choice since it makes it easier to shoot them down."
+            [[Hack enemy ships once they are in range either via probe or your ship. Impulse engines for the fighter types is a good choice since it makes it easier to shoot them down.]]
         )
         p.crutch_destroy_rel = "crutch_destroy_rel"
         p:addCustomMessage(
@@ -8131,7 +8399,9 @@ function sendCrutch(p, task)
         -- helm
         p.crutch_assist_hlm_msg = _(
             "msgHelms",
-            "You will have to go to the distressed freighter to help defend it against Kraylor and to help repair it. You may have to pick up parts from your home station. Deciding which to do first will be up to your commanding officer or CO. Be thinking about both options."
+            [[Travel to the distressed freighter to help identify what's wrong with it, repair it, and defend it against hostile Kraylor ships. The crew might also ask you to return to your home station to pick up parts.
+
+Deciding which task to complete first will be up to your commanding officer (CO). Be prepared for both options.]]
         )
         p.crutch_assist_hlm = "crutch_assist_hlm"
         p:addCustomMessage(
@@ -8142,7 +8412,9 @@ function sendCrutch(p, task)
         -- weapons
         p.crutch_assist_wea_msg = _(
             "msgWeapons",
-            "Your beams are fully functional. Your missiles have been returned to you. Load up your tubes in preparation for combat. Homing missiles are recommended. Even homing missiles can be dodged by the enemy. Try for as straight a shot as possible."
+            [[Your beam weapons are fully functional, and your full missile complement has been restored.
+
+Prepare for combat by loading your weapon tubes. Homing missiles are your best option, but even they can be dodged by hostile targets. Closer ranges and straighter angles to your target provide the best chances for landing a hit.]]
         )
         p.crutch_assist_wea = "crutch_assist_wea"
         p:addCustomMessage(
@@ -8165,7 +8437,13 @@ function sendCrutch(p, task)
         -- engineering
         p.crutch_assist_eng_msg = _(
             "msgEngineer",
-            "Pay careful attention to what systems are used and give them additional power when needed (along with coolant). Remember the docking/undocking protocol (no missile energy)"
+            [[Pay careful attention to what systems are in use by the crew, and manage their power and coolant as needed. Beam weapons and combat maneuvers generate heat particularly quickly.
+
+If a system becomes damaged, begin repairs by clicking a repair crew, then clicking the corresponding part of your ship.
+
+Remember that the docking/undocking protocol for your home station requires you to shut down your missile weapons system.
+
+If your ship is running low on energy (as displayed at the top left of your screen), the best way to recharge is to dock with your home station.]]
         )
         p.crutch_assist_eng = "crutch_assist_eng"
         p:addCustomMessage(
@@ -8184,7 +8462,7 @@ function sendCrutch(p, task)
         -- science
         p.crutch_assist_sci_msg = _(
             "msgScience",
-            "Scan the distressed Arlenian freighter as soon as you can (twice). After the second scan, get the impulse engine damage percentage by clicking the Tactical widget and selecting Systems. Report it to Relay who will report it to the home station."
+            [[Perform a deep scan (two successfully completed scans) on the distressed Arlenian freighter as soon as possible. After the second scan, identify its impulse engine damage percentage by clicking the sidebar selector and selecting Systems, then report it to your crew.]]
         )
         p.crutch_assist_sci = "crutch_assist_sci"
         p:addCustomMessage(
@@ -8195,7 +8473,9 @@ function sendCrutch(p, task)
         -- relay
         p.crutch_assist_rel_msg = _(
             "msgRelay",
-            "Launch probes to cover the sector where the distressed Arlenian freighter is located. Link the probe that finds the freighter to science. Contact the freighter. Report Science's scan results to your home station."
+            [[Launch probes to cover the sector where the distressed Arlenian freighter is located. Link the probe that finds the freighter to Science so they can scan it. Open communications with the freighter to get more information about their predicament.
+
+Once Science has scanned the freighter, report their scan results to your home station.]]
         )
         p.crutch_assist_rel = "crutch_assist_rel"
         p:addCustomMessage(
@@ -8206,7 +8486,7 @@ function sendCrutch(p, task)
         -- operations
         p.crutch_assist_ops_msg = _(
             "msgOperations",
-            "Contact the distressed Arlenian freighter, then scan the freighter as soon as you can (twice). After the second scan, get the impulse engine damage percentage by clicking the Tactical widget and selecting Systems. Report it to the home station."
+            [[Contact the distressed Arlenian freighter, then perform a deep scan (two successfully completed scans) on it as soon as possible. After the second scan, identify its impulse engine damage percentage by clicking the sidebar selector and selecting Systems. Report that information to your home station.]]
         )
         p.crutch_assist_ops = "crutch_assist_ops"
         p:addCustomMessage(
@@ -8218,7 +8498,9 @@ function sendCrutch(p, task)
         -- helm
         p.crutch_research_hlm_msg = _(
             "msgHelms",
-            "Use warp to approach but not intersect the planets and moons in motion. Intersetion will damage and quickly destroy your ship. Use guidance from Relay/Science/Operations for good approach vectors. Warn Engineering when you use warp, especially anything above warp one."
+            [[Use your warp drive to approach, but not collide with, the planets and moons in motion. Colliding with celestial bodies will damage and quickly destroy your ship.
+
+Coordinate with Relay/Science/Operations for a safe approach vector. Warn Engineering when you engage the warp drive, which consumes power and generates potentially damaging heat very quickly.]]
         )
         p.crutch_research_hlm = "crutch_research_hlm"
         p:addCustomMessage(
@@ -8229,7 +8511,7 @@ function sendCrutch(p, task)
         -- weapons
         p.crutch_research_wea_msg = _(
             "msgWeapons",
-            "Watch for enemy targets of opportunity. The planets and moons are far more dangerous, but if you leave the enemies alone, eventually, they will start attacking your home station."
+            [[Watch for hostile targets of opportunity. The planets and moons are far more hazardous, but if you don't reduce hostile threats in the area, they'll eventually attack your home station.]]
         )
         p.crutch_research_wea = "crutch_research_wea"
         p:addCustomMessage(
@@ -8252,7 +8534,9 @@ function sendCrutch(p, task)
         -- engineering
         p.crutch_research_eng_msg = _(
             "msgEngineer",
-            "Suggested default settings: 50% coolant in warp, 50% coolant in maneuvering, 150% power in maneuvering, remaining systems: 100%, remainig coolant: 0. Watch energy carefully and let the commanding officer know when you get below 200 so you can dock and get more. The reactor will help, but charging at a station is more efficient."
+            [[Your Helms officer will generate considerable heat when using the warp drive and maneuvering thrusters. Try distributing coolant evenly and only to the warp drive and maneuvering systems, increase maneuvering power to 150%, and leave your remaining systems at 100% power/0 coolant.
+
+Watch your ship's energy carefully, and notify the commanding officer when your stored energy reaches 200 or less. In a crisis, you can overpower your reactor and cut power to nonessential systems to generate more energy. However, charging at a station is much more efficient.]]
         )
         p.crutch_research_eng = "crutch_research_eng"
         p:addCustomMessage(
@@ -8270,7 +8554,9 @@ function sendCrutch(p, task)
         )
         -- science
         p.crutch_research_sci_msg =
-            "Quickly tell Helm/Tactical when planets or moons are coming. They don't see as far as you do. Study the orbiting bodies. Know that there are orbits of orbits. Tell everyone when you are notified that the data has been gathered on a moon or planet."
+            [[Helms/Tactical have limited sensor range, so quickly tell them when planets or moons are moving toward your ship, because a collision with them would likely be fatal.
+
+Study the orbiting bodies, including the orbits of bodies around other oribiting bodies. Tell the crew once you've gathered enough data on a moon or planet.]]
         p.crutch_research_sci = "crutch_research_sci"
         p:addCustomMessage(
             "Science",
@@ -8279,7 +8565,9 @@ function sendCrutch(p, task)
         )
         -- relay
         p.crutch_research_rel_msg =
-            "Quickly tell Helm/Tactical when planets or moons are coming. They don't see as far as you do. Study the orbiting bodies. Know that there are orbits of orbits. Plan approach vectors for Helm and clearly communicate them. Provide updates on what's scanned and what remains by using the 'Orbit research' button."
+            [[Helms/Tactical have limited sensor range, so quickly tell them when planets or moons are moving toward your ship, because a collision with them would likely be fatal.
+
+Place waypoints to plan approach vectors for Helms/Tactical and clearly communicate them. Provide updates on what's scanned and what remains by clicking the "Orbit research" button.]]
         p.crutch_research_rel = "crutch_research_rel"
         p:addCustomMessage(
             "Relay",
@@ -8288,7 +8576,9 @@ function sendCrutch(p, task)
         )
         -- operations
         p.crutch_research_ops_msg =
-            "Quickly tell Helm/Tactical when planets or moons are coming. They don't see as far as you do. Study the orbiting bodies. Know that there are orbits of orbits. Plan approach vectors for Helm and clearly communicate them. Tell everyone when you are notified that the data has been gathered on a moon or planet."
+            [[Helms/Tactical have limited sensor range, so quickly tell them when planets or moons are moving toward your ship, because a collision with them would likely be fatal. Place waypoints to plan approach vectors for Helms/Tactical and clearly communicate them.
+
+Study the orbiting bodies, including the orbits of bodies around other oribiting bodies. Tell the crew once you've gathered enough data on a moon or planet.]]
         p.crutch_research_ops = "crutch_research_ops"
         p:addCustomMessage(
             "Operations",
@@ -8838,12 +9128,11 @@ function taskCompletedDestroyFreighter(p)
         :setFaction("Kraylor")
         :setCommsScript("")
         :setCommsFunction(commsShip)
-        :onDestruction(marauderDestroyed)
-    lead_ship
         :setPosition(poa_x, poa_y)
         :setHeading(attack_angle)
         :orderFlyTowards(station_x, station_y)
         :setCallSign(generateCallSign(fleet_prefix))
+        :onDestruction(marauderDestroyed)
     table.insert(
         p.assist_freighter_marauders,
         { ship = lead_ship, name = lead_ship:getCallSign() }
@@ -8856,49 +9145,52 @@ function taskCompletedDestroyFreighter(p)
         { angle = 330, dist = 2700 },
     }
     for i, form in ipairs(forward_formation) do
+        local form_x, form_y =
+            vectorFromAngleNorth(attack_angle + form.angle, form.dist)
+        local form_prime_x, form_prime_y =
+            vectorFromAngle(form.angle, form.dist)
         local ship = CpuShip()
             :setTemplate(ST.MU52_HORNET)
             :setFaction("Kraylor")
             :setCommsScript("")
             :setCommsFunction(commsShip)
-        local form_x, form_y =
-            vectorFromAngleNorth(attack_angle + form.angle, form.dist)
-        local form_prime_x, form_prime_y =
-            vectorFromAngle(form.angle, form.dist)
-        ship:setPosition(poa_x + form_x, poa_y + form_y)
+            :setPosition(poa_x + form_x, poa_y + form_y)
             :setHeading(attack_angle)
-            :orderFlyFormation(lead_ship, form_prime_x, form_prime_y)
             :setCallSign(generateCallSign(fleet_prefix))
-        ship:onDestruction(marauderDestroyed)
+            :orderFlyFormation(lead_ship, form_prime_x, form_prime_y)
+            :onDestruction(marauderDestroyed)
         table.insert(
             p.assist_freighter_marauders,
             { ship = ship, name = ship:getCallSign() }
         )
     end
-    p:setWeaponStorageMax("Homing", 12)
-    p:setWeaponStorage("Homing", 12)
-    p:setWeaponStorageMax("Mine", 8)
-    p:setWeaponStorage("Mine", 8)
-    p:setWeaponStorageMax("EMP", 6)
-    p:setWeaponStorage("EMP", 6)
-    p:setWeaponStorageMax("Nuke", 4)
-    p:setWeaponStorage("Nuke", 4)
-    --                            Arc,  Dir, Range, CycleTime, Dmg
-    p:setBeamWeapon(0, 100, -20, 1500, 6, 8) -- restore cycle time
-    p:setBeamWeapon(1, 100, 20, 1500, 6, 8)
+    p
+        :setWeaponStorageMax("Homing", 12)
+        :setWeaponStorage("Homing", 12)
+        :setWeaponStorageMax("Mine", 8)
+        :setWeaponStorage("Mine", 8)
+        :setWeaponStorageMax("EMP", 6)
+        :setWeaponStorage("EMP", 6)
+        :setWeaponStorageMax("Nuke", 4)
+        :setWeaponStorage("Nuke", 4)
+    --                    Arc,  Dir, Range, CycleTime, Dmg
+        :setBeamWeapon(0, 100, -20, 1500, 6, 8) -- restore cycle time
+        :setBeamWeapon(1, 100, 20, 1500, 6, 8)
     psx, psy = vectorFromAngleNorth(p.home_station.heading_angle, 103000)
-    local wh = WormHole():setPosition(station_x + psx, station_y + psy)
     local rx, ry =
         vectorFromAngleNorth(p.home_station.heading_angle + 180, 13000)
-    wh:setTargetPosition(terrain_center_x + rx, terrain_center_y + ry)
-    wh:onTeleportation(function(self, teleportee)
-        string.format("")
-        if isObjectType(teleportee, "PlayerSpaceship") then
-            teleportee:setSystemHealth("jumpdrive", -random(0.2, 0.8))
-            teleportee:setSystemHealth("beamweapons", -random(0.2, 0.8))
-            teleportee:setSystemHealth("missilesystem", -random(0.2, 0.8))
-        end
-    end)
+    WormHole()
+        :setPosition(station_x + psx, station_y + psy)
+        :setTargetPosition(terrain_center_x + rx, terrain_center_y + ry)
+        :onTeleportation(function(self, teleportee)
+            string.format("")
+            if isObjectType(teleportee, "PlayerSpaceship") then
+                teleportee
+                    :setSystemHealth("jumpdrive", -random(0.2, 0.8))
+                    :setSystemHealth("beamweapons", -random(0.2, 0.8))
+                    :setSystemHealth("missilesystem", -random(0.2, 0.8))
+            end
+        end)
 end
 -- Fourth Task: Assist freighter
 -- Hurdles: Get parts from station, find freighter, fend off attackers
@@ -9043,8 +9335,9 @@ function taskResearch(p)
                 20
             )
         end
-        p:setWarpDrive(true)
-        p:setWarpSpeed(1250)
+        p
+            :setWarpDrive(true)
+            :setWarpSpeed(1250)
         p.research_message = "no more messages"
     end
     if p.research_start_clock == nil then
@@ -9063,11 +9356,11 @@ function taskResearch(p)
                 p.research_fleet_clock = getScenarioTime()
                 if #p.research_fleet < 5 then
                     local templates = {
-                        "MT52 Hornet",
-                        "MU52 Hornet",
-                        "Ktlitan Fighter",
-                        "Ktlitan Scout",
-                        "Fighter",
+                        ST.MT52_HORNET,
+                        ST.MU52_HORNET,
+                        ST.KTLITAN_FIGHTER,
+                        ST.KTLITAN_SCOUT,
+                        ST.STINGRAY,
                     }
                     local rx, ry = vectorFromAngleNorth(
                         p.home_station.heading_angle + 180,
@@ -9140,7 +9433,7 @@ function taskCompletedResearch(p)
                     string.format(
                         _(
                             "human-incCall",
-                            "You completed the research task. Destroy any Kraylor headed for %s"
+                            "You completed the research task. Destroy any Kraylor headed for %s."
                         ),
                         p.home_station:getCallSign()
                     )
@@ -9149,7 +9442,7 @@ function taskCompletedResearch(p)
                 p:addToShipLog(
                     _(
                         "goal-shipLog",
-                        "You completed the research task. Destroy any Kraylor that were headed for your home base"
+                        "You completed the research task. Destroy any Kraylor that were headed for your home base."
                     ),
                     "Magenta"
                 )
@@ -9207,13 +9500,26 @@ function taskResearchCleanup(p)
                     p.home_station:sendCommsMessage(
                         p,
                         string.format(
-                            "The Kraylor gunning for %s have been eliminated. Take the fight to the Kraylor by finding and destroying the station that sent fighters after that defenseless Arlenian freighter. Be careful though. I'm sure the Kraylor will not give up their station easily.",
+                            _(
+                                "human-incCall",
+                                [[The Kraylor gunning for %s have been eliminated. Take the fight to the Kraylor by finding and destroying the station that sent fighters after that defenseless Arlenian freighter.
+
+Be careful. I'm sure the Kraylor won't give up their station easily.]]
+                            ),
                             p.home_station:getCallSign()
                         )
                     )
                 else
                     p:addToShipLog(
-                        "The Kraylor gunning for your home station have been eliminated. Take the fight to the Kraylor by finding and destroying the station that sent fighters after that defenseless Arlenian freighter. Be careful though. I'm sure the Kraylor will not give up their station easily.",
+                        string.format(
+                            _(
+                                "human-incCall",
+                                [[The Kraylor gunning for %s have been eliminated. Take the fight to the Kraylor by finding and destroying the station that sent fighters after that defenseless Arlenian freighter.
+
+Be careful. I'm sure the Kraylor won't give up their station easily.]]
+                            ),
+                            _("your home station")
+                        ),
                         "Magenta"
                     )
                 end
