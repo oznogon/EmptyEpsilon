@@ -66,6 +66,7 @@ namespace
             setStarboxEnabled(false);
             setFogEnabled(false);
             setIgnoreNebulaOcclusion(true);
+            setBackgroundColor(glm::u8vec4(0, 0, 0, 255));
         }
 
         virtual void onDraw(sp::RenderTarget& renderer) override
@@ -155,7 +156,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
                 // out as the radar zooms out past 1x.
                 float zoom = LONG_RANGE_DISTANCE / main_radar->getDistance();
                 uint8_t dot_alpha = static_cast<uint8_t>(std::max(128.0f, std::min(255.0f, zoom * 255.0f)));
-                if (view_3d_enabled) dot_alpha = static_cast<uint8_t>(dot_alpha * 0.25f);
+                if (view_3d_enabled) dot_alpha = static_cast<uint8_t>(dot_alpha * 0.1f);
 
                 for (auto [entity, transform, trace] : sp::ecs::Query<sp::Transform, sp::ecs::optional<RadarTrace>>())
                 {
@@ -826,7 +827,7 @@ void GameMasterScreen::set3DViewEnabled(bool enabled)
     viewport_3d->setVisible(enabled);
     main_radar->setBackgroundAlpha(enabled ? 0 : 255);
     main_radar->setSectorGridOpacity(enabled ? 0.4f : 1.0f);
-    main_radar->setRadarTraceOpacity(enabled ? 0.25f : 1.0f);
+    main_radar->setRadarTraceOpacity(enabled ? 0.1f : 1.0f);
     if (view_3d_button) view_3d_button->setValue(enabled);
 }
 

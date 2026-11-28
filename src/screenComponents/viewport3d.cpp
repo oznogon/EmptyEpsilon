@@ -228,7 +228,20 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     if (GLAD_GL_ES_VERSION_2_0) glClearDepthf(1.0f);
     else glClearDepth(1.0);
 
-    glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    if (clear_background)
+    {
+        glClearColor(
+            background_color.r / 255.0f,
+            background_color.g / 255.0f,
+            background_color.b / 255.0f,
+            background_color.a / 255.0f
+        );
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    }
+    else
+    {
+        glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    }
 
     // Collect all nebula data in a single pass for fog + skybox computation.
     struct NebulaInfo

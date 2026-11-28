@@ -120,6 +120,7 @@ public:
     void setStarboxEnabled(bool enabled) { starbox_enabled = enabled; }
     void setFogEnabled(bool enabled) { fog_enabled = enabled; }
     void setIgnoreNebulaOcclusion(bool ignore) { ignore_nebula_occlusion = ignore; }
+    void setBackgroundColor(glm::u8vec4 color) { background_color = color; clear_background = true; }
 private:
     glm::vec3 worldToScreen(sp::RenderTarget& window, glm::vec3 world);
 
@@ -129,4 +130,6 @@ private:
     bool starbox_enabled = true;
     bool fog_enabled = true;
     bool ignore_nebula_occlusion = false;
+    bool clear_background = false;
+    glm::u8vec4 background_color{0, 0, 0, 255};
 };
