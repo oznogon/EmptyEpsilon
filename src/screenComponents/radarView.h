@@ -5,6 +5,8 @@
 #include "engine.h"
 #include "gestureTracker.h"
 
+#include <algorithm>
+
 class GuiMissileTubeControls;
 class TargetsContainer;
 class Waypoints;
@@ -65,6 +67,7 @@ private:
     bool show_heading_indicators = false;
     bool show_game_master_data = false;
     float range_indicator_step_size = 0.0f;
+    float sector_grid_opacity = 1.0f;
     uint8_t background_alpha = 255;
     ERadarStyle style = Circular;
     EFogOfWarStyle fog_style = NoFogOfWar;
@@ -109,6 +112,7 @@ public:
     GuiRadarView* setDistance(float distance) { this->distance = distance; return this; }
     float getDistance() { return distance; }
     GuiRadarView* setRangeIndicatorStepSize(float step) { range_indicator_step_size = step; return this; }
+    GuiRadarView* setSectorGridOpacity(float opacity) { sector_grid_opacity = std::clamp(opacity, 0.0f, 1.0f); return this; }
     GuiRadarView* longRange() { long_range = true; return this; }
     GuiRadarView* shortRange() { long_range = false; return this; }
     GuiRadarView* enableGhostDots() { show_ghost_dots = true; return this; }

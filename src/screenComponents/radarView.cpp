@@ -321,7 +321,8 @@ void GuiRadarView::drawSectorGrid(sp::RenderTarget& renderer)
     int sector_y_max = static_cast<int>(floor((view_position.y + (rect.position.y + rect.size.y - radar_screen_center.y) / scale) / sector_size));
     auto& sector_grid_style = radar_sector_grid_style->get(getState());
     glm::u8vec4 color = sector_grid_style.color;
-    glm::u8vec4 subsector_grid_color({color.r, color.g, color.b, color.a / 2});
+    color.a = static_cast<uint8_t>(color.a * sector_grid_opacity);
+    glm::u8vec4 subsector_grid_color({color.r, color.g, color.b, static_cast<uint8_t>(color.a / 2)});
 
     // Fallback to radar font, then bold_font.
     auto font = sector_grid_style.font;
