@@ -297,18 +297,6 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         ->setSize(200.0f, 25.0f);
     (new GuiTextTooltip(intercept_comms_button, "INTERCEPT_COMMS_TIP", tr("gm_tooltip", "Toggle intercepting all player communications.")))->setWidth();
 
-    if (view_3d_available)
-    {
-        view_3d_button = new GuiToggleButton(this, "GM_3D_VIEW_BUTTON", tr("button", "3D view"),
-            [this](bool value) { set3DViewEnabled(value); }
-        );
-        view_3d_button
-            ->setTextSize(20.0f)
-            ->setPosition(520.0f, 20.0f, sp::Alignment::TopLeft)
-            ->setSize(150.0f, GuiElement::GuiSizeRow);
-        (new GuiTextTooltip(view_3d_button, "GM_3D_VIEW_TIP", tr("gm_tooltip", "Toggle rendering the map as a 3D viewport.")))->setWidth();
-    }
-
     faction_selector = new GuiSelector(this, "FACTION_SELECTOR",
         [this](int index, string value)
         {
@@ -382,6 +370,17 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         ->setPosition(-145.0f, -70.0f, sp::Alignment::BottomRight)
         ->setSize(125.0f, 25.0f);
     (new GuiTextTooltip(copy_selected_button, "COPY_SELECTED_TIP", tr("gm_tooltip", "Copy only selected entities as a Lua script to the clipboard.")))->setWidth();
+
+    if (view_3d_available)
+    {
+        view_3d_button = new GuiToggleButton(this, "GM_3D_VIEW_BUTTON", tr("button", "3D"),
+            [this](bool value) { set3DViewEnabled(value); }
+        );
+        view_3d_button
+            ->setPosition(-270.0f, -20.0f, sp::Alignment::BottomRight)
+            ->setSize(50.0f, GuiElement::GuiSizeRow);
+        (new GuiTextTooltip(view_3d_button, "GM_3D_VIEW_TIP", tr("gm_tooltip", "Toggle rendering the map as a 3D viewport.")))->setWidth();
+    }
 
     cancel_action_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", tr("button", "Cancel"),
         []()
