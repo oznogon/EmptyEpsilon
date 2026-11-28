@@ -543,7 +543,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "vertical");
 
-    info_clock = new GuiKeyValueDisplay(info_layout, "INFO_CLOCK", 0.5, tr("Clock"), "");
+    info_clock = new GuiKeyValueDisplay(info_layout, "INFO_CLOCK", 0.3f, tr("Clock"), "");
     info_clock->setSize(GuiElement::GuiSizeMax, 30.0f);
 
     gm_script_options = new GuiListbox(this, "GM_SCRIPT_OPTIONS", [this](int index, string value)
@@ -1129,7 +1129,7 @@ void GameMasterScreen::update(float delta)
     {
         if (cnt == info_items.size())
         {
-            info_items.push_back(new GuiKeyValueDisplay(info_layout, "INFO_" + string(cnt), 0.5f, key, value));
+            info_items.push_back(new GuiKeyValueDisplay(info_layout, "INFO_" + string(cnt), 0.3f, key, value));
             info_items[cnt]->setSize(GuiElement::GuiSizeMax, 30.0f);
         }
         else
