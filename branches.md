@@ -212,3 +212,4 @@ patch-4 20261125 -- addToShipLog color param issue, adapted to reformatted scena
 kzsh:issues/2950 -- previously addressed in OLD.lua ShipTemplate refactoring
 
 patch-2 20261127 -- fix varname typo in string formatting
+gm-3d-view 20261127 -- add dummy 3D view to GM screen
