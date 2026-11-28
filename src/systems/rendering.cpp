@@ -84,41 +84,73 @@ bool RenderSystem::isOccludedByNebula(glm::vec2 source, glm::vec2 target, const 
     return false;
 }
 
-void RenderSystem::render3D(float aspect, float camera_fov, ProjectionType projection_type, float far_plane)
+void RenderSystem::render3D(float aspect, float camera_fov, ProjectionType projection_type, float far_plane, float orthographic_height, bool ignore_nebula_occlusion)
 {
     refreshNebulaCache();
-    view_vector = vec2FromAngle(camera_yaw);
-    if (camera_position.z <= 0.0f)
+
+    // A top-down orthographic view sees the entire X/Y plane at once. The
+    // perspective depth cutoffs and small-object culling below would incorrectly
+    // discard objects based on their horizontal distance from the camera.
+    const bool top_down_orthographic = projection_type == ProjectionType::Orthographic && camera_pitch >= 89.0f;
+    if (top_down_orthographic)
     {
+        view_vector = glm::vec2(0.0f);
         depth_cutoff_near = -std::numeric_limits<float>::infinity();
         depth_cutoff_far = std::numeric_limits<float>::infinity();
     }
     else
     {
-        float near_angle = glm::radians(camera_pitch + camera_fov * 0.5f);
-        float far_angle = glm::radians(camera_pitch - camera_fov * 0.5f);
-        depth_cutoff_near = camera_position.z * glm::cos(near_angle) / glm::sin(near_angle);
-        depth_cutoff_far = camera_position.z * glm::cos(far_angle) / glm::sin(far_angle);
-        if (camera_pitch + camera_fov * 0.5f >= 180.f)
+        view_vector = vec2FromAngle(camera_yaw);
+        if (camera_position.z <= 0.0f)
+        {
             depth_cutoff_near = -std::numeric_limits<float>::infinity();
-        if (camera_pitch - camera_fov * 0.5f <= 0.0f)
             depth_cutoff_far = std::numeric_limits<float>::infinity();
+        }
+        else
+        {
+            float near_angle = glm::radians(camera_pitch + camera_fov * 0.5f);
+            float far_angle = glm::radians(camera_pitch - camera_fov * 0.5f);
+            depth_cutoff_near = camera_position.z * glm::cos(near_angle) / glm::sin(near_angle);
+            depth_cutoff_far = camera_position.z * glm::cos(far_angle) / glm::sin(far_angle);
+            if (camera_pitch + camera_fov * 0.5f >= 180.f)
+                depth_cutoff_near = -std::numeric_limits<float>::infinity();
+            if (camera_pitch - camera_fov * 0.5f <= 0.0f)
+                depth_cutoff_far = std::numeric_limits<float>::infinity();
+        }
     }
     for (auto& handler : render_handlers) (this->*(handler.func))(handler.rif);
 
-    for (auto& render_list : render_lists)
+    if (!ignore_nebula_occlusion)
     {
-        for (auto it = render_list.begin(); it != render_list.end(); )
+        for (auto& render_list : render_lists)
         {
-            if (!it->entity.hasComponent<NeverRadarBlocked>()
-                && !it->entity.hasComponent<RadarBlock>()
-                && isOccludedByNebula(glm::vec2(camera_position.x, camera_position.y),
-                                      it->transform->getPosition(),
-                                      nebula_occluder_cache))
-                it = render_list.erase(it);
-            else ++it;
+            for (auto it = render_list.begin(); it != render_list.end(); )
+            {
+                if (!it->entity.hasComponent<NeverRadarBlocked>()
+                    && !it->entity.hasComponent<RadarBlock>()
+                    && isOccludedByNebula(glm::vec2(camera_position.x, camera_position.y),
+                                          it->transform->getPosition(),
+                                          nebula_occluder_cache))
+                    it = render_list.erase(it);
+                else ++it;
+            }
         }
     }
+
+    auto make_projection = [&](float list_far_plane) -> glm::mat4
+    {
+        if (projection_type == ProjectionType::Orthographic)
+        {
+            // Use an explicit half-height when provided (top-down map views),
+            // otherwise derive it from the camera distance and field of view.
+            const float height = orthographic_height > 0.0f
+                ? orthographic_height
+                : std::max(100.0f, camera_position.z) * glm::tan(glm::radians(camera_fov * 0.5f));
+            const float width = height * aspect;
+            return glm::ortho(-width, width, -height, height, 1.0f, list_far_plane);
+        }
+        return glm::perspective(glm::radians(camera_fov), aspect, 1.0f, list_far_plane);
+    };
 
     // Sort all render lists back-to-front once
     for (int n = static_cast<int>(render_lists.size()) - 1; n >= 0; n--)
@@ -134,18 +166,7 @@ void RenderSystem::render3D(float aspect, float camera_fov, ProjectionType proje
     for (int n = static_cast<int>(render_lists.size()) - 1; n >= 0; n--)
     {
         auto& render_list = render_lists[n];
-        glm::mat4 projection;
-        if (projection_type == ProjectionType::Orthographic)
-        {
-            // For orthographic projection, calculate view volume size based on FOV and reference distance
-            // Use a reference distance to determine the viewport size that would be visible at that distance with perspective
-            float reference_distance = std::max(100.0f, camera_position.z);
-            float height = reference_distance * glm::tan(glm::radians(camera_fov / 2.0f));
-            float width = height * aspect;
-            projection = glm::ortho(-width, width, -height, height, 1.0f, far_plane * (n + 1));
-        }
-        else
-            projection = glm::perspective(glm::radians(camera_fov), aspect, 1.f, far_plane * (n + 1));
+        glm::mat4 projection = make_projection(far_plane * (n + 1));
         // Update projection matrix in shaders.
         ShaderRegistry::updateProjectionView(projection, {});
 
@@ -168,16 +189,7 @@ void RenderSystem::render3D(float aspect, float camera_fov, ProjectionType proje
     for (int n = static_cast<int>(render_lists.size()) - 1; n >= 0; n--)
     {
         auto& render_list = render_lists[n];
-        glm::mat4 projection;
-        if (projection_type == ProjectionType::Orthographic)
-        {
-            const float reference_distance = std::max(100.0f, camera_position.z);
-            const float height = reference_distance * glm::tan(glm::radians(camera_fov * 0.5f));
-            const float width = height * aspect;
-            projection = glm::ortho(-width, width, -height, height, 1.0f, far_plane * (n + 1));
-        }
-        else
-            projection = glm::perspective(glm::radians(camera_fov), aspect, 1.0f, far_plane * (n + 1));
+        glm::mat4 projection = make_projection(far_plane * (n + 1));
         ShaderRegistry::updateProjectionView(projection, {});
 
         glEnable(GL_BLEND);
@@ -194,16 +206,7 @@ void RenderSystem::render3D(float aspect, float camera_fov, ProjectionType proje
     for (int n = static_cast<int>(render_lists.size()) - 1; n >= 0; n--)
     {
         auto& render_list = render_lists[n];
-        glm::mat4 projection;
-        if (projection_type == ProjectionType::Orthographic)
-        {
-            const float reference_distance = std::max(100.0f, camera_position.z);
-            const float height = reference_distance * glm::tan(glm::radians(camera_fov * 0.5f));
-            const float width = height * aspect;
-            projection = glm::ortho(-width, width, -height, height, 1.0f, far_plane * (n + 1));
-        }
-        else
-            projection = glm::perspective(glm::radians(camera_fov), aspect, 1.f, far_plane * (n + 1));
+        glm::mat4 projection = make_projection(far_plane * (n + 1));
         ShaderRegistry::updateProjectionView(projection, {});
 
         glEnable(GL_BLEND);

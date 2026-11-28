@@ -30,7 +30,7 @@ public:
         render_handlers.push_back({rif, &RenderSystem::findRenderObjects<COMPONENT, TRANSPARENT>});
     }
 
-    void render3D(float aspect, float camera_fov, ProjectionType projection_type = ProjectionType::Perspective, float far_plane = 25000.0f);
+    void render3D(float aspect, float camera_fov, ProjectionType projection_type = ProjectionType::Perspective, float far_plane = 25000.0f, float orthographic_height = 0.0f, bool ignore_nebula_occlusion = false);
     struct NebulaOccluder {
         glm::vec2 position;
         float occlusion_radius;
