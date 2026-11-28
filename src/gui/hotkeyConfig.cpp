@@ -623,6 +623,7 @@ Keys::Keys() :
     gm_show_callsigns("GM_SHOW_CALLSIGNS", "C"),
     gm_show_waypoints("GM_SHOW_WAYPOINTS", "W"),
     gm_show_health_bars("GM_SHOW_HEALTH_BARS", "H"),
+    gm_toggle_3d("GM_TOGGLE_3D", "V"),
 
     // Spectator screen
     spectator_show_callsigns("SPECTATOR_SHOW_CALLSIGNS", "C"),
@@ -1501,6 +1502,8 @@ void Keys::init()
     gm_show_waypoints.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     gm_show_health_bars.setLabel(tr("hotkey_menu", "GM screen"), tr("hotkey_GM", "Show health bars (GM)"));
     gm_show_health_bars.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    gm_toggle_3d.setLabel(tr("hotkey_menu", "GM screen"), tr("hotkey_GM", "Toggle 3D view (GM)"));
+    gm_toggle_3d.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
 
     // Spectator screen
     spectator_show_callsigns.setLabel(tr("hotkey_menu", "Spectator view"), tr("hotkey_Spectator", "Show callsigns (spectator)"));

@@ -32,6 +32,9 @@
 #include "screenComponents/helpOverlay.h"
 #include "screenComponents/radarView.h"
 #include "screenComponents/radarZoomSlider.h"
+#include "screenComponents/viewport3d.h"
+
+#include "preferenceManager.h"
 
 #include "gui/mouseRenderer.h"
 #include "gui/gui2_keyvaluedisplay.h"
@@ -46,6 +49,48 @@
 namespace
 {
     constexpr float game_speed_values[] = {0.1f, 0.25f, 0.5f, 1.0f, 2.0f, 4.0f, 8.0f};
+
+    // Renders the GM radar's view as a top-down orthographic 3D scene. The
+    // radar itself remains the interactive element, so all mouse and keyboard
+    // handling stays identical to the 2D view.
+    class GMViewport3D : public GuiViewport3D
+    {
+    public:
+        GMViewport3D(GuiContainer* owner, string id, GuiRadarView* radar)
+        : GuiViewport3D(owner, id), radar(radar)
+        {
+            hideHeadings();
+            hideSpacedust();
+            setCallsignVisibility(false);
+            setProjectionType(ProjectionType::Orthographic);
+            setStarboxEnabled(false);
+            setFogEnabled(false);
+            setIgnoreNebulaOcclusion(true);
+        }
+
+        virtual void onDraw(sp::RenderTarget& renderer) override
+        {
+            if (!radar || rect.size.x <= 0.0f || rect.size.y <= 0.0f)
+                return;
+
+            const float aspect = rect.size.x / rect.size.y;
+            const float half_height = radar->getDistance() * std::max(1.0f, 1.0f / aspect);
+            const float camera_height = std::max(20000.0f, half_height * 0.5f);
+
+            camera_position = glm::vec3(radar->getViewPosition(), camera_height);
+            camera_yaw = -radar->getViewRotation() - 90.0f;
+            camera_pitch = 90.0f;
+            camera_roll = 0.0f;
+
+            setOrthographicViewHeight(half_height);
+            setFarPlaneOverride(camera_height * 2.0f + 10000.0f);
+
+            GuiViewport3D::onDraw(renderer);
+        }
+
+    private:
+        GuiRadarView* radar;
+    };
 }
 
 static std::vector<std::pair<string, string>> getGMInfo(sp::ecs::Entity entity)
@@ -201,6 +246,20 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     box_selection_overlay->getLayout().fill_width = false;
     box_selection_overlay->hide();
 
+    // Optional 3D viewport behind the radar. The radar remains responsible for
+    // all interaction, so this element never handles input.
+    view_3d_available = PreferencesManager::get("gm_3d_view", "1") == "1";
+    if (view_3d_available)
+    {
+        auto gm_viewport = new GMViewport3D(this, "GM_VIEWPORT_3D", main_radar);
+        gm_viewport
+            ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+            ->hide();
+        gm_viewport->moveToBack();
+        viewport_3d = gm_viewport;
+    }
+
     pause_button = new GuiToggleButton(this, "PAUSE_BUTTON", tr("button", "Pause"),
         [this](bool value)
         {
@@ -235,6 +294,18 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         ->setPosition(300.0f, 20.0f, sp::Alignment::TopLeft)
         ->setSize(200.0f, 25.0f);
     (new GuiTextTooltip(intercept_comms_button, "INTERCEPT_COMMS_TIP", tr("gm_tooltip", "Toggle intercepting all player communications.")))->setWidth();
+
+    if (view_3d_available)
+    {
+        view_3d_button = new GuiToggleButton(this, "GM_3D_VIEW_BUTTON", tr("button", "3D view"),
+            [this](bool value) { set3DViewEnabled(value); }
+        );
+        view_3d_button
+            ->setTextSize(20.0f)
+            ->setPosition(520.0f, 20.0f, sp::Alignment::TopLeft)
+            ->setSize(150.0f, GuiElement::GuiSizeRow);
+        (new GuiTextTooltip(view_3d_button, "GM_3D_VIEW_TIP", tr("gm_tooltip", "Toggle rendering the map as a 3D viewport.")))->setWidth();
+    }
 
     faction_selector = new GuiSelector(this, "FACTION_SELECTOR",
         [this](int index, string value)
@@ -746,6 +817,17 @@ GameMasterScreen::~GameMasterScreen()
     }
 }
 
+void GameMasterScreen::set3DViewEnabled(bool enabled)
+{
+    if (!viewport_3d) return;
+
+    view_3d_enabled = enabled;
+    viewport_3d->setVisible(enabled);
+    main_radar->setBackgroundAlpha(enabled ? 0 : 255);
+    main_radar->setSectorGridOpacity(enabled ? 0.4f : 1.0f);
+    if (view_3d_button) view_3d_button->setValue(enabled);
+}
+
 void GameMasterScreen::update(float delta)
 {
     float mouse_wheel_delta = keys.zoom_in.getContinuousValue() + keys.zoom_in.getAxis0Value() + keys.zoom_in.getAxis1Value() - keys.zoom_out.getContinuousValue() - keys.zoom_out.getAxis0Value() - keys.zoom_out.getAxis1Value();
@@ -845,6 +927,10 @@ void GameMasterScreen::update(float delta)
     // Toggle health bars.
     if (keys.gm_show_health_bars.isDiscreteStepDown())
         show_health_bars = !show_health_bars;
+
+    // Toggle 3D view.
+    if (view_3d_available && keys.gm_toggle_3d.isDiscreteStepDown())
+        set3DViewEnabled(!view_3d_enabled);
 
     bool has_object = false;
     has_cpu_ship = false;

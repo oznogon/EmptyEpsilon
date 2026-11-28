@@ -673,6 +673,19 @@ void OptionsMenu::setupGraphicsOptions()
             ->setAttribute("margin", "0, 0, 0, 20");
         (new GuiTextTooltip(nebula_fog_toggle, "NEBULA_FOG_TIP", tr("tooltips", "Toggle visual fog effects that obscure vision inside nebula regions.")))->setWidth();
 
+        // GM screen 3D view toggle.
+        auto* gm_3d_view_toggle = new GuiToggleButton(graphics_page, "GM_3D_VIEW", tr("options", "Enable GM screen 3D view"),
+            [](bool value)
+            {
+                PreferencesManager::set("gm_3d_view", value ? "1" : "0");
+            }
+        );
+        gm_3d_view_toggle
+            ->setValue(PreferencesManager::get("gm_3d_view", "1") == "1")
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeRow)
+            ->setAttribute("margin", "0, 0, 0, 20");
+        (new GuiTextTooltip(gm_3d_view_toggle, "GM_3D_VIEW_TIP", tr("tooltips", "Allow the GM screen to render its map as a 3D viewport. Requires reopening the GM screen.")))->setWidth();
+
         // Atlas size configuration (only shown when 4K is supported).
         if (sp::RenderTarget::is4KAtlasSupported())
         {

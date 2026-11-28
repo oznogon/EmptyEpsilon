@@ -10,6 +10,7 @@
 class GuiEntityTweak;
 class GuiRadarView;
 class GuiRadarZoomSlider;
+class GuiViewport3D;
 class GuiOverlay;
 class GuiSelector;
 class GuiKeyValueDisplay;
@@ -33,6 +34,10 @@ private:
     TargetsContainer targets;
     sp::ecs::Entity target;
     GuiRadarView* main_radar;
+    GuiViewport3D* viewport_3d = nullptr;
+    GuiToggleButton* view_3d_button = nullptr;
+    bool view_3d_available = false;
+    bool view_3d_enabled = false;
     GuiOverlay* box_selection_overlay;
     GuiSelector* faction_selector;
 
@@ -130,6 +135,8 @@ private:
     GuiButton* cancel_action_button;
 
     GameMasterChatDialog* getChatDialog(sp::ecs::Entity entity);
+
+    void set3DViewEnabled(bool enabled);
 
 public:
     GameMasterScreen(RenderLayer* render_layer);
