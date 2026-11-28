@@ -1,6 +1,7 @@
 #pragma once
 
 #include "engine.h"
+#include "gui/gui2_scrollcontainer.h"
 #include "gui/gui2_scrolltextcontainer.h"
 #include "gui/gui2_canvas.h"
 #include "gui/gui2_overlay.h"
@@ -22,11 +23,13 @@ class GuiObjectCreationView;
 class GuiGlobalMessageEntryView;
 class GuiHotkeyHelpOverlay;
 class GuiPanel;
+class GuiScrollContainer;
+class GuiScrollFormattedText;
 
 class GameMasterScreen : public GuiCanvas, public Updatable
 {
 private:
-    const float MIN_ZOOM_DISTANCE = 5000.0f;
+    const float MIN_ZOOM_DISTANCE = 1000.0f;
     const float MAX_ZOOM_DISTANCE = 1000000.0f;
     const float LONG_RANGE_DISTANCE = 50000.0f;
     const float SHORT_RANGE_DISTANCE = 10000.0f;
@@ -47,7 +50,7 @@ private:
     GuiObjectCreationView* object_creation_view;
     GuiEntityTweak* tweak_dialog;
 
-    GuiElement* info_layout;
+    GuiScrollContainer* info_layout;
     std::vector<GuiKeyValueDisplay*> info_items;
     GuiKeyValueDisplay* info_clock;
     GuiListbox* gm_script_options;

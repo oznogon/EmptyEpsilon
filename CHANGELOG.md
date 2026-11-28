@@ -60,6 +60,7 @@
 - Redundant `isObjectType()` implementations in scenarios and `comms_scenario_utility.lua` have been removed in favor of the `utils.lua` version
 - Entity lifetime countdowns are now handled by a dedicated `LifeTimeSystem` instead of the missile system. The `LifeTime` component now tracks `maximum` and `alive_for` instead of a decrementing `lifetime` field, so scripts that define `lifetime` components directly must use `maximum` instead. Upstream 2855
 - French translations updated from upstream 2935
+- GM screen sidebar refactored to use layout attributes and scrolling GM info container
 
 ### Fixed
 

@@ -346,42 +346,6 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         ->setSize(250.0f, GuiElement::GuiSizeRow);
     (new GuiTextTooltip(create_button, "CREATE_OBJECT_TIP", tr("gm_tooltip", "Open the object creation menu to spawn new entities.")))->setWidth();
 
-    zoom_slider = new GuiRadarZoomSlider(this, "ZOOM_SLIDER", MIN_ZOOM_DISTANCE, MAX_ZOOM_DISTANCE, LONG_RANGE_DISTANCE, main_radar);
-    zoom_slider
-        ->setZoomReference(LONG_RANGE_DISTANCE)
-        ->setLabelPrecision(3)
-        ->setPosition(-20.0f, -20.0f, sp::Alignment::BottomRight)
-        ->setSize(250.0f, GuiElement::GuiSizeRow);
-
-    copy_scenario_button = new GuiButton(this, "COPY_SCENARIO_BUTTON", tr("button", "Copy scenario"),
-        [this]() { Clipboard::setClipboard(getScriptExport(false)); }
-    );
-    copy_scenario_button
-        ->setTextSize(20.0f)
-        ->setPosition(-20.0f, -70.0f, sp::Alignment::BottomRight)
-        ->setSize(125.0f, 25.0f);
-    (new GuiTextTooltip(copy_scenario_button, "COPY_SCENARIO_TIP", tr("gm_tooltip", "Copy all entities as a Lua script to the clipboard.")))->setWidth();
-
-    copy_selected_button = new GuiButton(this, "COPY_SELECTED_BUTTON", tr("button", "Copy selected"),
-        [this]() { Clipboard::setClipboard(getScriptExport(true)); }
-    );
-    copy_selected_button
-        ->setTextSize(20.0f)
-        ->setPosition(-145.0f, -70.0f, sp::Alignment::BottomRight)
-        ->setSize(125.0f, 25.0f);
-    (new GuiTextTooltip(copy_selected_button, "COPY_SELECTED_TIP", tr("gm_tooltip", "Copy only selected entities as a Lua script to the clipboard.")))->setWidth();
-
-    if (view_3d_available)
-    {
-        view_3d_button = new GuiToggleButton(this, "GM_3D_VIEW_BUTTON", tr("button", "3D"),
-            [this](bool value) { set3DViewEnabled(value); }
-        );
-        view_3d_button
-            ->setPosition(-270.0f, -20.0f, sp::Alignment::BottomRight)
-            ->setSize(50.0f, GuiElement::GuiSizeRow);
-        (new GuiTextTooltip(view_3d_button, "GM_3D_VIEW_TIP", tr("gm_tooltip", "Toggle rendering the map as a 3D viewport.")))->setWidth();
-    }
-
     cancel_action_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", tr("button", "Cancel"),
         []()
         {
@@ -551,24 +515,42 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
             {
                 auto cd = getChatDialog(obj);
                 if (auto transform = obj.getComponent<sp::Transform>())
-                    cd->show()->setPosition(main_radar->worldToScreen(transform->getPosition()))->setSize(300, 300);
+                {
+                    cd
+                        ->show()
+                        ->setPosition(main_radar->worldToScreen(transform->getPosition()))
+                        ->setSize(300.0f, 300.0f);
+                }
             }
         }
     });
-    player_comms_hail->setPosition(20, -170, sp::Alignment::BottomLeft)->setSize(250, 50)->hide();
+    player_comms_hail
+        ->setPosition(20.0f, -170.0f, sp::Alignment::BottomLeft)
+        ->setSize(250.0f, 50.0f)
+        ->hide();
     (new GuiTextTooltip(player_comms_hail, "HAIL_PLAYER_TIP", tr("gm_tooltip", "Open a communication channel with the selected player ship.")))->setWidth();
 
-    info_layout = new GuiElement(this, "INFO_LAYOUT");
-    info_layout->setPosition(-20, 20, sp::Alignment::TopRight)->setSize(300, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
+    auto right_column = new GuiElement(this, "RIGHT_COLUMN");
+    right_column
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopRight)
+        ->setSize(300.0f, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
+    right_column
+        ->setAttribute("padding", "0, 20, 20, 20");
+
+    info_layout = new GuiScrollContainer(right_column, "INFO_LAYOUT");
+    info_layout
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
 
     info_clock = new GuiKeyValueDisplay(info_layout, "INFO_CLOCK", 0.5, tr("Clock"), "");
-    info_clock->setSize(GuiElement::GuiSizeMax, 30);
+    info_clock->setSize(GuiElement::GuiSizeMax, 30.0f);
 
     gm_script_options = new GuiListbox(this, "GM_SCRIPT_OPTIONS", [this](int index, string value)
     {
         gm_script_options->setSelectionIndex(-1);
         int n = 0;
-        for(GMScriptCallback& callback : gameGlobalInfo->gm_callback_functions)
+        for (GMScriptCallback& callback : gameGlobalInfo->gm_callback_functions)
         {
             if (n == index)
             {
@@ -579,12 +561,17 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
             n++;
         }
     });
-    gm_script_options->setPosition(20, 130, sp::Alignment::TopLeft)->setSize(250, 500);
+    gm_script_options
+        ->setPosition(20.0f, 130.0f, sp::Alignment::TopLeft)
+        ->setSize(250.0f, 500.0f);
 
-    order_layout = new GuiElement(this, "ORDER_LAYOUT");
-    order_layout->setPosition(-20.0f, -110.0f, sp::Alignment::BottomRight)->setSize(300.0f, GuiElement::GuiSizeMax)->setAttribute("layout", "verticalbottom");
+    order_layout = new GuiElement(right_column, "ORDER_LAYOUT");
+    order_layout
+        ->setSize(GuiElement::GuiSizeMax, 180.0f)
+        ->setAttribute("layout", "verticalbottom");
 
     (new GuiLabel(order_layout, "ORDERS_HELP", tr("Right click to issue movement/target orders"), 20.0f))->setSize(GuiElement::GuiSizeMax, 30.0f);
+
     GuiButton* order_defend = new GuiButton(order_layout, "ORDER_DEFEND_LOCATION", tr("Defend location"),
         [this]()
         {
@@ -605,28 +592,39 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         ->setSize(GuiElement::GuiSizeMax, 30.0f);
     (new GuiTextTooltip(order_defend, "ORDER_DEFEND_TIP", tr("gm_tooltip", "Order selected AI entities to defend their current location.")))->setWidth();
 
-    GuiButton* order_stand_ground = new GuiButton(order_layout, "ORDER_STAND_GROUND", tr("Stand ground"), [this]() {
-        for(auto obj : targets.getTargets()) {
+    GuiButton* order_stand_ground = new GuiButton(order_layout, "ORDER_STAND_GROUND", tr("Stand ground"), [this]()
+    {
+        for (auto obj : targets.getTargets())
+        {
             if (auto ai = obj.getComponent<AIController>())
                 ai->orders = AIOrder::StandGround;
         }
     });
-    order_stand_ground->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
+    order_stand_ground
+        ->setTextSize(20)
+        ->setSize(GuiElement::GuiSizeMax, 30.0f);
     (new GuiTextTooltip(order_stand_ground, "ORDER_STAND_GROUND_TIP", tr("gm_tooltip", "Order selected AI entities to hold position and attack nearby enemies.")))->setWidth();
 
-    GuiButton* order_roaming = new GuiButton(order_layout, "ORDER_ROAMING", tr("Roaming"), [this]() {
-        for(auto obj : targets.getTargets()) {
-            if (auto ai = obj.getComponent<AIController>()) {
+    GuiButton* order_roaming = new GuiButton(order_layout, "ORDER_ROAMING", tr("Roaming"), [this]()
+    {
+        for (auto obj : targets.getTargets())
+        {
+            if (auto ai = obj.getComponent<AIController>())
+            {
                 ai->orders = AIOrder::Roaming;
                 ai->order_target_location = {0, 0};
             }
         }
     });
-    order_roaming->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
+    order_roaming
+        ->setTextSize(20)
+        ->setSize(GuiElement::GuiSizeMax, 30.0f);
     (new GuiTextTooltip(order_roaming, "ORDER_ROAMING_TIP", tr("gm_tooltip", "Order selected AI entities to roam freely and engage enemies.")))->setWidth();
 
-    GuiButton* order_idle = new GuiButton(order_layout, "ORDER_IDLE", tr("Idle"), [this]() {
-        for(auto obj : targets.getTargets()) {
+    GuiButton* order_idle = new GuiButton(order_layout, "ORDER_IDLE", tr("Idle"), [this]()
+    {
+        for (auto obj : targets.getTargets())
+        {
             if (auto ai = obj.getComponent<AIController>())
                 ai->orders = AIOrder::Idle;
         }
@@ -636,14 +634,14 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         ->setSize(GuiElement::GuiSizeMax, 30.0f);
     (new GuiTextTooltip(order_idle, "ORDER_IDLE_TIP", tr("gm_tooltip", "Order selected AI entities to stop all actions.")))->setWidth();
 
-    (new GuiLabel(order_layout, "ORDERS_LABEL", tr("Orders"), 20.0f))->addBackground()->setSize(GuiElement::GuiSizeMax, 30.0f);
+    (new GuiLabel(order_layout, "ORDERS_LABEL", tr("Orders"), 20.0f))
+        ->addBackground()
+        ->setSize(GuiElement::GuiSizeMax, 30.0f);
 
     // Player ship waypoint controls (shown when a player ship is selected)
-    gm_player_waypoint_layout = new GuiElement(this, "GM_WP_LAYOUT");
+    gm_player_waypoint_layout = new GuiElement(right_column, "GM_WP_LAYOUT");
     gm_player_waypoint_layout
-        ->setPosition(-20.0f, -240.0f, sp::Alignment::BottomRight)
-        ->setSize(300.0f, GuiElement::GuiSizeMax)
-        ->hide()
+        ->setSize(GuiElement::GuiSizeMax, 180.0f)
         ->setAttribute("layout", "verticalbottom");
 
     gm_delete_waypoint_button = new GuiToggleButton(gm_player_waypoint_layout, "GM_WP_DELETE", tr("button", "Delete waypoint"),
@@ -759,6 +757,54 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     (new GuiLabel(gm_player_waypoint_layout, "GM_WP_LABEL", tr("Waypoints"), 20.0f))
         ->addBackground()
         ->setSize(GuiElement::GuiSizeMax, 30.0f);
+
+    auto map_controls = new GuiElement(right_column, "MAP_CONTROLS");
+    map_controls
+        ->setPosition(0.0f, 0.0f, sp::Alignment::BottomRight)
+        ->setSize(GuiElement::GuiSizeMax, 75.0f)
+        ->setAttribute("layout", "verticalbottom");
+
+    auto map_controls_row = new GuiElement(map_controls, "");
+    map_controls_row
+        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setAttribute("layout", "horizontalright");
+
+    zoom_slider = new GuiRadarZoomSlider(map_controls_row, "ZOOM_SLIDER", MIN_ZOOM_DISTANCE, MAX_ZOOM_DISTANCE, LONG_RANGE_DISTANCE, main_radar);
+    zoom_slider
+        ->setZoomReference(LONG_RANGE_DISTANCE)
+        ->setLabelPrecision(3)
+        ->setSize(250.0f, GuiElement::GuiSizeMax);
+
+    if (view_3d_available)
+    {
+        view_3d_button = new GuiToggleButton(map_controls_row, "GM_3D_VIEW_BUTTON", tr("button", "3D"),
+            [this](bool value) { set3DViewEnabled(value); }
+        );
+        view_3d_button
+            ->setSize(50.0f, GuiElement::GuiSizeMax);
+        (new GuiTextTooltip(view_3d_button, "GM_3D_VIEW_TIP", tr("gm_tooltip", "Toggle rendering the map as a 3D viewport.")))->setWidth();
+    }
+
+    map_controls_row = new GuiElement(map_controls, "");
+    map_controls_row
+        ->setSize(GuiElement::GuiSizeMax, 25.0f)
+        ->setAttribute("layout", "horizontalright");
+
+    copy_scenario_button = new GuiButton(map_controls_row, "COPY_SCENARIO_BUTTON", tr("button", "Copy scenario"),
+        [this]() { Clipboard::setClipboard(getScriptExport(false)); }
+    );
+    copy_scenario_button
+        ->setTextSize(20.0f)
+        ->setSize(125.0f, 25.0f);
+    (new GuiTextTooltip(copy_scenario_button, "COPY_SCENARIO_TIP", tr("gm_tooltip", "Copy all entities as a Lua script to the clipboard.")))->setWidth();
+
+    copy_selected_button = new GuiButton(map_controls_row, "COPY_SELECTED_BUTTON", tr("button", "Copy selected"),
+        [this]() { Clipboard::setClipboard(getScriptExport(true)); }
+    );
+    copy_selected_button
+        ->setTextSize(20.0f)
+        ->setSize(125.0f, 25.0f);
+    (new GuiTextTooltip(copy_selected_button, "COPY_SELECTED_TIP", tr("gm_tooltip", "Copy only selected entities as a Lua script to the clipboard.")))->setWidth();
 
     chat_layer = new GuiElement(this, "");
     chat_layer
@@ -1016,13 +1062,6 @@ void GameMasterScreen::update(float delta)
     gm_route_toggle->setVisible(gameGlobalInfo->enable_waypoint_routes && main_radar->getWaypoints());
     gm_waypoint_set_selector->setVisible(gameGlobalInfo->enable_multiple_waypoint_sets && main_radar->getWaypoints());
 
-    // Move waypoint controls up when both AI orders and waypoints are visible.
-    gm_player_waypoint_layout->setPosition(
-        -20.0f,
-        has_cpu_ship && has_player_ship ? -300.0f : -240.0f,
-        sp::Alignment::BottomRight
-    );
-
     if (!gameGlobalInfo->enable_multiple_waypoint_sets && gm_waypoint_set != 1)
     {
         gm_waypoint_set = 1;
@@ -1096,7 +1135,8 @@ void GameMasterScreen::update(float delta)
         else
         {
             info_items[cnt]
-                ->setKey(tr("gm_info", key))->setValue(value)
+                ->setKey(tr("gm_info", key))
+                ->setValue(value)
                 ->show();
         }
         cnt++;
@@ -1108,7 +1148,7 @@ void GameMasterScreen::update(float delta)
         cnt++;
     }
 
-    bool gm_functions_changed = gm_script_options->entryCount() != int(gameGlobalInfo->gm_callback_functions.size());
+    bool gm_functions_changed = gm_script_options->entryCount() != static_cast<int>(gameGlobalInfo->gm_callback_functions.size());
     auto it = gameGlobalInfo->gm_callback_functions.begin();
     for (int n = 0; !gm_functions_changed && n<gm_script_options->entryCount(); n++)
     {
