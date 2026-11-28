@@ -4,6 +4,8 @@
 #include <ecs/query.h>
 #include <container/bitset.h>
 #include <vectorUtils.h>
+
+#include <algorithm>
 #include <graphics/renderTarget.h>
 #include "components/collision.h"
 
@@ -34,13 +36,14 @@ public:
         });
     }
 
-    static void render(sp::RenderTarget& renderer, glm::vec2 _radar_screen_center, float scale, glm::vec2 _view_position, float view_rotation, int flags, sp::Bitset _visible_objects) {
+    static void render(sp::RenderTarget& renderer, glm::vec2 _radar_screen_center, float scale, glm::vec2 _view_position, float view_rotation, int flags, sp::Bitset _visible_objects, float opacity = 1.0f) {
         radar_screen_center = _radar_screen_center;
         current_scale = scale;
         current_rotation_offset = -view_rotation;
         current_flags = flags;
         view_position = _view_position;
         visible_objects = _visible_objects;
+        current_opacity = std::clamp(opacity, 0.0f, 1.0f);
 
         for(auto& handler : handlers) {
             if ((handler.flags & flags) == handler.flags)
@@ -54,6 +57,7 @@ public:
     static constexpr int FlagGM = 0x04;
     static constexpr int FlagCallsigns = 0x08;
     static int current_flags;
+    static float current_opacity;
 private:
     static float current_scale;
     static float current_rotation_offset;

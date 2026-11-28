@@ -13,7 +13,14 @@ float RadarRenderSystem::current_rotation_offset;
 glm::vec2 RadarRenderSystem::radar_screen_center;
 glm::vec2 RadarRenderSystem::view_position;
 sp::Bitset RadarRenderSystem::visible_objects;
+float RadarRenderSystem::current_opacity = 1.0f;
 std::vector<RadarRenderSystem::Handler> RadarRenderSystem::handlers;
+
+static glm::u8vec4 applyRadarOpacity(glm::u8vec4 color)
+{
+    color.a = static_cast<uint8_t>(color.a * RadarRenderSystem::current_opacity);
+    return color;
+}
 
 void BasicRadarRendering::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity entity, glm::vec2 screen_position, float scale, float rotation, RadarTrace& trace)
 {
@@ -65,9 +72,13 @@ void BasicRadarRendering::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Ent
         }
     }
 
-    if ((trace.flags & RadarTrace::BlendAdd) && (trace.flags & RadarTrace::Rotate))
+    color = applyRadarOpacity(color);
+
+    // Additive sprites have no per-sprite alpha, so fall back to regular
+    // alpha blending when a radar-wide opacity is requested.
+    if (RadarRenderSystem::current_opacity >= 1.0f && (trace.flags & RadarTrace::BlendAdd) && (trace.flags & RadarTrace::Rotate))
         renderer.drawRotatedSpriteBlendAdd(icon, screen_position, size, rotation);
-    else if (trace.flags & RadarTrace::BlendAdd)
+    else if (RadarRenderSystem::current_opacity >= 1.0f && (trace.flags & RadarTrace::BlendAdd))
         renderer.drawRotatedSpriteBlendAdd(icon, screen_position, size, 0);
     else if (trace.flags & RadarTrace::Rotate)
         renderer.drawRotatedSprite(icon, screen_position, size, rotation, color);
@@ -93,7 +104,7 @@ void NebulaRadarRendering::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::En
     auto size = trace.radius * scale * 2.0f;
     size = std::clamp(size, trace.min_size, std::max(trace.min_size, trace.max_size));
 
-    const auto color = trace.color;
+    const auto color = applyRadarOpacity(trace.color);
     const auto icon = trace.icon;
 
     if (trace.flags & RadarTrace::Rotate)

@@ -32,6 +32,7 @@
 - GM screens now display a 2-pixel gray dot for entities without a radar trace
 - GM screens can render their map as an orthographic top-down 3D viewport, toggleable with a button or the `V` key
   - The 3D viewport preserves all 2D radar interactions, with the sector grid dimmed and the existing radar icons and HUD overlays drawn on top
+  - Radar traces and fallback dots for entities without traces are drawn at 25% opacity over the 3D scene
   - The feature can be disabled entirely with the `gm_3d_view` preference in `options.ini` or the "Enable GM screen 3D view" option in the Options menu
 - `MissileWeaponData` now has a Lua-settable trigger range factor (`setTriggerRangeFactor()`), which sets the trigger radius for mines as a multiple of the blast range
 - Lua entity definitions can now be composed with prefabs, a server-only component that inherits components from a parent prefab and merges overrides at spawn time. Every entity type recognized by `isObjectType()` now spawns from a named prefab, with spatial types sharing a `SpaceObject` base prefab, and new helpers `spawnPrefab()`, `entity:getPrefabName()`, and `entity:isPrefab()` expose prefab identity to scripts
