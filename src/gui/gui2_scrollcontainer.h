@@ -103,8 +103,11 @@ private:
     ScrollStart scroll_start = ScrollStart::Top;
     // Tracks whether scroll_start has been applied yet.
     bool scroll_start_applied = false;
-    // Defines the total height of content, in virtual pixels.
-    float content_height = 0.0f;
+    // Defines the valid scroll offset range, in virtual pixels. max_scroll is
+    // the amount of content below the visible area; min_scroll is negative
+    // when content extends above the visible area.
+    float min_scroll = 0.0f;
+    float max_scroll = 0.0f;
     // Tracks whether to auto-scroll to the bottom on content growth.
     bool auto_scroll_down = false;
     // When set, forces scroll to bottom on the next layout pass after content

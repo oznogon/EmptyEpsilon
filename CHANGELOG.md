@@ -75,6 +75,7 @@
   - Dust field no longer renders around the player ship when the main screen uses a camera entity's viewpoint instead of the player's
 - Entity lifetime expiration callbacks, such as `ScanProbe:onExpiration()` and `MissileWeaponData`'s `on_lifetime_expire`, now fire when an entity's lifetime expires
 - The GM screen's F1 help dialog now lists GM screen hotkeys
+- Scroll container limits are now calculated from the measured content extents rather than `content_height`, which could cause lines to be cut off if the content used margins
 
 ## [2026-10]
 

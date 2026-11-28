@@ -58,8 +58,6 @@ void GuiScrollContainer::cleanTree()
 
 void GuiScrollContainer::scrollToFraction(float fraction)
 {
-    const float min_scroll = -scroll_offset_bias;
-    const float max_scroll = std::max(0.0f, content_height - visible_height - scroll_offset_bias);
     const float scroll_range = max_scroll - min_scroll;
     scroll_offset = std::clamp(min_scroll + fraction * scroll_range, min_scroll, max_scroll);
     scrollbar_v->setValue(static_cast<int>(scroll_offset + scroll_offset_bias));
@@ -67,8 +65,6 @@ void GuiScrollContainer::scrollToFraction(float fraction)
 
 void GuiScrollContainer::scrollToOffset(float pixel_offset)
 {
-    const float min_scroll = -scroll_offset_bias;
-    const float max_scroll = std::max(0.0f, content_height - visible_height - scroll_offset_bias);
     scroll_offset = std::clamp(pixel_offset, min_scroll, max_scroll);
     scrollbar_v->setValue(static_cast<int>(scroll_offset + scroll_offset_bias));
 }
@@ -78,10 +74,10 @@ void GuiScrollContainer::updateLayout(const sp::Rect& bounds)
     this->rect = bounds;
     visible_height = bounds.size.y - layout.padding.top - layout.padding.bottom;
 
-    // Clamp scroll_offset using last frame's content_height to validate the
+    // Clamp scroll_offset using last frame's scroll limits to validate the
     // value passed to the layout manager. Allow negative offsets for layouts
     // where content extends above the content area (e.g. verticalbottom).
-    scroll_offset = std::clamp(scroll_offset, -scroll_offset_bias, std::max(0.0f, content_height - visible_height));
+    scroll_offset = std::clamp(scroll_offset, min_scroll, max_scroll);
 
     // Factor layout padding.
     glm::vec2 padding_offset{
@@ -104,8 +100,6 @@ void GuiScrollContainer::updateLayout(const sp::Rect& bounds)
     float max_bottom = 0.0f;
     float overflow_above = 0.0f;
     float overflow_below = 0.0f;
-    float min_scroll = 0.0f;
-    float max_scroll = 0.0f;
     auto recomputeExtents = [&]()
     {
         min_top = std::numeric_limits<float>::max();
@@ -124,11 +118,9 @@ void GuiScrollContainer::updateLayout(const sp::Rect& bounds)
 
         if (min_top == std::numeric_limits<float>::max())
         {
-            content_height = 0.0f;
             min_top = 0.0f;
             max_bottom = 0.0f;
         }
-        else content_height = max_bottom - min_top;
 
         // Determine scroll range. At scroll_offset 0, content is at its default
         // layout position. Content can extend above the content area (negative
@@ -166,7 +158,7 @@ void GuiScrollContainer::updateLayout(const sp::Rect& bounds)
     // Pass 2 (conditional): If content overflows, re-layout children with
     // scrollbar width subtracted from the content rect so child elements are
     // properly sized around the scrollbar.
-    bool has_overflow = (mode != ScrollMode::None) && (content_height > visible_height + 0.5f);
+    bool has_overflow = (mode != ScrollMode::None) && (max_scroll - min_scroll > 0.5f);
     if (has_overflow)
     {
         scrollbar_v->setVisible(false);
@@ -198,7 +190,7 @@ void GuiScrollContainer::updateLayout(const sp::Rect& bounds)
         recomputeExtents();
         scroll_offset = std::clamp(scroll_offset, min_scroll, max_scroll);
         scroll_offset_bias = overflow_above;
-        has_overflow = (mode != ScrollMode::None) && (content_height > visible_height + 0.5f);
+        has_overflow = (mode != ScrollMode::None) && (max_scroll - min_scroll > 0.5f);
     }
 
     // Override the scrollbar rect.
@@ -214,7 +206,7 @@ void GuiScrollContainer::updateLayout(const sp::Rect& bounds)
     // Sync scrollbar properties to new layout. Shift the value so the
     // scrollbar always sees a non-negative range.
     scrollbar_v
-        ->setRange(0, static_cast<int>(content_height))
+        ->setRange(0, static_cast<int>(max_scroll - min_scroll + visible_height))
         ->setValueSize(static_cast<int>(visible_height))
         ->setValue(static_cast<int>(scroll_offset + scroll_offset_bias));
 
@@ -225,7 +217,7 @@ void GuiScrollContainer::updateLayout(const sp::Rect& bounds)
     }
     else if (auto_scroll_down)
     {
-        if (scroll_offset + scroll_offset_bias >= std::max(0.0f, content_height - visible_height) - 0.5f)
+        if (scroll_offset >= max_scroll - 0.5f)
             scrollToFraction(1.0f);
     }
 }
@@ -461,8 +453,6 @@ bool GuiScrollContainer::onMouseWheelScroll(glm::vec2 /* position */, float valu
     // Scroll by a default interval of 50, or by the container height if set to
     // paged mode.
     const float step = (mode == ScrollMode::Page) ? visible_height : 50.0f;
-    const float min_scroll = -scroll_offset_bias;
-    const float max_scroll = std::max(0.0f, content_height - visible_height - scroll_offset_bias);
 
     // If there's no overflow, let mousewheel pass through.
     if (max_scroll - min_scroll < 0.5f) return false;
