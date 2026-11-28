@@ -9,6 +9,7 @@
 #include <glm/vec3.hpp>
 #include <glm/vec4.hpp>
 
+#include <algorithm>
 #include <array>
 
 class GuiViewport3D : public GuiElement
@@ -112,8 +113,20 @@ public:
     // base_fov set by main_screen_camera_fov preference on Viewport init
     float modifyFoV(float modifier) { fov_modifier = std::clamp(base_fov + modifier, 30.0f, 140.0f) - base_fov; return fov_modifier; }
     void setProjectionType(ProjectionType type) { projection_type = type; }
+    // Explicit orthographic half-height. Overrides the value derived from the
+    // camera distance and field of view when greater than zero.
+    void setOrthographicViewHeight(float half_height) { orthographic_view_height = std::max(half_height, 0.0f); }
+    void setFarPlaneOverride(float distance) { far_plane_override = std::max(distance, 0.0f); }
+    void setStarboxEnabled(bool enabled) { starbox_enabled = enabled; }
+    void setFogEnabled(bool enabled) { fog_enabled = enabled; }
+    void setIgnoreNebulaOcclusion(bool ignore) { ignore_nebula_occlusion = ignore; }
 private:
     glm::vec3 worldToScreen(sp::RenderTarget& window, glm::vec3 world);
 
     ProjectionType projection_type = ProjectionType::Perspective;
+    float orthographic_view_height = 0.0f;
+    float far_plane_override = 0.0f;
+    bool starbox_enabled = true;
+    bool fog_enabled = true;
+    bool ignore_nebula_occlusion = false;
 };

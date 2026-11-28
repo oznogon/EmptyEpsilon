@@ -287,20 +287,26 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         }
         effective_fog_distance = glm::mix(default_draw_distance, in_nebula_visibility_distance, nebula_fog_factor);
     }
-    float far_plane = glm::mix(default_draw_distance, in_nebula_visibility_distance, nebula_fog_factor);
+    float far_plane = far_plane_override > 0.0f
+        ? far_plane_override
+        : glm::mix(default_draw_distance, in_nebula_visibility_distance, nebula_fog_factor);
 
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
     glFrontFace(GL_CCW);
 
-    // Calculate orthographic bounds based on camera height and FoV.
+    // Calculate orthographic bounds based on camera height and FoV, unless an
+    // explicit half-height was supplied by the caller.
+    float ortho_height = 0.0f;
+    float ortho_width = 0.0f;
     if (projection_type == ProjectionType::Orthographic)
     {
-        const float reference_distance = std::max(100.0f, camera_position.z);
-        const float height = reference_distance * glm::tan(glm::radians(camera_fov * 0.5f));
-        const float width = height * (rect.size.x / rect.size.y);
-        projection_matrix = glm::ortho(-width, width, -height, height, 1.0f, far_plane);
+        ortho_height = orthographic_view_height > 0.0f
+            ? orthographic_view_height
+            : std::max(100.0f, camera_position.z) * glm::tan(glm::radians(camera_fov * 0.5f));
+        ortho_width = ortho_height * (rect.size.x / rect.size.y);
+        projection_matrix = glm::ortho(-ortho_width, ortho_width, -ortho_height, ortho_height, 1.0f, far_plane);
     }
     else
         projection_matrix = glm::perspective(glm::radians(camera_fov), rect.size.x / rect.size.y, 1.0f, far_plane);
@@ -317,12 +323,17 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
 
     // Draw starbox.
     glDepthMask(GL_FALSE);
+    if (starbox_enabled)
     {
         starbox_shader->bind();
         // Scale skybox appropriately for orthographic vs perspective projection
-        float skybox_scale = (projection_type == ProjectionType::Orthographic)
-            ? std::max(100.0f, camera_position.z * 2.0f) // Scale with camera distance for ortho
-            : 100.0f; // Fixed scale for perspective
+        float skybox_scale = 100.0f;
+        if (projection_type == ProjectionType::Orthographic)
+        {
+            skybox_scale = orthographic_view_height > 0.0f
+                ? std::max(ortho_width, ortho_height)
+                : std::max(100.0f, camera_position.z * 2.0f);
+        }
         glUniform1f(starbox_shader->getUniformLocation("u_scale"), skybox_scale);
 
         string skybox_name = "skybox/default";
@@ -637,7 +648,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     }
 
     // Apply pre-computed nebula fog.
-    if (PreferencesManager::get("nebula_fog", "1") == "1")
+    if (fog_enabled && PreferencesManager::get("nebula_fog", "1") == "1")
         ShaderRegistry::setFog(nebula_fog_color, effective_fog_distance);
     else ShaderRegistry::setFog(glm::vec3{0.0f}, 0.0f);
 
@@ -648,7 +659,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         ParticleEngine::render(this->projection_matrix, this->view_matrix);
     };
     RenderSystem render_system;
-    render_system.render3D(rect.size.x / rect.size.y, camera_fov, projection_type, far_plane);
+    render_system.render3D(rect.size.x / rect.size.y, camera_fov, projection_type, far_plane, ortho_height, ignore_nebula_occlusion);
     RenderSystem::post_opaque_render = nullptr;
 
     if (show_spacedust && my_spaceship)
