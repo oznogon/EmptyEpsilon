@@ -800,9 +800,8 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         ->setSize(300.0f, 30.0f);
 
     keyboard_help = new GuiHotkeyHelpOverlay(this, {
-        tr("hotkey_menu", "Console"),
-        tr("hotkey_menu", "Basic"),
-        tr("hotkey_menu", "GM")
+        tr("hotkey_menu", "General"),
+        tr("hotkey_menu", "GM screen")
     });
 
     gameGlobalInfo->on_gm_click = nullptr;
@@ -930,6 +929,23 @@ void GameMasterScreen::update(float delta)
     // Toggle health bars.
     if (keys.gm_show_health_bars.isDiscreteStepDown())
         show_health_bars = !show_health_bars;
+
+    // Toggle shields, beam arcs, and AI targeting overlays.
+    if (keys.gm_show_shields.isDiscreteStepDown())
+    {
+        show_shield_segments = !show_shield_segments;
+        main_radar->setShieldsVisible(show_shield_segments);
+    }
+    if (keys.gm_show_beam_arcs.isDiscreteStepDown())
+    {
+        show_beam_arcs = !show_beam_arcs;
+        main_radar->setBeamArcsVisible(show_beam_arcs);
+    }
+    if (keys.gm_show_ai_targets.isDiscreteStepDown())
+    {
+        show_ai_targets = !show_ai_targets;
+        main_radar->setAITargetsVisible(show_ai_targets);
+    }
 
     // Toggle 3D view.
     if (view_3d_available && keys.gm_toggle_3d.isDiscreteStepDown())

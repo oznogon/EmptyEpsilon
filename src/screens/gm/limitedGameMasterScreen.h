@@ -115,6 +115,9 @@ private:
     GuiToggleButton* gm_delete_waypoint_button;
 
     bool show_health_bars = true;
+    bool show_shield_segments = true;
+    bool show_beam_arcs = true;
+    bool show_ai_targets = true;
     float last_known_game_speed = -1.0f;
 
     GameMasterChatDialog* getChatDialog(sp::ecs::Entity entity);

@@ -1395,7 +1395,7 @@ LimitedGameMasterScreen::LimitedGameMasterScreen(RenderLayer* render_layer)
         ->setPosition(-20.0f, -20.0f, sp::Alignment::BottomRight)
         ->setSize(300.0f, 30.0f);
 
-    keyboard_help = new GuiHotkeyHelpOverlay(this, {tr("hotkey_menu", "Console"), tr("hotkey_menu", "Basic"), tr("hotkey_menu", "GM")});
+    keyboard_help = new GuiHotkeyHelpOverlay(this, {tr("hotkey_menu", "General"), tr("hotkey_menu", "GM screen")});
 }
 
 LimitedGameMasterScreen::~LimitedGameMasterScreen()
@@ -1503,6 +1503,22 @@ void LimitedGameMasterScreen::update(float delta)
 
     if (keys.gm_show_health_bars.isDiscreteStepDown())
         show_health_bars = !show_health_bars;
+
+    if (keys.gm_show_shields.isDiscreteStepDown())
+    {
+        show_shield_segments = !show_shield_segments;
+        main_radar->setShieldsVisible(show_shield_segments);
+    }
+    if (keys.gm_show_beam_arcs.isDiscreteStepDown())
+    {
+        show_beam_arcs = !show_beam_arcs;
+        main_radar->setBeamArcsVisible(show_beam_arcs);
+    }
+    if (keys.gm_show_ai_targets.isDiscreteStepDown())
+    {
+        show_ai_targets = !show_ai_targets;
+        main_radar->setAITargetsVisible(show_ai_targets);
+    }
 
     has_cpu_ship = false;
     has_player_ship = false;

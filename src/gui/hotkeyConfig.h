@@ -272,6 +272,9 @@ public:
     sp::io::Keybinding gm_show_callsigns;
     sp::io::Keybinding gm_show_waypoints;
     sp::io::Keybinding gm_show_health_bars;
+    sp::io::Keybinding gm_show_shields;
+    sp::io::Keybinding gm_show_beam_arcs;
+    sp::io::Keybinding gm_show_ai_targets;
     sp::io::Keybinding gm_toggle_3d;
 
     // Spectator screen binds

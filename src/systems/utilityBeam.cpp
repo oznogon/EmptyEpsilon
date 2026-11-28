@@ -389,6 +389,9 @@ void UtilityBeamSystem::render3D(sp::ecs::Entity entity, sp::Transform& transfor
 
 void UtilityBeamSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity entity, glm::vec2 screen_position, float scale, float rotation, UtilityBeam& utility_beam)
 {
+    if (RadarRenderSystem::current_flags & RadarRenderSystem::FlagHideBeamArcs)
+        return;
+
     // Render other ships' utility beams only if they're fully scanned.
     if (entity != my_spaceship)
     {

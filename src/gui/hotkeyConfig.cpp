@@ -623,6 +623,9 @@ Keys::Keys() :
     gm_show_callsigns("GM_SHOW_CALLSIGNS", "C"),
     gm_show_waypoints("GM_SHOW_WAYPOINTS", "W"),
     gm_show_health_bars("GM_SHOW_HEALTH_BARS", "H"),
+    gm_show_shields("GM_SHOW_SHIELDS", "S"),
+    gm_show_beam_arcs("GM_SHOW_BEAM_ARCS", "B"),
+    gm_show_ai_targets("GM_SHOW_AI_TARGETS", "T"),
     gm_toggle_3d("GM_TOGGLE_3D", "V"),
 
     // Spectator screen
@@ -1502,6 +1505,12 @@ void Keys::init()
     gm_show_waypoints.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     gm_show_health_bars.setLabel(tr("hotkey_menu", "GM screen"), tr("hotkey_GM", "Show health bars (GM)"));
     gm_show_health_bars.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    gm_show_shields.setLabel(tr("hotkey_menu", "GM screen"), tr("hotkey_GM", "Show shield segments (GM)"));
+    gm_show_shields.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    gm_show_beam_arcs.setLabel(tr("hotkey_menu", "GM screen"), tr("hotkey_GM", "Show beam arcs (GM)"));
+    gm_show_beam_arcs.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    gm_show_ai_targets.setLabel(tr("hotkey_menu", "GM screen"), tr("hotkey_GM", "Show AI targeting (GM)"));
+    gm_show_ai_targets.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     gm_toggle_3d.setLabel(tr("hotkey_menu", "GM screen"), tr("hotkey_GM", "Toggle 3D view (GM)"));
     gm_toggle_3d.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
 

@@ -908,6 +908,9 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
     else flags |= RadarRenderSystem::FlagShortRange;
     if (show_game_master_data) flags |= RadarRenderSystem::FlagGM;
     if (show_callsigns) flags |= RadarRenderSystem::FlagCallsigns;
+    if (!show_shields) flags |= RadarRenderSystem::FlagHideShields;
+    if (!show_beam_arcs) flags |= RadarRenderSystem::FlagHideBeamArcs;
+    if (!show_ai_targets) flags |= RadarRenderSystem::FlagHideAITargets;
 
     glm::vec2 radar_screen_center = rect.center();
 

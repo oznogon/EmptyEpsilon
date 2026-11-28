@@ -12,6 +12,8 @@ void GMRadarRender::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e,
 
 void GMRadarRender::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e, glm::vec2 screen_position, float scale, float rotation, AIController& component)
 {
+    if (RadarRenderSystem::current_flags & RadarRenderSystem::FlagHideAITargets)
+        return;
     if (component.ai)
         component.ai->drawOnGMRadar(renderer, screen_position, scale);
 }

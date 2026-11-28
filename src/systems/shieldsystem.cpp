@@ -165,6 +165,8 @@ void ShieldSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, Shields
 
 void ShieldSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e, glm::vec2 screen_position, float scale, float rotation, Shields& shields)
 {
+    if (RadarRenderSystem::current_flags & RadarRenderSystem::FlagHideShields)
+        return;
     if (!shields.active)
         return;
     auto scanstate = e.getComponent<ScanState>();

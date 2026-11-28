@@ -56,6 +56,9 @@ public:
     static constexpr int FlagShortRange = 0x02;
     static constexpr int FlagGM = 0x04;
     static constexpr int FlagCallsigns = 0x08;
+    static constexpr int FlagHideShields = 0x10;
+    static constexpr int FlagHideBeamArcs = 0x20;
+    static constexpr int FlagHideAITargets = 0x40;
     static int current_flags;
     static float current_opacity;
 private:

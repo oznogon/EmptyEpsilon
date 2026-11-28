@@ -402,6 +402,9 @@ void drawArc(sp::RenderTarget& renderer, glm::vec2 arc_center, float angle0, flo
 
 void BeamWeaponSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity entity, glm::vec2 screen_position, float scale, float rotation, BeamWeaponSys& beamsystem)
 {
+    if (RadarRenderSystem::current_flags & RadarRenderSystem::FlagHideBeamArcs)
+        return;
+
     if (entity != my_spaceship)
     {
         auto scanstate = entity.getComponent<ScanState>();

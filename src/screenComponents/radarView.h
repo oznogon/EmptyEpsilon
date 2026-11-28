@@ -66,6 +66,9 @@ private:
     bool show_callsigns = false;
     bool show_heading_indicators = false;
     bool show_game_master_data = false;
+    bool show_shields = true;
+    bool show_beam_arcs = true;
+    bool show_ai_targets = true;
     float range_indicator_step_size = 0.0f;
     float sector_grid_opacity = 1.0f;
     float radar_trace_opacity = 1.0f;
@@ -135,6 +138,9 @@ public:
     GuiRadarView* enableHeadingIndicators() { show_heading_indicators = true; return this; }
     GuiRadarView* disableHeadingIndicators() { show_heading_indicators = false; return this; }
     GuiRadarView* gameMaster() { show_game_master_data = true; return this; }
+    GuiRadarView* setShieldsVisible(bool visible) { show_shields = visible; return this; }
+    GuiRadarView* setBeamArcsVisible(bool visible) { show_beam_arcs = visible; return this; }
+    GuiRadarView* setAITargetsVisible(bool visible) { show_ai_targets = visible; return this; }
     GuiRadarView* setBackgroundAlpha(uint8_t background_alpha) { this->background_alpha = background_alpha; return this; }
     GuiRadarView* setStyle(ERadarStyle style) { this->style = style; return this; }
     GuiRadarView* setFogOfWarStyle(EFogOfWarStyle style) { this->fog_style = style; return this; }
